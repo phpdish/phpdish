@@ -1,17 +1,13 @@
 <?php
-/**
- * PHPDish comment component
- * @author Tao <taosikai@yeah.net>
- */
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="votes")
+ * @ORM\Table(name="questions")
  */
-class Vote
+class Question
 {
     /**
      * @ORM\Id
@@ -21,24 +17,33 @@ class Vote
     protected $id;
 
     /**
+     * @ORM\Column(type="string", length=150)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $body;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $originalBody;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="datetime")
      */
-    protected $viteType;
+    protected $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="questions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="votes")
-     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
-     */
-    protected $post;
 }

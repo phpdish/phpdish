@@ -71,6 +71,11 @@ class User
     protected $votes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="author")
+     */
+    protected $questions;
+
+    /**
      * Constructor
      */
     public function __construct()

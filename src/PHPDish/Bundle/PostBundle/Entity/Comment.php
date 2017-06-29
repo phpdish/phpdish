@@ -23,7 +23,12 @@ class Comment
     /**
      * @ORM\Column(type="text")
      */
-    protected $content;
+    protected $body;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $originalBody;
 
     /**
      * @ORM\Column(type="datetime", name="created_at")

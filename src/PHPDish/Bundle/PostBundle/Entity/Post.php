@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    use Votable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -51,6 +53,12 @@ class Post
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Vote", mappedBy="post")
+     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
+     */
+    protected $votes;
 
     /**
      * Get id

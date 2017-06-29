@@ -7,17 +7,12 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-class Votable
+trait Votable
 {
     /**
      * @ORM\Column(type="integer", length=10)
      */
     protected $voteCount;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Vote", mappedBy="votable")
-     */
-    protected $votes;
 
     /**
      * Set voteCount
