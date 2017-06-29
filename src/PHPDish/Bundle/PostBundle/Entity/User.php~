@@ -66,6 +66,16 @@ class User
     protected $posts;
 
     /**
+     * @ORM\OneToMany(targetEntity="Vote", mappedBy="author")
+     */
+    protected $votes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="author")
+     */
+    protected $questions;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -283,5 +293,39 @@ class User
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
+     *
+     * @return User
+     */
+    public function addPost(\PHPDish\Bundle\PostBundle\Entity\Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
+     */
+    public function removePost(\PHPDish\Bundle\PostBundle\Entity\Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

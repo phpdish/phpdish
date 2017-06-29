@@ -5,9 +5,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="topics")
+ * @ORM\Table(name="blogs")
  */
-class Topic
+class Blog
 {
     /**
      * @ORM\Id
@@ -29,7 +29,7 @@ class Topic
     /**
      * @ORM\Column(type="integer", length=10)
      */
-    protected $questionCount;
+    protected $postCounts;
 
     /**
      * @ORM\Column(type="text")
@@ -40,6 +40,18 @@ class Topic
      * @ORM\Column(type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="subscribedBlogs")
+     * @ORM\JoinTable(name="blogs_subscribers")
+     */
+    protected $subscribers;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="blog")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $author;
 
     /**
      * Get id

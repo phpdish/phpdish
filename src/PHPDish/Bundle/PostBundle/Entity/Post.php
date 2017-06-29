@@ -237,4 +237,45 @@ class Post
     {
         return $this->author;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
+     *
+     * @return Post
+     */
+    public function addVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
+     */
+    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
 }
