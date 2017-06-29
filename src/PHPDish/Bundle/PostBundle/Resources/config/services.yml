@@ -1,0 +1,4 @@
+services:
+#    php_dish_post.example:
+#        class: PHPDish\Bundle\PostBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

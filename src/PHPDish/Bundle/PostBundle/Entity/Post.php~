@@ -1,0 +1,54 @@
+<?php
+namespace PHPDish\Bundle\PostBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="posts")
+ */
+class Post
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $body;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $originalBody;
+
+    /**
+     * @ORM\Column(type="integer", length=10)
+     */
+    protected $viewCount;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     */
+    protected $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $author;
+}
