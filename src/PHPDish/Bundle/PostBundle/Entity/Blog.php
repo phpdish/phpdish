@@ -2,6 +2,8 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinColumns;
 
 /**
  * @ORM\Entity
@@ -43,12 +45,15 @@ class Blog
 
     /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="subscribedBlogs")
-     * @ORM\JoinTable(name="blogs_subscribers")
+     * @ORM\JoinTable(name="blogs_subscribers",
+     *     joinColumns={@JoinColumn(name="blog_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
+     *     )
      */
     protected $subscribers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="blog")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="blogs")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;

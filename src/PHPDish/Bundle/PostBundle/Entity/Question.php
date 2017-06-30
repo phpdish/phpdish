@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Question
 {
+    use Votable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

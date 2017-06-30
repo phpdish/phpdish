@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
+    use Votable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -59,30 +61,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     *
-     * @return Comment
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**

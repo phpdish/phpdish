@@ -28,7 +28,7 @@ class Vote
     /**
      * @ORM\Column(type="string", length=25)
      */
-    protected $viteType;
+    protected $voteType;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")

@@ -76,7 +76,7 @@ class User
     protected $questions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Blog", inversedBy="subscribers")
+     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="subscribers")
      */
     protected $subscribedBlogs;
 
