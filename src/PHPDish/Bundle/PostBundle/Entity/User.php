@@ -36,12 +36,12 @@ class User
     protected $password;
 
     /**
-     * @ORM\Column(type="smallint", length=1);
+     * @ORM\Column(type="smallint", length=1, nullable=true, options={"default": 0});
      */
     protected $gender;
 
     /**
-     * @ORM\Column(type="smallint", length=1);
+     * @ORM\Column(type="boolean");
      */
     protected $isBlocked;
 
@@ -405,5 +405,73 @@ class User
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * Add subscribedBlog
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog
+     *
+     * @return User
+     */
+    public function addSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog)
+    {
+        $this->subscribedBlogs[] = $subscribedBlog;
+
+        return $this;
+    }
+
+    /**
+     * Remove subscribedBlog
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog
+     */
+    public function removeSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog)
+    {
+        $this->subscribedBlogs->removeElement($subscribedBlog);
+    }
+
+    /**
+     * Get subscribedBlogs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubscribedBlogs()
+    {
+        return $this->subscribedBlogs;
+    }
+
+    /**
+     * Add blog
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $blog
+     *
+     * @return User
+     */
+    public function addBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $blog)
+    {
+        $this->blogs[] = $blog;
+
+        return $this;
+    }
+
+    /**
+     * Remove blog
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $blog
+     */
+    public function removeBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $blog)
+    {
+        $this->blogs->removeElement($blog);
+    }
+
+    /**
+     * Get blogs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBlogs()
+    {
+        return $this->blogs;
     }
 }

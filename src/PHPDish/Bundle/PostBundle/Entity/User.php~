@@ -76,6 +76,16 @@ class User
     protected $questions;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="subscribers")
+     */
+    protected $subscribedBlogs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="author")
+     */
+    protected $blogs;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -327,5 +337,73 @@ class User
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
+     *
+     * @return User
+     */
+    public function addVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
+     */
+    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Question $question
+     *
+     * @return User
+     */
+    public function addQuestion(\PHPDish\Bundle\PostBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Question $question
+     */
+    public function removeQuestion(\PHPDish\Bundle\PostBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait Votable
 {
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
     protected $voteCount;
 

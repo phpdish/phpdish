@@ -7,9 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="questions")
  */
-class Question
+class Question extends Commentable
 {
-    use Votable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -200,5 +199,71 @@ class Question
     public function getAuthor()
     {
         return $this->author;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set commentCount
+     *
+     * @param integer $commentCount
+     *
+     * @return Question
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+    /**
+     * Get commentCount
+     *
+     * @return integer
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     *
+     * @return Question
+     */
+    public function addComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    {
+        $comment->setCommentable($this);
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     */
+    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

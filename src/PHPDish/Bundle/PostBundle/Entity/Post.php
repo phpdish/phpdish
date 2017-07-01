@@ -7,10 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post
+class Post extends Commentable
 {
-    use Votable;
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -34,7 +32,7 @@ class Post
     protected $originalBody;
 
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
     protected $viewCount;
 
@@ -53,12 +51,6 @@ class Post
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Vote", mappedBy="post")
-     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
-     */
-    protected $votes;
 
     /**
      * Get id
@@ -277,5 +269,64 @@ class Post
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * Set commentCount
+     *
+     * @param integer $commentCount
+     *
+     * @return Post
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+    /**
+     * Get commentCount
+     *
+     * @return integer
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    {
+        $comment->setCommentable($this);
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     */
+    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

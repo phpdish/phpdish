@@ -147,4 +147,28 @@ class Vote
     {
         return $this->post;
     }
+
+    /**
+     * Set voteType
+     *
+     * @param string $voteType
+     *
+     * @return Vote
+     */
+    public function setVoteType($voteType)
+    {
+        $this->voteType = $voteType;
+
+        return $this;
+    }
+
+    /**
+     * Get voteType
+     *
+     * @return string
+     */
+    public function getVoteType()
+    {
+        return $this->voteType;
+    }
 }

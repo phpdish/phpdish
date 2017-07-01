@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
-    use Votable;
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -52,6 +50,12 @@ class Comment
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Commentable", inversedBy="comments", cascade={"remove"})
+     * @ORM\JoinColumn(name="commentable_id", referencedColumnName="id")
+     */
+    protected $commentable;
 
     /**
      * Get id
@@ -205,5 +209,29 @@ class Comment
     public function getOriginalBody()
     {
         return $this->originalBody;
+    }
+
+    /**
+     * Set commentable
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Commentable $commentable
+     *
+     * @return Comment
+     */
+    public function setCommentable(\PHPDish\Bundle\PostBundle\Entity\Commentable $commentable = null)
+    {
+        $this->commentable = $commentable;
+
+        return $this;
+    }
+
+    /**
+     * Get commentable
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\Commentable
+     */
+    public function getCommentable()
+    {
+        return $this->commentable;
     }
 }

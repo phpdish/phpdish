@@ -1,0 +1,31 @@
+<?php
+namespace PHPDish\Bundle\PostBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="commentable")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="comment_type", type="string")
+ * @ORM\DiscriminatorMap({"post"="Post", "question"="Question"})
+ */
+abstract class Commentable
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $commentCount;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="commentable")
+     */
+    protected $comments;
+}

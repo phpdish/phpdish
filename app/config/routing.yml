@@ -1,6 +1,7 @@
 php_dish_post:
-    resource: "@PHPDishPostBundle/Resources/config/routing.yml"
+    resource: "@PHPDishPostBundle/Controller/"
     prefix:   /
+    type: annotation
 
 app:
     resource: '@AppBundle/Controller/'
