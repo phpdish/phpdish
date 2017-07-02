@@ -6,12 +6,13 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -19,21 +20,6 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(type="string", length=80);
-     */
-    protected $email;
-
-    /**
-     * @ORM\Column(type="string", length=100);
-     */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="string", length=64);
-     */
-    protected $password;
 
     /**
      * @ORM\Column(type="smallint", length=1, nullable=true, options={"default": 0});

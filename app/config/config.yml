@@ -32,6 +32,7 @@ framework:
     assets: ~
     php_errors:
         log: true
+    translator: ~
 
 # Twig Configuration
 twig:
@@ -67,3 +68,19 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: PHPDish\Bundle\PostBundle\Entity\Comment
+            thread: PHPDish\Bundle\PostBundle\Entity\Post
+
+# app/config/config.yml
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: PHPDish\Bundle\PostBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"

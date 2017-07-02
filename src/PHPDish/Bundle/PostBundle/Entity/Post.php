@@ -2,12 +2,13 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\CommentBundle\Entity\Thread as BaseThread;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post extends Commentable
+class Post extends BaseThread
 {
     /**
      * @ORM\Id

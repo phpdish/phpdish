@@ -6,12 +6,14 @@
 namespace  PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\CommentBundle\Entity\Comment as BaseComment;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="comments")
  */
-class Comment
+class Comment extends BaseComment
 {
     /**
      * @ORM\Id
@@ -23,17 +25,7 @@ class Comment
     /**
      * @ORM\Column(type="text")
      */
-    protected $body;
-
-    /**
-     * @ORM\Column(type="text")
-     */
     protected $originalBody;
-
-    /**
-     * @ORM\Column(type="datetime", name="created_at")
-     */
-    protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at")
@@ -74,7 +66,7 @@ class Comment
      *
      * @return Comment
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
