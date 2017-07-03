@@ -7,8 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="questions")
  */
-class Question extends Commentable
+class Question
 {
+    use Commentable, Votable;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -46,6 +47,26 @@ class Question extends Commentable
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity="QuestionVote", mappedBy="question")
+     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
+     */
+    protected $votes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="QuestionComment", mappedBy="question")
+     * @ORM\JoinColumn(name="commentable_id", referencedColumnName="id")
+     */
+    protected $comments;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -178,37 +199,6 @@ class Question extends Commentable
     }
 
     /**
-     * Set author
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
-     *
-     * @return Question
-     */
-    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \PHPDish\Bundle\PostBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Set commentCount
      *
      * @param integer $commentCount
@@ -233,15 +223,96 @@ class Question extends Commentable
     }
 
     /**
-     * Add comment
+     * Set voteCount
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param integer $voteCount
      *
      * @return Question
      */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function setVoteCount($voteCount)
     {
-        $comment->setCommentable($this);
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount
+     *
+     * @return integer
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
+     *
+     * @return Question
+     */
+    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\QuestionVote $vote
+     *
+     * @return Question
+     */
+    public function addVote(\PHPDish\Bundle\PostBundle\Entity\QuestionVote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\QuestionVote $vote
+     */
+    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\QuestionVote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\QuestionComment $comment
+     *
+     * @return Question
+     */
+    public function addComment(\PHPDish\Bundle\PostBundle\Entity\QuestionComment $comment)
+    {
         $this->comments[] = $comment;
 
         return $this;
@@ -250,9 +321,9 @@ class Question extends Commentable
     /**
      * Remove comment
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param \PHPDish\Bundle\PostBundle\Entity\QuestionComment $comment
      */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\QuestionComment $comment)
     {
         $this->comments->removeElement($comment);
     }

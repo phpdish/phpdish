@@ -9,26 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="post_votes")
  */
-abstract class Vote
+class PostVote extends Vote
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="votes")
+     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
      */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $author;
+    protected $post;
 
     /**
      * Get id
@@ -45,7 +34,7 @@ abstract class Vote
      *
      * @param \DateTime $createdAt
      *
-     * @return $this
+     * @return PostVote
      */
     public function setCreatedAt($createdAt)
     {
@@ -65,11 +54,35 @@ abstract class Vote
     }
 
     /**
+     * Set post
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
+     *
+     * @return PostVote
+     */
+    public function setPost(\PHPDish\Bundle\PostBundle\Entity\Post $post = null)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\Post
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
      * Set author
      *
      * @param \PHPDish\Bundle\PostBundle\Entity\User $author
      *
-     * @return $this
+     * @return PostVote
      */
     public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
     {

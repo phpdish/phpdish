@@ -9,26 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="question_votes")
  */
-abstract class Vote
+class QuestionVote extends Vote
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="votes")
+     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
      */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $author;
+    protected $question;
 
     /**
      * Get id
@@ -45,7 +34,7 @@ abstract class Vote
      *
      * @param \DateTime $createdAt
      *
-     * @return $this
+     * @return QuestionVote
      */
     public function setCreatedAt($createdAt)
     {
@@ -65,11 +54,35 @@ abstract class Vote
     }
 
     /**
+     * Set question
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Question $question
+     *
+     * @return QuestionVote
+     */
+    public function setQuestion(\PHPDish\Bundle\PostBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\Question
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
      * Set author
      *
      * @param \PHPDish\Bundle\PostBundle\Entity\User $author
      *
-     * @return $this
+     * @return QuestionVote
      */
     public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
     {

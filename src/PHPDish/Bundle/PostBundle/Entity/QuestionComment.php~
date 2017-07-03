@@ -3,53 +3,20 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace  PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="question_comments")
  */
-abstract class Comment
+class QuestionComment extends Comment
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="comments")
      */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $body;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $originalBody;
-
-    /**
-     * @ORM\Column(type="datetime", name="created_at")
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", name="updated_at")
-     */
-    protected $updatedAt;
-
-    /**
-     * @ORM\Column(type="smallint", length=1)
-     */
-    protected $status;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $author;
+    protected $post;
 
     /**
      * Get id
@@ -66,7 +33,7 @@ abstract class Comment
      *
      * @param string $body
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setBody($body)
     {
@@ -90,7 +57,7 @@ abstract class Comment
      *
      * @param string $originalBody
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setOriginalBody($originalBody)
     {
@@ -114,7 +81,7 @@ abstract class Comment
      *
      * @param \DateTime $createdAt
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setCreatedAt($createdAt)
     {
@@ -138,7 +105,7 @@ abstract class Comment
      *
      * @param \DateTime $updatedAt
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -162,7 +129,7 @@ abstract class Comment
      *
      * @param integer $status
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setStatus($status)
     {
@@ -182,11 +149,35 @@ abstract class Comment
     }
 
     /**
+     * Set post
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\Question $post
+     *
+     * @return QuestionComment
+     */
+    public function setPost(\PHPDish\Bundle\PostBundle\Entity\Question $post = null)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\Question
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
      * Set author
      *
      * @param \PHPDish\Bundle\PostBundle\Entity\User $author
      *
-     * @return Comment
+     * @return QuestionComment
      */
     public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
     {

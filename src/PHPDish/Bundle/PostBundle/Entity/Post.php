@@ -8,8 +8,10 @@ use FOS\CommentBundle\Entity\Thread as BaseThread;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post extends BaseThread
+class Post
 {
+    use Commentable, Votable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -52,6 +54,26 @@ class Post extends BaseThread
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PostVote", mappedBy="post")
+     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
+     */
+    protected $votes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PostComment", mappedBy="post")
+     * @ORM\JoinColumn(name="commentable_id", referencedColumnName="id")
+     */
+    protected $comments;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -208,71 +230,6 @@ class Post extends BaseThread
     }
 
     /**
-     * Set author
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
-     *
-     * @return Post
-     */
-    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \PHPDish\Bundle\PostBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
-     *
-     * @return Post
-     */
-    public function addVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
-    {
-        $this->votes[] = $vote;
-
-        return $this;
-    }
-
-    /**
-     * Remove vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
-     */
-    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
-    {
-        $this->votes->removeElement($vote);
-    }
-
-    /**
-     * Get votes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
      * Set commentCount
      *
      * @param integer $commentCount
@@ -297,15 +254,96 @@ class Post extends BaseThread
     }
 
     /**
-     * Add comment
+     * Set voteCount
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param integer $voteCount
      *
      * @return Post
      */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function setVoteCount($voteCount)
     {
-        $comment->setCommentable($this);
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount
+     *
+     * @return integer
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
+     *
+     * @return Post
+     */
+    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \PHPDish\Bundle\PostBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostVote $vote
+     *
+     * @return Post
+     */
+    public function addVote(\PHPDish\Bundle\PostBundle\Entity\PostVote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostVote $vote
+     */
+    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\PostVote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
+    {
         $this->comments[] = $comment;
 
         return $this;
@@ -314,9 +352,9 @@ class Post extends BaseThread
     /**
      * Remove comment
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
      */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
     {
         $this->comments->removeElement($comment);
     }

@@ -16,7 +16,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/cocur/slugify/e8167e9a3236044afebd6e8ab13ebeb3ec9ca145.zip",
+                "url": "https://files.phpcomposer.com/files/cocur/slugify/e8167e9a3236044afebd6e8ab13ebeb3ec9ca145.zip",
                 "reference": "e8167e9a3236044afebd6e8ab13ebeb3ec9ca145",
                 "shasum": ""
             },
@@ -131,35 +131,35 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.7",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535"
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
-                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
+                "url": "https://files.phpcomposer.com/files/doctrine/annotations/54cacc9b81758b14e3ce750f205a393d52339e97.zip",
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Annotations\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -195,7 +195,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-08-31T12:32:49+00:00"
+            "time": "2017-02-24T16:22:25+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -269,28 +269,29 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
-                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+                "url": "https://files.phpcomposer.com/files/doctrine/collections/1a4fb7e902202c33cce8c55989b945612943c2ba.zip",
+                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "doctrine/coding-standard": "~0.1@dev",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -331,20 +332,20 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14T22:21:58+00:00"
+            "time": "2017-01-03T10:49:41+00:00"
         },
         {
             "name": "doctrine/common",
-            "version": "v2.6.2",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "7bce00698899aa2c06fe7365c76e4d78ddb15fa3"
+                "reference": "930297026c8009a567ac051fd545bf6124150347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/7bce00698899aa2c06fe7365c76e4d78ddb15fa3",
-                "reference": "7bce00698899aa2c06fe7365c76e4d78ddb15fa3",
+                "url": "https://files.phpcomposer.com/files/doctrine/common/930297026c8009a567ac051fd545bf6124150347.zip",
+                "reference": "930297026c8009a567ac051fd545bf6124150347",
                 "shasum": ""
             },
             "require": {
@@ -353,10 +354,10 @@
                 "doctrine/collections": "1.*",
                 "doctrine/inflector": "1.*",
                 "doctrine/lexer": "1.*",
-                "php": "~5.5|~7.0"
+                "php": "~5.6|~7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8|~5.0"
+                "phpunit/phpunit": "^5.4.6"
             },
             "type": "library",
             "extra": {
@@ -404,7 +405,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2016-11-30T16:50:46+00:00"
+            "time": "2017-01-13T14:02:13+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -962,7 +963,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/friendsofsymfony/comment-bundle/200b021075d444ad8e53eb3989bc6a996adfd8df.zip",
+                "url": "https://files.phpcomposer.com/files/FriendsOfSymfony/FOSCommentBundle/200b021075d444ad8e53eb3989bc6a996adfd8df.zip",
                 "reference": "200b021075d444ad8e53eb3989bc6a996adfd8df",
                 "shasum": ""
             },
@@ -1047,7 +1048,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/friendsofsymfony/rest-bundle/d62a6c0f4bc699f899865d7e7bc7a4186aef9a86.zip",
+                "url": "https://files.phpcomposer.com/files/FriendsOfSymfony/FOSRestBundle/d62a6c0f4bc699f899865d7e7bc7a4186aef9a86.zip",
                 "reference": "d62a6c0f4bc699f899865d7e7bc7a4186aef9a86",
                 "shasum": ""
             },
@@ -1148,7 +1149,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/friendsofsymfony/user-bundle/4f92bfbb8742ac8cc195d0b34bf8ecd83b62404a.zip",
+                "url": "https://files.phpcomposer.com/files/FriendsOfSymfony/FOSUserBundle/4f92bfbb8742ac8cc195d0b34bf8ecd83b62404a.zip",
                 "reference": "4f92bfbb8742ac8cc195d0b34bf8ecd83b62404a",
                 "shasum": ""
             },
@@ -1326,7 +1327,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/jms/metadata/6a06970a10e0a532fb52d3959547123b84a3b3ab.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/metadata/6a06970a10e0a532fb52d3959547123b84a3b3ab.zip",
                 "reference": "6a06970a10e0a532fb52d3959547123b84a3b3ab",
                 "shasum": ""
             },
@@ -1377,7 +1378,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/jms/parser-lib/c509473bc1b4866415627af0e1c6cc8ac97fa51d.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/parser-lib/c509473bc1b4866415627af0e1c6cc8ac97fa51d.zip",
                 "reference": "c509473bc1b4866415627af0e1c6cc8ac97fa51d",
                 "shasum": ""
             },
@@ -1412,7 +1413,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/jms/serializer/4fad8bbbe76e05de3b79ffa3db027058ed3813ff.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/serializer/4fad8bbbe76e05de3b79ffa3db027058ed3813ff.zip",
                 "reference": "4fad8bbbe76e05de3b79ffa3db027058ed3813ff",
                 "shasum": ""
             },
@@ -1492,7 +1493,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/jms/serializer-bundle/85ee039a2b7f89d77c403e33cee7b43a875c31e5.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/JMSSerializerBundle/85ee039a2b7f89d77c403e33cee7b43a875c31e5.zip",
                 "reference": "85ee039a2b7f89d77c403e33cee7b43a875c31e5",
                 "shasum": ""
             },
@@ -1563,7 +1564,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/knplabs/knp-menu/964b5b3ca7fd23019147991f4f75f361d061eb20.zip",
+                "url": "https://files.phpcomposer.com/files/KnpLabs/KnpMenu/964b5b3ca7fd23019147991f4f75f361d061eb20.zip",
                 "reference": "964b5b3ca7fd23019147991f4f75f361d061eb20",
                 "shasum": ""
             },
@@ -1629,7 +1630,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/knplabs/knp-menu-bundle/0e4af7209dc03e39c51ec70b68ab2ba3177c25de.zip",
+                "url": "https://files.phpcomposer.com/files/KnpLabs/KnpMenuBundle/0e4af7209dc03e39c51ec70b68ab2ba3177c25de.zip",
                 "reference": "0e4af7209dc03e39c51ec70b68ab2ba3177c25de",
                 "shasum": ""
             },
@@ -1678,16 +1679,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0"
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1e044bc4b34e91743943479f1be7a1d5eb93add0",
-                "reference": "1e044bc4b34e91743943479f1be7a1d5eb93add0",
+                "url": "https://files.phpcomposer.com/files/Seldaek/monolog/fd8c787753b3a2ad11bc60c063cff1358a32a3b4.zip",
+                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
                 "shasum": ""
             },
             "require": {
@@ -1708,7 +1709,7 @@
                 "phpunit/phpunit-mock-objects": "2.3.0",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "sentry/sentry": "^0.13",
-                "swiftmailer/swiftmailer": "~5.3"
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -1752,7 +1753,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-03-13T07:08:03+00:00"
+            "time": "2017-06-19T01:22:40+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1812,7 +1813,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/phpcollection/phpcollection/f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/php-collection/f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6.zip",
                 "reference": "f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6",
                 "shasum": ""
             },
@@ -1860,7 +1861,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/phpoption/phpoption/94e644f7d2051a5f0fcf77d81605f152eecff0ed.zip",
+                "url": "https://files.phpcomposer.com/files/schmittjoh/php-option/94e644f7d2051a5f0fcf77d81605f152eecff0ed.zip",
                 "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed",
                 "shasum": ""
             },
@@ -2316,7 +2317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/admin-bundle/10c27f6ee911c452ee67059bfdc1a1fca8953904.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/SonataAdminBundle/10c27f6ee911c452ee67059bfdc1a1fca8953904.zip",
                 "reference": "10c27f6ee911c452ee67059bfdc1a1fca8953904",
                 "shasum": ""
             },
@@ -2415,7 +2416,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/block-bundle/7cdf6e5620696cdd962eb4c404beeedaf20c3570.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/SonataBlockBundle/7cdf6e5620696cdd962eb4c404beeedaf20c3570.zip",
                 "reference": "7cdf6e5620696cdd962eb4c404beeedaf20c3570",
                 "shasum": ""
             },
@@ -2487,7 +2488,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/cache/f2f6be96c270d6a2b1f26fdc1d6edcb586b60691.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/cache/f2f6be96c270d6a2b1f26fdc1d6edcb586b60691.zip",
                 "reference": "f2f6be96c270d6a2b1f26fdc1d6edcb586b60691",
                 "shasum": ""
             },
@@ -2550,7 +2551,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/core-bundle/a1b837101262af856c45b22e8f0887553edf0fb0.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/SonataCoreBundle/a1b837101262af856c45b22e8f0887553edf0fb0.zip",
                 "reference": "a1b837101262af856c45b22e8f0887553edf0fb0",
                 "shasum": ""
             },
@@ -2629,7 +2630,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/datagrid-bundle/8aa9183f2ba1724b290faacb83fb003123bae548.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/SonataDatagridBundle/8aa9183f2ba1724b290faacb83fb003123bae548.zip",
                 "reference": "8aa9183f2ba1724b290faacb83fb003123bae548",
                 "shasum": ""
             },
@@ -2690,7 +2691,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/sonata-project/exporter/8ee7c0e804dc5e162187d8ed440d260adb3f1bce.zip",
+                "url": "https://files.phpcomposer.com/files/sonata-project/exporter/8ee7c0e804dc5e162187d8ed440d260adb3f1bce.zip",
                 "reference": "8ee7c0e804dc5e162187d8ed440d260adb3f1bce",
                 "shasum": ""
             },
@@ -2865,16 +2866,16 @@
         },
         {
             "name": "symfony/polyfill-apcu",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-apcu.git",
-                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa"
+                "reference": "2e7965b8cdfbba50d0092d3f6dca97dddec409e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/5d4474f447403c3348e37b70acc2b95475b7befa",
-                "reference": "5d4474f447403c3348e37b70acc2b95475b7befa",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-apcu/2e7965b8cdfbba50d0092d3f6dca97dddec409e2.zip",
+                "reference": "2e7965b8cdfbba50d0092d3f6dca97dddec409e2",
                 "shasum": ""
             },
             "require": {
@@ -2883,7 +2884,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2914,25 +2915,25 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T08:25:21+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
-                "reference": "2d6e2b20d457603eefb6e614286c22efca30fdb4"
+                "reference": "3191cbe0ce64987bd382daf6724af31c53daae01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/2d6e2b20d457603eefb6e614286c22efca30fdb4",
-                "reference": "2d6e2b20d457603eefb6e614286c22efca30fdb4",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-intl-icu/3191cbe0ce64987bd382daf6724af31c53daae01.zip",
+                "reference": "3191cbe0ce64987bd382daf6724af31c53daae01",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/intl": "~2.3|~3.0"
+                "symfony/intl": "~2.3|~3.0|~4.0"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -2940,7 +2941,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2972,20 +2973,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T08:25:21+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4"
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e79d363049d1c2128f133a2667e4f4190904f7f4",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-mbstring/f29dca382a6485c3cbe6379f0c61230167681937.zip",
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
                 "shasum": ""
             },
             "require": {
@@ -2997,7 +2998,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -3031,20 +3032,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T14:24:12+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "1dd42b9b89556f18092f3d1ada22cb05ac85383c"
+                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/1dd42b9b89556f18092f3d1ada22cb05ac85383c",
-                "reference": "1dd42b9b89556f18092f3d1ada22cb05ac85383c",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-php56/bc0b7d6cb36b10cfabb170a3e359944a95174929.zip",
+                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929",
                 "shasum": ""
             },
             "require": {
@@ -3054,7 +3055,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -3087,20 +3088,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T08:25:21+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "13ce343935f0f91ca89605a2f6ca6f5c2f3faac2"
+                "reference": "032fd647d5c11a9ceab8ee8747e13b5448e93874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/13ce343935f0f91ca89605a2f6ca6f5c2f3faac2",
-                "reference": "13ce343935f0f91ca89605a2f6ca6f5c2f3faac2",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-php70/032fd647d5c11a9ceab8ee8747e13b5448e93874.zip",
+                "reference": "032fd647d5c11a9ceab8ee8747e13b5448e93874",
                 "shasum": ""
             },
             "require": {
@@ -3110,7 +3111,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -3146,20 +3147,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T14:24:12+00:00"
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "746bce0fca664ac0a575e465f65c6643faddf7fb"
+                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/746bce0fca664ac0a575e465f65c6643faddf7fb",
-                "reference": "746bce0fca664ac0a575e465f65c6643faddf7fb",
+                "url": "https://files.phpcomposer.com/files/symfony/polyfill-util/ebccbde4aad410f6438d86d7d261c6b4d2b9a51d.zip",
+                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d",
                 "shasum": ""
             },
             "require": {
@@ -3168,7 +3169,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -3198,7 +3199,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2017-06-09T08:25:21+00:00"
         },
         {
             "name": "symfony/security-acl",
@@ -3210,7 +3211,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/symfony/security-acl/053b49bf4aa333a392c83296855989bcf88ddad1.zip",
+                "url": "https://files.phpcomposer.com/files/symfony/security-acl/053b49bf4aa333a392c83296855989bcf88ddad1.zip",
                 "reference": "053b49bf4aa333a392c83296855989bcf88ddad1",
                 "shasum": ""
             },
@@ -3483,7 +3484,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/twig/extensions/d188c76168b853481cc75879ea045bf93d718e9c.zip",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig-extensions/d188c76168b853481cc75879ea045bf93d718e9c.zip",
                 "reference": "d188c76168b853481cc75879ea045bf93d718e9c",
                 "shasum": ""
             },
@@ -3531,16 +3532,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.34.2",
+            "version": "v1.34.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "55e4beb721a044db9e31ae0470024fc205b6a008"
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/55e4beb721a044db9e31ae0470024fc205b6a008",
-                "reference": "55e4beb721a044db9e31ae0470024fc205b6a008",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig/451c6f4197e113e24c1c85bc3fc8c2d77adeff2e.zip",
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
                 "shasum": ""
             },
             "require": {
@@ -3592,7 +3593,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-06-06T03:56:50+00:00"
+            "time": "2017-06-07T18:45:17+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -3604,7 +3605,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/willdurand/jsonp-callback-validator/1a7d388bb521959e612ef50c5c7b1691b097e909.zip",
+                "url": "https://files.phpcomposer.com/files/willdurand/JsonpCallbackValidator/1a7d388bb521959e612ef50c5c7b1691b097e909.zip",
                 "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909",
                 "shasum": ""
             },
@@ -3644,7 +3645,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://dl.composer-proxy.org/willdurand/negotiation/03436ededa67c6e83b9b12defac15384cb399dc9.zip",
+                "url": "https://files.phpcomposer.com/files/willdurand/Negotiation/03436ededa67c6e83b9b12defac15384cb399dc9.zip",
                 "reference": "03436ededa67c6e83b9b12defac15384cb399dc9",
                 "shasum": ""
             },

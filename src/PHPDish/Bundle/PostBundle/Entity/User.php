@@ -42,19 +42,9 @@ class User extends BaseUser
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
-     */
-    protected $comments;
-
-    /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
      */
     protected $posts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Vote", mappedBy="author")
-     */
-    protected $votes;
 
     /**
      * @ORM\OneToMany(targetEntity="Question", mappedBy="author")
