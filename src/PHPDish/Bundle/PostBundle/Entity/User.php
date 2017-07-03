@@ -22,14 +22,14 @@ class User extends BaseUser implements UserInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="smallint", length=1, nullable=true, options={"default": 0});
+     * @ORM\Column(type="smallint", length=1);
      */
-    protected $gender;
+    protected $gender = 0;
 
     /**
      * @ORM\Column(type="boolean");
      */
-    protected $isBlocked;
+    protected $isBlocked = false;
 
     /**
      * @ORM\Column(type="datetime", name="created_at");

@@ -12,7 +12,6 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-
         return $this->render('PHPDishAdminBundle:Dashboard:index.html.twig');
     }
 }
