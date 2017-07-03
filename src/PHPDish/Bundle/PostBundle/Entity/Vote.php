@@ -7,10 +7,7 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
-abstract class Vote
+abstract class Vote implements VoteInterface
 {
     /**
      * @ORM\Id

@@ -8,11 +8,10 @@ namespace  PHPDish\Bundle\PostBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-/**
- * @ORM\Entity
- */
-abstract class Comment
+class Comment
 {
+    use Votable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -116,7 +115,7 @@ abstract class Comment
      *
      * @return Comment
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -203,5 +202,29 @@ abstract class Comment
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set voteCount
+     *
+     * @param integer $voteCount
+     *
+     * @return Comment
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount
+     *
+     * @return integer
+     */
+    public function getVoteCount()
+    {
+        return $this->voteCount;
     }
 }

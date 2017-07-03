@@ -9,13 +9,13 @@ interface TopicInterface
 {
     /**
      * 获取创建时间
-     * @return string
+     * @return \DateTime
      */
     public function getCreatedAt();
 
     /**
      * 获取更新时间
-     * @return string
+     * @return \DateTime
      */
     public function getUpdatedAt();
 

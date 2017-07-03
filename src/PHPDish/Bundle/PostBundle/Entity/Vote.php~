@@ -9,9 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="votes")
  */
-class Vote
+abstract class Vote implements VoteInterface
 {
     /**
      * @ORM\Id
@@ -26,21 +25,10 @@ class Vote
     protected $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=25)
-     */
-    protected $voteType;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="votes")
-     * @ORM\JoinColumn(name="votable_id", referencedColumnName="id")
-     */
-    protected $post;
 
     /**
      * Get id
@@ -57,7 +45,7 @@ class Vote
      *
      * @param \DateTime $createdAt
      *
-     * @return Vote
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -77,35 +65,11 @@ class Vote
     }
 
     /**
-     * Set viteType
-     *
-     * @param string $viteType
-     *
-     * @return Vote
-     */
-    public function setViteType($viteType)
-    {
-        $this->viteType = $viteType;
-
-        return $this;
-    }
-
-    /**
-     * Get viteType
-     *
-     * @return string
-     */
-    public function getViteType()
-    {
-        return $this->viteType;
-    }
-
-    /**
      * Set author
      *
      * @param \PHPDish\Bundle\PostBundle\Entity\User $author
      *
-     * @return Vote
+     * @return $this
      */
     public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
     {
@@ -122,29 +86,5 @@ class Vote
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    /**
-     * Set post
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
-     *
-     * @return Vote
-     */
-    public function setPost(\PHPDish\Bundle\PostBundle\Entity\Post $post = null)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \PHPDish\Bundle\PostBundle\Entity\Post
-     */
-    public function getPost()
-    {
-        return $this->post;
     }
 }

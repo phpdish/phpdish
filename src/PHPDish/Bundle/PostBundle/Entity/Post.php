@@ -8,7 +8,7 @@ use FOS\CommentBundle\Entity\Thread as BaseThread;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
-class Post
+class Post implements PostInterface
 {
     use Commentable, Votable;
 

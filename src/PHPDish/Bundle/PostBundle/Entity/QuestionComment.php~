@@ -19,133 +19,27 @@ class QuestionComment extends Comment
     protected $post;
 
     /**
-     * Get id
+     * Set voteCount
+     *
+     * @param integer $voteCount
+     *
+     * @return QuestionComment
+     */
+    public function setVoteCount($voteCount)
+    {
+        $this->voteCount = $voteCount;
+
+        return $this;
+    }
+
+    /**
+     * Get voteCount
      *
      * @return integer
      */
-    public function getId()
+    public function getVoteCount()
     {
-        return $this->id;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return QuestionComment
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set originalBody
-     *
-     * @param string $originalBody
-     *
-     * @return QuestionComment
-     */
-    public function setOriginalBody($originalBody)
-    {
-        $this->originalBody = $originalBody;
-
-        return $this;
-    }
-
-    /**
-     * Get originalBody
-     *
-     * @return string
-     */
-    public function getOriginalBody()
-    {
-        return $this->originalBody;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return QuestionComment
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return QuestionComment
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return QuestionComment
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
+        return $this->voteCount;
     }
 
     /**
@@ -170,29 +64,5 @@ class QuestionComment extends Comment
     public function getPost()
     {
         return $this->post;
-    }
-
-    /**
-     * Set author
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
-     *
-     * @return QuestionComment
-     */
-    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \PHPDish\Bundle\PostBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 }

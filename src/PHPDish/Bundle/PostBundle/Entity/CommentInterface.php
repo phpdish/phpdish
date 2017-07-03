@@ -39,29 +39,17 @@ interface CommentInterface extends VotableInterface
     public function setCreatedAt(\DateTime $time);
 
     /**
-     * 获取评论类型
-     * @return string
-     */
-    public function getType();
-
-    /**
-     * 设置评论类型
-     * @return $this
-     */
-    public function setType();
-
-    /**
      * 获取评论内容
      * @return string
      */
-    public function getContent();
+    public function getBody();
 
     /**
      * 设置内容
      * @param string $content
      * @return $this
      */
-    public function setContent($content);
+    public function setBody($content);
 
     /**
      * 获取评论状态
@@ -81,17 +69,4 @@ interface CommentInterface extends VotableInterface
      * @return UserInterface
      */
     public function getAuthor();
-
-    /**
-     * 获取被评论的资源
-     * @return CommentableInterface
-     */
-    public function getCommentable();
-
-    /**
-     * 设置评论的资源
-     * @param CommentableInterface $commentable
-     * @return $this
-     */
-    public function setCommentable(CommentableInterface $commentable);
 }
