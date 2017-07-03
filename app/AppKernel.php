@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
