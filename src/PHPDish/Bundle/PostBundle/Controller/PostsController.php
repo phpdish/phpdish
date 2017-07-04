@@ -77,4 +77,13 @@ class PostsController extends Controller
         $em->flush();
         return new Response();
     }
+
+//
+//    /**
+//     * @Route('/home', name="user_home")
+//     */
+//    public function homeAction()
+//    {
+//        return new Response('hello home');
+//    }
 }

@@ -3,7 +3,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
-
+        Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -12,7 +12,15 @@ security:
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                  ryan:
+                    password: 123456
+                    roles: 'ROLE_USER'
+                  admin:
+                    password: 123456
+                    roles: 'ROLE_ADMIN'
+
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -21,7 +29,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+        default:
+           http_basic: ~
+           anonymous: ~
         main:
             anonymous: ~
             # activate different ways to authenticate
@@ -46,3 +56,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/posts, role: ROLE_ADMIN }
