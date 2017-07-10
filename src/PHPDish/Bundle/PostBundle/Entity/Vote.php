@@ -6,6 +6,7 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PHPDish\Bundle\UserBundle\Entity\User;
 
 abstract class Vote implements VoteInterface
 {
@@ -22,7 +23,7 @@ abstract class Vote implements VoteInterface
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="votes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -64,7 +65,7 @@ abstract class Vote implements VoteInterface
     /**
      * Set author
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
+     * @param \PHPDish\Bundle\UserBundle\Entity\User $author
      *
      * @return $this
      */
@@ -78,7 +79,7 @@ abstract class Vote implements VoteInterface
     /**
      * Get author
      *
-     * @return \PHPDish\Bundle\PostBundle\Entity\User
+     * @return \PHPDish\Bundle\UserBundle\Entity\User
      */
     public function getAuthor()
     {

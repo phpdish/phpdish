@@ -8,5 +8,5 @@ trait Commentable
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
-    protected $commentCount;
+    protected $commentCount = 0;
 }

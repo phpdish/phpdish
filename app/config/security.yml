@@ -29,31 +29,15 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        default:
-           http_basic: ~
-           anonymous: ~
         main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
-
             logout:       true
-            anonymous:    true
+            anonymous:  ~
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/posts, role: ROLE_ADMIN }

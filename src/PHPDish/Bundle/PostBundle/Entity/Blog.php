@@ -44,7 +44,7 @@ class Blog
     protected $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="subscribedBlogs")
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="subscribedBlogs")
      * @ORM\JoinTable(name="blogs_subscribers",
      *     joinColumns={@JoinColumn(name="blog_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
@@ -53,7 +53,7 @@ class Blog
     protected $subscribers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="blogs")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="blogs")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;

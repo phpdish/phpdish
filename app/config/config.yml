@@ -80,7 +80,7 @@ fos_comment:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: PHPDish\Bundle\PostBundle\Entity\User
+    user_class: PHPDish\Bundle\UserBundle\Entity\User
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"

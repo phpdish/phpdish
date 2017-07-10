@@ -45,7 +45,7 @@ class Comment
     protected $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;

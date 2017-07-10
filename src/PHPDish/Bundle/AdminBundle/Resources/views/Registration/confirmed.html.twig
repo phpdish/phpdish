@@ -1,0 +1,18 @@
+{% extends "FOSUserBundle::sign_layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="card-content">
+    <div class="row">
+        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+        {% if targetUrl %}
+        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+        {% endif %}
+    </div>
+    <div class="card-action center">
+        <a href="{{ path('homepage') }}" class="waves-effect waves-light btn">{{ 'security.register.go_to_account'|trans({},'messages') }}</a>
+    </div>
+</div>
+{% endblock fos_user_content %}
+W

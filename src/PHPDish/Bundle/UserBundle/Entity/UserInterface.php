@@ -3,7 +3,7 @@
  * PHPDish user component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Entity;
 
 interface UserInterface
 {

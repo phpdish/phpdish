@@ -43,7 +43,7 @@ class Question
     protected $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="questions")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="questions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;

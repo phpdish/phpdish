@@ -12,5 +12,5 @@ trait Votable
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
-    protected $voteCount;
+    protected $voteCount = 0;
 }

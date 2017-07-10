@@ -3,7 +3,7 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser implements UserInterface
 {
@@ -42,22 +43,22 @@ class User extends BaseUser implements UserInterface
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post", mappedBy="author")
      */
     protected $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Question", mappedBy="author")
      */
     protected $questions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="subscribers")
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", mappedBy="subscribers")
      */
     protected $subscribedBlogs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blog", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", mappedBy="author")
      */
     protected $blogs;
 
@@ -66,6 +67,7 @@ class User extends BaseUser implements UserInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -449,5 +451,18 @@ class User extends BaseUser implements UserInterface
     public function getBlogs()
     {
         return $this->blogs;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->updatedAt = new \DateTime();
     }
 }

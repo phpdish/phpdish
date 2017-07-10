@@ -3,10 +3,12 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Thread as BaseThread;
+use PHPDish\Bundle\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="posts")
+ * @ORM\HasLifecycleCallbacks
  */
 class Post implements PostInterface
 {
@@ -27,7 +29,7 @@ class Post implements PostInterface
     /**
      * @ORM\Column(type="text")
      */
-    protected $body;
+    protected $body = 'test';
 
     /**
      * @ORM\Column(type="text")
@@ -37,7 +39,7 @@ class Post implements PostInterface
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
-    protected $viewCount;
+    protected $viewCount = 0;
 
     /**
      * @ORM\Column(type="datetime", name="created_at")
@@ -50,7 +52,7 @@ class Post implements PostInterface
     protected $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -66,6 +68,7 @@ class Post implements PostInterface
      * @ORM\JoinColumn(name="commentable_id", referencedColumnName="id")
      */
     protected $comments;
+
     /**
      * Constructor
      */
@@ -280,11 +283,11 @@ class Post implements PostInterface
     /**
      * Set author
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\User $author
+     * @param User $author
      *
      * @return Post
      */
-    public function setAuthor(\PHPDish\Bundle\PostBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 
@@ -294,7 +297,7 @@ class Post implements PostInterface
     /**
      * Get author
      *
-     * @return \PHPDish\Bundle\PostBundle\Entity\User
+     * @return User
      */
     public function getAuthor()
     {
@@ -344,8 +347,8 @@ class Post implements PostInterface
      */
     public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
     {
+        $comment->setPost($this);
         $this->comments[] = $comment;
-
         return $this;
     }
 
@@ -367,5 +370,17 @@ class Post implements PostInterface
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->updatedAt = new \DateTime();
     }
 }
