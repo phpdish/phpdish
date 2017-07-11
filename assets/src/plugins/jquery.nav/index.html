@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery One Page Nav</title>
+	<link href="demo.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+	<ul id="nav">
+		<li class="current"><a href="#intro">Intro</a></li>
+		<li><a href="#usage">Usage</a></li>
+		<li><a href="#options">Options</a></li>
+		<li><a href="#examples">Examples</a></li>
+	</ul>
+
+	<div id="container">
+		<div class="section" id="intro">
+			<h1>jQuery One Page Nav</h1>
+
+			<p>A lightweight jQuery plugin for the navigation on one-page sites. Adds smooth scrolling when clicking on the navigation and automatically selects the correct navigation items as you are scrolling through the different sections.</p>
+
+			<p><a href="https://github.com/davist11/jQuery-One-Page-Nav">GitHub Repo</a></p>
+		</div>
+
+		<div class="section" id="usage">
+			<h2>Usage</h2>
+
+			<pre>$(document).ready(function() {
+	$('#nav').onePageNav();
+});</pre>
+
+			<h3>Markup</h3>
+
+			<pre>&lt;ul id="nav">
+	&lt;li class="current">&lt;a href="#intro">Intro&lt;/a>&lt;/li>
+	&lt;li>&lt;a href="#usage">Usage&lt;/a>&lt;/li>
+	&lt;li>&lt;a href="#examples">Examples&lt;/a>&lt;/li>
+&lt;/ul></pre>
+		</div>
+
+		<div class="section" id="options">
+			<h2>Options</h2>
+
+			<ul>
+				<li><strong>currentClass</strong>: Class to add to the nav to indicate the current item. Defaults to <em>current</em>.</li>
+				<li><strong>changeHash</strong>: Whether you want to change the hash when a user clicks on the nav. Defaults to <em>false</em>.</li>
+				<li><strong>scrollSpeed</strong>: Speed at which the page will scroll upon clicking on the nav. Defaults to <em>750</em>.</li>
+				<li><strong>scrollThreshold</strong>: Percentage of screen at which the next section should become current. Defaults to <em>0.5</em>.</li>
+				<li><strong>filter</strong>: Selector of links to filter out of one page nav functionality.</li>
+				<li><strong>easing</strong>: Easing method. Defaults to <em>swing</em>.</li>
+				<li><strong>begin</strong>: Function to call when the scrolling starts.</li>
+				<li><strong>end</strong>: Function to call when the scrolling ends.</li>
+				<li><strong>scrollChange</strong>: Function to call when you enter a section. The current nav item gets passed in.</li>
+			</ul>
+		</div>
+
+		<div class="section" id="examples">
+			<h2>Examples</h2>
+
+			<ul>
+				<li><a href="filter.html">Filter out links</a></li>
+				<li><a href="hash.html">Change hash</a></li>
+				<li><a href="top.html">Horizontal Nav</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]-->
+	<!--[if gt IE 8]><!--><script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script><!--<![endif]-->
+	<script src="jquery.nav.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#nav').onePageNav();
+		});
+	</script>
+</body>
+</html>

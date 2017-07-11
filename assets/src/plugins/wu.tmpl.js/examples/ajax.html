@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../wu.tmpl.min.js"></script>
+</head>
+
+<body>
+
+	<ul wu-tmpl="{name:'list'}">
+		{{each list item index}}
+		<li>
+			{{index}}: {{item.name}}
+		</li>
+		{{/each}}
+	</ul>
+
+    <script src="../lib/jquery.js"></script>
+    <script>
+    	$.ajax({
+    		url: 'ajax.json',
+    		dataType: 'json',
+    		success: function (data) {
+    			wu.tmpl.render('list', data)
+    		}
+    	});
+    </script>
+</body>
+
+</html>

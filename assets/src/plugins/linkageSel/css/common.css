@@ -1,0 +1,36 @@
+* {
+	font-family:Arial, Helvetica, \5b8b\4f53,sans-serif;
+	font-size:14px;
+}
+#header {
+	background:#6FA6CC;
+	padding:10px 20px;
+	border-bottom:2px solid #CCC;
+}
+h1 {
+	font-size:20px;
+	}
+h2 {
+	font-size:16px;
+	border-bottom:1px solid #DDD;
+	margin:10px 0;
+}
+h3 {
+	font-size:13px;
+	margin:10px 0;
+	padding-left:2px;
+	border-left:2px solid #666666;
+}
+ul {
+	margin-left:20px;
+	
+}
+li {margin-top: 15px;}
+
+.main {
+	margin:20px;
+}
+.lsdemo {
+	margin-bottom:40px;
+	border-bottom:1px solid #DDDDDD
+}

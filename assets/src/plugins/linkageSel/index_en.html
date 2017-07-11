@@ -1,0 +1,1162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LinkageSel: Infinite Level Linkage Select</title>
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="js/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="js/syntaxhighlighter/shThemeDefault.css"  />
+
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+<div style="position: absolute; top: 10px; right: 11px;"><a href="index.html">中文</a> | <a href="index_en.html">English</a> </div>
+<div id="header"><h1>Javascript Infinite Level Linkage Select </h1></div>
+
+	<div class="main">
+		<h2>Overview</h2>
+		<ul>
+			<li>Multi level linkage, support ajax request and data cache, dynamic &lt;select&gt;construct, self defined tips as the first&lt;option&gt;,
+			the only one &lt;option&gt;selected automatically, self defined callback function when onChange event triggered.
+			</li>
+		</ul>
+
+		<h2>Requirement</h2>
+		<ul>
+			<li>jQuery v1.6+</li>
+		</ul>
+
+		<h2>License</h2>
+		<ul>
+			<li> 
+			Dual licensed under the MIT and GPL licenses: <br>
+			<a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a> <br>
+			<a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a>
+		</ul>
+		
+		<h2>Author</h2>
+		<ul>
+			<li><a target="_blank" href="http://linkagesel.xiaozhong.biz">waiting AT xiaozhong.biz</a></li>
+		</ul>
+
+		<h2>Update</h2>
+		<ul>
+			<li>See <a href="changes_en.txt" >changes</a></li>
+		</ul>
+
+		<h2>Download</h2>
+		<ul>
+		    <li>
+				<a target="_blank" href="http://linkagesel.xiaozhong.biz/linkagesel.zip">linkagesel.zip</a> including chinese-district data
+				of js and postgres
+		    </li>
+		    <li>
+		        <a target="_blank" href="https://github.com/waitingsong/LinkageSel">GitHub Repository</a>
+		    </li>
+		</ul>
+
+		<h2>Settings</h2>
+		<ul>
+			<li>
+				Usage:
+				var linkageSel = new LinkageSel(opts);
+			</li>
+			<li>opts params：
+				<table width="90%" border="1" cellspacing="0" cellpadding="5" style="margin-top:10px" >
+					<tr> 
+		            	<td width="12%" align="center">param name</td>
+		            	<td width="10%" align="center">type</td>
+		            	<td width="22%" align="center">default value</td>
+		            	<td width="4%" align="center">optional</td>
+		            	<td width="" align="center">comment</td>
+		          	</tr>
+		          	<tr>
+		            	<td>data</td>
+		            	<td>Object</td>
+		            	<td>null</td>
+		            	<td>√</td>
+		            	<td>local js data. can be used with 'ajax' param</td>
+		        	</tr>
+		          	<tr>
+		            	<td>url</td>
+		            	<td>String</td>
+		            	<td>&nbsp;</td>
+		            	<td>√</td>
+		            	<td>remote url address, get all data at one time</td>
+		        	</tr>
+		          	<tr>
+		            	<td>ajax</td>
+		            	<td>String</td>
+		            	<td>&nbsp;</td>
+		            	<td>√</td>
+		            	<td>remote url address for ajax</td>
+		        	</tr>
+		          	<tr>
+		            	<td>autoBind</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>whether constrct next level &lt;select&gt; automatically</td>
+		        	</tr>
+		          	<tr>
+		            	<td>autoHide</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>whether hide next levevl &lt;select&gt; which has not items</td>
+		        	</tr>
+		          	<tr>
+		            	<td>hideWidth</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+						<td>whether release the postion width if set 'autoHide' to TRUE. (true->'display:none'||false-> 'visibility:hidden')</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>autoLink</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>whether linkage to next level if only one item exists</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>defVal</td>
+		            	<td>Integer|Array</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>default selected value. integer for first &lt;select&gt;, array for multi &lt;select&gt; </td>
+		        	</tr>  
+		          	<tr>
+		            	<td>head</td>
+		            	<td>String|Number|false</td>
+		            	<td>Please select..</td>
+		            	<td>√</td>
+		            	<td>the first &lt;option&gt; name. blank string ('') is valid</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>level</td>
+		            	<td>Integer</td>
+		            	<td>20</td>
+		            	<td>√</td>
+		            	<td>limit to avoid Infinite loop</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>loaderImg</td>
+		            	<td>String</td>
+		            	<td>images/ui-anim_basic_16x16.gif</td>
+		            	<td>√</td>
+		            	<td>ajax loader image</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>root</td>
+		            	<td>Integer|Array</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>root entry. invalid for ajax request</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>select</td>
+		            	<td>String|Array</td>
+		            	<td>&nbsp; </td>
+		            	<td></td>
+		            	<td>jQuery selector of array of selector</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>selClass</td>
+		            	<td>String</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>class name for &lt;select&gt; which is constructed by code</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>selStyle</td>
+		            	<td>String</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>css style for &lt;select&gt; which is constructed by code</td>
+		        	</tr>  
+
+		          	<tr>
+		            	<td>minWidth</td>
+		            	<td>Integer</td>
+		            	<td>120</td>
+		            	<td>√</td>
+		            	<td></td>
+		        	</tr>  
+		          	<tr>
+		            	<td>maxWidth</td>
+		            	<td>Integer</td>
+		            	<td>300</td>
+		            	<td>√</td>
+		            	<td></td>
+		        	</tr>  
+		          	<tr>
+		            	<td>fixWidth</td>
+		            	<td>Integer</td>
+		            	<td>0</td>
+		            	<td>√</td>
+		            	<td>override effect defined by minWidth or maxWidth</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>onChange</td>
+		            	<td>Function</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>callback function when onChange event fired</td>
+		        	</tr>         	  
+		          	<tr>
+		            	<td>mvcQuery</td>
+		            	<td>Boolean</td>
+		            	<td>false</td>
+		            	<td>√</td>
+						<td>ajax request url compatible to MVC when set to true,
+							eg. http://linkagesel.xiaozhong.biz/district/get_nodes/1 when 'ajax' set to 'district/get_nodes'
+						</td>
+		        	</tr>         	  
+		          	<tr>
+		            	<td>dataReader</td>
+		            	<td>Object</td>
+						<td>{id: 'id', name: 'name', cell: 'cell'}</td>
+		            	<td>√</td>
+						<td>You can define othe data key name , such as {id: 'gid', name: 'value', cell: 'subcell'} </td>
+		        	</tr>         	  
+				</table>
+			</li>
+			
+			<li>
+				Method：
+				<table width="90%" border="1" cellspacing="0" cellpadding="5" style="margin-top:10px" >
+					<thead> 
+		            	<td width="15%" align="center">method name</td>
+		            	<td width="20%" align="center">param and type</td>
+		        		<td width="8%" align="center">type of return</td>
+		        		<td width="8%" align="center">chainable</td>
+		            	<td width="" align="center">comment</td>
+		          	</thead>
+		          	
+		          	<tr>
+		            	<td>changeValues</td>
+		            	<td>param1：Integer|Array <br /> param2: Boolean[option=false] </td>
+		        		<td>Object</td>
+		        		<td>√</td>
+		            	<td>change option value by hand. param2 to determine fire callback funcion bind on onChange event or not</td>
+		        	</tr>
+ 		          	<tr>
+		            	<td>getSelectedValue</td>
+		            	<td>idx：Integer</td>
+		        		<td>String</td>
+		        		<td>&nbsp;</td>
+						<td>return the value of the idx of &lt;select> (begein from zero). the return value is from the last element if no param pass.
+						return null if all element no selected item.</td>
+		        	</tr>
+        			<tr>
+		            	<td>getSelectedArr</td>
+		            	<td>&nbsp;</td>
+		        		<td>Array</td>
+		        		<td>&nbsp;</td>
+		            	<td>the return array include the value of all elements</td>
+		        	</tr>		        
+      				<tr>
+		            	<td>getSelectedData</td>
+		            	<td>
+		        			key： String <br />
+		        			idx： Interger[option]
+		        		</td>
+		        		<td>Object</td>
+		        		<td>&nbsp;</td>
+		            	<td>get data of the selected item row. the return data will from the last elemnet which has valid selected item if pass zero to inx</td>
+		        	</tr>
+      				<tr>
+		            	<td>getSelectedDataArr</td>
+		            	<td>key： String[option]</td>
+		        		<td>Array</td>
+		        		<td>&nbsp;</td>
+						<td>get all of the element object or object value which has selected item, stop at the one which has no seleted item.
+						if key is valid then return object[key] (type is int|string|null), if key not defined then return ojbect (typeis object|null)</td>
+		        	</tr>
+      				<tr>
+		            	<td>onChange</td>
+		            	<td>callback: Function;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+						<td>callback function bind to onchange event on element.
+						the variable this inner the function refer to the instance of LinkageSel (See Demo2)</td>
+		        	</tr>
+      				<tr>
+		            	<td>reset</td>
+		            	<td>&nbsp;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+		            	<td>reset to init status</td>
+		        	</tr>
+      				<tr>
+		            	<td>resetAll</td>
+		            	<td>&nbsp;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+		            	<td>reset to init status, including defVal and data</td>
+		        	</tr>		        
+		        </table>
+			</li>
+		</ul>
+
+		<h2 style="margin-top: 50px;">Demo</h2>
+		<div class="main">
+			<div class="lsdemo">
+				<h3><a name="demo1">Loading:</a></h3>
+				<pre class="brush: html">
+					&lt;script src="js/jquery.js">&lt;/script>
+					&lt;script src="js/comm.js">&lt;/script>
+					&lt;script src="js/linkagesel-min.js">&lt;/script>
+				</pre>
+			</div>
+			
+			<div class="lsdemo">
+				<h3><a>Data structure</a></h3>
+				<pre class="brush: js">
+					&lt;script&gt;
+						{
+							$id : {"name": $nameValue, "otherAttr": $otherAttrVal, "cell": { ... },
+						};
+						or 
+						{
+							$id : {"id": $id, "name": $nameValue, "otherAttr": $otherAttrVal, "cell": { ... },
+						};
+					&lt;/script&gt;
+					
+					$id is sequence index, used at &lt;option value="$id">&lt;/option>  the value of the "value"
+					'name' is used at  &lt;optio>NAME&lt;option>
+					'otherAttr' is optional other key name, such as  'price', 'zip'
+					'cell' is optional key name which contains sub data row
+						
+					example:
+					var data1 = {
+						1: {name: 'Vegetables', 
+							cell: { 
+								10: {name: 'Spinach', price: 4 }, 
+								11: {name: 'Eggplant', price: 5} 
+							}
+					};
+					or
+					var data1 = {
+						1: {id: 1, name: 'Vegetables', 
+							cell: { 
+								10: {id: 10, name: 'Spinach', price: 4 }, 
+								11: {id: 11, name: 'Eggplant', price: 5} 
+							}
+					};
+					or
+					var data1 = {
+						123: {id: 1, name: 'Vegetables', 
+							cell: { 
+								234: {id: 10, name: 'Spinach', price: 4 }, 
+								345: {id: 11, name: 'Eggplant', price: 5} 
+							}
+					};
+
+					Vegetables	(id==1)
+							|-->Spinach (id==1, price==4)
+							|-->Eggplant (id==10, price==5)
+					
+				</pre>
+
+				You can define the key name by yourself pass dataReader
+			</div>
+			
+			<div class="lsdemo">
+				<h3>Demo1：Start simple one</h3>
+				<div><select id="demo1" ></select></div>
+				<div style="margin-top: 10px">
+					<input type="button" title="get value of the last valid one" value="button1" id="getSelectedValue"/> get value of the last one which has selected item  <br />
+					<input type="button" title="" value="button2" id="getSelectedData"/> get last attribute value of the valid last
+				</div>
+				<pre class="brush: js">
+					&lt;script>
+					$(document).ready(function(){
+						var data1 = {
+							1: {name: 'Vegetables', cell: { 10: {name: 'Spinach', price: 4 }, 11: {name: 'Eggplant', price: 5} }
+							},
+							3: {name: 'Fruit', 
+								cell: { 
+									20: {name: 'Apple', cell: {201: {name: 'china', price: 20}  } } ,
+									21: {name: 'Peach', 
+											cell: { 
+												210: {name: 'Kiwi', price: 30}, 
+												211: {name: 'Nectarine', price: 31}, 
+											}
+									}
+								}
+							},
+							9: {name: 'Food', 
+								cell: { 
+									30: {name: 'Rice', 	cell: {	301: {name: 'USA', cell: {3001: {name: 'China', price: 50}} } } 	} 
+								}
+							}
+						};
+						var opts = {
+								data: data1,
+								select: '#demo1'
+						};
+						var linkageSel1 = new LinkageSel(opts);
+						
+						$('#getSelectedValue').click(function() {
+							var v = linkageSel.getSelectedValue();
+							alert(v);
+						});
+						
+						$('#getSelectedData').click(function() {
+							var name = linkageSel.getSelectedData('name'),
+								price = linkageSel.getSelectedData('price');
+							alert('name:' + name + ' price:' + price);
+
+						});
+					});
+					&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data1 = {
+							1: {name: 'Vegetables', cell: { 10: {name: 'Spinach', price: 4 }, 11: {name: 'Eggplant', price: 5} }
+							},
+							3: {name: 'Fruit', 
+								cell: { 
+									20: {name: 'Apple', cell: {201: {name: 'china', price: 20}  } } ,
+									21: {name: 'Peach', 
+											cell: { 
+												210: {name: 'Kiwi', price: 30}, 
+												211: {name: 'Nectarine', price: 31}, 
+											}
+										}
+								}
+							},
+							9: {name: 'Food', 
+								cell: { 
+									30: {name: 'Rice', 	cell: {	301: {name: 'USA', cell: {3001: {name: 'China', price: 50}} } } 	} 
+								}
+							}
+						};
+						
+						var opts = {
+								data: data1,
+								select: '#demo1'
+						};
+						var linkageSel = new LinkageSel(opts);
+						
+						$('#getSelectedValue').click(function() {
+							var v = linkageSel.getSelectedValue();
+							alert(v);
+						});
+						
+						$('#getSelectedData').click(function() {
+							var name = linkageSel.getSelectedData('name'),
+								price = linkageSel.getSelectedData('price');
+							alert('name:' + name + ' price:' + price);
+
+						});
+					});
+					
+				</script>
+			</div>
+					
+					
+					
+
+			<div class="lsdemo">
+				<h3>Demo2：Chinese provience city 3 level chain, all data local, get attribute value on onChange</h3>
+				<div>
+					<select id="demo2" ></select>
+				</div>
+				<div style="margin-top: 10px">
+					<input type="text" value="Address" id="tip" size="50" />
+				</div>
+				<div style="margin-top: 10px">
+					<input type="button" title="" value="button3" id="getValueArr2"/> get the value of all &lt;select> elements
+				</div>
+				<pre class="brush: js">
+						&lt;select id="demo2">&lt;/select>
+						地址：&lt;input type="text" value="tip" id="tip" size="50" />
+						&lt;input type="button" value="button3" id="getValueArr2"/>
+					
+						&lt;script src="js/district-all.js">&lt;/script>
+						&lt;script>
+							var opts = {
+									data: districtData,		// 'districtData' is the variable name assign in district-all.js
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo2' 
+							};
+									
+							var linkageSel2 = new LinkageSel(opts);
+							districtData = opts = null;	
+							
+							$('#getValueArr2').click(function() {
+								var arr = linkageSel2.getSelectedArr();
+								alert(arr.join(','));
+							});	
+							
+							linkageSel2.onChange(function() {
+								var input = $('#tip'),
+									d = this.getSelectedDataArr('name'),	// this refer to linkageSel2
+									zip = this.getSelectedData('zip'),		// zip of the last elm
+									arr = [];
+								for (var i = 0, len = d.length; i < len; i++) {
+									arr.push(d[i]);
+								}
+								zip = zip ? ' zip:' + zip : '';
+								input.val(arr.join(' ') + zip);
+							});
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo2',
+								dataReader: {id: 'id', name: 'name', cell: 'cell'}
+						};
+						var linkageSel2 = new LinkageSel(opts);
+						
+						$('#getValueArr2').click(function() {
+							var arr = linkageSel2.getSelectedArr();
+							alert(arr.join(','));
+						});	
+						
+						linkageSel2.onChange(function() {
+							var input = $('#tip'),
+								d = this.getSelectedDataArr('name'),
+								zip = this.getSelectedData('zip'),
+								arr = [];
+							for (var i = 0, len = d.length; i < len; i++) {
+								arr.push(d[i]);
+							}
+							zip = zip ? ' zip:' + zip : '';
+							input.val(arr.join(' ') + zip);
+						});
+					});
+				</script>
+			</div>
+
+
+
+
+
+			<div class="lsdemo">
+				<h3>Demo3：Chinese provience city 3 level chain, all data from ajax request</h3>
+				<div>
+					<select id="demo3" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script>
+							var opts = {
+									ajax: 'district_crud.php?aj=15',
+									selStyle: 'margin-left: 3px;',
+									select: '#demo3' 
+							};
+									
+							var linkageSel3 = new LinkageSel(opts);
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts = {
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo3'
+						};
+						var linkageSel3 = new LinkageSel(opts);
+					});
+				</script>
+			</div>
+
+
+
+
+			<div class="lsdemo">
+				<h3>Demo4: 1st level local, others ajax get</h3>
+				<div>
+					<select id="demo4" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script>
+							var data4 = {2: {name: 'Beijing'}, 4:{name: 'Hebei province'} };
+							var opts4 = {
+									data: data4,
+									ajax: 'district_crud.php?aj=15',	// ajax+local data
+									selStyle: 'margin-left: 3px;',
+									select: '#demo4'
+							};
+									
+							new LinkageSel(opts4);
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data4 = {2: {name: 'Beijing'}, 4:{name: 'Hebei province'} };
+						var opts4 = {
+								data: data4,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo4'
+						};
+						new LinkageSel(opts4);
+					});
+				</script>
+			</div>
+					
+					
+					
+					
+			<div class="lsdemo">
+				<h3>Demo5: set default item</h3>
+				<div>
+					<select id="demo5" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;script src="js/district-all.js">&lt;/script>
+						&lt;script>
+							var opts5 = {
+									data: districtData,
+									selStyle: 'margin-left: 3px;',
+									select:  ['#demo5'], 		// can be Array
+									defVal: [4]
+							};
+									
+							var linkageSel5 = new LinkageSel(opts5);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts5 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select:  ['#demo5'],
+								defVal: 4
+						};
+						var linkageSel5 = new LinkageSel(opts5);
+					});
+				</script>
+			</div>					
+					
+					
+					
+					
+			<div class="lsdemo">
+				<h3>Demo6: set default item, generate the 3rd element dynamically</h3>
+				<div>
+					<select id="demo61" ></select><select id="demo62" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo61">&lt;/select> &lt;select id="demo62">&lt;/select>
+						&lt;script>
+							var opts6 = {
+									data: districtData,
+									select:  [ '#demo61', '#demo62' ], 		// two static
+									defVal: 4
+							};
+									
+							var linkageSel6 = new LinkageSel(opts6);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts6 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: [ '#demo61', '#demo62'] ,
+								defVal: 4
+						};
+						new LinkageSel(opts6);
+					});
+				</script>
+			</div>							
+					
+					
+			<div class="lsdemo">
+				<h3>Demo7：set default items by pass array</h3>
+				<div>
+					<select id="demo7" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo7">&lt;/select>
+						&lt;script>
+							var opts7 = {
+									data: districtData,
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo7', 
+									defVal: [5, 256]		// array
+							};
+									
+							var linkageSel7 = new LinkageSel(opts7);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts7 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo7' ,
+								defVal: [5, 256]
+						};
+						new LinkageSel(opts7);
+					});
+				</script>
+			</div>						
+					
+
+
+
+			<div class="lsdemo">
+				<h3>Demo8: define data entry</h3>
+				<div>
+					Shanxi Province: <select id="demo8" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						Shanxi Province: &lt;select id="demo8">&lt;/select>
+						&lt;script>
+							var opts8 = {
+									data: districtData,
+									root: 5,				// entry
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo8' 		
+							};
+									
+							var linkageSel8 = new LinkageSel(opts8);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts8 = {
+								data: districtData,
+								root: 5,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo8'
+						};
+						new LinkageSel(opts8);
+					});
+				</script>
+			</div>						
+					
+			
+					
+			<div class="lsdemo">
+				<h3>Demo9: define data entry, multi default item by pass array</h3>
+				<div>
+				<div>
+					Shanxi Province: <select id="demo9"></select>
+				</div>
+	
+				<pre class="brush: js">
+						Shanxi Province: &lt;select id="demo9">&lt;/select>
+						&lt;script>
+							var opts9 = {
+									data: districtData,
+									root: 5,				// entry
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo9', 		
+									defVal: [256, 257]		// two
+							};
+									
+							var linkageSel9 = new LinkageSel(opts9);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts9 = {
+								data: districtData,
+								root: 5,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo9' ,
+								defVal: [256, 257]
+						};
+						new LinkageSel(opts9);
+					});
+				</script>
+			</div>						
+					
+			
+			
+			
+			<div class="lsdemo">
+				<h3>Demo10: set multi data entries by pass array</h3>
+				<div>
+					Shanxi Province, Taiyuan city: <select id="demo10"></select>
+				</div>
+	
+				<pre class="brush: js">
+						Shanxi Province, Taiyuan city: &lt;select id="demo10">&lt;/select>
+						&lt;script>
+							var opts10 = {
+									data: districtData,
+									root: [5, 256],				// array
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo9', 		
+									defVal: 257
+							};
+									
+							var linkageSel10 = new LinkageSel(opts10);
+							
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts10 = {
+								data: districtData,
+								root: [5, 256],
+								selStyle: 'margin-left: 3px;',
+								select: '#demo10' ,
+								defVal: 257
+						};
+						new LinkageSel(opts10);
+					});
+				</script>
+			</div>	
+
+
+
+			<div class="lsdemo">
+				<h3>Demo11: fixed width</h3>
+				<div>
+					<select id="demo11" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo11">&lt;/select>
+						&lt;script>
+							var opts11 = {
+									data: districtData,
+									selStyle: 'margin-left: 3px;',
+									select: '#demo11',
+									fixWidth: 200,			// fixed
+									head: 'Which one?'	// tips
+							};
+									
+							var linkageSel11 = new LinkageSel(opts11);
+						&lt;/script&gt;
+				</pre>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						var opts11 = {
+								data: districtData,
+								select: '#demo11',
+								fixWidth: 200,
+								head: 'Which one?'
+						};
+						new LinkageSel(opts11);
+					});
+				</script>
+			</div>		
+
+
+
+			<div class="lsdemo">
+				<h3>Demo12: no tips</h3>
+				<div>
+					<select id="demo12" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo12">&lt;/select>
+						&lt;script>
+							var opts12 = {
+									data: districtData,
+									select: '#demo12',
+									head: false	// no tips
+							};
+									
+							var linkageSel12 = new LinkageSel(opts12);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts12 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo12',
+								head: false
+						};
+						new LinkageSel(opts12);
+					});
+				</script>
+			</div>	
+					
+					
+
+
+
+			<div class="lsdemo">
+				<h3>Demo13: get all data by ajax one time</h3>
+				<div>
+					<select id="demo13" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo13" &gt; &lt;/select>
+						&lt;script>
+							var opts13 = {
+									select: '#demo13',
+									url: 'exampledata.php'
+							};
+									
+							var linkageSel13 = new LinkageSel(opts13);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts13 = {
+								selStyle: 'margin-left: 3px;',
+								select: '#demo13',
+								url: 'exampledata.php'
+						};
+						new LinkageSel(opts13);
+					});
+				</script>
+			</div>	
+
+
+
+			<div class="lsdemo">
+				<h3>Demo14: 1st level local data, others ajax get</h3>
+				<div>
+					<select id="demo14" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script src="js/district-level1.js">&lt;/script>
+						&lt;script>
+							var opts14 = {
+									data: districtData1,		//  districtData1 name assign in file district-level1.js
+									ajax: 'district_crud.php?aj=15',	
+									selStyle: 'margin-left: 3px;',
+									select: '#demo14'
+							};
+									
+							var linkageSel14 = new LinkageSel(opts14);
+						&lt;/script&gt;
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts14 = {
+								data: districtData1,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo14'
+						};
+						new LinkageSel(opts14);
+					});	
+				</script>
+			</div>
+
+			<div class="lsdemo">
+				<h3>Demo15: change selected item </h3>
+				<div>
+					<select id="demo15" ></select>
+					<button type="button" onclick="javascript: ls15.changeValues([23, 2244])">changeValues</button>
+				</div>
+				<pre class="brush: js">
+						&lt;body>
+							&lt;button type="button" onclick="javascript: ls15.changeValues([23, 2244])">changeValues&lt;/button>
+						&lt/body>
+
+						&lt;script src="js/district-level1.js"&gt;&lt;/script>
+						&lt;script>
+							var ls15;	// must outside of ready() !
+							$(document).ready(function(){
+								var opts15 = {
+										data: districtData1,
+										ajax: 'district_crud.php?aj=15',
+										selStyle: 'margin-left: 3px;',
+										select: '#demo15'
+								};
+										
+								window.ls15 = new LinkageSel(opts15);
+							});	
+						&lt;/script&gt;
+				</pre>
+				
+				<script>
+					var ls15;
+					$(document).ready(function(){
+						var opts15 = {
+								data: districtData1,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo15'
+						};
+						ls15 = new LinkageSel(opts15);
+					});	
+				</script>
+			</div>										
+
+
+			<div class="lsdemo">
+				<h3>Demo16：set data key name via dataReader</h3>
+				<div><select id="demo16" name="demo16"></select></div>
+				<pre class="brush: js">
+					&lt;script>
+					$(document).ready(function(){
+						var data16 = {
+							1: {gid: 1, value: 'IBM', 
+								sub: { 
+									10: {gid: 10, value: 'X3650'}, 
+									11: {gid: 11, value: 'X3860'} 
+								}
+							},
+							3: {gid: 3, value: 'HP', 
+								sub: { 
+									20: {gid: 20, value: '360'} ,
+									21: {gid: 21, value: '380'}
+								}
+							},
+							9: {gid: 9, value: 'DELL', 
+								sub: { 
+									29: {gid: 29, value: 'R710'} 
+									30: {gid: 30, value: 'R720'} 
+								}
+							}
+						};
+						var opts = {
+								data: data16,
+								select: "[name='demo16']",
+								dataReader: {id: 'gid', name: 'value', cell: 'sub'}	// self defined data key name
+						};
+						var ls16 = new LinkageSel(opts);
+					});
+					&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data16 = {
+							1: {gid: 1, value: 'IBM', 
+								sub: { 
+									10: {gid: 10, value: 'X3650'}, 
+									11: {gid: 11, value: 'X3860'} 
+								}
+							},
+							3: {gid: 3, value: 'HP', 
+								sub: { 
+									20: {gid: 20, value: '360'} ,
+									21: {gid: 21, value: '380'}
+								}
+							},
+							9: {gid: 9, value: 'DELL', 
+								sub: { 
+									29: {gid: 29, value: 'R710'} ,
+									30: {gid: 30, value: 'R720'} 
+								}
+							}
+						};
+						var opts = {
+								data: data16,
+								select: "[name='demo16']",
+								dataReader: {id: 'gid', name: 'value', cell: 'sub'}
+						};
+						var ls16 = new LinkageSel(opts);
+					});
+					
+				</script>
+			</div>
+					
+					
+
+			<div class="lsdemo">
+				<h3>Demo17：set default items by pass array, fetching data by ajax. see diff from demo7</h3>
+				<div>
+					<select id="demo17" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo17">&lt;/select>
+						&lt;script>
+							var opts17 = {
+									//data: districtData,	// demo7
+									ajax: 'district_crud.php?aj=15',
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo17',
+									defVal: [5, 256, 257]
+							};
+									
+							var linkageSel17 = new LinkageSel(opts17);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts17 = {
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select: '#demo17' ,
+								defVal: [5, 256, 257]
+						};
+						new LinkageSel(opts17);
+					});
+				</script>
+			</div>
+					
+
+			<div class="lsdemo">
+				<h3>Demo18：no tips, default values</h3>
+				<div>
+					<select id="demo18" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo18">&lt;/select>
+						&lt;script>
+							var opts18 = {
+									data: districtData,
+									select: '#demo18',
+									defVal: [5, 256, 257], 
+									head: false	// no tips
+							};
+									
+							var linkageSel18 = new LinkageSel(opts18);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts18 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo18',
+								defVal: [5, 256, 257], 
+								head: false
+						};
+						new LinkageSel(opts18);
+					});
+				</script>
+			</div>	
+
+
+		</div>
+	</div>
+</div>
+
+
+<script src="js/comm.js"></script>
+<script src="js/linkagesel-min.js"></script>
+
+<script src="js/district-all.js"></script>
+<script src="js/district-level1.js"></script>
+
+<script src="js/syntaxhighlighter/shCore.js"></script>
+<script src="js/syntaxhighlighter/shBrushJScript.js"></script>
+<script src="js/syntaxhighlighter/shBrushXml.js"></script>
+
+<script>
+$(document).ready(function(){
+	SyntaxHighlighter.all()	// SyntaxHighlighter consume huge memory after refreshing page many times
+});	
+</script>
+
+
+</body>
+</html>

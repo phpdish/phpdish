@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
             new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
+            new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+        <meta http-equiv="Cache-Control" content="no-transform ">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+        <title>{% block title %} {% endblock %}</title>
+        {% block keywords %}<meta name="keywords" content="phpdish"/>{% endblock %}
+        {% block description %}<meta name="description" content="phpdish"/>{% endblock %}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{ asset('bundles/phpdishweb/style.css') }}" rel="stylesheet">
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+        <header id="masthead">
+            <div class="container header-content">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <div class="custom-header clearfix">
+                            <div class="header-logo">
+                                <a href="/" rel="home">
+                                    <img src="{{ assets('bundles/phpdishweb/image/logo-p4.png') }}" class="img-responsive"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 hidden-xs">
+                        <div class="clearfix" style="letter-spacing:1px;margin:38px 15px 10px;">
+                            <form class="input-group" role="search" method="get" id="searchform" action="{{ path('search') }}">
+                                <span class="input-group-addon">搜索</span>
+                                <input type="text" class="form-control" placeholder="请输入检索关键词…" name="q" id="s" required>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default" id="searchsubmit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar navbar-default navbar-static-top" role="banner" data-role="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".header-navbar-collapse">
+                            <span class="sr-only">切换菜单</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="menu-item">
+                                <a href="<?=$this->Url->build(['prefix'=>false, 'controller'=>'Gifts', 'action'=>'index']);?>" itemprop="url">
+                                    <span class="glyphicon glyphicon-gift"></span> 积分换礼
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ path('about') }}" itemprop="url">关于本站</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- #navbar -->
+                </div>
+            </div>
+        </header>
+        <!-- #masthead -->
+        <?=$this->fetch('content');?>
+        <!-- #main -->
+        <footer id="colophon" class="container" role="contentinfo">
+            <div class="panel panel-default text-muted">
+                <div class="panel-body">
+                <?=$this->cell('Links');?>
+                </div>
+                <div class="panel-footer clearfix">
+                    <?=$this->cell('Fragments', ['copyright']);?>
+                    <span class="pull-right copyright">
+                        <?=$this->cell('Fragments', ['bottomTip']);?>
+                    </span>
+                </div>
+            </div>
+        </footer>
+        <div id="float-nav">
+            <ul id="float-nav-menu" class="display:none">
+                <li id="pageShare" title="分享">
+                    <span class="glyphicon glyphicon-share"></span>
+                    <div id="shareBox" class="floatBoxWrapper">
+                        <div class="floatBox">
+                            <div id="shareNotice" data-friend-text="已改为您的推广链接">本页二维码</div>
+                            <img id="shareQrcode" class="ldbg" width="130" height="130" alt="本页二维码" data-api="//open.dmeng.net/qrcode.png?text=" />
+                            <a href="javascript:;" id="sharePrompt" data-notice="快捷键：同时按下 Ctrl 和 C 然后按下 Enter 即可">点击复制网址</a>
+                        </div>
+                    </div>
+                </li>
+                <li id="goComments" title="评论">
+                    <span class="glyphicon glyphicon-comment"></span>
+                </li>
+                <li id="goTop" title="返回顶部">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdn.bootcss.com/lodash.js/4.17.2/lodash.min.js"></script>
+        <script type="text/javascript" src="{{ assets('bundles/phpdishwebbundle/js/common.js') }}"></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="stylesheet" href="../lib/animate.css">
+    <script type="text/javascript" src="../wu.tmpl.min.js"></script>
+    <style>
+    body {
+        margin: 10px 100px;
+    }
+    
+    li {
+        float: left;
+        clear: both;
+        border: solid 1px #bbb;
+        border-radius: 5px;
+        padding: .25em;
+        margin: .25em;
+    }
+    </style>
+</head>
+
+<body>
+
+    <ul wu-tmpl="{render:true}">
+        {{each list item i}}
+        <li class="animated zoomInRight" style="animation-delay: {{i*0.15}}s">
+            第 {{ i+1 }} 条记录
+        </li>
+        {{/each}}
+        <!-- empty -->
+        {{if !list.length}}
+        <li class="animated wobble">暂无记录</li>
+        {{/if}}
+    </ul>
+
+    <script>
+    var list = [];
+    for (var i = 0; i < 10; i++) {
+        list.push({
+            title: 'todo ' + i,
+            content: 'todo ' + i + 'content'
+        })
+    }
+    </script>
+</body>
+
+</html>

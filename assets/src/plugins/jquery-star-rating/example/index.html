@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>rating test</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="../src/rating.js"></script>
+    <link rel="stylesheet" href="../src/rating.css" type="text/css" media="screen" title="Rating CSS">
+    
+    <script type="text/javascript">
+        $(function(){
+            $('.container').rating();
+        });
+    </script>
+</head>
+
+<body>
+<h1><a title="Full Documentation" href="http://irfandurmus.com/projects/jquery-star-rating-plugin/">jQuery Star Rating Plugin</a></h1>
+    
+    <section class="container">
+        <input type="radio" name="example" class="rating" value="1" />
+        <input type="radio" name="example" class="rating" value="2" />
+        <input type="radio" name="example" class="rating" value="3" />
+        <input type="radio" name="example" class="rating" value="4" />
+        <input type="radio" name="example" class="rating" value="5" />
+    </section>
+        
+    <section>
+    <h2>How to use</h2>
+        <h3>Html</h3>
+        <pre>
+&lt;div class="container"&gt;
+    &lt;input type="radio" name="example" class="rating" value="1" /&gt;
+    &lt;input type="radio" name="example" class="rating" value="2" /&gt;
+    &lt;input type="radio" name="example" class="rating" value="3" /&gt;
+    &lt;input type="radio" name="example" class="rating" value="4" /&gt;
+    &lt;input type="radio" name="example" class="rating" value="5" /&gt;
+&lt;/div&gt;
+        </pre>
+ 
+        <h3>Simple usage</h3>
+        <pre>
+$('.container').rating();
+        </pre>
+        <h3>Using with callback method</h3>
+        <pre>
+$('.container').rating(function(vote, event){
+    // console.log(vote, event);
+});
+        </pre>
+        <h3>Example of using ajax</h3>
+        <pre>
+$('.container').rating(function(vote, event){
+    // write your ajax code here
+    // For example;
+    // $.get(document.URL, {vote: vote});
+});
+        </pre>
+
+   </section>
+</body>
+</html>

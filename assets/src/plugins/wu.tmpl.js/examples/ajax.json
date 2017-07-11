@@ -1,0 +1,9 @@
+{
+    "list": [
+        { "id": 1, "name": "ajax data 1" },
+        { "id": 2, "name": "ajax data 2" },
+        { "id": 3, "name": "ajax data 3" },
+        { "id": 4, "name": "ajax data 4" },
+        { "id": 5, "name": "ajax data 5" }
+    ]
+}

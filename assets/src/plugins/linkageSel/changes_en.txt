@@ -1,0 +1,140 @@
+﻿
+
+v2.4 20141004
+
+Bug Fixes
+---------
+	* do entityify.head(). avoid problue cause by head containing < or >
+	* next <option> not show if head is false and defVal not set. next option will be gen and show on demo12
+
+	
+-----------------------------------------------------------------------------------------------------
+v2.3 20140930
+
+Bug Fixes
+---------
+	* Add abort of setting to control ajax.abort() default value set to false, so DEMO3 and DEMO17 both work on the same page. thanks for 豆爸-逃逸的风<66340830@qq.com>
+	
+-----------------------------------------------------------------------------------------------------
+
+
+v2.2 20140204
+
+Bug Fixes
+---------
+	* defVal setting not works during all-level data fetching from ajax. thanks xiaogui32@osc
+	
+-----------------------------------------------------------------------------------------------------
+
+v2.1 20130512
+
+Bug Fixes
+---------
+	* selectedIdx calculate error when only one <option> item exists
+	
+-----------------------------------------------------------------------------------------------------
+
+v2.0 20130508
+
+Bug Fixes
+---------
+	* ajax_loader offset vaule set wrong cause window scroll display 
+	* 1st <select> not fire ajax request when no local data passed
+
+Add Features
+---------
+	+ add setting of 'dataReader' which define the key name of data, default value is object {id: 'id', name: 'name', cell: 'cell'}.
+	detail see demo
+
+-----------------------------------------------------------------------------------------------------
+v1.33 20130425
+
+Changes
+---------
+	* selStyle default value to blank
+	* selClass set default value 'LinkageSel'
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+v1.32 20130410
+
+Changes
+---------
+	* Fix elm not exists when bindIdx is 0
+
+-----------------------------------------------------------------------------------------------------
+
+v1.31 20130322
+
+Bug Fixes
+---------
+	* onChange() not fire when option value is null or blank
+
+-----------------------------------------------------------------------------------------------------
+
+v1.30 20130305
+
+Add Features
+---------
+	+ Add setting key 'mvcQuery' (bool) default false. ajax request url compatible to MVC when set to true,
+		eg. http://linkagesel.xiaozhong.biz/district/get_nodes/1		// true, and setting of 'ajax' set to 'district/get_nodes'
+			http://linkagesel.xiaozhong.biz/district/get_nodes.php?id=1		// false
+
+Bug Fixes
+---------
+	* generate HTML code of this.st.loaderImg . thanks to jeff-stric(jeff-stric.iteye.com)
+	* this.st.loaderImg not escaped
+
+Changes
+---------
+	* due to $.browser deprecated since jQuery v1.9, LinkageSel will trade IE6,7,8 as IE6 if no other plugin loaded such as jquery.mb.browser.js
+	http://pupunzi.open-lab.com/2013/01/17/jquery-mb-browser-reintroduce-the-removed-browser-object-in-jquery-1-9/
+	
+
+
+-----------------------------------------------------------------------------------------------------
+
+v1.24 20110730
+
+changes
+------------------
+	* jQuery requirs update to v1.6
+
+Bug Fixes
+---------
+	* ie6 delay problem，DEMO9 works not
+	* <option> construct compatibility by string concat
+
+-----------------------------------------------------------------------------------------------------
+v1.22 20110540
+
+Bug Fixes
+---------
+	* wrong assignment of ie6 validatition
+-----------------------------------------------------------------------------------------------------
+
+1.2 20100826 version
+
+Bug Fixes
+---------
+	* page flashing on  jQueryUI.dialog if <option> item too lang under Firefox
+
+Additions and changes
+------------------
+	* the function return instance objcet to support chain action which are changeValues(), onChange(), reset(), resetAll().
+		eg. linkageSel.reset().changeValues([23, 2244]);
+	* using recycle pool to reuse the <option> object deleted
+
+-----------------------------------------------------------------------------------------------------
+
+v1.1 20100824 version
+
+Additions and changes
+------------------
+	* changeValues( Integer|Array , Boolean[option=false]) 1st param can be Array to set multi level select
+
+-----------------------------------------------------------------------------------------------------
+
+v1.0 20100810 First Release

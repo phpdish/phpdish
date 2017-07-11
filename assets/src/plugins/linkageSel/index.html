@@ -1,0 +1,1139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LinkageSel: 通用JavaScript无限级联动下拉菜单</title>
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="js/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="js/syntaxhighlighter/shThemeDefault.css"  />
+
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+<div style="position: absolute; top: 10px; right: 11px;"><a href="index.html">中文</a> | <a href="index_en.html">English</a> </div>
+<div id="header"><h1>Javascript Infinite Level Select 无限级联动下拉菜单</h1></div>
+
+	<div class="main">
+		<h2>Overview</h2>
+		<ul>
+			<li>多级联动，支持Ajax动态获取数据并缓存数据，动态生成下级select菜单，设置动态生成"option"第一个条目作为提示项，自动选择唯一选项的菜单，设置回调函数在onChange事件触发时获取下拉菜单相关信息。 
+			详细功能及设置请见DEMO。</li>
+		</ul>
+
+		<h2>Requirement</h2>
+		<ul>
+			<li>jQuery v1.6+</li>
+		</ul>
+
+		<h2>License</h2>
+		<ul>
+			<li> 
+			Dual licensed under the MIT and GPL licenses: <br>
+			<a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a> <br>
+			<a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a>
+		</ul>
+		
+		<h2>Author</h2>
+		<ul>
+			<li><a target="_blank" href="http://linkagesel.xiaozhong.biz">waiting AT xiaozhong.biz</a></li>
+		</ul>
+
+		<h2>Update</h2>
+		<ul>
+			<li>See <a href="changes.txt" >changes</a></li>
+		</ul>
+
+		<h2>Download</h2>
+		<ul>
+		    <li>
+		        <a target="_blank" href="http://linkagesel.xiaozhong.biz/linkagesel.zip">linkagesel.zip</a> 包括js客户端所有数据及postgres数据库表数据
+		    </li>
+		    <li>
+		        <a target="_blank" href="https://github.com/waitingsong/LinkageSel">GitHub Repository</a>
+		    </li>
+		</ul>
+
+		<h2>Settings</h2>
+		<ul>
+			<li>
+				调用方式：
+				var linkageSel = new LinkageSel(opts);
+			</li>
+			<li>opts参数列表：
+				<table width="90%" border="1" cellspacing="0" cellpadding="5" style="margin-top:10px" >
+					<tr> 
+		            	<td width="12%" align="center">参数名</td>
+		            	<td width="10%" align="center">类型</td>
+		            	<td width="22%" align="center">默认值</td>
+		            	<td width="4%" align="center">可选</td>
+		            	<td width="" align="center">注释</td>
+		          	</tr>
+		          	<tr>
+		            	<td>data</td>
+		            	<td>Object</td>
+		            	<td>null</td>
+		            	<td>√</td>
+		            	<td>指定本地数据源。至少要指定data、url、ajax其中一个的值，data可以和ajax配合使用</td>
+		        	</tr>
+		          	<tr>
+		            	<td>url</td>
+		            	<td>String</td>
+		            	<td>&nbsp;</td>
+		            	<td>√</td>
+		            	<td>url地址，一次性远程获得所有数据</td>
+		        	</tr>
+		          	<tr>
+		            	<td>ajax</td>
+		            	<td>String</td>
+		            	<td>&nbsp;</td>
+		            	<td>√</td>
+		            	<td>ajax远程获得下级菜单数据</td>
+		        	</tr>
+		          	<tr>
+		            	<td>autoBind</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>自动生成下级select菜单</td>
+		        	</tr>
+		          	<tr>
+		            	<td>autoHide</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>自动隐藏下级菜单.若false,则可配合level固定值使用</td>
+		        	</tr>
+		          	<tr>
+		            	<td>hideWidth</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>如果设定自动隐藏下级菜单，则是否同时隐藏其占位宽度 true:'display:none'||false: 'visibility:hidden'</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>autoLink</td>
+		            	<td>Boolean</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>如果只有唯一选项则选中并联动下级</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>defVal</td>
+		            	<td>Integer|Array</td>
+		            	<td>true</td>
+		            	<td>√</td>
+		            	<td>默认选择项，指定多级菜单默认选项需要使用数组方式，并且按照层级顺序排列</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>head</td>
+		            	<td>String|Number|false</td>
+		            	<td>请选择</td>
+		            	<td>√</td>
+		            	<td>作为下拉菜单第一选择名称自动添加, 空字符（''）有效。若false则不自动添加</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>level</td>
+		            	<td>Integer</td>
+		            	<td>20</td>
+		            	<td>√</td>
+		            	<td>限定层级防止死循环</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>loaderImg</td>
+		            	<td>String</td>
+		            	<td>images/ui-anim_basic_16x16.gif</td>
+		            	<td>√</td>
+		            	<td>loader动态图标</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>root</td>
+		            	<td>Integer|Array</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>根所在位置,决定获取数据入口.不适用于ajax模式</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>select</td>
+		            	<td>String|Array</td>
+		            	<td>&nbsp; </td>
+		            	<td></td>
+		            	<td>jQuery选择器字符串或者jQuery选择器字符串数组</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>selClass</td>
+		            	<td>String</td>
+		            	<td>LinkageSel</td>
+		            	<td>√</td>
+		            	<td>应用于所有下拉菜单的class属性，包括预先生成的对象</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>selStyle</td>
+		            	<td>String</td>
+		            	<td style="text-decoration:  line-through;">margin-left:1px;</td>
+		            	<td>√</td>
+		            	<td>应用于下拉菜单的style属性</td>
+		        	</tr>  
+
+		          	<tr>
+		            	<td>minWidth</td>
+		            	<td>Integer</td>
+		            	<td>120</td>
+		            	<td>√</td>
+		            	<td>下拉菜单最小宽度</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>maxWidth</td>
+		            	<td>Integer</td>
+		            	<td>300</td>
+		            	<td>√</td>
+		            	<td>下拉菜单最大宽度</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>fixWidth</td>
+		            	<td>Integer</td>
+		            	<td>0</td>
+		            	<td>√</td>
+		            	<td>下拉菜单固定，此设置将覆盖minWidth、maxWidth的效果</td>
+		        	</tr>  
+		          	<tr>
+		            	<td>onChange</td>
+		            	<td>Function</td>
+		            	<td>&nbsp; </td>
+		            	<td>√</td>
+		            	<td>菜单选择变化时回调函数</td>
+		        	</tr>         	  
+		          	<tr>
+		            	<td>mvcQuery</td>
+		            	<td>Boolean</td>
+		            	<td>false</td>
+		            	<td>√</td>
+						<td> 置true后ajax请求会生成符合MVC格式的URI, 比如 http://linkagesel.xiaozhong.biz/district/get_nodes/0
+		URI第一个分段district为controller控制器名，
+		第二分段get_nodes为方法名，
+		第三分段为节点的id值
+		<br> 此时 ajax值需要设定为MVC格式， 比如 ajax: 'district/get_nodes'
+						</td>
+		        	</tr>         	  
+		          	<tr>
+		            	<td>dataReader</td>
+		            	<td>Object</td>
+						<td>{id: 'id', name: 'name', cell: 'cell'}</td>
+		            	<td>√</td>
+						<td>自定义数据结构中键名, 比如 {id: 'gid', name: 'value', cell: 'subcell'} </td>
+		        	</tr>         	  
+				</table>
+			</li>
+			
+			<li>
+				实例方法：
+				<table width="90%" border="1" cellspacing="0" cellpadding="5" style="margin-top:10px" >
+					<thead> 
+		            	<td width="15%" align="center">方法名</td>
+		            	<td width="20%" align="center">参数及其类型</td>
+		        		<td width="8%" align="center">返回值类型</td>
+		        		<td width="8%" align="center">可链式操作</td>
+		            	<td width="" align="center">注释</td>
+		          	</thead>
+		          	
+		          	<tr>
+		            	<td>changeValues</td>
+		            	<td>parm1：Integer|Array <br /> parm2: Boolean[option=false] </td>
+		        		<td>Object</td>
+		        		<td>√</td>
+		            	<td>手动改变选单值,可选触发onchange用户自定义回调函数</td>
+		        	</tr>
+ 		          	<tr>
+		            	<td>getSelectedValue</td>
+		            	<td>idx：Integer</td>
+		        		<td>String</td>
+		        		<td>&nbsp;</td>
+		            	<td>返回select的值。不带参数获得联动select中'最后一个'有选择select菜单的选择值；
+		        		如果大于等于0则 返回第 idx 个菜单(从0开始)选择值，如果都无有选择（一般是初始化后）则返回 null</td>
+		        	</tr>
+        			<tr>
+		            	<td>getSelectedArr</td>
+		            	<td>&nbsp;</td>
+		        		<td>Array</td>
+		        		<td>&nbsp;</td>
+		            	<td>返回数组包含所有select选择值</td>
+		        	</tr>		        
+      				<tr>
+		            	<td>getSelectedData</td>
+		            	<td>
+		        			key： String <br />
+		        			idx： Interger[option] 空则返回当前最后一个有选择项选单的选项项值对象
+		        		</td>
+		        		<td>Object</td>
+		        		<td>&nbsp;</td>
+		            	<td>返回第idx级（从0开始）菜单所选项目的对应数据的对象</td>
+		        	</tr>
+      				<tr>
+		            	<td>getSelectedDataArr</td>
+		            	<td>key： String[option]</td>
+		        		<td>Array</td>
+		        		<td>&nbsp;</td>
+		            	<td>获得所有有选择菜单的数据对象或对象值,遇到第一个未选择的停止。
+		        			对于返回值，如果指定key则返回 data[key] 对应值: int|str|null; 如果未指定key返回数据对象data: obj|null</td>
+		        	</tr>
+      				<tr>
+		            	<td>onChange</td>
+		            	<td>callback: Function;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+		            	<td>选项变化时回调函数，callback内的this被绑定到当前实例对象（可见Demo2）</td>
+		        	</tr>
+      				<tr>
+		            	<td>reset</td>
+		            	<td>&nbsp;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+		            	<td>回复到初始状态</td>
+		        	</tr>
+      				<tr>
+		            	<td>resetAll</td>
+		            	<td>&nbsp;</td>
+		        		<td>&nbsp;</td>
+		        		<td>√</td>
+		            	<td>回复到初始状态，包括默认选择项及初始数据</td>
+		        	</tr>		        
+		        </table>
+			</li>
+		</ul>
+
+		<h2 style="margin-top: 50px;">Demo</h2>
+		<div>SyntaxHighlighter语法高亮比较耗资源，重复刷新页面可能会导致内存占用攀高</div>
+		<div class="main">
+			<div class="lsdemo">
+				<h3><a name="demo1">加载：</a></h3>
+				<pre class="brush: html">
+					&lt;script src="js/jquery.js">&lt;/script>
+					&lt;script src="js/comm.js">&lt;/script>
+					&lt;script src="js/linkagesel-min.js">&lt;/script>
+				</pre>
+			</div>
+			
+			<div class="lsdemo">
+				<h3><a name="demo1">数据结构：</a></h3>
+				<pre class="brush: js">
+					&lt;script&gt;
+						var data = {
+							"key": {"name": nameValue, "otherAttr": otherAttrVal, "cell": { ... },
+						};
+					&lt;/script&gt;
+					key为条目的索引值，也等于 &lt;option value="VALUE" &gt; &lt;/option&gt; 中的 value 值,必须有
+					name为条目的显示值，即 &lt;optio&gt; name&lt;option&gt; ,必须有
+					otherAttr其他属性，比如code,price,但不能为cell,		可选
+					
+					cell为下级菜单包含的数据内容，包含同样的key/name/cell格式, 可选
+						
+					比如：
+					var data1 = {
+						1: {name: '蔬菜', 
+							cell: { 
+								10: {name: '菠菜', price: 4 }, 
+								11: {name: '茄子', price: 5} 
+							}
+					};
+					蔬菜|-->菠菜 (id等于1, price为4)
+						|-->茄子 (id等于10, price为5)
+					
+				</pre>
+			</div>
+			
+			<div class="lsdemo">
+				<h3>Demo1：开始一个简单的</h3>
+				<div><select id="demo1" ></select></div>
+				<div style="margin-top: 10px">
+					<input type="button" title="获得最后一个有效选项value" value="button1" id="getSelectedValue"/> 获得最后一个有效选项value  <br />
+					<input type="button" title="获得最后一个有效选项属性,有可能某属性为空" value="button2" id="getSelectedData"/> 获得最后一个有效选项属性
+				</div>
+				<pre class="brush: js">
+					&lt;script>
+					$(document).ready(function(){
+						var data1 = {
+							1: {name: '蔬菜', cell: { 10: {name: '菠菜', price: 4 }, 11: {name: '茄子', price: 5} }
+							},
+							3: {name: '水果', 
+								cell: { 
+									20: {name: '苹果', cell: {201: {name: '红富士', price: 20}  } } ,
+									21: {name: '桃', 
+											cell: { 
+												210: {name: '猕猴桃', price: 30}, 
+												211: {name: '油桃', price: 31}, 
+												212: {name: '蟠桃', priece: 32} }
+									}
+								}
+							},
+							9: {name: '粮食', 
+								cell: { 
+									30: {name: '水稻', 	cell: {	301: {name: '大米', cell: {3001: {name: '五常香米', price: 50}} } } 	} 
+								}
+							}
+						};
+						var opts = {
+								data: data1,
+								select: '#demo1'
+						};
+						var linkageSel1 = new LinkageSel(opts);
+						
+						$('#getSelectedValue').click(function() {
+							var v = linkageSel.getSelectedValue();
+							alert(v);
+						});
+						
+						$('#getSelectedData').click(function() {
+							var name = linkageSel.getSelectedData('name'),
+								price = linkageSel.getSelectedData('price');
+							alert('名称:' + name + ' 价格:' + price);
+
+						});
+					});
+					&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data1 = {
+							1: {name: '蔬菜', cell: { 10: {name: '菠菜', price: 4 }, 11: {name: '茄子', price: 5} }
+							},
+							3: {name: '水果', 
+								cell: { 
+									20: {name: '苹果', cell: {201: {name: '红富士', price: 20}  } } ,
+									21: {name: '桃', cell: { 210: {name: '猕猴桃', price: 30}, 211: {name: '油桃', price: 31}, 212: {name: '蟠桃', priece: 32} }
+									}
+								}
+							},
+							9: {name: '粮食', 
+								cell: { 
+									30: {name: '水稻', 	cell: {	301: {name: '大米', cell: {3001: {name: '五常香米', price: 50}} } } 	} 
+								}
+							}
+						};
+						
+						var opts = {
+								data: data1,
+								select: '#demo1'
+						};
+						var linkageSel = new LinkageSel(opts);
+						
+						$('#getSelectedValue').click(function() {
+							var v = linkageSel.getSelectedValue();
+							alert(v);
+						});
+						
+						$('#getSelectedData').click(function() {
+							var name = linkageSel.getSelectedData('name'),
+								price = linkageSel.getSelectedData('price');
+							alert('名称:' + name + ' 价格:' + price);
+
+						});
+					});
+					
+				</script>
+			</div>
+					
+					
+					
+
+			<div class="lsdemo">
+				<h3>Demo2：省市地三级联动,  本地加载数据。onChange时获取相关属性</h3>
+				<div>
+					<select id="demo2" ></select>
+				</div>
+				<div style="margin-top: 10px">
+					<input type="text" value="地址" id="tip" size="50" />
+				</div>
+				<div style="margin-top: 10px">
+					<input type="button" title="获得各级菜单所选值" value="button3" id="getValueArr2"/> 获得各级菜单所选值
+				</div>
+				<pre class="brush: js">
+						&lt;select id="demo2">&lt;/select>
+						地址：&lt;input type="text" value="tip" id="tip" size="50" />
+						&lt;input type="button" title="获得各级菜单所选值" value="button3" id="getValueArr2"/>
+					
+						&lt;script src="js/district-all.js">&lt;/script>
+						&lt;script>
+							var opts = {
+									data: districtData,		// districtData为district-all.js中定义的变量
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo2' 
+							};
+									
+							var linkageSel2 = new LinkageSel(opts);
+							districtData = opts = null;	// 如果数据量大最好在创建LinkageSel实例之后清空
+							
+							$('#getValueArr2').click(function() {
+								var arr = linkageSel2.getSelectedArr();
+								alert(arr.join(','));
+							});	
+							
+							linkageSel2.onChange(function() {
+								var input = $('#tip'),
+									d = this.getSelectedDataArr('name'),	// 所有有选定菜单的name. this === linkageSel2
+									zip = this.getSelectedData('zip'),		// 最末选定菜单的zip数据值
+									arr = [];
+								for (var i = 0, len = d.length; i < len; i++) {
+									arr.push(d[i]);
+								}
+								zip = zip ? ' 邮编:' + zip : '';
+								input.val(arr.join(' ') + zip);
+							});
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo2',
+								dataReader: {id: 'id', name: 'name', cell: 'cell'}
+						};
+						var linkageSel2 = new LinkageSel(opts);
+						//districtData = opts = null;	// 如果数据量大最好在创建LinkageSel实例之后清空
+						
+						$('#getValueArr2').click(function() {
+							var arr = linkageSel2.getSelectedArr();
+							alert(arr.join(','));
+						});	
+						
+						linkageSel2.onChange(function() {
+							var input = $('#tip'),
+								d = this.getSelectedDataArr('name'),
+								zip = this.getSelectedData('zip'),
+								arr = [];
+							for (var i = 0, len = d.length; i < len; i++) {
+								arr.push(d[i]);
+							}
+							zip = zip ? ' 邮编:' + zip : '';
+							input.val(arr.join(' ') + zip);
+						});
+					});
+				</script>
+			</div>
+
+
+
+
+
+			<div class="lsdemo">
+				<h3>Demo3：省市地三级联动,  Ajax动态获取下级数据</h3>
+				<div>
+					<select id="demo3" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script>
+							var opts = {
+									ajax: 'district_crud.php?aj=15',
+									selStyle: 'margin-left: 3px;',
+									select: '#demo3' 
+							};
+									
+							var linkageSel3 = new LinkageSel(opts);
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts = {
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo3'
+						};
+						var linkageSel3 = new LinkageSel(opts);
+					});
+				</script>
+			</div>
+
+
+
+
+			<div class="lsdemo">
+				<h3>Demo4：1级数据JS中赋值, Ajax动态获取2、3级数据</h3>
+				<div>
+					<select id="demo4" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script>
+							var data4 = {2: {name: '北京市'}, 4:{name: '河北省'} };
+							var opts4 = {
+									data: data4,
+									ajax: 'district_crud.php?aj=15',	// ajax与data配合获取未定义的下级数据
+									selStyle: 'margin-left: 3px;',
+									select: '#demo4'
+							};
+									
+							new LinkageSel(opts4);
+						&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data4 = {2: {name: '北京市'}, 4:{name: '河北省'} };
+						var opts4 = {
+								data: data4,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo4'
+						};
+						new LinkageSel(opts4);
+					});
+				</script>
+			</div>
+					
+					
+					
+					
+			<div class="lsdemo">
+				<h3>Demo5：指定默认选项</h3>
+				<div>
+					<select id="demo5" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;script src="js/district-all.js">&lt;/script>
+						&lt;script>
+							var opts5 = {
+									data: districtData,			// districtData为district-all.js中定义的变量
+									selStyle: 'margin-left: 3px;',
+									select:  ['#demo5'], 		// select的值可以是个数组
+									defVal: [4]
+							};
+									
+							var linkageSel5 = new LinkageSel(opts5);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts5 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select:  ['#demo5'],
+								defVal: 4
+						};
+						var linkageSel5 = new LinkageSel(opts5);
+					});
+				</script>
+			</div>					
+					
+					
+					
+					
+			<div class="lsdemo">
+				<h3>Demo6：指定默认选项, 静态动态混合select</h3>
+				<div>
+					<select id="demo61" ></select><select id="demo62" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo61">&lt;/select> &lt;select id="demo62">&lt;/select>
+						&lt;script>
+							var opts6 = {
+									data: districtData,
+									select:  [ '#demo61', '#demo62' ], 		// 2个静态,剩余的动态生成	
+									defVal: 4
+							};
+									
+							var linkageSel6 = new LinkageSel(opts6);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts6 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: [ '#demo61', '#demo62'] ,
+								defVal: 4
+						};
+						new LinkageSel(opts6);
+					});
+				</script>
+			</div>							
+					
+					
+					
+
+
+			<div class="lsdemo">
+				<h3>Demo7：指定多个默认选项, 动态生成select</h3>
+				<div>
+					<select id="demo7" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo7">&lt;/select>
+						&lt;script>
+							var opts7 = {
+									data: districtData,
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo7', 		// 只有一个
+									defVal: [5, 256]		// 可是两个哟
+							};
+									
+							var linkageSel7 = new LinkageSel(opts7);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts7 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo7' ,
+								defVal: [5, 256]
+						};
+						new LinkageSel(opts7);
+					});
+				</script>
+			</div>						
+					
+
+
+
+			<div class="lsdemo">
+				<h3>Demo8：定义数据入口</h3>
+				<div>
+					山西省：<select id="demo8" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						山西省：&lt;select id="demo8">&lt;/select>
+						&lt;script>
+							var opts8 = {
+									data: districtData,
+									root: 5,				// 数据入口
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo8' 		
+							};
+									
+							var linkageSel8 = new LinkageSel(opts8);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts8 = {
+								data: districtData,
+								root: 5,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo8'
+						};
+						new LinkageSel(opts8);
+					});
+				</script>
+			</div>						
+					
+			
+					
+			<div class="lsdemo">
+				<h3>Demo9：指定数据入口, 多个默认选项</h3>
+				<div>
+					山西省：<select id="demo9" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						山西省：&lt;select id="demo9">&lt;/select>
+						&lt;script>
+							var opts9 = {
+									data: districtData,
+									root: 5,				// 数据入口
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo9', 		
+									defVal: [256, 257]		// 两个哟
+							};
+									
+							var linkageSel9 = new LinkageSel(opts9);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts9 = {
+								data: districtData,
+								root: 5,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo9' ,
+								defVal: [256, 257]
+						};
+						new LinkageSel(opts9);
+					});
+				</script>
+			</div>						
+					
+			
+			
+			
+			<div class="lsdemo">
+				<h3>Demo10：指定深层数据入口, 默认选项</h3>
+				<div>
+					山西省 太原市：<select id="demo10" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						山西省：&lt;select id="demo10">&lt;/select>
+						&lt;script>
+							var opts10 = {
+									data: districtData,
+									root: [5, 256],				// 深层数据入口
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo9', 		
+									defVal: 257
+							};
+									
+							var linkageSel10 = new LinkageSel(opts10);
+							
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts10 = {
+								data: districtData,
+								root: [5, 256],
+								selStyle: 'margin-left: 3px;',
+								select: '#demo10' ,
+								defVal: 257
+						};
+						new LinkageSel(opts10);
+					});
+				</script>
+			</div>	
+
+
+
+			<div class="lsdemo">
+				<h3>Demo11：固定宽度</h3>
+				<div>
+					<select id="demo11" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo11">&lt;/select>
+						&lt;script>
+							var opts11 = {
+									data: districtData,
+									selStyle: 'margin-left: 3px;',
+									select: '#demo11',
+									fixWidth: 200,			// 固定宽度
+									head: '想好了选哪个么'	// 自定义
+							};
+									
+							var linkageSel11 = new LinkageSel(opts11);
+						&lt;/script&gt;
+				</pre>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						var opts11 = {
+								data: districtData,
+								select: '#demo11',
+								fixWidth: 200,
+								head: '想好了选哪个么'
+						};
+						new LinkageSel(opts11);
+					});
+				</script>
+			</div>		
+
+
+
+			<div class="lsdemo">
+				<h3>Demo12：不使用提示条目</h3>
+				<div>
+					<select id="demo12" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo12">&lt;/select>
+						&lt;script>
+							var opts12 = {
+									data: districtData,
+									select: '#demo12',
+									head: false	// 不使用自动生成提示作为菜单第一项
+							};
+									
+							var linkageSel12 = new LinkageSel(opts12);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts12 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo12',
+								head: false
+						};
+						new LinkageSel(opts12);
+					});
+				</script>
+			</div>	
+					
+					
+
+
+
+			<div class="lsdemo">
+				<h3>Demo13：一次性远程获取数据，不适合大数据量情况</h3>
+				<div>
+					<select id="demo13" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo13" &gt; &lt;/select>
+						&lt;script>
+							var opts13 = {
+									select: '#demo13',
+									url: 'exampledata.php'
+							};
+									
+							var linkageSel13 = new LinkageSel(opts13);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts13 = {
+								selStyle: 'margin-left: 3px;',
+								select: '#demo13',
+								url: 'exampledata.php'
+						};
+						new LinkageSel(opts13);
+					});
+				</script>
+			</div>	
+
+
+
+			<div class="lsdemo">
+				<h3>Demo14：1级菜单数据JS文件加载, Ajax动态获取2、3级数据</h3>
+				<div>
+					<select id="demo14" ></select>
+				</div>
+				<pre class="brush: js">
+						&lt;script src="js/district-level1.js">&lt;/script>
+						&lt;script>
+							var opts14 = {
+									data: districtData1,		//  注意变量名
+									ajax: 'district_crud.php?aj=15',	// ajax与data配合获取未定义的下级数据
+									selStyle: 'margin-left: 3px;',
+									select: '#demo14'
+							};
+									
+							var linkageSel14 = new LinkageSel(opts14);
+						&lt;/script&gt;
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var opts14 = {
+								data: districtData1,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo14'
+						};
+						new LinkageSel(opts14);
+					});	
+				</script>
+			</div>
+
+			<div class="lsdemo">
+				<h3>Demo15：1级菜单数据JS文件加载, Ajax动态获取2、3级数据。手动设定值，可用于编辑页面的自动选定</h3>
+				<div>
+					<select id="demo15" ></select>
+					<button type="button" onclick="javascript: ls15.changeValues([23, 2244])">changeValues</button>
+				</div>
+				<pre class="brush: js">
+						&lt;body>
+							&lt;button type="button" onclick="javascript: ls15.changeValues([23, 2244])">changeValues&lt;/button>
+						&lt/body>
+
+						&lt;script src="js/district-level1.js"&gt;&lt;/script>
+						&lt;script>
+							var ls15;	// must outside of ready() !
+							$(document).ready(function(){
+								var opts15 = {
+										data: districtData1,		//  注意变量名
+										ajax: 'district_crud.php?aj=15',	// ajax与data配合获取未定义的下级数据
+										selStyle: 'margin-left: 3px;',
+										select: '#demo15'
+								};
+										
+								window.ls15 = new LinkageSel(opts15);
+							});	
+						&lt;/script&gt;
+				</pre>
+				
+				<script>
+					var ls15;
+					$(document).ready(function(){
+						var opts15 = {
+								data: districtData1,
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select:  '#demo15'
+						};
+						ls15 = new LinkageSel(opts15);
+					});	
+				</script>
+			</div>										
+
+
+			<div class="lsdemo">
+				<h3>Demo16：自定义数据key名</h3>
+				<div><select id="demo16" name="demo16"></select></div>
+				<pre class="brush: js">
+					&lt;script>
+					$(document).ready(function(){
+						var data16 = {
+							1: {gid: 1, value: 'IBM', 
+								sub: { 
+									10: {gid: 10, value: 'X3650'}, 
+									11: {gid: 11, value: 'X3860'} 
+								}
+							},
+							3: {gid: 3, value: 'HP', 
+								sub: { 
+									20: {gid: 20, value: '360'} ,
+									21: {gid: 21, value: '380'}
+								}
+							},
+							9: {gid: 9, value: 'DELL', 
+								sub: { 
+									29: {gid: 29, value: 'R710'} 
+									30: {gid: 30, value: 'R720'} 
+								}
+							}
+						};
+						var opts = {
+								data: data16,
+								select: "[name='demo16']",
+								dataReader: {id: 'gid', name: 'value', cell: 'sub'}	// self defined data key name
+						};
+						var ls16 = new LinkageSel(opts);
+					});
+					&lt;/script>
+				</pre>
+				
+				<script>
+					$(document).ready(function(){
+						var data16 = {
+							1: {gid: 1, value: 'IBM', 
+								sub: { 
+									10: {gid: 10, value: 'X3650'}, 
+									11: {gid: 11, value: 'X3860'} 
+								}
+							},
+							3: {gid: 3, value: 'HP', 
+								sub: { 
+									20: {gid: 20, value: '360'} ,
+									21: {gid: 21, value: '380'}
+								}
+							},
+							9: {gid: 9, value: 'DELL', 
+								sub: { 
+									29: {gid: 29, value: 'R710'} ,
+									30: {gid: 30, value: 'R720'} 
+								}
+							}
+						};
+						var opts = {
+								data: data16,
+								select: "[name='demo16']",
+								dataReader: {id: 'gid', name: 'value', cell: 'sub'}
+						};
+						var ls16 = new LinkageSel(opts);
+					});
+					
+				</script>
+			</div>
+					
+					
+
+			<div class="lsdemo">
+				<h3>Demo17：ajax获取数据且多个默认值. 注意与demo7的区别</h3>
+				<div>
+					<select id="demo17" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo17">&lt;/select>
+						&lt;script>
+							var opts17 = {
+									//data: districtData,	// demo7
+									ajax: 'district_crud.php?aj=15',
+									selStyle: 'margin-left: 3px;',
+									select:  '#demo17',
+									defVal: [5, 256, 257]
+							};
+									
+							var linkageSel17 = new LinkageSel(opts17);
+						&lt;/script>
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts17 = {
+								ajax: 'district_crud.php?aj=15',
+								selStyle: 'margin-left: 3px;',
+								select: '#demo17' ,
+								defVal: [5, 256, 257]
+						};
+						new LinkageSel(opts17);
+					});
+				</script>
+			</div>
+
+
+
+			<div class="lsdemo">
+				<h3>Demo18：不使用提示条目，指定默认值</h3>
+				<div>
+					<select id="demo18" ></select>
+				</div>
+	
+				<pre class="brush: js">
+						&lt;select id="demo18">&lt;/select>
+						&lt;script>
+							var opts18 = {
+									data: districtData,
+									select: '#demo18',
+									defVal: [5, 256, 257], 
+									head: false	// 不使用自动生成提示作为菜单第一项
+							};
+									
+							var linkageSel18 = new LinkageSel(opts18);
+						&lt;/script&gt;
+				</pre>
+				<script>
+					$(document).ready(function(){
+						var opts18 = {
+								data: districtData,
+								selStyle: 'margin-left: 3px;',
+								select: '#demo18',
+								defVal: [5, 256, 257], 
+								head: false
+						};
+						new LinkageSel(opts18);
+					});
+				</script>
+			</div>	
+					
+					
+		</div>
+	</div>
+</div>
+
+
+<script src="js/comm.js"></script>
+<script src="js/linkagesel-min.js"></script>
+
+<script src="js/district-all.js"></script>
+<script src="js/district-level1.js"></script>
+
+<script src="js/syntaxhighlighter/shCore.js"></script>
+<script src="js/syntaxhighlighter/shBrushJScript.js"></script>
+<script src="js/syntaxhighlighter/shBrushXml.js"></script>
+
+<script>
+$(document).ready(function(){
+	SyntaxHighlighter.all()	// SyntaxHighlighter好像会导致不断刷新页面内存不断增长
+});	
+</script>
+
+
+</body>
+</html>
