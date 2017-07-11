@@ -2,8 +2,8 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CommentBundle\Entity\Thread as BaseThread;
 use PHPDish\Bundle\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -74,8 +74,8 @@ class Post implements PostInterface
      */
     public function __construct()
     {
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -233,54 +233,6 @@ class Post implements PostInterface
     }
 
     /**
-     * Set commentCount
-     *
-     * @param integer $commentCount
-     *
-     * @return Post
-     */
-    public function setCommentCount($commentCount)
-    {
-        $this->commentCount = $commentCount;
-
-        return $this;
-    }
-
-    /**
-     * Get commentCount
-     *
-     * @return integer
-     */
-    public function getCommentCount()
-    {
-        return $this->commentCount;
-    }
-
-    /**
-     * Set voteCount
-     *
-     * @param integer $voteCount
-     *
-     * @return Post
-     */
-    public function setVoteCount($voteCount)
-    {
-        $this->voteCount = $voteCount;
-
-        return $this;
-    }
-
-    /**
-     * Get voteCount
-     *
-     * @return integer
-     */
-    public function getVoteCount()
-    {
-        return $this->voteCount;
-    }
-
-    /**
      * Set author
      *
      * @param User $author
@@ -295,6 +247,15 @@ class Post implements PostInterface
     }
 
     /**
+     * Gets the summary of the post
+     * @return string
+     */
+    public function getSummary()
+    {
+        return mb_substr($this->body, 0, 250);
+    }
+
+    /**
      * Get author
      *
      * @return User
@@ -302,74 +263,6 @@ class Post implements PostInterface
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    /**
-     * Add vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostVote $vote
-     *
-     * @return Post
-     */
-    public function addVote(\PHPDish\Bundle\PostBundle\Entity\PostVote $vote)
-    {
-        $this->votes[] = $vote;
-
-        return $this;
-    }
-
-    /**
-     * Remove vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostVote $vote
-     */
-    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\PostVote $vote)
-    {
-        $this->votes->removeElement($vote);
-    }
-
-    /**
-     * Get votes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * Add comment
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
-     *
-     * @return Post
-     */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
-    {
-        $comment->setPost($this);
-        $this->comments[] = $comment;
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
-     */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
     }
 
     /**

@@ -1,0 +1,82 @@
+{% block title %}{{ 七目鱼 }}{% endblock %}
+
+<div id="main" class="container" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+    <div class="row">
+        <article id="content" class="col-lg-8 col-md-8 archive" role="article" itemscope="" itemtype="http://schema.org/Article">
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="page_carousel" class="carousel slide carousel-v2 margin-bottom-20">
+                            <div class="carousel-inner">
+                                <?php foreach ($carousels as $key => $carousel) :?>
+                                <div class="item <?php if ($key == 0):?>active<?php endif;?>">
+                                    <a href="<?=$carousel->href;?>" title="<?=$carousel->name;?>" target="_blank">
+                                        <img alt="<?=$carousel->name;?>" src="<?=$this->Url->imageUrl($carousel->src);?>"/>
+                                    </a>
+                                    <div class="carousel-caption">
+                                        <p><?=showFixedStr($carousel->description, 60);?></p>
+                                    </div>
+                                </div>
+                                <?php endforeach;?>
+                            </div>
+                            <div class="carousel-arrow">
+                                <a data-slide="prev" href="#page_carousel"
+                                   class="left carousel-control"> <i class="fa fa-angle-left"></i>
+                                </a> <a data-slide="next" href="#page_carousel"
+                                        class="right carousel-control"> <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- End -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="headline-u headline-md"><h3>编辑推荐</h3></div>
+                        <ul class="list-unstyled list-ranking">
+                            <?php foreach ($recommendPosts as $post):?>
+                            <li><i class="fa fa-angle-right color-green"></i> <?=$this->Html->link(showFixedStr($post->title, 22), ['_name'=>'post.show', $post->id]);?></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="entry-content" itemprop="articleBody">
+                {% for post in pagination %}
+                {% set postUrl =  path('post_show', post.id) %}
+                <article class="single-post clearfix" role="article">
+                    {% if post.poster %}
+                    <div class="entry-thumbnail">
+                        <a href="{{ postUrl }}" title="{{ post.title }}">
+                            <img src="{{ post.getPoster(300, 300) }}" class="img-responsive">
+                        </a>
+                    </div>
+                    {% endif; %}
+                    <header class="entry-header">
+                        <h3 class="entry-title" itemprop="name">
+                            {% if post.isRecommend %}
+                            <span class="sticky-tag">置顶</span>
+                            {% endif %}
+                            <a href="{{ postUrl }}" rel="bookmark" itemprop="url">
+                                <span itemprop="name">{{ post.title }}</span>
+                            </a>
+                        </h3>
+                        <div class="entry-meta">
+                            <a href="{{ path('user_view', post.userId) }}">{{ post.user.username }}</a>
+                            <time class="entry-date num"><?=tranTime($post->create_time);?></time>
+                            <a href="{{ postUrl }}#comments"><i class="num">{{ post.commentCount }}</i> 条评论</a>
+                            <span><i class="num">{{ post.viewCount }}</i>次浏览</span>
+                        </div>
+                    </header>
+                    <div class="entry-excerpt">{{ post.getSummary }}</div>
+                </article>
+                {% endfor %}
+            </div>
+            <footer class="entry-footer">
+                <div id="pagination">
+                    <ul class="pagination" role="navigation">{{ knp_paginator(pagination) }}</ul>
+                </div>
+            </footer>
+        </article>
+        <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+        </div>
+        <!-- #sidebar -->
+    </div>
+</div>
