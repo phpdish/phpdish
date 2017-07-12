@@ -1,0 +1,45 @@
+{% extends "PHPDishWebBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="main" class="container">
+    <div class="row">
+        <article id="content" class="single col-lg-8 col-md-8">
+            <header class="entry-header">
+                <div class="entry-location">首页</div>
+                <h1 class="entry-title">{{ post.title }}</h1>
+                <div class="entry-meta">
+                    <div class="entry-set-font">
+                        <span data-role="content-resize" data-type="small" class="disabled">A<sup>-</sup></span>
+                        <span data-role="content-resize">A<sup>+</sup></span>
+                    </div>
+                    <a href="{{ path('user_view', {'username': post.author.username}) }}">{{ post.author.username }}</a>
+                    <time class="entry-date num">{{ post.createdAt|date('Y-m-d H:i:s') }}</time>
+                    <a href="#comments"><i data-num-comments="true" class="num">{{ post.commentCount }}</i>条评论</a>
+                    <span><i data-num-views="true" class="num">{{ post.viewCount }}</i>次浏览</span>
+                </div>
+            </header>
+            <div class="entry-content markdown-body">{{ post.body }}</div>
+            <footer class="entry-footer">
+                <div class="vote-group" id="post-vote" role="group">
+                    <a href="javascript:;" class="up btn btn-default btn-lg" data-choose="like">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <i class="num">{{ post.voteCount }}</i>
+                    </a>
+                </div>
+                {% include 'PHPDishWebBundle:Common:share.html.twig' %}
+            </footer>
+            {% include 'PHPDishWebBundle:Post:post_comment.html.twig' %}
+        </article>
+        <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+            <aside class="widget clearfix widget_search">
+                {% include 'PHPDishWebBundle:Common:search.html.twig' %}
+            </aside>
+            <aside class="widget clearfix">
+                <div class="tag-box tag-box-v6 no-margin">
+                    {% include 'PHPDishWebBundle:Post:user_dashboard.html.twig' %}
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+{% endblock %}

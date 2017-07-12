@@ -1,0 +1,27 @@
+<div id="comments">
+    <div id="respond">
+        <h4 class="respond-title">发表评论
+            <small id="cancel-comment-reply"><a rel="nofollow" id="cancel-comment-reply-link" style="display:none;">点击这里取消回复。</a></small>
+        </h4>
+        <form method="post" id="commentform" data-id="<?=$post->id?>">
+            <p id="login-tips"></p>
+            <div id="commentaction">
+                <textarea name="content" class="form-control" id="comment" cols="58" rows="3" tabindex="4" required="required"></textarea>
+                <div class="btn-toolbar clearfix" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <span class="btn btn-default" id="looks-image">表情</span>
+                    </div>
+                    <div class="btn-group pull-right" role="group">
+                        <input name="submit" type="submit" class="btn btn-default" id="commentsubmit" tabindex="5" data-loading-text="提交中..." value="发表评论">
+                    </div>
+                </div>
+            </div>
+            <div id="comment-error-alert" class="alert alert-warning" style="display:none;" role="alert"></div>
+            <div id="comment-success-tips" class="alert alert-success" style="display:none;" role="alert"></div>
+        </form>
+    </div>
+    <div class="comments-panel" data-role="comments-panel"></div>
+    <div class="text-center" id="comments-loading">
+        <div class="loading-indicator">评论加载中</div>
+    </div>
+</div>

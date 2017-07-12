@@ -14,8 +14,6 @@ trait Votable
      */
     protected $voteCount = 0;
 
-    protected $votes;
-
     /**
      * Set voteCount
      *

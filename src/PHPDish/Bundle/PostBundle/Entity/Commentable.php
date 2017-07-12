@@ -10,8 +10,6 @@ trait Commentable
      */
     protected $commentCount = 0;
 
-    protected $comments;
-
     /**
      * Set commentCount
      *

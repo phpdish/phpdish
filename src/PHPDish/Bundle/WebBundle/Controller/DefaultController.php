@@ -20,4 +20,12 @@ class DefaultController extends Controller
             'pagination' => $pagination
         ]);
     }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction()
+    {
+
+    }
 }

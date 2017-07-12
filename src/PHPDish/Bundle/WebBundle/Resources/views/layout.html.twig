@@ -25,7 +25,7 @@
                         <div class="custom-header clearfix">
                             <div class="header-logo">
                                 <a href="/" rel="home">
-                                    <img src="{{ assets('bundles/phpdishweb/image/logo-p4.png') }}" class="img-responsive"/>
+                                    <img src="{{ asset('bundles/phpdishweb/image/logo-p4.png') }}" class="img-responsive"/>
                                 </a>
                             </div>
                         </div>
@@ -71,9 +71,8 @@
                 </div>
             </div>
         </header>
-        <!-- #masthead -->
-        <?=$this->fetch('content');?>
-        <!-- #main -->
+        {% block content %}
+        {% endblock %}
         <footer id="colophon" class="container" role="contentinfo">
             <div class="panel panel-default text-muted">
                 <div class="panel-body">
@@ -110,7 +109,7 @@
         <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/lodash.js/4.17.2/lodash.min.js"></script>
-        <script type="text/javascript" src="{{ assets('bundles/phpdishwebbundle/js/common.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/phpdishwebbundle/js/common.js') }}"></script>
         {% block script %}{% endblock %}
     </body>
 </html>

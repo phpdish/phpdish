@@ -10,7 +10,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\PostBundle\Entity\Comment;
 use PHPDish\Bundle\PostBundle\Entity\Post;
-use PHPDish\Bundle\PostBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,24 +18,15 @@ use Symfony\Component\HttpFoundation\Response;
 class PostsController extends Controller
 {
     /**
-     * @Route(name="post_index", path="/posts")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager()->getRepository('PHPDishPostBundle:Post');
-        $posts = $em->findAll();
-        dump($posts);
-        return new Response();
-    }
-
-    /**
      * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
      * @param Post $post
+     * @return Response
      */
     public function viewAction(Post $post)
     {
-        dump($post->getComments()->toArray());
-        return new Response();
+        return $this->render('PHPDishWebBundle:Post:view.html.twig', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -77,13 +68,4 @@ class PostsController extends Controller
         $em->flush();
         return new Response();
     }
-
-//
-//    /**
-//     * @Route('/home', name="user_home")
-//     */
-//    public function homeAction()
-//    {
-//        return new Response('hello home');
-//    }
 }

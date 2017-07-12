@@ -19,27 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 class QuestionsController extends Controller
 {
     /**
-     * @Route(name="post_index", path="/posts")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager()->getRepository('PHPDishPostBundle:Post');
-        $posts = $em->findAll();
-        dump($posts);
-        return new Response();
-    }
-
-    /**
-     * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
-     * @param Post $post
-     */
-    public function viewAction(Post $post)
-    {
-        dump($post->getComments()->toArray());
-        return new Response();
-    }
-
-    /**
      * @Route("/questions/add", name="add_post")
      */
     public function add()
