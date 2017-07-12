@@ -13,6 +13,7 @@ use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PostsController extends Controller
@@ -26,6 +27,23 @@ class PostsController extends Controller
     {
         return $this->render('PHPDishWebBundle:Post:view.html.twig', [
             'post' => $post
+        ]);
+    }
+
+    /**
+     * @Route("/users/{username}/posts", name="user_posts")
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function userPostsAction($username, Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->getRepository('PHPDishWebBundle:Post')->createQueryBuilder('n');
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 10);
+        return $this->render('PHPDishWebBundle:Post:user_posts.html.twig',  [
+            'pagination' => $pagination,
         ]);
     }
 

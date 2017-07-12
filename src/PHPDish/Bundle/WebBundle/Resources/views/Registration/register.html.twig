@@ -4,17 +4,22 @@
 <div class="container content">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <form class="reg-page" id="register-form" method="post">
+            {{ form_start(form, {'attr':{'class': 'reg-page', 'id': 'register-form'}}) }}
                 <div class="reg-header">
                     <h2>注册一个新账户</h2>
                     <p>已经有账户?点此<a href="{{ path('login') }}">登录</a>你的账户</p>
                 </div>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <span class="black-text"><p>{{ flashMessage }}</p></span>
+                {% endfor %}
                 <label>用户名 <span class="color-red">*</span></label>
-                <?=$this->Form->text('username', ['class'=>'form-control margin-bottom-20', 'autocomplete'=>'off', 'placeholder' => '用户名']);?>
+                {{ form_widget(form.username, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
+                <label>邮箱 <span class="color-red">*</span></label>
+                {{ form_widget(form.email, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
                 <label>密码 <span class="color-red">*</span></label>
-                <?=$this->Form->password('pwd', ['class'=>'form-control margin-bottom-20', 'autocomplete'=>'off', 'id' => 'password']);?>
+                 {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
                 <label>重复密码 <span class="color-red">*</span></label>
-                <?=$this->Form->password('repassword', ['class'=>'form-control margin-bottom-20', 'autocomplete'=>'off']);?>
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
                 <div class="row">
                     <div class="col-lg-6 checkbox">
                         <label>
@@ -27,7 +32,7 @@
                         <button class="btn btn-primary" type="submit">注册</button>
                     </div>
                 </div>
-            </form>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>

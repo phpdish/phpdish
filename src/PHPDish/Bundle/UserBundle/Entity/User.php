@@ -7,6 +7,7 @@ namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -15,6 +16,13 @@ use Doctrine\ORM\Mapping\JoinColumn;
  */
 class User implements UserInterface
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
     /**
      * @ORM\Column(type="string")
      */
@@ -26,11 +34,15 @@ class User implements UserInterface
     protected $email;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
-    protected $id;
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $password;
 
     /**
      * @ORM\Column(type="smallint", length=1);
@@ -168,6 +180,22 @@ class User implements UserInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 
     /**

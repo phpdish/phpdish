@@ -1,19 +1,20 @@
 php_dish_web:
-    resource: "@PHPDishWebBundle/Controller"
-    type: annotation
-
-php_dish_user:
-    resource: "@PHPDishUserBundle/Controller"
-    type: annotation
-
-php_dish_admin:
-    resource: "@PHPDishAdminBundle/Controller"
-    prefix:   /admin
+    resource: "@PHPDishWebBundle/Controller/"
+    prefix: /
     type: annotation
 
 php_dish_post:
     resource: "@PHPDishPostBundle/Controller/"
-    prefix:   /
+    prefix: /
+    type: annotation
+
+php_dish_user:
+    resource: "@PHPDishUserBundle/Controller/"
+    type: annotation
+
+php_dish_admin:
+    resource: "@PHPDishAdminBundle/Controller/"
+    prefix: /admin
     type: annotation
 
 fos_comment_api:
