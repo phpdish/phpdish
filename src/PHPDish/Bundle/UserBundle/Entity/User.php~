@@ -6,15 +6,24 @@
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements UserInterface
+class User implements UserInterface
 {
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="email")
+     */
+    protected $email;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -77,8 +86,6 @@ class User extends BaseUser implements UserInterface
      */
     public function __construct()
     {
-        parent::__construct();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -89,6 +96,20 @@ class User extends BaseUser implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 
     /**
@@ -474,5 +495,53 @@ class User extends BaseUser implements UserInterface
             $this->createdAt = new \DateTime();
         }
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Set followingCount
+     *
+     * @param integer $followingCount
+     *
+     * @return User
+     */
+    public function setFollowingCount($followingCount)
+    {
+        $this->followingCount = $followingCount;
+
+        return $this;
+    }
+
+    /**
+     * Get followingCount
+     *
+     * @return integer
+     */
+    public function getFollowingCount()
+    {
+        return $this->followingCount;
+    }
+
+    /**
+     * Set fanCount
+     *
+     * @param integer $fanCount
+     *
+     * @return User
+     */
+    public function setFanCount($fanCount)
+    {
+        $this->fanCount = $fanCount;
+
+        return $this;
+    }
+
+    /**
+     * Get fanCount
+     *
+     * @return integer
+     */
+    public function getFanCount()
+    {
+        return $this->fanCount;
     }
 }

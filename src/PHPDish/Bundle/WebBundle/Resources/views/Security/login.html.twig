@@ -1,0 +1,35 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="container content">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <form class="reg-page" action="{{ path('login') }}" method="post" id="login-form">
+                <div class="reg-header">
+                    <h2>登录你的账号</h2>
+                    <p>还没有账户?点此<a href="{{ path('register') }}">注册</a></p>
+                </div>
+                {% if error %}
+                <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" id="username" name="_username" placeholder="用户名" value="{{ last_username }}"/>
+                </div>
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="text" class="form-control" id="password" name="_password" placeholder="密码" value="{{ last_username }}"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 checkbox">
+                        <label><input name="remember" type="checkbox">记住我</label>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary pull-right" type="submit">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

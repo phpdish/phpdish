@@ -2,8 +2,8 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
         Symfony\Component\Security\Core\User\User: plaintext
+        PHPDish\Bundle\UserBundle\Entity\UserInterface: md5
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -21,9 +21,6 @@ security:
                     password: 123456
                     roles: 'ROLE_ADMIN'
 
-        fos_userbundle:
-            id: fos_user.user_provider.username
-
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -32,12 +29,11 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-            logout:       true
+                login_path: login
+                check_path: login
+            logout: true
             anonymous:  ~
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

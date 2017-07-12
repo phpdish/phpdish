@@ -6,15 +6,25 @@
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements UserInterface
+class User implements UserInterface
 {
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -53,6 +63,15 @@ class User extends BaseUser implements UserInterface
     protected $fanCount = 0;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\JoinTable(name="users_roles",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $roles;
+
+    /**
      * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post", mappedBy="author")
      */
     protected $posts;
@@ -77,8 +96,6 @@ class User extends BaseUser implements UserInterface
      */
     public function __construct()
     {
-        parent::__construct();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -89,6 +106,20 @@ class User extends BaseUser implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 
     /**
