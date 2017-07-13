@@ -1,0 +1,33 @@
+<?php
+namespace PHPDish\Bundle\WebBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="friend_links")
+ */
+class FriendLink
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $url;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $logo;
+}
