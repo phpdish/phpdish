@@ -1,0 +1,24 @@
+body {font-family:Menlo,Monaco,Consolas,"Helvetica Neue",Helvetica,"Courier New",'微软雅黑',monospace,Arial,sans-serif,'黑体';color:#555;}
+a {display:inline-block;text-decoration:none;color:#29abe2;}
+.green {color:#0fd59d;}
+.red {color:#f98280;}
+.blue {color:#29abe2;}
+input:focus,textarea:focus {outline:none;}
+a:hover {text-decoration:none;color:#15b374;}
+.label-success {background-color:#0fd59d;}
+.header {box-shadow:0px 0px 1px #e5e5e5;border-bottom:solid 1px #d5d5d5;padding:0;background-color:#fff;}
+.logo {text-decoration:none;font-weight:bold;font-size:24px;color:#0fd59d;padding:10px;}
+.navi {padding:5px 20px;font-size:14px;font-weight:bold;font-family:Menlo,Monaco,Consolas,"Courier New",monospace,"Helvetica Neue",Helvetica,Arial,sans-serif,'幼圆'}
+.navi a {padding:0px 20px;color:#999;}
+.navi a:hover {color:#15b374;}
+
+.src-panel {border:1px solid #dedede;padding:5px;border:none;}
+.src-panel textarea{border:none;height:400px;padding:10px;padding-left:40px;border-radius:0;resize:none;outline:none;}
+.preview-area textarea {border:none;height:500px;padding:10px;padding-left:20px;border-radius:0;resize:none;outline:none;}
+/*行号*/div.numberedtextarea-wrapper {position:relative;}
+div.numberedtextarea-wrapper textarea {display:block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+div.numberedtextarea-line-numbers {position:absolute;display:block;background-color:#fafafa;top:0;left:0;right:0;bottom:0;width:40px;border-right:1px dashed #eee;border-bottom:solid 1px #ddd;color:#999;overflow:hidden;}
+div.numberedtextarea-number {padding-right:6px;text-align:center;}
+
+.target-panel .preview-panel textarea{border:none;min-height:400px;padding:10px;padding-left:40px;border-radius:0;resize:none;outline:none;}
+

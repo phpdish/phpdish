@@ -28,7 +28,9 @@ class RegistrationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('user_home');
+            return $this->redirectToRoute('user_home', [
+                'username' => $user->getUsername()
+            ]);
         }
         return $this->render('PHPDishWebBundle:Registration:register.html.twig', [
             'form' => $form->createView()

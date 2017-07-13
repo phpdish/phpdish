@@ -7,14 +7,14 @@
         <meta http-equiv="Cache-Control" content="no-transform ">
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-        <title>{% block title %} {% endblock %}</title>
+        <title>{% block title %} {% endblock %} - PHPDish</title>
         {% block keywords %}<meta name="keywords" content="phpdish"/>{% endblock %}
         {% block description %}<meta name="description" content="phpdish"/>{% endblock %}
         <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ asset('bundles/phpdishweb/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/phpdishweb/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
     </head>
     <body>
@@ -25,7 +25,7 @@
                         <div class="custom-header clearfix">
                             <div class="header-logo">
                                 <a href="/" rel="home">
-                                    <img src="{{ asset('bundles/phpdishweb/image/logo-p4.png') }}" class="img-responsive"/>
+                                    <img src="{{ asset('bundles/phpdishweb/img/logo-p4.png') }}" class="img-responsive"/>
                                 </a>
                             </div>
                         </div>

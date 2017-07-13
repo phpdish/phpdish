@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
             new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
             new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
+            new PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

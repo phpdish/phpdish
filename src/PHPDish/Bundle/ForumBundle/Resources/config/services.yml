@@ -1,0 +1,4 @@
+services:
+#    php_dish_forum.example:
+#        class: PHPDish\Bundle\ForumBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
