@@ -1,32 +1,30 @@
 {
-    "util/json-format": "js/util/json-format.15d3f5.js",
-    "util/css-format": "js/util/css-format.1d6b61.js",
-    "post": "js/post.e9a3b2.js",
-    "user/avatar": [
-        "js/user/avatar.005b1b.js",
-        "css/user/avatar-494e80.css"
-    ],
-    "user/post": [
-        "js/user/post.39ae88.js",
-        "css/user/post-ff52d2.css"
-    ],
-    "question": [
-        "js/question.25092d.js",
-        "css/question-ff52d2.css"
-    ],
-    "style": [
-        "js/style.c7b605.js",
-        "css/style-a938f4.css"
-    ],
-    "user/user": "js/user/user.7939ce.js",
-    "util/unix-timestamp": "js/util/unix-timestamp.5b3fd4.js",
-    "util/js-format": "js/util/js-format.22c543.js",
-    "util/html-format": "js/util/html-format.730584.js",
-    "user/profile": "js/user/profile.aac1ea.js",
-    "user/message": "js/user/message.ca759d.js",
-    "user": "js/user.b802c1.js",
-    "sign": "js/sign.e6a2a8.js",
-    "gift": "js/gift.705f62.js",
-    "default": "js/default.cf0c29.js",
-    "common": "common-2831e7.js"
+  "build/css/style.css": "/build/css/style.7df6efe825832e9accbd6817f7a34bf2.css",
+  "build/fonts/icomoon.eot?-qdfu1s": "/build/fonts/icomoon.0a74426fd2e61cc33038f01711ea7dc0.eot",
+  "build/fonts/icomoon.ttf?-qdfu1s": "/build/fonts/icomoon.9f5fd7b11f2af70749a8cb87f3ae5992.ttf",
+  "build/fonts/icomoon.woff?-qdfu1s": "/build/fonts/icomoon.7d4ac7df8cd762eafe536f820c1d1a17.woff",
+  "build/images/Jcrop.gif": "/build/images/Jcrop.7a4b4c6ebdb549fcbe47408f9457493e.gif",
+  "build/images/black.png": "/build/images/black.af8ad2ab80d1f88c44b05834da3b0c71.png",
+  "build/images/icomoon.svg?-qdfu1s": "/build/images/icomoon.f5580465c76fa662176a802b7a3bbb87.svg",
+  "build/js/default.js": "/build/js/default.168d75065bd34ae981cd.js",
+  "build/js/gift.js": "/build/js/gift.8581fc2849602a9d249d.js",
+  "build/js/post.js": "/build/js/post.d91090494b9e6fb196a5.js",
+  "build/js/question.css": "/build/js/question.08f61af2e1fb028ecf4dd6074f846f9d.css",
+  "build/js/question.js": "/build/js/question.ffff073f2b2dd75f11d7.js",
+  "build/js/sign.js": "/build/js/sign.fea4c568d9b6510980b4.js",
+  "build/js/style.css": "/build/js/style.605467195de86b48c12490b5524178ee.css",
+  "build/js/style.js": "/build/js/style.f38fa425609a42613e55.js",
+  "build/js/user.js": "/build/js/user.9cc6d983cbb1052ca85e.js",
+  "build/js/user/avatar.css": "/build/js/user/avatar.bdf7a86346d8b759bb3d7d5b18657f52.css",
+  "build/js/user/avatar.js": "/build/js/user/avatar.f29327893794d2e82ea6.js",
+  "build/js/user/message.js": "/build/js/user/message.ebc8b0c256b680f30c5b.js",
+  "build/js/user/post.css": "/build/js/user/post.08f61af2e1fb028ecf4dd6074f846f9d.css",
+  "build/js/user/post.js": "/build/js/user/post.8a80004c69fe879aa2b2.js",
+  "build/js/user/profile.js": "/build/js/user/profile.a33d883c4e338dc6b86c.js",
+  "build/js/user/user.js": "/build/js/user/user.84ad8b005c71413f40be.js",
+  "build/js/util/css-format.js": "/build/js/util/css-format.6933114c9383631bf2cf.js",
+  "build/js/util/html-format.js": "/build/js/util/html-format.c51d35928b8b947dd871.js",
+  "build/js/util/js-format.js": "/build/js/util/js-format.8a21f2482785bcae8b07.js",
+  "build/js/util/json-format.js": "/build/js/util/json-format.2d518ebd15b99e073c7b.js",
+  "build/js/util/unix-timestamp.js": "/build/js/util/unix-timestamp.4f6bf58cbb658f7f5029.js"
 }

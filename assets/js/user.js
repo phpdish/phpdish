@@ -1,6 +1,6 @@
 'use strict';
-require('module/common.js');
-var util = require('module/util.js');
+// require('module/common.js');
+// var util = require('module/util.js');
 
 (function($){
     var container = $('#uclist').first();
