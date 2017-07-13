@@ -1,0 +1,32 @@
+{
+    "util/json-format": "js/util/json-format.15d3f5.js",
+    "util/css-format": "js/util/css-format.1d6b61.js",
+    "post": "js/post.e9a3b2.js",
+    "user/avatar": [
+        "js/user/avatar.005b1b.js",
+        "css/user/avatar-494e80.css"
+    ],
+    "user/post": [
+        "js/user/post.39ae88.js",
+        "css/user/post-ff52d2.css"
+    ],
+    "question": [
+        "js/question.25092d.js",
+        "css/question-ff52d2.css"
+    ],
+    "style": [
+        "js/style.c7b605.js",
+        "css/style-a938f4.css"
+    ],
+    "user/user": "js/user/user.7939ce.js",
+    "util/unix-timestamp": "js/util/unix-timestamp.5b3fd4.js",
+    "util/js-format": "js/util/js-format.22c543.js",
+    "util/html-format": "js/util/html-format.730584.js",
+    "user/profile": "js/user/profile.aac1ea.js",
+    "user/message": "js/user/message.ca759d.js",
+    "user": "js/user.b802c1.js",
+    "sign": "js/sign.e6a2a8.js",
+    "gift": "js/gift.705f62.js",
+    "default": "js/default.cf0c29.js",
+    "common": "common-2831e7.js"
+}

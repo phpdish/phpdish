@@ -1,116 +1,163 @@
-var path = require('path');
-var glob = require('glob');
-var config = require('./config.build');
+const webpack = require('webpack')
+const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+const CleanPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const glob = require('glob');
 
-var entryPath = path.resolve(config.projectPath, config.entryPathName);
-var baseUrl = '/' + config.theme;
+var buildPath = "./web/build";
+const config = {
+    buildPath: path.resolve(buildPath),
+    assetsPath: path.resolve("./assets"),
+    cssPath: path.resolve("./assets/css"),
+    jsPath: path.resolve("./assets/js"),
+    modulesPath: path.resolve("./assets/modules"),
+    pluginsPath: path.resolve("./assets/plugins"),
+    mapPath: path.resolve(buildPath + '/manifest.json'),
+};
 
-var commonModulePath = path.resolve('./assets/src/modules');
-var commonPluginPath = path.resolve('./assets/src/plugins');
-var isProduct = (process.env.NODE_ENV == 'production');//判断环境变量
+// isProduct 判断是否是生产环境
+const isProduct = (process.env.NODE_ENV === 'production')
+const baseURL = !isProduct ? 'http://localhost:8088/static/' : '/build/'
 
-/**
- * 获取公共入口
- * @returns {{}}
- */
-function getEntry(entryPath) {
-    var entry = {};
-    var srcDirName = entryPath + '/**/*.js';
+const getEntry = function(){
+    const entry = {}
+    const srcDirName = config.jsPath + '/**/*.js'
     glob.sync(srcDirName).forEach(function (filepath) {
-        var name = filepath.slice(filepath.lastIndexOf(config.entryPathName) + config.entryPathName.length + 1, -3);
+        const name = filepath.slice(filepath.indexOf('js') + 'js'.length + 1, -3);
         entry[name] = filepath;
-    });
-    return entry;
-}
+    })
+    return entry
+};
+// console.log(getEntry(config.entryPath));
+// return;
 
-var webpack = require('webpack');
-var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var CleanPlugin = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
-    entry: getEntry(entryPath),
+const webpackConfig = {
+    entry: getEntry(config.jsPath),
     output: {
         path: config.buildPath,
-        publicPath: baseUrl + '/js/',
-        // filename: '[name]-[hash].js'
-        filename: '[name].js'
+        filename: 'js/[name].[chunkhash:6].js',
+        publicPath: baseURL
     },
     module: {
-        perLoaders: [
+        rules: [
             {
-                test: /\.js$/,
-                loader: "jshint",
-                exclude: /node_modules/
-            }
-        ],
-        loaders: [
+                test: /\.(js|jsx)$/,
+                exclude: [
+                    /node_modules/,
+                    path.resolve(__dirname, 'assets/js/plugins')
+                ],
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: true
+                }
+            },
+            {
+                test: /\.njk$/,
+                loader: 'nunjucks-loader'
+            },
             {
                 test: /\.css$/,
-                // loader: 'style!css'
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader")
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?sourceMap&minimize!postcss-loader?sourceMap'
+                })
             },
             {
-                test: /\.js$/,
-                loader: "babel",
-                exclude: /node_modules/
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?sourceMap&minimize!sass-loader?sourceMap'
+                })
             },
             {
-                test: /\.svg$/,
-                loader: 'file'
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                query: {
+                    limit: 10000,
+                    name: 'images/[name].[hash:7].[ext]'
+                }
             },
-            { test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=50000&name=[path][name].[ext]'}
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                query: {
+                    limit: 10000,
+                    name: 'fonts/[name].[hash:7].[ext]'
+                }
+            }
         ]
     },
-    noParse: [],
     resolve: {
-        root: path.resolve(config.projectPath, './src/js'),
-        extensions: ['', '.js', '.json', '.scss'],
+        modules: [
+            config.jsPath,
+            'node_modules'
+        ],
+        extensions: ['.js', '.json', '.scss'],
         alias: {
-            commonModule: commonModulePath,
-            commonPlugin: commonPluginPath,
-            module: path.resolve(config.modulePath),
-            plugin: path.resolve(config.pluginPath),
-
-            layer: 'commonPlugin/layer/layer.js',
-            lazyload: path.resolve(config.pluginPath, './jquery.lazyload.min.js'),
-            cookie: path.resolve(config.pluginPath, './js.cookie.js'),
-            dmuploader: path.resolve(config.pluginPath, './uploader/src/dmuploader.min.js'),
-            tmpl: path.resolve(config.pluginPath, './wu.tmpl.js/wu.tmpl.js'),
-            prettySocial: path.resolve(config.pluginPath, './prettySocial/jquery.prettySocial.js'),
-            fs: 'module/memory-fs.js'
+            css: config.cssPath,
+            js: config.jsPath,
+            module: config.modulesPath,
+            plugin: config.pluginsPath
         }
     },
     externals: {
         'jquery': 'window.$',
         'lodash': 'window._'
     },
+    devtool: !isProduct ? 'source-map' : false,
     plugins: [
-        new CleanPlugin([''], {
-            root: path.resolve(config.buildPath)
+        new BrowserSyncPlugin({
+            host: 'localhost',
+            port: 3000,
+            proxy: 'localhost:8000'
         }),
-        new ExtractTextPlugin("css/[name].css", {allChunks: true}),
+        new CleanPlugin(['*'], {
+            root: config.buildPath
+        }),
+        new ExtractTextPlugin({filename: "css/[name]-[contenthash:6].css", allChunks: true}),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery",
-            "_": "lodash"
+            "_": "lodash",
         }),
         new CommonsChunkPlugin({
             name: "common",
-            filename: 'common.js',
+            filename: 'common-[chunkhash:6].js',
             minChunks: 3
-        })
-    ]
-};
-//生产环境加载uglify
+        }),
+        //生成编译之后的文件映射
+        function () {
+            this.plugin('done', function (stats) {
+                require('fs').writeFileSync(config.mapPath, JSON.stringify(stats.toJson().assetsByChunkName, null, 4));
+            })
+        }
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        publicPath: '/static',
+        host: "0.0.0.0",
+        port: "8765",
+        compress: true,
+        hot: true
+    }
+}
+
 if (isProduct) {
-    module.exports.plugins = (module.exports.plugins || []).concat([
+    webpackConfig.plugins = webpackConfig.plugins.concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            },
-            comments: false,
+            }
         })
-    ]);
+    ])
 }
+module.exports = webpackConfig

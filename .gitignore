@@ -16,3 +16,4 @@
 /vendor/
 /web/bundles/
 /.idea/*
+/node_modules/*
