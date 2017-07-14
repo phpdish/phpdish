@@ -5,8 +5,7 @@
  */
 namespace  PHPDish\Bundle\CoreBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use DateTime;
 
 interface VoteInterface
@@ -16,6 +15,13 @@ interface VoteInterface
      * @return int
      */
     public function getId();
+
+    /**
+     * 设置作者
+     * @param UserInterface $author
+     * @return VoteInterface
+     */
+    public function setAuthor(UserInterface $author);
 
     /**
      * 获取赞的用户

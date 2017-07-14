@@ -8,6 +8,7 @@ namespace PHPDish\Bundle\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use DateTime;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 abstract class Vote implements VoteInterface
 {
@@ -22,6 +23,11 @@ abstract class Vote implements VoteInterface
      * @ORM\Column(type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @var UserInterface
+     */
+    protected $author;
 
     /**
      * {@inheritdoc}
@@ -46,5 +52,21 @@ abstract class Vote implements VoteInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAuthor(UserInterface $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
