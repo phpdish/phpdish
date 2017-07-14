@@ -1,10 +1,10 @@
 <?php
-namespace PHPDish\Bundle\WebBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PHPDish\Bundle\CoreBundle\Repository\FriendLinkRepository")
  * @ORM\Table(name="friend_links")
  */
 class FriendLink
@@ -29,7 +29,12 @@ class FriendLink
     /**
      * @ORM\Column(type="string")
      */
-    protected $logo;
+    protected $logo = '';
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $priority = 0;
 
     /**
      * Get id
@@ -111,5 +116,29 @@ class FriendLink
     public function getLogo()
     {
         return $this->logo;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     *
+     * @return FriendLink
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }

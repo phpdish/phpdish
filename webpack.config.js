@@ -38,10 +38,14 @@ function findEntries(buildPath){
     });
     return entries;
 }
-var entries2 = findEntries(config.jsPath);
-for (var entryName in entries2) {
-    Encore.addEntry(entryName, entries2[entryName]);
+var foundEntries = findEntries(config.jsPath);
+for (var entryName in foundEntries) {
+    Encore.addEntry(entryName, foundEntries[entryName]);
 }
+//add shared entry
+Encore.createSharedEntry('common', [
+    path.resolve(config.modulesPath, 'common.js')
+]);
 
 //add style entries
 Encore.addStyleEntry('css/style', config.cssPath + '/_style.css');
