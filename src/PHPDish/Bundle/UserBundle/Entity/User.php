@@ -5,6 +5,7 @@
  */
 namespace PHPDish\Bundle\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,6 +51,11 @@ class User implements UserInterface
     protected $gender = 0;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $description;
+
+    /**
      * @ORM\Column(type="boolean");
      */
     protected $isBlocked = false;
@@ -73,6 +79,24 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     protected $fanCount = 0;
+
+    /**
+     * 关注我的
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="following")
+     * @var ArrayCollection|UserInterface[]
+     */
+    protected $followers;
+
+    /**
+     * 我关注的
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followers")
+     * @ORM\JoinTable(name="user_followers",
+     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id", unique=true)}
+     * )
+     * @var ArrayCollection|UserInterface[]
+     */
+    protected $following;
 
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
@@ -108,6 +132,10 @@ class User implements UserInterface
      */
     public function __construct()
     {
+        //关注我的
+        $this->followers = new ArrayCollection();
+        //我关注的
+        $this->following =  new ArrayCollection();
     }
 
     /**
@@ -581,5 +609,131 @@ class User implements UserInterface
     public function getFanCount()
     {
         return $this->fanCount;
+    }
+
+    /**
+     * 检查用户是否被某个用户关注
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isFollowedBy(UserInterface $user)
+    {
+        return $this->followers->contain($user);
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return User
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Add follower
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\User $follower
+     *
+     * @return User
+     */
+    public function addFollower(\PHPDish\Bundle\UserBundle\Entity\User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\User $follower
+     */
+    public function removeFollower(\PHPDish\Bundle\UserBundle\Entity\User $follower)
+    {
+        $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\User $following
+     *
+     * @return User
+     */
+    public function addFollowing(\PHPDish\Bundle\UserBundle\Entity\User $following)
+    {
+        $this->following[] = $following;
+
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\User $following
+     */
+    public function removeFollowing(\PHPDish\Bundle\UserBundle\Entity\User $following)
+    {
+        $this->following->removeElement($following);
+    }
+
+    /**
+     * Get following
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\Role $role
+     *
+     * @return User
+     */
+    public function addRole(\PHPDish\Bundle\UserBundle\Entity\Role $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \PHPDish\Bundle\UserBundle\Entity\Role $role
+     */
+    public function removeRole(\PHPDish\Bundle\UserBundle\Entity\Role $role)
+    {
+        $this->roles->removeElement($role);
     }
 }

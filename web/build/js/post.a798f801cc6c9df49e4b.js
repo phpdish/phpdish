@@ -1,4 +1,4 @@
-webpackJsonp([5],{
+webpackJsonp([3],{
 
 /***/ "./assets/js/post.js":
 /***/ (function(module, exports, __webpack_require__) {
@@ -73,7 +73,7 @@ new ContentResize($('#content .entry-content'), $('[data-role="content-resize"]'
 
 //礼品
 window.giftId && new Gift(window.giftId);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
@@ -333,7 +333,7 @@ function Comment(postId) {
 }
 
 module.exports = Comment;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js"), __webpack_require__("./node_modules/_lodash@4.17.4@lodash/lodash.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(1)))
 
 /***/ }),
 
@@ -363,7 +363,7 @@ function ContentResize($contentContainer, $resize) {
 }
 
 module.exports = ContentResize;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
@@ -465,7 +465,7 @@ function Gift(giftId) {
 }
 
 module.exports = Gift;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 
@@ -557,7 +557,7 @@ Vote.TYPE_POST = 'post';
 Vote.TYPE_COMMENT = 'comment';
 
 module.exports = Vote;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_lodash@4.17.4@lodash/lodash.js"), __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
 
 /***/ }),
 
@@ -574,7 +574,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 (function (factory) {
 	if (true) {
 		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

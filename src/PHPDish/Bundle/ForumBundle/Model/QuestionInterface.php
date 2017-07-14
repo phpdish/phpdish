@@ -3,7 +3,7 @@
  * PHPDish forum component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\ForumBundle\Entity;
 
 interface QuestionInterface extends VotableInterface, CommentableInterface
 {

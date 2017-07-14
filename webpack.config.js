@@ -62,4 +62,8 @@ webpackConfig.resolve.alias = {
     module: config.modulesPath,
     plugin: config.pluginsPath
 };
+webpackConfig.externals = {
+    'jquery': 'window.$',
+    'lodash': 'window._',
+};
 module.exports = webpackConfig;

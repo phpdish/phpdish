@@ -84,7 +84,7 @@ function CssFormat() {
     }
 }
 new CssFormat();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/_jquery@1.12.4@jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 

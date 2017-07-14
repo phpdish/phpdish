@@ -3,9 +3,9 @@
  * PHPDish forum component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\ForumBundle\Entity;
 
-interface TopicInterface
+interface NodeInterface
 {
     /**
      * 获取创建时间

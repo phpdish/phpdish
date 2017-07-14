@@ -1,1 +1,85 @@
-用户主页
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ asset('build/js/user.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="main" class="container" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+    <div class="row">
+        <article id="content" class="col-lg-8 col-md-8 archive author-archive"  role="article" itemscope="" itemtype="http://schema.org/Article">
+            <header class="entry-header">
+                <div class="entry-location">
+                    首页
+                </div>
+                <div class="entry-author clearfix">
+                    <div class="pull-right">
+                        {% if app.user and user.isFollowedBy(app.user) %}
+                        <button type="button" class="btn btn-sm btn-default" data-role="unfollow-user" data-user-id="<?=$user->id;?>">取消关注</button>
+                        {%else %}
+                        <button type="button" class="btn-u btn-u-red" data-role="follow-user" data-user-id="<?=$user->id;?>"><i class="fa fa-plus"></i> 关注</button>
+                        {% endif %}
+                    </div>
+                    <div class="author-avatar">
+                        <img alt='用户' src="<?= $avatar=$this->Url->imageUrl($user->avatar);?>" data-original="<?=$avatar?>" class="avatar avatar-80 photo" height="80" width="80"/>
+                    </div>
+                    <div class="author-info">
+                        <h1 class="vcard">{{ user.username }}</h1>
+                        <p class="author-description">{{ user.description }}</p>
+                        <p class="small author-register-time">在{{ user.createdAt|date('Y-m-d') }}注册?></p>
+                    </div>
+                </div>
+                <div class="entry-tab">
+                    <ul>
+                        <li {% if tab = 'feed' %}class="active"{% endif %}><a href="{{ path('user_feeds') }}">动态</a></li>
+                        <li {% if tab = 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts') }}">文章</a></li>
+                        <li {% if tab = 'topics' %}class="active"{% endif %}><a href="{{ path('user_topics') }}">话题</a></li>
+                    </ul>
+                </div>
+                <div class="entry-meta">
+                    <span>共找到了10条记录</span>
+                    <span>还没有发表过内容</span>
+                </div>
+            </header>
+            <div class="entry-content" itemprop="articleBody">
+                <?=$this->fetch('content');?>
+            </div>
+            <footer class="entry-footer margin-bottom-20 content-wrap">
+                <div id="pagination">
+                    <ul class="pagination" role="navigation"></ul>
+                </div>
+                <button id="loading" class="btn rounded btn-default btn-block" type="button">加载更多</button>
+            </footer>
+        </article>
+        <div id="sidebar" class="col-lg-4 col-md-4" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">
+            <aside id="recent_user-3" class="widget clearfix widget_recent_user">
+                <h3 class="widget-title">关注</h3>
+                <ul>
+                    <?php foreach($followUsers as $followUser):?>
+                    <li>
+                        <a href="<?=$this->Url->build(['_name'=>'user.show', $followUser->id]);?>" target="_blank" title="<?=$followUser->username?>">
+                            <img alt="<?=$followUser->username?>" src="<?=$this->Url->imageUrl($followUser->avatar);?>" class="avatar avatar-50 photo" height="50" width="50"/>
+                        </a>
+                    </li>
+                    <?php endforeach;?>
+                </ul>
+            </aside>
+            <aside id="recent_user-3" class="widget clearfix widget_recent_user">
+                <h3 class="widget-title">粉丝</h3>
+                <ul>
+                    <?php foreach($followers as $follower):?>
+                    <li>
+                        <a href="<?=$this->Url->build(['_name'=>'user.show', $follower->id]);?>" target="_blank" title="<?=$follower->username?>">
+                            <img alt="<?=$follower->username?>" src="<?=$this->Url->imageUrl($follower->avatar);?>" class="avatar avatar-50 photo" height="50" width="50"/>
+                        </a>
+                    </li>
+                    <?php endforeach;?>
+                </ul>
+            </aside>
+        </div>
+        <!-- #sidebar -->
+    </div>
+</div>
+{% endblock %}

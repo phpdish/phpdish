@@ -5,7 +5,10 @@
  */
 namespace PHPDish\Bundle\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -15,16 +18,6 @@ use Doctrine\ORM\Mapping as ORM;
 class User implements UserInterface
 {
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="email")
-     */
-    protected $email;
-
-    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -32,9 +25,35 @@ class User implements UserInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $password;
+
+    /**
      * @ORM\Column(type="smallint", length=1);
      */
     protected $gender = 0;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $description;
 
     /**
      * @ORM\Column(type="boolean");
@@ -62,6 +81,31 @@ class User implements UserInterface
     protected $fanCount = 0;
 
     /**
+     * 关注我的
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="following")
+     */
+    protected $followers;
+
+    /**
+     * 我关注的
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followers")
+     * @ORM\JoinTable(name="user_followers",
+     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $following;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\JoinTable(name="users_roles",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $roles;
+
+    /**
      * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post", mappedBy="author")
      */
     protected $posts;
@@ -86,6 +130,10 @@ class User implements UserInterface
      */
     public function __construct()
     {
+        //关注我的
+        $this->followers = new ArrayCollection();
+        //我关注的
+        $this->following =  new ArrayCollection();
     }
 
     /**
@@ -158,6 +206,22 @@ class User implements UserInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 
     /**
@@ -543,5 +607,15 @@ class User implements UserInterface
     public function getFanCount()
     {
         return $this->fanCount;
+    }
+
+    /**
+     * 检查用户是否被某个用户关注
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isFollowedBy(UserInterface $user)
+    {
+        return $this->fans->contain($user);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
