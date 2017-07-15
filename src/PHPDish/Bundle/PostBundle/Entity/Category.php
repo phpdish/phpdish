@@ -5,9 +5,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
+use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use PHPDish\Bundle\UserBundle\Entity\User;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 /**
@@ -16,6 +16,8 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
  */
 class Category extends Taxonomy implements CategoryInterface
 {
+    use EnabledTrait;
+
     /**
      * @ORM\Column(type="string")
      */
@@ -25,11 +27,6 @@ class Category extends Taxonomy implements CategoryInterface
      * @ORM\Column(type="boolean")
      */
     protected $isRecommended;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $isBlocked;
 
     /**
      * @ORM\Column(type="integer", length=10)
@@ -113,22 +110,6 @@ class Category extends Taxonomy implements CategoryInterface
     public function getCreator()
     {
         return $this->creator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setIsBlocked($isBlocked)
-    {
-        $this->isBlocked = $isBlocked;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBlocked()
-    {
-        return $this->isBlocked;
     }
 
     /**

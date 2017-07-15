@@ -8,7 +8,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
-use PHPDish\Bundle\PostBundle\Entity\Comment;
+use PHPDish\Bundle\PostBundle\Entity\PostComment;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,7 +69,7 @@ class PostsController extends Controller
         $post->setCreatedAt(new \DateTime());
         $post->setUpdatedAt(new \DateTime());
 
-        $comment = new Comment();
+        $comment = new PostComment();
         $comment->setCreatedAt(new \DateTime());
         $comment->setUpdatedAt(new \DateTime());
         $comment->setBody('asa');

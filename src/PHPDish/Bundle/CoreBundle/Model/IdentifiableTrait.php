@@ -1,11 +1,16 @@
 <?php
 namespace PHPDish\Bundle\CoreBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait IdentifiableTrait
 {
     /**
      * @var int
-     * Identifier
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 

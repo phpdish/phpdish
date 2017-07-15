@@ -5,7 +5,20 @@
  */
 namespace  PHPDish\Bundle\PostBundle\Model;
 
-interface PostInterface extends VotableInterface, CommentableInterface
+use PHPDish\Bundle\CoreBundle\Model\ContentInterface;
+use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
+use PHPDish\Bundle\CoreBundle\Model\CommentableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+
+interface PostInterface extends
+    IdentifiableInterface,
+    ContentInterface,
+    DateTimeInterface,
+    UserAwareInterface,
+    CommentableInterface,
+    VotableInterface
 {
     /**
      * 获取标题
@@ -14,16 +27,11 @@ interface PostInterface extends VotableInterface, CommentableInterface
     public function getTitle();
 
     /**
-     * 获取创建时间
-     * @return string
+     * 设置标题
+     * @param string $title
+     * @return $this
      */
-    public function getCreatedAt();
-
-    /**
-     * 获取修改时间
-     * @return string
-     */
-    public function getUpdatedAt();
+    public function setTitle($title);
 
     /**
      * 获取查看次数
@@ -32,8 +40,9 @@ interface PostInterface extends VotableInterface, CommentableInterface
     public function getViewCount();
 
     /**
-     * 获取作者
-     * @return UserInterface
+     * 设置查看次数
+     * @param int $viewCount
+     * @return $this
      */
-    public function getAuthor();
+    public function setViewCount($viewCount);
 }

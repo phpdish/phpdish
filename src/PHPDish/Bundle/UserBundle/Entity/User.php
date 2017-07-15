@@ -354,11 +354,11 @@ class User implements UserInterface
     /**
      * Add comment
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
      *
      * @return User
      */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
     {
         $this->comments[] = $comment;
 
@@ -368,9 +368,9 @@ class User implements UserInterface
     /**
      * Remove comment
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Comment $comment
+     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
      */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\Comment $comment)
+    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
     {
         $this->comments->removeElement($comment);
     }

@@ -3,7 +3,7 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 use DateTime;
 
-interface TaxonomyInterface extends DateTimeInterface, IdentifiableInterface
+interface TaxonomyInterface extends IdentifiableInterface, DateTimeInterface
 {
     /**
      * 设置分类名称

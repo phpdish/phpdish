@@ -7,11 +7,12 @@ namespace  PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\TaxonomyInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface CategoryInterface extends TaxonomyInterface
+interface CategoryInterface extends TaxonomyInterface, EnabledInterface
 {
     /**
      * 获取封面
@@ -45,18 +46,6 @@ interface CategoryInterface extends TaxonomyInterface
     public function getSubscriberCount();
 
     /**
-     * 获取创建时间
-     * @return string
-     */
-    public function getCreatedAt();
-
-    /**
-     * 获取修改时间
-     * @return string
-     */
-    public function getUpdatedAt();
-
-    /**
      * 添加一个作者
      * @param UserInterface $user
      * @return $this
@@ -87,10 +76,4 @@ interface CategoryInterface extends TaxonomyInterface
      * @return boolean
      */
     public function isRecommended();
-
-    /**
-     * 是否锁定
-     * @return boolean
-     */
-    public function isBlocked();
 }
