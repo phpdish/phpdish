@@ -9,6 +9,7 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 
 /**
  * @ORM\Entity

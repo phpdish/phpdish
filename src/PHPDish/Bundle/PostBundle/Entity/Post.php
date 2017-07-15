@@ -1,12 +1,14 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\CommentableTrait;
 use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
+use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -36,8 +38,9 @@ class Post implements PostInterface
     protected $viewCount = 0;
 
     /**
+     * @var PostCommentInterface[]|Collection
      * @ORM\OneToMany(targetEntity="PostComment", mappedBy="post")
-     * @ORM\JoinColumn(name="commentable_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $comments;
 

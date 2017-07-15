@@ -3,7 +3,7 @@
  * PHPDish post component
  * @author Tao <taosikai@yeah.net>
  */
-namespace  PHPDish\Bundle\PostBundle\Entity;
+namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
