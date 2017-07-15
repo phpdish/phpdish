@@ -13,7 +13,7 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="blogs")
+ * @ORM\Table(name="categories")
  */
 class Category extends Taxonomy implements CategoryInterface
 {
@@ -45,7 +45,7 @@ class Category extends Taxonomy implements CategoryInterface
     protected $subscriberCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mapedBy="subscribedBlogs")
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="subscribedBlogs")
      */
     protected $subscribers;
 
@@ -58,7 +58,7 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="manageableCategories")
      * @ORM\JoinTable(name="user_categories",
-     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}，
+     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
      * )
      */

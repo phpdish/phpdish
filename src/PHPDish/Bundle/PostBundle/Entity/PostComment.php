@@ -11,12 +11,17 @@ use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="post_comments")
+ */
 class PostComment extends BaseComment implements PostCommentInterface
 {
     use VotableTrait;
     
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $post;
 

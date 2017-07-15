@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\CommentableTrait;
 use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
@@ -25,7 +26,8 @@ class Post implements PostInterface
         UserAwareTrait,
         DateTimeTrait,
         CommentableTrait,
-        VotableTrait;
+        VotableTrait,
+        EnabledTrait;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -40,9 +42,13 @@ class Post implements PostInterface
     /**
      * @var PostCommentInterface[]|Collection
      * @ORM\OneToMany(targetEntity="PostComment", mappedBy="post")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     */
+    protected $user;
 
     /**
      * Constructor
@@ -94,6 +100,14 @@ class Post implements PostInterface
     public function getSummary()
     {
         return mb_substr($this->body, 0, 250);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**

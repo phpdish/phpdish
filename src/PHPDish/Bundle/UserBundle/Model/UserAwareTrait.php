@@ -1,6 +1,8 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait UserAwareTrait
 {
     /**

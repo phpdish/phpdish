@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\CoreBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 trait DateTimeTrait

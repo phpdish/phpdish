@@ -7,6 +7,7 @@ namespace  PHPDish\Bundle\PostBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\ContentInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
 use PHPDish\Bundle\CoreBundle\Model\CommentableInterface;
@@ -18,7 +19,8 @@ interface PostInterface extends
     DateTimeInterface,
     UserAwareInterface,
     CommentableInterface,
-    VotableInterface
+    VotableInterface,
+    EnabledInterface
 {
     /**
      * 获取标题

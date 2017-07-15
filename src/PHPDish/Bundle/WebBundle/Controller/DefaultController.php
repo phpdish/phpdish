@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\WebBundle\Controller;
 
+use PHPDish\Bundle\PostBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $post =  new Post();
+        dump($post);
+
+        exit;
         $em = $this->getDoctrine()->getEntityManager();
         $query = $em->getRepository('PHPDishPostBundle:Post')->createQueryBuilder('P');
         $paginator = $this->get('knp_paginator');

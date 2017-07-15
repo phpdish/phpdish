@@ -109,28 +109,13 @@ class User implements UserInterface
     protected $roles;
 
     /**
-     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post", mappedBy="author")
-     */
-    protected $posts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Question", mappedBy="author")
-     */
-    protected $questions;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", inversedBy="subscribers")
-     * @ORM\JoinTable(name="blogs_subscribers",
-     *     joinColumns={@JoinColumn(name="blog_id", referencedColumnName="id")},
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", inversedBy="subscribers")
+     * @ORM\JoinTable(name="category_subscribers",
+     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
-     *     )
+     * )
      */
     protected $subscribedBlogs;
-
-    /**
-     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", mappedBy="author")
-     */
-    protected $blogs;
 
     /**
      * Constructor

@@ -1,6 +1,8 @@
 <?php
 namespace PHPDish\Bundle\CoreBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
+
 abstract class Taxonomy implements TaxonomyInterface
 {
     use DateTimeTrait, IdentifiableTrait;

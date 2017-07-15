@@ -12,11 +12,6 @@ trait CommentableTrait
     protected $commentCount = 0;
 
     /**
-     * @var CommentInterface[]|Collection
-     */
-    protected $comments;
-
-    /**
      * Set commentCount
      * @param integer $commentCount
      * @return $this
@@ -36,7 +31,6 @@ trait CommentableTrait
         return $this->commentCount;
     }
 
-
     /**
      * Add comment
      * @param CommentInterface $comment
@@ -44,7 +38,7 @@ trait CommentableTrait
      */
     public function addComment(CommentInterface $comment)
     {
-        $this->comments[] = $comment;
+        $this->getComments()->add($comment);
         return $this;
     }
 
@@ -54,15 +48,12 @@ trait CommentableTrait
      */
     public function removeComment(CommentInterface $comment)
     {
-        $this->comments->removeElement($comment);
+        $this->getComments()->removeElement($comment);
     }
 
     /**
      * Get comments
-     * @return Collection|CommentInterface[]
+     * @return Collection
      */
-    public function getComments()
-    {
-        return $this->comments;
-    }
+    abstract public function getComments();
 }
