@@ -3,14 +3,8 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 use DateTime;
 
-interface TaxonomyInterface extends DateTimeInterface
+interface TaxonomyInterface extends DateTimeInterface, IdentifiableInterface
 {
-    /**
-     * 获取id
-     * @return integer
-     */
-    public function getId();
-
     /**
      * 设置分类名称
      * @param string $name

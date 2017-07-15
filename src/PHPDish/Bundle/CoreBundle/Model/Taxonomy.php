@@ -3,14 +3,7 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 abstract class Taxonomy implements TaxonomyInterface
 {
-    use DateTimeTrait;
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use DateTimeTrait, IdentifiableTrait;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -26,14 +19,6 @@ abstract class Taxonomy implements TaxonomyInterface
      * @ORM\Column(type="text")
      */
     protected $description;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * {@inheritdoc}

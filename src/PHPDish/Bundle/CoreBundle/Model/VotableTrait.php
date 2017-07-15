@@ -3,7 +3,7 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\CoreBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;

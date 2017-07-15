@@ -3,7 +3,7 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\CoreBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
 interface CommentableInterface
 {
@@ -18,4 +18,17 @@ interface CommentableInterface
      * @return CommentInterface[]
      */
     public function getComments();
+
+    /**
+     * 添加一条评论
+     * @param CommentInterface $comment
+     * @return $this
+     */
+    public function addComment(CommentInterface $comment);
+
+    /**
+     * 移除一条评论
+     * @param CommentInterface $comment
+     */
+    public function removeComment(CommentInterface $comment);
 }

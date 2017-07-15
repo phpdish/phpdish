@@ -1,14 +1,20 @@
 <?php
-namespace PHPDish\Bundle\CoreBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-trait Commentable
+trait CommentableTrait
 {
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
+     * @ORM\Column(type="integer")
      */
     protected $commentCount = 0;
+
+    /**
+     * @var CommentInterface[]|Collection
+     */
+    protected $comments;
 
     /**
      * Set commentCount
@@ -33,7 +39,6 @@ trait Commentable
 
     /**
      * Add comment
-     *
      * @param CommentInterface $comment
      * @return $this
      */
@@ -45,18 +50,16 @@ trait Commentable
 
     /**
      * Remove comment
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
+     * @param CommentInterface $comment
      */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
+    public function removeComment(CommentInterface $comment)
     {
         $this->comments->removeElement($comment);
     }
 
     /**
      * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|CommentInterface[]
      */
     public function getComments()
     {
