@@ -1,5 +1,5 @@
 <?php
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,21 +12,17 @@ trait Commentable
 
     /**
      * Set commentCount
-     *
      * @param integer $commentCount
-     *
-     * @return Post
+     * @return $this
      */
     public function setCommentCount($commentCount)
     {
         $this->commentCount = $commentCount;
-
         return $this;
     }
 
     /**
      * Get commentCount
-     *
      * @return integer
      */
     public function getCommentCount()
@@ -38,13 +34,11 @@ trait Commentable
     /**
      * Add comment
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
-     *
-     * @return Post
+     * @param CommentInterface $comment
+     * @return $this
      */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
+    public function addComment(CommentInterface $comment)
     {
-        $comment->setPost($this);
         $this->comments[] = $comment;
         return $this;
     }

@@ -3,9 +3,12 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace  PHPDish\Bundle\PostBundle\Entity;
+namespace  PHPDish\Bundle\CoreBundle\Entity;
 
-interface CommentInterface extends VotableInterface
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use DateTime;
+
+interface CommentInterface
 {
     /**
      * 不予显示
@@ -36,7 +39,7 @@ interface CommentInterface extends VotableInterface
      * @param \DateTime $time
      * @return $this
      */
-    public function setCreatedAt(\DateTime $time);
+    public function setCreatedAt(DateTime $time);
 
     /**
      * 获取评论内容

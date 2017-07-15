@@ -3,7 +3,7 @@
  * PHPDish comment component
  * @author Tao <taosikai@yeah.net>
  */
-namespace PHPDish\Bundle\PostBundle\Entity;
+namespace PHPDish\Bundle\CoreBundle\Entity;
 
 interface CommentableInterface
 {

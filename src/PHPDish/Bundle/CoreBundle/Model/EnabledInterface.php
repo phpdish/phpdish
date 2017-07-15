@@ -1,0 +1,21 @@
+<?php
+namespace PHPDish\Bundle\CoreBundle\Model;
+
+/**
+ * Interface EnabledInterface.
+ */
+interface EnabledInterface
+{
+    /**
+     * Set isEnabled.
+     * @param bool $enabled enabled value
+     * @return $this Self object
+     */
+    public function setEnabled($enabled);
+
+    /**
+     * Get if entity is enabled.
+     * @return bool Enabled
+     */
+    public function isEnabled();
+}

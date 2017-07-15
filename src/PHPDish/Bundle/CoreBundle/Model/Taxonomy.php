@@ -1,10 +1,10 @@
 <?php
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use DateTime;
-
 abstract class Taxonomy implements TaxonomyInterface
 {
+    use DateTimeTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -26,16 +26,6 @@ abstract class Taxonomy implements TaxonomyInterface
      * @ORM\Column(type="text")
      */
     protected $description;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $updatedAt;
 
     /**
      * {@inheritdoc}
@@ -95,39 +85,5 @@ abstract class Taxonomy implements TaxonomyInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

@@ -3,7 +3,7 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 use DateTime;
 
-interface TaxonomyInterface
+interface TaxonomyInterface extends DateTimeInterface
 {
     /**
      * 获取id
@@ -49,30 +49,4 @@ interface TaxonomyInterface
      * @return string
      */
     public function getDescription();
-
-    /**
-     * 设置创建时间
-     * @param DateTime $createdAt
-     * @return TaxonomyInterface
-     */
-    public function setCreatedAt(DateTime $createdAt);
-
-    /**
-     * 获取创建时间
-     * @return DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * 设置创建时间
-     * @param DateTime $updatedAt
-     * @return TaxonomyInterface
-     */
-    public function setUpdatedAt(DateTime $updatedAt);
-
-    /**
-     * 获取更新时间
-     * @return DateTime
-     */
-    public function getUpdatedAt();
 }

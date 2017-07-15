@@ -119,7 +119,11 @@ class User implements UserInterface
     protected $questions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", mappedBy="subscribers")
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Blog", inversedBy="subscribers")
+     * @ORM\JoinTable(name="blogs_subscribers",
+     *     joinColumns={@JoinColumn(name="blog_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
+     *     )
      */
     protected $subscribedBlogs;
 
@@ -486,11 +490,11 @@ class User implements UserInterface
     /**
      * Add subscribedBlog
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog
+     * @param \PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog
      *
      * @return User
      */
-    public function addSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog)
+    public function addSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog)
     {
         $this->subscribedBlogs[] = $subscribedBlog;
 
@@ -500,9 +504,9 @@ class User implements UserInterface
     /**
      * Remove subscribedBlog
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog
+     * @param \PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog
      */
-    public function removeSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $subscribedBlog)
+    public function removeSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog)
     {
         $this->subscribedBlogs->removeElement($subscribedBlog);
     }
@@ -520,11 +524,11 @@ class User implements UserInterface
     /**
      * Add blog
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $blog
+     * @param \PHPDish\Bundle\PostBundle\Entity\Category $blog
      *
      * @return User
      */
-    public function addBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $blog)
+    public function addBlog(\PHPDish\Bundle\PostBundle\Entity\Category $blog)
     {
         $this->blogs[] = $blog;
 
@@ -534,9 +538,9 @@ class User implements UserInterface
     /**
      * Remove blog
      *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Blog $blog
+     * @param \PHPDish\Bundle\PostBundle\Entity\Category $blog
      */
-    public function removeBlog(\PHPDish\Bundle\PostBundle\Entity\Blog $blog)
+    public function removeBlog(\PHPDish\Bundle\PostBundle\Entity\Category $blog)
     {
         $this->blogs->removeElement($blog);
     }
