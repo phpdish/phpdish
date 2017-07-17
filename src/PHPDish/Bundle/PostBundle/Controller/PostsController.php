@@ -32,8 +32,12 @@ class PostsController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            $post->setUser($this->getUser());
             $em->persist($post);
             $em->flush();
+            return $this->redirectToRoute('post_view', [
+                'id' => $post->getId()
+            ]);
         }
         return $this->render('PHPDishWebBundle:Post:add.html.twig', [
             'form' => $form->createView()

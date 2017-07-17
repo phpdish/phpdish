@@ -12,7 +12,7 @@
                         <span data-role="content-resize" data-type="small" class="disabled">A<sup>-</sup></span>
                         <span data-role="content-resize">A<sup>+</sup></span>
                     </div>
-                    <a href="{{ path('user_view', {'username': post.author.username}) }}">{{ post.author.username }}</a>
+                    <a href="{{ path('user_view', {'username': post.user.username}) }}">{{ post.user.username }}</a>
                     <time class="entry-date num">{{ post.createdAt|date('Y-m-d H:i:s') }}</time>
                     <a href="#comments"><i data-num-comments="true" class="num">{{ post.commentCount }}</i>条评论</a>
                     <span><i data-num-views="true" class="num">{{ post.viewCount }}</i>次浏览</span>

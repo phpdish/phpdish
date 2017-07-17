@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     /**
-     * @Route("/users/{username}", name="user_home", requirements={"username": "\w+"})
+     * @Route("/users/{username}", name="user_view", requirements={"username": "\w+"})
      * @param string $username
      * @return Response
      */
