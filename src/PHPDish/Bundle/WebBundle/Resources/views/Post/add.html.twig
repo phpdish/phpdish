@@ -1,0 +1,32 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %}写文章{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="main" class="container">
+    <div class="row">
+        <article id="content" class="single col-md-12">
+            <div class="entry-content">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'add-post-form'}}) }}
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.title) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.originalBody, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.originalBody) }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">发布</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

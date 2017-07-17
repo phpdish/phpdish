@@ -8,7 +8,7 @@ trait EnabledTrait
     /**
      * @ORM\Column(type="integer")
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * Set if is enabled.

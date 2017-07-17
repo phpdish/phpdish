@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        PHPDish\Bundle\UserBundle\Entity\UserInterface:
+        PHPDish\Bundle\UserBundle\Model\UserInterface:
             algorithm: md5
             encode_as_base64: false
             iterations: 0
@@ -13,15 +13,6 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory:
-                users:
-                  ryan:
-                    password: 123456
-                    roles: 'ROLE_USER'
-                  admin:
-                    password: 123456
-                    roles: 'ROLE_ADMIN'
         phpdish:
             entity:
                 class: PHPDishUserBundle:User
@@ -47,3 +38,5 @@ security:
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/write, role: ROLE_USER }
+        - { path: ^/settings, role: ROLE_USER }

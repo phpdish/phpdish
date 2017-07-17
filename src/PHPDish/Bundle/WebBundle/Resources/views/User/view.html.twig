@@ -33,9 +33,9 @@
                 </div>
                 <div class="entry-tab">
                     <ul>
-                        <li {% if tab = 'feed' %}class="active"{% endif %}><a href="{{ path('user_feeds') }}">动态</a></li>
-                        <li {% if tab = 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts') }}">文章</a></li>
-                        <li {% if tab = 'topics' %}class="active"{% endif %}><a href="{{ path('user_topics') }}">话题</a></li>
+                        <li {% if tab == 'feed' %}class="active"{% endif %}><a href="{{ path('user_feeds') }}">动态</a></li>
+                        <li {% if tab == 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts') }}">文章</a></li>
+                        <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_topics') }}">话题</a></li>
                     </ul>
                 </div>
                 <div class="entry-meta">

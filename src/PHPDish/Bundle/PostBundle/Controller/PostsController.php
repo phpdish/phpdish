@@ -10,6 +10,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\PostBundle\Entity\PostComment;
 use PHPDish\Bundle\PostBundle\Entity\Post;
+use PHPDish\Bundle\PostBundle\Form\Type\PostType;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,6 +19,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PostsController extends Controller
 {
+    /**
+     * 创建文章
+     * @Route("/write", name="post_add")
+     * @param Request $request
+     * @return Response
+     */
+    public function addAction(Request $request)
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($post);
+            $em->flush();
+        }
+        return $this->render('PHPDishWebBundle:Post:add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
      * @param Post $post
@@ -45,45 +67,5 @@ class PostsController extends Controller
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig',  [
             'pagination' => $pagination,
         ]);
-    }
-
-    /**
-     * @Route("/posts/add", name="add_post")
-     */
-    public function add()
-    {
-        $post = new Post();
-        $user = new User();
-        $user->setEmail('email');
-        $user->setUsername('foo');
-        $user->setPassword('foo');
-        $user->setIsBlocked(false);
-        $user->setCreatedAt(new \DateTime());
-        $user->setUpdatedAt(new \DateTime());
-
-
-        $post->setAuthor($user);
-        $post->setTitle('test test');
-        $post->setBody('content');
-        $post->setOriginalBody('content');
-        $post->setCreatedAt(new \DateTime());
-        $post->setUpdatedAt(new \DateTime());
-
-        $comment = new PostComment();
-        $comment->setCreatedAt(new \DateTime());
-        $comment->setUpdatedAt(new \DateTime());
-        $comment->setBody('asa');
-        $comment->setOriginalBody('asa');
-        $comment->setAuthor($user);
-        $comment->setStatus(0);
-
-        $post->addComment($comment);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($post);
-        $em->persist($comment);
-        $em->persist($user);
-        $em->flush();
-        return new Response();
     }
 }

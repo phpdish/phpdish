@@ -15,11 +15,8 @@ class PostType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => '标题'
             ])
-            ->add('original_body', TextareaType::class, [
+            ->add('originalBody', TextareaType::class, [
                 'label' => '内容'
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => '保存'
             ]);
     }
 }

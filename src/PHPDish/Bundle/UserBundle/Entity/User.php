@@ -52,7 +52,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      */
-    protected $description;
+    protected $description = '';
 
     /**
      * @ORM\Column(type="integer")
