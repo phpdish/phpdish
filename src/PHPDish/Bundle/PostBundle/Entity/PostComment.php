@@ -26,6 +26,11 @@ class PostComment extends BaseComment implements PostCommentInterface
     protected $post;
 
     /**
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     */
+    protected $user;
+
+    /**
      * {@inheritdoc}
      */
     public function setPost(PostInterface $post)
@@ -40,5 +45,13 @@ class PostComment extends BaseComment implements PostCommentInterface
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -121,4 +121,12 @@ class Post implements PostInterface
         }
         $this->updatedAt = new \DateTime();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

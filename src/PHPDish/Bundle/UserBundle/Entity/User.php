@@ -8,6 +8,9 @@ namespace PHPDish\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
@@ -18,12 +21,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
  */
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use IdentifiableTrait, DateTimeTrait, EnabledTrait;
 
     /**
      * @ORM\Column(type="string")
@@ -55,21 +53,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     protected $description;
-
-    /**
-     * @ORM\Column(type="boolean");
-     */
-    protected $isBlocked = false;
-
-    /**
-     * @ORM\Column(type="datetime", name="created_at");
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", name="updated_at");
-     */
-    protected $updatedAt;
 
     /**
      * @ORM\Column(type="integer")
@@ -128,16 +111,6 @@ class User implements UserInterface
         $this->following =  new ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getSalt()
     {
         return null;
@@ -154,9 +127,7 @@ class User implements UserInterface
 
     /**
      * Set email
-     *
      * @param string $email
-     *
      * @return User
      */
     public function setEmail($email)
@@ -168,7 +139,6 @@ class User implements UserInterface
 
     /**
      * Get email
-     *
      * @return string
      */
     public function getEmail()
@@ -178,9 +148,7 @@ class User implements UserInterface
 
     /**
      * Set username
-     *
      * @param string $username
-     *
      * @return User
      */
     public function setUsername($username)
@@ -218,9 +186,7 @@ class User implements UserInterface
 
     /**
      * Set password
-     *
      * @param string $password
-     *
      * @return User
      */
     public function setPassword($password)
@@ -232,7 +198,6 @@ class User implements UserInterface
 
     /**
      * Get password
-     *
      * @return string
      */
     public function getPassword()
@@ -242,9 +207,7 @@ class User implements UserInterface
 
     /**
      * Set gender
-     *
      * @param integer $gender
-     *
      * @return User
      */
     public function setGender($gender)
@@ -256,288 +219,11 @@ class User implements UserInterface
 
     /**
      * Get gender
-     *
      * @return integer
      */
     public function getGender()
     {
         return $this->gender;
-    }
-
-    /**
-     * Set isBlocked
-     *
-     * @param integer $isBlocked
-     *
-     * @return User
-     */
-    public function setIsBlocked($isBlocked)
-    {
-        $this->isBlocked = $isBlocked;
-
-        return $this;
-    }
-
-    /**
-     * Get isBlocked
-     *
-     * @return integer
-     */
-    public function getIsBlocked()
-    {
-        return $this->isBlocked;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return User
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return User
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Add comment
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
-     *
-     * @return User
-     */
-    public function addComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
-    {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\PostComment $comment
-     */
-    public function removeComment(\PHPDish\Bundle\PostBundle\Entity\PostComment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Add post
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
-     *
-     * @return User
-     */
-    public function addPost(\PHPDish\Bundle\PostBundle\Entity\Post $post)
-    {
-        $this->posts[] = $post;
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Post $post
-     */
-    public function removePost(\PHPDish\Bundle\PostBundle\Entity\Post $post)
-    {
-        $this->posts->removeElement($post);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
-
-    /**
-     * Add vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
-     *
-     * @return User
-     */
-    public function addVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
-    {
-        $this->votes[] = $vote;
-
-        return $this;
-    }
-
-    /**
-     * Remove vote
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Vote $vote
-     */
-    public function removeVote(\PHPDish\Bundle\PostBundle\Entity\Vote $vote)
-    {
-        $this->votes->removeElement($vote);
-    }
-
-    /**
-     * Get votes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVotes()
-    {
-        return $this->votes;
-    }
-
-    /**
-     * Add question
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Question $question
-     *
-     * @return User
-     */
-    public function addQuestion(\PHPDish\Bundle\PostBundle\Entity\Question $question)
-    {
-        $this->questions[] = $question;
-
-        return $this;
-    }
-
-    /**
-     * Remove question
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Question $question
-     */
-    public function removeQuestion(\PHPDish\Bundle\PostBundle\Entity\Question $question)
-    {
-        $this->questions->removeElement($question);
-    }
-
-    /**
-     * Get questions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
-    }
-
-    /**
-     * Add subscribedBlog
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog
-     *
-     * @return User
-     */
-    public function addSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog)
-    {
-        $this->subscribedBlogs[] = $subscribedBlog;
-
-        return $this;
-    }
-
-    /**
-     * Remove subscribedBlog
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog
-     */
-    public function removeSubscribedBlog(\PHPDish\Bundle\PostBundle\Entity\Category $subscribedBlog)
-    {
-        $this->subscribedBlogs->removeElement($subscribedBlog);
-    }
-
-    /**
-     * Get subscribedBlogs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSubscribedBlogs()
-    {
-        return $this->subscribedBlogs;
-    }
-
-    /**
-     * Add blog
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Category $blog
-     *
-     * @return User
-     */
-    public function addBlog(\PHPDish\Bundle\PostBundle\Entity\Category $blog)
-    {
-        $this->blogs[] = $blog;
-
-        return $this;
-    }
-
-    /**
-     * Remove blog
-     *
-     * @param \PHPDish\Bundle\PostBundle\Entity\Category $blog
-     */
-    public function removeBlog(\PHPDish\Bundle\PostBundle\Entity\Category $blog)
-    {
-        $this->blogs->removeElement($blog);
-    }
-
-    /**
-     * Get blogs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getBlogs()
-    {
-        return $this->blogs;
     }
 
 
@@ -555,9 +241,7 @@ class User implements UserInterface
 
     /**
      * Set followingCount
-     *
      * @param integer $followingCount
-     *
      * @return User
      */
     public function setFollowingCount($followingCount)
@@ -569,7 +253,6 @@ class User implements UserInterface
 
     /**
      * Get followingCount
-     *
      * @return integer
      */
     public function getFollowingCount()
@@ -579,9 +262,7 @@ class User implements UserInterface
 
     /**
      * Set fanCount
-     *
      * @param integer $fanCount
-     *
      * @return User
      */
     public function setFanCount($fanCount)
@@ -593,7 +274,6 @@ class User implements UserInterface
 
     /**
      * Get fanCount
-     *
      * @return integer
      */
     public function getFanCount()
@@ -638,11 +318,11 @@ class User implements UserInterface
     /**
      * Add follower
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $follower
+     * @param User $follower
      *
      * @return User
      */
-    public function addFollower(\PHPDish\Bundle\UserBundle\Entity\User $follower)
+    public function addFollower(User $follower)
     {
         $this->followers[] = $follower;
 
@@ -652,9 +332,9 @@ class User implements UserInterface
     /**
      * Remove follower
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $follower
+     * @param User $follower
      */
-    public function removeFollower(\PHPDish\Bundle\UserBundle\Entity\User $follower)
+    public function removeFollower(User $follower)
     {
         $this->followers->removeElement($follower);
     }
@@ -672,23 +352,22 @@ class User implements UserInterface
     /**
      * Add following
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $following
+     * @param User $following
      *
      * @return User
      */
-    public function addFollowing(\PHPDish\Bundle\UserBundle\Entity\User $following)
+    public function addFollowing(User $following)
     {
         $this->following[] = $following;
-
         return $this;
     }
 
     /**
      * Remove following
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $following
+     * @param User $following
      */
-    public function removeFollowing(\PHPDish\Bundle\UserBundle\Entity\User $following)
+    public function removeFollowing(User $following)
     {
         $this->following->removeElement($following);
     }
@@ -706,23 +385,21 @@ class User implements UserInterface
     /**
      * Add role
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\Role $role
+     * @param Role $role
      *
      * @return User
      */
-    public function addRole(\PHPDish\Bundle\UserBundle\Entity\Role $role)
+    public function addRole(Role $role)
     {
         $this->roles[] = $role;
-
         return $this;
     }
 
     /**
      * Remove role
-     *
-     * @param \PHPDish\Bundle\UserBundle\Entity\Role $role
+     * @param Role $role
      */
-    public function removeRole(\PHPDish\Bundle\UserBundle\Entity\Role $role)
+    public function removeRole(Role $role)
     {
         $this->roles->removeElement($role);
     }

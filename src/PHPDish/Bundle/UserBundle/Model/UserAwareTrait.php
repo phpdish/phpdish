@@ -1,15 +1,8 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-
 trait UserAwareTrait
 {
-    /**
-     * @var UserInterface
-     */
-    protected $user;
-
     /**
      * 设置作者
      * @param UserInterface $user
@@ -25,8 +18,5 @@ trait UserAwareTrait
      * 获取用户
      * @return UserInterface
      */
-    public function getUser()
-    {
-        return $this->user;
-    }
+    abstract public function getUser();
 }
