@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class PostsController extends Controller
 {
@@ -28,18 +29,18 @@ class PostsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $repository = $this->getPostRepository();
-        $post = $repository->createPost();
+        $manager = $this->get('post.post_manager');
+        $post = $manager->createPost($this->getUser());
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $post->setUser($this->getUser());
-            $em->persist($post);
-            $em->flush();
-            return $this->redirectToRoute('post_view', [
-                'id' => $post->getId()
-            ]);
+            if ($manager->savePost($post)) {
+                return $this->redirectToRoute('post_view', [
+                    'id' => $post->getId()
+                ]);
+            } else {
+                $request->getSession()->getFlashBag()->add('error', '文章无法创建');
+            }
         }
         return $this->render('PHPDishWebBundle:Post:add.html.twig', [
             'form' => $form->createView()
