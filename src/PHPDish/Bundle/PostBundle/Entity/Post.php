@@ -9,6 +9,7 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -49,6 +50,12 @@ class Post implements PostInterface
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      */
     protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
 
     /**
      * Constructor
@@ -128,5 +135,22 @@ class Post implements PostInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCategory(CategoryInterface $category)
+    {
+        $this->category = $category;
+        return $this;
     }
 }

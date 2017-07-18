@@ -35,11 +35,6 @@ class Category extends Taxonomy implements CategoryInterface
     protected $postCount;
 
     /**
-     * @ORM\OneToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post", mappedBy="category")
-     */
-    protected $posts;
-
-    /**
      * @ORM\Column(type="integer", length=10)
      */
     protected $subscriberCount;

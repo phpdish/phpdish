@@ -47,4 +47,17 @@ interface PostInterface extends
      * @return $this
      */
     public function setViewCount($viewCount);
+
+    /**
+     * 获取分类
+     * @return CategoryInterface
+     */
+    public function getCategory();
+
+    /**
+     * 设置分类
+     * @param CategoryInterface $category
+     * @return $this
+     */
+    public function setCategory(CategoryInterface $category);
 }

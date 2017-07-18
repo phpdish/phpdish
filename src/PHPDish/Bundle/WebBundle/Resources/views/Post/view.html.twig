@@ -1,11 +1,15 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
+{% block title %} {{ post.title }} {% endblock %}
+
 {% block content %}
 <div id="main" class="container">
     <div class="row">
         <article id="content" class="single col-lg-8 col-md-8">
             <header class="entry-header">
-                <div class="entry-location">首页</div>
+                <div class="entry-location">
+                    {% include "PHPDishWebBundle:Common:crumbs.html.twig" with {'breadcrumbs': []}%}
+                </div>
                 <h1 class="entry-title">{{ post.title }}</h1>
                 <div class="entry-meta">
                     <div class="entry-set-font">
