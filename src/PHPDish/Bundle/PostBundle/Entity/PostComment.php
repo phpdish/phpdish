@@ -12,7 +12,7 @@ use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostCommentRepository")
  * @ORM\Table(name="post_comments")
  */
 class PostComment extends BaseComment implements PostCommentInterface
