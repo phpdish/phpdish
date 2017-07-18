@@ -11,6 +11,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 use PHPDish\Bundle\PostBundle\Entity\PostComment;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
+use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,7 +28,8 @@ class PostsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $post = new Post();
+        $repository = $this->getPostRepository();
+        $post = $repository->createPost();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,5 +73,14 @@ class PostsController extends Controller
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig',  [
             'pagination' => $pagination,
         ]);
+    }
+
+    /**
+     * 获取post repository
+     * @return PostRepository
+     */
+    protected function getPostRepository()
+    {
+        return $this->getDoctrine()->getEntityManager()->getRepository('PHPDishPostBundle:Post');
     }
 }
