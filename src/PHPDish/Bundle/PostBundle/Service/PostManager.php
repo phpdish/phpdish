@@ -61,4 +61,8 @@ class PostManager implements PostManagerInterface
         return $this->entityManager->getRepository('PHPDishPostBundle:Post')
             ->find($id);
     }
+
+    public function findUserPosts(UserInterface $user)
+    {
+    }
 }

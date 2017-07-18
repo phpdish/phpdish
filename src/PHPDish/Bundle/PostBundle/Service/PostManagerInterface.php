@@ -26,4 +26,10 @@ interface PostManagerInterface
      * @return PostInterface
      */
     public function findPostById($id);
+
+    /**
+     * 获取用户的文章
+     * @param UserInterface $user
+     */
+    public function findUserPosts(UserInterface $user);
 }
