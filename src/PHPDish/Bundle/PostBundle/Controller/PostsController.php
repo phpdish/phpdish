@@ -8,16 +8,14 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
-use PHPDish\Bundle\PostBundle\Entity\PostComment;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
-use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\PostBundle\Service\PostManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class PostsController extends Controller
 {
@@ -29,7 +27,7 @@ class PostsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $manager = $this->get('post.post_manager');
+        $manager = $this->getPostManager();
         $post = $manager->createPost($this->getUser());
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -67,21 +65,18 @@ class PostsController extends Controller
      */
     public function userPostsAction($username, Request $request)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->getRepository('PHPDishWebBundle:Post')->createQueryBuilder('n');
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 10);
+        $posts = $this->getPostManager()->findUserPosts($this->getUser(), $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig',  [
-            'pagination' => $pagination,
+            'posts' => $posts,
         ]);
     }
 
     /**
-     * 获取post repository
-     * @return PostRepository
+     * 获取文章管理
+     * @return PostManager
      */
-    protected function getPostRepository()
+    protected function getPostManager()
     {
-        return $this->getDoctrine()->getEntityManager()->getRepository('PHPDishPostBundle:Post');
+        return $this->get('phpdish.manager.post');
     }
 }

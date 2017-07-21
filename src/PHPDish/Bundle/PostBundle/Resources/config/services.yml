@@ -2,13 +2,13 @@ services:
 #    php_dish_post.example:
 #        class: PHPDish\Bundle\PostBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
-    post.post_manager:
+    phpdish.manager.post:
         class: PHPDish\Bundle\PostBundle\Service\PostManager
         arguments:
             - '@event_dispatcher'
             - '@doctrine.orm.entity_manager'
 
-    post.comment_manager:
+    phpdish.manager.post_comment:
         class: PHPDish\Bundle\PostBundle\Service\PostCommentManager
         arguments:
             - '@event_dispatcher'

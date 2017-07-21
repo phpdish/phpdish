@@ -16,16 +16,18 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            new PHPDish\Bundle\PostBundle\PHPDishPostBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
+
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
             new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
+            new PHPDish\Bundle\PostBundle\PHPDishPostBundle(),
             new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
             new PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
-            new PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
+            new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

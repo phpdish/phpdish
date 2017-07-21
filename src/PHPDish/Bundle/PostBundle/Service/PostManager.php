@@ -2,6 +2,9 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -11,6 +14,8 @@ use PHPDish\Bundle\PostBundle\Entity\Post;
 
 class PostManager implements PostManagerInterface
 {
+    const MAX_ITEM_NUM = 10;
+
     /**
      * @var EventDispatcherInterface
      */
@@ -62,7 +67,22 @@ class PostManager implements PostManagerInterface
             ->find($id);
     }
 
-    public function findUserPosts(UserInterface $user)
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
+        $query = $this->entityManager->getRepository('PHPDishPostBundle:Post')
+            ->createQueryBuilder('p')
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    protected function createPaginator(Query $query, $page, $limit = null)
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
+        $paginator->setCurrentPage($page);
+        $paginator->setMaxPerPage($limit ?: static::MAX_ITEM_NUM);
+        return $paginator;
     }
 }
