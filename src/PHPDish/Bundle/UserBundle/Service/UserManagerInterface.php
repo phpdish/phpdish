@@ -17,5 +17,5 @@ interface UserManagerInterface
      * @param string  $email
      * @return UserInterface
      */
-    public function findByEmail($email);
+    public function findUserByEmail($email);
 }

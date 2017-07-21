@@ -13,16 +13,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $post =  new Post();
-        dump($post);
-
-        exit;
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->getRepository('PHPDishPostBundle:Post')->createQueryBuilder('P');
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $request->query->get('page') ?: 1, 10);
+        $postManager = $this->get('phpdish.manager.post');
+        $posts = $postManager->findLatestPosts($request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Default:index.html.twig', [
-            'pagination' => $pagination
+            'posts' => $posts
         ]);
     }
 

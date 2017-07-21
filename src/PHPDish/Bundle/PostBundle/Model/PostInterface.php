@@ -36,6 +36,19 @@ interface PostInterface extends
     public function setTitle($title);
 
     /**
+     * 设置题图
+     * @param string $cover
+     * @return $this
+     */
+    public function setCover($cover);
+
+    /**
+     * 获取题图
+     * @return string
+     */
+    public function getCover();
+
+    /**
      * 获取查看次数
      * @return int
      */
@@ -60,4 +73,10 @@ interface PostInterface extends
      * @return $this
      */
     public function setCategory(CategoryInterface $category);
+
+    /**
+     * 获取摘要
+     * @return string
+     */
+    public function getSummary();
 }

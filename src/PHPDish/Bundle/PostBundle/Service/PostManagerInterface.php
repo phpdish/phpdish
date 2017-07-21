@@ -36,4 +36,12 @@ interface PostManagerInterface
      * @return Pagerfanta
      */
     public function findUserPosts(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 获取用户的文章
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findLatestPosts($page, $limit = null);
 }

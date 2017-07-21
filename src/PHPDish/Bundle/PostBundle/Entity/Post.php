@@ -36,6 +36,16 @@ class Post implements PostInterface
     protected $title;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $cover;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isRecommended = false;
+
+    /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
     protected $viewCount = 0;
@@ -86,6 +96,23 @@ class Post implements PostInterface
     /**
      * {@inheritdoc}
      */
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
@@ -115,6 +142,22 @@ class Post implements PostInterface
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRecommend($recommended)
+    {
+        $this->isRecommended = $recommended;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRecommended()
+    {
+        return $this->isRecommended;
     }
 
     /**

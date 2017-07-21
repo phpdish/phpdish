@@ -7,13 +7,19 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
+use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\PostBundle\Entity\Post;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class PostManager implements PostManagerInterface
 {
+    /**
+     * 单页最大显示文章数量
+     * @var int
+     */
     const MAX_ITEM_NUM = 10;
 
     /**
@@ -26,10 +32,16 @@ class PostManager implements PostManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager)
+    /**
+     * @var MarkdownParserInterface
+     */
+    protected $markdownParser;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->entityManager = $entityManager;
+        $this->markdownParser = $markdownParser;
     }
 
     /**
@@ -47,6 +59,10 @@ class PostManager implements PostManagerInterface
      */
     public function savePost(PostInterface $post)
     {
+        //Transform markdown format body
+        if ($post->getOriginalBody()) {
+            $post->setBody($this->markdownParser->transformMarkdown($post->getOriginalBody()));
+        }
         $event = new PostPersistEvent($post);
         $this->eventDispatcher->dispatch(Events::POST_PRE_PERSIST, $event);
 
@@ -56,6 +72,16 @@ class PostManager implements PostManagerInterface
         $this->entityManager->persist($post);
         $this->entityManager->flush();
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatestPosts($page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('p')
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
     }
 
     /**
@@ -84,5 +110,13 @@ class PostManager implements PostManagerInterface
         $paginator->setCurrentPage($page);
         $paginator->setMaxPerPage($limit ?: static::MAX_ITEM_NUM);
         return $paginator;
+    }
+
+    /**
+     * @return PostRepository
+     */
+    protected function getRepository()
+    {
+        return $this->entityManager->getRepository('PHPDishPostBundle:Post');
     }
 }
