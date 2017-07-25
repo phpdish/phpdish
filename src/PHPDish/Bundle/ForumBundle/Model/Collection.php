@@ -7,6 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="topics")
  */
-class Topic implements TopicInterface
+class Collection implements CollectionInterface
 {
 }

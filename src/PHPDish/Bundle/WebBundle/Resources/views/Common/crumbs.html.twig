@@ -2,7 +2,7 @@
     <li><a href="/">首页</a></li>
     {% for breadcrumb in  breadcrumbs %}
         <li {% if loop.last %}class="active"{% endif %}>
-            {% if breadcrumn.url %}
+            {% if breadcrumb.url is defined %}
             <a href = "{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
             {% else %}
             {{ breadcrumb.title }}

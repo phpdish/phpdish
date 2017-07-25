@@ -2,5 +2,32 @@
 
 {% set tab = 'post' %}
 {% block user_content %}
-    hehehe
+   {% for post in posts %}
+       <article class="single-post clearfix" role="article">
+           {% set postUrl = path('post_view', {'id': post.id}) %}
+           {% if post.cover %}
+           <div class="entry-thumbnail">
+               <a href="{{ postUrl }}" title="{{ post.title }}">
+                   <img src="{{ post.buildCover(400, 300) }}" style="display: inline;">
+               </a>
+           </div>
+           {% endif %}
+           <header class="entry-header">
+               <h3 class="entry-title" itemprop="name">
+                   {%  if post.isRecommended %}<span class="sticky-tag">推荐</span>{% endif %}
+                   <a href="{{ postUrl }}" rel="bookmark" itemprop="url">
+                       <span itemprop="name">{{ post.title }}</span>
+                   </a>
+               </h3>
+               <div class="entry-meta">
+                   <time class="entry-date num">{{ post.createdAt|date('Y-m-d') }}</time>
+                   <a href="{{ postUrl }}#comments">
+                       <i class="num">{{ post.commentCount }}</i> 条评论
+                   </a>
+                   <span><i class="num">{{ post.viewCount }}</i>次浏览</span>
+               </div>
+           </header>
+           <div class="entry-excerpt">{{ post.summary }}</div>
+       </article>
+   {% endfor %}
 {% endblock %}

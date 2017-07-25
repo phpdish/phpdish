@@ -12,7 +12,11 @@
         <article id="content" class="col-lg-8 col-md-8 archive author-archive"  role="article" itemscope="" itemtype="http://schema.org/Article">
             <header class="entry-header">
                 <div class="entry-location">
-                    首页
+                    {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
+                        'breadcrumbs': [
+                             {'title': '用户'}
+                        ]
+                    } %}
                 </div>
                 <div class="entry-author clearfix">
                     <div class="pull-right">
@@ -23,17 +27,19 @@
                         {% endif %}
                     </div>
                     <div class="author-avatar">
-                        <img alt='用户' src="<?= $avatar=$this->Url->imageUrl($user->avatar);?>" data-original="<?=$avatar?>" class="avatar avatar-80 photo" height="80" width="80"/>
+                        <img alt='用户' src="{{ user.avatar() }}" class="avatar avatar-80 photo" height="80" width="80"/>
                     </div>
                     <div class="author-info">
                         <h1 class="vcard">{{ user.username }}</h1>
-                        <p class="author-description">{{ user.description }}</p>
-                        <p class="small author-register-time">在{{ user.createdAt|date('Y-m-d') }}注册?></p>
+                        <p class="author-description">{{ user.description|default('Hello world') }}</p>
+                        <p class="small author-register-time">在{{ user.createdAt|date('Y-m-d') }}注册</p>
                     </div>
                 </div>
                 <div class="entry-tab">
                     <ul>
-                        <li {% if tab == 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts') }}">文章</a></li>
+                        <li {% if tab == 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
+                        <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">话题</a></li>
+                        <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">动态</a></li>
                     </ul>
                 </div>
                 <div class="entry-meta">
@@ -47,10 +53,7 @@
                 {% endblock %}
             </div>
             <footer class="entry-footer margin-bottom-20 content-wrap">
-                <div id="pagination">
-                    <ul class="pagination" role="navigation"></ul>
-                </div>
-                <button id="loading" class="btn rounded btn-default btn-block" type="button">加载更多</button>
+                {{ pagerfanta(posts, 'twitter_bootstrap3') }}
             </footer>
         </article>
         <div id="sidebar" class="col-lg-4 col-md-4" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">
