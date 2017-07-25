@@ -22,6 +22,10 @@
                     {{ form_errors(form.originalBody) }}
                 </div>
                 <div class="form-group">
+                    {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.originalBody) }}
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary">发布</button>
                 </div>
                 {{ form_end(form) }}

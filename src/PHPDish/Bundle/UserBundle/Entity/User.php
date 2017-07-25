@@ -294,7 +294,7 @@ class User implements UserInterface
      */
     public function isFollowedBy(UserInterface $user)
     {
-        return $this->followers->contain($user);
+        return $this->followers->contains($user);
     }
 
     /**

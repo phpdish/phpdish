@@ -100,7 +100,7 @@ class PostManager implements PostManagerInterface
     public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
         $query = $this->getRepository()->createQueryBuilder('p')
-            ->where(['p.user' => $user->getId()])
+            ->where('p.user = :userId')->setParameter('userId', $user->getId())
             ->orderBy('p.createdAt', 'desc')
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);

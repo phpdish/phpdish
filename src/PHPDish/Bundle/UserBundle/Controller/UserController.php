@@ -1,7 +1,7 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Controller;
 
-use PHPDish\Bundle\UserBundle\Service\UserManager;
+use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +15,7 @@ class UserController extends Controller
      */
     public function viewAction($username)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('PHPDishUserBundle:User')->findOneBy(['username'=> $username]);
+        $user = $this->getUserManager()->findUserByName($username);
         return $this->render('PHPDishWebBundle:User:view.html.twig', [
             'user' => $user
         ]);
@@ -35,7 +34,7 @@ class UserController extends Controller
     }
 
     /**
-     * @return UserManager
+     * @return UserManagerInterface
      */
     protected function getUserManager()
     {

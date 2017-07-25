@@ -11,6 +11,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
 use PHPDish\Bundle\PostBundle\Service\PostManager;
+use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,11 +65,11 @@ class PostsController extends Controller
      */
     public function userPostsAction($username, Request $request)
     {
-        $user = $this->get('phpdish.manager.user')->findUserByName($username);
+        $user = $this->getUserManager()->findUserByName($username);
         $posts = $this->getPostManager()->findUserPosts($user, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig', [
             'user' => $user,
-            'posts' => $posts,
+            'posts' => $posts
         ]);
     }
 
@@ -79,5 +80,13 @@ class PostsController extends Controller
     protected function getPostManager()
     {
         return $this->get('phpdish.manager.post');
+    }
+
+    /**
+     * @return UserManagerInterface
+     */
+    protected function getUserManager()
+    {
+        return $this->get('phpdish.manager.user');
     }
 }

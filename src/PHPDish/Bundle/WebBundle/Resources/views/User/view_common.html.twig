@@ -33,9 +33,7 @@
                 </div>
                 <div class="entry-tab">
                     <ul>
-                        <li {% if tab == 'feed' %}class="active"{% endif %}><a href="{{ path('user_feeds') }}">动态</a></li>
                         <li {% if tab == 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts') }}">文章</a></li>
-                        <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_topics') }}">话题</a></li>
                     </ul>
                 </div>
                 <div class="entry-meta">
@@ -44,7 +42,9 @@
                 </div>
             </header>
             <div class="entry-content" itemprop="articleBody">
-                <?=$this->fetch('content');?>
+                {% block user_content %}
+                    没有记录
+                {% endblock %}
             </div>
             <footer class="entry-footer margin-bottom-20 content-wrap">
                 <div id="pagination">

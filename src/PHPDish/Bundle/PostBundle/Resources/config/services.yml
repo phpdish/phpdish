@@ -9,8 +9,19 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@markdown.parser'
 
+    phpdish.manager.category:
+        class: PHPDish\Bundle\PostBundle\Service\CategoryManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
     phpdish.manager.post_comment:
         class: PHPDish\Bundle\PostBundle\Service\PostCommentManager
         arguments:
             - '@event_dispatcher'
             - '@doctrine.orm.entity_manager'
+
+    phpdish.form.post:
+         class: PHPDish\Bundle\PostBundle\Form\Type\PostType
+         arguments: ['@phpdish.manager.category']
+         tags:
+             - { name: form.type }
