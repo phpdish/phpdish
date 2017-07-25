@@ -44,4 +44,12 @@ interface PostManagerInterface
      * @return Pagerfanta
      */
     public function findLatestPosts($page, $limit = null);
+
+    /**
+     * 获取推荐的文章
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findRecommendPosts($page, $limit = null);
 }

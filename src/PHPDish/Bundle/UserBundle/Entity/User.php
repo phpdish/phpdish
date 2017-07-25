@@ -125,6 +125,12 @@ class User implements UserInterface
         return ['ROLE_USER'];
     }
 
+    public function avatar($width = 120, $height = 120)
+    {
+        return '/uploads/avatar/user1.jpg';
+    }
+
+
     /**
      * Set email
      * @param string $email

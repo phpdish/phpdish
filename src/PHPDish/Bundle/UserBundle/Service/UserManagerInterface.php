@@ -18,4 +18,11 @@ interface UserManagerInterface
      * @return UserInterface
      */
     public function findUserByEmail($email);
+
+    /**
+     * 获取最近注册的用户
+     * @param int $limit
+     * @return UserInterface[]
+     */
+    public function findLatestUsers($limit);
 }

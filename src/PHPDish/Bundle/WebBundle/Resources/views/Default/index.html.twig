@@ -34,9 +34,9 @@
                     <div class="col-md-6">
                         <div class="headline-u headline-md"><h3>编辑推荐</h3></div>
                         <ul class="list-unstyled list-ranking">
-                            <?php foreach ($recommendPosts as $post):?>
-                            <li><i class="fa fa-angle-right color-green"></i> <?=$this->Html->link(showFixedStr($post->title, 22), ['_name'=>'post.show', $post->id]);?></li>
-                            <?php endforeach;?>
+                            {% for post in recommendedPosts %}
+                                <li><i class="fa fa-angle-right color-green"></i> <a href="{{ path('post_view', {'id': post.id}) }}">{{ post.title }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         </h3>
                         <div class="entry-meta">
                             <a href="{{ path('user_view', {'username': post.user.username}) }}">{{ post.user.username }}</a>
-                            <time class="entry-date num"><?=tranTime($post->create_time);?></time>
+                            <time class="entry-date num">{{ post.createdAt|date('Y-m-d') }}</time>
                             <a href="{{ postUrl }}#comments"><i class="num">{{ post.commentCount }}</i> 条评论</a>
                             <span><i class="num">{{ post.viewCount }}</i>次浏览</span>
                         </div>
@@ -79,6 +79,10 @@
             </footer>
         </article>
         <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+            <aside id="recent_user-3" class="widget clearfix widget_recent_user">
+                <h3 class="widget-title">活跃用户</h3>
+                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
+            </aside>
         </div>
         <!-- #sidebar -->
     </div>

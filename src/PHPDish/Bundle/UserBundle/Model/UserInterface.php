@@ -16,4 +16,5 @@ interface UserInterface extends
     DateTimeInterface,
     EnabledInterface
 {
+    public function avatar($width = 120, $height = 120);
 }

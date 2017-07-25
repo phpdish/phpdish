@@ -196,4 +196,15 @@ class Post implements PostInterface
         $this->category = $category;
         return $this;
     }
+
+    /**
+     * 构建图片背景
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
+    public function buildCover($width, $height)
+    {
+        return sprintf( '/thumbs/%dx%d/%s', $width, $height, $this->getCover());
+    }
 }

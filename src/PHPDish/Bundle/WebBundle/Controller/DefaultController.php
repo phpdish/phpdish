@@ -15,8 +15,10 @@ class DefaultController extends Controller
     {
         $postManager = $this->get('phpdish.manager.post');
         $posts = $postManager->findLatestPosts($request->query->getInt('page', 1));
+        $recommendedPosts = $postManager->findRecommendPosts(1, 5);
         return $this->render('PHPDishWebBundle:Default:index.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'recommendedPosts' => $recommendedPosts
         ]);
     }
 

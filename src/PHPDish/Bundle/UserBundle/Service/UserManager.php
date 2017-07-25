@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
 class UserManager implements UserManagerInterface
 {
@@ -29,7 +30,27 @@ class UserManager implements UserManagerInterface
      */
     public function findUserByEmail($email)
     {
-        return $this->entityManager->getRepository('PHPDishUserBundle:User')
+        return $this->getRepository()
             ->findOneBy(['email' => $email]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatestUsers($limit)
+    {
+        return $this->getRepository()->createQueryBuilder('u')
+            ->orderBy('u.createdAt', 'desc')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getRepository()
+    {
+        return $this->entityManager->getRepository('PHPDishUserBundle:User');
     }
 }

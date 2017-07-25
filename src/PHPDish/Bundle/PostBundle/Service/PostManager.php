@@ -80,6 +80,7 @@ class PostManager implements PostManagerInterface
     public function findLatestPosts($page, $limit = null)
     {
         $query = $this->getRepository()->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'desc')
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
@@ -89,7 +90,7 @@ class PostManager implements PostManagerInterface
      */
     public function findPostById($id)
     {
-        return $this->entityManager->getRepository('PHPDishPostBundle:Post')
+        return $this->getRepository()
             ->find($id);
     }
 
@@ -98,8 +99,21 @@ class PostManager implements PostManagerInterface
      */
     public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
-        $query = $this->entityManager->getRepository('PHPDishPostBundle:Post')
-            ->createQueryBuilder('p')
+        $query = $this->getRepository()->createQueryBuilder('p')
+            ->where(['p.user' => $user->getId()])
+            ->orderBy('p.createdAt', 'desc')
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findRecommendPosts($page = 1, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('p')
+            ->where('p.isRecommended = 1')
+            ->orderBy('p.createdAt', 'desc')
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
