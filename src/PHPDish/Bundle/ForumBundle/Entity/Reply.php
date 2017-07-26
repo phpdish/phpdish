@@ -20,6 +20,11 @@ class Reply extends BaseComment implements ReplyInterface
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Topic")
+     */
+    protected $topic;
+
+    /**
      * {@inheritdoc}
      */
     public function getUser()

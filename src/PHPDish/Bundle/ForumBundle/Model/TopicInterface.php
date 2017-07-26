@@ -25,4 +25,29 @@ interface TopicInterface extends
 //    public function getReplyCount();
 //
 //    public function setReplyCount();
+
+    /**
+     * 获取标题
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * 设置标题
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title);
+
+    /**
+     * 获取所属thread
+     * @return ThreadInterface
+     */
+    public function getThread();
+
+    /**
+     * @param ThreadInterface $thread
+     * @return $this
+     */
+    public function setThread(ThreadInterface $thread);
 }
