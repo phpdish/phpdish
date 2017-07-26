@@ -31,29 +31,29 @@ trait CommentableTrait
         return $this->commentCount;
     }
 
-    /**
-     * Add comment
-     * @param CommentInterface $comment
-     * @return $this
-     */
-    public function addComment(CommentInterface $comment)
-    {
-        $this->getComments()->add($comment);
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     * @param CommentInterface $comment
-     */
-    public function removeComment(CommentInterface $comment)
-    {
-        $this->getComments()->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     * @return Collection
-     */
-    abstract public function getComments();
+//    /**
+//     * Add comment
+//     * @param CommentInterface $comment
+//     * @return $this
+//     */
+//    public function addComment(CommentInterface $comment)
+//    {
+//        $this->getComments()->add($comment);
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove comment
+//     * @param CommentInterface $comment
+//     */
+//    public function removeComment(CommentInterface $comment)
+//    {
+//        $this->getComments()->removeElement($comment);
+//    }
+//
+//    /**
+//     * Get comments
+//     * @return Collection
+//     */
+//    abstract public function getComments();
 }
