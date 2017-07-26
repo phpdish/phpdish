@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.5.9",
         "FriendsOfSymfony/comment-bundle": "^2.0",
+        "cakephp/chronos": "^1.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/user-bundle": "^2.0",
@@ -29,6 +30,7 @@
         "knplabs/knp-markdown-bundle": "^1.5",
         "knplabs/knp-menu-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
+        "nesbot/carbon": "^1.22",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "sonata-project/admin-bundle": "^3.20",

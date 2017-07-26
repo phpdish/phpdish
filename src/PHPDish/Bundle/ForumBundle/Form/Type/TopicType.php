@@ -27,6 +27,7 @@ class TopicType extends AbstractType
             ])
             ->add('thread', EntityType::class, [
                 'label' => '所属分类',
+                'choice_label' => 'name',
                 'class' => 'PHPDishForumBundle:Thread',
                 'choices' => $this->threadManager->findEnabledThreads()
             ])

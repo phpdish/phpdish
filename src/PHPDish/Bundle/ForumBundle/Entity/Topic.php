@@ -55,7 +55,7 @@ class Topic implements TopicInterface
         $this->title = $title;
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */

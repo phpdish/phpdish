@@ -25,8 +25,9 @@ class PostsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function addAction(Request $request)
+    public function createAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getPostManager();
         $post = $manager->createPost($this->getUser());
         $form = $this->createForm(PostType::class, $post);

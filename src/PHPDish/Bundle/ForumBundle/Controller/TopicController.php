@@ -17,6 +17,7 @@ class TopicController extends Controller
      */
     public function createAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getTopicManager();
         $topic = $manager->createTopic($this->getUser());
         $form = $this->createForm(TopicType::class, $topic);

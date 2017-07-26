@@ -1,6 +1,8 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Cake\Chronos\Chronos;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Servuce\PaginatorTrait;
@@ -30,6 +32,7 @@ class TopicManager implements TopicManagerInterface
     {
         $topic = new Topic();
         $topic->setUser($user);
+        $topic->setCreatedAt(Carbon::now());
         return $topic;
     }
 
@@ -38,6 +41,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function saveTopic(TopicInterface $topic)
     {
+        $topic->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($topic);
         $this->entityManager->flush();
         return true;
