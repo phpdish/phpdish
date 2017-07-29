@@ -27,7 +27,7 @@ class Topic implements TopicInterface
     protected $title;
 
     /**
-     * @ORM\OneToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var UserInterface
      */
