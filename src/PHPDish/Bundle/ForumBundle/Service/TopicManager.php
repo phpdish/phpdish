@@ -1,11 +1,10 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Service;
 
-use Cake\Chronos\Chronos;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\CoreBundle\Servuce\PaginatorTrait;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Topic;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
@@ -31,8 +30,11 @@ class TopicManager implements TopicManagerInterface
     public function createTopic(UserInterface $user)
     {
         $topic = new Topic();
-        $topic->setUser($user);
-        $topic->setCreatedAt(Carbon::now());
+        $now = Carbon::now();
+        $topic->setUser($user)
+            ->setRepliedAt($now)
+            ->setCreatedAt($now)
+            ->setLastReplyUser($user);
         return $topic;
     }
 
@@ -52,7 +54,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function findTopicById($id)
     {
-        return $this->getThreadRepository()->find($id);
+        return $this->getTopicRepository()->find($id);
     }
 
     /**
@@ -60,17 +62,42 @@ class TopicManager implements TopicManagerInterface
      */
     public function findThreadTopics(ThreadInterface $thread, $page, $limit = null)
     {
-        $query = $this->getThreadRepository()->createQueryBuilder('t')
-            ->where('t.threadId = :threadId')->setParameter('threadId', $thread->getId())
+        $query = $this->getTopicRepository()->createQueryBuilder('t')
+            ->where('t.thread = :threadId')->setParameter('threadId', $thread->getId())
             ->orderBy('t.updatedAt', 'desc')
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findUserTopics(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->getTopicRepository()->createQueryBuilder('t')
+            ->where('t.user = :userId')->setParameter('userId', $user->getId())
+            ->orderBy('t.createdAt', 'desc')
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findHotTopics(\DateTime $date, $limit)
+    {
+        return $this->getTopicRepository()->createQueryBuilder('t')
+            ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
+            ->orderBy('t.replyCount', 'desc')
+            ->addOrderBy('t.createdAt', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return EntityRepository
      */
-    protected function getThreadRepository()
+    protected function getTopicRepository()
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Topic');
     }

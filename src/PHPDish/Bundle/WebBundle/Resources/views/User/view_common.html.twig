@@ -43,18 +43,16 @@
                     </ul>
                 </div>
                 <div class="entry-meta">
-                    <span>共找到了10条记录</span>
+                    {% block entry_meta %}
                     <span>还没有发表过内容</span>
+                    {% endblock %}
                 </div>
             </header>
+            {% block user_content %}
             <div class="entry-content" itemprop="articleBody">
-                {% block user_content %}
-                    没有记录
-                {% endblock %}
+                没有记录
             </div>
-            <footer class="entry-footer margin-bottom-20 content-wrap">
-                {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-            </footer>
+            {% endblock %}
         </article>
         <div id="sidebar" class="col-lg-4 col-md-4" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">
             <aside id="recent_user-3" class="widget clearfix widget_recent_user">

@@ -21,7 +21,7 @@ class ThreadController extends Controller
     {
         $thread = $this->getThreadManager()->findThreadBySlug($slug);
         $topics = $this->getTopicManager()->findThreadTopics($thread, $request->query->getInt('page', 1));
-        $this->render('PHPDishWebBundle:Thread:view.html.twig', [
+        return $this->render('PHPDishWebBundle:Thread:view.html.twig', [
             'thread' => $thread,
             'topics' => $topics
         ]);

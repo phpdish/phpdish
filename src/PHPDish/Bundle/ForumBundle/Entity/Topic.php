@@ -40,6 +40,32 @@ class Topic implements TopicInterface
     protected $thread;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $repliedAt;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $replyCount = 0;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $recommended = 0;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $stickTop = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="last_reply_user_id", referencedColumnName="id")
+     */
+    protected $lastReplyUser;
+
+    /**
      * {@inheritdoc}
      */
     public function getTitle()
@@ -78,6 +104,106 @@ class Topic implements TopicInterface
     public function setThread(ThreadInterface $thread)
     {
         $this->thread = $thread;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastReplyUser(UserInterface $user)
+    {
+        $this->lastReplyUser = $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastReplyUser()
+    {
+        return $this->lastReplyUser;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepliedAt()
+    {
+        return $this->repliedAt;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRepliedAt(\DateTime $reliedAt)
+    {
+        $this->repliedAt = $reliedAt;
+        return $this;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReplyCount()
+    {
+        return $this->replyCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReplyCount($replyCount)
+    {
+        $this->replyCount = $replyCount;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function recommend()
+    {
+        $this->recommended = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isStickTop()
+    {
+        return $this->stickTop;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStickTop($stickTop)
+    {
+        $this->stickTop = $stickTop;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function stickTop()
+    {
+        $this->stickTop = true;
     }
 }
 

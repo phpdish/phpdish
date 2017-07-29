@@ -29,10 +29,28 @@ interface TopicManagerInterface
     public function findTopicById($id);
 
     /**
+     * 查找指定分类下的话题
      * @param ThreadInterface $thread
      * @param int $page
      * @param int $limit
      * @return Pagerfanta
      */
     public function findThreadTopics(ThreadInterface $thread, $page, $limit = null);
+
+    /**
+     * 查找指定用户的话题
+     * @param UserInterface $user
+     * @param int $page
+     * @param int $limit
+     * @return Pagerfanta
+     */
+    public function findUserTopics(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 获取指定时间内的热帖
+     * @param \DateTime $date
+     * @param int $limit
+     * @return TopicInterface[]
+     */
+    public function findHotTopics(\DateTime $date, $limit);
 }

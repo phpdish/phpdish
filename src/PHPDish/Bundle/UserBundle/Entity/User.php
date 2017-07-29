@@ -232,19 +232,6 @@ class User implements UserInterface
         return $this->gender;
     }
 
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updateTimestamps()
-    {
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
-        }
-        $this->updatedAt = new \DateTime();
-    }
-
     /**
      * Set followingCount
      * @param integer $followingCount

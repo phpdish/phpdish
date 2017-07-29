@@ -1,0 +1,27 @@
+{% extends 'PHPDishWebBundle:User:view_common.html.twig' %}
+
+{% set tab = 'topic' %}
+
+{% if topics.count %}
+    {% block entry_meta %}
+        <span>共发表了{{ topics.count }}个话题</span>
+    {% endblock %}
+{% endif %}
+
+{% block user_content %}
+    <div class="entry-content">
+        <ul id="uclist" class="noborder">
+            {% for topic in topics %}
+            <li>
+                <div class="text"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
+                <span class="info">
+                    {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer class="entry-footer content-wrap">
+        {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+    </footer>
+{% endblock %}

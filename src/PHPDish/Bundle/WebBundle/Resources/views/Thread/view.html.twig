@@ -1,91 +1,65 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
+
+{% block title %} {{ thread.name }} {% endblock %}
+
 {% block content %}
-<div id="main" class="container" role="main">
-    <div class="row">
-        <article id="content" class="col-lg-8 col-md-8 archive">
-            <header class="entry-header">
-                <div class="entry-location">
-                    {% include 'Common:crumbs.html.twig' with [
-                       {'title': topic.thread.name, 'url': path('thread_view', {'slug': topic.thread.slug})}
-                       {'title': topic.title}
-                    ] %}
+    <div id="main" class="container" role="main">
+        <div class="row">
+            <article id="content" class="col-lg-8 col-md-8 archive topic-show">
+                <header class="entry-header">
+                    <div class="entry-location">
+                        {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {breadcrumbs: [
+                            {title: thread.name}
+                        ]} %}
+                    </div>
+                </header>
+                <div class="entry-content">
+                    {% for topic in topics %}
+                    <div class="question-list">
+                        <dl class="dl-horizontal">
+                            <dt><img src="{{ topic.user.avatar() }}" data-role="user-avatar"></dt>
+                            <dd>
+                                <p>
+                                    <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
+                                    {% if topic.isRecommended %}
+                                    <i class="color-blue fa fa-thumbs-o-up"></i>
+                                    {% endif %}
+                                </p>
+                                <ul class="list-unstyled list-inline small">
+                                    <li class="text-muted">{{ topic.user.username }}发起于{{ topic.createdAt|date('Y-m-d H:i') }}</li>
+                                    <li class="text-muted">{{ topic.replyCount }}回复</li>
+                                    <li class="text-muted">最后回复：{{ topic.repliedAt|date('Y-m-d H:i') }}</li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                    {% endfor %}
                 </div>
-                <div class="content-wrap">
-                    <h3 class="margin-bottom-10"><?=$question->title;?></h3>
-                    <div class="clearfix"><?=$question->content;?></div>
-                    <ul class="list-unstyled list-inline clearfix small">
-                        <li class="text-muted"><i class="fa fa-calendar"></i> <?=tranTime($question->create_time);?></li>
-                        <li class="text-muted"><i class="fa fa-pencil"></i> <?=$question->user->username;?></li>
-                        <li class="text-muted"><i class="fa fa-comments"></i> <a href="#add_reply"><?=$question->reply_nums?> 回复</a></li>
-                        <li class="pull-right">
-                            <img src="<?=$this->Url->thumbnail($question->user->avatar, 120, 120)?>" class="img-width-50" data-plate="true" data-id="<?=$question->user_id?>"/>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            <div class="entry-content" itemprop="articleBody">
-                <div class="headline headlime-md"><h3><?=$question->reply_nums;?>个回答</h3></div>
-                <?php foreach ($replies as $reply):?>
-                <div>
-                    <div class="clearfix margin-bottom-10"><?=$reply->content;?></div>
-                    <ul class="list-unstyled list-inline clearfix small">
-                        <li class="text-muted"><i class="fa fa-calendar"></i> <?=tranTime($reply->create_time);?></li>
-                        <li class="text-muted"><i class="fa fa-pencil"></i> <?=$reply->username;?></li>
-                        <li class="text-muted"><i class="fa fa-comments"></i> <span class="cursor-pointer" data-at="<?=$reply->user->username;?>">回复TA</span></li>
-                        <li class="pull-right">
-                            <img src="<?=$this->Url->thumbnail($reply->user->avatar, 120, 120)?>" class="img-width-50" data-plate="true" data-id="<?=$reply->user_id?>"/>
-                        </li>
-                    </ul>
-                </div>
-                <hr/>
-                <?php endforeach;?>
+                <footer class="entry-footer">
+                    <div id="pagination">{{ pagerfanta(topics, 'twitter_bootstrap3') }} </div>
+                    <div class="content-wrap">
+                        <form id="add-question-form">
+                            <div class="headline headline-md"><h3>发帖</h3></div>
+                            <input type="text" class="form-control" name="title" placeholder="标题">
+                            <div class="margin-bottom-20"></div>
+                            <textarea class="form-control" id="content-textarea" name="content" rows="10"></textarea>
+                            <div class="margin-bottom-20"></div>
+                            <button type="submit" class="btn btn-primary">发布</button>
+                        </form>
+                    </div>
+                </footer>
+            </article>
+            <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+                <aside class="widget clearfix widget_recent_entries">
+                    <h3 class="widget-title">最新话题</h3>
+                    {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
+                </aside>
             </div>
-            <footer class="entry-footer">
-                <?php if($this->request->param('paging.QuestionReplies.pageCount') > 1):?>
-                <div id="pagination">
-                    <ul class="pagination" role="navigation">
-                        <?php
-                    echo $this->Paginator->prev('«');
-                        echo $this->Paginator->numbers();
-                        echo $this->Paginator->next('»');
-                        ?>
-                    </ul>
-                </div>
-                <?php endif;?>
-                <div class="content-wrap">
-                    <form id="add-reply-form">
-                        <div class="headline headline-md"><h3>回复</h3></div>
-                        <textarea class="form-control" id="content-textarea" name="content" rows="10"></textarea>
-                        <div class="margin-bottom-20"></div>
-                        <button type="submit" class="btn btn-primary">回复</button>
-                    </form>
-                </div>
-            </footer>
-        </article>
-        <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
-            <?=$this->cell('Topics::user', [$globalUser]);?>
-            <aside class="widget clearfix">
-                <div class="margin-bottom-10">
-                    <?php if($isSaved):?>
-                    <button class="btn btn-default"><i class="fa fa-check"></i> 已收藏</button>
-                    <?php else:?>
-                    <button class="btn btn-primary" data-role="save-question" data-question-id="<?=$question->id?>"><i class="fa fa-heart"></i> 收藏</button>
-                    <?php endif;?>
-                    <span class="color-grey"><?=$question->attention_nums;?> 人收藏了该问题 </span>
-                </div>
-                <div>
-                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧">百度贴吧</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a></div>
-                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-                </div>
-            </aside>
-            <?=$this->cell('Topics::index');?>
-            <?=$this->cell('Questions::index', ['最新帖子', $topic->id, 10, 'create_time']);?>
+            <!-- #sidebar -->
         </div>
-        <!-- #sidebar -->
     </div>
-</div>
-<script type="text/javascript">
-window.topicId = {{ topic.id }};
-</script>
+    <script type="text/javascript">
+        window.threadId = '{{ thread.id }}';
+    </script>
 {% endblock %}

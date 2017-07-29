@@ -1,8 +1,10 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
+use Carbon\Carbon;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
+use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,10 +49,48 @@ class TopicController extends Controller
     }
 
     /**
+     * @Route("/users/{username}/topics", name="user_topics")
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function userTopicsAction($username, Request $request)
+    {
+        $user = $this->getUserManager()->findUserByName($username);
+        $topics = $this->getTopicManager()->findUserTopics($user, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:Topic:user_topics.html.twig', [
+            'user' => $user,
+            'topics' => $topics
+        ]);
+    }
+
+    /**
+     * 今日热帖
+     * @param int|null $max
+     * @return Response
+     */
+    public function todayHotTopicsAction($max = null)
+    {
+        $date = Carbon::today()->modify('-3 days');
+        $topics = $this->getTopicManager()->findHotTopics($date, $max ?: 10);
+        return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
+            'topics' => $topics
+        ]);
+    }
+
+    /**
      * @return TopicManagerInterface
      */
     protected function getTopicManager()
     {
         return $this->get('phpdish.manager.topic');
+    }
+
+    /**
+     * @return UserManagerInterface
+     */
+    protected function getUserManager()
+    {
+        return $this->get('phpdish.manager.user');
     }
 }
