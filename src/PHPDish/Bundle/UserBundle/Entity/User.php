@@ -64,20 +64,21 @@ class User implements UserInterface
      */
     protected $fanCount = 0;
 
+
     /**
-     * 关注我的
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="following")
+     * 关注我的用户
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="following")
+     * @ORM\JoinTable(name="users_followers",
+     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id")}
+     * )
      * @var ArrayCollection|UserInterface[]
      */
     protected $followers;
 
     /**
-     * 我关注的
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followers")
-     * @ORM\JoinTable(name="user_followers",
-     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id", unique=true)}
-     * )
+     * 我关注的用户
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="followers")
      * @var ArrayCollection|UserInterface[]
      */
     protected $following;
@@ -86,19 +87,10 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
      * @ORM\JoinTable(name="users_roles",
      *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
      * )
      */
     protected $roles;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", inversedBy="subscribers")
-     * @ORM\JoinTable(name="category_subscribers",
-     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
-     * )
-     */
-    protected $subscribedBlogs;
 
     /**
      * Constructor

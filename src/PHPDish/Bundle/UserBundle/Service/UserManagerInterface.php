@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Service;
 
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface UserManagerInterface
@@ -25,4 +26,22 @@ interface UserManagerInterface
      * @return UserInterface[]
      */
     public function findLatestUsers($limit);
+
+    /**
+     * 查找用户的粉丝
+     * @param UserInterface $user
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findUserFollowers(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 查找用户正在关注的人
+     * @param UserInterface $user
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findUserFollowing(UserInterface $user, $page, $limit = null);
 }

@@ -57,27 +57,11 @@
         <div id="sidebar" class="col-lg-4 col-md-4" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">
             <aside id="recent_user-3" class="widget clearfix widget_recent_user">
                 <h3 class="widget-title">关注</h3>
-                <ul>
-                    <?php foreach($followUsers as $followUser):?>
-                    <li>
-                        <a href="<?=$this->Url->build(['_name'=>'user.show', $followUser->id]);?>" target="_blank" title="<?=$followUser->username?>">
-                            <img alt="<?=$followUser->username?>" src="<?=$this->Url->imageUrl($followUser->avatar);?>" class="avatar avatar-50 photo" height="50" width="50"/>
-                        </a>
-                    </li>
-                    <?php endforeach;?>
-                </ul>
+                {{ render(controller('PHPDishUserBundle:User:userFollowing', {'user': user})) }}
             </aside>
             <aside id="recent_user-3" class="widget clearfix widget_recent_user">
                 <h3 class="widget-title">粉丝</h3>
-                <ul>
-                    <?php foreach($followers as $follower):?>
-                    <li>
-                        <a href="<?=$this->Url->build(['_name'=>'user.show', $follower->id]);?>" target="_blank" title="<?=$follower->username?>">
-                            <img alt="<?=$follower->username?>" src="<?=$this->Url->imageUrl($follower->avatar);?>" class="avatar avatar-50 photo" height="50" width="50"/>
-                        </a>
-                    </li>
-                    <?php endforeach;?>
-                </ul>
+                {{ render(controller('PHPDishUserBundle:User:userFollowers', {'user': user})) }}
             </aside>
         </div>
         <!-- #sidebar -->

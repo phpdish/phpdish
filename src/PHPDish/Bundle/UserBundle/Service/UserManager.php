@@ -3,9 +3,12 @@ namespace PHPDish\Bundle\UserBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class UserManager implements UserManagerInterface
 {
+    use PaginatorTrait;
     /**
      * @var EntityManagerInterface
      */
@@ -44,6 +47,30 @@ class UserManager implements UserManagerInterface
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserFollowing(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.followers', 'f')
+            ->where('f.id = :userId')->setParameter('userId', $user->getId())
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserFollowers(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.following', 'f')
+            ->where('f.id = :userId')->setParameter('userId', $user->getId())
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
     }
 
     /**

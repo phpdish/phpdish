@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Controller;
 
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,6 +31,22 @@ class UserController extends Controller
         $users = $this->getUserManager()->findLatestUsers($limit);
         return $this->render('PHPDishWebBundle:User:latest.html.twig', [
             'users' => $users
+        ]);
+    }
+
+    public function userFollowingAction(UserInterface $user)
+    {
+        $following = $this->getUserManager()->findUserFollowing($user, 1);
+        return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
+            'users' => $following
+        ]);
+    }
+
+    public function userFollowersAction(UserInterface $user)
+    {
+        $following = $this->getUserManager()->findUserFollowers($user, 1);
+        return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
+            'users' => $following
         ]);
     }
 
