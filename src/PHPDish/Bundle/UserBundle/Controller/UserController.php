@@ -18,9 +18,8 @@ class UserController extends FOSRestController
      */
     public function viewAction($username)
     {
-        $user = $this->getUserManager()->findUserByName($username);
-        return $this->render('PHPDishWebBundle:User:view.html.twig', [
-            'user' => $user
+        return $this->forward('PHPDishPostBundle:Post:userPosts', [
+            'username' => $username
         ]);
     }
 
