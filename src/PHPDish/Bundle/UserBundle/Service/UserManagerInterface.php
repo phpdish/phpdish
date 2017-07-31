@@ -44,4 +44,12 @@ interface UserManagerInterface
      * @return Pagerfanta
      */
     public function findUserFollowing(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 关注用户
+     * @param UserInterface $user
+     * @param UserInterface $follower
+     * @return boolean
+     */
+    public function followUser(UserInterface $user, UserInterface $follower);
 }

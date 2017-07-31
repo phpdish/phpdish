@@ -62,8 +62,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    protected $fanCount = 0;
-
+    protected $followerCount = 0;
 
     /**
      * 关注我的用户
@@ -225,9 +224,7 @@ class User implements UserInterface
     }
 
     /**
-     * Set followingCount
-     * @param integer $followingCount
-     * @return User
+     * {@inheritdoc}
      */
     public function setFollowingCount($followingCount)
     {
@@ -237,8 +234,7 @@ class User implements UserInterface
     }
 
     /**
-     * Get followingCount
-     * @return integer
+     * {@inheritdoc}
      */
     public function getFollowingCount()
     {
@@ -246,24 +242,20 @@ class User implements UserInterface
     }
 
     /**
-     * Set fanCount
-     * @param integer $fanCount
-     * @return User
+     * {@inheritdoc}
      */
-    public function setFanCount($fanCount)
+    public function setFollowerCount($count)
     {
-        $this->fanCount = $fanCount;
-
+        $this->followerCount = $count;
         return $this;
     }
 
     /**
-     * Get fanCount
-     * @return integer
+     * {@inheritdoc}
      */
-    public function getFanCount()
+    public function getFollowerCount()
     {
-        return $this->fanCount;
+        return $this->followerCount;
     }
 
     /**
@@ -301,71 +293,22 @@ class User implements UserInterface
     }
 
     /**
-     * Add follower
-     *
-     * @param User $follower
-     *
-     * @return User
+     * {@inheritdoc}
      */
-    public function addFollower(User $follower)
+    public function addFollower(UserInterface $follower)
     {
         $this->followers[] = $follower;
-
         return $this;
     }
 
     /**
-     * Remove follower
-     *
-     * @param User $follower
+     * {@inheritdoc}
      */
     public function removeFollower(User $follower)
     {
         $this->followers->removeElement($follower);
     }
 
-    /**
-     * Get followers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFollowers()
-    {
-        return $this->followers;
-    }
-
-    /**
-     * Add following
-     *
-     * @param User $following
-     *
-     * @return User
-     */
-    public function addFollowing(User $following)
-    {
-        $this->following[] = $following;
-        return $this;
-    }
-
-    /**
-     * Remove following
-     *
-     * @param User $following
-     */
-    public function removeFollowing(User $following)
-    {
-        $this->following->removeElement($following);
-    }
-
-    /**
-     * Get following
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFollowing()
-    {
-        return $this->following;
-    }
 
     /**
      * Add role

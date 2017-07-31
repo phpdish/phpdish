@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<div id="main" class="container" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+<div id="main" class="container" role="main">
     <div class="row">
-        <article id="content" class="col-lg-8 col-md-8 archive author-archive"  role="article" itemscope="" itemtype="http://schema.org/Article">
+        <article id="content" class="col-lg-8 col-md-8 archive author-archive">
             <header class="entry-header">
                 <div class="entry-location">
                     {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
@@ -23,7 +23,9 @@
                         {% if app.user and user.isFollowedBy(app.user) %}
                         <button type="button" class="btn btn-sm btn-default" data-role="unfollow-user" data-user-id="<?=$user->id;?>">取消关注</button>
                         {%else %}
-                        <button type="button" class="btn-u btn-u-red" data-role="follow-user" data-user-id="<?=$user->id;?>"><i class="fa fa-plus"></i> 关注</button>
+                        <button type="button" class="btn-u btn-u-red" data-role="follow-user" data-username="{{ user.username }}">
+                            <i class="fa fa-plus"></i> 关注
+                        </button>
                         {% endif %}
                     </div>
                     <div class="author-avatar">

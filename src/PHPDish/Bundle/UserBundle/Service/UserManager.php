@@ -74,6 +74,20 @@ class UserManager implements UserManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function followUser(UserInterface $user, UserInterface $follower)
+    {
+        $user->addFollower($follower);
+        $user->setFollowerCount($user->getFollowerCount() + 1);
+        $follower->setFollowingCount($follower->getFollowingCount() + 1);
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($follower);
+        $this->entityManager->flush();
+        return true;
+    }
+
+    /**
      * @return EntityRepository
      */
     protected function getRepository()
