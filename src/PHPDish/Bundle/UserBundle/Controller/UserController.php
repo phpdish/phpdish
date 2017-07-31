@@ -2,11 +2,13 @@
 namespace PHPDish\Bundle\UserBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\View\View;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends FOSRestController
@@ -63,6 +65,23 @@ class UserController extends FOSRestController
     }
 
     /**
+     * @Route("/users/{username}/followers", name="user_followers")
+     * @Method("GET")
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function getUserFollowersAction($username, Request $request)
+    {
+        $manager = $this->getUserManager();
+        $user = $manager->findUserByName($username);
+        $followers = $manager->findUserFollowers($user, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:User:followers.html.twig', [
+            'followers' => $followers
+        ]);
+    }
+
+    /**
      * @Route("/users/{username}/followers", name="follower_add")
      * @Method("POST")
      * @param string $username
@@ -74,7 +93,7 @@ class UserController extends FOSRestController
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         if ($manager->followUser($user, $this->getUser())) {
-            $view = $this->view([
+            $view = View::create()->setData([
                 'follower_count' => $user->getFollowerCount()
             ]);
         } else {
