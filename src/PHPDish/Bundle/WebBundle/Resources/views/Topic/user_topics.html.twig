@@ -22,6 +22,8 @@
         </ul>
     </div>
     <footer class="entry-footer content-wrap">
-        {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+        {% if topics.haveToPaginate %}
+            {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+        {% endif %}
     </footer>
 {% endblock %}

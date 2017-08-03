@@ -40,6 +40,8 @@
         {% endfor %}
     </div>
     <footer class="entry-footer content-wrap">
-        {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+        {% if posts.haveToPaginate %}
+            {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+        {% endif %}
     </footer>
 {% endblock %}
