@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Doctrine\Common\Collections\Criteria;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
@@ -45,6 +46,15 @@ interface TopicManagerInterface
      * @return Pagerfanta
      */
     public function findUserTopics(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 查找指定条件的话题
+     * @param Criteria $criteria
+     * @param int $page
+     * @param int $limit
+     * @return Pagerfanta
+     */
+    public function findTopics(Criteria $criteria, $page, $limit = null);
 
     /**
      * 获取指定时间内的热帖

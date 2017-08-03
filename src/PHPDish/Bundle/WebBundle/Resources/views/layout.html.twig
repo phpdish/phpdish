@@ -25,7 +25,7 @@
                         <div class="custom-header clearfix">
                             <div class="header-logo">
                                 <a href="/" rel="home">
-                                    <img src="{{ asset('bundles/phpdishweb/img/logo-p4.png') }}" class="img-responsive"/>
+                                    <img src="{{ asset('/img/logo-p4.png') }}" class="img-responsive"/>
                                 </a>
                             </div>
                         </div>
@@ -56,9 +56,23 @@
                         </button>
                     </div>
                     <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li class="menu-item">
+                                <a href="/">首页</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ path('topic') }}">社区</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ path('topic') }}">问答</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ path('topic') }}">招聘</a>
+                            </li>
+                        </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="menu-item">
-                                <a href="<?=$this->Url->build(['prefix'=>false, 'controller'=>'Gifts', 'action'=>'index']);?>" itemprop="url">
+                                <a href="">
                                     <span class="glyphicon glyphicon-gift"></span> 积分换礼
                                 </a>
                             </li>

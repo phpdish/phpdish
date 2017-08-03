@@ -1,0 +1,77 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} {{ topic.title }} {% endblock %}
+
+{% block content %}
+    <div id="main" class="container" role="main">
+        <div class="row">
+            <article id="content" class="col-lg-8 col-md-8 archive">
+                <header class="entry-header">
+                    <div class="entry-location">
+                        {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
+                            'breadcrumbs': [
+                                {'title': topic.thread.name, 'url': path('thread_view', {'slug':  topic.thread.slug})}
+                            ]
+                        } %}
+                    </div>
+                    <div class="content-wrap">
+                        <h3 class="margin-bottom-10">{{ topic.title }}</h3>
+                        <div class="clearfix">{{ topic.body }}</div>
+                        <ul class="list-unstyled list-inline clearfix small">
+                            <li class="text-muted"><i class="fa fa-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
+                            <li class="text-muted"><i class="fa fa-pencil"></i> {{ topic.user.username }}</li>
+                            <li class="text-muted"><i class="fa fa-comments"></i> <a href="#add_reply">{{ topic.replyCount }}回复</a></li>
+                            <li class="pull-right">
+                                <img src="{{ topic.user.avatar }}" class="img-width-50"/>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="entry-content" itemprop="articleBody">
+                    <div class="headline headlime-md"><h3>{{ replies.count }}个回答</h3></div>
+                    {% for reply in replies %}
+                    <div>
+                        <div class="clearfix margin-bottom-10">{{ reply.body }}</div>
+                        <ul class="list-unstyled list-inline clearfix small">
+                            <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt:date('Y-m-d') }}</li>
+                            <li class="text-muted"><i class="fa fa-pencil"></i> {{ reply.user.username }}</li>
+                            <li class="text-muted"><i class="fa fa-comments"></i> <span class="cursor-pointer" data-role="mention" data-username="{{ reply.user.username }}">回复TA</span></li>
+                            <li class="pull-right">
+                                <img src="{{ reply.user.avatar }}" class="img-width-50"/>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr/>
+                    {% endfor %}
+                </div>
+                <footer class="entry-footer">
+                    {% if replies.haveToPaginate %}
+                        {{ pagerfanta(replies, 'twitter_bootstrap3') }}
+                    {% endif %}
+                    <div class="content-wrap">
+                        <form id="add-reply-form">
+                            <div class="headline headline-md"><h3>回复</h3></div>
+                            <textarea class="form-control" id="content-textarea" name="content" rows="10"></textarea>
+                            <div class="margin-bottom-20"></div>
+                            <button type="submit" class="btn btn-primary">回复</button>
+                        </form>
+                    </div>
+                </footer>
+            </article>
+            <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+                <aside class="widget clearfix">
+                    <div class="margin-bottom-10">
+                        <button class="btn btn-default"><i class="fa fa-check"></i> 已收藏</button>
+                        <button class="btn btn-primary" data-role="save-question" data-question-id="<?=$question->id?>"><i class="fa fa-heart"></i> 收藏</button>
+                        <span class="color-grey"><?=$question->attention_nums;?> 人收藏了该问题 </span>
+                    </div>
+                </aside>
+                <aside class="widget clearfix widget_recent_entries">
+                    <h3 class="widget-title">热门</h3>
+                    {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
+                </aside>
+            </div>
+            <!-- #sidebar -->
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block content %}
+    <div id="main" class="container" role="main">
+        <div class="row">
+            <article id="content" class="col-lg-8 col-md-8 archive">
+                <header class="entry-header">
+                    <div class="entry-location">
+                        {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
+                            'breadcrumbs': [
+                                {'title': '话题', 'url': path('topic')}
+                            ]
+                        } %}
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <div class="question-list">
+                        {% for topic in topics %}
+                        <dl class="dl-horizontal">
+                            <dt><img src="{{ topic.user.avatar }}"></dt>
+                            <dd>
+                                <p>
+                                    <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
+                                    {% if topic.recommended %}
+                                    <i class="color-blue fa fa-thumbs-o-up"></i>
+                                    {% endif %}
+                                </p>
+                                <ul class="list-unstyled list-inline small">
+                                    <li class="text-muted">{{ topic.user.username }}发起于{{ topic.createdAt|date('Y-m-d') }}</li>
+                                    <li class="text-muted">{{ topic.replyCount }}回复</li>
+                                    <li class="text-muted"><a href="{{ path('thread_view', {'slug': topic.thread.slug}) }}">{{ topic.thread.name }}</a></li>
+                                    <li class="text-muted">最后回复：{{ topic.repliedAt|date('Y-m-d') }}</li>
+                                </ul>
+                            </dd>
+                        </dl>
+                            {% if loop.last == false %}
+                                <hr class="margin-vertical-10"/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <footer class="entry-footer">
+                    {% if topics.haveToPaginate %}
+                        {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                    {% endif %}
+                </footer>
+            </article>
+            <div id="sidebar" class="col-lg-4 col-md-4" role="complementary" itemscope itemtype="http://schema.org/WPSideBar">
+                <aside class="widget clearfix widget_recent_entries">
+                    <h3 class="widget-title">热门话题</h3>
+                    {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}

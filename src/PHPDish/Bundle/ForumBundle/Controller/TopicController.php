@@ -2,7 +2,9 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
+use PHPDish\Bundle\ForumBundle\Service\ReplyManagerInterface;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +14,25 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TopicController extends Controller
 {
+    /**
+     * @Route("/topics", name="topic")
+     * @param Request $request
+     * @return Response
+     */
+    public function indexAction(Request $request)
+    {
+        $manager = $this->getTopicManager();
+        $criteria = Criteria::create();
+        $criteria->orderBy([
+            'recommended' => 'desc',
+            'createdAt' => 'desc'
+        ]);
+        $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
+            'topics' => $topics
+        ]);
+    }
+
     /**
      * @Route("/topics/new", name="topic_add")
      * @param Request $request
@@ -38,13 +59,16 @@ class TopicController extends Controller
     /**
      * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"})
      * @param int $id
+     * @param Request $request
      * @return Response
      */
-    public function viewAction($id)
+    public function viewAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
+        $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page'));
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
-            'topic' => $topic
+            'topic' => $topic,
+            'replies' => $replies
         ]);
     }
 
@@ -71,7 +95,7 @@ class TopicController extends Controller
      */
     public function todayHotTopicsAction($max = null)
     {
-        $date = Carbon::today()->modify('-3 days');
+        $date = Carbon::today()->modify('-100 days');
         $topics = $this->getTopicManager()->findHotTopics($date, $max ?: 10);
         return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
             'topics' => $topics
@@ -84,6 +108,14 @@ class TopicController extends Controller
     protected function getTopicManager()
     {
         return $this->get('phpdish.manager.topic');
+    }
+
+    /**
+     * @return ReplyManagerInterface
+     */
+    protected function getReplyManager()
+    {
+        return $this->get('phpdish.manager.reply');
     }
 
     /**

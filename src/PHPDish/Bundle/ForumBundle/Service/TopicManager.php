@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -80,6 +81,18 @@ class TopicManager implements TopicManagerInterface
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findTopics(Criteria $criteria, $page, $limit = null)
+    {
+        $query = $this->getTopicRepository()->createQueryBuilder('t')
+            ->addCriteria($criteria)
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
 
     /**
      * {@inheritdoc}

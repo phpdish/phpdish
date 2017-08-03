@@ -11,6 +11,9 @@ services:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    phpdish.manager.reply:
+        class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
+        arguments: ["@doctrine.orm.entity_manager"]
 
     phpdish.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType
