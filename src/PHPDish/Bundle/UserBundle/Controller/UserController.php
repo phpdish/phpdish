@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends FOSRestController
 {
@@ -69,8 +70,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Route("/users/{username}/followers", name="user_followers")
-     * @Method("GET")
+     * @Route("/users/{username}/followers.{_format}", name="user_followers", defaults={"_format"="html"})
      * @param string $username
      * @param Request $request
      * @return Response
@@ -81,10 +81,10 @@ class UserController extends FOSRestController
         $user = $manager->findUserByName($username);
         $followers = $manager->findUserFollowers($user, $request->query->getInt('page', 1));
 
-        return $this->handleView($this->view($followers));
-
-        $json = $this->get('serializer')->serialize($followers, 'json');
-        return new Response($json);
+        $view = $this->view($followers);
+        $view->setTemplateVar('followers')
+            ->setTemplate('PHPDishWebBundle:User:followers.html.twig');
+        return $this->handleView($view);
     }
 
     /**

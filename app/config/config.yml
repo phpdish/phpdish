@@ -82,7 +82,19 @@ fos_comment:
 fos_rest:
     routing_loader:
         default_format: json
+    view:
+#        mime_types:
+#            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1', 'application/json;version=1.2']
+        view_response_listener: false
+        formats:
+            json: true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+
     format_listener:
-      rules:
-            prefer_extension: false
-            fallback_format: json
+        rules:
+            - { path: ^/, priorities: [ html, json ], fallback_format: ~, prefer_extension: true }

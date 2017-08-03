@@ -70,8 +70,6 @@ class UserManager implements UserManagerInterface
             ->innerJoin('u.following', 'f')
             ->where('f.id = :userId')->setParameter('userId', $user->getId())
             ->getQuery();
-        $query->setFetchMode('User', 'followers', \Doctrine\ORM\Mapping\ClassMetadata::FETCH_EAGER);
-        return $query->getResult();
         return $this->createPaginator($query, $page, $limit);
     }
 
