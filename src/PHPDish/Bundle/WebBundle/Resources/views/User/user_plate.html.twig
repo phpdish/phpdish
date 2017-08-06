@@ -1,0 +1,19 @@
+<div class="margin-top-10">
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="cmt user-info">
+        <img src="{{ app.user.avatar }}" class="rounded-x">
+        <div class="cmt-block user-title">
+            <p><a href="{{ path('user_view', {'username': app.user.username}) }}">{{ app.user.username }}</a></p>
+            <ul class="list-inline badge-lists badge-icons">
+                <li><a href="{{ path('user_topics',  {'username': app.user.username}) }}">话题</a></li>
+                <li><a href="{{ path('user_posts',  {'username': app.user.username}) }}">文章</a></li>
+                <li><a title="我的短消息" href=""><i class="fa fa-envelope"></i></a><span class="badge badge-orange rounded-x">10</span></li>
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <p>七目鱼是一个以内容分享为主的清晰的小众社区，致力于为文字爱好者，技术爱好者提供知识分享的平台。</p>
+    <a class="btn btn-block btn-default" href="{{ path('register') }}">现在注册</a>
+    <p class="text-center">已注册用户请<a href="{{ path('login') }}">登录</a></p>
+    {% endif %}
+</div>

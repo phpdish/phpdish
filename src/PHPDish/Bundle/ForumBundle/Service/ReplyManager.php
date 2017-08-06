@@ -31,7 +31,7 @@ class ReplyManager  implements ReplyManagerInterface
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null)
     {
         $query = $this->replyRepository->createQueryBuilder('r')
-            ->where('t.topic = :topicId')->setParameter('topicId', $topic->getId())
+            ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId())
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }

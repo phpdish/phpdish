@@ -65,7 +65,7 @@ class TopicController extends Controller
     public function viewAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
-        $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page'));
+        $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies

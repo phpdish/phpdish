@@ -27,13 +27,13 @@
                         </ul>
                     </div>
                 </header>
-                <div class="entry-content" itemprop="articleBody">
+                <div class="entry-content">
                     <div class="headline headlime-md"><h3>{{ replies.count }}个回答</h3></div>
                     {% for reply in replies %}
                     <div>
                         <div class="clearfix margin-bottom-10">{{ reply.body }}</div>
                         <ul class="list-unstyled list-inline clearfix small">
-                            <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt:date('Y-m-d') }}</li>
+                            <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt|date('Y-m-d') }}</li>
                             <li class="text-muted"><i class="fa fa-pencil"></i> {{ reply.user.username }}</li>
                             <li class="text-muted"><i class="fa fa-comments"></i> <span class="cursor-pointer" data-role="mention" data-username="{{ reply.user.username }}">回复TA</span></li>
                             <li class="pull-right">
@@ -59,13 +59,7 @@
                 </footer>
             </article>
             <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
-                <aside class="widget clearfix">
-                    <div class="margin-bottom-10">
-                        <button class="btn btn-default"><i class="fa fa-check"></i> 已收藏</button>
-                        <button class="btn btn-primary" data-role="save-question" data-question-id="<?=$question->id?>"><i class="fa fa-heart"></i> 收藏</button>
-                        <span class="color-grey"><?=$question->attention_nums;?> 人收藏了该问题 </span>
-                    </div>
-                </aside>
+                {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
                 <aside class="widget clearfix widget_recent_entries">
                     <h3 class="widget-title">热门</h3>
                     {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}

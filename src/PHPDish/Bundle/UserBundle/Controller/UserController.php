@@ -81,7 +81,7 @@ class UserController extends FOSRestController
         $user = $manager->findUserByName($username);
         $followers = $manager->findUserFollowers($user, $request->query->getInt('page', 1));
 
-        $view = $this->view($followers);
+        $view = $this->view($followers->getCurrentPageResults());
         $view->setTemplateVar('followers')
             ->setTemplate('PHPDishWebBundle:User:followers.html.twig');
         return $this->handleView($view);
