@@ -4,9 +4,6 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
-use PHPDish\Bundle\ForumBundle\Service\ReplyManagerInterface;
-use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
-use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TopicController extends Controller
 {
+    use ManagerTrait;
+
     /**
      * @Route("/topics", name="topic")
      * @param Request $request
@@ -100,29 +99,5 @@ class TopicController extends Controller
         return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
             'topics' => $topics
         ]);
-    }
-
-    /**
-     * @return TopicManagerInterface
-     */
-    protected function getTopicManager()
-    {
-        return $this->get('phpdish.manager.topic');
-    }
-
-    /**
-     * @return ReplyManagerInterface
-     */
-    protected function getReplyManager()
-    {
-        return $this->get('phpdish.manager.reply');
-    }
-
-    /**
-     * @return UserManagerInterface
-     */
-    protected function getUserManager()
-    {
-        return $this->get('phpdish.manager.user');
     }
 }

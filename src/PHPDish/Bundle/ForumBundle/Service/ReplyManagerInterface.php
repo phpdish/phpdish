@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Pagerfanta\Pagerfanta;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 
 interface ReplyManagerInterface
@@ -14,4 +15,18 @@ interface ReplyManagerInterface
      * @return Pagerfanta
      */
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null);
+
+    /**
+     * 创建一条回复
+     * @param TopicInterface $topic
+     * @return ReplyInterface
+     */
+    public function createReply(TopicInterface $topic);
+
+    /**
+     * 保存回复
+     * @param ReplyInterface $reply
+     * @return boolean
+     */
+    public function saveReply(ReplyInterface $reply);
 }

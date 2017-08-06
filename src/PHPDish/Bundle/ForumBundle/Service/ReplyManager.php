@@ -4,6 +4,8 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\ForumBundle\Entity\Reply;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 
 class ReplyManager  implements ReplyManagerInterface
@@ -23,6 +25,26 @@ class ReplyManager  implements ReplyManagerInterface
     {
         $this->entityManager = $entityManager;
         $this->replyRepository = $entityManager->getRepository('PHPDishForumBundle:Reply');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createReply(TopicInterface $topic)
+    {
+        $reply = new Reply();
+        $reply->setTopic($topic);
+        return $reply;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveReply(ReplyInterface $reply)
+    {
+        $this->entityManager->persist($reply);
+        $this->entityManager->flush();
+        return true;
     }
 
     /**
