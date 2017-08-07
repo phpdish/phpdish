@@ -74,10 +74,11 @@ fos_comment:
     db_driver: orm
     class:
         model:
-            comment: PHPDish\Bundle\PostBundle\Entity\Comment
-            thread: PHPDish\Bundle\PostBundle\Entity\Post
+            comment: PHPDish\Bundle\CommentBundle\Entity\Comment
+            thread: PHPDish\Bundle\CommentBundle\Entity\Thread
 
-# app/config/config.yml
+assetic:
+    bundles: [ "FOSCommentBundle" ]
 
 fos_rest:
     routing_loader:

@@ -15,7 +15,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
             new PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
+            new PHPDish\Bundle\CommentBundle\PHPDishCommentBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
