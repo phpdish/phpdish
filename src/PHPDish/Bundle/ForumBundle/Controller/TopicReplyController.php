@@ -26,14 +26,14 @@ class TopicReplyController extends FOSRestController
     /**
      * @Route("/topics/{id}/replies", name="topic_add_reply")
      * @Method("POST")
-     * @param int $topicId
+     * @param int $id
      * @param Request $request
      * @return Response
      */
-    public function addTopicReply($topicId, Request $request)
+    public function addTopicReply($id, Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $topic = $this->getTopicManager()->findTopicById($topicId);
+        $topic = $this->getTopicManager()->findTopicById($id);
         $reply = $this->getReplyManager()->createReply($topic);
         $form =  $this->createForm(TopicReplyType::class, $reply);
         $form->handleRequest($request);
@@ -45,7 +45,7 @@ class TopicReplyController extends FOSRestController
             ->setStatusCode(400)
             ->setData(array(
                 'form' => $form,
-                'topicId' => $topicId,
+                'topicId' => $id,
             ));
         return $this->handleView($view);
     }

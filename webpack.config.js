@@ -18,6 +18,7 @@ Encore
     })
     .enableVersioning(true)
     .enableSourceMaps(!Encore.isProduction());
+
 if (!Encore.isProduction()) {
     Encore.enableVersioning(false);
     Encore.setPublicPath('http://127.0.0.1:8080')
@@ -50,7 +51,7 @@ for (const entryName in foundEntries) {
 //add shared entry
 Encore.createSharedEntry('common', [
     path.resolve(config.modulesPath, 'common.js'),
-    path.resolve(config.modulesPath, 'editor.js'),
+    path.resolve(config.modulesPath, 'editor.js')
 ]);
 
 //add style entries

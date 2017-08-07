@@ -26,6 +26,7 @@ var routes = {
     'user.changeAvatar': {path:  '/user/users/avatar', method: 'POST'},
     'topic.follow': {path:'/topics/{id}/follow', method: 'POST'},
     'topic.unfollow': {path:'/topics/{id}/unfollow', method: 'POST'},
+    'topic.addReply': {path: '/topics/{id}/replies', method: 'POST'},
     'question.follow': {path:'/questions/{id}/follow', method: 'POST'},
     'question.unfollow': {path:'/questions/{id}/unfollow', method: 'POST'},
     'questionReply.add': {path:'/question-replies/add/{questionId}', method: 'POST'}, //添加问题回复

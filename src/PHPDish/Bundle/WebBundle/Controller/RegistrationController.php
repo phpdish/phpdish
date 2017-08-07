@@ -3,6 +3,7 @@ namespace PHPDish\Bundle\WebBundle\Controller;
 
 use PHPDish\Bundle\UserBundle\Entity\User;
 use PHPDish\Bundle\UserBundle\Form\Type\UserType;
+use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $user = new User();
+        $user = $this->getUserManager()->createUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -25,15 +26,21 @@ class RegistrationController extends Controller
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            return $this->redirectToRoute('user_home', [
+            $this->getUserManager()->saveUser($user);
+            return $this->redirectToRoute('user_view', [
                 'username' => $user->getUsername()
             ]);
         }
         return $this->render('PHPDishWebBundle:Registration:register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @return UserManagerInterface
+     */
+    protected function getUserManager()
+    {
+        return $this->get('phpdish.manager.user');
     }
 }

@@ -1,7 +1,6 @@
 'use strict';
 
 var layer = require('layer-dialog');
-// require('layer-dialog/skin/layer.css');
 
 function Dialog()
 {

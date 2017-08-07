@@ -1,9 +1,11 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Service;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\UserBundle\Entity\User;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class UserManager implements UserManagerInterface
@@ -17,6 +19,27 @@ class UserManager implements UserManagerInterface
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createUser()
+    {
+        $user = new User();
+        $user->setCreatedAt(Carbon::now());
+        return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveUser(UserInterface $user)
+    {
+        $user->setUpdatedAt(Carbon::now());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        return true;
     }
 
     /**

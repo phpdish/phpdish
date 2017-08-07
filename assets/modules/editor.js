@@ -1,4 +1,4 @@
-var wangEditor =  require('wangeditor');
+var WangEditor =  require('wangeditor');
 // require('wangeditor/dist/css/wangEditor.min.css');
 var util  = require('./util.js');
 var Emotions = require('./emotion.js');
@@ -36,18 +36,17 @@ function Editor($element, options)
     }, options);
 
     //公共配置
-    wangEditor.config.printLog = false;
-    var editor = new wangEditor(options.element);
-    editor.config.menus = options.toolbar;
+    var editor = new WangEditor(options.element);
+    editor.customConfig.menus = options.toolbar;
     //配置上传
-    editor.config.uploadImgUrl = '/attachments/add?src=wangeditor';
-    editor.config.uploadParams = {
+    editor.customConfig.uploadImgUrl = '/attachments/add?src=wangeditor';
+    editor.customConfig.uploadParams = {
         token: util.getToken(),
         user: util.getAuthUser()
     };
-    editor.config.uploadImgFileName = 'upfile';
+    editor.customConfig.uploadImgFileName = 'upfile';
     //配置emotion
-    editor.config.emotions = {
+    editor.customConfig.emotions = {
         baiduPaoPao: {
             title: "泡泡",
             data: convertEmotions(Emotions.getEmotion('baidu.pp'))
@@ -59,7 +58,7 @@ function Editor($element, options)
         youkuDefault: {
             title: "优酷",
             data: convertEmotions(Emotions.getEmotion('youku.default'))
-        },
+        }
     };
     editor.create();
     return editor;

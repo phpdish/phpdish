@@ -7,6 +7,19 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface UserManagerInterface
 {
     /**
+     * 创建新用户
+     * @return UserInterface
+     */
+    public function createUser();
+
+    /**
+     * 保存新用户
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function saveUser(UserInterface $user);
+
+    /**
      * 根据用户名获取用户
      * @param string $username
      * @return UserInterface

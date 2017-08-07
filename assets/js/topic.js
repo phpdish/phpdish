@@ -5,10 +5,11 @@ var util = require('module/util.js');
 require('jquery-validation');
 
 //话题列表页与话题详情页公用
-var $contentTextarea = $('#content-textarea');
+var $editor = $('#editor');
 //编辑器
-if($contentTextarea.length > 0){
-    var editor = new Editor($contentTextarea);
+console.log($editor);
+if($editor.length > 0){
+    var editor = new Editor('#editor');
 }
 //话题详情页
 (function($){
@@ -23,45 +24,30 @@ if($contentTextarea.length > 0){
     //    }
     //    util.goHash($addReplyForm);
     // });
-    //回复验证
-    $addReplyForm.validate({
-       submitHandler: function() {
-           if($addReplyForm._lock){
-               return false;
-           }
-           var contentText = editor.$txt.formatText();
-           if($.trim(contentText).length == 0){
-                util.dialog.msg('请填写内容');
-               return false;
-           }
-           $addReplyForm._lock = true;
-           util.request('topicReply.add', {topicId: window.topicId}, $addReplyForm.serialize(), {success: function(response){
-               if (response.code==0) {
-                   util.dialog.msg(response.message, 2);
-                   setTimeout(function(){
-                       location.reload();
-                   }, 1000);
-               } else {
-                   util.dialog.alert(response.message, 2);
-               }
-               $addReplyForm._lock = false;
-           }});
-           return false;
-       },
-       errorPlacement: function(error, element) {
-           error.insertAfter($(element));
-       },
-       rules: {
-           content: {
-               required: true
-           }
-       },
-       messages: {
-           content: {
-               required: '请填写内容',
-           }
-       }
-   });
+    $addReplyForm.on('submit', function(){
+        if($addReplyForm._lock){
+            return false;
+        }
+        var body = $.trim(editor.txt.html());
+        if(body.length === 0){
+            util.dialog.msg('请填写内容');
+            return false;
+        }
+        $addReplyForm._lock = true;
+        util.request('topic.addReply', window.topicId, {originalBody: body}, {success: function(response){
+            console.log(response);exit;
+            if (response.code==0) {
+                util.dialog.msg(response.message, 2);
+                setTimeout(function(){
+                    location.reload();
+                }, 1000);
+            } else {
+                util.dialog.alert(response.message, 2);
+            }
+            $addReplyForm._lock = false;
+        }});
+        return false;
+    });
 })($);
 
 //添加话题
