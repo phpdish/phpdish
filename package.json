@@ -1,5 +1,5 @@
 {
-  "name": "slcms",
+  "name": "phpdish",
   "version": "1.0.0",
   "description": "slcms",
   "main": "index.js",
@@ -8,20 +8,15 @@
   },
   "scripts": {
     "build": "encore production",
-    "build:dev": "encore dev",
-    "build-admin": "webpack --config webpack.admin.config.js",
-    "build-supplier": "webpack --config webpack.supplier.config.js"
+    "build:dev": "encore dev-server"
   },
   "repository": {
     "type": "git",
-    "url": "git@git.oschina.net:slince/slcms.git"
+    "url": "git@git.oschina.net:slince/phpdish.git"
   },
-  "keywords": [
-    "slcms",
-    "cms"
-  ],
+  "keywords": ["phpdish", "dish", "community"],
   "author": "Tao",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "@symfony/webpack-encore": "symfony/webpack-encore",
     "babel-core": "^6.17.0",
@@ -73,6 +68,6 @@
     "simditor": "^2.3.6",
     "slick-carousel": "^1.6.0",
     "tinymce": "^4.4.3",
-    "wangeditor": "^2.1.22"
+    "wangeditor": "^3.0"
   }
 }

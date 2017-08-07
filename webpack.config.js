@@ -1,7 +1,7 @@
-var Encore = require('@symfony/webpack-encore');
-var path = require('path');
-var glob = require('glob');
-var buildPath = 'web/build';
+const Encore = require('@symfony/webpack-encore');
+const path = require('path');
+const glob = require('glob');
+const buildPath = 'web/build';
 
 Encore
     .setOutputPath(buildPath)
@@ -16,9 +16,14 @@ Encore
         '_': 'lodash',
         "window.lodash": "lodash"
     })
-    .enableVersioning(true);
-
-var config = {
+    .enableVersioning(true)
+    .enableSourceMaps(!Encore.isProduction());
+if (!Encore.isProduction()) {
+    Encore.enableVersioning(false);
+    Encore.setPublicPath('http://127.0.0.1:8080')
+        .setManifestKeyPrefix('build/');
+}
+const config = {
     buildPath: path.resolve(buildPath),
     assetsPath: path.resolve("./assets"),
     cssPath: path.resolve("./assets/css"),
@@ -29,33 +34,30 @@ var config = {
 };
 
 //add js entries
-function findEntries(buildPath){
-    var entries = {};
-    var srcDirName = buildPath + '/**/*.js';
+function findEntries(entryPath){
+    const entries = {};
+    const srcDirName = entryPath + '/**/*.js';
     glob.sync(srcDirName).forEach(function (filepath) {
         const name = filepath.slice(filepath.indexOf('js'), -3);
         entries[name] = filepath;
     });
     return entries;
 }
-var foundEntries = findEntries(config.jsPath);
-for (var entryName in foundEntries) {
+const foundEntries = findEntries(config.jsPath);
+for (const entryName in foundEntries) {
     Encore.addEntry(entryName, foundEntries[entryName]);
 }
 //add shared entry
 Encore.createSharedEntry('common', [
-    path.resolve(config.modulesPath, 'common.js')
+    path.resolve(config.modulesPath, 'common.js'),
+    path.resolve(config.modulesPath, 'editor.js'),
 ]);
 
 //add style entries
 Encore.addStyleEntry('css/style', config.cssPath + '/_style.css');
 
-if (Encore.isProduction()) {
-
-}
-
 //final webpack config
-var webpackConfig = Encore.getWebpackConfig();
+const webpackConfig = Encore.getWebpackConfig();
 webpackConfig.resolve.alias = {
     css: config.cssPath,
     js: config.jsPath,

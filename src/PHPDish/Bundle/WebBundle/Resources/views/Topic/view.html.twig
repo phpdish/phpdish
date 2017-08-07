@@ -2,6 +2,13 @@
 
 {% block title %} {{ topic.title }} {% endblock %}
 
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/topic.js') }}"></script>
+    <script type="text/javascript">
+        window.topicId = {{ topic.id }};
+    </script>
+{% endblock %}
+
 {% block content %}
     <div id="main" class="container" role="main">
         <div class="row">

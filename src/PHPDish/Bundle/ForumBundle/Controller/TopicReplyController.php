@@ -2,9 +2,11 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TopicReplyController extends FOSRestController
 {
@@ -26,12 +28,25 @@ class TopicReplyController extends FOSRestController
      * @Method("POST")
      * @param int $topicId
      * @param Request $request
+     * @return Response
      */
     public function addTopicReply($topicId, Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $topic = $this->getTopicManager()->findTopicById($topicId);
         $reply = $this->getReplyManager()->createReply($topic);
-
+        $form =  $this->createForm(TopicReplyType::class, $reply);
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isValid()) {
+            $this->getReplyManager()->saveReply($reply);
+            return $this->handleView($this->routeRedirectView('topic_replies'));
+        }
+        $view = $this->view()
+            ->setStatusCode(400)
+            ->setData(array(
+                'form' => $form,
+                'topicId' => $topicId,
+            ));
+        return $this->handleView($view);
     }
 }
