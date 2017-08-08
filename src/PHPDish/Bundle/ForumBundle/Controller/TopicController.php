@@ -66,15 +66,9 @@ class TopicController extends Controller
     {
         $topic = $this->getTopicManager()->findTopicById($id);
         $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
-
-        $reply = $this->getReplyManager()->createReply($topic);
-        $form =  $this->createForm(TopicReplyType::class, $reply);
-        $form->handleRequest($request);
-
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies,
-            'form' => $form->createView()
         ]);
     }
 
