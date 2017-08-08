@@ -34,7 +34,7 @@ if($editor.length > 0){
             return false;
         }
         $addReplyForm._lock = true;
-        util.request('topic.addReply', window.topicId, {originalBody: body}, {success: function(response){
+        util.request('topic.addReply', window.topicId, {reply: {original_body: body}}, {success: function(response){
             console.log(response);exit;
             if (response.code==0) {
                 util.dialog.msg(response.message, 2);

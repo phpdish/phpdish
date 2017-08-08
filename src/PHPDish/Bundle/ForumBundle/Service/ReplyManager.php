@@ -1,12 +1,14 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class ReplyManager  implements ReplyManagerInterface
 {
@@ -30,10 +32,12 @@ class ReplyManager  implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function createReply(TopicInterface $topic)
+    public function createReply(TopicInterface $topic, UserInterface $user)
     {
         $reply = new Reply();
-        $reply->setTopic($topic);
+        $reply->setTopic($topic)
+            ->setUser($user)
+            ->setCreatedAt(Carbon::now());
         return $reply;
     }
 
@@ -42,6 +46,7 @@ class ReplyManager  implements ReplyManagerInterface
      */
     public function saveReply(ReplyInterface $reply)
     {
+        $reply->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
         return true;

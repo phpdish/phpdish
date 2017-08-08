@@ -39,6 +39,7 @@ class Reply extends BaseComment implements ReplyInterface
     public function setTopic(TopicInterface $topic)
     {
         $this->topic = $topic;
+        return $this;
     }
 
     /**

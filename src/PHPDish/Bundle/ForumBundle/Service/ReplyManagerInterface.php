@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface ReplyManagerInterface
 {
@@ -19,9 +20,10 @@ interface ReplyManagerInterface
     /**
      * 创建一条回复
      * @param TopicInterface $topic
+     * @param UserInterface $user
      * @return ReplyInterface
      */
-    public function createReply(TopicInterface $topic);
+    public function createReply(TopicInterface $topic, UserInterface $user);
 
     /**
      * 保存回复

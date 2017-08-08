@@ -34,19 +34,21 @@ class TopicReplyController extends FOSRestController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $topic = $this->getTopicManager()->findTopicById($id);
-        $reply = $this->getReplyManager()->createReply($topic);
-        $form =  $this->createForm(TopicReplyType::class, $reply);
+        $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
+        $form =  $this->createForm(TopicReplyType::class, $reply, [
+            'csrf_protection' => false
+        ]);
         $form->handleRequest($request);
-        if ($form->isValid() && $form->isValid()) {
+        $view = $this->view()->setFormat('json');
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getReplyManager()->saveReply($reply);
-            return $this->handleView($this->routeRedirectView('topic_replies'));
+            $view->setData(['reply' => $reply]);
+        } else {
+            $view->setStatusCode(400)
+                ->setData(array(
+                    'form' => $form,
+                ));
         }
-        $view = $this->view()
-            ->setStatusCode(400)
-            ->setData(array(
-                'form' => $form,
-                'topicId' => $id,
-            ));
         return $this->handleView($view);
     }
 }
