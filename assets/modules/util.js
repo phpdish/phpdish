@@ -1,17 +1,18 @@
 'use strict';
 
-var Route = require('./route.js');
-var Dialog = require('./dialog.js');
+const Route = require('./route.js');
+const Dialog = require('./dialog.js');
 
-var token = 'fghxssfgrtgbds78ddsaadcff';
-var authUser = 'api';
+const token = 'fghxssfgrtgbds78ddsaadcff';
+const authUser = 'api';
 
-module.exports = {
+export default {
     route: new Route(),
     request: function () {
         return this.route.request.apply(this.route, arguments);
     },
     dialog: new Dialog(),
+
     /**
      * hash的偏移高度
      * @param hash
@@ -19,19 +20,18 @@ module.exports = {
      */
     hashOffset: function(hash) {
         hash = hash ? hash : location.hash;
-        var $hash = $(hash);
+        const $hash = $(hash);
         if ($hash.length <= 0) {
             return null
         }
-        var offset = $hash.offset().top;
-        return offset;
+        return $hash.offset().top;
     },
     /**
      * 页面滑行到hash节点
      * @param hash
      */
     goHash: function(hash) {
-        var offset = this.hashOffset(hash);
+        const offset = this.hashOffset(hash);
         if (null !== offset) {
             $("html,body").animate({
                 scrollTop: offset

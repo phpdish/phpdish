@@ -19,7 +19,7 @@
                     <div class="question-list">
                         {% for topic in topics %}
                         <dl class="dl-horizontal">
-                            <dt><img src="{{ topic.user.avatar }}"></dt>
+                            <dt><a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar() }}" data-username="{{ topic.user.username }}" data-role="user-avatar"></a></dt>
                             <dd>
                                 <p>
                                     <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>

@@ -18,7 +18,7 @@
                     {% for topic in topics %}
                     <div class="question-list">
                         <dl class="dl-horizontal">
-                            <dt><img src="{{ topic.user.avatar() }}" data-role="user-avatar"></dt>
+                            <dt><a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar() }}" data-username="{{ topic.user.username }}" data-role="user-avatar"></a></dt>
                             <dd>
                                 <p>
                                     <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
@@ -37,17 +37,9 @@
                     {% endfor %}
                 </div>
                 <footer class="entry-footer">
-                    <div id="pagination">{{ pagerfanta(topics, 'twitter_bootstrap3') }} </div>
-                    <div class="content-wrap">
-                        <form id="add-question-form">
-                            <div class="headline headline-md"><h3>发帖</h3></div>
-                            <input type="text" class="form-control" name="title" placeholder="标题">
-                            <div class="margin-bottom-20"></div>
-                            <textarea class="form-control" id="content-textarea" name="content" rows="10"></textarea>
-                            <div class="margin-bottom-20"></div>
-                            <button type="submit" class="btn btn-primary">发布</button>
-                        </form>
-                    </div>
+                    {% if topics.haveToPaginate %}
+                    {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                    {% endif %}
                 </footer>
             </article>
             <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">

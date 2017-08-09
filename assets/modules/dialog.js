@@ -1,6 +1,6 @@
 'use strict';
 
-var layer = require('layer-dialog');
+var layer = require('art-dialog');
 
 function Dialog()
 {

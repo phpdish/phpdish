@@ -10,7 +10,7 @@
 <div id="main" class="container">
     <div class="row">
         <article id="content" class="single col-md-12">
-            <div class="entry-content">
+            <div class="entry-content panel-box">
                 {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'add-post-form'}}) }}
                 {{ form_errors(form) }}
                 <div class="form-group">
@@ -18,7 +18,13 @@
                     {{ form_errors(form.title) }}
                 </div>
                 <div class="form-group">
-                    {{ form_widget(form.originalBody, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.originalBody, {'attr': {
+                        'class': 'form-control',
+                        'rows': 20,
+                        'cols': 50,
+                        'style': "overflow:hidden",
+                        'placeholder': "请使用 Markdown 格式书写 ;-)，代码片段黏贴时请注意使用高亮语法。" }}
+                    ) }}
                     {{ form_errors(form.originalBody) }}
                 </div>
                 <div class="form-group">

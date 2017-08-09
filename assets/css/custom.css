@@ -2514,3 +2514,7 @@ article .entry-details {
     opacity: 0;
     cursor: pointer;
 }
+
+.panel-box {
+    padding: 10px 20px;
+}

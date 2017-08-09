@@ -51,7 +51,8 @@ for (const entryName in foundEntries) {
 //add shared entry
 Encore.createSharedEntry('common', [
     path.resolve(config.modulesPath, 'common.js'),
-    path.resolve(config.modulesPath, 'editor.js')
+    path.resolve(config.modulesPath, 'editor.js'),
+    path.resolve(config.modulesPath, 'markdown-editor.js'),
 ]);
 
 //add style entries
