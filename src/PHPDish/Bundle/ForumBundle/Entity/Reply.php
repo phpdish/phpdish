@@ -6,7 +6,7 @@ use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
-use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -18,13 +18,15 @@ class Reply extends BaseComment implements ReplyInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @MaxDepth(1)
+     * @JMS\MaxDepth(1)
+     * @JMS\Groups({"details"})
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Topic")
-     * @MaxDepth(1)
+     * @JMS\MaxDepth(1)
+     * @JMS\Groups({"details"})
      */
     protected $topic;
 

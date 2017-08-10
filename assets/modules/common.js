@@ -1,12 +1,13 @@
 'use strict';
-var util = require('./util.js');
-var UserQuickNav = require('./user-quick-nav.js');
-var scrollToFixed = require('scrolltofixed');
-//通用性操作
-require('./common-action.js');
+import util from './util.js';
 
-var $document = $(document);
-var $window = $(window);
+const UserQuickNav = require('./user-quick-nav.js');
+const scrollToFixed = require('scrolltofixed');
+//通用性操作
+import './common-action.js';
+
+const $document = $(document);
+const $window = $(window);
 
 //验证码刷新
 (function($){

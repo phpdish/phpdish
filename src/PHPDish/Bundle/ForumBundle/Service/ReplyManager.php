@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
@@ -23,10 +24,16 @@ class ReplyManager  implements ReplyManagerInterface
      */
     protected $replyRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var MarkdownParserInterface
+     */
+    protected $markdownParser;
+
+    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser)
     {
         $this->entityManager = $entityManager;
         $this->replyRepository = $entityManager->getRepository('PHPDishForumBundle:Reply');
+        $this->markdownParser = $markdownParser;
     }
 
     /**
@@ -46,7 +53,9 @@ class ReplyManager  implements ReplyManagerInterface
      */
     public function saveReply(ReplyInterface $reply)
     {
-        $reply->setUpdatedAt(Carbon::now());
+        $reply->setUpdatedAt(Carbon::now())
+            ->setBody($this->markdownParser->transformMarkdown($reply->getOriginalBody()));
+
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
         return true;

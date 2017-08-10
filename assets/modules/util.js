@@ -1,7 +1,7 @@
 'use strict';
 
-const Route = require('./route.js');
-const Dialog = require('./dialog.js');
+import Route from './route.js';
+import Dialog from './dialog.js';
 
 const token = 'fghxssfgrtgbds78ddsaadcff';
 const authUser = 'api';

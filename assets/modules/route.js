@@ -1,8 +1,8 @@
 'use strict';
 
-var $ = require('jquery');
+import $  from 'jquery';
 
-var routes = {
+const routes = {
     'page.init': {path: '/pages/init', method: 'POST'}, //页面初始化
     'captcha': '/captcha', ///验证码
     'post.show': '/posts/{id}', //post展示页
@@ -36,7 +36,7 @@ var routes = {
 
 function Route()
 {
-    var _this = this;
+    const _this = this;
     /**
      * name  路由名
      * requirements 占位符 参数id
@@ -53,7 +53,7 @@ function Route()
             options.success = parameters;
             parameters = {};
         }
-        var route = this.getRoute(name, requirements);
+        const route = this.getRoute(name, requirements);
         $.extend(options, {
             url: route[0],
             type: route[1],
@@ -88,7 +88,7 @@ function Route()
 
     this.getRoutePath = function(name, requirements){
         if(typeof routes[name] != 'undefined'){
-            var path;
+            let path;
             if(typeof routes[name] == 'object'){
                 path = routes[name].path;
             } else {
@@ -110,4 +110,4 @@ function Route()
     }
 }
 
-module.exports = Route;
+export default Route;

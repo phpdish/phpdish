@@ -1,6 +1,5 @@
 'use strict';
 
-
 //提取umeditor中的表情数据
 var group = {};
 $('td[class^="edui-emotion"]').each(function(){
@@ -16,7 +15,6 @@ $('td[class^="edui-emotion"]').each(function(){
         icon: realurl
     });
 });
-console.log(group);
 
 
 //百度的表情包数据
@@ -1477,7 +1475,7 @@ var YOUKU_EMOTION = {
         }
     ]
 };
-var Emotions = {
+const Emotions = {
     /**
      * 表情数据
      */
@@ -1510,4 +1508,4 @@ var Emotions = {
 Emotions.append('baidu', BAIDU_EMOTION);
 Emotions.append('youku', YOUKU_EMOTION);
 
-module.exports = Emotions;
+export default Emotions;

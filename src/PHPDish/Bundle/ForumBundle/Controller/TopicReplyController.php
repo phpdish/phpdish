@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,7 +43,9 @@ class TopicReplyController extends FOSRestController
         $view = $this->view()->setFormat('json');
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getReplyManager()->saveReply($reply);
-            $view->setData(['reply' => $reply]);
+            $view->setData(['reply' => $reply])
+                ->getContext()
+                ->addGroups(['Default']);
         } else {
             $view->setStatusCode(400)
                 ->setData(array(

@@ -1,5 +1,6 @@
 'use strict';
-var util = require('./util.js');
+
+import util from './util.js';
 
 function UserQuickNav($quickNavPanel, data){
     /**
@@ -8,7 +9,7 @@ function UserQuickNav($quickNavPanel, data){
      * @returns {string}
      */
     this.combineUserNav = function(navs){
-        var navInfo = '';
+        let navInfo = '';
         _.forEach(navs, function(nav, key){
             navInfo += '<a href="' + nav.url + '" title="' + nav.text + '"><em>' + nav.text + "</em>";
             if(nav.num){
@@ -21,17 +22,17 @@ function UserQuickNav($quickNavPanel, data){
     };
 
     this.init =  function(){
-        var ucId = "#ucenterAvatar",
+        const ucId = "#ucenterAvatar",
             hid = "#ucenterHome";
-        var $userHome = $('<li  id="ucenterAvatar"><a id="ucenterHome"></a></li>');
-        var $userHomeALink = $userHome.find('#ucenterHome');
+        const $userHome = $('<li  id="ucenterAvatar"><a id="ucenterHome"></a></li>');
+        const $userHomeALink = $userHome.find('#ucenterHome');
         if(!data.user.id){
             $userHomeALink.attr({
                 "title": data.user.welcome,
                 "href": util.route.getRoutePath('user.login')
             });
         }else{
-            var navInfo = this.combineUserNav(data.user.navs);
+            const navInfo = this.combineUserNav(data.user.navs);
             $userHomeALink.attr({
                 "title": data.user.username,
                 "href": data.user.homepage
@@ -45,4 +46,4 @@ function UserQuickNav($quickNavPanel, data){
     this.init();
 }
 
-module.exports = UserQuickNav;
+export default UserQuickNav;

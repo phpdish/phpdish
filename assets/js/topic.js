@@ -1,50 +1,40 @@
 'use strict';
-require('module/common.js');
-var Editor = require('module/editor.js');
-var util = require('module/util.js');
-require('jquery-validation');
+
+import 'jquery-validation';
+import 'module/common.js';
+import Editor from 'module/editor.js';
+import Util from 'module/util.js';
 
 //话题列表页与话题详情页公用
-var $editor = $('#editor');
-//编辑器
-console.log($editor);
-if($editor.length > 0){
-    var editor = new Editor('#editor');
+const $editorElement = $('#editor');
+let editor;
+if($editorElement.length > 0){
+    editor = (new Editor('#editor')).getRawEditor();
 }
 //话题详情页
 (function($){
-    var $addReplyForm = $('#add-reply-form');
-
-    // //回复艾特
-    // $('[data-at]').on('click', document, function(){
-    //    var $this = $(this);
-    //    var username = $this.data('at');
-    //    if(typeof username != 'undefined' && username.length != 0){
-    //        editor.$txt.prepend('回复 @' + username + ' :');
-    //    }
-    //    util.goHash($addReplyForm);
-    // });
+    const $addReplyForm = $('#add-reply-form');
     $addReplyForm.on('submit', function(){
-        if($addReplyForm._lock){
+        if($addReplyForm.lock){
             return false;
         }
-        var body = $.trim(editor.txt.html());
+        let body = $.trim(editor.txt.html());
         if(body.length === 0){
             util.dialog.msg('请填写内容');
             return false;
         }
-        $addReplyForm._lock = true;
-        util.request('topic.addReply', window.topicId, {reply: {original_body: body}}, {success: function(response){
-            console.log(response);exit;
-            if (response.code==0) {
-                util.dialog.msg(response.message, 2);
-                setTimeout(function(){
-                    location.reload();
-                }, 1000);
-            } else {
-                util.dialog.alert(response.message, 2);
-            }
-            $addReplyForm._lock = false;
+        $addReplyForm.lock = true;
+        Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}, {success: function(response){
+            console.log(response);
+            // if (response.code==0) {
+            //     util.dialog.msg(response.message, 2);
+            //     setTimeout(function(){
+            //         location.reload();
+            //     }, 1000);
+            // } else {
+            //     util.dialog.alert(response.message, 2);
+            // }
+            $addReplyForm.lock = false;
         }});
         return false;
     });

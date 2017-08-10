@@ -13,7 +13,9 @@ services:
 
     phpdish.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@markdown.parser"
 
     phpdish.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType

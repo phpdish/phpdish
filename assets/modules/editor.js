@@ -1,7 +1,8 @@
-var WangEditor =  require('wangeditor');
-// require('wangeditor/dist/css/wangEditor.min.css');
-var util  = require('./util.js');
-var Emotions = require('./emotion.js');
+'use strict';
+
+import WangEditor from 'wangeditor';
+import util from './util.js';
+import Emotions from './emotion.js';
 
 /**
  * 转换表情数据
@@ -36,7 +37,7 @@ function Editor($element, options)
     }, options);
 
     //公共配置
-    var editor = new WangEditor(options.element);
+    const editor = new WangEditor(options.element);
     editor.customConfig.menus = options.toolbar;
     //配置上传
     editor.customConfig.uploadImgUrl = '/attachments/add?src=wangeditor';
@@ -61,7 +62,11 @@ function Editor($element, options)
         }
     };
     editor.create();
-    return editor;
+
+    this.getRawEditor = function(){
+        console.log(editor, 70);
+        return editor;
+    };
 }
 
-module.exports = Editor;
+export default Editor;

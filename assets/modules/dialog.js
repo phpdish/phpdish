@@ -4,7 +4,7 @@ var layer = require('art-dialog');
 
 function Dialog()
 {
-    var _this = this;
+    const _this = this;
     this.layer = layer;
     this.open = function(options){
         options = _.merge({
@@ -51,4 +51,4 @@ function Dialog()
     };
 }
 
-module.exports = Dialog;
+export default Dialog;
