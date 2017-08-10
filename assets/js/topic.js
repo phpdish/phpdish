@@ -2,40 +2,35 @@
 
 import 'jquery-validation';
 import 'module/common.js';
-import Editor from 'module/editor.js';
-import Util from 'module/util.js';
+import Util from '../modules/util.js';
+import nunjucks from 'nunjucks';
 
-//话题列表页与话题详情页公用
-const $editorElement = $('#editor');
-let editor;
-if($editorElement.length > 0){
-    editor = (new Editor('#editor')).getRawEditor();
-}
 //话题详情页
 (function($){
+    const $editorElement = $('#editor');
     const $addReplyForm = $('#add-reply-form');
+    const $repliesPanel = $('#topic-replies-panel');
+
+    //添加回复表单提交
     $addReplyForm.on('submit', function(){
         if($addReplyForm.lock){
             return false;
         }
-        let body = $.trim(editor.txt.html());
+        let body = $.trim($editorElement.val());
         if(body.length === 0){
-            util.dialog.msg('请填写内容');
+            Util.dialog.msg('请填写内容');
             return false;
         }
         $addReplyForm.lock = true;
-        Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}, {success: function(response){
-            console.log(response);
-            // if (response.code==0) {
-            //     util.dialog.msg(response.message, 2);
-            //     setTimeout(function(){
-            //         location.reload();
-            //     }, 1000);
-            // } else {
-            //     util.dialog.alert(response.message, 2);
-            // }
+        Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
+            const html = nunjucks.render('../templates/topic/reply_item.njk', {
+                'reply': response.reply
+            });
+            console.log(html, response);
+
+        }).complete(function(){
             $addReplyForm.lock = false;
-        }});
+        });
         return false;
     });
 })($);

@@ -37,6 +37,11 @@ const routes = {
 function Route()
 {
     const _this = this;
+
+    this.send = function(name, requirements, parameters, options){
+
+    };
+
     /**
      * name  路由名
      * requirements 占位符 参数id
@@ -45,11 +50,13 @@ function Route()
      */
     this.request = function(name, requirements, parameters, options){
         options = options || {};
-        if(typeof requirements == 'function'){
+
+        if(typeof requirements === 'function'){
             options.success = requirements;
             requirements = {};
             parameters = {};
-        }else if(typeof parameters == 'function'){
+
+        }else if(typeof parameters === 'function'){
             options.success = parameters;
             parameters = {};
         }
@@ -61,18 +68,24 @@ function Route()
         });
         return this.lastRequest = $.ajax(options);
     };
+
+    this.getRoutePath = function(name, requirements){
+        return this.getRoute(name, requirements)[0];
+    };
+
+
     this.getRoute = function(name, requirements) {
-        if(typeof routes[name] != 'undefined'){
-            var method, path;
-            if(typeof routes[name] == 'object'){
+        if(typeof routes[name] !== 'undefined'){
+            let method, path;
+            if(typeof routes[name] === 'object'){
                 path = routes[name].path;
                 method = routes[name].method;
             } else {
                 path = routes[name];
                 method = 'GET';
             }
-            if(typeof requirements != 'undefined'){
-                if(typeof requirements != 'object'){
+            if(typeof requirements !== 'undefined'){
+                if(typeof requirements !== 'object'){
                     requirements = {id: requirements};
                 }
             } else {
@@ -85,29 +98,6 @@ function Route()
         }
         return false;
     };
-
-    this.getRoutePath = function(name, requirements){
-        if(typeof routes[name] != 'undefined'){
-            let path;
-            if(typeof routes[name] == 'object'){
-                path = routes[name].path;
-            } else {
-                path = routes[name];
-            }
-            if(typeof requirements != 'undefined'){
-                if(typeof requirements != 'object'){
-                    requirements = {id: requirements};
-                }
-            } else {
-                requirements = {};
-            }
-            $.each(requirements, function (i, n){
-                path = path.replace('{'+i+'}', n);
-            });
-            return path;
-        }
-        return false;
-    }
 }
 
 export default Route;

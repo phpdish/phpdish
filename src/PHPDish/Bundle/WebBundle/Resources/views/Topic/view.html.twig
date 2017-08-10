@@ -36,20 +36,22 @@
                 </header>
                 <div class="entry-content">
                     <div class="headline headlime-md"><h3>{{ replies.count }}个回答</h3></div>
-                    {% for reply in replies %}
-                    <div>
-                        <div class="clearfix margin-bottom-10">{{ reply.body }}</div>
-                        <ul class="list-unstyled list-inline clearfix small">
-                            <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt|date('Y-m-d') }}</li>
-                            <li class="text-muted"><i class="fa fa-pencil"></i> {{ reply.user.username }}</li>
-                            <li class="text-muted"><i class="fa fa-comments"></i> <span class="cursor-pointer" data-role="mention" data-username="{{ reply.user.username }}">回复TA</span></li>
-                            <li class="pull-right">
-                                <img src="{{ reply.user.avatar }}" class="img-width-50"/>
-                            </li>
-                        </ul>
+                    <div id="topic-replies-panel">
+                        {% for reply in replies %}
+                            <div>
+                                <div class="clearfix margin-bottom-10">{{ reply.body }}</div>
+                                <ul class="list-unstyled list-inline clearfix small">
+                                    <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt|date('Y-m-d') }}</li>
+                                    <li class="text-muted"><i class="fa fa-pencil"></i> {{ reply.user.username }}</li>
+                                    <li class="text-muted"><i class="fa fa-comments"></i> <span class="cursor-pointer" data-role="mention" data-username="{{ reply.user.username }}">回复TA</span></li>
+                                    <li class="pull-right">
+                                        <img src="{{ reply.user.avatar }}" class="img-width-50"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr/>
+                        {% endfor %}
                     </div>
-                    <hr/>
-                    {% endfor %}
                 </div>
                 <footer class="entry-footer">
                     {% if replies.haveToPaginate %}
@@ -58,7 +60,7 @@
                     <div class="content-wrap">
                         <form id="add-reply-form">
                             <div class="headline headline-md"><h3>回复</h3></div>
-                            <div id="editor"></div>
+                            <textarea class="form-control" id="editor" placeholder="请使用markdown语法"></textarea>
                             <div class="margin-bottom-20"></div>
                             <button type="submit" class="btn btn-primary">回复</button>
                         </form>
