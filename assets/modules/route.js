@@ -62,6 +62,8 @@ function Route()
         }
         const route = this.getRoute(name, requirements);
         $.extend(options, {
+            'dataType': 'json',
+        }, {
             url: route[0],
             type: route[1],
             data: parameters

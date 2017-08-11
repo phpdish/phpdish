@@ -3,7 +3,8 @@
 import 'jquery-validation';
 import 'module/common.js';
 import Util from '../modules/util.js';
-import nunjucks from 'nunjucks';
+import replyItemTemplate from '../templates/topic/repliy_item.njk';
+
 
 //话题详情页
 (function($){
@@ -23,11 +24,7 @@ import nunjucks from 'nunjucks';
         }
         $addReplyForm.lock = true;
         Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
-            const html = nunjucks.render('../templates/topic/reply_item.njk', {
-                'reply': response.reply
-            });
-            console.log(html, response);
-
+            Util.dialog.message('提交成功').flash(() => location.reload());
         }).complete(function(){
             $addReplyForm.lock = false;
         });

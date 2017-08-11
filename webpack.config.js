@@ -28,6 +28,7 @@ const config = {
     buildPath: path.resolve(buildPath),
     assetsPath: path.resolve("./assets"),
     cssPath: path.resolve("./assets/css"),
+    scssPath: path.resolve("./assets/scss"),
     jsPath: path.resolve("./assets/js"),
     modulesPath: path.resolve("./assets/modules"),
     pluginsPath: path.resolve("./assets/plugins"),
@@ -53,10 +54,11 @@ Encore.createSharedEntry('common', [
     path.resolve(config.modulesPath, 'common.js'),
     path.resolve(config.modulesPath, 'editor.js'),
     path.resolve(config.modulesPath, 'markdown-editor.js'),
+    path.resolve(config.modulesPath, 'dialog.js'),
 ]);
 
 //add style entries
-Encore.addStyleEntry('css/style', config.cssPath + '/_style.css');
+Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
 
 //final webpack config
 const webpackConfig = Encore.getWebpackConfig();
@@ -70,4 +72,10 @@ webpackConfig.externals = {
     'jquery': 'window.$',
     'lodash': 'window._',
 };
+//add nunjunks loader
+webpackConfig.module.rules.push({
+    test: /\.njk$/,
+    loader: 'nunjucks-loader'
+});
+
 module.exports = webpackConfig;

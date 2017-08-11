@@ -1,7 +1,7 @@
 'use strict';
 
 import Route from './route.js';
-import Dialog from './dialog.js';
+import * as DialogFactory from './dialog.js';
 
 const token = 'fghxssfgrtgbds78ddsaadcff';
 const authUser = 'api';
@@ -11,7 +11,7 @@ export default {
     request: function () {
         return this.route.request.apply(this.route, arguments);
     },
-    dialog: new Dialog(),
+    dialog: DialogFactory,
 
     /**
      * hash的偏移高度

@@ -2774,6 +2774,15 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
+loader-utils@^0.2.12:
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-0.2.17.tgz#f86e6374d43205a6e6c60e9196f17c0299bfb348"
+  dependencies:
+    big.js "^3.1.3"
+    emojis-list "^2.0.0"
+    json5 "^0.5.0"
+    object-assign "^4.0.1"
+
 loader-utils@^1.0.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
@@ -3220,6 +3229,10 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+noty@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/noty/-/noty-3.1.2.tgz#301903fd8f9dd292ba61a35e15629302f745e4b3"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -3248,6 +3261,13 @@ num2fraction@^1.2.2:
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+
+nunjucks-loader@^2.4.8:
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/nunjucks-loader/-/nunjucks-loader-2.4.8.tgz#6d678258f37b028d7e7a78206b2938ef8bb6d097"
+  dependencies:
+    loader-utils "^0.2.12"
+    slash "~1.0.0"
 
 nunjucks@^3.0.1:
   version "3.0.1"
@@ -4275,7 +4295,7 @@ simplemde@^1.11.2:
     codemirror-spell-checker "*"
     marked "*"
 
-slash@^1.0.0:
+slash@^1.0.0, slash@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 

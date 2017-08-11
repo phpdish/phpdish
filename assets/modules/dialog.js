@@ -1,54 +1,71 @@
 'use strict';
 
-var layer = require('art-dialog');
+import artDialog from 'art-dialog';
+import 'art-dialog/css/dialog.css';
 
-function Dialog()
-{
-    const _this = this;
-    this.layer = layer;
-    this.open = function(options){
-        options = _.merge({
-            type: 3
-        }, options);
-        return layer.open(options);
-    };
+function Dialog(options){
+    options = options || {};
+
+    const dialog = artDialog(options);
+
+    let onEndCallback;
 
     /**
-     * 提示层
-     * @param message
+     * 闪现，定时关闭
+     * @param seconds
+     * @param callback
      */
-    this.msg = function(message){
-        return layer.msg(message);
-    };
-    this.alert = function(content, options, yes){
-        return layer.alert(content, options, yes);
-    };
-    /**
-     * 询问层
-     * @param content
-     * @param options
-     * @param yes
-     * @param cancel
-     * @returns {*}
-     */
-    this.confirm = function(content, options, yes, cancel){
-        return layer.confirm(content, options, yes, cancel);
+    this.flash = function(seconds, callback){
+        if (typeof seconds === 'function') {
+            callback = seconds;
+            seconds = 3;
+        }
+        seconds = seconds || 3;
+        setTimeout(() => this.destroy(callback), seconds * 1000);
     };
 
     /**
-     * 等待
-     * @returns {*}
+     * 销毁对话框
      */
-    this.wait = function(){
-        return this.layer.load(1);
+    this.destroy = function(callback){
+        dialog.remove();
+        typeof callback === 'function' && callback.call(this);
+        typeof onEndCallback === 'function' && onEndCallback.call(this);
     };
+
     /**
-     * 关闭dialog
-     * @param index
+     * 关闭不销毁
      */
-    this.close = function(index){
-        index ? this.layer.close(index) : this.layer.closeAll();
+    this.close = function(callback){
+        dialog.close();
+        typeof callback === 'function' && callback.call(this);
     };
+
+    this.show = function(){
+        dialog.show();
+    };
+
+    /**
+     * 注册弹窗关闭时回调
+     * @param callback
+     */
+    this.onEnd = function(callback){
+        onEndCallback = callback;
+    };
+
+    this.show();
 }
 
+/**
+ * 消息提示框
+ * @param message
+ * @param options
+ * @returns {Dialog}
+ */
+export const message = function(message, options){
+    options = options || {};
+    return new Dialog($.extend(options, {
+        content: message
+    }));
+};
 export default Dialog;
