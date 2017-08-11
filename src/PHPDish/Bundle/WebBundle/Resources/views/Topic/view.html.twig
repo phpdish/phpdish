@@ -58,11 +58,15 @@
                         {{ pagerfanta(replies, 'twitter_bootstrap3') }}
                     {% endif %}
                     <div class="content-wrap">
-                        <form id="add-reply-form">
+                        <form id="add-reply-form" class="form-panel">
                             <div class="headline headline-md"><h3>回复</h3></div>
-                            <textarea class="form-control" id="editor" placeholder="请使用markdown语法"></textarea>
-                            <div class="margin-bottom-20"></div>
-                            <button type="submit" class="btn btn-primary">回复</button>
+                            <div class="md-editor">
+                                <textarea class="editor form-control" id="editor" placeholder="请使用markdown语法"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <div class="tips">请使用Markdown语法书写</div>
+                                <button type="submit" class="btn btn-primary">回复</button>
+                            </div>
                         </form>
                     </div>
                 </footer>
