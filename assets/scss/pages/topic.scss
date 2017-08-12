@@ -1,0 +1,92 @@
+@import "../blocks/md-editor.scss";
+
+//topic部分
+.topic{
+  .author{
+    float:right;
+    .avatar{
+      width:100px;
+    }
+  }
+  .title{
+    //float:left;
+    margin-right:10px;
+  }
+  .summary{
+    height:50px;
+    line-height:50px;
+  }
+}
+
+//回复列表样式
+.topic-replies{
+  .panel-body{
+    padding-top:0;
+  }
+  .reply{
+    border-bottom: 1px solid #F5F5F5;
+  }
+}
+//回复样式
+.reply{
+  padding: 10px 0;
+  .summary{
+    color:#ccc;
+    .author-username{
+      font-size:14px;
+      color: #555;
+      //font-weight:bold;
+    }
+    .reply-user{
+      cursor: pointer;
+    }
+    .author {
+      float: right;
+      .avatar{
+        width:50px;
+        height:50px;
+      }
+    }
+  }
+  .body{
+    //padding:50px 0;
+  }
+}
+
+//回复话题
+.reply-topic{
+  .panel-heading{
+    padding:5px 15px;
+    line-height: 20px;
+  }
+}
+.form-panel{
+  .form-actions{
+    margin-top:10px;
+    .tips{
+      color:#999;
+      font-size: 12px;
+      float:right;
+      i{
+        font-size:15px;
+        vertical-align: middle;
+        color:#333;
+      }
+    }
+  }
+}
+
+//侧边栏
+
+.topics-widget{
+  li{
+    line-height:1.5em;
+    overflow: hidden;
+    .avatar{
+      width:25px;
+      height:25px;
+      float:right;
+      vertical-align: middle
+    }
+  }
+}
