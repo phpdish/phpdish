@@ -12,7 +12,7 @@
 {% block content %}
     <div id="main" class="container" role="main">
         <div class="row">
-            <article id="content" class="col-lg-8 col-md-8 archive">
+            <article id="content" class="col-md-9 archive">
                 <header class="entry-header">
                     <div class="entry-location">
                         {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
@@ -39,7 +39,7 @@
                     <div id="topic-replies-panel">
                         {% for reply in replies %}
                             <div>
-                                <div class="clearfix margin-bottom-10">{{ reply.body }}</div>
+                                <article class="markdown-body clearfix margin-bottom-10">{{ reply.body|raw }}</article>
                                 <ul class="list-unstyled list-inline clearfix small">
                                     <li class="text-muted"><i class="fa fa-calendar"></i> {{ reply.createdAt|date('Y-m-d') }}</li>
                                     <li class="text-muted"><i class="fa fa-pencil"></i> {{ reply.user.username }}</li>
@@ -60,18 +60,34 @@
                     <div class="content-wrap">
                         <form id="add-reply-form" class="form-panel">
                             <div class="headline headline-md"><h3>回复</h3></div>
-                            <div class="md-editor">
-                                <textarea class="editor form-control" id="editor" placeholder="请使用markdown语法"></textarea>
+                            <div class="md-editor" data-role="md-editor">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#write" aria-controls="home" role="tab" data-toggle="tab">书写</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#preview" aria-controls="profile" role="tab" data-toggle="tab">预览</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active md-editor-write-panel" id="write">
+                                        <textarea class="md-editor-write form-control" role="md-editor-write" placeholder="请使用markdown语法"></textarea>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane md-editor-preview-panel" id="preview">
+                                        <article class="md-editor-preview markdown-body"  role="md-editor-preview">
+                                        </article>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-actions">
-                                <div class="tips">请使用Markdown语法书写</div>
+                                <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
                                 <button type="submit" class="btn btn-primary">回复</button>
                             </div>
                         </form>
                     </div>
                 </footer>
             </article>
-            <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
+            <div id="sidebar" class="col-md-3" role="complementary">
                 {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
                 <aside class="widget clearfix widget_recent_entries">
                     <h3 class="widget-title">热门</h3>

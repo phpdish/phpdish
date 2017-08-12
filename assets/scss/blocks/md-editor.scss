@@ -1,0 +1,15 @@
+.md-editor{
+  min-height:250px;
+  .md-editor-write-panel{
+    padding-top: 10px;
+    .md-editor-write{
+      height: 250px;
+      resize: vertical;
+    }
+  }
+  .md-editor-preview-panel{
+    .md-editor-preview{
+      padding:10px;
+    }
+  }
+}

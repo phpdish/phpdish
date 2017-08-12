@@ -1,6 +1,17 @@
+@import "blocks/md-editor.scss";
+
 .form-panel{
-    .editor{
-      height: 250px;
-      resize: vertical;
+  .form-actions{
+    margin-top:10px;
+    .tips{
+      color:#999;
+      font-size: 12px;
+      float:right;
+      i{
+        font-size:15px;
+        vertical-align: middle;
+        color:#333;
+      }
     }
+  }
 }

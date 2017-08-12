@@ -55,6 +55,7 @@ Encore.createSharedEntry('common', [
     path.resolve(config.modulesPath, 'editor.js'),
     path.resolve(config.modulesPath, 'markdown-editor.js'),
     path.resolve(config.modulesPath, 'dialog.js'),
+    'github-markdown-css'
 ]);
 
 //add style entries
