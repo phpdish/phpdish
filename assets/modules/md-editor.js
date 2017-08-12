@@ -2,6 +2,8 @@
 
 import $ from 'jquery';
 import marked from 'marked';
+import TextComplete from 'textcomplete/lib/textcomplete';
+import TextArea from 'textcomplete/lib/textarea';
 
 class MDEditor
 {
@@ -13,6 +15,8 @@ class MDEditor
         };
         this.editorTextElement = $element.find('[role="md-editor-write"]');
         this.previewElement = $element.find('[role="md-editor-preview"]');
+        this.textCompleteTextArea = new TextArea(this.editorTextElement[0]);
+        this.textComplete = new TextComplete(this.textCompleteTextArea);
         this.prepareUi();
     }
 
@@ -33,6 +37,32 @@ class MDEditor
 
     getHtml(){
         return marked(this.getContent());
+    }
+    registerMention (users){
+        this.textComplete.register([
+            // {
+            //     match: /(^|\s):(\w+)$/,
+            //     search: function (term, callback) {
+            //         callback(emojies.filter(emoji => { return emoji.startsWith(term); }));
+            //     },
+            //     replace: function (value) {
+            //         return '$1:' + value + ': ';
+            //     }
+            // },
+            {
+                match: /\B@(\S*)$/,
+                search: function(term, callback) {
+                    callback(users.fiter((username)=> {
+                        return username.startsWith(term)
+                        || username.toLowerCase().startsWith(term.toLowerCase());
+                    }));
+                },
+                index: 1,
+                replace: function(mention) {
+                    return "@${mention}";
+                }
+            }
+        ]);
     }
 }
 
