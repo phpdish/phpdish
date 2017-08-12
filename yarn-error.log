@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\taosikai\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add twemoji --save
+  C:\Program Files\nodejs\node.exe C:\Users\taosikai\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
   C:\Program Files\Docker\Docker\Resources\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\webserver\service\mysql\MySQL Server 5.7\bin;C:\webserver\service\apache\apache2.4\bin;C:\Program Files\Git\cmd;C:\webserver\service\php\php7.1.8;C:\ProgramData\ComposerSetup\bin;C:\Users\taosikai\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Redis;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs;C:\webserver\service\apache\apache2.4\bin;C:\Users\taosikai\AppData\Local\Microsoft\WindowsApps;C:\Users\taosikai\AppData\Roaming\npm
@@ -43,6 +43,8 @@ npm manifest:
       "babel-plugin-transform-runtime": "^6.0",
       "babel-preset-es2015": "^6.24.1",
       "babel-preset-stage-0": "^6.24.1",
+      "nunjucks": "^3.0.1",
+      "nunjucks-loader": "^2.4.8",
       "glob": "^7.0",
       "node-sass": "^4.0",
       "sass-loader": "^6.0"
@@ -51,18 +53,12 @@ npm manifest:
       "air-datepicker": "^2.0",
       "art-dialog": "^7.0",
       "clipboard": "^1.0",
-      "draft-js-plugins-editor": "^2.0.0-beta1",
       "github-markdown-css": "^2.8.0",
       "jquery-validation": "^1.0",
-      "layer-dialog": "^2.1.0",
       "marked": "^0.3",
       "memory-fs": "^0.4",
-      "noty": "^3.1.2",
-      "nunjucks": "^3.0.1",
-      "nunjucks-loader": "^2.4.8",
       "scrolltofixed": "^1.0",
       "simplemde": "^1.11.2",
-      "slick-carousel": "^1.0",
       "textcomplete": "^0.13.1",
       "wangeditor": "^3.0.7"
     }
