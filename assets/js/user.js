@@ -14,8 +14,7 @@ $('[data-role="follow"]').on('click', '[data-action="follow-user"]', function(){
             .addClass('btn btn-sm btn-default')
             .html('取消关注');
     }, function(response){
-        console.log(response);
-        Util.dialog.message(response.error).flash();
+        Util.dialog.message(response.responseJSON.error).flash();
     });
 }).on('click', '[data-action="unfollow-user"]', function(){
     const $this = $(this);

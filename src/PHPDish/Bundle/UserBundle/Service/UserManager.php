@@ -102,7 +102,7 @@ class UserManager implements UserManagerInterface
     public function followUser(UserInterface $user, UserInterface $follower)
     {
         if ($user->getId() == $follower->getId()) {
-            throw new \LogicException('你不能关注你自己');
+//            throw new \LogicException('你不能关注你自己');
         }
         $user->addFollower($follower);
         $user->setFollowerCount($user->getFollowerCount() + 1);
