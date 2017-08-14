@@ -1,14 +1,14 @@
 //变量
-@import "variables.scss";
-//markdown的样式
-//@import "markdown.scss";
+@import "./variables.scss";
 //第三方工具样式
-@import "vendor.scss";
+@import "./vendor.scss";
+//覆盖第三方样式
+@import "./polyfill.scss";
 //主题基础样式
-@import "base.scss";
+@import "./base.scss";
 //主题全局样式
-@import "style.scss";
+@import "./style.scss";
 //各个页面单独样式
-@import "log_reg.scss";
+@import "./pages/log_reg.scss";
 //子样式
-@import "pages/topic.scss";
+@import "./pages/topic.scss";

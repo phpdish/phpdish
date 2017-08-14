@@ -3,21 +3,17 @@
 import 'jquery-validation';
 import 'module/common.js';
 import Util from '../modules/util.js';
-import MDEditor from '../modules/md-editor';
+import MDEditor from '../modules/md-editor/md-editor';
 
 
-function findUser(){
-    let users = $('[data-username]').map(function(){
-        return $(this).data('username');
-    });
-    return _.uniq(users);
-}
 //话题详情页
 (function($){
     const $addReplyForm = $('#add-reply-form');
     const $repliesPanel = $('#topic-replies-panel');
     const editor = new MDEditor($('[data-role="md-editor"]'));
-    editor.registerMention(findUser());
+    //启用艾特和emoji
+    editor.registerMention().registerGithubEmoji().enablePlugin();
+
     //添加回复表单提交
     $addReplyForm.on('submit', function(){
         if($addReplyForm.lock){
