@@ -1,22 +1,15 @@
 <?php
 namespace PHPDish\Bundle\UserBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
-use PHPDish\Bundle\CoreBundle\Controller\Controller;
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Hateoas\Configuration\Route as HateoasRoute;
-use Hateoas\Representation\Factory\PagerfantaFactory;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-class UserController extends FOSRestController
+class UserController extends RestController
 {
     /**
      * @Route("/users/{username}", name="user_view", requirements={"username": "\w+"})
@@ -71,11 +64,12 @@ class UserController extends FOSRestController
 
     /**
      * @Route("/users/{username}/followers.{_format}", name="user_followers", defaults={"_format"="html"})
+     * @Method("GET")
      * @param string $username
      * @param Request $request
      * @return Response
      */
-    public function getUserFollowersAction($username, Request $request)
+    public function getFollowersAction($username, Request $request)
     {
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
@@ -98,11 +92,19 @@ class UserController extends FOSRestController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
-        $manager->followUser($user, $this->getUser());
-        $data = [
-            'follower_count' => $user->getFollowerCount()
-        ];
-        return $this->createJsonResponse($data);
+        $view = $this->view();
+        try {
+            $manager->followUser($user, $this->getUser());
+            $view->setStatusCode(static::HTTP_CREATED)->setData([
+                'follower_count' => $user->getFollowerCount()
+            ]);
+        } catch (\Exception $exception) {
+            $view->setStatusCode(static::HTTP_BAD_REQUEST)
+                ->setData([
+                    'error' => $exception->getMessage()
+                ]);
+        }
+        return $this->handleView($view);
     }
 
     /**

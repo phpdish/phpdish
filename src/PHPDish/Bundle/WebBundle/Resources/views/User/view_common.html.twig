@@ -18,7 +18,7 @@
                         ]
                     } %}
                     <div class="clearfix margin-bottom-10" data-username="{{ user.username }}">
-                        <div class="pull-right">
+                        <div class="pull-right" data-role="follow">
                             {% if app.user and user.isFollowedBy(app.user) %}
                                 <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
                             {%else %}

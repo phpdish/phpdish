@@ -5,19 +5,22 @@ import Util from '../modules/util.js';
 
 
 
-$('[data-action="follow-user"]').on('click', function(){
+$('[data-role="follow"]').on('click', '[data-action="follow-user"]', function(){
     const $this = $(this);
     const username = $this.data('username') || $this.closest('[data-username]').data('username');
-    Util.request('user.follow', {'username': username}, function(response){
+    Util.request('user.follow', {'username': username}).then(function(response){
+        $this.attr('data-action', 'unfollow-user')
+            .removeClass('btn-u btn-u-red')
+            .addClass('btn btn-sm btn-default')
+            .html('取消关注');
+    }, function(response){
         console.log(response);
+        Util.dialog.message(response.error).flash();
     });
-});
-
-$('[data-action="unfollow-user"]').on('click', function(){
+}).on('click', '[data-action="unfollow-user"]', function(){
     const $this = $(this);
     const username = $this.data('username') || $this.closest('[data-username]').data('username');
     Util.request('user.unfollow', {'username': username}, function(response){
-        console.log(response);
     });
 });
 

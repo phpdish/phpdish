@@ -62,6 +62,7 @@ interface UserManagerInterface
      * 关注用户
      * @param UserInterface $user
      * @param UserInterface $follower
+     * @throws \LogicException
      * @return boolean
      */
     public function followUser(UserInterface $user, UserInterface $follower);
