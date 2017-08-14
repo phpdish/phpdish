@@ -1,7 +1,30 @@
 @import "../blocks/md-editor.scss";
 
+/**
+ * topic列表页
+ */
+.topics {
+  .topic{
+    .avatar{
+      width:50px;
+      border-radius: 50%;
+    }
+    .summary{
+      padding-top: 10px;
+      color: #777;
+    }
+    .title{
+      font-size:14px;
+      line-height:1.5em;
+    }
+  }
+}
+
+/**
+ * topic详情页部分
+ */
 //topic部分
-.topic{
+.topic-view{
   .author{
     float:right;
     .avatar{
@@ -15,6 +38,9 @@
   .summary{
     height:50px;
     line-height:50px;
+    i.if {
+      color: #8590a6
+    }
   }
 }
 
@@ -23,33 +49,37 @@
   .panel-body{
     padding-top:0;
   }
-  .reply{
-    border-bottom: 1px solid #F5F5F5;
+  .list-group-item{
+    border: 1px solid $borderColor;
   }
-}
-//回复样式
-.reply{
-  padding: 10px 0;
-  .summary{
-    color:#ccc;
-    .author-username{
-      font-size:14px;
-      color: #555;
-      //font-weight:bold;
-    }
-    .reply-user{
-      cursor: pointer;
-    }
-    .author {
-      float: right;
-      .avatar{
-        width:50px;
-        height:50px;
+
+  //回复样式
+  .reply{
+    padding: 0;
+    .summary{
+      color:#ccc;
+      .author-username{
+        font-size:14px;
+        color: #555;
+        //font-weight:bold;
+      }
+      .reply-user{
+        cursor: pointer;
+      }
+      .author {
+        float: right;
+        .avatar{
+          width:50px;
+          height:50px;
+        }
+      }
+      i.if {
+        color: #8590a6
       }
     }
-  }
-  .body{
-    //padding:50px 0;
+    .body{
+      //padding:50px 0;
+    }
   }
 }
 
@@ -77,7 +107,6 @@
 }
 
 //侧边栏
-
 .topics-widget{
   li{
     line-height:1.5em;

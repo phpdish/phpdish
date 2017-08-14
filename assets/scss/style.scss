@@ -1,18 +1,38 @@
 @charset "UTF-8";
 
+//自定义panel
 .panel-u{
+  border-color: $borderColor;
   .panel-heading{
     background-color:#fff;
+    border-color:$borderColor;
+  }
+  .list-group-item{
+    border: 1px solid $borderColor;
   }
 }
 
+//widget panel
 .panel-widget{
+  @extend .panel-u;
   .panel-heading{
-    background-color:#fff;
     text-align:center;
   }
 }
 
 .user-plate{
 
+}
+
+//页尾
+.footer{
+  border: $borderColor;
+  background-color: #fff;
+  .panel{
+    border: none;
+    .panel-footer{
+      border: none;
+      background-color: #fff;
+    }
+  }
 }

@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//at.alicdn.com/t/font_382846_ztn82jkbjiwzh0k9.css"  rel="stylesheet">
+        <link href="//at.alicdn.com/t/font_382846_8vx02i8wx13e4s4i.css"  rel="stylesheet">
         <link href="{{ asset('build/common.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
@@ -89,15 +89,17 @@
         </header>
         {% block content %}
         {% endblock %}
-        <footer id="colophon" class="container" role="contentinfo">
-            <div class="panel panel-default text-muted">
-                <div class="panel-body">{{ render(controller('PHPDishCoreBundle:FriendLink:list', {'limit': 5})) }}</div>
-                <div class="panel-footer clearfix">
-                    <p>2014 © Qimuyu. All Rights Reserved.&nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank">皖ICP备14022941号</a> <a target="_blank" rel="nofollow" href="http://www.qimuyu.com/privacy.html">隐私政策</a> | <a target="_blank" rel="nofollow" href="http://www.qimuyu.com/terms.html">服务条款</a></p>
-                    <span class="pull-right copyright"></span>
+        <div class="footer">
+            <footer class="container">
+                <div class="panel panel-default">
+                    <div class="panel-body">{{ render(controller('PHPDishCoreBundle:FriendLink:list', {'limit': 5})) }}</div>
+                    <div class="panel-footer clearfix">
+                        <p>2014 © Qimuyu. All Rights Reserved.&nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank">皖ICP备14022941号</a> <a target="_blank" rel="nofollow" href="http://www.qimuyu.com/privacy.html">隐私政策</a> | <a target="_blank" rel="nofollow" href="http://www.qimuyu.com/terms.html">服务条款</a></p>
+                        <span class="pull-right copyright"></span>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
         <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>

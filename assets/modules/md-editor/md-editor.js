@@ -49,12 +49,12 @@ class MDEditor
     }
 
     append(content){
-        this.setContent(this.getContent() . content);
+        this.setContent(this.getContent() + content);
         return this;
     }
 
     prepend(content){
-        this.setContent(content . this.getContent());
+        this.setContent(content + this.getContent());
         return this;
     }
 

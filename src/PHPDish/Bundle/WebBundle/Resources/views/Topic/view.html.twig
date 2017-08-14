@@ -13,7 +13,7 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-md-9">
-                <div class="panel panel-default panel-u topic">
+                <div class="panel panel-default panel-u topic-view">
                     <div class="panel-heading clearfix">
                         <div class="author">
                             <img src="{{ topic.user.avatar }}" class="avatar"/>
@@ -21,9 +21,9 @@
                         <div class="title"><h3>{{ topic.title }}</h3></div>
                         <div class="summary">
                             <ul class="list-unstyled list-inline">
-                                <li class="text-muted"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
-                                <li class="text-muted"><i class="fa fa-pencil"></i> {{ topic.user.username }}</li>
-                                <li class="text-muted"><i class="fa fa-comments"></i> <a href="#add_reply">{{ topic.replyCount }}回复</a></li>
+                                <li class="text-muted"><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
+                                <li class="text-muted"><i class="if i-user"></i> {{ topic.user.username }}</li>
+                                <li class="text-muted"><i class="if i-comment"></i> <a href="#add-reply-form"  data-action="go-reply">{{ topic.replyCount }}回复</a></li>
                             </ul>
                         </div>
                     </div>
@@ -32,28 +32,30 @@
                     </div>
                 </div>
                 <div class="panel panel-default panel-u topic-replies">
-                    <div class="panel-heading"><h4>{{ replies.count }}个回答</h4></div>
-                    <div id="topic-replies-panel" class="panel-body">
+                    <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
+                    <ul class="list-group" id="topic-replies-panel">
                         {% for reply in replies %}
-                            <div class="topic reply">
-                                <div class="summary clearfix">
-                                    <div class="author">
-                                        <img src="{{ reply.user.avatar }}" class="avatar img-circle"/>
+                            <li class="list-group-item" role="reply" data-reply-id="{{ reply.id }}" data-username="{{ reply.user.username }}">
+                                <div class="topic reply">
+                                    <div class="summary clearfix">
+                                        <div class="author">
+                                            <a href="{{ path('user_view', {'username': reply.user.username}) }}"><img src="{{ reply.user.avatar }}" class="avatar img-circle"/></a>
+                                        </div>
+                                        <ul class="list-unstyled list-inline small">
+                                            <li  class="author-username">{{ reply.user.username }}</li>
+                                            <li>#{{ loop.index }} <span data-date="{{ reply.createdAt|date('Y-m-d\TH:i:sO') }}">{{ reply.createdAt|date('Y-m-d H:i:s') }}</span></li>
+                                            <li>
+                                                <span class="reply-user" data-action="mention">
+                                                    <i class="if i-reply" title="回复TA"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <ul class="list-unstyled list-inline small">
-                                        <li  class="author-username">{{ reply.user.username }}</li>
-                                        <li>#{{ loop.index }} <span data-date="{{ reply.createdAt|date('Y-m-d\TH:i:sO') }}">{{ reply.createdAt|date('Y-m-d H:i:s') }}</span></li>
-                                        <li>
-                                            <span class="reply-user" data-role="mention" data-username="{{ reply.user.username }}">
-                                                <i class="if i-reply" title="回复TA"></i>
-                                            </span>
-                                        </li>
-                                    </ul>
+                                    <article class="body markdown-body">{{ reply.body|raw }}</article>
                                 </div>
-                                <article class="body markdown-body">{{ reply.body|raw }}</article>
-                            </div>
+                            </li>
                         {% endfor %}
-                    </div>
+                    </ul>
                     {% if replies.haveToPaginate %}
                     <div class="panel-footer">
                         {{ pagerfanta(replies, 'twitter_bootstrap3') }}
@@ -97,7 +99,7 @@
             </div>
             <div class="col-md-3">
                 {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
-                <aside class="panel panel-default panel-widget">
+                <aside class="panel panel-default panel-widget" data-sticky="true">
                     <div class="panel-heading">热门话题</div>
                     {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
                 </aside>

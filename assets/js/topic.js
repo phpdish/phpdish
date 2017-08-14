@@ -13,6 +13,17 @@ import MDEditor from '../modules/md-editor/md-editor';
     const editor = new MDEditor($('[data-role="md-editor"]'));
     //启用艾特和emoji
     editor.registerMention().registerGithubEmoji().enablePlugin();
+    //reply action
+
+    $repliesPanel.find('[role="reply"]').each(function(){
+        const $this = $(this);
+        const replyId = $this.data('reply-id');
+        const username = $this.data('username');
+        $this.find('[data-action="mention"]').on('click', function(){
+            editor.append(`@${username} `);
+            Util.goHash('#add-reply-form');
+        });
+    });
 
     //添加回复表单提交
     $addReplyForm.on('submit', function(){
