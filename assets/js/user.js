@@ -1,13 +1,23 @@
 'use strict';
-// require('module/common.js');
-var util = require('module/util.js');
 
-$(function($){
-    $('[data-role="follow-user"]').on('click', function(){
-        var username = $(this).data('username');
-        util.request('user.follow', {'username': username}, function(response){
-            console.log(response);
-        });
+import '../modules/common.js';
+import Util from '../modules/util.js';
+
+
+
+$('[data-action="follow-user"]').on('click', function(){
+    const $this = $(this);
+    const username = $this.data('username') || $this.closest('[data-username]').data('username');
+    Util.request('user.follow', {'username': username}, function(response){
+        console.log(response);
+    });
+});
+
+$('[data-action="unfollow-user"]').on('click', function(){
+    const $this = $(this);
+    const username = $this.data('username') || $this.closest('[data-username]').data('username');
+    Util.request('user.unfollow', {'username': username}, function(response){
+        console.log(response);
     });
 });
 

@@ -41,11 +41,11 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                    {% if topics.haveToPaginate %}
                     <div class="panel-footer">
-                        {% if topics.haveToPaginate %}
-                            {{ pagerfanta(topics, 'twitter_bootstrap3') }}
-                        {% endif %}
+                        {{ pagerfanta(topics, 'twitter_bootstrap3') }}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-3">

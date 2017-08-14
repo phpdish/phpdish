@@ -4,51 +4,56 @@
 {% block title %} {{ thread.name }} {% endblock %}
 
 {% block content %}
-    <div id="main" class="container" role="main">
+    <div class="container" role="main">
         <div class="row">
-            <article id="content" class="col-lg-8 col-md-8 archive topic-show">
-                <header class="entry-header">
-                    <div class="entry-location">
+            <div class="col-md-9">
+                <div class="panel panel-default panel-u">
+                    <div class="panel-heading">
                         {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {breadcrumbs: [
-                            {title: thread.name}
+                             {title: '话题', url: path('topic')},
+                             {title: thread.name}
                         ]} %}
                     </div>
-                </header>
-                <div class="entry-content">
-                    {% for topic in topics %}
-                    <div class="question-list">
-                        <dl class="dl-horizontal">
-                            <dt><a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar() }}" data-username="{{ topic.user.username }}" data-role="user-avatar"></a></dt>
-                            <dd>
-                                <p>
-                                    <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
-                                    {% if topic.isRecommended %}
-                                    <i class="color-blue fa fa-thumbs-o-up"></i>
-                                    {% endif %}
-                                </p>
-                                <ul class="list-unstyled list-inline small">
-                                    <li class="text-muted">{{ topic.user.username }}发起于{{ topic.createdAt|date('Y-m-d H:i') }}</li>
-                                    <li class="text-muted">{{ topic.replyCount }}回复</li>
-                                    <li class="text-muted">最后回复：{{ topic.repliedAt|date('Y-m-d H:i') }}</li>
-                                </ul>
-                            </dd>
-                        </dl>
+                    <div class="panel-body topics">
+                        {% for topic in topics %}
+                            <div class="media topic">
+                                <div class="media-left">
+                                    <a href="{{ path('user_view', {'username': topic.user.username}) }}">
+                                        <img src="{{ topic.user.avatar() }}" class="media-object avatar" role="avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="title">
+                                        <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
+                                        {% if topic.recommended %}
+                                            <i class="if i-sticky"></i>
+                                        {% endif %}
+                                    </div>
+                                    <ul class="list-unstyled list-inline summary">
+                                        <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|date('Y-m-d') }}</li>
+                                        <li><a href="{{ path('thread_view', {'slug': topic.thread.slug}) }}">{{ topic.thread.name }}</a></li>
+                                        <li>最后回复：{{ topic.repliedAt|date('Y-m-d') }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% if loop.last == false %}
+                                <hr class="margin-vertical-10"/>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
-                <footer class="entry-footer">
                     {% if topics.haveToPaginate %}
-                    {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                        <div class="panel-footer">
+                            {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                        </div>
                     {% endif %}
-                </footer>
-            </article>
-            <div id="sidebar" class="col-lg-4 col-md-4" role="complementary">
-                <aside class="widget clearfix widget_recent_entries">
-                    <h3 class="widget-title">最新话题</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <aside class="panel panel-default panel-widget">
+                    <div class="panel-heading">最新话题</div>
                     {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
                 </aside>
             </div>
-            <!-- #sidebar -->
         </div>
     </div>
     <script type="text/javascript">

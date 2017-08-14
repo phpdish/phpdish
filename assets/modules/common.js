@@ -2,6 +2,7 @@
 
 import 'scrolltofixed';
 import Util from './util.js';
+import {default as Dialog} from './dialog.js';
 
 //固定模块
 (function($){
@@ -14,25 +15,25 @@ import Util from './util.js';
 
 //用户quick plate
 (function($){
-    var _userPlateDialogs = {};
-    var timer;
+    let userPlateDialogs = {};
+    let timer;
     $('[data-plate]').on('mouseover', function(){
         //关闭所有的dialog
         _.forEach(_userPlateDialogs, function(dialog){
             dialog.close();
         });
-        var $this = $(this);
-        var userId = $this.data('id');
+        const $this = $(this);
+        const userId = $this.data('id');
         clearTimeout(timer);
         //如果已经创建则直接开启
-        if (typeof _userPlateDialogs[userId] != 'undefined') {
-            if (!_userPlateDialogs[userId].open) {
-                _userPlateDialogs[userId].show($this[0]);
+        if (typeof userPlateDialogs[userId] !== 'undefined') {
+            if (!userPlateDialogs[userId].open) {
+                userPlateDialogs[userId].show($this[0]);
             }
             return false;
         }
-        var htmlContent = 'loading...';
-        var dialog = artDialog({
+        let htmlContent = 'loading...';
+        const dialog = new Dialog({
             id: 'dialog_' + userId,
             align: 'top left',
             content: htmlContent,
@@ -43,15 +44,15 @@ import Util from './util.js';
             dialog.close();
         });
         dialog.show($this[0]);
-        util.request('user.plate', userId, function(html){
+        Util.request('user.plate', userId, function(html){
             dialog.content(html);
         });
-        _userPlateDialogs[userId] = dialog;
+        userPlateDialogs[userId] = dialog;
     }).on('mouseout', function(){
-        var userId = $(this).data('id');
-        if(typeof _userPlateDialogs[userId] != 'undefined'){
+        const userId = $(this).data('id');
+        if(typeof _userPlateDialogs[userId] !== 'undefined'){
             timer = setTimeout(function(){
-                _userPlateDialogs[userId].close();
+                userPlateDialogs[userId].close();
             }, 500);
         }
     });

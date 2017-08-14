@@ -17,13 +17,13 @@
                             {'title': '用户'}
                         ]
                     } %}
-                    <div class="clearfix margin-bottom-10">
+                    <div class="clearfix margin-bottom-10" data-username="{{ user.username }}">
                         <div class="pull-right">
                             {% if app.user and user.isFollowedBy(app.user) %}
-                                <button type="button" class="btn btn-sm btn-default" data-role="unfollow-user" data-user-id="<?=$user->id;?>">取消关注</button>
+                                <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
                             {%else %}
-                                <button type="button" class="btn-u btn-u-red" data-role="follow-user" data-username="{{ user.username }}">
-                                    <i class="fa fa-plus"></i> 关注
+                                <button type="button" class="btn-u btn-u-red" data-action="follow-user">
+                                    <i class="if i-plus"></i> 关注
                                 </button>
                             {% endif %}
                         </div>
@@ -57,12 +57,12 @@
             </div>
         </article>
         <div class="col-md-3">
-            <aside id="recent_user-3" class="widget clearfix widget_recent_user">
-                <h3 class="widget-title">关注</h3>
+            <aside class="panel panel-default panel-widget">
+                <div class="panel-heading">关注</div>
                 {{ render(controller('PHPDishUserBundle:User:userFollowing', {'user': user})) }}
             </aside>
-            <aside id="recent_user-3" class="widget clearfix widget_recent_user">
-                <h3 class="widget-title">粉丝</h3>
+            <aside class="panel panel-default panel-widget">
+                <div class="panel-heading">粉丝</div>
                 {{ render(controller('PHPDishUserBundle:User:userFollowers', {'user': user})) }}
             </aside>
         </div>
