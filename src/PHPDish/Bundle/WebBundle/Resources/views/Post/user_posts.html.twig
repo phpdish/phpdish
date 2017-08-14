@@ -9,9 +9,9 @@
 {% endif %}
 
 {% block user_content %}
-    <div class="entry-content">
+    <div class="panel-body">
         {% for post in posts %}
-            <article class="single-post clearfix" role="article">
+            <article class="post clearfix" role="article">
                {% set postUrl = path('post_view', {'id': post.id}) %}
                {% if post.cover %}
                <div class="entry-thumbnail">
@@ -21,27 +21,25 @@
                </div>
                {% endif %}
                <header class="entry-header">
-                   <h3 class="entry-title" itemprop="name">
+                   <h3 class="entry-title">
                        {%  if post.isRecommended %}<span class="sticky-tag">推荐</span>{% endif %}
-                       <a href="{{ postUrl }}" rel="bookmark" itemprop="url">
-                           <span itemprop="name">{{ post.title }}</span>
+                       <a href="{{ postUrl }}" rel="bookmark">
+                           <span>{{ post.title }}</span>
                        </a>
                    </h3>
                    <div class="entry-meta">
                        <time class="entry-date num">{{ post.createdAt|date('Y-m-d') }}</time>
-                       <a href="{{ postUrl }}#comments">
-                           <i class="num">{{ post.commentCount }}</i> 条评论
-                       </a>
-                       <span><i class="num">{{ post.viewCount }}</i>次浏览</span>
+                       <a href="{{ postUrl }}#comments">{{ post.commentCount }}条评论</a>
+                       <span>{{ post.viewCount }}次浏览</span>
                    </div>
                </header>
-               <div class="entry-excerpt">{{ post.summary }}</div>
+               <div class="entry-excerpt">{{ post.summary|striptags }}</div>
             </article>
         {% endfor %}
     </div>
-    <footer class="entry-footer content-wrap">
-        {% if posts.haveToPaginate %}
-            {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-        {% endif %}
+    {% if posts.haveToPaginate %}
+    <footer class="panel-footer">
+        {{ pagerfanta(posts, 'twitter_bootstrap3') }}
     </footer>
+    {% endif %}
 {% endblock %}

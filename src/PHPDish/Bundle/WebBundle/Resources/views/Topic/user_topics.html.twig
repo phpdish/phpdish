@@ -9,10 +9,10 @@
 {% endif %}
 
 {% block user_content %}
-    <div class="entry-content">
-        <ul id="uclist" class="noborder">
+    <div class="panel-body">
+        <ul id="uclist" class="list-group noborder">
             {% for topic in topics %}
-            <li>
+            <li class="list-group-item">
                 <div class="text"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
                 <span class="info">
                     {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
