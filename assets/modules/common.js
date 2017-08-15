@@ -7,7 +7,7 @@ import {default as Dialog} from './dialog.js';
 //固定模块
 (function($){
     //固定导航
-    $('[data-role="navbar"]').scrollToFixed();
+    // $('[data-role="navbar"]').scrollToFixed();
     $('[data-sticky]').scrollToFixed({
         marginTop: 60
     });

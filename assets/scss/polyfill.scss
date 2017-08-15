@@ -9,8 +9,20 @@
     }
 }
 
+//面包屑路径导航
 .breadcrumb{
     background-color:#fff;
     margin-bottom: 0;
-
+}
+//banner nav
+.navbar-brand{
+    padding: 0 15px;
+    height: 60px;
+}
+.navbar-default{
+    background-color:#fff;
+}
+.navbar-nav li a{
+    line-height:30px;
+    font-size: 14px;
 }

@@ -20,34 +20,7 @@
         {% block css %}{% endblock %}
     </head>
     <body>
-        <header id="masthead">
-            <div class="container header-content">
-                <div class="row">
-                    <div class="col-md-6 col-xs-6">
-                        <div class="custom-header clearfix">
-                            <div class="header-logo">
-                                <a href="/" rel="home">
-                                    <img src="{{ asset('/img/logo-p4.png') }}" class="img-responsive"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 hidden-xs">
-                        <div class="clearfix" style="letter-spacing:1px;margin:38px 15px 10px;">
-                            <form class="input-group" role="search" method="get" id="searchform" action="{{ path('search') }}">
-                                <span class="input-group-addon">搜索</span>
-                                <input type="text" class="form-control" placeholder="请输入检索关键词…" name="q" id="s" required>
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default" id="searchsubmit">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="navbar navbar-default navbar-static-top" role="banner" data-role="navbar">
+        <div class="navbar navbar-default navbar-fixed-top" role="banner" data-role="navbar">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".header-navbar-collapse">
@@ -56,6 +29,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
+                        <a class="navbar-brand"><img src="{{ asset('/img/2.png') }}" class="img-responsive"/></a>
                     </div>
                     <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
@@ -83,10 +57,8 @@
                             </li>
                         </ul>
                     </nav>
-                    <!-- #navbar -->
                 </div>
             </div>
-        </header>
         {% block content %}
         {% endblock %}
         <div class="footer">
