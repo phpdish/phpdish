@@ -1,0 +1,43 @@
+{% extends 'PHPDishWebBundle:User:view_common.html.twig' %}
+
+{% if tab  is not defined %}
+{% set tab = 'following' %}
+{% endif %}
+
+{% if users.count %}
+    {% block entry_meta %}
+        <span>共关注{{ users.count }}个用户</span>
+    {% endblock %}
+{% endif %}
+
+{% block user_content %}
+    <div class="panel-body users-list">
+    {% for user in users %}
+        <div class="media item">
+            <div class="media-left">
+                {% set userHomeUrl = path('user_view', {'username': user.username}) %}
+                <a href="{{ userHomeUrl  }}">
+                    <img src="{{ user.avatar() }}" class="media-object avatar">
+                </a>
+            </div>
+            <div class="media-body">
+                <div class="action pull-right" data-role="follow" data-username="{{ user.username }}">
+                    {% if (app.user and user.isFollowedBy(app.user)) %}
+                        <button class="btn btn-sm btn-default" data-action="unfollow-user">已关注</button>
+                    {% else %}
+                        <button class="btn-u btn-sm btn-u-sea" data-action="follow-user"><i class="if i-plus"></i> 关注</button>
+                    {% endif %}
+                </div>
+                <div class="title"><a href="{{ userHomeUrl }}">{{ user.username }}</a></div>
+                <div class="description">{{ user.description }}</div>
+                <div class="meta">
+                    <ul class="list-unstyled list-inline">
+                        <li>{{ user.followingCount }}关注</li>
+                        <li>{{ user.followerCount }}粉丝</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

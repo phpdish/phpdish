@@ -1,0 +1,29 @@
+{% extends 'PHPDishWebBundle:User:view_common.html.twig' %}
+
+{% set tab = 'reply' %}
+
+{% if replies.count %}
+    {% block entry_meta %}
+        <span>共发表了{{ replies.count }}个回复</span>
+    {% endblock %}
+{% endif %}
+
+{% block user_content %}
+    <div class="panel-body">
+        <ul class="uclist noborder">
+            {% for reply in replies %}
+                <li>
+                    <div class="text">{{ reply.body|raw }}</div>
+                    <span class="info">
+                    {{ reply.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if replies.haveToPaginate %}
+        <footer class="panel-footer">
+            {{ pagerfanta(replies, 'twitter_bootstrap3') }}
+        </footer>
+    {% endif %}
+{% endblock %}

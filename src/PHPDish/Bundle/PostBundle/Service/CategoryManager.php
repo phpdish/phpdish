@@ -28,6 +28,13 @@ class CategoryManager implements CategoryManagerInterface
             ->getResult();
     }
 
+    public function findCategoryBySlug($slug)
+    {
+        return $this->getRepository()->findOneBy([
+            'slug' => $slug
+        ]);
+    }
+
     /**
      * @return PostRepository
      */

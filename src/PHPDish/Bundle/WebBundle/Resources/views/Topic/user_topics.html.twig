@@ -21,9 +21,9 @@
             {% endfor %}
         </ul>
     </div>
-    <footer class="entry-footer content-wrap">
-        {% if topics.haveToPaginate %}
+    {% if topics.haveToPaginate %}
+        <footer class="panel-footer">
             {{ pagerfanta(topics, 'twitter_bootstrap3') }}
-        {% endif %}
-    </footer>
+        </footer>
+    {% endif %}
 {% endblock %}

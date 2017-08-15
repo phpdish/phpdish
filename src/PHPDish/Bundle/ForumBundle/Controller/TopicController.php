@@ -78,7 +78,7 @@ class TopicController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function userTopicsAction($username, Request $request)
+    public function getUserTopicsAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
         $topics = $this->getTopicManager()->findUserTopics($user, $request->query->getInt('page', 1));

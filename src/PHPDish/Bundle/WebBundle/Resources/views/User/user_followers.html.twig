@@ -1,0 +1,11 @@
+{% extends 'PHPDishWebBundle:User:user_following.html.twig' %}
+
+{% set tab = 'follower' %}
+
+{% set users = followers %}
+
+{% if followers.count %}
+    {% block entry_meta %}
+        <span>共{{ followers.count }}个粉丝</span>
+    {% endblock %}
+{% endif %}

@@ -18,6 +18,15 @@ interface ReplyManagerInterface
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null);
 
     /**
+     * 获取话题下的回复
+     * @param UserInterface $user
+     * @param int $page
+     * @param null|int $limit
+     * @return Pagerfanta
+     */
+    public function findUserReplies(UserInterface $user, $page, $limit = null);
+
+    /**
      * 创建一条回复
      * @param TopicInterface $topic
      * @param UserInterface $user

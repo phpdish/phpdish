@@ -63,21 +63,40 @@ class UserController extends RestController
     }
 
     /**
+     * 获取用户关注的人
+     * @Route("/users/{username}/following", name="user_following")
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function getUserFollowingAction($username, Request $request)
+    {
+        $manager = $this->getUserManager();
+        $user = $manager->findUserByName($username);
+        $following = $manager->findUserFollowing($user, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:User:user_following.html.twig', [
+            'user' => $user,
+            'users' => $following
+        ]);
+    }
+
+    /**
      * @Route("/users/{username}/followers.{_format}", name="user_followers", defaults={"_format"="html"})
      * @Method("GET")
      * @param string $username
      * @param Request $request
      * @return Response
      */
-    public function getFollowersAction($username, Request $request)
+    public function getUserFollowersAction($username, Request $request)
     {
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         $followers = $manager->findUserFollowers($user, $request->query->getInt('page', 1));
 
-        $view = $this->view($followers->getCurrentPageResults());
-        $view->setTemplateVar('followers')
-            ->setTemplate('PHPDishWebBundle:User:followers.html.twig');
+        $view = $this->view([
+                'user' => $user,
+                'followers' => $followers
+            ])->setTemplate('PHPDishWebBundle:User:user_followers.html.twig');
         return $this->handleView($view);
     }
 

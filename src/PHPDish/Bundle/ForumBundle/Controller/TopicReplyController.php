@@ -1,7 +1,6 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
-use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,6 +21,23 @@ class TopicReplyController extends FOSRestController
     public function getRepliesAction($topicId, Request $request)
     {
         $topicManager = $this->getTopicManager()->findTopicById($topicId);
+    }
+
+    /**
+     * @Route("/users/{username}/replies", name="user_replies")
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function getUserRepliesAction($username, Request $request)
+    {
+        $user = $this->getUserManager()->findUserByName($username);
+        $replies = $this->getReplyManager()
+            ->findUserReplies($user, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:TopicReply:user_replies.html.twig', [
+            'user' => $user,
+            'replies' => $replies
+        ]);
     }
 
     /**

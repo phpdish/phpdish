@@ -10,15 +10,17 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
-use PHPDish\Bundle\PostBundle\Service\PostManager;
-use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
 
 class PostController extends Controller
 {
+    use ManagerTrait;
+    use UserManagerTrait;
+
     /**
      * 创建文章
      * @Route("/write", name="post_add")
@@ -72,22 +74,5 @@ class PostController extends Controller
             'user' => $user,
             'posts' => $posts
         ]);
-    }
-
-    /**
-     * 获取文章管理
-     * @return PostManager
-     */
-    protected function getPostManager()
-    {
-        return $this->get('phpdish.manager.post');
-    }
-
-    /**
-     * @return UserManagerInterface
-     */
-    protected function getUserManager()
-    {
-        return $this->get('phpdish.manager.user');
     }
 }

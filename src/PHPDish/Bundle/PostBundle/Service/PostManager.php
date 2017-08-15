@@ -1,12 +1,14 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -97,6 +99,17 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findPosts(Criteria $criteria, $page = 1, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('p')
+            ->addCriteria($criteria)
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
         $query = $this->getRepository()->createQueryBuilder('p')
@@ -104,6 +117,15 @@ class PostManager implements PostManagerInterface
             ->orderBy('p.createdAt', 'desc')
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCategoryPosts(CategoryInterface $category, $page  = 1, $limit = null)
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
+        return $this->findPosts($criteria, $page, $limit);
     }
 
     /**

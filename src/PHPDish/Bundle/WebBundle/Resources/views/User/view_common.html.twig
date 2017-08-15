@@ -22,7 +22,7 @@
                             {% if app.user and user.isFollowedBy(app.user) %}
                                 <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
                             {%else %}
-                                <button type="button" class="btn-u btn-u-red" data-action="follow-user">
+                                <button type="button" class="btn-u btn-sm btn-u-red" data-action="follow-user">
                                     <i class="if i-plus"></i> 关注
                                 </button>
                             {% endif %}
@@ -38,9 +38,11 @@
                     </div>
                     <div class="entry-tab">
                         <ul>
-                            <li {% if tab == 'posts' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
-                            <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
-                            <li {% if tab == 'topics' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">动态</a></li>
+                            <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
+                            <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
+                            <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
+                            <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
+                            <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
                         </ul>
                     </div>
                     <div class="entry-meta">
@@ -57,11 +59,11 @@
             </div>
         </article>
         <div class="col-md-3">
-            <aside class="panel panel-default panel-widget">
+            <aside class="panel panel-default panel-widget panel-widget-user">
                 <div class="panel-heading">关注</div>
                 {{ render(controller('PHPDishUserBundle:User:userFollowing', {'user': user})) }}
             </aside>
-            <aside class="panel panel-default panel-widget">
+            <aside class="panel panel-default panel-widget panel-widget-user">
                 <div class="panel-heading">粉丝</div>
                 {{ render(controller('PHPDishUserBundle:User:userFollowers', {'user': user})) }}
             </aside>

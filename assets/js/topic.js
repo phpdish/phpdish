@@ -15,7 +15,7 @@ import MDEditor from '../modules/md-editor/md-editor';
     editor.registerMention().registerGithubEmoji().enablePlugin();
     //reply action
 
-    $repliesPanel.find('[role="reply"]').each(function(){
+    $repliesPanel.find('[data-role="reply"]').each(function(){
         const $this = $(this);
         const replyId = $this.data('reply-id');
         const username = $this.data('username');

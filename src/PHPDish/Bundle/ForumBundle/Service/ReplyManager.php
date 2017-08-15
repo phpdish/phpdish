@@ -71,4 +71,15 @@ class ReplyManager  implements ReplyManagerInterface
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserReplies(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->replyRepository->createQueryBuilder('r')
+            ->where('r.user = :userId')->setParameter('userId', $user->getId())
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
 }

@@ -16,7 +16,7 @@
                 <div class="panel panel-default panel-u topic-view">
                     <div class="panel-heading clearfix">
                         <div class="author">
-                            <img src="{{ topic.user.avatar }}" class="avatar"/>
+                            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}" class="avatar"/></a>
                         </div>
                         <div class="title"><h3>{{ topic.title }}</h3></div>
                         <div class="summary">
@@ -35,7 +35,7 @@
                     <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
                     <ul class="list-group" id="topic-replies-panel">
                         {% for reply in replies %}
-                            <li class="list-group-item" role="reply" data-reply-id="{{ reply.id }}" data-username="{{ reply.user.username }}">
+                            <li class="list-group-item" data-role="reply" data-reply-id="{{ reply.id }}" data-username="{{ reply.user.username }}">
                                 <div class="topic reply">
                                     <div class="summary clearfix">
                                         <div class="author">

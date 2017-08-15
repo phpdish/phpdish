@@ -3,6 +3,6 @@
     <img src="<?=$this->Url->thumbnail($author->avatar, 120, 120);?>" class="rounded-x" data-plate="true" data-id="<?=$author->id;?>">
     <div class="cmt-block user-title">
         <p><span class="label">作者</span><a href="{{ path('user_view', {'username': post.user.username}) }}">{{ post.user.username }}</a></p>
-        <p class="text-muted">{{ post.user.followingCount }}个关注，{{ post.user.fanCount }}个粉丝</p>
+        <p class="text-muted">{{ post.user.followingCount }}个关注，{{ post.user.followerCount }}个粉丝</p>
     </div>
 </div>

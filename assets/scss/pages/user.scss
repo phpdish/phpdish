@@ -1,3 +1,6 @@
+/**
+ * Dash结构
+ */
 .user-dash {
   .entry-author {
     margin: 15px 0 0;
@@ -59,6 +62,9 @@
         display: table-cell;
         float: none;
         width: 1%;
+        &.active{
+          border-bottom: 2px solid #646464;
+        }
         a {
           display: block;
           text-align: center;
@@ -75,11 +81,11 @@
             color: #555 !important
           }
         }
-        &.active a {
-          border: 1px solid #eee;
-          border-width: 0 1px;
-          color: #555 !important
-        }
+        //&.active a {
+        //  border: 1px solid #eee;
+        //  border-width: 0 1px;
+        //  color: #555 !important
+        //}
       }
     }
   }
@@ -101,6 +107,7 @@
   }
 }
 
+//内容列表
 .uclist {
   padding: 0;
   margin: 0 0 30px;
@@ -152,3 +159,31 @@
     }
   }
 }
+
+//关注列表
+.users-list{
+  .item{
+    .avatar{
+      width: 60px;
+      height:60px;
+    }
+    .title{
+      font: {
+        size:15px;
+        weight: 700;
+      }
+      color: #333;
+      line-height: 1.5em;
+    }
+    .description{
+      font-size: 12px;
+    }
+    .meta{
+      color: #969696;
+      font-size: 12px;
+    }
+  }
+}
+
+.panel-widget-user ul{margin:0}
+.panel-widget-user ul li{border:0;display:inline-block;margin:4px 0 0 4px;padding:4px}
