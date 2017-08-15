@@ -37,10 +37,7 @@ const routes = {
 function Route()
 {
     const _this = this;
-
-    this.send = function(name, requirements, parameters, options){
-
-    };
+    let lastRequest;
 
     /**
      * name  路由名
@@ -63,11 +60,17 @@ function Route()
         const route = this.getRoute(name, requirements);
         $.extend(options, {
             'dataType': 'json',
+            'headers': {}
         }, {
             url: route[0],
             type: route[1],
             data: parameters
         });
+        if (options.type.toUpperCase() === 'DELETE') {
+            options.headers['x-http-method-override'] = 'DELETE';
+        } else if (options.type.toUpperCase() === 'PATCH') {
+            options.headers['x-http-method-override'] = 'PATCH';
+        }
         return this.lastRequest = $.ajax(options);
     };
 

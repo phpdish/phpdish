@@ -20,10 +20,17 @@ interface UserInterface extends
 
     /**
      * 添加一个粉丝
-     * @param UserInterface $user
+     * @param UserInterface $follower
      * @return UserInterface
      */
-    public function addFollower(UserInterface $user);
+    public function addFollower(UserInterface $follower);
+
+    /**
+     * 取消粉丝
+     * @param UserInterface $follower
+     * @return UserInterface
+     */
+    public function removeFollower(UserInterface $follower);
 
     /**
      * 设置粉丝数

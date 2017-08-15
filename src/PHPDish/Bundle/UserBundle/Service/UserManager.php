@@ -107,6 +107,21 @@ class UserManager implements UserManagerInterface
         $user->addFollower($follower);
         $user->setFollowerCount($user->getFollowerCount() + 1);
         $follower->setFollowingCount($follower->getFollowingCount() + 1);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->persist($follower);
+        $this->entityManager->flush();
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unFollowUser(UserInterface $user, UserInterface $follower)
+    {
+        $user->removeFollower($follower);
+        $user->setFollowerCount($user->getFollowerCount() - 1);
+        $follower->setFollowingCount($follower->getFollowingCount() - 1);
         $this->entityManager->persist($user);
         $this->entityManager->persist($follower);
         $this->entityManager->flush();

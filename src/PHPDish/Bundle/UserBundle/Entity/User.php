@@ -304,7 +304,7 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function removeFollower(User $follower)
+    public function removeFollower(UserInterface $follower)
     {
         $this->followers->removeElement($follower);
     }

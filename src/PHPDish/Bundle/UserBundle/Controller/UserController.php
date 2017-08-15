@@ -108,6 +108,25 @@ class UserController extends RestController
     }
 
     /**
+     * @Route("/users/{username}/followers", name="follower_delete")
+     * @Method("DELETE")
+     * @param string $username
+     * @return Response
+     */
+    public function unFollowAction($username)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $manager = $this->getUserManager();
+        $user = $manager->findUserByName($username);
+        $view = $this->view();
+        $manager->unFollowUser($user, $this->getUser());
+        $view->setStatusCode(static::HTTP_OK)->setData([
+            'follower_count' => $user->getFollowerCount()
+        ]);
+        return $this->handleView($view);
+    }
+
+    /**
      * @return UserManagerInterface
      */
     protected function getUserManager()

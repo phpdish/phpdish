@@ -66,4 +66,12 @@ interface UserManagerInterface
      * @return boolean
      */
     public function followUser(UserInterface $user, UserInterface $follower);
+
+    /**
+     * 取消关注用户
+     * @param UserInterface $user
+     * @param UserInterface $follower
+     * @return boolean
+     */
+    public function unFollowUser(UserInterface $user, UserInterface $follower);
 }
