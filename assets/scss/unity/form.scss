@@ -1,0 +1,326 @@
+/*------------------------------------
+  Form Elements
+------------------------------------*/
+.form-control {
+  border-color: #ccc;
+}
+
+.form-control-md {
+  padding: .8rem 1rem .6rem;
+}
+
+.u-form-control {
+  padding: .8rem 1rem .6rem;
+}
+
+.u-form-control::-webkit-input-placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control::-moz-placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control:-ms-input-placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control::placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control::-moz-placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control::-webkit-input-placeholder {
+  color: inherit;
+  opacity: .3;
+}
+
+.u-form-control-sm {
+  padding: .4rem .5rem .1rem;
+  font-size: .875rem;
+}
+
+.u-form-control-lg {
+  padding: .75rem 1.5rem .55rem;
+  font-size: 1.25rem;
+}
+
+.u-form-control-shadow--focus:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.u-textarea-expandable {
+  max-height: 42px;
+  transition-property: max-height;
+  transition-duration: .2s;
+  transition-timing-function: ease-in;
+}
+
+.u-textarea-expandable:focus {
+  max-height: 90px;
+}
+
+/*------------------------------------
+  States
+------------------------------------*/
+/*------------------------------------
+  Success states
+------------------------------------*/
+/*------------------------------------
+  Success state v1-1
+------------------------------------*/
+.u-has-success-v1-1 .form-control,
+.u-has-success-v1-1 .input-group-addon,
+.u-has-success-v1-1 [class*="u-select"] {
+  background-color: #f0fff0;
+  border-color: #72c02c;
+}
+
+.u-has-success-v1-1 .form-control[readonly],
+.u-has-success-v1-1 .input-group-addon[readonly],
+.u-has-success-v1-1 [class*="u-select"][readonly] {
+  background-color: #f0fff0;
+}
+
+.u-has-success-v1-1 .form-control-feedback {
+  color: #72c02c;
+}
+
+.u-has-success-v1-1 [class*="u-check-icon"] {
+  color: #f0fff0;
+  background-color: #f0fff0;
+}
+
+.u-has-success-v1-1 [class*="u-check-icon"] i {
+  color: rgba(114, 192, 44, 0.2);
+}
+
+.u-has-success-v1-1 .input-group-addon,
+.u-has-success-v1-1 .input-group-addon:last-child,
+.u-has-success-v1-1 .chosen-single div b {
+  color: #72c02c;
+}
+
+/*------------------------------------
+  Success state v1-2
+------------------------------------*/
+.u-has-success-v1-2 {
+  position: relative;
+}
+
+.u-has-success-v1-2 .form-control,
+.u-has-success-v1-2 .input-group-addon,
+.u-has-success-v1-2 [class*="u-select"] {
+  background-color: #f0fff0;
+  border-color: #72c02c;
+}
+
+.u-has-success-v1-2 .form-control[readonly],
+.u-has-success-v1-2 .input-group-addon[readonly],
+.u-has-success-v1-2 [class*="u-select"][readonly] {
+  background-color: #f0fff0;
+}
+
+.u-has-success-v1-2 .form-control-feedback {
+  color: #72c02c;
+}
+
+.u-has-success-v1-2 [class*="u-check-icon"] {
+  color: #f0fff0;
+  background-color: #f0fff0;
+  border-radius: 50%;
+}
+
+.u-has-success-v1-2 [class*="u-check-icon"] i {
+  color: rgba(114, 192, 44, 0.2);
+}
+
+.u-has-success-v1-2 .input-group-addon,
+.u-has-success-v1-2 .input-group-addon:last-child,
+.u-has-success-v1-2 .chosen-single div b {
+  color: #72c02c;
+}
+
+.u-has-success-v1-2 .input-group-addon,
+.u-has-success-v1-2 .input-group-addon:last-child {
+  color: #fff;
+  background-color: #72c02c;
+}
+
+.u-has-success-v1-2 .form-control-feedback::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: 18px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 3px 3px 0 3px;
+  border-color: #72c02c transparent transparent transparent;
+}
+
+/*------------------------------------
+  Error states
+------------------------------------*/
+/*------------------------------------
+  Error state v1
+------------------------------------*/
+.u-has-error-v1 .form-control,
+.u-has-error-v1 .input-group-addon,
+.u-has-error-v1 [class*="u-select"] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1 .form-control[readonly],
+.u-has-error-v1 .input-group-addon[readonly],
+.u-has-error-v1 [class*="u-select"][readonly] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1 .form-control-feedback {
+  color: #f00;
+}
+
+.u-has-error-v1 [class*="u-check-icon"] {
+  background-color: #fff0f0;
+}
+
+/*------------------------------------
+  Error state v1-2
+------------------------------------*/
+.u-has-error-v1-2 .form-control,
+.u-has-error-v1-2 .input-group-addon,
+.u-has-error-v1-2 [class*="u-select"] {
+  background-color: #fff0f0;
+  border-color: #f00;
+}
+
+.u-has-error-v1-2 .form-control[readonly],
+.u-has-error-v1-2 .input-group-addon[readonly],
+.u-has-error-v1-2 [class*="u-select"][readonly] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1-2 .form-control-feedback {
+  color: #f00;
+}
+
+.u-has-error-v1-2 [class*="u-check-icon"] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1-2 .input-group-addon:last-child,
+.u-has-error-v1-2 .chosen-single div b {
+  color: #f00;
+}
+
+.u-has-error-v1-2 .error {
+  display: block;
+}
+
+/*------------------------------------
+  Error state v1-3
+------------------------------------*/
+.u-has-error-v1-3 {
+  position: relative;
+}
+
+.u-has-error-v1-3 .form-control,
+.u-has-error-v1-3 .input-group-addon,
+.u-has-error-v1-3 [class*="u-select"] {
+  background-color: #fff0f0;
+  border-color: #f00;
+}
+
+.u-has-error-v1-3 .form-control[readonly],
+.u-has-error-v1-3 .input-group-addon[readonly],
+.u-has-error-v1-3 [class*="u-select"][readonly] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1-3 .form-control-feedback {
+  color: #f00;
+}
+
+.u-has-error-v1-3 .form-control-feedback::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: 18px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 3px 3px 0 3px;
+  border-color: #f00 transparent transparent transparent;
+}
+
+.u-has-error-v1-3 [class*="u-check-icon"] {
+  background-color: #fff0f0;
+}
+
+.u-has-error-v1-3 .input-group-addon:last-child,
+.u-has-error-v1-3 .chosen-single div b {
+  color: #f00;
+}
+
+.u-has-error-v1-3 .error {
+  display: block;
+}
+
+.u-has-error-v1-3 .input-group-addon,
+.u-has-error-v1-3 .input-group-addon:last-child {
+  color: #fff;
+  background-color: #f00;
+}
+
+/*------------------------------------
+  Error state v2
+------------------------------------*/
+.u-has-error-v2:after {
+  content: '\f00d';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  font-family: 'FontAwesome', sans-serif;
+  color: #f00;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.u-has-error-v2 input:not([type="checkbox"]):not([type="radio"]),
+.u-has-error-v2 textarea {
+  border-color: #f00;
+}
+
+/*------------------------------------
+  Disabled states
+------------------------------------*/
+/*------------------------------------
+  Disabled state v1
+------------------------------------*/
+.u-has-disabled-v1 label,
+.u-has-disabled-v1 .form-control,
+.u-has-disabled-v1 .input-group-addon,
+.u-has-disabled-v1 [class*="u-select"] {
+  background-color: #fff;
+  opacity: .5;
+}
+
+.u-has-disabled-v1 label:disabled,
+.u-has-disabled-v1 .form-control:disabled,
+.u-has-disabled-v1 .input-group-addon:disabled,
+.u-has-disabled-v1 [class*="u-select"]:disabled {
+  background-color: #fff;
+  opacity: .5;
+}

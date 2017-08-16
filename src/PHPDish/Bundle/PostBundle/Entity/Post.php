@@ -161,23 +161,19 @@ class Post implements PostInterface
     }
 
     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updateTimestamps()
-    {
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
-        }
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWordCount()
+    {
+        return mb_strlen($this->getBody(), 'UTF-8');
     }
 
     /**

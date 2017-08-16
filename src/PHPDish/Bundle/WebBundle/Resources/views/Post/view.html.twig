@@ -3,44 +3,92 @@
 {% block title %} {{ post.title }} {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container narrow-layout">
     <div class="row">
-        <div  class="col-md-9">
-            <article class="panel panel-default">
-                <header class="panel-headning">
-                    {% include "PHPDishWebBundle:Common:crumbs.html.twig" with {'breadcrumbs': [
-                        {'title': post.category.name, 'url': path('category_view', {'slug': post.category.slug})}
-                    ]}%}
-                    <h1 class="entry-title">{{ post.title }}</h1>
-                    <div class="entry-meta">
-                        <a href="{{ path('user_view', {'username': post.user.username}) }}">{{ post.user.username }}</a>
-                        <time class="entry-date num">{{ post.createdAt|date('Y-m-d H:i:s') }}</time>
-                        <a href="#comments"><i data-num-comments="true" class="num">{{ post.commentCount }}</i>条评论</a>
-                        <span><i data-num-views="true" class="num">{{ post.viewCount }}</i>次浏览</span>
+        <div  class="col-md-12">
+            <article class="panel panel-default panel-u post-detail">
+                <header class="panel-heading">
+                    <h1 class="entry-title title">{{ post.title }}</h1>
+                    <div class="media author">
+                        <div class="media-left"><a class="avatar"><img src="{{ post.user.avatar }}" class="img-responsive"/></a></div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <span class="username">{{ post.user.username }}</span>
+                                <span data-role="follow">
+                                    {% if (app.user and post.user.isFollowedBy(app.user)) %}
+                                        <button class="btn btn-sm btn-default" data-action="unfollow-user">已关注</button>
+                                    {% else %}
+                                        <button class="btn btn-success" data-action="follow-user"><i class="if i-plus"></i>关注</button>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="meta">
+                                <span class="publish-date">{{ post.createdAt|date('Y-m-d H:i:s') }}</span>
+                                <span class="word-num">字数 {{ post.wordCount }}</span>
+                                <span class="comment-num">评论 {{ post.commentCount }}</span>
+                                <span class="view-num">浏览 {{ post.viewCount }}</span>
+                            </div>
+                        </div>
                     </div>
                 </header>
-                <div class="panel-body markdown-body">{{ post.body }}</div>
-                <footer class="panel-footer">
-                    <div class="vote-group" id="post-vote" role="group">
-                        <a href="javascript:;" class="up btn btn-default btn-lg" data-choose="like">
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                            <i class="num">{{ post.voteCount }}</i>
-                        </a>
+                <div class="panel-body">
+                    <div class="markdown-body body">{{ post.body|raw }}</div>
+                    <hr/>
+                    <div class="category media">
+                        <div class="media-left media-middle">
+                            {% set categoryUrl = path('category_view', {'slug': post.category.slug}) %}
+                            <a href="{{ categoryUrl }}" class="avatar">
+                                <img src="{{ post.category.cover }}" class="media-object img-circle img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <div class="pull-right" data-role="subscribe">
+                                <button class="btn btn-success btn-sm"><i class="if i-plus"></i> 订阅本专栏</button>
+                            </div>
+                            <h4 class="media-heading">
+                                <a href="{{ categoryUrl }}">{{ post.category.name }}</a>
+                            </h4>
+                            <ul class="list-unstyled list-inline meta">
+                                <li>文章 {{ post.category.postCount }}</li>
+                                <li>订阅 {{ post.category.subscriberCount }}</li>
+                            </ul>
+                            <div>{{ post.category.description }}</div>
+                        </div>
                     </div>
-                    {% include 'PHPDishWebBundle:Common:share.html.twig' %}
-                </footer>
-                {% include 'PHPDishWebBundle:Post:post_comment.html.twig' %}
-            </article>
-        </div>
-        <div class="col-md-3">
-            <aside class="panel panel-default panel-widget">
-                {% include 'PHPDishWebBundle:Common:search.html.twig' %}
-            </aside>
-            <aside class="panel panel-default panel-widget">
-                <div class="tag-box tag-box-v6 no-margin">
-                    {% include 'PHPDishWebBundle:Post:user_dashboard.html.twig' %}
                 </div>
-            </aside>
+            </article>
+            <div class="panel panel-default panel-u">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8 add-comment">
+                            <form>
+                                <div class="form-group">
+                                    {% if not app.user %}
+                                        <a href="{{ path('login') }}" class="avatar">
+                                            <img src="{{ asset('img/default_user.png') }}" class="img-responsive img-circle"/>
+                                        </a>
+                                        <textarea class="form-control" placeholder="点击头像登录后发表评论" disabled="disabled"></textarea>
+                                    {% else %}
+                                        <a href="{{ path('login') }}" class="avatar">
+                                            <img src="{{ asset('img/default_user.jpg') }}" class="img-responsive img-circle"/>
+                                        </a>
+                                        <textarea class="form-control" placeholder="写下你的评论..."></textarea>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-success btn-sm">评论</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-heading"><h5>{{ post.commentCount }}个评论</h5></div>
+                <ul class="list-group reply-list">
+                </ul>
+            </div>
         </div>
     </div>
 </div>

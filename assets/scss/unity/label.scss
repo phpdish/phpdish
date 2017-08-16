@@ -1,0 +1,114 @@
+/*------------------------------------
+  Background Colors
+------------------------------------*/
+.u-label {
+  display: inline-block;
+  padding: .35rem .58rem;
+  font-size: .9rem;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  color: #fff;
+  /* Label Size
+  ------------------------------------*/
+  /* Label Styles
+  ------------------------------------*/
+  /* Label Num
+  ------------------------------------*/
+}
+
+.u-label:empty {
+  display: none;
+}
+
+.btn .u-label {
+  position: relative;
+  top: -1px;
+}
+
+.u-label-default {
+  background-color: #777;
+}
+
+.u-label-default[href]:hover, .u-label-default[href]:focus {
+  background-color: #555;
+}
+
+.u-label-primary {
+  background-color: #5cb85c;
+}
+
+.u-label-primary[href]:hover, .u-label-primary[href]:focus {
+  background-color: #55b555;
+}
+
+.u-label-success {
+  background-color: #5cb85c;
+}
+
+.u-label-success[href]:hover, .u-label-success[href]:focus {
+  background-color: #55b555;
+}
+
+.u-label-info {
+  background-color: #5bc0de;
+}
+
+.u-label-info[href]:hover, .u-label-info[href]:focus {
+  background-color: #53bddc;
+}
+
+.u-label-warning {
+  background-color: #f0ad4e;
+}
+
+.u-label-warning[href]:hover, .u-label-warning[href]:focus {
+  background-color: #efa945;
+}
+
+.u-label-danger {
+  background-color: #d9534f;
+}
+
+.u-label-danger[href]:hover, .u-label-danger[href]:focus {
+  background-color: #d74b47;
+}
+
+.u-label.g-rounded-10 {
+  padding: .35rem .7rem;
+}
+
+.u-label--sm {
+  font-size: .8rem;
+}
+
+.u-label--lg {
+  font-size: 1.1rem;
+}
+
+.u-label.u-label-with-icon {
+  padding: .5rem .85rem;
+}
+
+.u-label.u-label-with-icon i {
+  margin-right: .5rem;
+}
+
+.u-label-num {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 .35rem;
+  line-height: 2rem;
+}
+
+.u-label-num.u-label--sm {
+  min-width: 1.6rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+}
+
+.u-label-num.u-label--lg {
+  min-width: 2.2rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+}

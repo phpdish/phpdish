@@ -21,46 +21,48 @@
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" role="banner" data-role="navbar">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".header-navbar-collapse">
-                            <span class="sr-only">切换菜单</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand"><img src="{{ asset('/img/2.png') }}" class="img-responsive"/></a>
-                    </div>
-                    <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
-                        <ul class="nav navbar-nav">
-                            <li class="menu-item">
-                                <a href="/">首页</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ path('topic') }}">社区</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ path('topic') }}">问答</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ path('topic') }}">招聘</a>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="menu-item">
-                                <a href="">
-                                    <span class="glyphicon glyphicon-gift"></span> 积分换礼
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ path('about') }}">关于本站</a>
-                            </li>
-                        </ul>
-                    </nav>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".header-navbar-collapse">
+                        <span class="sr-only">切换菜单</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand"><img src="{{ asset('/img/2.png') }}" class="img-responsive"/></a>
                 </div>
+                <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li class="menu-item">
+                            <a href="/">首页</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ path('topic') }}">社区</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ path('topic') }}">问答</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ path('topic') }}">招聘</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="menu-item">
+                            <a href="">
+                                <span class="glyphicon glyphicon-gift"></span> 积分换礼
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ path('about') }}">关于本站</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+        </div>
+        <div class="masthead">
         {% block content %}
         {% endblock %}
+        </div>
         <div class="footer">
             <footer class="container">
                 <div class="panel panel-default">

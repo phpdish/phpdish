@@ -1,0 +1,193 @@
+/*------------------------------------
+  Badges
+------------------------------------*/
+[class*="u-badge"] {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  font-size: 0.92857rem;
+  color: #555;
+  z-index: 3;
+}
+
+[class*="u-badge"]:not([class*="--top-left"]):not([class*="--bottom-left"]):not([class*="--bottom-right"]) {
+  top: 0;
+  right: 0;
+  -webkit-transform: translate(50%, -50%);
+  -ms-transform: translate(50%, -50%);
+  transform: translate(50%, -50%);
+}
+
+.u-badge--top-left {
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.u-badge--bottom-left {
+  bottom: 0;
+  left: 0;
+  -webkit-transform: translate(-50%, 50%);
+  -ms-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+}
+
+.u-badge--bottom-right {
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translate(50%, 50%);
+  -ms-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+}
+
+/*------------------------------------
+  Badges v1
+------------------------------------*/
+[class*="u-badge-v1"] {
+  background-color: #ddd;
+  box-sizing: content-box;
+}
+
+.u-badge-v1 {
+  min-width: 1.28571rem;
+  min-height: 1.28571rem;
+  line-height: 1.28571rem;
+  padding: 0.21429rem;
+}
+
+.u-badge-v1.g-brd-around {
+  line-height: 1.14286rem;
+}
+
+.u-badge-v1--xs {
+  min-width: 1rem;
+  min-height: 1rem;
+  line-height: 1rem;
+  font-size: 0.71429rem;
+  padding: 0.14286rem;
+}
+
+.u-badge-v1--xs.g-brd-around {
+  line-height: 0.85714rem;
+}
+
+.u-badge-v1--sm {
+  min-width: 1.14286rem;
+  min-height: 1.14286rem;
+  line-height: 1.14286rem;
+  font-size: 0.78571rem;
+  padding: 0.14286rem;
+}
+
+.u-badge-v1--sm.g-brd-around {
+  line-height: 1rem;
+}
+
+.u-badge-v1--md {
+  min-width: 1.28571rem;
+  min-height: 1.28571rem;
+  line-height: 1.28571rem;
+  font-size: 0.92857rem;
+  padding: 0.21429rem;
+}
+
+.u-badge-v1--md.g-brd-around {
+  line-height: 1.14286rem;
+}
+
+.u-badge-v1--lg {
+  min-width: 1.42857rem;
+  min-height: 1.42857rem;
+  line-height: 1.42857rem;
+  font-size: 1.07143rem;
+  padding: 0.21429rem;
+}
+
+.u-badge-v1--lg.g-brd-around {
+  line-height: 1.28571rem;
+}
+
+.u-badge-v1--xl {
+  min-width: 1.85714rem;
+  min-height: 1.85714rem;
+  line-height: 1.85714rem;
+  font-size: 1.21429rem;
+  padding: 0.21429rem;
+}
+
+.u-badge-v1--xl.g-brd-around {
+  line-height: 1.71429rem;
+}
+
+/*------------------------------------
+  Badges v2
+------------------------------------*/
+[class*="u-badge-v2"] {
+  background-color: #72c02c;
+  border-radius: 50%;
+}
+
+.u-badge-v2 {
+  width: 14px;
+  height: 14px;
+}
+
+.u-badge-v2--xs {
+  width: 8px;
+  height: 8px;
+}
+
+.u-badge-v2--sm {
+  width: 12px;
+  height: 12px;
+}
+
+.u-badge-v2--md {
+  width: 14px;
+  height: 14px;
+}
+
+.u-badge-v2--lg {
+  width: 16px;
+  height: 16px;
+}
+
+.u-badge-v2--xl {
+  width: 18px;
+  height: 18px;
+}
+
+/*------------------------------------
+  Badges v3
+------------------------------------*/
+[class*="u-badge-v3"] {
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 1px #555, 0 -1px 1px #555, 1px 0 1px #555, -1px 0 1px #555;
+}
+
+.u-badge-v3 {
+  font-size: 1rem;
+}
+
+.u-badge-v3--xs {
+  font-size: 0.71429rem;
+}
+
+.u-badge-v3--sm {
+  font-size: 0.85714rem;
+}
+
+.u-badge-v3--md {
+  font-size: 1rem;
+}
+
+.u-badge-v3--lg {
+  font-size: 1.14286rem;
+}
+
+.u-badge-v3--xl {
+  font-size: 1.14286rem;
+}

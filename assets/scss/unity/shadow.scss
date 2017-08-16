@@ -1,0 +1,376 @@
+
+/*------------------------------------
+  Box-shadows Styles
+------------------------------------*/
+.u-shadow-none {
+  box-shadow: none !important;
+}
+
+.u-shadow-none--focus:focus {
+  box-shadow: none !important;
+}
+
+.g-parent:hover .u-shadow-none--parent-hover {
+  box-shadow: none !important;
+}
+
+/*------------------------------------
+  Box-shadows-v1
+------------------------------------*/
+.u-shadow-v1-1 {
+  box-shadow: 0 0 5px #999;
+}
+
+.u-shadow-v1-2 {
+  box-shadow: 0 0 10px #999;
+}
+
+.u-shadow-v1-2--hover:hover {
+  box-shadow: 0 0 10px #999;
+}
+
+.g-parent:hover .u-shadow-v1-2--hover-parent {
+  box-shadow: 0 0 10px #999;
+}
+
+.u-shadow-v1-3 {
+  box-shadow: 0 0 5px #ddd;
+}
+
+.u-shadow-v1-4 {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.u-shadow-v1-5 {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-5--hover:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+*:hover > .u-shadow-v1-5--hover-parent {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-6 {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-6--hover:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+*:hover > .u-shadow-v1-6--hover-parent {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-7 {
+  box-shadow: 0 0 8px #eee;
+}
+
+.u-shadow-v1-7--hover:hover {
+  box-shadow: 0 0 8px #eee;
+}
+
+*:hover > .u-shadow-v1-7--hover-parent {
+  box-shadow: 0 0 8px #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v1
+------------------------------------*/
+.u-shadow-v1-1 {
+  box-shadow: 0 0 5px #999;
+}
+
+.u-shadow-v1-2 {
+  box-shadow: 0 0 10px #999;
+}
+
+.u-shadow-v1-2--hover:hover {
+  box-shadow: 0 0 10px #999;
+}
+
+.g-parent:hover .u-shadow-v1-2--hover-parent {
+  box-shadow: 0 0 10px #999;
+}
+
+.u-shadow-v1-3 {
+  box-shadow: 0 0 5px #ddd;
+}
+
+.u-shadow-v1-4 {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.u-shadow-v1-5 {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-5--hover:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+*:hover > .u-shadow-v1-5--hover-parent {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-6 {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-6--hover:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+*:hover > .u-shadow-v1-6--hover-parent {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.u-shadow-v1-7 {
+  box-shadow: 0 0 8px #eee;
+}
+
+.u-shadow-v1-7--hover:hover {
+  box-shadow: 0 0 8px #eee;
+}
+
+*:hover > .u-shadow-v1-7--hover-parent {
+  box-shadow: 0 0 8px #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v3-v4-v5
+------------------------------------*/
+.u-shadow-v3,
+.u-shadow-v4,
+.u-shadow-v5 {
+  position: relative;
+}
+
+.u-shadow-v3::after,
+.u-shadow-v3::before,
+.u-shadow-v4::before,
+.u-shadow-v5::after {
+  content: "";
+  position: absolute;
+  top: 80%;
+  left: 0.35714rem;
+  bottom: 1.07143rem;
+  width: 50%;
+  max-width: 21.42857rem;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.u-shadow-v3::after,
+.u-shadow-v3::before,
+.u-shadow-v4::before,
+.u-shadow-v5::after {
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.u-shadow-v3::after,
+.u-shadow-v5::after {
+  left: auto;
+  right: 0.35714rem;
+  -webkit-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+}
+
+/*------------------------------------
+  Box-shadows-v6
+------------------------------------*/
+.u-shadow-v6 {
+  box-shadow: 0 8px 6px -6px #555;
+}
+
+/*------------------------------------
+  Box-shadows-v7
+------------------------------------*/
+.u-shadow-v7 {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/*------------------------------------
+  Box-shadows-v8
+------------------------------------*/
+.u-shadow-v8 {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.05);
+}
+
+.u-shadow-v8--hover:hover {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.05);
+}
+
+.u-shadow-v8-1 {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/*------------------------------------
+  Box-shadows-v9
+------------------------------------*/
+.u-shadow-v9 {
+  box-shadow: 1px 1px 1px #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v10
+------------------------------------*/
+.u-shadow-v10 {
+  box-shadow: 2px 2px 2px #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v11
+------------------------------------*/
+.u-shadow-v11 {
+  box-shadow: 0 0 2px #ccc;
+}
+
+/*------------------------------------
+  Box-shadows-v12
+------------------------------------*/
+.u-shadow-v12 {
+  box-shadow: inset 2px 2px 2px 0 #ccc;
+}
+
+/*------------------------------------
+  Box-shadows-v13
+------------------------------------*/
+.u-shadow-v13 {
+  box-shadow: inset 2px 2px 2px 0 #72c02c;
+}
+
+/*------------------------------------
+  Box-shadows-v14
+------------------------------------*/
+.u-shadow-v14 {
+  box-shadow: 2px 2px 2px 0 #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v15
+------------------------------------*/
+.u-shadow-v15 {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+/*------------------------------------
+  Box-shadows-v16
+------------------------------------*/
+.u-shadow-v16 {
+  box-shadow: inset 5px 5px 5px 0 rgba(17, 17, 17, 0.5);
+}
+
+/*------------------------------------
+  Box-shadows-v17
+------------------------------------*/
+.u-shadow-v17 {
+  box-shadow: 3px 2px 8px 2px rgba(0, 0, 0, 0.17);
+}
+
+/*------------------------------------
+  Box-shadows-v18
+------------------------------------*/
+.u-shadow-v18 {
+  box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+/*------------------------------------
+  Box-shadows-v19
+------------------------------------*/
+.u-shadow-v19 {
+  box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/*------------------------------------
+  Box-shadows-v20
+------------------------------------*/
+.u-shadow-v20 {
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05);
+}
+
+.u-shadow-v20--hover:hover {
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05);
+}
+
+/*------------------------------------
+  Box-shadows-v21
+------------------------------------*/
+.u-shadow-v21 {
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.09);
+  transition-property: all;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-duration: .3s;
+}
+
+.u-shadow-v21--hover:hover {
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+}
+
+/*------------------------------------
+  Box-shadows-v22
+------------------------------------*/
+.u-shadow-v22 {
+  box-shadow: 0 2px 5px #eee;
+}
+
+/*------------------------------------
+  Box-shadows-v23
+------------------------------------*/
+.u-shadow-v23 {
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*------------------------------------
+  Box-shadows-v24
+------------------------------------*/
+.u-shadow-v24 {
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.06);
+}
+
+.g-parent.active .u-shadow-v24--active {
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.06);
+}
+
+/*------------------------------------
+  Box-shadows-v25
+------------------------------------*/
+.u-shadow-v25 {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.07);
+}
+
+/*------------------------------------
+  Box-shadows-v26
+------------------------------------*/
+.u-shadow-v26 {
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*------------------------------------
+  Box-shadows-v27
+------------------------------------*/
+.u-shadow-v27 {
+  box-shadow: 0 0 3px #b5b5b5;
+}
+
+/*------------------------------------
+  Box-shadows-v28
+------------------------------------*/
+.u-shadow-v28 {
+  box-shadow: 0 10px 45px -5px rgba(0, 0, 0, 0.04);
+}
+
+/*------------------------------------
+  Box-shadows-v29
+------------------------------------*/
+.u-shadow-v29 {
+  box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.1);
+}

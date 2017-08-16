@@ -19,3 +19,82 @@
     margin: 0
   }
 }
+
+/**
+ * 文章详情页
+ */
+.post-detail{
+  .body{
+    line-height: 1.8em;
+    font-size: 14px;
+  }
+  //作者部分
+  .author{
+    .avatar{
+      display: inline-block;
+      height: 50px;
+      width:50px;
+      vertical-align: middle;
+      img{
+        @extend .img-circle;
+      }
+    }
+    .media-body{
+      vertical-align: middle;
+      .username{
+        font-size: 14px;
+        padding-right: 10px;
+        vertical-align: middle;
+      }
+      i{
+        font-size: 12px;
+      }
+      button{
+        padding: 0 7px 0 5px;
+        font-size: 12px;
+        border-radius: 12px;
+      }
+      .meta{
+        color: $metaColor;
+        margin-top: 5px;
+      }
+    }
+  }
+  //专栏部分
+  .category{
+    .avatar{
+      width: 50px;
+      height:50px;
+      display: inline-block;
+    }
+    .media-heading{
+      a{
+        color: $focusFontColor;
+      }
+    }
+    .meta{
+      color:$metaColor;
+      li{
+        padding-right: 0;
+      }
+    }
+  }
+}
+.add-comment{
+  position: relative;
+  margin-left:62px;
+  .avatar{
+    width:50px;
+    height:50px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    position: absolute;
+    left: -48px;
+  }
+  textarea{
+    vertical-align: middle;
+    resize: none;
+    height: 100px;
+  }
+}

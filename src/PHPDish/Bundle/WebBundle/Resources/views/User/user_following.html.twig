@@ -13,7 +13,7 @@
 {% block user_content %}
     <div class="panel-body users-list">
     {% for user in users %}
-        <div class="media item">
+        <div class="media user">
             <div class="media-left">
                 {% set userHomeUrl = path('user_view', {'username': user.username}) %}
                 <a href="{{ userHomeUrl  }}">

@@ -62,6 +62,12 @@ interface PostInterface extends
     public function setViewCount($viewCount);
 
     /**
+     * 获取字数
+     * @return int
+     */
+    public function getWordCount();
+
+    /**
      * 获取分类
      * @return CategoryInterface
      */

@@ -9,6 +9,13 @@
     }
 }
 
+//覆盖markdown的字体
+.markdown-body{
+    font:{
+        family: "微软雅黑", "宋体";
+    }
+}
+
 //面包屑路径导航
 .breadcrumb{
     background-color:#fff;
