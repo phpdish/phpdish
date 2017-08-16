@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="container content">
+<div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
             <form class="reg-page" action="{{ path('login') }}" method="post" id="login-form">
                 <div class="reg-header">
                     <h2>登录你的账号</h2>
@@ -19,21 +19,42 @@
                 <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
                 <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="if i-user"></i></span>
                     <input type="text" class="form-control" id="username" name="_username" placeholder="用户名" value="{{ last_username }}"/>
                 </div>
                 <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <span class="input-group-addon"><i class="if i-password"></i></span>
                     <input type="text" class="form-control" id="password" name="_password" placeholder="密码" value="{{ last_username }}"/>
                 </div>
                 <div class="row">
                     <div class="col-md-6 checkbox">
                         <label><input name="remember" type="checkbox">记住我</label>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary pull-right" type="submit">登录</button>
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="forgot-password">找回密码</a>
                     </div>
                 </div>
+                <button class="btn btn-md u-btn-primary btn-block" type="submit">登录</button>
+                <div class="cross-line">
+                    <span>或者使用</span>
+                </div>
+                <ul class="list-inline text-center social-connection">
+                    <li class="list-inline-item">
+                        <button class="btn btn-sm u-btn-outline-blue"><i class="if i-baidu"></i></button>
+                    </li>
+                    <li class="list-inline-item ">
+                        <button class="btn btn-sm u-btn-outline-black"><i class="if i-github"></i></button>
+                    </li>
+                    <li class="list-inline-item ">
+                        <button class="btn btn-sm u-btn-outline-primary"><i class="if i-wechat"></i></button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn btn-sm u-btn-outline-purple"><i class="if i-qq"></i></button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn btn-sm u-btn-outline-red"><i class="if i-weibo"></i></button>
+                    </li>
+                </ul>
             </form>
         </div>
     </div>

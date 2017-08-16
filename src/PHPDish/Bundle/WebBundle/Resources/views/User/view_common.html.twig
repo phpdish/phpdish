@@ -22,7 +22,7 @@
                             {% if app.user and user.isFollowedBy(app.user) %}
                                 <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
                             {%else %}
-                                <button type="button" class="btn-u btn-sm btn-u-red" data-action="follow-user">
+                                <button type="button" class="btn btn-md u-btn-deeporange" data-action="follow-user">
                                     <i class="if i-plus"></i> 关注
                                 </button>
                             {% endif %}
