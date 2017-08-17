@@ -8,14 +8,14 @@ namespace  PHPDish\Bundle\PostBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
-use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
+use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 
 /**
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostCommentRepository")
  * @ORM\Table(name="post_comments")
  */
-class PostComment extends BaseComment implements PostCommentInterface
+class Comment extends BaseComment implements CommentInterface
 {
     use VotableTrait;
     
