@@ -1,0 +1,18 @@
+{% for reply in replies %}
+    {% set userUrl = path('user_view', {'username': reply.user.username}) %}
+    <li class="list-group-item media reply" data-role="reply" data-reply-id="{{ reply.id }}"  data-username="{{ reply.user.username }}">
+        <div class="media-left">
+            <a href="{{ userUrl }}" class="avatar"><img src="{{ reply.user.avatar }}" class="media img-responsive img-circle"></a>
+        </div>
+        <div class="media-body">
+            <div class="media-heading">
+                <a href="{{ userUrl }}" class="username">{{ reply.user.username }}</a>
+                <ul class="list-unstyled list-inline meta">
+                    <li>#{{ loop.index }} {{ reply.createdAt|date('Y-m-d') }}</li>
+                    <li><span class="reply-user" data-action="mention"><i class="if i-reply" title="回复TA"></i></span></li>
+                </ul>
+            </div>
+            <div class="body">{{ reply.body|raw }}</div>
+        </div>
+    </li>
+{% endfor %}

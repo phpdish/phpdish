@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.reply-list{
+  .reply{
+    margin-top: 0;
+    padding-top:20px;
+    .media-left{
+      padding-right:15px;
+    }
+    .avatar{
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+    }
+    .username{
+      font-size:15px;
+      color: $focusFontColor;
+    }
+    .meta{
+      color: $metaColor;
+      .reply-user{
+        cursor: pointer;
+        color: #8590a6
+      }
+    }
+    .body{
+      line-height: 1.6em;
+    }
+  }
+}

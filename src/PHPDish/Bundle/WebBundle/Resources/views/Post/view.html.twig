@@ -58,38 +58,52 @@
                 </div>
             </article>
             <div class="panel panel-default panel-u">
-                <div class="panel-body">
+                <div class="panel-body margin-bottom-10">
                     <div class="row">
-                        <div class="col-md-8 add-comment">
-                            <form>
-                                <div class="form-group">
-                                    {% if not app.user %}
-                                        <a href="{{ path('login') }}" class="avatar">
-                                            <img src="{{ asset('img/default_user.png') }}" class="img-responsive img-circle"/>
+                        <div class="col-md-10 add-comment">
+                            {% if not app.user %}
+                                <a href="{{ path('login') }}" class="avatar">
+                                    <img src="{{ asset('img/default_user.png') }}" class="img-responsive img-circle"/>
+                                </a>
+                                <textarea class="form-control" placeholder="点击头像登录后发表评论" disabled="disabled"></textarea>
+                            {% else %}
+                                {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
+                                    <div class="form-group md-editor" data-role="md-editor">
+                                        <a class="avatar">
+                                            <img src="{{ app.user.avatar}}" class="img-responsive img-circle"/>
                                         </a>
-                                        <textarea class="form-control" placeholder="点击头像登录后发表评论" disabled="disabled"></textarea>
-                                    {% else %}
-                                        <a href="{{ path('login') }}" class="avatar">
-                                            <img src="{{ asset('img/default_user.jpg') }}" class="img-responsive img-circle"/>
-                                        </a>
-                                        <textarea class="form-control" placeholder="写下你的评论..."></textarea>
-                                    {% endif %}
-                                </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-success btn-sm">评论</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-
+                                        {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'role': 'md-editor-write',  'class': 'form-control', 'placeholder': '写下你的评论...'}}) }}
+                                        {#<textarea class="form-control" data-role="comment-body" placeholder="写下你的评论..."></textarea>#}
+                                        <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button data-role="submit" class="btn u-btn-primary">评论</button>
+                                    </div>
+                                {{ form_end(form) }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="panel-heading"><h5>{{ post.commentCount }}个评论</h5></div>
-                <ul class="list-group reply-list">
+                <ul class="list-group reply-list" data-role="replies-panel">
+                   {% include 'PHPDishWebBundle:Common:replies.html.twig' with {
+                       replies: comments
+                   } %}
                 </ul>
+                {% if comments.haveToPaginate %}
+                    <footer class="panel-footer">
+                        {{ pagerfanta(comments, 'twitter_bootstrap3') }}
+                    </footer>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
+    <script type="text/javascript">
+    window.postId = {{ post.id }};
+    </script>
 {% endblock %}

@@ -8,7 +8,7 @@ trait ContentTrait
     /**
      * @ORM\Column(type="text")
      */
-    protected $body = 'test';
+    protected $body;
 
     /**
      * @ORM\Column(type="text")

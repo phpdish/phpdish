@@ -31,30 +31,10 @@
                         <article class="body markdown-body">{{ topic.body|raw }}</article>
                     </div>
                 </div>
-                <div class="panel panel-default panel-u topic-replies">
+                <div class="panel panel-default panel-u">
                     <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
-                    <ul class="list-group" id="topic-replies-panel">
-                        {% for reply in replies %}
-                            <li class="list-group-item" data-role="reply" data-reply-id="{{ reply.id }}" data-username="{{ reply.user.username }}">
-                                <div class="topic reply">
-                                    <div class="summary clearfix">
-                                        <div class="author">
-                                            <a href="{{ path('user_view', {'username': reply.user.username}) }}"><img src="{{ reply.user.avatar }}" class="avatar img-circle"/></a>
-                                        </div>
-                                        <ul class="list-unstyled list-inline small">
-                                            <li  class="author-username">{{ reply.user.username }}</li>
-                                            <li>#{{ loop.index }} <span data-date="{{ reply.createdAt|date('Y-m-d\TH:i:sO') }}">{{ reply.createdAt|date('Y-m-d H:i:s') }}</span></li>
-                                            <li>
-                                                <span class="reply-user" data-action="mention">
-                                                    <i class="if i-reply" title="回复TA"></i>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <article class="body markdown-body">{{ reply.body|raw }}</article>
-                                </div>
-                            </li>
-                        {% endfor %}
+                    <ul class="list-group reply-list" data-role="replies-panel">
+                        {% include 'PHPDishWebBundle:Common:replies.html.twig'%}
                     </ul>
                     {% if replies.haveToPaginate %}
                     <div class="panel-footer">
@@ -66,33 +46,8 @@
                     <div class="panel-heading"><h4>回复</h4></div>
                     <form id="add-reply-form" class="form-panel">
                         <div class="panel-body">
-                            <div class="md-editor" data-role="md-editor">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#write" aria-controls="home" role="tab" data-toggle="tab">
-                                            <i class="if i-write"></i> 书写
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#preview" aria-controls="profile" role="tab" data-toggle="tab">
-                                            <i class="if i-preview"></i> 预览
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active md-editor-write-panel" id="write">
-                                        <textarea class="md-editor-write form-control" role="md-editor-write" placeholder="请使用markdown语法"></textarea>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane md-editor-preview-panel" id="preview">
-                                        <article class="md-editor-preview markdown-body"  role="md-editor-preview">
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
-                                <button type="submit" class="btn btn-primary">回复</button>
-                            </div>
+                            {% include 'PHPDishWebBundle:Common:md_editor.html.twig' %}
+                            <div class="form-actions"><button type="submit" class="btn u-btn-primary">回复</button></div>
                         </div>
                     </form>
                 </div>

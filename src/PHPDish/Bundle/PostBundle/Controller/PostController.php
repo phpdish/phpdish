@@ -8,7 +8,9 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\PostBundle\Entity\Post;
+use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -51,12 +53,18 @@ class PostController extends Controller
     /**
      * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
      * @param Post $post
+     * @param Request $request
      * @return Response
      */
-    public function viewAction(Post $post)
+    public function viewAction(Post $post,  Request $request)
     {
+        $form = $this->createForm(CommentType::class);
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('post', $post->getId()));
+        $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Post:view.html.twig', [
-            'post' => $post
+            'post' => $post,
+            'comments' =>  $comments,
+            'form' => $form->createView()
         ]);
     }
 

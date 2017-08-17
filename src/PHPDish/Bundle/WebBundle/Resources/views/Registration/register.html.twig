@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container content">
+<div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             {{ form_start(form, {'attr':{'class': 'reg-page', 'id': 'register-form'}}) }}
@@ -16,16 +16,24 @@
                     <p>已经有账户?点此<a href="{{ path('login') }}">登录</a>你的账户</p>
                 </div>
                 {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <span class="black-text"><p>{{ flashMessage }}</p></span>
+                    <span class="black-text">{ flashMessage }}</span>
                 {% endfor %}
-                <label>用户名 <span class="color-red">*</span></label>
-                {{ form_widget(form.username, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
-                <label>邮箱 <span class="color-red">*</span></label>
-                {{ form_widget(form.email, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
-                <label>密码 <span class="color-red">*</span></label>
-                 {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
-                <label>重复密码 <span class="color-red">*</span></label>
-                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control margin-bottom-20'}})  }}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="if i-user"></i></span>
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': '你的用户名'}})  }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="if i-email"></i></span>
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '你的邮箱'}})  }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="if i-password"></i></span>
+                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': '设置密码'}})  }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="if i-password"></i></span>
+                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': '重复上面的密码'}})  }}
+                </div>
                 <div class="row">
                     <div class="col-lg-6 checkbox">
                         <label>
@@ -35,7 +43,7 @@
                         <span id="for_policy"></span>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <button class="btn btn-primary" type="submit">注册</button>
+                        <button class="btn btn-md u-btn-primary" type="submit">注册</button>
                     </div>
                 </div>
             {{ form_end(form) }}

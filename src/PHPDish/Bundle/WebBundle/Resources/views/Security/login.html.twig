@@ -18,11 +18,11 @@
                 {% if error %}
                 <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <div class="input-group margin-bottom-20">
+                <div class="input-group">
                     <span class="input-group-addon"><i class="if i-user"></i></span>
                     <input type="text" class="form-control" id="username" name="_username" placeholder="用户名" value="{{ last_username }}"/>
                 </div>
-                <div class="input-group margin-bottom-20">
+                <div class="input-group">
                     <span class="input-group-addon"><i class="if i-password"></i></span>
                     <input type="text" class="form-control" id="password" name="_password" placeholder="密码" value="{{ last_username }}"/>
                 </div>

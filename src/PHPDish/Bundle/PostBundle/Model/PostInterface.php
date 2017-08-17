@@ -18,7 +18,6 @@ interface PostInterface extends
     ContentInterface,
     DateTimeInterface,
     UserAwareInterface,
-    CommentableInterface,
     VotableInterface,
     EnabledInterface
 {
@@ -60,6 +59,26 @@ interface PostInterface extends
      * @return $this
      */
     public function setViewCount($viewCount);
+
+    /**
+     * 获取评论数量
+     * @return int
+     */
+    public function getCommentCount();
+
+    /**
+     * 设置评论数量
+     * @param int $commentCount
+     * @return $this
+     */
+    public function setCommentCount($commentCount);
+
+    /**
+     * 自增评论数量
+     * @param int $count
+     * @return $this
+     */
+    public function increaseCommentCount($count = 1);
 
     /**
      * 获取字数

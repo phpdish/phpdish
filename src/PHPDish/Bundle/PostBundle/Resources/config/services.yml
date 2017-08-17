@@ -14,11 +14,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    phpdish.manager.post_comment:
-        class: PHPDish\Bundle\PostBundle\Service\PostCommentManager
+    phpdish.manager.post.comment:
+        class: PHPDish\Bundle\PostBundle\Service\CommentManager
         arguments:
-            - '@event_dispatcher'
             - '@doctrine.orm.entity_manager'
+            - "@markdown.parser"
 
     phpdish.form.post:
          class: PHPDish\Bundle\PostBundle\Form\Type\PostType

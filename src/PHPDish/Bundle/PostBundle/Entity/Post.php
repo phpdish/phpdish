@@ -1,7 +1,6 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\CommentableTrait;
 use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
@@ -10,7 +9,6 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\PostBundle\Model\PostCommentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -26,7 +24,6 @@ class Post implements PostInterface
         ContentTrait,
         UserAwareTrait,
         DateTimeTrait,
-        CommentableTrait,
         VotableTrait,
         EnabledTrait;
 
@@ -48,13 +45,12 @@ class Post implements PostInterface
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
-    protected $viewCount = 0;
+    protected $commentCount = 0;
 
     /**
-     * @var PostCommentInterface[]|Collection
-     * @ORM\OneToMany(targetEntity="PostComment", mappedBy="post")
+     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
      */
-    protected $comments;
+    protected $viewCount = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
@@ -128,20 +124,37 @@ class Post implements PostInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->commentCount = $commentCount;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function increaseCommentCount($count = 1)
+    {
+        $this->commentCount += $count;
+    }
+
+    /**
      * Gets the summary of the post
      * @return string
      */
     public function getSummary()
     {
         return mb_substr($this->body, 0, 250);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getComments()
-    {
-        return $this->comments;
     }
 
     /**

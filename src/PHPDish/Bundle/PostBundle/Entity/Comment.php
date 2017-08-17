@@ -10,23 +10,26 @@ use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use JMS\Serializer\Annotation as JMS;
 
 /**
- * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostCommentRepository")
- * @ORM\Table(name="post_comments")
+ * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\CommentRepository")
+ * @ORM\Table(name="comments")
  */
 class Comment extends BaseComment implements CommentInterface
 {
     use VotableTrait;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Post")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * @JMS\MaxDepth(1)
      */
     protected $post;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @JMS\MaxDepth(1)
      */
     protected $user;
 

@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
+use PHPDish\Bundle\PostBundle\Service\CommentManagerInterface;
 use PHPDish\Bundle\PostBundle\Service\PostManagerInterface;
 
 trait ManagerTrait
@@ -22,5 +23,14 @@ trait ManagerTrait
     protected function getCategoryManager()
     {
         return $this->get('phpdish.manager.category');
+    }
+
+    /**
+     * 获取评论管理服务
+     * @return CommentManagerInterface
+     */
+    public function getPostCommentManager()
+    {
+        return $this->get('phpdish.manager.post.comment');
     }
 }

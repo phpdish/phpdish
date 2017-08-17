@@ -8,6 +8,9 @@
 @import "./base.scss";
 //主题全局样式
 @import "./style.scss";
+//block样式
+@import "./blocks/utils.scss";
+@import "./blocks/replies.scss";
 //各个页面单独样式
 @import "./pages/log_reg.scss";
 @import "./pages/topic.scss";
