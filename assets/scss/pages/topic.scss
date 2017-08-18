@@ -3,15 +3,15 @@
 /**
  * topic列表页
  */
-.topics {
+.topic-list {
   .topic{
     .avatar{
       width:50px;
       border-radius: 50%;
     }
-    .summary{
-      padding-top: 10px;
-      color: #bab9bb;
+    .meta{
+      padding-top: 5px;
+      color: $metaColor;
     }
     .title{
       font-size:14px;
@@ -40,45 +40,6 @@
     line-height:50px;
     i.if {
       color: #8590a6
-    }
-  }
-}
-
-//回复列表样式
-.topic-replies{
-  .panel-body{
-    padding-top:0;
-  }
-  .list-group-item{
-    border: 1px solid $borderColor;
-  }
-
-  //回复样式
-  .reply{
-    padding: 0;
-    .summary{
-      color:#ccc;
-      .author-username{
-        font-size:14px;
-        color: #555;
-        //font-weight:bold;
-      }
-      .reply-user{
-        cursor: pointer;
-      }
-      .author {
-        float: right;
-        .avatar{
-          width:50px;
-          height:50px;
-        }
-      }
-      i.if {
-        color: #8590a6
-      }
-    }
-    .body{
-      //padding:50px 0;
     }
   }
 }

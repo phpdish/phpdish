@@ -12,7 +12,7 @@
                     <li><span class="reply-user" data-action="mention"><i class="if i-reply" title="回复TA"></i></span></li>
                 </ul>
             </div>
-            <div class="body">{{ reply.body|raw }}</div>
+            <div class="body markdown-body">{{ reply.body|raw }}</div>
         </div>
     </li>
 {% endfor %}
