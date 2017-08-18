@@ -21,9 +21,9 @@
                                 {% endif %}
                                 <div class="content-box">
                                     <div class="author">
-                                        <a href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-responsive"></a>
-                                        <span>{{ post.user.username }}</span>
-                                        <time>{{ post.createdAt|date('Y-m-d') }}</time>
+                                        <a class="avatar" href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-responsive"></a>
+                                        <span class="username">{{ post.user.username }}</span>
+                                        <time class="publish-time">{{ post.createdAt|date('Y-m-d') }}</time>
                                     </div>
                                     <h3 class="title">
                                         {% if post.isRecommended %}
