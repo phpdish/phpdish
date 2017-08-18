@@ -154,7 +154,7 @@ class Post implements PostInterface
      */
     public function getSummary()
     {
-        return mb_substr($this->body, 0, 250);
+        return strip_tags(mb_substr($this->body, 0, 250));
     }
 
     /**

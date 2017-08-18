@@ -1,8 +1,8 @@
-<ul>
+<ul class="list-group">
     {% for user in users %}
-    <li>
+    <li class="list-group-item">
         <a href="{{ path('user_view', {'username': user.username}) }}" target="_blank" title="{{ user.username }}">
-            <img src="{{ user.username }}" class="avatar avatar-50 photo" height="50" width="50"/>
+            <img src="{{ user.avatar }}" class="avatar img-responsive" height="50" width="50"/>
         </a>
     </li>
     {% endfor %}

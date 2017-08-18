@@ -1,6 +1,7 @@
 php_dish_comment:
-    resource: "@PHPDishCommentBundle/Resources/config/routing.yml"
+    resource: "@PHPDishCommentBundle/Controller/"
     prefix:   /
+    type: annotation
 
 php_dish_web:
     resource: "@PHPDishWebBundle/Controller/"
