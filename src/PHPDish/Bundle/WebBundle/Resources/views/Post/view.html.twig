@@ -86,7 +86,7 @@
                 </div>
                 <div class="panel-heading"><h5>{{ post.commentCount }}个评论</h5></div>
                 <ul class="list-group reply-list" data-role="replies-panel">
-                   {% include 'PHPDishWebBundle:Common:replies.html.twig' with {
+                   {% include 'PHPDishWebBundle:Common:reply_list.html.twig' with {
                        replies: comments
                    } %}
                 </ul>

@@ -24,6 +24,14 @@ class PostController extends Controller
     use UserManagerTrait;
 
     /**
+     * @
+     */
+    public function indexAction()
+    {
+
+    }
+
+    /**
      * 创建文章
      * @Route("/write", name="post_add")
      * @param Request $request

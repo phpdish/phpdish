@@ -34,7 +34,7 @@
                 <div class="panel panel-default panel-u">
                     <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
                     <ul class="list-group reply-list" data-role="replies-panel">
-                        {% include 'PHPDishWebBundle:Common:replies.html.twig'%}
+                        {% include 'PHPDishWebBundle:Common:reply_list.html.twig'%}
                     </ul>
                     {% if replies.haveToPaginate %}
                     <div class="panel-footer">

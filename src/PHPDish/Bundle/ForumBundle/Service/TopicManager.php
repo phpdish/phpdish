@@ -63,11 +63,11 @@ class TopicManager implements TopicManagerInterface
      */
     public function findThreadTopics(ThreadInterface $thread, $page, $limit = null)
     {
-        $query = $this->getTopicRepository()->createQueryBuilder('t')
-            ->where('t.thread = :threadId')->setParameter('threadId', $thread->getId())
-            ->orderBy('t.updatedAt', 'desc')
-            ->getQuery();
-        return $this->createPaginator($query, $page, $limit);
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('thread', $thread->getId()))
+            ->orderBy([
+                'updatedAt' => 'DESC'
+            ]);
+        return $this->findTopics($criteria, $page, $limit);
     }
 
     /**
@@ -75,11 +75,11 @@ class TopicManager implements TopicManagerInterface
      */
     public function findUserTopics(UserInterface $user, $page, $limit = null)
     {
-        $query = $this->getTopicRepository()->createQueryBuilder('t')
-            ->where('t.user = :userId')->setParameter('userId', $user->getId())
-            ->orderBy('t.createdAt', 'desc')
-            ->getQuery();
-        return $this->createPaginator($query, $page, $limit);
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()))
+            ->orderBy([
+                'createdAt' => 'DESC'
+            ]);
+        return $this->findTopics($criteria, $page, $limit);
     }
 
     /**
@@ -99,6 +99,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function findHotTopics(\DateTime $date, $limit)
     {
+//        echo $date->format(\DateTime::ATOM);exit;
         return $this->getTopicRepository()->createQueryBuilder('t')
             ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
             ->orderBy('t.replyCount', 'desc')

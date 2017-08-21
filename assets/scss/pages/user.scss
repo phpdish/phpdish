@@ -160,12 +160,14 @@
   }
 }
 
-//关注列表
-.users-list{
+/**
+ * 用户列表
+ */
+.user-list{
   .user{
     .avatar{
-      width: 60px;
-      height:60px;
+      width: 50px;
+      height:50px;
     }
     .title{
       font: {
@@ -184,6 +186,44 @@
     }
   }
 }
+/**
+ * 小关注标签
+ */
+.user-list-v1{
+   .btn{
+      padding: 0 5px;
+     i{
+       font-size:12px;
+     }
+     &.u-btn-orange{
+       border: 1px solid $contrastColor;
+       background-color:transparent;
+       color: $contrastColor;
+     }
+     &.btn-default{
 
-.panel-widget-user ul{margin:0}
-.panel-widget-user ul li{border:0;display:inline-block;margin:4px 0 0 4px;padding:4px}
+     }
+   }
+  .user{
+    .title{
+      font-weight:normal;
+    }
+    .description{
+      margin-top: 5px;
+    }
+    .meta{
+      display:none;
+    }
+  }
+}
+.panel-widget-user  {
+  ul{
+    margin: 0;
+    li {
+      border: 0;
+      display: inline-block;
+      margin: 4px 0 0 4px;
+      padding: 4px
+    }
+  }
+}

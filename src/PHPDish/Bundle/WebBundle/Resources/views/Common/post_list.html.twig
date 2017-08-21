@@ -10,7 +10,7 @@
                 </div>
                 <h3 class="title">
                     {% if post.isRecommended %}
-                        <span class="sticky-tag">置顶</span>
+                        <span class="sticky-tag">推荐</span>
                     {% endif %}
                     <a href="{{ postUrl }}">
                         <span>{{ post.title }}</span>
@@ -23,7 +23,7 @@
                 </ul>
             </div>
             {% if post.cover %}
-                <div class="media-right media-middle">
+                <div class="media-right media-middle cover">
                     <a href="{{ postUrl }}" title="{{ post.title }}">
                         <img src="{{ post.buildCover(300, 300) }}" class="media-object">
                     </a>

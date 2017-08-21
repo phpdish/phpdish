@@ -3,6 +3,11 @@
  */
 .post-list{
   .post{
+    .cover{
+      img{
+        max-width: 120px;
+      }
+    }
     .author{
       .avatar{
         width: 38px;

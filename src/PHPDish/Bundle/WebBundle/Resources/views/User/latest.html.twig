@@ -1,9 +1,3 @@
-<ul class="list-group">
-    {% for user in users %}
-    <li class="list-group-item">
-        <a href="{{ path('user_view', {'username': user.username}) }}" target="_blank" title="{{ user.username }}">
-            <img src="{{ user.avatar }}" class="avatar img-responsive" height="50" width="50"/>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="panel-body user-list user-list-v1">
+    {% include 'PHPDishWebBundle:Common:user_list.html.twig' %}
+</div>
