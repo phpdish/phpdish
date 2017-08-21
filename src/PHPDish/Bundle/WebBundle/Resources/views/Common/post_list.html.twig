@@ -6,7 +6,7 @@
                 <div class="author">
                     <a class="avatar" href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-circle img-responsive"></a>
                     <span class="username">{{ post.user.username }}</span>
-                    <time class="publish-time">{{ post.createdAt|date('Y-m-d') }}</time>
+                    <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|date('Y-m-d') }}</time>
                 </div>
                 <h3 class="title">
                     {% if post.isRecommended %}

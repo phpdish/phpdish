@@ -18,9 +18,20 @@
   }
   .entry-tabs{
     margin-bottom: 0;
+    margin-left: 0;
+    font-size: 14px;
     li{
       line-height:20px;
-      padding: 10px 20px;
+      a{
+        display:block;
+        padding: 10px 30px;
+      }
+      &.active{
+        font-weight: 600;
+        a{
+          border-bottom: 2px solid $contrastColor;
+        }
+      }
     }
   }
 }

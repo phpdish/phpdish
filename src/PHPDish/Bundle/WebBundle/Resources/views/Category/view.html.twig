@@ -31,8 +31,9 @@
                     </div>
                 </div>
                 <ul class="list-unstyled list-inline entry-tabs">
-                    <li><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'new'}) }}">新发布</a></li>
+                    <li class="active"><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'new'}) }}">新发布</a></li>
                     <li><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
+                    <li><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">关注的人</a></li>
                 </ul>
                 <ul class="list-group post-list">
                     {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
