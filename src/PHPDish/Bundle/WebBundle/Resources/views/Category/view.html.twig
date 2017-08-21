@@ -6,9 +6,9 @@
 <div class="container" role="main">
     <div class="row">
         <div class="col-lg-9 col-md-9">
-            <div class="panel panel-default panel-u">
+            <div class="panel panel-default panel-u category-detail">
                 <div class="panel-heading">
-                    <div class="media category-detail">
+                    <div class="media category">
                         <div class="media-left media-middle">
                             {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
                             <a href="{{ categoryUrl }}" class="avatar">
@@ -30,6 +30,10 @@
                         </div>
                     </div>
                 </div>
+                <ul class="list-unstyled list-inline entry-tabs">
+                    <li>新发布</li>
+                    <li>热门</li>
+                </ul>
                 <ul class="list-group post-list">
                     {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
                 </ul>

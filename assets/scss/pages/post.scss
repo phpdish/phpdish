@@ -2,17 +2,25 @@
   专栏页面
 ------------------------------------*/
 .category-detail{
-  .avatar{
-    width: 80px;
-    height: 80px;
-    display: inline-block;
+  .category{
+    .avatar{
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+    }
+    .name{
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .meta{
+      color: $metaColor;
+    }
   }
-  .name{
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .meta{
-    color: $metaColor;
+  .entry-tabs{
+    li{
+      line-height:20px;
+      padding: 10px 0;
+    }
   }
 }
 
