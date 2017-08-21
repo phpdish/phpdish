@@ -21,10 +21,8 @@ class DefaultController extends Controller
         $postManager = $this->getPostManager();
         $posts = $postManager->findLatestPosts($request->query->getInt('page', 1));
         $topics = $this->getTopicManager()->findHotTopics(Carbon::now()->addDays(-7), 15);
-        $recommendedPosts = $postManager->findRecommendPosts(1, 5);
         return $this->render('PHPDishWebBundle:Default:index.html.twig', [
             'posts' => $posts,
-            'recommendedPosts' => $recommendedPosts,
             'topics' => $topics
         ]);
     }

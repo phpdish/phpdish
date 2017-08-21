@@ -58,18 +58,10 @@ interface PostManagerInterface
     public function findPosts(Criteria $criteria, $page  = 1, $limit = null);
 
     /**
-     * 获取用户的文章
+     * 获取最新文章
      * @param int $page
      * @param int|null $limit
      * @return Pagerfanta
      */
     public function findLatestPosts($page, $limit = null);
-
-    /**
-     * 获取推荐的文章
-     * @param int $page
-     * @param int|null $limit
-     * @return Pagerfanta
-     */
-    public function findRecommendPosts($page, $limit = null);
 }

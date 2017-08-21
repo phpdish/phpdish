@@ -24,12 +24,18 @@ class PostController extends Controller
     use UserManagerTrait;
 
     /**
-     * @
+     * @Route("/posts", name="post")
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-
+        $posts = $this->getPostManager()->findLatestPosts($request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:Post:index.html.twig', [
+            'posts' => $posts
+        ]);
     }
+
 
     /**
      * 创建文章
