@@ -1,0 +1,22 @@
+/*------------------------------------
+  话题列表
+------------------------------------*/
+.topic-list {
+  .topic{
+    .avatar{
+      width:50px;
+      border-radius: 50%;
+    }
+    .meta{
+      padding-top: 5px;
+      color: $metaColor;
+    }
+    .title{
+      font-size:14px;
+      line-height:1.5em;
+    }
+  }
+  hr{
+    margin: 10px auto;
+  }
+}

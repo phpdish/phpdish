@@ -1,62 +1,51 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block script %}
-<script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
-{% endblock %}
+{% block title %} PHPDish {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" role="main">
     <div class="row">
-        <div class="col-md-9" role="article">
-            <article class="panel panel-default panel-u">
-                <header class="panel-heading">
-                    <div class="entry-location">
-                        {% include "PHPDishWebBundle:Common:crumbs.html.twig" with {'breadcrumbs': [
-                            {'title': category.name, 'url': path('category_view', {'slug': category.slug})}
-                        ]}%}
+        <div class="col-lg-9 col-md-9">
+            <div class="panel panel-default panel-u">
+                <div class="panel-heading">
+                    <div class="media category-detail">
+                        <div class="media-left media-middle">
+                            {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
+                            <a href="{{ categoryUrl }}" class="avatar">
+                                <img src="{{ category.cover }}" class="media-object img-circle img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <div class="pull-right" data-role="subscribe">
+                                <button class="btn btn-success btn-sm"><i class="if i-plus"></i> 订阅本专栏</button>
+                            </div>
+                            <h4 class="media-heading name">
+                                <a href="{{ categoryUrl }}">{{ category.name }}</a>
+                            </h4>
+                            <ul class="list-unstyled list-inline meta">
+                                <li>文章 {{ category.postCount }}</li>
+                                <li>订阅 {{ category.subscriberCount }}</li>
+                            </ul>
+                            <div>{{ category.description }}</div>
+                        </div>
                     </div>
-                    <h1 class="entry-title">最新文章</h1>
-                    <div class="entry-meta">共有<i class="num">{{posts.count}}</i>篇文章</div>
-                </header>
-                <div class="panel-body">
-                    {% for post in posts %}
-                        {% set postUrl = path('post_view', {id: post.id}) %}
-                        <article class="post clearfix" role="article">
-                            {% if post.cover %}
-                                <div class="entry-thumbnail">
-                                    <a href="{{ postUrl }}" title="{{ post.title }}">
-                                        <img src="{{ post.buildCover(400, 300) }}" style="display: inline;">
-                                    </a>
-                                </div>
-                            {% endif %}
-                            <header class="entry-header">
-                                <h3 class="entry-title">
-                                    {% if post.isRecommended() %}
-                                    <span class="sticky-tag">推荐</span>
-                                    {% endif %}
-                                    <a href="{{ postUrl }}" rel="bookmark">
-                                        <span>{{ post.title }}</span>
-                                    </a>
-                                </h3>
-                                <div class="entry-meta">
-                                    <time class="entry-date num">{{ post.createdAt|date('Y-m-d') }}</time>
-                                    <a href="{{ postUrl }}#comments"><i class="num">{{ post.commentCount }}</i> 条评论</a>
-                                    <span><i class="num">{{ post.viewCount }}</i>次浏览</span>
-                                </div>
-                            </header>
-                            <div class="entry-excerpt">{{ post.summary|striptags }}</div>
-                        </article>
-                    {% endfor %}
                 </div>
+                <ul class="list-group post-list">
+                    {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
+                </ul>
                 {% if posts.haveToPaginate %}
                 <footer class="panel-footer">
-                    {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                    {{ pagerfanta(posts, 'twitter_bootstrap3') }}
                 </footer>
                 {% endif %}
-            </article>
+            </div>
         </div>
-        <div class="col-md-3">
-            widget
+        <div class="col-lg-3 col-md-3">
+            <aside class="panel panel-default panel-widget" data-sticky="true">
+                <div class="panel-heading">活跃用户</div>
+                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
+            </aside>
+            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
         </div>
     </div>
 </div>

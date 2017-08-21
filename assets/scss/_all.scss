@@ -10,7 +10,12 @@
 @import "./style.scss";
 //block样式
 @import "./blocks/utils.scss";
-@import "./blocks/replies.scss";
+@import "./blocks/reply_list.scss";
+@import "./blocks/user_list.scss";
+@import "./blocks/topic_list.scss";
+@import "./blocks/post_list.scss";
+@import "./blocks/friend_community.scss";
+
 //各个页面单独样式
 @import "./pages/log_reg.scss";
 @import "./pages/topic.scss";

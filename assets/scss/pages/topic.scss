@@ -1,32 +1,8 @@
 @import "../blocks/md-editor.scss";
 
-/**
- * topic列表页
- */
-.topic-list {
-  .topic{
-    .avatar{
-      width:50px;
-      border-radius: 50%;
-    }
-    .meta{
-      padding-top: 5px;
-      color: $metaColor;
-    }
-    .title{
-      font-size:14px;
-      line-height:1.5em;
-    }
-  }
-  hr{
-    margin: 10px auto;
-  }
-}
-
-/**
- * topic详情页部分
- */
-//topic部分
+/*------------------------------------
+  topic详情页部分
+------------------------------------*/
 .topic-view{
   .author{
     float:right;

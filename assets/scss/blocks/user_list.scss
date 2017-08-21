@@ -1,0 +1,56 @@
+/*------------------------------------
+  用户列表
+------------------------------------*/
+.user-list{
+  .user{
+    .avatar{
+      width: 50px;
+      height:50px;
+    }
+    .title{
+      font: {
+        size:15px;
+        weight: 700;
+      }
+      color: #333;
+      line-height: 1.5em;
+    }
+    .description{
+      font-size: 12px;
+    }
+    .meta{
+      color: #969696;
+      font-size: 12px;
+    }
+  }
+}
+/**
+ * 小关注标签
+ */
+.user-list-v1{
+  .btn{
+    padding: 0 5px;
+    i{
+      font-size:12px;
+    }
+    &.u-btn-orange{
+      border: 1px solid $contrastColor;
+      background-color:transparent;
+      color: $contrastColor;
+    }
+    &.btn-default{
+
+    }
+  }
+  .user{
+    .title{
+      font-weight:normal;
+    }
+    .description{
+      margin-top: 5px;
+    }
+    .meta{
+      display:none;
+    }
+  }
+}

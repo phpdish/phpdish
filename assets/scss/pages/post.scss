@@ -1,49 +1,24 @@
-/**
- * 文章列表页面
- */
-.post-list{
-  .post{
-    .cover{
-      img{
-        max-width: 120px;
-      }
-    }
-    .author{
-      .avatar{
-        width: 38px;
-        height: 38px;
-        display:inline-block;
-        vertical-align: middle;
-      }
-      .username{
-        font-size: 12px;
-        color: #666;
-        margin:0 10px;
-      }
-      .publish-time{
-        color: $metaColor;
-      }
-    }
-    .title{
-      line-height: 1.5em;
-      margin-top:5px;
-      font-weight:700;
-      font-size:18px;
-      color: $focusFontColor
-    }
-    .meta{
-      margin-top: 5px;
-      color: $metaColor;
-      a{
-        color: $metaColor;
-      }
-    }
+/*------------------------------------
+  专栏页面
+------------------------------------*/
+.category-detail{
+  .avatar{
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+  }
+  .name{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .meta{
+    color: $metaColor;
   }
 }
 
-/**
- * 文章详情页
- */
+/*------------------------------------
+  文章详情页
+------------------------------------*/
 .post-detail{
   .body{
     line-height: 1.8em;
