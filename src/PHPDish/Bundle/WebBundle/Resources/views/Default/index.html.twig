@@ -8,40 +8,7 @@
         <div class="col-lg-9 col-md-9">
             <div class="panel panel-default panel-u">
                 <ul class="list-group post-list">
-                    {% for post in posts %}
-                        <li class="list-group-item">
-                            {% set postUrl =  path('post_view', {'id': post.id}) %}
-                            <article class="post clearfix" role="article">
-                                {% if post.cover %}
-                                    <div class="entry-thumbnail">
-                                        <a href="{{ postUrl }}" title="{{ post.title }}">
-                                            <img src="{{ post.buildCover(300, 300) }}" class="img-responsive">
-                                        </a>
-                                    </div>
-                                {% endif %}
-                                <div class="content-box">
-                                    <div class="author">
-                                        <a class="avatar" href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-responsive"></a>
-                                        <span class="username">{{ post.user.username }}</span>
-                                        <time class="publish-time">{{ post.createdAt|date('Y-m-d') }}</time>
-                                    </div>
-                                    <h3 class="title">
-                                        {% if post.isRecommended %}
-                                            <span class="sticky-tag">置顶</span>
-                                        {% endif %}
-                                        <a href="{{ postUrl }}">
-                                            <span>{{ post.title }}</span>
-                                        </a>
-                                    </h3>
-                                    <div class="summary">{{ post.summary }}</div>
-                                    <ul class="list-unstyled list-inline meta">
-                                        <li><a href="{{ postUrl }}#comments"><i class="num">{{ post.commentCount }}</i> 条评论</a></li>
-                                        <li><span><i class="num">{{ post.viewCount }}</i>次浏览</span></li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </li>
-                    {% endfor %}
+                    {% include 'PHPDishWebBundle:Common:posts.html.twig' %}
                 </ul>
                 {% if posts.haveToPaginate %}
                 <footer class="panel-footer">

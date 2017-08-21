@@ -103,6 +103,7 @@ class Post implements PostInterface
      */
     public function getCover()
     {
+        return true;
         return $this->cover;
     }
 
@@ -214,6 +215,7 @@ class Post implements PostInterface
      */
     public function buildCover($width, $height)
     {
+        return 'http://image.woshipm.com/wp-files/2017/08/COI8jra6kC9Ded4JeMEn.jpg!/both/202x145';
         return sprintf( '/thumbs/%dx%d/%s', $width, $height, $this->getCover());
     }
 }

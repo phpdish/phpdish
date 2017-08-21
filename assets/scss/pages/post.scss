@@ -5,13 +5,32 @@
   .post{
     .author{
       .avatar{
-        width: 50px;
-        height: 50px;
+        width: 38px;
+        height: 38px;
         display:inline-block;
         vertical-align: middle;
       }
       .username{
-        font-size: 14px;
+        font-size: 12px;
+        color: #666;
+        margin:0 10px;
+      }
+      .publish-time{
+        color: $metaColor;
+      }
+    }
+    .title{
+      line-height: 1.5em;
+      margin-top:5px;
+      font-weight:700;
+      font-size:18px;
+      color: $focusFontColor
+    }
+    .meta{
+      margin-top: 5px;
+      color: $metaColor;
+      a{
+        color: $metaColor;
       }
     }
   }

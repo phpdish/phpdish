@@ -1,0 +1,34 @@
+{% for post in posts %}
+    <li class="list-group-item">
+        {% set postUrl =  path('post_view', {'id': post.id}) %}
+        <article class="media post clearfix" role="article">
+            <div class="media-body content-box">
+                <div class="author">
+                    <a class="avatar" href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-circle img-responsive"></a>
+                    <span class="username">{{ post.user.username }}</span>
+                    <time class="publish-time">{{ post.createdAt|date('Y-m-d') }}</time>
+                </div>
+                <h3 class="title">
+                    {% if post.isRecommended %}
+                        <span class="sticky-tag">置顶</span>
+                    {% endif %}
+                    <a href="{{ postUrl }}">
+                        <span>{{ post.title }}</span>
+                    </a>
+                </h3>
+                <div class="summary">{{ post.summary }}</div>
+                <ul class="list-unstyled list-inline meta">
+                    <li><a href="{{ postUrl }}#comments"><i class="if i-comment"></i> {{ post.commentCount }}</a></li>
+                    <li><i class="if i-view"></i> {{ post.viewCount }}</li>
+                </ul>
+            </div>
+            {% if post.cover %}
+                <div class="media-right media-middle">
+                    <a href="{{ postUrl }}" title="{{ post.title }}">
+                        <img src="{{ post.buildCover(300, 300) }}" class="media-object">
+                    </a>
+                </div>
+            {% endif %}
+        </article>
+    </li>
+{% endfor %}
