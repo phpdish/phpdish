@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -20,7 +21,18 @@ class CategoryController extends RestController
     public function viewAction($slug, Request $request)
     {
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
-        $posts = $this->getPostManager()->findCategoryPosts($category, $request->query->getInt('page', 1));
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
+        if ($request->query->get('orderby') === 'hot') {
+            $criteria->orderBy([
+                'viewCount' => 'desc',
+                'createdAt' => 'desc'
+            ]);
+        } else {
+            $criteria->orderBy([
+                'createdAt' => 'desc'
+            ]);
+        }
+        $posts = $this->getPostManager()->findPosts($criteria, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Category:view.html.twig', [
             'category' => $category,
             'posts' => $posts

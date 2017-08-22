@@ -7,11 +7,10 @@ import lockButton from '../modules/button-lock.js';
 $('[data-role="follow-category"]').on('click', '[data-action="follow"]', function(){
     const $this = $(this);
     const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
-    console.log(slug);
     const buttonLock = lockButton($this);
 
     Util.request('category.follow', {'slug': slug}).done(function(response){
-        $this.attr('data-action', 'unfollow').removeClass('btn-follow').addClass('btn btn-unfollow')
+        $this.attr('data-action', 'unfollow').removeClass('btn-follow').addClass('btn-unfollow')
             .html('已关注');
 
     }).fail(function(response){
@@ -34,149 +33,30 @@ $('[data-role="follow-category"]').on('click', '[data-action="follow"]', functio
 });
 
 /**
-//关注文章
-(function() {
-    var $savePost = $('[data-role="save-post"]');
-    $savePost.on('click', function () {
-        var $this = $(this);
-        if ($this._lock) {
-            return false;
-        }
-        $this._lock = true;
-        var postId = $this.data('post-id');
-        util.request('post.favorite', postId, function (response) {
-            if (response.code == 0) {
-                util.dialog.msg(response.message);
-                $this.html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-            } else {
-                util.dialog.alert(response.message);
-            }
-            $this._lock = false;
-        });
+ * 用户关注
+ */
+$('[data-role="follow"]').on('click', '[data-action="follow"]', function(){
+    const $this = $(this);
+    const username = $this.data('username') || $this.closest('[data-username]').data('username');
+    const buttonLock = lockButton($this);
+    Util.request('user.follow', {'username': username}).done(function(response){
+        $this.attr('data-action', 'unfollow').removeClass('u-btn-deeporange').addClass('btn-default')
+            .html('已关注');
+    }).fail(function(response){
+        Util.dialog.message(response.responseJSON.error).flash();
+    }).always(() => {
+        buttonLock.release();
     });
-})($);
-//关注问题
-(function() {
-    var $saveQuestion = $('[data-role="save-question"]');
-    $saveQuestion.on('click', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        var questionId = $saveQuestion.data('question-id');
-        $this._lock = true;
-        util.request('question.follow', questionId, function(response){
-            if(response.code == 0){
-                util.dialog.msg(response.message);
-                $this.after('<button class="btn btn-default"><i class="fa fa-check"></i> 已关注</button>').remove();
-            }else{
-                util.dialog.alert(response.message);
-            }
-            $this._lock = false;
-        });
+}).on('click', '[data-action="unfollow"]', function(){
+    const $this = $(this);
+    const username = $this.data('username') || $this.closest('[data-username]').data('username');
+    const buttonLock = lockButton($this);
+    Util.request('user.unfollow', {'username': username}).done(function(response){
+        $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-deeporange')
+            .html('<i class="if i-plus"></i> 关注');
+    }).fail(function(response){
+        Util.dialog.message(response.responseJSON.error).flash();
+    }).always(() => {
+        buttonLock.release();
     });
-})($);
-//取消关注问题
-(function() {
-    var $unsaveQuestion = $('[data-role="unsave-question"]');
-    $unsaveQuestion.on('click', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        var questionId = $saveQuestion.data('question-id');
-        $this._lock = true;
-        util.dialog.confirm('确认取消收藏?', {}, function(){
-            kernel.request('question.unfollow', questionId, function(response){
-                if(response.code == 0){
-                    util.dialog.msg(response.message);
-                    $this.closest('li').fadeOut();
-                }else{
-                    util.dialog.alert(response.message);
-                }
-                $this._lock = false;
-            });
-        });
-    });
-})($);
-//关注问题
-(function() {
-    $document.on('click', '[data-role="follow-topic"]', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        $this._lock = true;
-        var topicId = $this.data('topic-id');
-        util.request('topic.follow', topicId, function(response){
-            if(response.code == 0){
-                util.dialog.msg(response.message, 2);
-                $this.html('<i class="glyphicon glyphicon-ok"></i> 已关注').removeAttr('data-role');
-            }else{
-                util.dialog.alert(response.message, 2);
-            }
-        });
-    });
-})($);
-//取消关注话题
-(function() {
-    var $unfollowTopic = $('[data-role="unfollow-topic"]');
-    $unfollowTopic.on('click', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        $this._lock = true;
-        var topicId = $this.data('topic-id');
-        util.dialog.confirm('确认取消收藏?', {}, function() {
-            util.request('topic.unfollow', topicId, function (response) {
-                if (response.code == 0) {
-                    util.dialog.msg(response.message);
-                    $this.closest('li').fadeOut();
-                } else {
-                    util.dialog.alert(response.message);
-                }
-            });
-        });
-    });
-})($);
-//关注用户
-(function() {
-    $document.on('click', '[data-role="follow-user"]', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        $this._lock = true;
-        var userId = $this.data('user-id');
-        util.request('user.follow', userId, function(response){
-            if(response.code == 0){
-                var html = '<button class="btn btn-default btn-sm" data-rolow="unfollow-user" data-user-id="'+ userId +'">取消关注</button>';
-                $this.after(html).remove();
-            }else{
-                util.dialog.alert(response.message);
-            }
-        });
-    });
-})($);
-//取消关注用户
-(function() {
-    $document.on('click', '[data-role="unfollow-user"]', function(){
-        var $this = $(this);
-        if($this._lock){
-            return false;
-        }
-        $this._lock = true;
-        var userId = $this.data('user-id');
-        util.request('user.unfollow', userId, function(response){
-            if(response.code == 0){
-                var html = '<button class="btn-u btn-u-red" data-role="follow-user" data-user-id="'+ userId +'"><i class="fa fa-plus"></i> 关注</button>';
-                $this.after(html).remove();
-            }else{
-                util.dialog.alert(response.message);
-            }
-        });
-    });
-})($);
-
- **/
+});

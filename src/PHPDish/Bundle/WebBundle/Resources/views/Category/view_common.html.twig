@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <ul class="list-unstyled list-inline entry-tabs">
-                    <li {% if tab == 'new' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'new'}) }}">新发布</a></li>
+                    <li {% if tab == 'new' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug}) }}">新发布</a></li>
                     <li {% if tab == 'hot' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
                     <li {% if tab == 'followers' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">关注的人</a></li>
                 </ul>

@@ -1,6 +1,10 @@
 {% extends 'PHPDishWebBundle:Category:view_common.html.twig' %}
 
-{% set tab = 'new' %}
+{% if app.request.query.get('orderby') == 'hot' %}
+    {% set tab = 'hot' %}
+{% else %}
+    {% set tab = 'new' %}
+{% endif %}
 
 {% block category_content %}
     <ul class="list-group post-list">
