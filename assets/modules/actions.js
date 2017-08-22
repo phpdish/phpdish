@@ -41,7 +41,7 @@ $('[data-role="follow"]').on('click', '[data-action="follow"]', function(){
     const buttonLock = lockButton($this);
     Util.request('user.follow', {'username': username}).done(function(response){
         $this.attr('data-action', 'unfollow').removeClass('u-btn-deeporange').addClass('btn-default')
-            .html('已关注');
+            .html('<i class="if i-check"></i> 已关注');
     }).fail(function(response){
         Util.dialog.message(response.responseJSON.error).flash();
     }).always(() => {

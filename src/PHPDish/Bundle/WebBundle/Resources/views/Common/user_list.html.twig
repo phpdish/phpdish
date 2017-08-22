@@ -1,6 +1,6 @@
 {% for user in users %}
     <div class="media user">
-        <div class="media-left">
+        <div class="media-left media-middle">
             {% set userHomeUrl = path('user_view', {'username': user.username}) %}
             <a href="{{ userHomeUrl  }}">
                 <img src="{{ user.avatar() }}" class="media-object avatar">

@@ -41,6 +41,8 @@
     color: $metaColor;
     font-size: 12px;
     padding: 10px 15px;
+    border-bottom:1px solid $borderColor;
+    margin-bottom: -1px;
   }
 }
 
