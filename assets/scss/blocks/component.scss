@@ -42,3 +42,26 @@
     @extend .u-btn-deeporange;
   }
 }
+
+//tab导航
+.tab-nav{
+  margin-bottom: 0;
+  margin-left: 0;
+  font-size: 14px;
+  margin-top: -1px;
+  border-top: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+  li{
+    line-height:20px;
+    a{
+      display:block;
+      padding: 10px 30px;
+    }
+    &.active{
+      font-weight: 600;
+      a{
+        border-bottom: 2px solid $contrastColor;
+      }
+    }
+  }
+}

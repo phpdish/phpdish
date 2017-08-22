@@ -17,39 +17,41 @@
                             {'title': '用户'}
                         ]
                     } %}
-                    <div class="clearfix margin-bottom-10" data-username="{{ user.username }}">
-                        <div class="pull-right" data-role="follow">
-                            {% if app.user and user.isFollowedBy(app.user) %}
-                                <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
-                            {%else %}
-                                <button type="button" class="btn btn-md u-btn-deeporange" data-action="follow-user">
-                                    <i class="if i-plus"></i> 关注
-                                </button>
-                            {% endif %}
-                        </div>
-                        <div class="author-avatar">
-                            <img src="{{ user.avatar() }}" class="avatar avatar-80 photo"/>
-                        </div>
-                        <div class="author-info">
-                            <h1 class="vcard">{{ user.username }}</h1>
-                            <p class="author-description">{{ user.description|default('Hello world') }}</p>
-                            <p class="small author-register-time">在{{ user.createdAt|date('Y-m-d') }}注册</p>
+                    <div class="clearfix user-details" data-username="{{ user.username }}">
+                        <div class="media">
+                            <div class="media-left avatar">
+                                <img src="{{ user.avatar() }}" class="img-responsive"/>
+                            </div>
+                            <div class="media-body summary">
+                                <h1 class="username">{{ user.username }}</h1>
+                                <p class="description">{{ user.description|default('Hello world') }}</p>
+                                <p class="small register-at">在{{ user.createdAt|date('Y-m-d') }}注册</p>
+                            </div>
+                            <div class="media-right">
+                                <div data-role="follow">
+                                    {% if app.user and user.isFollowedBy(app.user) %}
+                                        <button type="button" class="btn btn-sm btn-default" data-action="unfollow-user">取消关注</button>
+                                    {%else %}
+                                        <button type="button" class="btn btn-md u-btn-deeporange" data-action="follow-user">
+                                            <i class="if i-plus"></i> 关注
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="entry-tab">
-                        <ul>
-                            <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
-                            <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
-                            <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
-                            <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
-                            <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
-                        </ul>
-                    </div>
-                    <div class="entry-meta">
-                        {% block entry_meta %}
-                            <span>还没有发表过内容</span>
-                        {% endblock %}
-                    </div>
+                </div>
+                <ul class="list-unstyled list-inline tab-nav">
+                    <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
+                    <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
+                    <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
+                    <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
+                    <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
+                </ul>
+                <div class="entry-meta">
+                    {% block entry_meta %}
+                        <span>还没有发表过内容</span>
+                    {% endblock %}
                 </div>
                 {% block user_content %}
                     <div class="panel-content">

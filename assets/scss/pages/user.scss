@@ -1,105 +1,46 @@
-
 /*------------------------------------
   User Dash
 ------------------------------------*/
 .user-dash {
-  .entry-author {
-    margin: 15px 0 0;
-    padding: 20px 30px 15px;
-    background-color: #f9f9f9;
-    white-space: nowrap;
-    position: relative
-  }
+  .user-details{
+    .avatar {
+      float: left;
+      margin: 0 15px 0 0;
+      img {
+        border-radius: 5px;
+      }
+    }
 
-  .author-avatar {
-    float: left;
-    margin: 0 15px 0 0
-  }
-
-  .author-description, .author-info .vcard {
-    text-overflow: ellipsis;
-    overflow: hidden
-  }
-
-  .author-info .vcard {
-    margin: 3px 0 2px;
-    font-size: 18px;
-    line-height: 30px
-  }
-
-  .author-info .vcard a {
-    color: #337ab7 !important
-  }
-
-  .author-description {
-    color: #666;
-    font-size: 13px;
-    margin: 0 0 5px 0;
-    line-height: 20px
-  }
-
-  .author-register-time {
-    margin: 0;
-    font-size: 12px;
-    line-height: 14px;
-    color: #888
-  }
-
-  .entry-tab {
-    padding: 0 30px;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    border-width: 1px 0;
-
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-      border-collapse: separate;
-      li {
-        display: table-cell;
-        float: none;
-        width: 1%;
-        &.active{
-          border-bottom: 2px solid #646464;
-        }
+    .summary {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      .username {
+        margin: 3px 0 2px;
+        font-size: 18px;
+        line-height: 30px;
         a {
-          display: block;
-          text-align: center;
-          padding: 0 15px;
-          line-height: 38px;
-          color: #888;
-          text-decoration: none;
-          letter-spacing: .1em;
-          font-size: 13px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          &:hover {
-            color: #555 !important
-          }
+          color: #337ab7 !important
         }
+      }
+      .description {
+        color: #666;
+        font-size: 13px;
+        margin: 0 0 5px 0;
+        line-height: 20px
+      }
+      .register-at {
+        margin: 0;
+        font-size: 12px;
+        line-height: 14px;
+        color: #888
       }
     }
   }
 
   .entry-meta {
-    color: #999;
+    color: $metaColor;
     font-size: 12px;
-    line-height: 16px;
-    margin: 0 0 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    a {
-      color: #999;
-      &:hover {
-        color: #999;
-      }
-    }
+    padding: 10px 15px;
   }
 }
 
@@ -156,9 +97,8 @@
   }
 }
 
-
-.panel-widget-user  {
-  ul{
+.panel-widget-user {
+  ul {
     margin: 0;
     li {
       border: 0;
