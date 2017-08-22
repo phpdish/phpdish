@@ -17,6 +17,7 @@
   cursor: pointer;
 }
 
+//推荐印章
 .sticky-tag{
   border:1px solid #ea6f5a;
   padding: 0 2px;
@@ -29,5 +30,15 @@
   font:{
     size: 12px;
     weight:normal;
+  }
+}
+
+//关注按钮组
+.follow-panel{
+  .btn-unfollow{
+    @extend .u-btn-outline-primary;
+  }
+  .btn-follow{
+    @extend .u-btn-deeporange;
   }
 }

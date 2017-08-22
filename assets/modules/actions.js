@@ -1,7 +1,39 @@
 'use strict';
-var util = require('./util.js');
-var $document = $(document);
 
+import Util from './util.js';
+import lockButton from '../modules/button-lock.js';
+
+//关注专栏
+$('[data-role="follow-category"]').on('click', '[data-action="follow"]', function(){
+    const $this = $(this);
+    const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
+    console.log(slug);
+    const buttonLock = lockButton($this);
+
+    Util.request('category.follow', {'slug': slug}).done(function(response){
+        $this.attr('data-action', 'unfollow').removeClass('btn-follow').addClass('btn btn-unfollow')
+            .html('已关注');
+
+    }).fail(function(response){
+        Util.dialog.message(response.responseJSON.error).flash();
+    }).always(() => {
+        buttonLock.release();
+    });
+}).on('click', '[data-action="unfollow"]', function(){
+    const $this = $(this);
+    const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
+    const buttonLock = lockButton($this);
+    Util.request('category.unfollow', {'slug': slug}).done(function(response){
+        $this.attr('data-action', 'follow').removeClass('btn-unfollow').addClass('btn-follow')
+            .html('<i class="if i-plus"></i> 关注');
+    }).fail(function(response){
+        Util.dialog.message(response.responseJSON.error).flash();
+    }).always(() => {
+        buttonLock.release();
+    });
+});
+
+/**
 //关注文章
 (function() {
     var $savePost = $('[data-role="save-post"]');
@@ -146,3 +178,5 @@ var $document = $(document);
         });
     });
 })($);
+
+ **/

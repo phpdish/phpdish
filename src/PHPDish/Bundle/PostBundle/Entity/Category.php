@@ -1,13 +1,12 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 
@@ -37,34 +36,42 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * @ORM\Column(type="integer", length=10)
      */
-    protected $subscriberCount;
+    protected $followerCount;
 
     /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="subscribedBlogs")
+     * 订阅者
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinTable(name="categories_followers",
+     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     * )
      */
-    protected $subscribers;
+    protected $followers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="categories")
+     * 创建人
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $creator;
 
     /**
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="manageableCategories")
-     * @ORM\JoinTable(name="user_categories",
-     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
+     * 管理员
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinTable(name="categories_managers",
+     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
      * )
      */
-    protected $authors;
+    protected $managers;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->subscribers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->managers = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     /**
@@ -125,9 +132,9 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsRecommended($isRecommended)
+    public function setRecommended($recommended)
     {
-        $this->isRecommended = $isRecommended;
+        $this->isRecommended = $recommended;
     }
 
     /**
@@ -136,22 +143,6 @@ class Category extends Taxonomy implements CategoryInterface
     public function isRecommended()
     {
         return $this->isRecommended;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubscriberCount()
-    {
-        return $this->subscriberCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubscribers()
-    {
-        return $this->subscribers;
     }
 
     /**
@@ -166,34 +157,58 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthors()
+    public function getManagers()
     {
-        return $this->authors;
+        return $this->managers;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addAuthor(UserInterface $user)
+    public function addManager(UserInterface $user)
     {
-        $this->authors[] = $user;
+        $this->managers[] = $user;
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPosts()
+    public function addFollower(UserInterface $user)
     {
-        return $this->posts;
+        $this->followers[] = $user;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addPost(PostInterface $post)
+    public function removeFollower(UserInterface $user)
     {
-        $this->posts[] = $post;
+        $this->followers->removeElement($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFollowerCount()
+    {
+        return $this->followerCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFollowerCount($count)
+    {
+        $this->followerCount = $count;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFollowedBy(UserInterface $user)
+    {
+        return $this->followers->contains($user);
     }
 }

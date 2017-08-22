@@ -1,57 +1,14 @@
-{% extends 'PHPDishWebBundle::layout.html.twig' %}
+{% extends 'PHPDishWebBundle:Category:view_common.html.twig' %}
 
-{% block title %} PHPDish {% endblock %}
+{% set tab = 'new' %}
 
-{% block content %}
-<div class="container" role="main">
-    <div class="row">
-        <div class="col-lg-9 col-md-9">
-            <div class="panel panel-default panel-u category-detail">
-                <div class="panel-heading">
-                    <div class="media category">
-                        <div class="media-left media-middle">
-                            {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
-                            <a href="{{ categoryUrl }}" class="avatar">
-                                <img src="{{ category.cover }}" class="media-object img-circle img-responsive"/>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <div class="pull-right" data-role="subscribe">
-                                <button class="btn btn-success btn-sm"><i class="if i-plus"></i> 订阅本专栏</button>
-                            </div>
-                            <h4 class="media-heading name">
-                                <a href="{{ categoryUrl }}">{{ category.name }}</a>
-                            </h4>
-                            <ul class="list-unstyled list-inline meta">
-                                <li>文章 {{ category.postCount }}</li>
-                                <li>订阅 {{ category.subscriberCount }}</li>
-                            </ul>
-                            <div>{{ category.description }}</div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-unstyled list-inline entry-tabs">
-                    <li class="active"><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'new'}) }}">新发布</a></li>
-                    <li><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
-                    <li><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">关注的人</a></li>
-                </ul>
-                <ul class="list-group post-list">
-                    {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
-                </ul>
-                {% if posts.haveToPaginate %}
-                <footer class="panel-footer">
-                    {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-                </footer>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3">
-            <aside class="panel panel-default panel-widget" data-sticky="true">
-                <div class="panel-heading">活跃用户</div>
-                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
-            </aside>
-            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
-        </div>
-    </div>
-</div>
+{% block category_content %}
+    <ul class="list-group post-list">
+        {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
+    </ul>
+    {% if posts.haveToPaginate %}
+    <footer class="panel-footer">
+        {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+    </footer>
+    {% endif %}
 {% endblock %}

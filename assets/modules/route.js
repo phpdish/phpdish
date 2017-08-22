@@ -8,13 +8,15 @@ const routes = {
     'post.show': '/posts/{id}', //post展示页
     'post.summary': '/posts/summary/{id}', //post的概要信息
     'post.like': {path: '/posts/{id}/like', method: 'POST'},
-    'post.unlike': {path: '/posts/{id}/unlike', method: 'POST'},
-    'post.favorite': {path: '/posts/{id}/favorites', method: 'POST'},
-    'post.analysis': '/posts/{id}/analysis',
+    'post.follow': {path: '/posts/{id}/unlike', method: 'POST'},
     'comment.load': '/posts/{id}/comments',
     'comment.add': {path: '/posts/{id}/comments', 'method': 'POST'},
     'comment.like': {path: '/comments/{id}/like', method: 'POST'},
     'comment.unlike': {path: '/comments/{id}/unlike', method: 'POST'},
+
+    'category.follow': {path: '/categories/{slug}/followers', method: 'POST'},
+    'category.unfollow': {path: '/categories/{slug}/followers', method: 'DELETE'},
+
     'gift.exchange': {path: '/gifts/{id}/exchange', method: 'POST'},
     'gift.summary': {path: '/gifts/summary/{id}', method: 'POST'},
     'user.follow': {path:'/users/{username}/followers', method: 'POST'},

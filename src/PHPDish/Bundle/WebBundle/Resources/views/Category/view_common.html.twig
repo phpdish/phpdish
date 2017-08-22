@@ -1,0 +1,54 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} PHPDish {% endblock %}
+
+{% block content %}
+<div class="container" role="main">
+    <div class="row">
+        <div class="col-lg-9 col-md-9">
+            <div class="panel panel-default panel-u category-detail">
+                <div class="panel-heading">
+                    <div class="media category">
+                        <div class="media-left media-middle">
+                            {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
+                            <a href="{{ categoryUrl }}" class="avatar">
+                                <img src="{{ category.cover }}" class="media-object img-circle img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ category.slug }}">
+                                {% if app.user and category.isFollowedBy(app.user) %}
+                                    <button class="btn btn-unfollow" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
+                                {% else %}
+                                    <button class="btn btn-follow" data-action="follow"><i class="if i-plus"></i> 关注本专栏</button>
+                                {% endif %}
+                            </div>
+                            <h4 class="media-heading name">
+                                <a href="{{ categoryUrl }}">{{ category.name }}</a>
+                            </h4>
+                            <ul class="list-unstyled list-inline meta">
+                                <li>文章 {{ category.postCount }}</li>
+                                <li>订阅 {{ category.followerCount }}</li>
+                            </ul>
+                            <div>{{ category.description }}</div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-unstyled list-inline entry-tabs">
+                    <li {% if tab == 'new' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'new'}) }}">新发布</a></li>
+                    <li {% if tab == 'hot' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
+                    <li {% if tab == 'followers' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">关注的人</a></li>
+                </ul>
+                {% block category_content %}{% endblock %}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <aside class="panel panel-default panel-widget" data-sticky="true">
+                <div class="panel-heading">活跃用户</div>
+                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
+            </aside>
+            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

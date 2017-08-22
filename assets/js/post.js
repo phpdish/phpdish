@@ -6,6 +6,7 @@ import {editor} from '../modules/blocks/reply';
 
 import lockButton from '../modules/button-lock.js';
 
+
 /**
  * Post Details
  */
@@ -34,6 +35,8 @@ $('#add-reply-form').on('submit', function(){
     });
     return false;
 });
+
+
 
 
 

@@ -1,6 +1,7 @@
 'use strict';
 
 import 'scrolltofixed';
+import './actions.js';
 import Util from './util.js';
 import {default as Dialog} from './dialog.js';
 

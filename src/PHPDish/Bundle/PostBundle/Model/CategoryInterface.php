@@ -51,37 +51,52 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      * 获取订阅人数量
      * @return int
      */
-    public function getSubscriberCount();
+    public function getFollowerCount();
 
     /**
-     * 添加一个作者
+     * 设置订阅人数量
+     * @param int $count
+     * @return $this
+     */
+    public function setFollowerCount($count);
+
+    /**
+     * 添加一个管理员
      * @param UserInterface $user
      * @return $this
      */
-    public function addAuthor(UserInterface $user);
+    public function addManager(UserInterface $user);
 
     /**
-     * 获取作者
-     * @return UserInterface[]|ArrayCollection
-     */
-    public function getAuthors();
-
-    /**
-     * 添加一篇文章
-     * @param PostInterface $post
+     * 添加关注者
+     * @param UserInterface $user
      * @return $this
      */
-    public function addPost(PostInterface $post);
+    public function addFollower(UserInterface $user);
 
     /**
-     * 获取所有文章
-     * @return PostInterface[]|Collection
+     * 取消关注
+     * @param UserInterface $user
+     * @return $this
      */
-    public function getPosts();
+    public function removeFollower(UserInterface $user);
+
+    /**
+     * 获取管理员
+     * @return UserInterface[]|ArrayCollection
+     */
+    public function getManagers();
 
     /**
      * 是否推荐
      * @return boolean
      */
     public function isRecommended();
+
+    /**
+     * 检查分类是否被关注
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isFollowedBy(UserInterface $user);
 }
