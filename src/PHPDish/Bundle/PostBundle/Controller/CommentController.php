@@ -37,7 +37,7 @@ class CommentController extends RestController
                     'comment' => $comment
                 ])
                 ->setStatusCode(static::HTTP_CREATED)
-                ->getContext()->enableMaxDepth();
+                ->getContext()->enableMaxDepth()->setGroups(['Default']);
         } else {
             $view->setData([
                     'form' => $form

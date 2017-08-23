@@ -24,12 +24,14 @@ class Comment extends BaseComment implements CommentInterface
      * @ORM\ManyToOne(targetEntity="Post")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * @JMS\MaxDepth(1)
+     * @JMS\Groups({"details"})
      */
     protected $post;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @JMS\MaxDepth(1)
+     * @JMS\Groups({"details"})
      */
     protected $user;
 

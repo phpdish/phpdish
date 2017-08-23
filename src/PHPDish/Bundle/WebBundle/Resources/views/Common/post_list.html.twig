@@ -1,11 +1,12 @@
 {% for post in posts %}
     <li class="list-group-item">
         {% set postUrl =  path('post_view', {'id': post.id}) %}
+        {% set authorUrl = path('user_view', {'username': post.user.username}) %}
         <article class="media post clearfix" role="article">
             <div class="media-body content-box">
                 <div class="author">
-                    <a class="avatar" href="{{ path('user_view', {'username': post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-circle img-responsive"></a>
-                    <span class="username">{{ post.user.username }}</span>
+                    <a class="avatar" href="{{ authorUrl }}"><img src="{{ post.user.avatar }}" class="img-circle img-responsive"></a>
+                    <span class="username"><a href="{{ authorUrl }}">{{ post.user.username }}</a></span>
                     <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|date('Y-m-d') }}</time>
                 </div>
                 <h3 class="title">

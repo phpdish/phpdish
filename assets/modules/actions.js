@@ -10,8 +10,8 @@ $('[data-role="follow-category"]').on('click', '[data-action="follow"]', functio
     const buttonLock = lockButton($this);
 
     Util.request('category.follow', {'slug': slug}).done(function(response){
-        $this.attr('data-action', 'unfollow').removeClass('btn-follow').addClass('btn-unfollow')
-            .html('已关注');
+        $this.attr('data-action', 'unfollow').removeClass('u-btn-deeporange').addClass('btn-default')
+            .html('<i class="if i-check"></i> 已关注');
 
     }).fail(function(response){
         Util.dialog.message(response.responseJSON.error).flash();
@@ -23,7 +23,7 @@ $('[data-role="follow-category"]').on('click', '[data-action="follow"]', functio
     const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
     const buttonLock = lockButton($this);
     Util.request('category.unfollow', {'slug': slug}).done(function(response){
-        $this.attr('data-action', 'follow').removeClass('btn-unfollow').addClass('btn-follow')
+        $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-deeporange')
             .html('<i class="if i-plus"></i> 关注');
     }).fail(function(response){
         Util.dialog.message(response.responseJSON.error).flash();
