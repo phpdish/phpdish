@@ -41,6 +41,13 @@ interface UserManagerInterface
     public function findLatestUsers($limit);
 
     /**
+     * 根据用户名获取多个用户
+     * @param array $userNames
+     * @return UserInterface[]
+     */
+    public function findUsersByNames($userNames);
+
+    /**
      * 查找用户的粉丝
      * @param UserInterface $user
      * @param int $page
