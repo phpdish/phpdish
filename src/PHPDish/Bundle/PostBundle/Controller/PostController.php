@@ -8,6 +8,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
@@ -65,6 +66,7 @@ class PostController extends Controller
     }
 
     /**
+     * 查看文章
      * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
      * @param Post $post
      * @param Request $request
@@ -83,6 +85,7 @@ class PostController extends Controller
     }
 
     /**
+     * 用户文章
      * @Route("/users/{username}/posts", name="user_posts")
      * @param string $username
      * @param Request $request
@@ -94,6 +97,22 @@ class PostController extends Controller
         $posts = $this->getPostManager()->findUserPosts($user, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig', [
             'user' => $user,
+            'posts' => $posts
+        ]);
+    }
+
+    /**
+     * 推荐的文章
+     * @param int $limit
+     * @return Response
+     */
+    public function recommendPostsAction($limit)
+    {
+        $criteria = Criteria::create()->orderBy(['isRecommended' => 'desc', 'createdAt' => 'desc'])
+            ->andWhere(Criteria::expr()->gte('createdAt', Carbon::parse('-100 days')))
+            ->setMaxResults($limit);
+        $posts = $this->getPostManager()->findPostsByCriteria($criteria);
+        return $this->render('PHPDishWebBundle:Post:recommend_posts.html.twig', [
             'posts' => $posts
         ]);
     }

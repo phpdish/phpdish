@@ -93,6 +93,7 @@ class PostManager implements PostManagerInterface
         return $this->createPaginator($query, $page, $limit);
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -118,6 +119,16 @@ class PostManager implements PostManagerInterface
     {
         $criteria = Criteria::create()->orderBy(['createdAt'  => 'desc']);
         return $this->findPosts($criteria, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findPostsByCriteria(Criteria $criteria)
+    {
+        return $this->getRepository()->createQueryBuilder('p')
+            ->addCriteria($criteria)
+            ->getQuery()->getResult();
     }
 
     /**

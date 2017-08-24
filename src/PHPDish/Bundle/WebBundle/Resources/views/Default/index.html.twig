@@ -29,6 +29,7 @@
                 <div class="panel-heading">活跃用户</div>
                 {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
             </aside>
+            {{ render(controller('PHPDishPostBundle:Post:recommendPosts', {'limit': 10})) }}
         </div>
     </div>
 </div>

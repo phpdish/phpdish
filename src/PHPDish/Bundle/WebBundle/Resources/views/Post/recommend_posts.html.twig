@@ -1,0 +1,11 @@
+<div class="panel panel-widget">
+    <div class="panel-heading">推荐阅读</div>
+    <ul class="list-group">
+        {% for post in posts %}
+        <li>
+            <p>{{ post.title }}</p>
+            <div><a href="{{ path('user_view', {username: post.user.username}) }}"><img src="{{ post.user.avatar }}"></a></div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
