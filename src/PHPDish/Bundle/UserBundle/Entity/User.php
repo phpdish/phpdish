@@ -92,8 +92,11 @@ class User implements UserInterface
     protected $roles;
 
     /**
-     * Constructor
+     * 订阅的专栏
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", mappedBy="followers")
      */
+    protected $followingCategories;
+
     public function __construct()
     {
         //关注我的

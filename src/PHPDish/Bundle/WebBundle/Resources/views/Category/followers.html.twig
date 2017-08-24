@@ -1,0 +1,14 @@
+{% extends 'PHPDishWebBundle:Category:view_common.html.twig' %}
+
+{% set tab = 'follower' %}
+
+{% block category_content %}
+    <div class="panel-body user-list">
+        {% include 'PHPDishWebBundle:Common:user_list.html.twig' %}
+    </div>
+    {% if users.haveToPaginate %}
+        <footer class="panel-footer">
+            {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+        </footer>
+    {% endif %}
+{% endblock %}

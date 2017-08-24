@@ -2,13 +2,12 @@
     <div class="media user">
         <div class="media-left">
             {% set userHomeUrl = path('user_view', {'username': user.username}) %}
-            <a href="{{ userHomeUrl  }}">
-                <img src="{{ user.avatar() }}" class="media-object avatar">
+            <a href="{{ userHomeUrl  }}" class="avatar">
+                <img src="{{ user.avatar() }}" class="media-object img-responsive img-circle">
             </a>
         </div>
         <div class="media-body">
             <div class="title"><a href="{{ userHomeUrl }}">{{ user.username }}</a></div>
-            <div class="description">{{ user.description }}</div>
             <div class="meta">
                 <ul class="list-unstyled list-inline">
                     <li>{{ user.followingCount }}关注</li>

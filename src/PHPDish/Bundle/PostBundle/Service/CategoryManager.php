@@ -2,12 +2,14 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class CategoryManager implements CategoryManagerInterface
 {
+    use PaginatorTrait;
 
     /**
      * @var EntityManagerInterface

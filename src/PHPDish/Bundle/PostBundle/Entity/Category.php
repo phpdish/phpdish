@@ -40,7 +40,7 @@ class Category extends Taxonomy implements CategoryInterface
 
     /**
      * 订阅者
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followingCategories")
      * @ORM\JoinTable(name="categories_followers",
      *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=true)}

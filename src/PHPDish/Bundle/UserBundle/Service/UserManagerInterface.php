@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Pagerfanta\Pagerfanta;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface UserManagerInterface
@@ -64,6 +65,15 @@ interface UserManagerInterface
      * @return Pagerfanta
      */
     public function findUserFollowing(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 查找专栏的订阅者
+     * @param CategoryInterface $category
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findCategoryFollowers(CategoryInterface $category, $page, $limit = null);
 
     /**
      * 关注用户

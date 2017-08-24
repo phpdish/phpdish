@@ -12,7 +12,10 @@ class CategoryController extends RestController
 {
     use ManagerTrait;
 
+    use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
     /**
+     * 专栏详情
      * @Route("/categories/{slug}", name="category_view")
      * @param string $slug
      * @param Request $request
@@ -36,6 +39,22 @@ class CategoryController extends RestController
         return $this->render('PHPDishWebBundle:Category:view.html.twig', [
             'category' => $category,
             'posts' => $posts
+        ]);
+    }
+
+    /**
+     * @Route("/categories/{slug}/followers", name="category_followers")
+     * @param string $slug
+     * @param Request $request
+     * @return Response
+     */
+    public function getFollowersAction($slug, Request $request)
+    {
+        $category = $this->getCategoryManager()->findCategoryBySlug($slug);
+        $users = $this->getUserManager()->findCategoryFollowers($category, $request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:Category:followers.html.twig',  [
+            'category' => $category,
+            'users'  => $users
         ]);
     }
 
@@ -73,10 +92,5 @@ class CategoryController extends RestController
             'follower_count' => $category->getFollowerCount()
         ]);
         return $this->handleView($view);
-    }
-
-    public function userCategoriesAction()
-    {
-
     }
 }

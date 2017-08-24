@@ -50,7 +50,7 @@
                     <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
                     <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
                 </ul>
-                <div class="entry-meta">
+                <div class="entry-meta hidden">
                     {% block entry_meta %}
                         <span>还没有发表过内容</span>
                     {% endblock %}

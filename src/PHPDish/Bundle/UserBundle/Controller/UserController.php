@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends RestController
 {
     /**
-     * @Route("/users/{username}", name="user_view", requirements={"username": "\w+"})
+     * @Route("/users/{username}", name="user_view")
      * @param string $username
      * @return Response
      */
