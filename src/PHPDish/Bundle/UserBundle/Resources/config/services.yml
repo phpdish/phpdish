@@ -6,3 +6,12 @@ services:
         class: PHPDish\Bundle\UserBundle\Service\UserManager
         arguments:
              - '@doctrine.orm.entity_manager'
+
+    # PHPDish Adapter
+    phpdish.mention.adapter:
+        class: PHPDish\Bundle\UserBundle\Mention\Adapter
+        arguments: ['@phpdish.manager.user', '@router']
+
+    phpdish.mention.parser:
+        class: PHPDish\Component\Mention\MentionParser
+        arguments: ['@phpdish.mention.adapter']

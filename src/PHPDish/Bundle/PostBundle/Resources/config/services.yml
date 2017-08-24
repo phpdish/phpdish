@@ -19,6 +19,7 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - "@markdown.parser"
+            - "@phpdish.mention.parser"
 
     phpdish.form.post:
          class: PHPDish\Bundle\PostBundle\Form\Type\PostType

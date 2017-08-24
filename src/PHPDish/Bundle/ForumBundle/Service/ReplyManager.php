@@ -10,6 +10,7 @@ use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\Mention\MentionParserInterface;
 
 class ReplyManager  implements ReplyManagerInterface
 {
@@ -29,11 +30,17 @@ class ReplyManager  implements ReplyManagerInterface
      */
     protected $markdownParser;
 
-    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser)
+    /**
+     * @var MentionParserInterface
+     */
+    protected $mentionParser;
+
+    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser, MentionParserInterface $mentionParser)
     {
         $this->entityManager = $entityManager;
         $this->replyRepository = $entityManager->getRepository('PHPDishForumBundle:Reply');
         $this->markdownParser = $markdownParser;
+        $this->mentionParser = $mentionParser;
     }
 
     /**

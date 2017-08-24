@@ -75,6 +75,15 @@ class UserManager implements UserManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findUsersByNames($userNames)
+    {
+        $qb = $this->getRepository()->createQueryBuilder('u');
+        return $qb->where($qb->expr()->in('u.username', $userNames))->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findUserFollowing(UserInterface $user, $page, $limit = null)
     {
         $query = $this->getRepository()->createQueryBuilder('u')

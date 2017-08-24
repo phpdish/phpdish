@@ -14,11 +14,11 @@
                         <div class="media-body">
                             <div class="media-heading">
                                 <span class="username">{{ post.user.username }}</span>
-                                <span data-role="follow">
+                                <span data-role="follow" data-username="{{ post.user.username }}">
                                     {% if (app.user and post.user.isFollowedBy(app.user)) %}
-                                        <button class="btn btn-sm btn-default" data-action="unfollow">已关注</button>
+                                        <button class="btn btn-sm btn-default" data-action="unfollow"><i class="if i-check"></i> 已关注</button>
                                     {% else %}
-                                        <button class="btn btn-success" data-action="follow"><i class="if i-plus"></i>关注</button>
+                                        <button class="btn btn-sm btn-success" data-action="follow"><i class="if i-plus"></i> 关注</button>
                                     {% endif %}
                                 </span>
                             </div>
