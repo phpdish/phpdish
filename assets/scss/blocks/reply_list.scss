@@ -20,6 +20,7 @@
       color: $focusFontColor;
     }
     .meta{
+      float:right;
       color: $metaColor;
       .reply-user{
         cursor: pointer;
@@ -28,6 +29,13 @@
     }
     .body{
       line-height: 1.6em;
+      font-size: 15px;
+      a{
+        color: #3194d0;
+        &:hover{
+          color: #3194d0;
+        }
+      }
     }
   }
 }

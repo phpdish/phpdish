@@ -48,6 +48,14 @@ class MentionParser implements MentionParserInterface
     /**
      * {@inheritdoc}
      */
+    public function getMentionedUsers()
+    {
+        return $this->mentionedUsers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getParsedBody()
     {
         return $this->parsedBody;

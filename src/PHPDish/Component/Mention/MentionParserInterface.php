@@ -30,4 +30,10 @@ interface MentionParserInterface
      * @return array
      */
     public function getMentionedNames();
+
+    /**
+     * Gets the mentioned users
+     * @return array
+     */
+    public function getMentionedUsers();
 }

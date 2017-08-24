@@ -45,8 +45,8 @@ class Adapter implements AdapterInterface
      */
     public function createUserLink($user)
     {
-        return sprintf('<a href="%s">@%s</a> ', $this->router->generate('user_view', [
+        return sprintf('<a href="%s" target="_blank" data-username="%s">@%s</a> ', $this->router->generate('user_view', [
             'username' => $user->getUsername()
-        ]), $user->getUsername());
+        ]), $user->getUsername(), $user->getUsername());
     }
 }
