@@ -10,10 +10,11 @@
                 <header class="panel-heading">
                     <h1 class="entry-title title">{{ post.title }}</h1>
                     <div class="media author">
-                        <div class="media-left"><a class="avatar"><img src="{{ post.user.avatar }}" class="img-responsive"/></a></div>
+                        {% set userHome = path('user_view', {username: post.user.username}) %}
+                        <div class="media-left"><a class="avatar" href="{{ userHome }}"><img src="{{ post.user.avatar }}" class="img-responsive"/></a></div>
                         <div class="media-body">
                             <div class="media-heading">
-                                <span class="username">{{ post.user.username }}</span>
+                                <span class="username"><a href="{{ userHome }}">{{ post.user.username }}</a></span>
                                 <span data-role="follow" data-username="{{ post.user.username }}">
                                     {% if (app.user and post.user.isFollowedBy(app.user)) %}
                                         <button class="btn btn-sm btn-default" data-action="unfollow"><i class="if i-check"></i> 已关注</button>

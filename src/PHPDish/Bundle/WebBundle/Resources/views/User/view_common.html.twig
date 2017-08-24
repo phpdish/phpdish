@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-<div id="main" class="container" role="main">
+    <div class="container narrow-layout">
     <div class="row">
-        <article id="content" class="col-md-9">
+        <article class="col-md-12">
             <div class="panel panel-default panel-u user-dash">
                 <div class="panel-heading">
                     {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
@@ -62,16 +62,6 @@
                 {% endblock %}
             </div>
         </article>
-        <div class="col-md-3">
-            <aside class="panel panel-default panel-widget panel-widget-user">
-                <div class="panel-heading">关注</div>
-                {{ render(controller('PHPDishUserBundle:User:userFollowing', {'user': user})) }}
-            </aside>
-            <aside class="panel panel-default panel-widget panel-widget-user">
-                <div class="panel-heading">粉丝</div>
-                {{ render(controller('PHPDishUserBundle:User:userFollowers', {'user': user})) }}
-            </aside>
-        </div>
     </div>
 </div>
 {% endblock %}

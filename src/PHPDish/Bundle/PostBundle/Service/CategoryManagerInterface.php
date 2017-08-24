@@ -21,6 +21,14 @@ interface CategoryManagerInterface
      */
     public function findCategoryBySlug($slug);
 
+
+    /**
+     * 获取用户的专栏
+     * @param UserInterface $user
+     * @return CategoryInterface[]
+     */
+    public function findUserCategories(UserInterface $user);
+
     /**
      * 添加管理员
      * @param CategoryInterface $category

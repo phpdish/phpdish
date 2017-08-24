@@ -74,4 +74,9 @@ class CategoryController extends RestController
         ]);
         return $this->handleView($view);
     }
+
+    public function userCategoriesAction()
+    {
+
+    }
 }

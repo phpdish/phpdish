@@ -16,6 +16,7 @@ services:
         arguments:
           - "@doctrine.orm.entity_manager"
           - "@markdown.parser"
+          - "@phpdish.mention.parser"
 
     phpdish.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType

@@ -33,6 +33,18 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findUserCategories(UserInterface $user)
+    {
+        return $this->getRepository()->createQueryBuilder('c')
+            ->where('c.user = :userId')->setParameter('userId', $user->getId())
+            ->orderBy('c.createdAt', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findCategoryBySlug($slug)
     {
         return $this->getRepository()->findOneBy([
