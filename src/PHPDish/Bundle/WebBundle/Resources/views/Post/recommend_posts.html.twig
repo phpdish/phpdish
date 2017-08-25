@@ -1,10 +1,12 @@
 <div class="panel panel-widget">
     <div class="panel-heading">推荐阅读</div>
-    <ul class="list-group">
+    <ul class="list-group post-list-v1">
         {% for post in posts %}
-        <li>
-            <p>{{ post.title }}</p>
-            <div><a href="{{ path('user_view', {username: post.user.username}) }}"><img src="{{ post.user.avatar }}"></a></div>
+        <li class="list-group-item post">
+            <p class="title">{{ post.title }}</p>
+            <div class="author">
+                <a href="{{ path('user_view', {username: post.user.username}) }}"><img src="{{ post.user.avatar }}" class="img-responsive img-circle"> {{ post.user.username }}</a>
+            </div>
         </li>
         {% endfor %}
     </ul>

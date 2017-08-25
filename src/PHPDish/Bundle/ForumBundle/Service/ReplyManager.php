@@ -60,8 +60,10 @@ class ReplyManager  implements ReplyManagerInterface
      */
     public function saveReply(ReplyInterface $reply)
     {
+        $body = $this->markdownParser->transformMarkdown($reply->getOriginalBody());
+        $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
         $reply->setUpdatedAt(Carbon::now())
-            ->setBody($this->markdownParser->transformMarkdown($reply->getOriginalBody()));
+            ->setBody($parsedBody);
 
         $this->entityManager->persist($reply);
         $this->entityManager->flush();

@@ -40,3 +40,33 @@
     }
   }
 }
+
+.post-list-v1{
+  li{
+    border: none !important;
+  }
+  .post{
+    .title{
+      font:{
+        size: 14px;
+      }
+      color: $focusFontColor;
+      line-height: 1.5em;
+      margin-bottom: 2px;
+    }
+    .author{
+      img{
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 5px;
+        border: 1px solid rgba(0,0,0,0.05);
+      }
+      a{
+        color: $metaColor;
+      }
+      color: $metaColor;
+    }
+  }
+}

@@ -5,11 +5,13 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Topic;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\Mention\MentionParserInterface;
 
 class TopicManager implements TopicManagerInterface
 {
@@ -20,9 +22,21 @@ class TopicManager implements TopicManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var MarkdownParserInterface
+     */
+    protected $markdownParser;
+
+    /**
+     * @var MentionParserInterface
+     */
+    protected $mentionParser;
+
+    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser, MentionParserInterface $mentionParser)
     {
         $this->entityManager = $entityManager;
+        $this->markdownParser = $markdownParser;
+        $this->mentionParser = $mentionParser;
     }
 
     /**
@@ -44,7 +58,11 @@ class TopicManager implements TopicManagerInterface
      */
     public function saveTopic(TopicInterface $topic)
     {
-        $topic->setUpdatedAt(Carbon::now());
+        $body = $this->markdownParser->transformMarkdown($topic->getOriginalBody());
+        $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
+        $topic->setUpdatedAt(Carbon::now())
+            ->setBody($parsedBody);
+
         $this->entityManager->persist($topic);
         $this->entityManager->flush();
         return true;
