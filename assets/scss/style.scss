@@ -2,7 +2,11 @@
 
 //自定义panel
 .panel-u{
-  border-color: $borderColor;
+  //border-color: $borderColor;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  box-sizing: border-box;
   .panel-heading{
     background-color:#fff;
     border-color:$borderColor;
@@ -16,7 +20,7 @@
 .panel-widget{
   @extend .panel-u;
   .panel-heading{
-    text-align:center;
+    text-align:left;
   }
 }
 
