@@ -20,7 +20,7 @@ class DefaultController extends Controller
     {
         $postManager = $this->getPostManager();
         $posts = $postManager->findLatestPosts($request->query->getInt('page', 1));
-        $topics = $this->getTopicManager()->findHotTopics(Carbon::now()->addDays(-7), 15);
+        $topics = $this->getTopicManager()->findHotTopics(Carbon::now()->addDays(-10), 15);
         return $this->render('PHPDishWebBundle:Default:index.html.twig', [
             'posts' => $posts,
             'topics' => $topics

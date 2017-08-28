@@ -25,11 +25,9 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-3">
-            <aside class="panel panel-default panel-widget">
-                <div class="panel-heading">活跃用户</div>
-                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
-            </aside>
+            {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
             {{ render(controller('PHPDishPostBundle:Post:recommendPosts', {'limit': 10})) }}
+            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
         </div>
     </div>
 </div>

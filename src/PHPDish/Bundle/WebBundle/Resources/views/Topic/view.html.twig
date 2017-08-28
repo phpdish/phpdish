@@ -54,10 +54,7 @@
             </div>
             <div class="col-md-3">
                 {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
-                <aside class="panel panel-default panel-widget" data-sticky="true">
-                    <div class="panel-heading">热门话题</div>
-                    {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
-                </aside>
+                {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
             </div>
             <!-- #sidebar -->
         </div>

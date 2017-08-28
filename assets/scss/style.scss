@@ -1,5 +1,83 @@
 @charset "UTF-8";
 
+//下margin 10px
+.margin-bottom-10{
+  margin-bottom: 10px !important;
+}
+
+//圆形图片
+.img-circle{
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.img-circle:hover {
+  -moz-box-shadow: 0px 0px 25px rgba(0, 255, 178, 1);
+  -webkit-box-shadow: 0px 0px 25px rgba(0, 255, 178, 1);
+  box-shadow: 0px 0px 25px rgba(0, 255, 178, 1);
+  cursor: pointer;
+}
+
+//Badge
+.badge-u{
+  color: #fff;
+}
+.badge-u-success{
+  background-color:#72c02c !important;
+}
+.badge-u-orange{
+  background-color:orange !important;
+}
+
+//推荐印章
+.sticky-tag{
+  border:1px solid #ea6f5a;
+  padding: 0 2px;
+  cursor: pointer;
+  &:hover{
+    color: #ec6149;
+    background-color: rgba(236,97,73,.05);
+  }
+  color: #ea6f5a;
+  font:{
+    size: 12px;
+    weight:normal;
+  }
+}
+
+//关注按钮组
+.follow-panel{
+  .btn-unfollow{
+    @extend .u-btn-outline-primary;
+  }
+  .btn-follow{
+    @extend .u-btn-deeporange;
+  }
+}
+
+//tab导航
+.tab-nav{
+  margin-bottom: -1px;
+  margin-left: 0;
+  font-size: 14px;
+  margin-top: -1px;
+  border-top: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+  li{
+    line-height:20px;
+    a{
+      display:block;
+      padding: 10px 30px;
+    }
+    &.active{
+      font-weight: 600;
+      a{
+        border-bottom: 2px solid $contrastColor;
+      }
+    }
+  }
+}
+
 //自定义panel
 .panel-u{
   //border-color: $borderColor;
@@ -24,10 +102,6 @@
   }
 }
 
-.user-plate{
-
-}
-
 //页尾
 .footer{
   border: $borderColor;
@@ -37,6 +111,29 @@
     .panel-footer{
       border: none;
       background-color: #fff;
+    }
+  }
+}
+
+//话题页右上角用户区域
+.community-description{
+  .register-action{
+    margin-bottom: 10px;
+  }
+}
+.user-plate{
+  .avatar{
+    width:50px;
+    height:50px;
+    display: inline-block;
+  }
+  .badge-icons{
+     font-size:14px;
+     margin-top: 12px;
+    .notification-num{
+      .badge{
+        margin-left: 5px;
+      }
     }
   }
 }
