@@ -111,15 +111,15 @@
     padding: 0 15px;
     margin-top: 14px;
   }
-
-  .user{
-    .avatar{
-      height: 45px;
-      //img{
-      //  height: 45px;
-      //  width: 45px;
-      //}
-      display:inline-block;
+}
+.nav-user{
+  padding-top: 12px;
+  position:relative;
+  .avatar{
+    img{
+      width: 35px;
+      height: 35px;
+      display: inline-block;
     }
   }
 }

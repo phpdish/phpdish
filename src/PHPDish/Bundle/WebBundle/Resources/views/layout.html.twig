@@ -53,30 +53,30 @@
                             </div>
                             <button type="submit" class="btn btn-default"><i class="if i-search"></i></button>
                         </form>
-                        <ul class="nav navbar-nav navbar-right nav-action">
-                            {% if app.user %}
-                                <li class="menu-item user">
-                                    <a class="dropdown-toggle avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
-                                        <a href="{{ path('login') }}">{{ app.user.username }}</a>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>
-                            {% else %}
+                        {% if app.user %}
+                        <div class="nav-user pull-right">
+                            <div class="dropdown-toggle avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
+                                <span class="caret"></span>
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        {% else %}
+                            <ul class="nav navbar-nav navbar-right nav-action">
                                 <li class="menu-item">
                                     <a href="{{ path('login') }}">登录</a>
                                 </li>
                                 <li class="menu-item">
                                     <span><a href="{{ path('register') }}" class="btn btn-sm u-btn-outline-primary btn-register">注册</a></span>
                                 </li>
-                            {% endif %}
-                        </ul>
+                            </ul>
+                        {% endif %}
                     </nav>
                 </div>
             </div>
