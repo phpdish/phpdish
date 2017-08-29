@@ -111,6 +111,17 @@
     padding: 0 15px;
     margin-top: 14px;
   }
+
+  .user{
+    .avatar{
+      height: 45px;
+      //img{
+      //  height: 45px;
+      //  width: 45px;
+      //}
+      display:inline-block;
+    }
+  }
 }
 //头部搜索
 .top-search{
@@ -119,6 +130,9 @@
     border-bottom: 1px solid #333;
     box-shadow:none;
     border-radius: 0;
+    &:focus{
+      border-bottom-color: $contrastColor;
+    }
   }
   .btn{
     border: none;
