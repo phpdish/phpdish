@@ -104,7 +104,34 @@
 //导航区域
 .nav-action{
   .btn-register{
-
+    vertical-align: middle;
+    -webkit-border-radius:999px;
+    -moz-border-radius:999px;
+    border-radius: 999px;
+    padding: 0 15px;
+    margin-top: 14px;
+  }
+}
+//头部搜索
+.top-search{
+  .query{
+    border: none;
+    border-bottom: 1px solid #333;
+    box-shadow:none;
+    border-radius: 0;
+  }
+  .btn{
+    border: none;
+    transition: font-size 0.2s;
+    width: 40px;
+    height: 34px;
+    padding: 5px 0 0 0;
+    &:hover{
+      background-color: transparent;
+      i{
+        font-size: 18px;
+      }
+    }
   }
 }
 

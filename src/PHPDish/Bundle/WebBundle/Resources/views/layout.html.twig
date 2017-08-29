@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//at.alicdn.com/t/font_382846_qbbqqfqgz871ra4i.css"  rel="stylesheet">
+        <link href="//at.alicdn.com/t/font_382846_5w4nceq3l9fcg14i.css"  rel="stylesheet">
         <link href="{{ asset('build/common.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
@@ -32,7 +32,7 @@
                         </button>
                         <a class="navbar-brand"><img src="{{ asset('/img/5.png') }}" class="img-responsive"/></a>
                     </div>
-                    <nav id="navbar" class="collapse navbar-collapse header-navbar-collapse" role="navigation">
+                    <nav class="collapse navbar-collapse header-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
                             <li class="menu-item">
                                 <a href="/">首页</a>
@@ -47,11 +47,15 @@
                                 <a href="{{ path('topic') }}">招聘</a>
                             </li>
                         </ul>
+                        <form class="navbar-form navbar-left top-search" action="/search">
+                            <div class="form-group">
+                                <input type="text" name="q" class="form-control query" placeholder="搜索">
+                            </div>
+                            <button type="submit" class="btn btn-default"><i class="if i-search"></i></button>
+                        </form>
                         <ul class="nav navbar-nav navbar-right nav-action">
                             <li class="menu-item">
-                                <a href="">
-                                    <span class="glyphicon glyphicon-gift"></span> 积分换礼
-                                </a>
+                                <a href="{{ path('login') }}">登录</a>
                             </li>
                             <li class="menu-item">
                                 <span><a href="{{ path('register') }}" class="btn btn-sm u-btn-outline-primary btn-register">注册</a></span>
