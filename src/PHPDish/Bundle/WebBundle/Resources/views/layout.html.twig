@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//at.alicdn.com/t/font_382846_5w4nceq3l9fcg14i.css"  rel="stylesheet">
+        <link href="//at.alicdn.com/t/font_382846_0tn2r3qwvlu40a4i.css"  rel="stylesheet">
         <link href="{{ asset('build/common.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
@@ -59,12 +59,12 @@
                                 <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
                                 <span class="caret"></span>
                             </div>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                            <ul class="dropdown-menu popover-menu">
+                                <li role="separator" class="arrow"></li>
+                                <li><a href="{{ path('user_view', {username: app.user.username}) }}"><i class="if i-user"></i> 我的主页</a></li>
+                                <li><a href="#"><i class="if i-setting-o"></i> 设置</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="{{ path('logout') }}"><i class="if i-logout"></i> 退出</a></li>
                             </ul>
                         </div>
                         {% else %}

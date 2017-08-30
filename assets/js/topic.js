@@ -2,6 +2,7 @@
 
 import 'jquery-validation';
 import 'module/common.js';
+import 'bootstrap-select';
 import Util from '../modules/util.js';
 import {editor} from '../modules/blocks/reply';
 

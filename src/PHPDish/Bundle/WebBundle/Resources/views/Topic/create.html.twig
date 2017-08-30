@@ -3,34 +3,42 @@
 {% block title %}创建新话题 {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/topic.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-    <div id="main" class="container">
+    <div class="container" role="main">
         <div class="row">
-            <article id="content" class="single col-md-12">
-                <div class="entry-content">
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'add-post-form'}}) }}
-                    {{ form_errors(form) }}
-                    <div class="form-group">
-                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.title) }}
+            <article class="col-md-9">
+                <div class="panel panel-u add-topic">
+                    <div class="panel-heading">
+                        发布新话题
                     </div>
-                    <div class="form-group">
-                        {{ form_widget(form.originalBody, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.originalBody) }}
+                    <div class="panel-body topic">
+                        {{ form_start(form, {'attr': {'id': 'add-topic-form'}}) }}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control title', placeholder: '请填写标题'}}) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.originalBody, {'attr': {'class': 'form-control body', placeholder: '请填写正文，支持Markdown，注意排版与代码高亮'}}) }}
+                            {{ form_errors(form.originalBody) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.thread, {'attr': {'class': 'selectpicker thread'}}) }}
+                            {{ form_errors(form.thread) }}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">发布</button>
+                        </div>
+                        {{ form_end(form) }}
                     </div>
-                    <div class="form-group">
-                        {{ form_widget(form.thread, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.thread) }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">发布</button>
-                    </div>
-                    {{ form_end(form) }}
                 </div>
             </article>
+            <div class="col-md-3">
+                {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
+            </div>
         </div>
     </div>
 {% endblock %}

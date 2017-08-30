@@ -49,6 +49,7 @@
                 </div>
             </div>
             <div class="col-md-3">
+                {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
                 {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
                 {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
