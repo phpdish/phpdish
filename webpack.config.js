@@ -53,7 +53,10 @@ for (const entryName in foundEntries) {
 Encore.createSharedEntry('common', [
     path.resolve(config.modulesPath, 'common.js'),
     path.resolve(config.modulesPath, 'dialog.js'),
-    'github-markdown-css'
+    'github-markdown-css',
+    'bootstrap-select/dist/css/bootstrap-select.min.css',
+    'codemirror/lib/codemirror.css',
+    'codemirror/theme/yeti.css'
 ]);
 
 //add style entries

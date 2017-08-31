@@ -51,7 +51,18 @@
 ------------------------------------*/
 .add-topic{
   .topic{
-
+    .body{
+      resize: vertical;
+      height: 350px;
+    }
+    .thread{
+      li.selected{
+        a{
+          background-color: #9ccc65;
+          color: #fff;
+        }
+      }
+    }
   }
 }
 

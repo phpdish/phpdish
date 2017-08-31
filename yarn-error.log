@@ -1,14 +1,14 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\taosikai\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Users\taosikai\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add codemirror --save
 
 PATH: 
-  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\webserver\service\php-7.1.4;C:\ProgramData\ComposerSetup\bin;C:\Users\taosikai\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\nodejs\;C:\Users\taosikai\AppData\Local\Microsoft\WindowsApps;C:\Users\taosikai\AppData\Roaming\npm
+  C:\Program Files\Docker\Docker\Resources\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\webserver\service\mysql\MySQL Server 5.7\bin;C:\webserver\service\apache\apache2.4\bin;C:\Program Files\Git\cmd;C:\webserver\service\php\php5.6.19;C:\ProgramData\ComposerSetup\bin;C:\Users\taosikai\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Redis;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs;C:\webserver\service\apache\apache2.4\bin;C:\ProgramData\chocolatey\bin;C:\Users\taosikai\AppData\Local\Microsoft\WindowsApps;C:\Users\taosikai\AppData\Roaming\npm
 
 Yarn version: 
   0.27.5
 
 Node version: 
-  8.2.1
+  7.9.0
 
 Platform: 
   win32 x64
@@ -52,6 +52,7 @@ npm manifest:
     "dependencies": {
       "air-datepicker": "^2.0",
       "art-dialog": "^7.0",
+      "bootstrap-select": "^1.12.4",
       "clipboard": "^1.0",
       "github-markdown-css": "^2.8.0",
       "jquery-validation": "^1.0",
@@ -5274,7 +5275,4 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: connect ETIMEDOUT 104.16.61.173:443
-      at Object.exports._errnoException (util.js:1024:11)
-      at exports._exceptionWithHostPort (util.js:1047:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1150:14)
+  Error: EPERM: operation not permitted, unlink 'E:\www\dish\node_modules\node-sass\vendor\win32-x64-51\binding.node'

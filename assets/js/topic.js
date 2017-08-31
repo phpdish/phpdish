@@ -3,8 +3,11 @@
 import 'jquery-validation';
 import 'module/common.js';
 import 'bootstrap-select';
+
 import Util from '../modules/util.js';
 import {editor} from '../modules/blocks/reply';
+import CodeMirror from 'codemirror';
+import 'codemirror/mode/markdown/markdown.js';
 
 //话题详情页
 (function($){
@@ -28,6 +31,17 @@ import {editor} from '../modules/blocks/reply';
         return false;
     });
 })($);
+
+(function($){
+    const editor = CodeMirror.fromTextArea(document.getElementById("topic_originalBody"), {
+        mode: 'markdown',
+        lineNumbers: true,
+        lineWrapping: true,
+        indentUnit: 4,
+        // theme: 'yeti'
+    });
+})($);
+
 //
 // //添加话题
 // (function($){
