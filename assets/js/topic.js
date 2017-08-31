@@ -33,13 +33,16 @@ import 'codemirror/mode/markdown/markdown.js';
 })($);
 
 (function($){
-    const editor = CodeMirror.fromTextArea(document.getElementById("topic_originalBody"), {
-        mode: 'markdown',
-        lineNumbers: true,
-        lineWrapping: true,
-        indentUnit: 4,
-        // theme: 'yeti'
-    });
+    const editorElement = document.getElementById("topic_originalBody");
+    if (editorElement) {
+        const editor = CodeMirror.fromTextArea(editorElement, {
+            mode: 'markdown',
+            lineNumbers: true,
+            lineWrapping: true,
+            indentUnit: 4,
+            // theme: 'yeti'
+        });
+    }
 })($);
 
 //

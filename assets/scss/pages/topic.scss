@@ -51,6 +51,10 @@
 ------------------------------------*/
 .add-topic{
   .topic{
+    .editor{
+      border: 1px solid #eee;
+      border-left:none;
+    }
     .body{
       resize: vertical;
       height: 350px;
@@ -63,6 +67,18 @@
         }
       }
     }
+    .submit-btn{
+        vertical-align: bottom;
+    }
+    .preview-action{
+      margin-left: 20px;
+      cursor:pointer;
+    }
+  }
+  .preview-panel{
+    background-color:#fcf8e3;
+    border: 1px dashed #dedede;
+    padding: 10px;
   }
 }
 
