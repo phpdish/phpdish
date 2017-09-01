@@ -22,7 +22,7 @@
                             {{ form_errors(form.title) }}
                         </div>
                         <div class="form-group editor">
-                            {{ form_widget(form.originalBody, {'attr': {'class': 'form-control body', placeholder: '请填写正文，支持Markdown，注意排版与代码高亮'}}) }}
+                            {{ form_widget(form.originalBody, {'required': false, 'attr': {'class': 'form-control body', placeholder: '请填写正文，支持Markdown，注意排版与代码高亮'}}) }}
                             {{ form_errors(form.originalBody) }}
                         </div>
                         <div class="form-group">
@@ -31,11 +31,10 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 发布</button>
-                            <span class="preview-action"><i class="if i-view"></i> 预览</span>
+                            <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
                         </div>
                         {{ form_end(form) }}
-
-                        <div class="preview-panel" data-role="preview">
+                        <div class="preview-panel markdown-body hidden" data-role="preview-panel">
                             预览区域
                         </div>
                     </div>

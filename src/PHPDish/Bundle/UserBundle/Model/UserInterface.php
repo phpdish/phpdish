@@ -16,6 +16,12 @@ interface UserInterface extends
     DateTimeInterface,
     EnabledInterface
 {
+    /**
+     * 是否是女性
+     * @return boolean
+     */
+    public function isWomen();
+
     public function avatar($width = 120, $height = 120);
 
     /**

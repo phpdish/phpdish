@@ -8,6 +8,8 @@ import Util from '../modules/util.js';
 import {editor} from '../modules/blocks/reply';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
+import marked from 'marked';
+import store from 'store';
 
 //话题详情页
 (function($){
@@ -24,7 +26,7 @@ import 'codemirror/mode/markdown/markdown.js';
         }
         $addReplyForm.lock = true;
         Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
-            Util.dialog.message('提交成功').flash(() => location.reload());
+            Util.dialog.message('回复成功').flash(() => location.reload());
         }).complete(function(){
             $addReplyForm.lock = false;
         });
@@ -32,8 +34,15 @@ import 'codemirror/mode/markdown/markdown.js';
     });
 })($);
 
+/**
+ * 添加topic
+ */
 (function($){
     const editorElement = document.getElementById("topic_originalBody");
+    const $preview = $('[data-action="preview"]');
+    const $previewPanel = $('[data-role="preview-panel"]');
+    const $topicTitle = $('#topic_title');
+    const $topicBody = $(editorElement);
     if (editorElement) {
         const editor = CodeMirror.fromTextArea(editorElement, {
             mode: 'markdown',
@@ -41,6 +50,30 @@ import 'codemirror/mode/markdown/markdown.js';
             lineWrapping: true,
             indentUnit: 4,
             // theme: 'yeti'
+        });
+        //还原draft
+        const draft = store.get('topic_draft');
+        draft.body && editor.setValue(draft.body);
+        draft.title && $topicTitle.val(draft.title);
+
+        editor.on('change', () => {
+            const value = editor.getValue();
+            //设置draft
+            store.set('topic_draft', {
+                title: $topicTitle.val(),
+                body: value
+            });
+            //预览
+            const html = marked(value);
+            $previewPanel.html(html);
+        });
+        $preview.on('click', () => {
+            console.log('click');
+            $previewPanel.toggleClass('hidden');
+        });
+        //提交表单
+        $('#add-topic-form').on('submit', function(){
+            $topicBody.val(editor.getValue());
         });
     }
 })($);

@@ -6,10 +6,12 @@
 <script type="text/javascript" src="{{ asset('build/js/user.js') }}"></script>
 {% endblock %}
 
+{% set isMe = app.user is same as (user) %}
+
 {% block content %}
-    <div class="container narrow-layout">
+    <div class="container">
     <div class="row">
-        <article class="col-md-12">
+        <article class="col-md-9">
             <div class="panel panel-default panel-u user-dash">
                 <div class="panel-heading">
                     {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
@@ -62,6 +64,13 @@
                 {% endblock %}
             </div>
         </article>
+        {% set appellation = isMe ? '我' : (user.isWomen ? '她' : '他')%}
+        <div class="col-md-3">
+            <div class="panel panel-widget">
+                <div class="panel-heading">{{ appellation }}的专栏</div>
+                <div class="panel-body">{{ render(controller('PHPDishPostBundle:Category:userCategories', {'user': user})) }}</div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

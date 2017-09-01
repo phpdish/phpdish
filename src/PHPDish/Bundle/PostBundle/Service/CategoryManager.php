@@ -38,7 +38,7 @@ class CategoryManager implements CategoryManagerInterface
     public function findUserCategories(UserInterface $user)
     {
         return $this->getRepository()->createQueryBuilder('c')
-            ->where('c.user = :userId')->setParameter('userId', $user->getId())
+            ->where('c.creator = :userId')->setParameter('userId', $user->getId())
             ->orderBy('c.createdAt', 'desc')
             ->getQuery()
             ->getResult();

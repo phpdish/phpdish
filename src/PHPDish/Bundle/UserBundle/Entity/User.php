@@ -24,6 +24,18 @@ class User implements UserInterface
     use IdentifiableTrait, DateTimeTrait, EnabledTrait;
 
     /**
+     * 男性
+     * @var int
+     */
+    const GENDER_MEN = 0;
+
+    /**
+     * 女性
+     * @var int
+     */
+    const GENDER_WOMEN = 1;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $username;
@@ -133,7 +145,6 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -213,7 +224,6 @@ class User implements UserInterface
     public function setGender($gender)
     {
         $this->gender = $gender;
-
         return $this;
     }
 
@@ -224,6 +234,14 @@ class User implements UserInterface
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isWomen()
+    {
+        return $this->gender == static::GENDER_WOMEN;
     }
 
     /**
@@ -315,9 +333,7 @@ class User implements UserInterface
 
     /**
      * Add role
-     *
      * @param Role $role
-     *
      * @return User
      */
     public function addRole(Role $role)

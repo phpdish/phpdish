@@ -68,11 +68,13 @@ class MentionParser implements MentionParserInterface
     {
         $this->parsedBody = $body;
         $this->mentionedNames = static::extractUserNames($body);
-        $this->mentionedUsers = $this->adapter->findUsers($this->mentionedNames);
-        foreach ($this->mentionedUsers as $user) {
-            $search = '@' . $user->getUsername();
-            $replace = $this->adapter->createUserLink($user);
-            $this->parsedBody = str_replace($search, $replace, $this->parsedBody);
+        if ($this->mentionedNames) {
+            $this->mentionedUsers = $this->adapter->findUsers($this->mentionedNames);
+            foreach ($this->mentionedUsers as $user) {
+                $search = '@' . $user->getUsername();
+                $replace = $this->adapter->createUserLink($user);
+                $this->parsedBody = str_replace($search, $replace, $this->parsedBody);
+            }
         }
         return $this;
     }

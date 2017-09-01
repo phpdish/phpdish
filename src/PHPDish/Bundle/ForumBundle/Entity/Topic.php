@@ -12,6 +12,7 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -23,6 +24,7 @@ class Topic implements TopicInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 

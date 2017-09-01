@@ -1,0 +1,17 @@
+<div class="category-list">
+    {% for category in categories %}
+    <div class="media category">
+        {%  set categoryUrl = path('category_view', {'slug': category.slug}) %}
+        <div class="media-left media-middle">
+            <a href="{{ categoryUrl }}" class="cover">
+                <img src="{{ category.cover }}" class="media img-responsive"/>
+            </a>
+        </div>
+        <div class="media-body">
+            <div class="media-heading name"> <a href="{{ categoryUrl }}">{{ category.name }}</a></div>
+            <p class="description">{{ category.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <span class="add-new-category"><i class="if i-plus"></i> 创建新专栏</span>
+</div>

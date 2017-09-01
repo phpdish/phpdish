@@ -3,6 +3,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,5 +93,18 @@ class CategoryController extends RestController
             'follower_count' => $category->getFollowerCount()
         ]);
         return $this->handleView($view);
+    }
+
+    /**
+     * 获取用户的专栏
+     * @param UserInterface $user
+     * @return Response
+     */
+    public function userCategoriesAction(UserInterface $user)
+    {
+        $categories = $this->getCategoryManager()->findUserCategories($user);
+        return $this->render('PHPDishWebBundle:Category:user_categories.html.twig', [
+            'categories' => $categories
+        ]);
     }
 }

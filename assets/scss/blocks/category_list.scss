@@ -1,0 +1,26 @@
+.category-list{
+  .category{
+    .cover{
+      display:inline-block;
+      width: 60px;
+      height: 60px;
+      img{
+        border-radius: 3px
+      }
+    }
+    .name{
+      font-size: 16px;
+      font-weight: 600;
+      a{
+        color: $focusFontColor;
+      }
+    }
+    .description{
+      color: $grayFontColor;
+    }
+  }
+  .add-new-category{
+    color: $contrastColor;
+    font-size: 16px;
+  }
+}

@@ -99,7 +99,7 @@ class PostManager implements PostManagerInterface
      */
     public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()));
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()))->orderBy(['createdAt' => 'desc']);
         return $this->findPosts($criteria, $page, $limit);
     }
 

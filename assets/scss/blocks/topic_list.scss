@@ -10,6 +10,9 @@
     .meta{
       padding-top: 5px;
       color: $metaColor;
+      a{
+        color: $metaColor;
+      }
     }
     .title{
       font-size:14px;

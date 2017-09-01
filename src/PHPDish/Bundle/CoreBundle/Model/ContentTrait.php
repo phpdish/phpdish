@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait ContentTrait
 {
@@ -12,6 +13,7 @@ trait ContentTrait
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     protected $originalBody;
 
