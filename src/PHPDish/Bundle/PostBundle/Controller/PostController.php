@@ -40,7 +40,7 @@ class PostController extends Controller
 
     /**
      * 创建文章
-     * @Route("/write", name="post_add")
+     * @Route("/posts/new", name="post_add")
      * @param Request $request
      * @return Response
      */
@@ -57,10 +57,10 @@ class PostController extends Controller
                     'id' => $post->getId()
                 ]);
             } else {
-                $request->getSession()->getFlashBag()->add('error', '文章无法创建');
+                $this->addFlash('error', '文章无法创建');
             }
         }
-        return $this->render('PHPDishWebBundle:Post:add.html.twig', [
+        return $this->render('PHPDishWebBundle:Post:create.html.twig', [
             'form' => $form->createView()
         ]);
     }

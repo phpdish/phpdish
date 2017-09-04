@@ -56,7 +56,8 @@ Encore.createSharedEntry('common', [
     'github-markdown-css',
     'bootstrap-select/dist/css/bootstrap-select.min.css',
     'codemirror/lib/codemirror.css',
-    'codemirror/theme/yeti.css'
+    'codemirror/theme/yeti.css',
+    'simplemde/src/css/simplemde.css'
 ]);
 
 //add style entries

@@ -100,3 +100,29 @@
     min-height: 100px;
   }
 }
+
+/*------------------------------------
+  添加文章
+------------------------------------*/
+
+.add-post{
+  .body{
+    min-height: 500px;
+  }
+  .CodeMirror{
+    min-height: 500px;
+    .CodeMirror-scroll{
+      min-height: 500px;
+    }
+  }
+}
+.action-popover{
+  position: fixed;
+  z-index: 9999;
+  border: 1px solid #eee;
+  padding: 20px 0;
+  background-color: #fff;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

@@ -3,9 +3,9 @@
 import '../modules/common.js';
 import Util from '../modules/util.js';
 import {editor} from '../modules/blocks/reply';
-
 import lockButton from '../modules/button-lock.js';
 
+import SimpleMDE from 'simplemde';
 
 /**
  * Post Details
@@ -36,6 +36,39 @@ $('#add-reply-form').on('submit', function(){
     return false;
 });
 
+/**
+ * 添加文章
+ */
+(function($){
+    const postBody = document.getElementById('post_originalBody');
+    const $postBody = $(postBody);
+    if (postBody) {
+        const simplemde = new SimpleMDE({
+            element: postBody,
+            autofocus: true,
+            spellChecker: false,
+            status: false,
+            indentWithTabs: false,
+            tabSize: 4,
+            autosave: {
+                enabled: true,
+                uniqueId: 'post_draft',
+                delay: 1000,
+            },
+            toolbar: [
+                "bold", "italic", "heading", "|", "quote", "code", "table",
+                "horizontal-rule", "unordered-list", "ordered-list", "|",
+                "link", "image", "|",  "side-by-side", "fullscreen", "preview", "|",
+                {
+                    name: 'guide',
+                    action: 'https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md',
+                    className: 'fa fa-info-circle',
+                    title: 'Markdown 语法',
+                }
+            ],
+        });
+    }
+})($);
 
 
 

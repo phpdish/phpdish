@@ -1,5 +1,6 @@
 'use strict';
 
+import 'bootstrap-select';
 import 'scrolltofixed';
 import './actions.js';
 import Util from './util.js';
