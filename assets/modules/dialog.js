@@ -68,4 +68,26 @@ export const message = function(message, options){
         content: message
     }));
 };
+
+/**
+ * 确认框
+ * @param message
+ * @param options
+ * @returns {Promise}
+ */
+export const confirm = (message, options) => {
+    options = options || {};
+    return new Promise((resolve, reject) => {
+        new Dialog($.extend({
+            title: '确认？',
+            ok: resolve,
+            cancel: reject,
+            okValue: '是',
+            cancelValue: '否'
+        }, options, {
+            content: message,
+        }));
+    });
+};
+
 export default Dialog;

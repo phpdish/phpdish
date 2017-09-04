@@ -42,6 +42,10 @@ $('#add-reply-form').on('submit', function(){
 (function($){
     const postBody = document.getElementById('post_originalBody');
     const $postBody = $(postBody);
+    const $postTitle = $('#post_title');
+    const $addPostForm = $('#add-post-form');
+    const $addPostBtn = $('[data-action="add-post"]');
+
     if (postBody) {
         const simplemde = new SimpleMDE({
             element: postBody,
@@ -66,6 +70,21 @@ $('#add-reply-form').on('submit', function(){
                     title: 'Markdown 语法',
                 }
             ],
+        });
+        $addPostBtn.on('click', () => {
+            if ($postTitle.val().length === 0 || simplemde.value().length === 0) {
+                Util.dialog.message('文章标题和内容不能为空').flash();
+                return false;
+            }
+            const buttonLock = lockButton($addPostBtn);
+            Util.dialog.confirm('确认发布这篇文章？').then(()=> {
+                $addPostForm.submit();
+                return true;
+            }, () => {
+                buttonLock.release();
+                return false;
+            });
+            return false;
         });
     }
 })($);

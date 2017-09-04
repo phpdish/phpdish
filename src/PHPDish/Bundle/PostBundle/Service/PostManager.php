@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
@@ -49,7 +50,7 @@ class PostManager implements PostManagerInterface
     public function createPost(UserInterface $user)
     {
         $post = new Post();
-        $post->setUser($user);
+        $post->setUser($user)->setCreatedAt(Carbon::now());
         return $post;
     }
 
@@ -58,6 +59,7 @@ class PostManager implements PostManagerInterface
      */
     public function savePost(PostInterface $post)
     {
+        $post->setUpdatedAt(Carbon::now());
         //Transform markdown format body
         if ($post->getOriginalBody()) {
             $post->setBody($this->markdownParser->transformMarkdown($post->getOriginalBody()));
