@@ -19,7 +19,7 @@
                             <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}" class="avatar"/></a>
                         </div>
                         <div class="title"><h3>{{ topic.title }}</h3></div>
-                        <div class="summary">
+                        <div class="meta">
                             <ul class="list-unstyled list-inline">
                                 <li class="text-muted"><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
                                 <li class="text-muted"><i class="if i-user"></i> {{ topic.user.username }}</li>

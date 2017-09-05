@@ -9,12 +9,18 @@
 {% endif %}
 
 {% block user_content %}
-    <ul class="list-group post-list">
-        {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
-    </ul>
-    {% if posts.haveToPaginate %}
-    <footer class="panel-footer">
-        {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-    </footer>
+    {% if posts.count %}
+        <ul class="list-group post-list">
+            {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
+        </ul>
+        {% if posts.haveToPaginate %}
+        <footer class="panel-footer">
+            {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+        </footer>
+        {% endif %}
+    {% else %}
+        <div class="empty-data">
+            <p><i class="if i-post-o"></i> 还没有发表过文章</p>
+        </div>
     {% endif %}
 {% endblock %}

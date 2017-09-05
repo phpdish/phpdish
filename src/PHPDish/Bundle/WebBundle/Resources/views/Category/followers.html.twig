@@ -3,12 +3,18 @@
 {% set tab = 'follower' %}
 
 {% block category_content %}
-    <div class="panel-body user-list">
-        {% include 'PHPDishWebBundle:Common:user_list.html.twig' %}
-    </div>
-    {% if users.haveToPaginate %}
-        <footer class="panel-footer">
-            {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-        </footer>
-    {% endif %}
+     {% if users.count %}
+        <div class="panel-body user-list">
+            {% include 'PHPDishWebBundle:Common:user_list.html.twig' %}
+        </div>
+        {% if users.haveToPaginate %}
+            <footer class="panel-footer">
+                {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+            </footer>
+        {% endif %}
+     {% else %}
+         <div class="empty-data">
+             <p><i class="if i-fan"></i> 还没有订阅者</p>
+         </div>
+     {% endif %}
 {% endblock %}

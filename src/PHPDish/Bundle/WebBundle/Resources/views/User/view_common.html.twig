@@ -12,13 +12,8 @@
     <div class="container">
     <div class="row">
         <article class="col-md-9">
-            <div class="panel panel-default panel-u user-dash">
+            <div class="panel panel-u user-dash">
                 <div class="panel-heading">
-                    {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
-                        'breadcrumbs': [
-                            {'title': '用户'}
-                        ]
-                    } %}
                     <div class="clearfix user-details" data-username="{{ user.username }}">
                         <div class="media">
                             <div class="media-left avatar">

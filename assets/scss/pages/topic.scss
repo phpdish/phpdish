@@ -14,9 +14,13 @@
     //float:left;
     margin-right:10px;
   }
-  .summary{
+  .meta{
     height:50px;
     line-height:50px;
+    color: #777;
+    a{
+      color: #777;
+    }
     i.if {
       color: #8590a6
     }
@@ -54,6 +58,9 @@
     .editor{
       border: 1px solid #eee;
       border-left:none;
+      .CodeMirror{
+        padding:0;
+      }
     }
     .body{
       resize: vertical;

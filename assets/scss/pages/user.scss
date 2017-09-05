@@ -6,6 +6,7 @@
     .avatar {
       float: left;
       margin: 0 15px 0 0;
+      width: 100px;
       img {
         border-radius: 5px;
       }
@@ -16,8 +17,8 @@
       overflow: hidden;
       .username {
         margin: 3px 0 2px;
-        font-size: 18px;
-        line-height: 30px;
+        font-size: 21px;
+        line-height: 1.5em;
         a {
           color: #337ab7 !important
         }

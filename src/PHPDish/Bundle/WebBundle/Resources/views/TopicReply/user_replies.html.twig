@@ -9,21 +9,27 @@
 {% endif %}
 
 {% block user_content %}
-    <div class="panel-body">
-        <ul class="uclist noborder">
-            {% for reply in replies %}
-                <li>
-                    <div class="text">{{ reply.body|raw }}</div>
-                    <span class="info">
-                    {{ reply.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
-                    </span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% if replies.haveToPaginate %}
-        <footer class="panel-footer">
-            {{ pagerfanta(replies, 'twitter_bootstrap3') }}
-        </footer>
+    {% if replies.count %}
+        <div class="panel-body">
+            <ul class="uclist noborder">
+                {% for reply in replies %}
+                    <li>
+                        <div class="text">{{ reply.body|raw }}</div>
+                        <span class="info">
+                        {{ reply.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if replies.haveToPaginate %}
+            <footer class="panel-footer">
+                {{ pagerfanta(replies, 'twitter_bootstrap3') }}
+            </footer>
+        {% endif %}
+    {% else %}
+        <div class="empty-data">
+            <p><i class="if i-comment"></i> 还没有发表过回复</p>
+        </div>
     {% endif %}
 {% endblock %}

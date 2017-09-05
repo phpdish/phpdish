@@ -9,21 +9,27 @@
 {% endif %}
 
 {% block user_content %}
-    <div class="panel-body">
-        <ul class="uclist noborder">
-            {% for topic in topics %}
-            <li>
-                <div class="text"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
-                <span class="info">
-                    {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
-                </span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% if topics.haveToPaginate %}
-        <footer class="panel-footer">
-            {{ pagerfanta(topics, 'twitter_bootstrap3') }}
-        </footer>
+    {% if topics.count %}
+        <div class="panel-body">
+            <ul class="uclist noborder">
+                {% for topic in topics %}
+                <li>
+                    <div class="text"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
+                    <span class="info">
+                        {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if topics.haveToPaginate %}
+            <footer class="panel-footer">
+                {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+            </footer>
+        {% endif %}
+    {% else %}
+        <div class="empty-data">
+            <p><i class="if i-comment"></i> 还没有发表过话题</p>
+        </div>
     {% endif %}
 {% endblock %}

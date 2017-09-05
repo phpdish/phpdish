@@ -207,3 +207,14 @@
     }
   }
 }
+
+//数据列表空状态
+.empty-data{
+  padding: 40px 0;
+  text-align: center;
+  color: #8590a6;
+  i.if {
+    font-size: 40px;
+    color: rgba(133, 144, 166, 0.8);
+  }
+}

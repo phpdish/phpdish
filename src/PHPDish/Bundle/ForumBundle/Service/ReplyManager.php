@@ -64,7 +64,7 @@ class ReplyManager  implements ReplyManagerInterface
         $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
         $reply->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
-
+        $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
         return true;

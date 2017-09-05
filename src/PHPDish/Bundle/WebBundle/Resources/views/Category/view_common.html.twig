@@ -39,7 +39,9 @@
                     <li {% if tab == 'hot' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
                     <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': category.slug}) }}">订阅</a></li>
                 </ul>
-                {% block category_content %}{% endblock %}
+                {% block category_content %}
+                没有任何数据
+                {% endblock %}
             </div>
         </div>
     </div>
