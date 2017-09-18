@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//at.alicdn.com/t/font_382846_n3cyt9p44b6e0zfr.css"  rel="stylesheet">
+        <link href="//at.alicdn.com/t/font_382846_qkzm8sd0c1dlhaor.css"  rel="stylesheet">
         <link href="{{ asset('build/common.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
@@ -34,16 +34,16 @@
                     </div>
                     <nav class="collapse navbar-collapse header-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
-                            <li class="menu-item">
+                            <li>
                                 <a href="/">首页</a>
                             </li>
-                            <li class="menu-item">
+                            <li>
                                 <a href="{{ path('topic') }}">社区</a>
                             </li>
-                            <li class="menu-item">
+                            <li>
                                 <a href="{{ path('topic') }}">问答</a>
                             </li>
-                            <li class="menu-item">
+                            <li>
                                 <a href="{{ path('topic') }}">招聘</a>
                             </li>
                         </ul>
@@ -53,30 +53,41 @@
                             </div>
                             <button type="submit" class="btn btn-default"><i class="if i-search"></i></button>
                         </form>
-                        {% if app.user %}
-                        <div class="nav-user pull-right">
-                            <div class="dropdown-toggle avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
-                                <span class="caret"></span>
-                            </div>
-                            <ul class="dropdown-menu popover-menu">
-                                <li role="separator" class="arrow"></li>
-                                <li><a href="{{ path('user_view', {username: app.user.username}) }}"><i class="if i-user"></i> 我的主页</a></li>
-                                <li><a href="#"><i class="if i-setting-o"></i> 设置</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('logout') }}"><i class="if i-logout"></i> 退出</a></li>
-                            </ul>
-                        </div>
-                        {% else %}
-                            <ul class="nav navbar-nav navbar-right nav-action">
-                                <li class="menu-item">
+
+                        <ul class="nav navbar-nav navbar-right nav-profile">
+                            {% if app.user %}
+                                <li class="dropdown">
+                                    <a href="{{ path('topic_add') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="if i-plus-bold"></i>
+                                    </a>
+                                    <ul class="dropdown-menu popover-menu">
+                                        <li role="separator" class="arrow"></li>
+                                        <li><a href="{{ path('post_add') }}"><i class="if i-comment-square"></i> 发起话题</a></li>
+                                        <li><a href="{{ path('post_add') }}"><i class="if i-post-o"></i> 发布文章</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown nav-user">
+                                    <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu popover-menu">
+                                        <li role="separator" class="arrow"></li>
+                                        <li><a href="{{ path('user_view', {username: app.user.username}) }}"><i class="if i-user"></i> 我的主页</a></li>
+                                        <li><a href="#"><i class="if i-setting-o"></i> 设置</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="{{ path('logout') }}"><i class="if i-logout"></i> 退出</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li>
                                     <a href="{{ path('login') }}">登录</a>
                                 </li>
-                                <li class="menu-item">
+                                <li>
                                     <span><a href="{{ path('register') }}" class="btn btn-sm u-btn-outline-primary btn-register">注册</a></span>
                                 </li>
-                            </ul>
-                        {% endif %}
+                            {% endif %}
+                        </ul>
                     </nav>
                 </div>
             </div>

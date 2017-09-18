@@ -102,7 +102,8 @@
   }
 }
 //导航区域
-.nav-action{
+.nav-profile{
+  margin-right: 0;
   .btn-register{
     vertical-align: middle;
     -webkit-border-radius:999px;
@@ -111,24 +112,25 @@
     padding: 0 15px;
     margin-top: 14px;
   }
-}
-.nav-user{
-  position:relative;
-  cursor:pointer;
-  &:hover{
-    background-color: #f5f5f5;
-  }
-  .avatar{
-    padding: 10px 10px 15px 18px;
-    img{
-      width: 35px;
-      height: 35px;
-      display: inline-block;
+
+  .nav-user{
+    position:relative;
+    cursor:pointer;
+    &:hover{
+      background-color: #f5f5f5;
+    }
+    .avatar{
+      padding: 13px 10px 13px 18px;;
+      img{
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+      }
     }
   }
+
   .popover-menu{
     border-top:1px solid $contrastColor;
-    top: 55px;
     .arrow{
       top: -8px;
       right: 20px;
@@ -145,7 +147,16 @@
       }
     }
   }
+
+  .dropdown-menu{
+    li .if{
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
 }
+
+
 //头部搜索
 .top-search{
   .query{
