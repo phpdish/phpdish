@@ -6,6 +6,7 @@ use PHPDish\Bundle\PostBundle\Controller\ManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -14,7 +15,8 @@ class DefaultController extends Controller
     use \PHPDish\Bundle\ForumBundle\Controller\ManagerTrait;
 
     /**
-     * @Route("/", name="homepage")
+     * @param Request $request
+     * @return Response
      */
     public function indexAction(Request $request)
     {

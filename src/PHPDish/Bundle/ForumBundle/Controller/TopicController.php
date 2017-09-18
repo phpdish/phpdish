@@ -15,6 +15,7 @@ class TopicController extends Controller
     use ManagerTrait;
 
     /**
+     * @Route("/", name="homepage")
      * @Route("/topics", name="topic")
      * @param Request $request
      * @return Response

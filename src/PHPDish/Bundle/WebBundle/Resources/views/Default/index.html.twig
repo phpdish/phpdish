@@ -6,22 +6,11 @@
 <div class="container" role="main">
     <div class="row">
         <div class="col-lg-9 col-md-9">
-            <div class="panel panel-default panel-u topic-list">
+            <div class="panel panel-u topic-list">
                 <div class="panel-heading">热门话题</div>
                 <div class="panel-body">
                     {% include 'PHPDishWebBundle:Common:topic_list.html.twig' %}
                 </div>
-            </div>
-            <div class="panel panel-default panel-u">
-                <div class="panel-heading">新发布</div>
-                <ul class="list-group post-list">
-                    {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
-                </ul>
-                {% if posts.haveToPaginate %}
-                <footer class="panel-footer">
-                    {{ pagerfanta(posts, 'twitter_bootstrap3') }}
-                </footer>
-                {% endif %}
             </div>
         </div>
         <div class="col-lg-3 col-md-3">

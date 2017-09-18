@@ -1,12 +1,12 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} PHPDish {% endblock %}
+{% block title %} 专栏 {% endblock %}
 
 {% block content %}
 <div class="container" role="main">
     <div class="row">
         <div class="col-lg-9 col-md-9">
-            <div class="panel panel-default panel-u">
+            <div class="panel panel-u">
                 <div class="panel-heading">最新文章</div>
                 <ul class="list-group post-list">
                     {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
@@ -19,10 +19,8 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-3">
-            <aside class="panel panel-default panel-widget" data-sticky="true">
-                <div class="panel-heading">活跃用户</div>
-                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
-            </aside>
+            {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
+            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
         </div>
     </div>
 </div>
