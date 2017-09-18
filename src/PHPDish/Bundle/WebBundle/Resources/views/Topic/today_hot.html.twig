@@ -3,8 +3,8 @@
     <ul class="list list-group topics-widget">
          {% for topic in topics %}
         <li class="list-group-item">
+            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}"  class="avatar img-circle"/></a>
             <a href="{{ path('topic_view', {'id': topic.id}) }}">
-                <img src="{{ topic.user.avatar }}"  class="avatar img-circle"/>
                 {{ topic.title }}
             </a>
         </li>
