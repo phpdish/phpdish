@@ -21,14 +21,19 @@ class PostType extends AbstractType
         $this->categoryManager = $categoryManager;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureOptions($resolver);
+        $resolver->setDefined('user');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump($options);exit;
         $builder
             ->add('title', TextType::class, [
                 'label' => '标题'
@@ -36,10 +41,22 @@ class PostType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => 'PHPDishPostBundle:Category',
                 'choice_label' => 'name',
-                'choices' => $this->categoryManager->findAllEnabledCategories()
+                'choices' => $this->getCurrentUserCategories($options)
             ])
             ->add('originalBody', TextareaType::class, [
                 'label' => '内容'
             ]);
+    }
+
+    /**
+     * 获取当前用户的专栏
+     * @return \PHPDish\Bundle\PostBundle\Model\CategoryInterface[]
+     */
+    protected function getCurrentUserCategories($options)
+    {
+       if (!isset($options['user'])) {
+            throw new \InvalidArgumentException('You musts provide the option "user"');
+        }
+        return $this->categoryManager->findUserCategories($options['user']);
     }
 }

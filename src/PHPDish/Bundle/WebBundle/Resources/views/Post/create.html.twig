@@ -16,8 +16,6 @@
                     {{ form_start(form, {'attr': {'id': 'add-post-form'}}) }}
                     {{ form_errors(form) }}
                     <div class="form-group">
-                        {{ dump(form.title.vars) }}
-                        {{ form_label(form.title) }}
                         {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': '请输入文章标题'}}) }}
                         {{ form_errors(form.title) }}
                     </div>

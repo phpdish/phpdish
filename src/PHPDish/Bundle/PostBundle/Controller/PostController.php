@@ -49,7 +49,9 @@ class PostController extends Controller
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getPostManager();
         $post = $manager->createPost($this->getUser());
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, [
+            'user' => $this->getUser()
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($manager->savePost($post)) {
