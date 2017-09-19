@@ -7,44 +7,48 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="panel panel-default panel-u">
-                    <div class="panel-heading">
-                        {% include 'PHPDishWebBundle:Common:crumbs.html.twig' with {
-                            'breadcrumbs': [
-                                {'title': '话题', 'url': path('topic')}
-                            ]
-                        } %}
-                    </div>
-                    <div class="panel-body topic-list">
-                        {% for topic in topics %}
-                            <div class="media topic">
-                                <div class="media-left">
-                                    <a href="{{ path('user_view', {'username': topic.user.username}) }}">
-                                        <img src="{{ topic.user.avatar() }}" class="media-object avatar" role="avatar">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div class="media-heading title">
-                                        <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
-                                        {% if topic.recommended %}
-                                            <i class="if i-sticky"></i>
-                                        {% endif %}
+                    <ul class="list-unstyled list-inline tab-nav">
+                        {% set tab = app.request.query.get('tab') %}
+                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('homepage') }}">看帖</a></li>
+                        <li {% if tab == 'good' %}class="active"{% endif %}><a href="{{ path('homepage', {'tab': 'good'}) }}">精华</a></li>
+                    </ul>
+                    {% if topics.count %}
+                        <div class="panel-body topic-list">
+                            {% for topic in topics %}
+                                <div class="media topic">
+                                    <div class="media-left">
+                                        <a href="{{ path('user_view', {'username': topic.user.username}) }}">
+                                            <img src="{{ topic.user.avatar() }}" class="media-object avatar" role="avatar">
+                                        </a>
                                     </div>
-                                    <ul class="list-unstyled list-inline meta">
-                                        <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|date('Y-m-d') }}</li>
-                                        <li><a href="{{ path('thread_view', {'slug': topic.thread.slug}) }}">{{ topic.thread.name }}</a></li>
-                                        <li>最后回复：{{ topic.repliedAt|date('Y-m-d') }}</li>
-                                    </ul>
+                                    <div class="media-body">
+                                        <div class="media-heading title">
+                                            <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
+                                            {% if topic.recommended %}
+                                                <i class="if i-sticky"></i>
+                                            {% endif %}
+                                        </div>
+                                        <ul class="list-inline list-unstyled meta">
+                                            <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|date('Y-m-d') }}</li>
+                                            <li><a href="{{ path('thread_view', {'slug': topic.thread.slug}) }}">{{ topic.thread.name }}</a></li>
+                                            <li>最后回复：{{ topic.repliedAt|date('Y-m-d') }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
+                                {% if loop.last == false %}
+                                    <hr class="margin-vertical-10"/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if topics.haveToPaginate %}
+                            <div class="panel-footer">
+                                {{ pagerfanta(topics, 'twitter_bootstrap3') }}
                             </div>
-                            {% if loop.last == false %}
-                                <hr class="margin-vertical-10"/>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% if topics.haveToPaginate %}
-                    <div class="panel-footer">
-                        {{ pagerfanta(topics, 'twitter_bootstrap3') }}
-                    </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="empty-data">
+                            <p><i class="if i-comment"></i> 没有话题</p>
+                        </div>
                     {% endif %}
                 </div>
             </div>

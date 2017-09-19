@@ -207,5 +207,13 @@ class Topic implements TopicInterface
     {
         $this->stickTop = true;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBelongsTo(UserInterface $user)
+    {
+        return $this->getUser() === $user;
+    }
 }
 

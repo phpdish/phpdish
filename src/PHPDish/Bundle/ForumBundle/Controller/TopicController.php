@@ -24,10 +24,12 @@ class TopicController extends Controller
     {
         $manager = $this->getTopicManager();
         $criteria = Criteria::create();
-        $criteria->orderBy([
-            'recommended' => 'desc',
-            'createdAt' => 'desc'
-        ]);
+        $criteria->orderBy(['repliedAt' => 'desc']);
+
+        $tab = $request->query->get('tab');
+        if ($tab && $tab === 'good') {
+            $criteria->where(Criteria::expr()->eq('recommended', true));
+        }
         $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
         return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
             'topics' => $topics
@@ -70,6 +72,30 @@ class TopicController extends Controller
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies,
+        ]);
+    }
+    /**
+     * @Route("/topics/{id}/edit", name="topic_edit", requirements={"id": "\d+"})
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function editAction($id, Request $request)
+    {
+        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic || !$topic->isBelongsTo($this->getUser())) {
+            $this->createNotFoundException();
+        }
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getTopicManager()->saveTopic($topic);
+            return $this->redirectToRoute('topic_view', [
+                'id' => $topic->getId()
+            ]);
+        }
+        return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

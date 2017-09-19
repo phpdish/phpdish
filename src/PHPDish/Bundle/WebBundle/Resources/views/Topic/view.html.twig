@@ -18,17 +18,20 @@
                         <div class="author">
                             <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}" class="avatar"/></a>
                         </div>
-                        <div class="title"><h3>{{ topic.title }}</h3></div>
+                        <h3 class="title">{{ topic.title }}</h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
-                                <li class="text-muted"><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
-                                <li class="text-muted"><i class="if i-user"></i> {{ topic.user.username }}</li>
-                                <li class="text-muted"><i class="if i-comment"></i> <a href="#add-reply-form"  data-action="go-reply">{{ topic.replyCount }}回复</a></li>
+                                <li><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
+                                <li><i class="if i-user"></i> {{ topic.user.username }}</li>
+                                <li><i class="if i-comment"></i> <a href="#add-reply-form"  data-action="go-reply">{{ topic.replyCount }}回复</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="panel-body">
                         <article class="body markdown-body">{{ topic.body|raw }}</article>
+                    </div>
+                    <div class="panel-footer">
+                        <share-button></share-button>
                     </div>
                 </div>
                 <div class="panel panel-default panel-u">

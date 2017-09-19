@@ -45,6 +45,7 @@
     "marked": "^0.3",
     "memory-fs": "^0.4",
     "scrolltofixed": "^1.0",
+    "share-button": "^1.0.3",
     "simplemde": "^1.11.2",
     "store": "^2.0.12",
     "textcomplete": "^0.13.1",

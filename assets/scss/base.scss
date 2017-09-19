@@ -52,3 +52,11 @@ a {
 .narrow-layout{
   width: 960px;
 }
+
+.meta{
+  font-size: 12px;
+  color: $metaColor;
+  a{
+    color:$metaColor;
+  }
+}

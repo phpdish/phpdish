@@ -123,4 +123,11 @@ interface TopicInterface extends
      * @return $this
      */
     public function stickTop();
+
+    /**
+     * 检查话题是否是属于指定用户
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isBelongsTo(UserInterface $user);
 }

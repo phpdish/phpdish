@@ -7,20 +7,15 @@
   .author{
     float:right;
     .avatar{
-      width:100px;
+      width:75px;
     }
   }
   .title{
     //float:left;
     margin-right:10px;
+    line-height: 1.2em;
   }
   .meta{
-    height:50px;
-    line-height:50px;
-    color: #777;
-    a{
-      color: #777;
-    }
     i.if {
       color: #8590a6
     }
