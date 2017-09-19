@@ -7,6 +7,7 @@ import CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import marked from 'marked';
 import store from 'store';
+import ShareButton from 'share-button';
 
 //话题详情页
 (function($){
@@ -28,6 +29,15 @@ import store from 'store';
             $addReplyForm.lock = false;
         });
         return false;
+    });
+
+    //分享
+    new ShareButton({
+        networks: {
+            facebook: {
+                appId: "abc123"
+            }
+        }
     });
 })($);
 
