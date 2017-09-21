@@ -57,7 +57,8 @@ Encore.createSharedEntry('common', [
     'bootstrap-select/dist/css/bootstrap-select.min.css',
     'codemirror/lib/codemirror.css',
     'codemirror/theme/yeti.css',
-    'simplemde/src/css/simplemde.css'
+    'simplemde/src/css/simplemde.css',
+    'social-share-button.js/dist/social-share.min.css',
 ]);
 
 //add style entries

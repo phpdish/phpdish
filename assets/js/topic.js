@@ -7,29 +7,46 @@ import CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import marked from 'marked';
 import store from 'store';
-import 'goodshare.js';
+import SocialShare from 'social-share-button.js';
 
 //话题详情页
 (function($){
-    const $addReplyForm = $('#add-reply-form');
-    //添加回复表单提交
-    $addReplyForm.on('submit', function(){
-        if($addReplyForm.lock){
-            return false;
-        }
-        let body = editor.getContent();
-        if(body.length === 0){
-            Util.dialog.message('请填写内容').flash();
-            return false;
-        }
-        $addReplyForm.lock = true;
-        Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
-            Util.dialog.message('回复成功').flash(() => location.reload());
-        }).complete(function(){
-            $addReplyForm.lock = false;
-        });
-        return false;
+
+    //分享
+    new SocialShare('.social-share-container', {
+        'theme': 'default'
     });
+
+    //话题操作
+    $('[data-role="topic-action"]').find('[data-action="remove"]').on('click', function(){
+        Util.dialog.confirm('确认删除这个话题吗？').then(() => {
+            Util.dialog.message('你点了确认');
+        });
+    });
+
+    //回复窗口
+    (function(){
+        const $addReplyForm = $('#add-reply-form');
+        //添加回复表单提交
+        $addReplyForm.on('submit', function(){
+            if($addReplyForm.lock){
+                return false;
+            }
+            let body = editor.getContent();
+            if(body.length === 0){
+                Util.dialog.message('请填写内容').flash();
+                return false;
+            }
+            $addReplyForm.lock = true;
+            Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
+                Util.dialog.message('回复成功').flash(() => location.reload());
+            }).complete(function(){
+                $addReplyForm.lock = false;
+            });
+            return false;
+        });
+    })();
+
 })($);
 
 /**

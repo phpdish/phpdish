@@ -82,6 +82,7 @@ class TopicController extends Controller
      */
     public function editAction($id, Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $topic = $this->getTopicManager()->findTopicById($id);
         if (!$topic || !$topic->isBelongsTo($this->getUser())) {
             $this->createNotFoundException();
@@ -96,6 +97,7 @@ class TopicController extends Controller
         }
         return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
             'form' => $form->createView(),
+            'topic' => $topic
         ]);
     }
 

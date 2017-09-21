@@ -1,6 +1,8 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %}创建新话题 {% endblock %}
+{% block title %}
+    {% if topic is defined %} 编辑话题 {% else %} 创建新话题 {% endif %}
+{% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/topic.js') }}"></script>

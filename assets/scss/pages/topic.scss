@@ -20,6 +20,28 @@
       color: #8590a6
     }
   }
+
+  .panel-footer{
+    background: transparent;
+
+    .action{
+      float:right;
+      margin-bottom: 0;
+      font-size: 20px;
+      color: $metaColor;
+      vertical-align: middle;
+      a{
+        color: $metaColor;
+        text-decoration: none;
+        &:hover{
+          color: $contrastColor;
+        }
+        i{
+          font-size: 18px;
+        }
+      }
+    }
+  }
 }
 
 //回复话题
