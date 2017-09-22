@@ -8,6 +8,7 @@ import 'codemirror/mode/markdown/markdown.js';
 import marked from 'marked';
 import store from 'store';
 import SocialShare from 'social-share-button.js';
+import lockButton from '../modules/button-lock.js';
 
 //话题详情页
 (function($){
@@ -18,9 +19,28 @@ import SocialShare from 'social-share-button.js';
     });
 
     //话题操作
-    $('[data-role="topic-action"]').find('[data-action="remove"]').on('click', function(){
+
+    const $topicAction =  $('[data-role="topic-action"]');
+    const $removeAction = $topicAction.find('[data-action="remove"]');
+
+    const buttonLock = lockButton($removeAction);
+    $removeAction.on('click', function(){
+        if (buttonLock.isDisabled()) {
+            return false;
+        }
+        buttonLock.lock();
         Util.dialog.confirm('确认删除这个话题吗？').then(() => {
-            Util.dialog.message('你点了确认');
+            Util.request('topic.delete', window.topicId).done(() => {
+                Util.dialog.message('话题已经被删除').flash(2, () => {
+                    location.href = '/';
+                });
+            }).fail((response) => {
+                Util.dialog.message(response.responseObj.error).flash(3);
+            }).always(()  => {
+                buttonLock.release();
+            });
+        }, () => {
+            buttonLock.release();
         });
     });
 

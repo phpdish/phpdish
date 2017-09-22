@@ -71,6 +71,17 @@ class TopicManager implements TopicManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function blockTopic(TopicInterface $topic)
+    {
+        $topic->disable();
+        $this->entityManager->persist($topic);
+        $this->entityManager->flush();
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findTopicById($id)
     {
         return $this->getTopicRepository()->find($id);

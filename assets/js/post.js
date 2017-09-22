@@ -18,7 +18,7 @@ $('#add-reply-form').on('submit', function(){
     if (body.length === 0) {
         return false;
     }
-    const buttonLock = lockButton($btn).text('提交中');
+    const buttonLock = lockButton($btn).text('提交中').lock();
     Util.request('comment.add', window.postId, {
         comment: {
             original_body: body,
@@ -76,7 +76,7 @@ $('#add-reply-form').on('submit', function(){
                 Util.dialog.message('文章标题和内容不能为空').flash();
                 return false;
             }
-            const buttonLock = lockButton($addPostBtn);
+            const buttonLock = lockButton($addPostBtn).lock();
             Util.dialog.confirm('确认发布这篇文章？').then(()=> {
                 $addPostForm.submit();
                 return true;

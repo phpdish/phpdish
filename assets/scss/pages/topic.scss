@@ -36,6 +36,10 @@
         &:hover{
           color: $contrastColor;
         }
+        &:focus{
+          color: $contrastColor;
+          outline:none;
+        }
         i{
           font-size: 18px;
         }

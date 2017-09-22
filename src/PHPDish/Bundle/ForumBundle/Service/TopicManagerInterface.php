@@ -30,6 +30,13 @@ interface TopicManagerInterface
     public function findTopicById($id);
 
     /**
+     * 封禁topic
+     * @param TopicInterface $topic
+     * @return boolean
+     */
+    public function blockTopic(TopicInterface $topic);
+
+    /**
      * 查找指定分类下的话题
      * @param ThreadInterface $thread
      * @param int $page

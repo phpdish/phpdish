@@ -3,18 +3,20 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TopicController extends Controller
+class TopicController extends RestController
 {
     use ManagerTrait;
 
     /**
+     * 话题列表
      * @Route("/", name="homepage")
      * @Route("/topics", name="topic")
      * @param Request $request
@@ -37,6 +39,7 @@ class TopicController extends Controller
     }
 
     /**
+     * 创建话题
      * @Route("/topics/new", name="topic_add")
      * @param Request $request
      * @return Response
@@ -60,6 +63,7 @@ class TopicController extends Controller
     }
 
     /**
+     * 查看话题
      * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"})
      * @param int $id
      * @param Request $request
@@ -75,6 +79,7 @@ class TopicController extends Controller
         ]);
     }
     /**
+     * 修改话题
      * @Route("/topics/{id}/edit", name="topic_edit", requirements={"id": "\d+"})
      * @param int $id
      * @param Request $request
@@ -82,11 +87,9 @@ class TopicController extends Controller
      */
     public function editAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $topic = $this->getTopicManager()->findTopicById($id);
-        if (!$topic || !$topic->isBelongsTo($this->getUser())) {
-            $this->createNotFoundException();
-        }
+        $this->denyAccessUnlessGranted('edit', $topic);
+
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,6 +105,24 @@ class TopicController extends Controller
     }
 
     /**
+     * 删除话题
+     * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"})
+     * @Method("DELETE")
+     * @param int $id
+     * @return Response
+     */
+    public function deleteAction($id)
+    {
+        $topic = $this->getTopicManager()->findTopicById($id);
+        $topic || $this->createNotFoundException();
+        $this->getTopicManager()->blockTopic($topic);
+        return $this->handleView($this->view([
+            'result' => true
+        ]));
+    }
+
+    /**
+     * 用户的帖子
      * @Route("/users/{username}/topics", name="user_topics")
      * @param string $username
      * @param Request $request

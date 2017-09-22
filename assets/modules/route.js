@@ -17,6 +17,8 @@ const routes = {
     'category.follow': {path: '/categories/{slug}/followers', method: 'POST'},
     'category.unfollow': {path: '/categories/{slug}/followers', method: 'DELETE'},
 
+    'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
+
     'gift.exchange': {path: '/gifts/{id}/exchange', method: 'POST'},
     'gift.summary': {path: '/gifts/summary/{id}', method: 'POST'},
     'user.follow': {path:'/users/{username}/followers', method: 'POST'},

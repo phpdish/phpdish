@@ -26,3 +26,11 @@ services:
         arguments: ["@phpdish.manager.thread"]
         tags:
            - {name: "form.type"}
+
+    phpdish.security.topic_voter:
+        class: PHPDish\Bundle\ForumBundle\Security\TopicVoter
+        arguments:
+            - "@security.access.decision_manager"
+        tags:
+            - {name: "security.voter"}
+        public: false

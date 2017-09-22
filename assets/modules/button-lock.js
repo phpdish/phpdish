@@ -3,7 +3,6 @@
 class ButtonLock{
     constructor($element){
         this.element = $element;
-        this.lock();
     }
     text(text){
         this.element.data('_oldText', this.element.html());
@@ -13,8 +12,14 @@ class ButtonLock{
     isEnable(){
         return this.element.data('_lock') !== true;
     }
+
+    isDisabled(){
+        return this.element.data('_lock') === true;
+    }
+
     lock(){
         this.element.addClass('disabled').attr('disabled', true).data('_lock', true);
+        return this;
     }
     release(){
         const oldText = this.element.data('_oldText');

@@ -18,4 +18,16 @@ interface EnabledInterface
      * @return bool Enabled
      */
     public function isEnabled();
+
+    /**
+     * Disable the entity
+     * @return $this
+     */
+    public function disable();
+
+    /**
+     * Enable the entity
+     * @return $this
+     */
+    public function enable();
 }
