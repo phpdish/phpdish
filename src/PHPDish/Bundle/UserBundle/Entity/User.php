@@ -128,7 +128,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return ['ROLE_USER', 'ROLE_SUPER_ADMIN'];
     }
 
     public function avatar($width = 120, $height = 120)

@@ -78,6 +78,7 @@ class TopicController extends RestController
             'replies' => $replies,
         ]);
     }
+
     /**
      * 修改话题
      * @Route("/topics/{id}/edit", name="topic_edit", requirements={"id": "\d+"})
@@ -88,6 +89,7 @@ class TopicController extends RestController
     public function editAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
+        $topic || $this->createNotFoundException();
         $this->denyAccessUnlessGranted('edit', $topic);
 
         $form = $this->createForm(TopicType::class, $topic);
@@ -105,6 +107,26 @@ class TopicController extends RestController
     }
 
     /**
+     * 切换话题推荐状态
+     * @Route("/topics/{id}/toggle_recommend", name="topic_toggle_recommend", requirements={"id": "\d+"})
+     * @param int $id
+     * @return Response
+     */
+    public function toggleRecommendAction($id)
+    {
+        $topic = $this->getTopicManager()->findTopicById($id);
+        $topic || $this->createNotFoundException();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', $topic);
+        $topic->setRecommended(!$topic->isRecommended());
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($topic);
+        $manager->flush();
+        return $this->handleView($this->view([
+            'is_recommended' => $topic->isRecommended()
+        ]));
+    }
+
+    /**
      * 删除话题
      * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
@@ -115,6 +137,9 @@ class TopicController extends RestController
     {
         $topic = $this->getTopicManager()->findTopicById($id);
         $topic || $this->createNotFoundException();
+        $topic = $this->getTopicManager()->findTopicById($id);
+        $this->denyAccessUnlessGranted('edit', $topic);
+
         $this->getTopicManager()->blockTopic($topic);
         return $this->handleView($this->view([
             'result' => true

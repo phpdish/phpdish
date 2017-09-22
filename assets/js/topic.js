@@ -19,10 +19,9 @@ import lockButton from '../modules/button-lock.js';
     });
 
     //话题操作
-
     const $topicAction =  $('[data-role="topic-action"]');
     const $removeAction = $topicAction.find('[data-action="remove"]');
-
+    const $recommendAction = $topicAction.find('[data-action="recommend"]');
     const buttonLock = lockButton($removeAction);
     $removeAction.on('click', function(){
         if (buttonLock.isDisabled()) {
@@ -43,6 +42,33 @@ import lockButton from '../modules/button-lock.js';
             buttonLock.release();
         });
     });
+    //推荐位
+    const recommendButtonLock = lockButton($recommendAction);
+    $recommendAction.on('click', function(){
+        if (recommendButtonLock.isDisabled()) {
+            return false;
+        }
+        recommendButtonLock.lock();
+        const isRecommended = $recommendAction.data('recommend');
+        let message =  isRecommended ? '确认取消推荐吗？' : '确认推荐这个话题吗?';
+
+        Util.dialog.confirm(message).then(() => {
+            Util.request('topic.toggleRecommend', window.topicId).done((response) => {
+                let message = response.is_recommended ? '话题已经被推荐' : '话题已经被取消推荐';
+                Util.dialog.message(message).flash(2, () => {
+                    location.reload();
+                });
+            }).fail((response) => {
+                Util.dialog.message(response.responseObj.error).flash(3);
+            }).always(()  => {
+                recommendButtonLock.release();
+            });
+        }, () => {
+            recommendButtonLock.release();
+        });
+    });
+
+
 
     //回复窗口
     (function(){

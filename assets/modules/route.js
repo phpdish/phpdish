@@ -18,6 +18,7 @@ const routes = {
     'category.unfollow': {path: '/categories/{slug}/followers', method: 'DELETE'},
 
     'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
+    'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
 
     'gift.exchange': {path: '/gifts/{id}/exchange', method: 'POST'},
     'gift.summary': {path: '/gifts/summary/{id}', method: 'POST'},

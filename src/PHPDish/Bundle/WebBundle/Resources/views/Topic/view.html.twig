@@ -18,7 +18,7 @@
                         <div class="author">
                             <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}" class="avatar"/></a>
                         </div>
-                        <h3 class="title">{{ topic.title }}</h3>
+                        <h3 class="title">{{ topic.title }} {% if topic.recommended %}<i class="if i-badge"></i>{% endif %}</h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
                                 <li><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
@@ -32,8 +32,13 @@
                     </div>
                     <div class="panel-footer clearfix">
                         <ul class="list-inline list-unstyled action" data-role="topic-action">
+                            {% if is_granted('edit', topic) %}
                             <li><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i></a></li>
                             <li><a href="{{ path('topic_edit', {id: topic.id}) }}" title="编辑"><i class="if i-edit"></i></a></li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN', topic) %}
+                                <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="取消加精" data-recommend="true" class="cancel-recommend" {% else %}title="加精"{% endif %} data-action="recommend"><i class="if i-set-good"></i></a></li>
+                            {% endif %}
                         </ul>
                         <div class="social-share-container"></div>
                     </div>
