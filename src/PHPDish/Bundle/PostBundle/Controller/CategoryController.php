@@ -3,6 +3,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\PostBundle\Form\Type\CategoryType;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -14,6 +15,30 @@ class CategoryController extends RestController
     use ManagerTrait;
 
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
+    /**
+     * @Route("/categories/new", name="category_add")
+     * @param Request $request
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $manager = $this->getCategoryManager();
+        $category = $manager->createCategory($this->getUser());
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->saveCategory($category);
+            $this->addFlash('notice', '专栏创建成功');
+            return $this->redirectToRoute('category_view', [
+                'slug' => $category->getSlug()
+            ]);
+        }
+        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
     /**
      * 专栏详情

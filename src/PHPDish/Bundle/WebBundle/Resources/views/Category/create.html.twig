@@ -1,0 +1,38 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} 创建专栏 {% endblock %}
+
+{% block content %}
+    <div class="container narrow-layout" role="main">
+        <div class="row">
+            <article class="col-md-12">
+                <div class="panel panel-u add-category">
+                    <div class="panel-heading">创建专栏</div>
+                    <div class="panel-body">
+                        {{ form_start(form, {'attr': {'id': 'add-category-form', 'class': 'category'}}) }}
+                        {{ form_errors(form) }}
+                            <div class="form-group">
+                                {{ form_label(form.name) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: '请填写专栏名称'}}) }}
+                                {{ form_errors(form.name) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.description) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '专栏介绍'}}) }}
+                                {{ form_errors(form.description) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.cover) }}
+                                {{ form_widget(form.cover, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.cover) }}
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn u-btn-primary"><i class="if i-plus-bold"></i> 确定创建</button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+{% endblock %}

@@ -2,7 +2,9 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\PostBundle\Entity\Category;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -60,9 +62,7 @@ class CategoryManager implements CategoryManagerInterface
     public function addManagerForCategory(CategoryInterface $category, UserInterface $user)
     {
         $category->addManager($user);
-        $this->entityManager->persist($category);
-        $this->entityManager->flush();
-        return true;
+        return $this->saveCategory($category);
     }
 
     /**
@@ -72,9 +72,7 @@ class CategoryManager implements CategoryManagerInterface
     {
         $category->addFollower($user);
         $category->setFollowerCount($category->getFollowerCount() + 1);
-        $this->entityManager->persist($category);
-        $this->entityManager->flush();
-        return true;
+        return $this->saveCategory($category);
     }
 
     /**
@@ -84,6 +82,24 @@ class CategoryManager implements CategoryManagerInterface
     {
         $category->removeFollower($user);
         $category->setFollowerCount($category->getFollowerCount() - 1);
+        return $this->saveCategory($category);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createCategory(UserInterface $user)
+    {
+        $category = new Category();
+        $category->setCreator($user);
+        return $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveCategory(CategoryInterface $category)
+    {
         $this->entityManager->persist($category);
         $this->entityManager->flush();
         return true;
