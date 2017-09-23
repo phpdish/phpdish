@@ -6,5 +6,8 @@ import 'inline-attachment/src/codemirror-4.inline-attachment.js'
 
 class InlineAttachment
 {
+    constructor(){
 
+        
+    }
 }
