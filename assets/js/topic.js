@@ -9,6 +9,8 @@ import marked from 'marked';
 import store from 'store';
 import SocialShare from 'social-share-button.js';
 import lockButton from '../modules/button-lock.js';
+import 'inline-attachment/src/inline-attachment.js'
+import 'inline-attachment/src/codemirror-4.inline-attachment.js'
 
 //话题详情页
 (function($){
@@ -111,6 +113,10 @@ import lockButton from '../modules/button-lock.js';
             lineWrapping: true,
             indentUnit: 4,
             // theme: 'yeti'
+        });
+        inlineAttachment.editors.codemirror4.attach(editor, {
+            uploadUrl: Util.route.getRoutePath('upload'),
+            jsonFieldName: 'path',
         });
 
         //还原draft

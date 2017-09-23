@@ -20,6 +20,8 @@ const routes = {
     'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
     'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
 
+    'upload': {path: '/uploads', method: 'POST'},
+
     'gift.exchange': {path: '/gifts/{id}/exchange', method: 'POST'},
     'gift.summary': {path: '/gifts/summary/{id}', method: 'POST'},
     'user.follow': {path:'/users/{username}/followers', method: 'POST'},

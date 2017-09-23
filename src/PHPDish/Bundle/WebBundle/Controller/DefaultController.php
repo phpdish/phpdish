@@ -15,6 +15,7 @@ class DefaultController extends Controller
     use \PHPDish\Bundle\ForumBundle\Controller\ManagerTrait;
 
     /**
+     * 首页（暂时不启用）
      * @param Request $request
      * @return Response
      */
@@ -30,10 +31,23 @@ class DefaultController extends Controller
     }
 
     /**
+     * 关于我们
      * @Route("/about", name="about")
      */
     public function aboutAction()
     {
+    }
 
+    /**
+     * 附件上传接口
+     * @Route("/uploads", name="upload")
+     * @param Request $request
+     * @return Response
+     */
+    public function upload(Request $request)
+    {
+        return $this->json([
+            'path' => 'https://diycode.b0.upaiyun.com/photo/2017/20daab12f38170c91a7d5b9280fdf3e3.png!small'
+        ]);
     }
 }

@@ -80,6 +80,9 @@ fos_comment:
 assetic:
     bundles: [ "FOSCommentBundle" ]
 
+jms_serializer:
+    enable_short_alias: false
+
 fos_rest:
     routing_loader:
         default_format: json
