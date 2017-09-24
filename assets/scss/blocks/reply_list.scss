@@ -17,7 +17,12 @@
     }
     .username{
       font-size:15px;
+      color: #166174;
+      margin-right: 10px;
+    }
+    .publish-at{
       color: $metaColor;
+      font-size:12px;
     }
     .meta{
       float:right;
