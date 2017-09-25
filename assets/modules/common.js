@@ -6,9 +6,6 @@ import './actions.js';
 import Util from './util.js';
 import {default as Dialog} from './dialog.js';
 
-import 'inline-attachment/src/inline-attachment.js'
-import 'inline-attachment/src/jquery.inline-attachment.js'
-
 //固定模块
 (function($){
     //固定导航
@@ -62,12 +59,3 @@ import 'inline-attachment/src/jquery.inline-attachment.js'
         }
     });
 })($);
-
-//粘贴板上传
-$('textarea[data-role="inline-attachment"]').inlineattachment({
-    uploadUrl: Util.route.getRoutePath('upload'),
-    jsonFieldName: 'path',
-    onUploadedFile: function(response) {
-        console.log(response);
-    },
-});

@@ -2,15 +2,11 @@
 
 import 'module/common.js';
 import Util from '../modules/util.js';
-import CodeMirror from 'codemirror';
-import 'codemirror/mode/markdown/markdown.js';
-import marked from 'marked';
 import store from 'store';
 import SocialShare from 'social-share-button.js';
 import lockButton from '../modules/button-lock.js';
-import 'inline-attachment/src/inline-attachment.js'
-import 'inline-attachment/src/codemirror-4.inline-attachment.js'
 import Editor from '../modules/md-editor/editor.js';
+import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
 
 //话题详情页
 (function($){
@@ -117,42 +113,7 @@ import Editor from '../modules/md-editor/editor.js';
     const $topicTitle = $('#topic_title');
     const $topicBody = $(editorElement);
     if (editorElement) {
-        const editor = CodeMirror.fromTextArea(editorElement, {
-            mode: 'markdown',
-            lineNumbers: true,
-            lineWrapping: true,
-            indentUnit: 4,
-            // theme: 'yeti'
-        });
-        inlineAttachment.editors.codemirror4.attach(editor, {
-            uploadUrl: Util.route.getRoutePath('upload'),
-            jsonFieldName: 'path',
-        });
-
-        //还原draft
-        const draft = store.get('topic_draft') || {};
-        draft.title && $topicTitle.val(draft.title);
-        if (draft.body) {
-            editor.setValue(draft.body);
-            makePreviewHtml(draft.body);
-        }
-
-        editor.on('change', () => {
-            const markdown = editor.getValue();
-            //设置draft
-            store.set('topic_draft', {
-                title: $topicTitle.val(),
-                body: markdown
-            });
-            //预览
-            makePreviewHtml(markdown);
-        });
-
-        $preview.on('click', () => {
-            console.log('click');
-            $previewPanel.toggleClass('hidden');
-        });
-
+        const editor = new CodeMirrorEditor($topicBody, $preview, $previewPanel);
         //提交表单
         $('#add-topic-form').on('submit', function(){
             if ($topicTitle.val().length === 0 || editor.getValue().length === 0) {
@@ -162,13 +123,5 @@ import Editor from '../modules/md-editor/editor.js';
             $topicBody.val(editor.getValue());
             store.remove('topic_draft');
         });
-    }
-    /**
-     * 准备预览区域
-     * @param markdown
-     */
-    function makePreviewHtml(markdown) {
-        const html = marked(markdown);
-        $previewPanel.html(html);
     }
 })($);
