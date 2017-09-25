@@ -11,14 +11,14 @@ export default function(options){
 
     //还原draft
     const draft = store.get(options.key) || {};
-    if (draft) {
+    if (draft.body) {
         this.setContent(draft.body);
     }
     this.on('change', () => {
         const markdown = this.getContent();
         //设置draft
         store.set(options.key, {
-            title: options.titleElement.val(),
+            title: options.titleElement ? options.titleElement.val() : null,
             body: markdown
         });
     });

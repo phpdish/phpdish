@@ -2,7 +2,6 @@
 
 import InlineAttachment from '../inline-attachment.js';
 
-export default function(){
-    console.log(this.textarea);
-    new InlineAttachment(this.textarea);
+export default function(element){
+    new InlineAttachment(element || this.textarea);
 };

@@ -31,9 +31,9 @@ class CodeMirrorEditor extends BaseEditor {
 
     getPlugins(){
         return [
-            mention,
-            emoji,
-            inlineAttachment,
+            () => {
+                inlineAttachment(this.codeMirrorEditor);
+            },
             () => {
                 draft({
                     key: 'topic_draft'
