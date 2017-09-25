@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -73,9 +74,13 @@ class TopicController extends RestController
     {
         $topic = $this->getTopicManager()->findTopicById($id);
         $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
+
+        $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
+        $form =  $this->createForm(TopicReplyType::class, $reply);
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies,
+            'form' => $form->createView()
         ]);
     }
 

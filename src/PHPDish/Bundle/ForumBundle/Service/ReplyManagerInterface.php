@@ -32,7 +32,7 @@ interface ReplyManagerInterface
      * @param UserInterface $user
      * @return ReplyInterface
      */
-    public function createReply(TopicInterface $topic, UserInterface $user);
+    public function createReply(TopicInterface $topic, UserInterface $user = null);
 
     /**
      * 保存回复

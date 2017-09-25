@@ -46,12 +46,12 @@ class ReplyManager  implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function createReply(TopicInterface $topic, UserInterface $user)
+    public function createReply(TopicInterface $topic, UserInterface $user = null)
     {
         $reply = new Reply();
         $reply->setTopic($topic)
-            ->setUser($user)
             ->setCreatedAt(Carbon::now());
+        $user && $reply->setUser($user);
         return $reply;
     }
 

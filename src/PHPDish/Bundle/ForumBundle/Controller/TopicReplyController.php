@@ -50,11 +50,10 @@ class TopicReplyController extends FOSRestController
     public function addTopicReply($id, Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $topic = $this->getTopicManager()->findTopicById($id);
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
-        $form =  $this->createForm(TopicReplyType::class, $reply, [
-            'csrf_protection' => false
-        ]);
+        $form =  $this->createForm(TopicReplyType::class, $reply);
         $form->handleRequest($request);
         $view = $this->view()->setFormat('json');
         if ($form->isSubmitted() && $form->isValid()) {

@@ -158,7 +158,9 @@
 }
 
 
-//头部搜索
+/*------------------------------------
+  头部搜索
+------------------------------------*/
 .top-search{
   .query{
     border: none;
@@ -184,7 +186,9 @@
   }
 }
 
-//页尾
+/*------------------------------------
+  页尾
+------------------------------------*/
 .footer{
   border: $borderColor;
   background-color: #fff;
@@ -197,7 +201,9 @@
   }
 }
 
-//话题页右上角用户区域
+/*------------------------------------
+  话题页右上角用户区域
+------------------------------------*/
 .community-description{
   .register-action{
     margin-bottom: 10px;
@@ -220,7 +226,9 @@
   }
 }
 
-//数据列表空状态
+/*------------------------------------
+  数据列表空状态
+------------------------------------*/
 .empty-data{
   padding: 40px 0;
   text-align: center;
@@ -228,5 +236,28 @@
   i.if {
     font-size: 40px;
     color: rgba(133, 144, 166, 0.8);
+  }
+}
+
+/*------------------------------------
+  Comment Form
+------------------------------------*/
+.comment-panel{
+  .body{
+    height: 100px;
+    vertical-align: middle;
+    resize: none;
+  }
+  .tips{
+    color:$metaColor;
+    font-size: 12px;
+    float:right;
+    i{
+      font-size:16px;
+      vertical-align: middle;
+    }
+  }
+  .actions{
+    margin-top:10px;
   }
 }
