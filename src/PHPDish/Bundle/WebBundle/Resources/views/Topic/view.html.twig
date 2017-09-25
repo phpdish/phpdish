@@ -54,15 +54,21 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="panel panel-u reply-topic">
+                <div class="panel panel-u reply-topic" id="reply-topic">
                     <div class="panel-heading"><h4>回复</h4></div>
-                    <form id="add-reply-form">
-                        <div class="panel-body comment-panel">
+                    <div class="panel-body comment-panel">
+                        <form id="add-reply-form">
                             {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': '写下你的评论...'}}) }}
                             <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
-                            <div class="actions"><button type="submit" class="btn u-btn-primary">回复</button></div>
+                            <div class="actions">
+                                <button type="submit" class="btn u-btn-primary">回复</button>
+                                <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                            </div>
+                        </form>
+                        <div class="preview-panel markdown-body hidden" data-role="preview-panel">
+                            预览区域
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">

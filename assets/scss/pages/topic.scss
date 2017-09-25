@@ -55,7 +55,18 @@
   }
 }
 
-//回复话题
+/*------------------------------------
+  Markdown 预览
+------------------------------------*/
+.preview-panel{
+  background-color:rgba(249, 255, 217, 0.25);
+  border: 1px dashed #dedede;
+  padding: 10px;
+}
+
+/*------------------------------------
+  回复话题
+------------------------------------*/
 .reply-topic{
   .panel-heading{
     padding:5px 15px;
@@ -94,12 +105,6 @@
       margin-left: 20px;
       cursor:pointer;
     }
-  }
-  .preview-panel{
-    //background-color:#fcf8e3;
-    background-color:rgba(249, 255, 217, 0.25);
-    border: 1px dashed #dedede;
-    padding: 10px;
   }
 }
 
