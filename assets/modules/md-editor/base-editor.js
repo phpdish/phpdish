@@ -27,7 +27,7 @@ class BaseEditor
      * @returns {*}
      */
     getContent(){
-        return $.trim(this.textarea.val());
+        return this.textarea.val();
     }
 
     /**
@@ -37,6 +37,11 @@ class BaseEditor
      */
     setContent(content){
         this.textarea.val(content);
+        return this;
+    }
+
+    appendContent(content){
+        this.setContent(this.getContent() + content);
         return this;
     }
 

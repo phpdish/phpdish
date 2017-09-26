@@ -65,14 +65,13 @@ function Route()
             parameters = {};
         }
         const route = this.getRoute(name, requirements);
-        $.extend(options, {
-            'dataType': 'json',
-            'headers': {}
-        }, {
+        options = $.extend({
+            dataType: 'json',
+            headers: {},
             url: route[0],
             type: route[1],
-            data: parameters
-        });
+            data: parameters instanceof $ ? parameters.serialize() : parameters
+        }, options);
         if (options.type.toUpperCase() === 'DELETE') {
             options.headers['x-http-method-override'] = 'DELETE';
         } else if (options.type.toUpperCase() === 'PATCH') {

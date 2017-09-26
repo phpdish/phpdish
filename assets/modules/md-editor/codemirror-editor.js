@@ -22,6 +22,13 @@ class CodeMirrorEditor extends BaseEditor {
         this.enablePlugin();
     }
 
+    getContent(){
+        return this.codeMirrorEditor.getValue();
+    }
+
+    setContent(content){
+        this.codeMirrorEditor.setValue(content);
+    }
     handleContentChange() {
         this.codeMirrorEditor.on('change', () => {
             let html = this.getHtml();
@@ -35,7 +42,7 @@ class CodeMirrorEditor extends BaseEditor {
                 inlineAttachment(this.codeMirrorEditor);
             },
             () => {
-                draft({
+                draft.call(this, {
                     key: 'topic_draft'
                 });
             }

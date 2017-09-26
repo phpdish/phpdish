@@ -14,7 +14,7 @@ export default function(options){
     if (draft.body) {
         this.setContent(draft.body);
     }
-    this.on('change', () => {
+    this.codeMirrorEditor.on('change', () => {
         const markdown = this.getContent();
         //设置draft
         store.set(options.key, {

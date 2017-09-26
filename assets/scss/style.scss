@@ -259,5 +259,15 @@
   }
   .actions{
     margin-top:10px;
+    .preview-action{
+      margin-left: 20px;
+      cursor:pointer;
+      &:hover{
+        color: $contrastColor;
+      }
+    }
+  }
+  .preview-panel{
+    margin-top:10px;
   }
 }

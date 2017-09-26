@@ -73,8 +73,8 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
     //回复窗口
     (function(){
         const $replyTopic = $('#reply-topic');
-        if ($replyTopic.length > 0) {
-            const $addReplyForm = $('#add-reply-form');
+        const $addReplyForm = $('#add-reply-form');
+        if ($addReplyForm.length > 0) {
             const $replyBody = $('#reply_original_body');
             const $preview = $replyTopic.find('[data-action="preview"]');
             const $previewPanel = $replyTopic.find('[data-role="preview-panel"]');
@@ -90,12 +90,25 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
                     return false;
                 }
                 $addReplyForm.lock = true;
-                Util.request('topic.addReply', window.topicId, {reply: {original_body: body}}).success(function(response){
+                Util.request('topic.addReply', window.topicId, $addReplyForm).success(function(response){
                     Util.dialog.message('回复成功').flash(() => location.reload());
                 }).complete(function(){
                     $addReplyForm.lock = false;
                 });
                 return false;
+            });
+
+
+            //Reply list
+            const $repliesPanel = $('#reply-list');
+            $repliesPanel.find('[data-role="reply"]').each(function(){
+                const $this = $(this);
+                const replyId = $this.data('reply-id');
+                const username = $this.data('username');
+                $this.find('[data-action="mention"]').on('click', function(){
+                    editor.appendContent(`@${username} `);
+                    Util.goHash('#add-reply-form');
+                });
             });
         }
 

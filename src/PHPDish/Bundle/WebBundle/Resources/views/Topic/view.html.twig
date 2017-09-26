@@ -45,7 +45,7 @@
                 </div>
                 <div class="panel panel-default panel-u">
                     <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
-                    <ul class="list-group reply-list" data-role="replies-panel">
+                    <ul class="list-group reply-list" id="reply-list" data-role="replies-panel">
                         {% include 'PHPDishWebBundle:Common:reply_list.html.twig'%}
                     </ul>
                     {% if replies.haveToPaginate %}
@@ -57,17 +57,21 @@
                 <div class="panel panel-u reply-topic" id="reply-topic">
                     <div class="panel-heading"><h4>回复</h4></div>
                     <div class="panel-body comment-panel">
-                        <form id="add-reply-form">
-                            {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': '写下你的评论...'}}) }}
-                            <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
-                            <div class="actions">
-                                <button type="submit" class="btn u-btn-primary">回复</button>
-                                <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
+                                {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': '写下你的评论...'}}) }}
+                                <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                <div class="actions">
+                                    <button type="submit" class="btn u-btn-primary">回复</button>
+                                    <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                                </div>
+                            {{ form_end(form) }}
+                            <div class="preview-panel markdown-body hidden" data-role="preview-panel">
+                                预览区域
                             </div>
-                        </form>
-                        <div class="preview-panel markdown-body hidden" data-role="preview-panel">
-                            预览区域
-                        </div>
+                        {% else %}
+                            <textarea class="form-control" placeholder="请先登录后再回复" disabled="disabled"></textarea>
+                        {% endif %}
                     </div>
                 </div>
             </div>
