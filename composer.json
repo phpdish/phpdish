@@ -27,6 +27,7 @@
         "doctrine/orm": "^2.5",
         "friendsofsymfony/user-bundle": "^2.0",
         "incenteev/composer-parameter-handler": "^2.0",
+        "knplabs/knp-gaufrette-bundle": "^0.4.0",
         "knplabs/knp-markdown-bundle": "^1.5",
         "knplabs/knp-menu-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
