@@ -1,15 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taosikai
- * Date: 2017/9/28
- * Time: 16:03
- */
 
 namespace PHPDish\Component\Media\UrlBuilder;
 
 
-class UrlBuilderInterface
-{
+use PHPDish\Component\Media\Model\MediaInterface;
 
+interface UrlBuilderInterface
+{
+    /**
+     * 为媒体文件创造url
+     * @param MediaInterface $media
+     * @return string
+     */
+    public function build(MediaInterface $media);
 }

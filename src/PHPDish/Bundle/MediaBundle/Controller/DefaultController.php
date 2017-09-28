@@ -23,10 +23,10 @@ class DefaultController extends Controller
         if (is_null($file)) {
             throw new \InvalidArgumentException('Bad arguments');
         }
-        $uploadedFile = $this->get('phpdish.file_uploader')->upload($file);
+        $uploadedFile = $this->get('phpdish.media.file_uploader')->upload($file);
         return $this->json([
             'key' => $uploadedFile->getKey(),
-            'path' => '/web/uploads/'. $uploadedFile->getKey()
+            'path' => $uploadedFile->getUrl()
         ]);
     }
 }

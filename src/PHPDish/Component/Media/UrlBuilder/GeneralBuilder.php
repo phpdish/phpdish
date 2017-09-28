@@ -1,15 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taosikai
- * Date: 2017/9/28
- * Time: 16:05
- */
 
 namespace PHPDish\Component\Media\UrlBuilder;
 
+use PHPDish\Component\Media\Model\MediaInterface;
 
-class GeneralBuilder
+class GeneralBuilder implements UrlBuilderInterface
 {
+    /**
+     * 基本url
+     * @var string
+     */
+    protected $baseUrl;
 
+    public function __construct($baseUrl)
+    {
+        $this->baseUrl = '/' . trim($baseUrl,  '/')  . '/';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(MediaInterface $media)
+    {
+        return "{$this->baseUrl}/{$media->getKey()}";
+    }
 }

@@ -42,6 +42,11 @@ class File extends Media implements FileInterface
      */
     protected $content;
 
+    public function __construct($key = null)
+    {
+        $this->key = $key;
+    }
+
     /**
      * Set path.
      *

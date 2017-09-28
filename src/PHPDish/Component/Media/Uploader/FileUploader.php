@@ -2,27 +2,26 @@
 
 namespace PHPDish\Component\Media\Uploader;
 
+use PHPDish\Component\Media\Manager\FileFactory;
 use PHPDish\Component\Media\Manager\FileManagerInterface;
-use PHPDish\Component\Media\Model\File;
-use PHPDish\Component\Media\Namer\NamerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader implements FileUploaderInterface
 {
     /**
+     * @var FileFactory
+     */
+    protected $fileFactory;
+
+    /**
      * @var FileManagerInterface
      */
     protected $fileManager;
 
-    /**
-     * @var NamerInterface
-     */
-    protected $namer;
-
-    public function __construct(FileManagerInterface $fileManager, NamerInterface $namer)
+    public function __construct(FileFactory $fileFactory, FileManagerInterface $fileManager)
     {
+        $this->fileFactory = $fileFactory;
         $this->fileManager = $fileManager;
-        $this->namer = $namer;
     }
 
     /**
@@ -30,19 +29,8 @@ class FileUploader implements FileUploaderInterface
      */
     public function upload(UploadedFile $uploadedFile)
     {
-        $file = static::createFile($uploadedFile)
-            ->setKey($this->namer->transform($uploadedFile));
+        $file = $this->fileFactory->createFileFromUploadedFile($uploadedFile);
         $this->fileManager->upload($file, true);
-        return $file;
-    }
-
-    protected static function createFile(UploadedFile $uploadedFile)
-    {
-        $file = new File();
-        $file->setExtension($uploadedFile->guessExtension())
-            ->setSize($uploadedFile->getSize())
-            ->setContentType($uploadedFile->getMimeType())
-            ->setContent(file_get_contents($uploadedFile->getRealPath()));
         return $file;
     }
 }
