@@ -1,0 +1,15 @@
+services:
+#    php_dish_media.example:
+#        class: PHPDish\Bundle\MediaBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    phpdish.file_manager:
+       class: PHPDish\Component\Media\Manager\FileManager
+       arguments: ['@phpdish.local_filesystem']
+
+    phpdish.file_uploader_namer:
+       class: PHPDish\Component\Media\Namer\GeneralNamer
+       arguments: ['@phpdish.local_filesystem']
+
+    phpdish.file_uploader:
+       class: PHPDish\Component\Media\Uploader\FileUploader
+       arguments: ['@phpdish.file_manager', '@phpdish.file_uploader_namer']
