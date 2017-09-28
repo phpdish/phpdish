@@ -39,7 +39,7 @@ class CodeMirrorEditor extends BaseEditor {
     getPlugins(){
         return [
             () => {
-                inlineAttachment(this.codeMirrorEditor);
+                inlineAttachment.call(this, this.codeMirrorEditor);
             },
             () => {
                 draft.call(this, {

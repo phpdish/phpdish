@@ -22,6 +22,6 @@ class GeneralBuilder implements UrlBuilderInterface
      */
     public function build(MediaInterface $media)
     {
-        return "{$this->baseUrl}/{$media->getKey()}";
+        return "{$this->baseUrl}{$media->getKey()}";
     }
 }

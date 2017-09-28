@@ -22,6 +22,10 @@ class BaseEditor
         return [];
     }
 
+    rePreview(){
+        this.previewContainer.html(this.getHtml() || '没有预览');
+    }
+
     /**
      * 获取编辑器内容
      * @returns {*}

@@ -35,7 +35,8 @@ class FileFactory  implements FileFactoryInterface
             ->setSize($uploadedFile->getSize())
             ->setContentType($uploadedFile->getMimeType())
             ->setContent(file_get_contents($uploadedFile->getRealPath()))
-            ->setKey($this->namer->transform($uploadedFile));
+            ->setKey($this->namer->transform($uploadedFile))
+            ->setUrl($this->urlBuilder->build($file));
         return $file;
     }
 

@@ -8,15 +8,11 @@ import Util from  './util.js';
 
 class InlineAttachment
 {
-    constructor(element){
-        const options = {
+    constructor(element, options){
+        options = $.extend({
             uploadUrl: Util.route.getRoutePath('upload'),
             jsonFieldName: 'path',
-            onUploadedFile: function(response) {
-                console.log(response);
-            }
-        };
-        console.log(element instanceof $);
+        }, options);
         if (element instanceof $) {
             element.inlineattachment(options);
         } else {

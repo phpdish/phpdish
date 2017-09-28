@@ -240,13 +240,23 @@
 }
 
 /*------------------------------------
+  Markdown 预览
+------------------------------------*/
+.preview-panel{
+  background-color:rgba(249, 255, 217, 0.25);
+  border: 1px dashed #dedede;
+  padding: 10px;
+}
+
+/*------------------------------------
   Comment Form
 ------------------------------------*/
+
 .comment-panel{
   .body{
-    height: 100px;
+    height: 150px;
     vertical-align: middle;
-    resize: none;
+    resize: vertical;
   }
   .tips{
     color:$metaColor;

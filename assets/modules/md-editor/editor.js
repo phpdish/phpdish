@@ -23,8 +23,7 @@ class Editor extends BaseEditor
 
     handleContentChange() {
         this.textarea.on('keyup', () => {
-            let html = this.getHtml();
-            this.previewContainer.html(html || '没有预览');
+            this.rePreview();
         });
     }
 
