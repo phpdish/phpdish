@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\WebBundle\Controller;
 
 use Carbon\Carbon;
+use Gaufrette\File;
 use PHPDish\Bundle\PostBundle\Controller\ManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,6 +14,8 @@ class DefaultController extends Controller
     use ManagerTrait;
 
     use \PHPDish\Bundle\ForumBundle\Controller\ManagerTrait;
+
+    const UPLOAD_FIELD_NAME = 'file';
 
     /**
      * 首页（暂时不启用）
@@ -46,8 +49,15 @@ class DefaultController extends Controller
      */
     public function upload(Request $request)
     {
+        $file = $request->files->get(static::UPLOAD_FIELD_NAME);
+        if (is_null($file)) {
+            throw new \InvalidArgumentException('Bad arguments');
+        }
+        /** @var File*/
+        $uploadedFile = $this->get('phpdish.file_uploader')->upload($file);
         return $this->json([
-            'path' => 'https://diycode.b0.upaiyun.com/photo/2017/20daab12f38170c91a7d5b9280fdf3e3.png!small'
+            'key' => $uploadedFile->getKey(),
+            'path' => '/web/uploads/'. $uploadedFile->getKey()
         ]);
     }
 }

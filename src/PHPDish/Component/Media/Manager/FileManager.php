@@ -3,6 +3,7 @@
 namespace PHPDish\Component\Media\Manager;
 
 use Gaufrette\Filesystem;
+use PHPDish\Component\Media\Model\FileInterface;
 
 class FileManager implements FileManagerInterface
 {
@@ -10,6 +11,7 @@ class FileManager implements FileManagerInterface
      * @var Filesystem
      */
     protected $filesystem;
+
 
     public function __construct(Filesystem $filesystem)
     {
@@ -19,24 +21,17 @@ class FileManager implements FileManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function upload($path, $data, $overwrite = true)
+    public function upload(FileInterface $file, $overwrite = true)
     {
-        $this->filesystem->write($path, $data, $overwrite);
+        $this->filesystem->write($file->getKey(), $file->getContent(), $overwrite);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    public function download(FileInterface $file)
     {
-        return $this->filesystem->get($key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
-    {
-        return $this->filesystem->has($key);
+        $content = $this->filesystem->read($file->getKey());
+        $file->setContent($content);
     }
 }

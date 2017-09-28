@@ -3,8 +3,8 @@
 namespace PHPDish\Component\Media\Uploader;
 
 use PHPDish\Component\Media\Manager\FileManagerInterface;
-use PHPDish\Component\Media\Uploader\Namer\NamerInterface;
-use Symfony\Component\HttpFoundation\File\File;
+use PHPDish\Component\Media\Model\File;
+use PHPDish\Component\Media\Namer\NamerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader implements FileUploaderInterface
@@ -28,13 +28,21 @@ class FileUploader implements FileUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $uploadedFile)
     {
-        $key = $this->namer->transform($file);
-        $this->fileManager->upload(
-            $key,
-            file_get_contents($file->getRealPath())
-        );
-        return $this->fileManager->get($key);
+        $file = static::createFile($uploadedFile)
+            ->setKey($this->namer->transform($uploadedFile));
+        $this->fileManager->upload($file, true);
+        return $file;
+    }
+
+    protected static function createFile(UploadedFile $uploadedFile)
+    {
+        $file = new File();
+        $file->setExtension($uploadedFile->guessExtension())
+            ->setSize($uploadedFile->getSize())
+            ->setContentType($uploadedFile->getMimeType())
+            ->setContent(file_get_contents($uploadedFile->getRealPath()));
+        return $file;
     }
 }

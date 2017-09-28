@@ -83,6 +83,18 @@ assetic:
 jms_serializer:
     enable_short_alias: false
 
+knp_gaufrette:
+    adapters:
+        local:
+            local:
+                directory: '%kernel.project_dir%/web/uploads'
+                create: true
+    filesystems:
+        local:
+          adapter: local
+          alias: phpdish.local_filesystem
+
+
 fos_rest:
     routing_loader:
         default_format: json

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Component\Media\Uploader\Namer;
+namespace PHPDish\Component\Media\Namer;
 
 interface NamerInterface
 {

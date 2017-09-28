@@ -2,3 +2,15 @@ services:
 #    php_dish_web.example:
 #        class: PHPDish\Bundle\WebBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    phpdish.file_manager:
+       class: PHPDish\Component\Media\Manager\FileManager
+       arguments: ['@phpdish.local_filesystem']
+
+    phpdish.file_uploader_namer:
+       class: PHPDish\Component\Media\Uploader\Namer\GeneralNamer
+       arguments: ['@phpdish.file_manager']
+
+    phpdish.file_uploader:
+       class: PHPDish\Component\Media\Uploader\FileUploader
+       arguments: ['@phpdish.file_manager', '@phpdish.file_uploader_namer']
