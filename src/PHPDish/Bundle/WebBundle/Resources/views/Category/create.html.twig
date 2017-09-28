@@ -24,11 +24,12 @@
                                 {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '专栏介绍'}}) }}
                                 {{ form_errors(form.description) }}
                             </div>
-                            <div class="form-group" id="upload-cover">
-                                <div id="pick-image"><i class="if i-camera"></i></div>
+                            <div class="form-group upload-cover clearfix" id="upload-cover">
+                                <div id="pick-image" class="upload-camera-icon"><i class="if i-camera"></i></div>
+                                <div class="preview-image"><img data-role="preview" class="img-responsive" src=""/></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn u-btn-primary"><i class="if i-plus-bold"></i> 确定创建</button>
+                                <button type="submit" class="btn u-btn-primary"><i class="if i-plus-bold"></i> 创建</button>
                             </div>
                         {{ form_end(form) }}
                     </div>

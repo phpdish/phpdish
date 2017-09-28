@@ -251,7 +251,6 @@
 /*------------------------------------
   Comment Form
 ------------------------------------*/
-
 .comment-panel{
   .body{
     height: 150px;
@@ -280,4 +279,18 @@
   .preview-panel{
     margin-top:10px;
   }
+}
+
+/*------------------------------------
+  上传的照相机按钮
+------------------------------------*/
+.upload-camera-icon{
+  display:inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: $metaColor;
+  i{
+    font-size: 22px;
+  }
+  border: 1px dashed $metaColor;
 }
