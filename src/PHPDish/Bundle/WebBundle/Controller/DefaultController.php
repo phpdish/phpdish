@@ -15,8 +15,6 @@ class DefaultController extends Controller
 
     use \PHPDish\Bundle\ForumBundle\Controller\ManagerTrait;
 
-    const UPLOAD_FIELD_NAME = 'file';
-
     /**
      * 首页（暂时不启用）
      * @param Request $request
@@ -39,25 +37,5 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-    }
-
-    /**
-     * 附件上传接口
-     * @Route("/uploads", name="upload")
-     * @param Request $request
-     * @return Response
-     */
-    public function upload(Request $request)
-    {
-        $file = $request->files->get(static::UPLOAD_FIELD_NAME);
-        if (is_null($file)) {
-            throw new \InvalidArgumentException('Bad arguments');
-        }
-        /** @var File*/
-        $uploadedFile = $this->get('phpdish.file_uploader')->upload($file);
-        return $this->json([
-            'key' => $uploadedFile->getKey(),
-            'path' => '/web/uploads/'. $uploadedFile->getKey()
-        ]);
     }
 }
