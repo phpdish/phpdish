@@ -36,6 +36,7 @@
   "dependencies": {
     "air-datepicker": "^2.0",
     "art-dialog": "^7.0",
+    "blueimp-file-upload": "^9.19.1",
     "bootstrap-select": "^1.12.4",
     "clipboard": "^1.0",
     "codemirror": "^5.29.0",
@@ -45,6 +46,7 @@
     "jquery-validation": "^1.0",
     "marked": "^0.3",
     "memory-fs": "^0.4",
+    "plupload": "^2.3.3",
     "scrolltofixed": "^1.0",
     "simplemde": "^1.11.2",
     "social-share-button.js": "^1.0.0",
