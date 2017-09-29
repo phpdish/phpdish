@@ -48,7 +48,9 @@
   }
 }
 
-//内容列表
+/*------------------------------------
+  内容列表
+------------------------------------*/
 .uclist {
   padding: 0;
   margin:0;
@@ -104,6 +106,9 @@
   }
 }
 
+/*------------------------------------
+  User Panel
+------------------------------------*/
 .panel-widget-user {
   ul {
     margin: 0;
@@ -112,6 +117,26 @@
       display: inline-block;
       margin: 4px 0 0 4px;
       padding: 4px
+    }
+  }
+}
+
+/*------------------------------------
+  User Panel
+------------------------------------*/
+.user-counter{
+  .cell{
+    display:inline-block;
+    text-align: center;
+    .title{
+      color:$metaColor;
+      font-size:14px;
+    }
+    .number{
+      font-size: 18px;
+    }
+    &:not(:last-child){
+      border-right: 1px solid #f0f2f7;
     }
   }
 }

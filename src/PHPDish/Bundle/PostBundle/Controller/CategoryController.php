@@ -129,7 +129,8 @@ class CategoryController extends RestController
     {
         $categories = $this->getCategoryManager()->findUserCategories($user);
         return $this->render('PHPDishWebBundle:Category:user_categories.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'user' => $user
         ]);
     }
 }

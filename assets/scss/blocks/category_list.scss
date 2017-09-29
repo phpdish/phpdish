@@ -17,7 +17,11 @@
     padding: 5px 0;
   }
   .add-new-category{
-    color: $contrastColor;
-    font-size: 16px;
+    font-size: 13px;
+    padding: 10px 0;
+    a{
+      color: $contrastColor;
+      text-decoration: none;
+    }
   }
 }

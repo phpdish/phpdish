@@ -295,10 +295,13 @@
   border: 1px dashed $metaColor;
 }
 
+.i-plus{
+  font-size:17px;
+}
+
 /*------------------------------------
   Form Error
 ------------------------------------*/
-
 form{
   label.error{
     color: #d04949;

@@ -63,4 +63,30 @@ interface UserInterface extends
      * @return int
      */
     public function getFollowingCount();
+
+    /**
+     * 获取文章数量
+     * @return int
+     */
+    public function getPostCount();
+
+    /**
+     * 设置文章数量
+     * @param int $postCount
+     * @return UserInterface
+     */
+    public function setPostCount($postCount);
+
+    /**
+     * 获取话题数量
+     * @return int
+     */
+    public function getTopicCount();
+
+    /**
+     * 设置话题数量
+     * @param int $topicCount
+     * @return UserInterface
+     */
+    public function setTopicCount($topicCount);
 }

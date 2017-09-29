@@ -109,6 +109,18 @@ class User implements UserInterface
      */
     protected $followingCategories;
 
+    /**
+     * 文章数量
+     * @ORM\Column(type="integer")
+     */
+    protected $postCount = 0;
+
+    /**
+     * 话题数量
+     * @ORM\Column(type="integer")
+     */
+    protected $topicCount = 0;
+
     public function __construct()
     {
         //关注我的
@@ -330,7 +342,6 @@ class User implements UserInterface
         $this->followers->removeElement($follower);
     }
 
-
     /**
      * Add role
      * @param Role $role
@@ -349,5 +360,41 @@ class User implements UserInterface
     public function removeRole(Role $role)
     {
         $this->roles->removeElement($role);
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostCount()
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * @param int $postCount
+     * @return User
+     */
+    public function setPostCount($postCount)
+    {
+        $this->postCount = $postCount;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTopicCount()
+    {
+        return $this->topicCount;
+    }
+
+    /**
+     * @param int $topicCount
+     * @return User
+     */
+    public function setTopicCount($topicCount)
+    {
+        $this->topicCount = $topicCount;
+        return $this;
     }
 }
