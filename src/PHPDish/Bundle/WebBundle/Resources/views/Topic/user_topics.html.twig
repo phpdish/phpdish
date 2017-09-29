@@ -10,18 +10,16 @@
 
 {% block user_content %}
     {% if topics.count %}
-        <div class="panel-body">
-            <ul class="uclist noborder">
-                {% for topic in topics %}
-                <li>
-                    <div class="text"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
-                    <span class="info">
-                        {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
-                    </span>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul class="list-group resource-list">
+            {% for topic in topics %}
+            <li class="list-group-item">
+                <div class="title"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
+                <span class="meta">
+                    {{ topic.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
         {% if topics.haveToPaginate %}
             <footer class="panel-footer">
                 {{ pagerfanta(topics, 'twitter_bootstrap3') }}

@@ -51,61 +51,11 @@
 /*------------------------------------
   内容列表
 ------------------------------------*/
-.uclist {
-  padding: 0;
-  margin:0;
-  list-style: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  color: #777;
-  li {
-    border-top: 1px solid #eee;
-    padding: 15px;
-    &:first-child {
-      border-top: 0
-    }
-    &.highlight {
-      background: #fcfcfc
-    }
-    .pm-box {
-      margin: 0 49px
-    }
-    .pm-date {
-      font-size: 12px;
-      line-height: 1.1;
-      margin: 0
-    }
-    .pm-content {
-      color: #444;
-      line-height: 1.5
-    }
-    .info {
-      font-size: 12px;
-      line-height: 22px;
-      color: #999
-    }
-    .text {
-      color: #444
-    }
-    .glyphicon {
-      margin: 0 3px
-    }
-  }
-
-  &.noborder {
-    border: 0;
-    li {
-      padding: 15px 0;
-      &:first-child {
-        padding-top: 0
-      }
-      &:last-child {
-        padding-bottom: 0
-      }
-    }
+.resource-list{
+  .title{
+    font-size:14px;
   }
 }
-
 /*------------------------------------
   User Panel
 ------------------------------------*/
