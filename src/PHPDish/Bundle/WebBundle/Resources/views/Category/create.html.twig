@@ -24,6 +24,11 @@
                                 {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '专栏介绍'}}) }}
                                 {{ form_errors(form.description) }}
                             </div>
+                            <div class="form-group">
+                                {{ form_label(form.slug) }} {{ url('category_view', {'slug': 'domain'})|raw }}
+                                {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder: '访问域名'}}) }}
+                                {{ form_errors(form.slug) }}
+                            </div>
                             <div class="form-group upload-cover clearfix" id="upload-cover">
                                 <div id="pick-image" class="upload-camera-icon"><i class="if i-camera"></i></div>
                                 <div class="preview-image"><img data-role="preview" class="img-responsive" src=""/></div>

@@ -26,17 +26,17 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isRecommended;
+    protected $isRecommended = false;
 
     /**
      * @ORM\Column(type="integer", length=10)
      */
-    protected $postCount;
+    protected $postCount = 0;
 
     /**
      * @ORM\Column(type="integer", length=10)
      */
-    protected $followerCount;
+    protected $followerCount = 0;
 
     /**
      * 订阅者

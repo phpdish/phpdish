@@ -2,22 +2,19 @@
   .category{
     .cover{
       display:inline-block;
-      width: 60px;
-      height: 60px;
+      width: 35px;
+      height: 35px;
+      vertical-align: middle;
       img{
         border-radius: 3px
       }
     }
     .name{
-      font-size: 16px;
-      font-weight: 600;
-      a{
-        color: $focusFontColor;
-      }
+      font-size: 14px;
+      vertical-align: middle;
+      margin-left:5px;
     }
-    .description{
-      color: $grayFontColor;
-    }
+    padding: 5px 0;
   }
   .add-new-category{
     color: $contrastColor;

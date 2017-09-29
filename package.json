@@ -43,7 +43,7 @@
     "editor.md": "^1.5.0",
     "github-markdown-css": "^2.8.0",
     "inline-attachment": "^2.0.3",
-    "jquery-validation": "^1.0",
+    "jquery-validation": "^1.17.0",
     "marked": "^0.3",
     "memory-fs": "^0.4",
     "plupload": "^2.3.3",

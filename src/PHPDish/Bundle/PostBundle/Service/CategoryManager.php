@@ -1,6 +1,8 @@
 <?php
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Carbon\Carbon;
+use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -91,7 +93,8 @@ class CategoryManager implements CategoryManagerInterface
     public function createCategory(UserInterface $user)
     {
         $category = new Category();
-        $category->setCreator($user);
+        $category->setCreator($user)
+            ->setCreatedAt(Carbon::now());
         return $category;
     }
 
@@ -100,6 +103,7 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function saveCategory(CategoryInterface $category)
     {
+        $category->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($category);
         $this->entityManager->flush();
         return true;

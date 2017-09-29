@@ -19,6 +19,9 @@ class CategoryType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => '描述'
             ])
+            ->add('slug', TextType::class, [
+                'label' => '访问域名'
+            ])
             ->add('cover', HiddenType::class, [
                 'label' => '封面'
             ]);
