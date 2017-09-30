@@ -31,6 +31,7 @@
         "knplabs/knp-markdown-bundle": "^1.5",
         "knplabs/knp-menu-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
+        "liip/imagine-bundle": "^1.9",
         "nesbot/carbon": "^1.22",
         "overtrue/pinyin": "^3.0",
         "sensio/distribution-bundle": "^5.0.19",

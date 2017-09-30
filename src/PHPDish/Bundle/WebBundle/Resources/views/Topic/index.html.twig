@@ -18,7 +18,7 @@
                                 <div class="media topic">
                                     <div class="media-left">
                                         <a href="{{ path('user_view', {'username': topic.user.username}) }}">
-                                            <img src="{{ topic.user.avatar() }}" class="media-object avatar" role="avatar">
+                                            <img src="{{ asset('/uploads/avatar/user1.jpg')|imagine_filter('my_thumb') }}" class="media-object avatar" role="avatar">
                                         </a>
                                     </div>
                                     <div class="media-body">

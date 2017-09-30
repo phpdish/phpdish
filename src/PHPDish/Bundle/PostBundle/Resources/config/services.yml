@@ -21,7 +21,7 @@ services:
             - "@markdown.parser"
             - "@phpdish.mention.parser"
 
-    phpdish.form.post:
+    phpdish.form.type.post:
          class: PHPDish\Bundle\PostBundle\Form\Type\PostType
          arguments: ['@phpdish.manager.category']
          tags:

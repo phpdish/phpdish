@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             new PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
             new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),

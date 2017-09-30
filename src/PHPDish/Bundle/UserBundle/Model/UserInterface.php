@@ -22,8 +22,6 @@ interface UserInterface extends
      */
     public function isWomen();
 
-    public function avatar($width = 120, $height = 120);
-
     /**
      * 添加一个粉丝
      * @param UserInterface $follower

@@ -70,6 +70,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+# FOSComment
 fos_comment:
     db_driver: orm
     class:
@@ -80,9 +81,11 @@ fos_comment:
 assetic:
     bundles: [ "FOSCommentBundle" ]
 
+# JMS Serializer
 jms_serializer:
     enable_short_alias: false
 
+# KNP Gaufrette:
 knp_gaufrette:
     adapters:
         local:
@@ -94,7 +97,33 @@ knp_gaufrette:
           adapter: local
           alias: phpdish.local_filesystem
 
+# Liip Imagine
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
 
+    filter_sets:
+        cache: ~
+
+        # the name of the "filter set"
+        my_thumb:
+
+            # adjust the image quality to 75%
+            quality: 75
+
+            # list of transformations to apply (the "filters")
+            filters:
+
+                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail: { size: [120, 90], mode: outbound }
+
+                # create a 2px black border: center the thumbnail on a black background
+                # 4px larger to create a 2px border around the final image
+                background: { size: [124, 94], position: center, color: '#000000' }
+
+# FOSRest
 fos_rest:
     routing_loader:
         default_format: json

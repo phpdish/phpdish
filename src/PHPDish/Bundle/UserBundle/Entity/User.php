@@ -143,12 +143,6 @@ class User implements UserInterface
         return ['ROLE_USER', 'ROLE_SUPER_ADMIN'];
     }
 
-    public function avatar($width = 120, $height = 120)
-    {
-        return '/uploads/avatar/user1.jpg';
-    }
-
-
     /**
      * Set email
      * @param string $email

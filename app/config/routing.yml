@@ -1,3 +1,6 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
     prefix:   /
