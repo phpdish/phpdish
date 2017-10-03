@@ -76,7 +76,9 @@ class CategoryController extends RestController
     }
 
     /**
+     * 专栏的关注者
      * @Route("/categories/{slug}/followers", name="category_followers")
+     * @Method("GET")
      * @param string $slug
      * @param Request $request
      * @return Response

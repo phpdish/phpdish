@@ -11,12 +11,12 @@
                     <h1 class="entry-title title">{{ post.title }}</h1>
                     <div class="media author">
                         {% set userHome = path('user_view', {username: post.user.username}) %}
-                        <div class="media-left"><a class="avatar" href="{{ userHome }}"><img src="{{ post.user.avatar }}" class="img-responsive"/></a></div>
+                        <div class="media-left"><a class="avatar" href="{{ userHome }}"><img src="{{ post.user.avatar|imagine_filter('middle_square') }}" class="img-responsive"/></a></div>
                         <div class="media-body">
                             <div class="media-heading">
                                 <span class="username"><a href="{{ userHome }}">{{ post.user.username }}</a></span>
                                 <span data-role="follow" data-username="{{ post.user.username }}">
-                                    {% if (app.user and post.user.isFollowedBy(app.user)) %}
+                                    {% if (is_granted('IS_AUTHENTICATED_FULLY') and post.user.isFollowedBy(app.user)) %}
                                         <button class="btn btn-sm btn-default" data-action="unfollow"><i class="if i-check"></i> 已关注</button>
                                     {% else %}
                                         <button class="btn btn-sm btn-success" data-action="follow"><i class="if i-plus"></i> 关注</button>
@@ -39,12 +39,12 @@
                         <div class="media-left media-middle">
                             {% set categoryUrl = path('category_view', {'slug': post.category.slug}) %}
                             <a href="{{ categoryUrl }}" class="avatar">
-                                <img src="{{ post.category.cover }}" class="media-object img-circle img-responsive"/>
+                                <img src="{{ post.category.cover|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
                             </a>
                         </div>
                         <div class="media-body">
                             <div class="pull-right" data-role="follow-category"  data-slug="{{ post.category.slug }}">
-                                {% if app.user and post.category.isFollowedBy(app.user) %}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and post.category.isFollowedBy(app.user) %}
                                     <button class="btn  btn-sm btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
                                 {% else %}
                                     <button class="btn btn-sm u-btn-deeporange" data-action="follow"><i class="if i-plus"></i> 关注本专栏</button>
@@ -75,7 +75,7 @@
                                 {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
                                     <div class="form-group md-editor" data-role="md-editor">
                                         <a class="avatar">
-                                            <img src="{{ app.user.avatar}}" class="img-responsive img-circle"/>
+                                            <img src="{{ app.user.avatar|imagine_filter('middle_square')}}" class="img-responsive img-circle"/>
                                         </a>
                                         {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'role': 'md-editor-write',  'class': 'form-control', 'placeholder': '写下你的评论...'}}) }}
                                         {#<textarea class="form-control" data-role="comment-body" placeholder="写下你的评论..."></textarea>#}

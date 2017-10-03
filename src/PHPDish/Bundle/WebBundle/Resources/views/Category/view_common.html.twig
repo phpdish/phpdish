@@ -12,7 +12,7 @@
                         <div class="media-left media-middle">
                             {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
                             <a href="{{ categoryUrl }}" class="avatar">
-                                <img src="{{ category.cover }}" class="media-object img-circle img-responsive"/>
+                                <img src="{{ category.cover|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
                             </a>
                         </div>
                         <div class="media-body">
