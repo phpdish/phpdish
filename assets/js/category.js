@@ -3,13 +3,14 @@
 import '../modules/common.js';
 import 'jquery-validation';
 import UploadFile from '../modules/upload-file.js';
+import Util from '../modules/util.js';
 
 //上传 封面
 (function(){
     const $uploadCover = $('#upload-cover');
+    const $categoryCover =$('#category_cover');
     if ($uploadCover.length > 0) {
         const $previewImage = $uploadCover.find('[data-role="preview"]');
-        const $categoryCover =$('#category_cover');
         new UploadFile('pick-image', {
             onUploaded: (result) => {
                 if (result.status === 200) {
@@ -24,6 +25,13 @@ import UploadFile from '../modules/upload-file.js';
         });
     }
     $('#add-category-form').validate({
+        submitHandler: () => {
+            if ($categoryCover.val().length === 0) {
+                Util.dialog.message('请为你的专栏上传封面').flash();
+                return false;
+            }
+            return true;
+        },
         messages: {
             'category[name]': {
                 required: '请输入专栏标题'

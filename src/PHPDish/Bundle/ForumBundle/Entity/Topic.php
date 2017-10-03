@@ -3,6 +3,7 @@ namespace PHPDish\Bundle\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
+use PHPDish\Bundle\CoreBundle\Utility;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\CoreBundle\Model\CommentableTrait;
@@ -66,6 +67,12 @@ class Topic implements TopicInterface
      * @ORM\JoinColumn(name="last_reply_user_id", referencedColumnName="id")
      */
     protected $lastReplyUser;
+
+    /**
+     * 文章插图
+     * @var array
+     */
+    protected $images;
 
     /**
      * {@inheritdoc}
@@ -214,6 +221,17 @@ class Topic implements TopicInterface
     public function isBelongsTo(UserInterface $user)
     {
         return $this->getUser() === $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        if (!is_null($this->images)) {
+            return $this->images;
+        }
+        return $this->images = Utility::extractImagesFromMarkdown($this->getOriginalBody());
     }
 }
 

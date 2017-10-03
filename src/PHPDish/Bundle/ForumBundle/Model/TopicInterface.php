@@ -130,4 +130,10 @@ interface TopicInterface extends
      * @return boolean
      */
     public function isBelongsTo(UserInterface $user);
+
+    /**
+     * 提取文章中的图片
+     * @return array
+     */
+    public function getImages();
 }
