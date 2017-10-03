@@ -26,11 +26,14 @@ class CategoryController extends RestController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getCategoryManager();
 
-//        $categories = $manager->findUserCategories($this->getUser())->count();
-
         $category = $manager->createCategory($this->getUser());
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
+
+        if (($number = $manager->getUserCategoriesNumber($this->getUser())) >= 2) {
+            $this->addFlash('danger', sprintf('最多只能创建两个专栏，你现在已经拥有%d个', $number));
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveCategory($category);
             $this->addFlash('notice', '专栏创建成功');
@@ -39,7 +42,8 @@ class CategoryController extends RestController
             ]);
         }
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'hasManyCategories' => $number >= 2
         ]);
     }
 

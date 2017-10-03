@@ -41,11 +41,32 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function findUserCategories(UserInterface $user)
     {
-        return $this->getRepository()->createQueryBuilder('c')
-            ->where('c.creator = :userId')->setParameter('userId', $user->getId())
-            ->orderBy('c.createdAt', 'desc')
+        return $this->createGetUserCategoriesQueryBuilder($user)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserCategoriesNumber(UserInterface $user)
+    {
+        $qb = $this->createGetUserCategoriesQueryBuilder($user);
+        return $qb->select($qb->expr()->count('c'))
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * 创建用户专栏查询的query builder
+     * @param UserInterface $user
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function createGetUserCategoriesQueryBuilder(UserInterface $user)
+    {
+        return $this->getRepository()->createQueryBuilder('c')
+            ->where('c.creator = :userId')->setParameter('userId', $user->getId())
+            ->orderBy('c.createdAt', 'desc');
     }
 
     /**

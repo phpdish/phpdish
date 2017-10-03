@@ -11,7 +11,9 @@
             <article class="col-md-12">
                 <div class="panel panel-u add-category">
                     <div class="panel-heading">创建专栏</div>
+                    {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
                     <div class="panel-body">
+                        {{ flashes() }}
                         {{ form_start(form, {'attr': {'id': 'add-category-form', 'class': 'category'}}) }}
                         {{ form_errors(form) }}
                             <div class="form-group">
@@ -34,7 +36,7 @@
                                 <div class="preview-image"><img data-role="preview" class="img-responsive" src=""/></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn u-btn-primary"><i class="if i-plus-bold"></i> 创建</button>
+                                <button type="submit" {% if hasManyCategories %}disabled="disabled"{% endif %} class="btn u-btn-primary"><i class="if i-plus-bold"></i> 创建</button>
                             </div>
                         {{ form_end(form) }}
                     </div>

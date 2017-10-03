@@ -6,6 +6,7 @@ import {editor} from '../modules/blocks/reply';
 import lockButton from '../modules/button-lock.js';
 
 import SimpleMDE from 'simplemde';
+import InlineAttachment from '../modules/inline-attachment.js';
 
 /**
  * Post Details
@@ -71,6 +72,8 @@ $('#add-reply-form').on('submit', function(){
                 }
             ],
         });
+        new InlineAttachment(simplemde.codemirror); //处理附件上传的功能
+
         $addPostBtn.on('click', () => {
             if ($postTitle.val().length === 0 || simplemde.value().length === 0) {
                 Util.dialog.message('文章标题和内容不能为空').flash();

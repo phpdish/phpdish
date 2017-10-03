@@ -29,6 +29,13 @@ interface CategoryManagerInterface
     public function findUserCategories(UserInterface $user);
 
     /**
+     * 获取用户的专栏数量
+     * @param UserInterface $user
+     * @return int
+     */
+    public function getUserCategoriesNumber(UserInterface $user);
+
+    /**
      * 添加管理员
      * @param CategoryInterface $category
      * @param UserInterface $user
