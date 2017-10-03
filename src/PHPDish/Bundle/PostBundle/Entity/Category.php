@@ -107,20 +107,6 @@ class Category extends Taxonomy implements CategoryInterface
         return $this->cover;
     }
 
-
-    public function cover()
-    {
-        return $this->buildCover(120, 120);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildCover($width, $height)
-    {
-        return '/uploads/avatar/user1.jpg';
-    }
-
     /**
      * {@inheritdoc}
      */

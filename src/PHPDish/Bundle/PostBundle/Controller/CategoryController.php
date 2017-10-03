@@ -25,6 +25,9 @@ class CategoryController extends RestController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $manager = $this->getCategoryManager();
+
+//        $categories = $manager->findUserCategories($this->getUser())->count();
+
         $category = $manager->createCategory($this->getUser());
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);

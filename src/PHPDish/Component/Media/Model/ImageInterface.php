@@ -35,4 +35,8 @@ interface ImageInterface extends FileInterface
      * @return int
      */
     public function getHeight();
+
+    public function setResizeUrl($url);
+
+    public function getResizeUrl($width, $height);
 }

@@ -2,7 +2,7 @@
 
 namespace PHPDish\Component\Media\UrlBuilder;
 
-
+use PHPDish\Component\Media\Model\ImageInterface;
 use PHPDish\Component\Media\Model\MediaInterface;
 
 interface UrlBuilderInterface
@@ -13,4 +13,13 @@ interface UrlBuilderInterface
      * @return string
      */
     public function build(MediaInterface $media);
+
+    /**
+     * 给图片生成resize url
+     * @param ImageInterface $image
+     * @param string $filter
+     * @param array $runtimeConfig
+     * @return string
+     */
+    public function buildImageResizeUrl(ImageInterface $image, $filter, $runtimeConfig = []);
 }

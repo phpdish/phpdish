@@ -3,7 +3,7 @@
         <div class="media-left">
             {% set userHomeUrl = path('user_view', {'username': user.username}) %}
             <a href="{{ userHomeUrl  }}" class="avatar">
-                <img src="{{ user.avatar() }}" class="media-object img-responsive img-circle">
+                <img src="{{ asset(user.avatar)|imagine_filter('middle_square') }}" class="media-object img-responsive img-circle">
             </a>
         </div>
         <div class="media-body">

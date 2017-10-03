@@ -12,7 +12,6 @@ class FileManager implements FileManagerInterface
      */
     protected $filesystem;
 
-
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;

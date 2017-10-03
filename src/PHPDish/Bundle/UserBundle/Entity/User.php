@@ -67,6 +67,11 @@ class User implements UserInterface
     protected $description = '';
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $avatar = '';
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $followingCount = 0;
@@ -389,6 +394,24 @@ class User implements UserInterface
     public function setTopicCount($topicCount)
     {
         $this->topicCount = $topicCount;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar ?: 'avatar/user1.jpg';
+    }
+
+    /**
+     * @param string $avatar
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
         return $this;
     }
 }

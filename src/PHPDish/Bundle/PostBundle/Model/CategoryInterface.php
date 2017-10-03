@@ -21,14 +21,6 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function getCover();
 
     /**
-     * 创建封面图
-     * @param int $width
-     * @param int $height
-     * @return string
-     */
-    public function buildCover($width, $height);
-
-    /**
      * 设置创建人
      * @param UserInterface $creator
      * @return $this

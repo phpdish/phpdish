@@ -17,7 +17,7 @@
                     <div class="clearfix user-details" data-username="{{ user.username }}">
                         <div class="media">
                             <div class="media-left avatar">
-                                <img src="{{ user.avatar() }}" class="img-responsive"/>
+                                <img src="{{ asset(user.avatar)|imagine_filter('middle_square') }}" class="img-responsive"/>
                             </div>
                             <div class="media-body summary">
                                 <h1 class="username">{{ user.username }}</h1>

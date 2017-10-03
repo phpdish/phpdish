@@ -90,7 +90,7 @@ knp_gaufrette:
     adapters:
         local:
             local:
-                directory: '%kernel.project_dir%/web/uploads'
+                directory: '%kernel.project_dir%/web/media/uploads'
                 create: true
     filesystems:
         local:
@@ -99,28 +99,22 @@ knp_gaufrette:
 
 # Liip Imagine
 liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.root_dir%/../web/media/uploads"
+
     resolvers:
         default:
             web_path: ~
 
     filter_sets:
         cache: ~
-
         # the name of the "filter set"
-        my_thumb:
-
-            # adjust the image quality to 75%
+        middle_square:
             quality: 75
-
-            # list of transformations to apply (the "filters")
             filters:
-
-                # create a thumbnail: set size to 120x90 and use the "outbound" mode
-                # to crop the image when the size ratio of the input differs
                 thumbnail: { size: [120, 120], mode: outbound }
-
-                # create a 2px black border: center the thumbnail on a black background
-                # 4px larger to create a 2px border around the final image
                 background: { size: [120, 120], position: center, color: '#000000' }
 
 # FOSRest

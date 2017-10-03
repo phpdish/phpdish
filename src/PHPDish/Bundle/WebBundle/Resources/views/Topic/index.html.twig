@@ -19,7 +19,7 @@
                                     <div class="media-left">
                                         <a href="{{ path('user_view', {'username': topic.user.username}) }}">
                                             {% set runtimeConfig = {"thumbnail": {"size": [50, 50] }} %}
-                                            <img src="{{ asset('/uploads/avatar/user1.jpg')|imagine_filter('my_thumb') }}" class="media-object avatar" role="avatar">
+                                            <img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" class="media-object avatar" role="avatar">
                                         </a>
                                     </div>
                                     <div class="media-body">

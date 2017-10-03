@@ -3,7 +3,7 @@
     <li class="category">
         {%  set categoryUrl = path('category_view', {'slug': category.slug}) %}
         <a href="{{ categoryUrl }}" class="cover">
-            <img src="{{ category.cover }}" class="media img-responsive"/>
+            <img src="{{ category.cover|imagine_filter('middle_square') }}" class="media img-responsive"/>
         </a>
         <a href="{{ categoryUrl }}" class="name">{{ category.name }}</a>
     </li>

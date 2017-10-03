@@ -3,7 +3,7 @@
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="media user-plate">
             <div class="media-left">
-                <a class="avatar"><img src="{{ app.user.avatar }}" class="media-object img-circle img-responsive"></a>
+                <a class="avatar"><img src="{{ asset(app.user.avatar)|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"></a>
             </div>
             <div class="media-body user-title">
                 <div class="media-heading username"><a href="{{ path('user_view', {'username': app.user.username}) }}">{{ app.user.username }}</a></div>

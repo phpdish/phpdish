@@ -68,7 +68,7 @@
                                 </li>
                                 <li class="dropdown nav-user">
                                     <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ app.user.avatar }}"  class="img-responsive img-circle"/>
+                                        <img src="{{ asset(app.user.avatar)|imagine_filter('middle_square') }}"  class="img-responsive img-circle"/>
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu popover-menu">

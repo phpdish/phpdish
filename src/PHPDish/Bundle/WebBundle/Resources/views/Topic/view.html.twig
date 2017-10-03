@@ -16,7 +16,7 @@
                 <div class="panel panel-default panel-u topic-view">
                     <div class="panel-heading clearfix">
                         <div class="author">
-                            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ topic.user.avatar }}" class="avatar"/></a>
+                            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" class="avatar"/></a>
                         </div>
                         <h3 class="title">{{ topic.title }} {% if topic.recommended %}<i class="if i-badge" title="精品话题"></i>{% endif %}</h3>
                         <div class="meta">

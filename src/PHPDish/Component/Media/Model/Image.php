@@ -21,6 +21,7 @@ class Image extends File implements ImageInterface
      */
     protected $height;
 
+    protected $resizeUrl;
     /**
      * Set image width in pixels.
      *
@@ -67,5 +68,15 @@ class Image extends File implements ImageInterface
     public function getHeight()
     {
         return $this->height;
+    }
+
+    public function setResizeUrl($url)
+    {
+        $this->resizeUrl = $url;
+    }
+
+    public function getResizeUrl($width, $height)
+    {
+        return $this->resizeUrl;
     }
 }

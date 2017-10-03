@@ -19,14 +19,14 @@ class DefaultController extends Controller
      */
     public function upload(Request $request)
     {
-        $file = $request->files->get(static::UPLOAD_FIELD_NAME);
-        if (is_null($file)) {
+        $uploadedFile = $request->files->get(static::UPLOAD_FIELD_NAME);
+        if (is_null($uploadedFile)) {
             throw new \InvalidArgumentException('Bad arguments');
         }
-        $uploadedFile = $this->get('phpdish.media.file_uploader')->upload($file);
+        $file = $this->get('phpdish.media.file_uploader')->upload($uploadedFile);
         return $this->json([
-            'key' => $uploadedFile->getKey(),
-            'path' => $uploadedFile->getUrl()
+            'key' => $file->getKey(),
+            'path' => $this->get('phpdish.media.url_builder')->buildImageResizeUrl($file, 'middle_square')
         ]);
     }
 }

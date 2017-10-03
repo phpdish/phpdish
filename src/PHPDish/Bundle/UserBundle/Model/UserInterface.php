@@ -87,4 +87,17 @@ interface UserInterface extends
      * @return UserInterface
      */
     public function setTopicCount($topicCount);
+
+    /**
+     * 获取avatar的路径
+     * @return string
+     */
+    public function getAvatar();
+
+    /**
+     * 设置avatar的路径
+     * @param string $avatar
+     * @return UserInterface
+     */
+    public function setAvatar($avatar);
 }

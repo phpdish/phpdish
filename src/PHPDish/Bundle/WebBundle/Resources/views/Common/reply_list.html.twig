@@ -2,7 +2,7 @@
     {% set userUrl = path('user_view', {'username': reply.user.username}) %}
     <li class="list-group-item media reply" data-role="reply" data-reply-id="{{ reply.id }}"  data-username="{{ reply.user.username }}">
         <div class="media-left">
-            <a href="{{ userUrl }}" class="avatar"><img src="{{ reply.user.avatar }}" class="media img-responsive img-circle"></a>
+            <a href="{{ userUrl }}" class="avatar"><img src="{{ asset(reply.user.avatar)|imagine_filter('middle_square') }}" class="media img-responsive img-circle"></a>
         </div>
         <div class="media-body">
             <div class="media-heading">

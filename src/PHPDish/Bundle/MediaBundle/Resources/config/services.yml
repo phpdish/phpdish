@@ -12,7 +12,7 @@ services:
 
     phpdish.media.url_builder:
        class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
-       arguments: ['/uploads/']
+       arguments: ['@liip_imagine.cache.manager', '/media/uploads/']
 
     phpdish.media.file_factory:
         class: PHPDish\Component\Media\Manager\FileFactory

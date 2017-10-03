@@ -17,5 +17,5 @@
 /web/bundles/
 /.idea/*
 /node_modules/*
-/web/uploads/*
-/web/media/*
+/web/media/uploads/*
+/web/media/cache/*
