@@ -34,6 +34,13 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function getCreator();
 
     /**
+     * 设置文章数量
+     * @param int $postCount
+     * @return int
+     */
+    public function setPostCount($postCount);
+
+    /**
      * 获取文章数量
      * @return int
      */

@@ -104,4 +104,10 @@ interface PostInterface extends
      * @return string
      */
     public function getSummary();
+
+    /**
+     * 提取文章中的图片
+     * @return array
+     */
+    public function getImages();
 }

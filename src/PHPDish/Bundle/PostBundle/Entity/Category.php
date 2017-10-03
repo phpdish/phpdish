@@ -77,9 +77,9 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setPostCounts($postCounts)
+    public function setPostCount($postCount)
     {
-        $this->postCount = $postCounts;
+        $this->postCount = $postCount;
         return $this;
     }
 

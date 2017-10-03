@@ -8,7 +8,7 @@
         <a href="{{ categoryUrl }}" class="name">{{ category.name }}</a>
     </li>
     {% endfor %}
-    {% if categories|length < 100 and app.user is same as (user) %}
+    {% if categories|length < 2 and app.user is same as (user) %}
     <li class="add-new-category"><a href="{{ path('category_add') }}"><i class="if i-plus"></i> 创建新专栏</a></li>
     {% endif %}
 </ul>

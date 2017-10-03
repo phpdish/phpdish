@@ -60,6 +60,9 @@ class PostManager implements PostManagerInterface
     public function savePost(PostInterface $post)
     {
         $post->setUpdatedAt(Carbon::now());
+        if (!$post->getId()) {
+            $post->getCategory()->setPostCount($post->getCategory()->getPostCount() + 1);
+        }
         //Transform markdown format body
         if ($post->getOriginalBody()) {
             $post->setBody($this->markdownParser->transformMarkdown($post->getOriginalBody()));

@@ -8,6 +8,7 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
+use PHPDish\Bundle\CoreBundle\Utility;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,7 +41,7 @@ class Post implements PostInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isRecommended = false;
+    protected $recommended = false;
 
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default": 0})
@@ -62,6 +63,12 @@ class Post implements PostInterface
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
+
+    /**
+     * 文章插图
+     * @var array
+     */
+    protected $images;
 
     /**
      * Constructor
@@ -163,7 +170,7 @@ class Post implements PostInterface
      */
     public function setRecommend($recommended)
     {
-        $this->isRecommended = $recommended;
+        $this->recommended = $recommended;
     }
 
     /**
@@ -171,7 +178,7 @@ class Post implements PostInterface
      */
     public function isRecommended()
     {
-        return $this->isRecommended;
+        return $this->recommended;
     }
 
     /**
@@ -208,14 +215,13 @@ class Post implements PostInterface
     }
 
     /**
-     * 构建图片背景
-     * @param int $width
-     * @param int $height
-     * @return string
+     * {@inheritdoc}
      */
-    public function buildCover($width, $height)
+    public function getImages()
     {
-        return 'http://image.woshipm.com/wp-files/2017/08/COI8jra6kC9Ded4JeMEn.jpg!/both/202x145';
-        return sprintf( '/thumbs/%dx%d/%s', $width, $height, $this->getCover());
+        if (!is_null($this->images)) {
+            return $this->images;
+        }
+         return $this->images = Utility::extractImagesFromMarkdown($this->getOriginalBody());
     }
 }

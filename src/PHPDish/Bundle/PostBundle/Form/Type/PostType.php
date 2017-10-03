@@ -26,7 +26,7 @@ class PostType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined('user');
+        $resolver->setRequired('user');
     }
 
     /**

@@ -23,10 +23,10 @@
                     <li><i class="if i-view"></i> {{ post.viewCount }}</li>
                 </ul>
             </div>
-            {% if post.cover %}
+            {% if post.images %}
                 <div class="media-right media-middle cover">
                     <a href="{{ postUrl }}" title="{{ post.title }}">
-                        <img src="{{ post.buildCover(300, 300) }}" class="media-object">
+                        <img src="{{ post.images[0] }}" class="media-object">
                     </a>
                 </div>
             {% endif %}
