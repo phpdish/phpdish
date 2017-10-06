@@ -103,9 +103,15 @@
         border-radius: 12px;
       }
       .meta{
+        display:inline-block;
         color: $metaColor;
         margin-top: 5px;
         font-size: 12px;
+      }
+      .action{
+        @extend .meta;
+        display:inline-block;
+        float: right;
       }
     }
   }

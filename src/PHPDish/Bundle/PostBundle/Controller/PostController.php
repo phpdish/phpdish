@@ -87,6 +87,36 @@ class PostController extends Controller
     }
 
     /**
+     * 修改文章
+     * @Route("/post/{id}/edit", name="post_edit", requirements={"id": "\d+"})
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function editAction($id, Request $request)
+    {
+        $post = $this->getPostManager()->findPostById($id);
+        if ($post) {
+            $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $post);
+        $form = $this->createForm(PostType::class, $post, [
+            'user' => $this->getUser()
+        ]);
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+            $this->getPostManager()->savePost($post);
+            return $this->redirectToRoute('post_view', [
+                'id' => $post->getId()
+            ]);
+        }
+        return $this->render('PHPDishWebBundle:Post:create.html.twig', [
+            'form' => $form->createView(),
+            'post' => $post
+        ]);
+    }
+
+    /**
      * 用户文章
      * @Route("/users/{username}/posts", name="user_posts")
      * @param string $username

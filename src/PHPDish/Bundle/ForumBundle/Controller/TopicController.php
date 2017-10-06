@@ -73,6 +73,9 @@ class TopicController extends RestController
     public function viewAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
+        if ($topic) {
+            $this->createNotFoundException();
+        }
         $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
 
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());

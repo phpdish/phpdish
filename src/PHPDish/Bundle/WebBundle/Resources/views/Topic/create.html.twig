@@ -1,7 +1,9 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
+{% set title = topic is defined ? '编辑话题' : '创建新话题' %}
+
 {% block title %}
-    {% if topic is defined %} 编辑话题 {% else %} 创建新话题 {% endif %}
+    {{ title }}
 {% endblock %}
 
 {% block script %}
@@ -14,7 +16,7 @@
             <article class="col-md-9">
                 <div class="panel panel-u add-topic">
                     <div class="panel-heading">
-                        发布新话题
+                        {{ title }}
                     </div>
                     <div class="panel-body">
                         {{ form_start(form, {'attr': {'id': 'add-topic-form', 'class': 'topic'}}) }}

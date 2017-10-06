@@ -12,6 +12,7 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
 use PHPDish\Bundle\CoreBundle\Model\CommentableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface PostInterface extends
     IdentifiableInterface,
@@ -110,4 +111,11 @@ interface PostInterface extends
      * @return array
      */
     public function getImages();
+
+    /**
+     * 检查文章是否是属于指定用户
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isBelongsTo(UserInterface $user);
 }

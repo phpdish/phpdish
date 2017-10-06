@@ -6,7 +6,7 @@
 <div class="container narrow-layout">
     <div class="row">
         <div  class="col-md-12">
-            <article class="panel panel-default panel-u post-detail">
+            <article class="panel panel-u post-detail">
                 <header class="panel-heading">
                     <h1 class="entry-title title">{{ post.title }}</h1>
                     <div class="media author">
@@ -28,6 +28,12 @@
                                 <span class="word-num">字数 {{ post.wordCount }}</span>
                                 <span class="comment-num">评论 {{ post.commentCount }}</span>
                                 <span class="view-num">浏览 {{ post.viewCount }}</span>
+                            </div>
+                            <div class="action">
+                                {% if is_granted('edit', post) or true %}
+                                    <span><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i> 删除</a></span>
+                                    <span><a href="{{ path('post_edit', {'id': post.id}) }}" title="修改"><i class="if i-edit"></i> 修改</a></span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -26,3 +26,10 @@ services:
          arguments: ['@phpdish.manager.category']
          tags:
              - { name: form.type }
+
+    phpdish.security.post_voter:
+        class: PHPDish\Bundle\PostBundle\Security\PostVoter
+        arguments: ['@security.access.decision_manager']
+        tags:
+             - { name: security.voter}
+        public: false

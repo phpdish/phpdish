@@ -13,6 +13,7 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
@@ -212,6 +213,16 @@ class Post implements PostInterface
     {
         $this->category = $category;
         return $this;
+    }
+
+    /**
+     * 检查文章是否是属于指定用户
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isBelongsTo(UserInterface $user)
+    {
+        return $this->getUser() === $user;
     }
 
     /**
