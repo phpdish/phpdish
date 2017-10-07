@@ -13,14 +13,14 @@ class TopicReplyController extends FOSRestController
     use ManagerTrait;
 
     /**
-     * @Route("/topics/{id}/replies", name="topic_replies")
-     * @Method("GET")
-     * @param int $topicId
-     * @param Request $request
+     * 删除回复
+     * @Route("/replies/{id}", name="topic_reply_delete", requirements={"id": "\d+"})
+     * @param int $id
+     * @return Response
      */
-    public function getRepliesAction($topicId, Request $request)
+    public function deleteAction($id)
     {
-        $topicManager = $this->getTopicManager()->findTopicById($topicId);
+
     }
 
     /**
