@@ -26,7 +26,7 @@
                             <h4 class="media-heading name">
                                 <a href="{{ categoryUrl }}">{{ category.name }}</a>
                                 {% if is_granted('edit', category) %}
-                                    <a href="{{ path('category_edit', {'slug': category.slug}) }}" title="编辑"><i class="if i-edit"></i></a>
+                                    <a class="meta" href="{{ path('category_edit', {'slug': category.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑专栏</a>
                                 {% endif %}
                             </h4>
                             <ul class="list-unstyled list-inline meta">

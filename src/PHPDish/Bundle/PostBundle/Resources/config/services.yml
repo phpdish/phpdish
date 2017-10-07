@@ -41,3 +41,10 @@ services:
         tags:
              - { name: security.voter}
         public: false
+
+    phpdish.security.category_voter:
+        class: PHPDish\Bundle\PostBundle\Security\CategoryVoter
+        arguments: ['@security.access.decision_manager']
+        tags:
+             - { name: security.voter}
+        public: false

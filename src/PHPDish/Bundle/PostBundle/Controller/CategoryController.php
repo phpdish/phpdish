@@ -76,6 +76,36 @@ class CategoryController extends RestController
     }
 
     /**
+     * 编辑专栏信息
+     * @Route("/categories/{slug}/edit", name="category_edit")
+     * @param string $slug
+     * @param Request $request
+     * @return Response
+     */
+    public function editAction($slug, Request $request)
+    {
+        $manager = $this->getCategoryManager();
+        $category = $manager->findCategoryBySlug($slug);
+        if (!$category) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $category);
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+            $manager->saveCategory($category);
+            $this->addFlash('success', '专栏修改成功');
+            return $this->redirectToRoute('category_view', [
+                'slug' => $category->getSlug()
+            ]);
+        }
+        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+            'form' => $form->createView(),
+            'category' => $category
+        ]);
+    }
+
+    /**
      * 专栏的关注者
      * @Route("/categories/{slug}/followers", name="category_followers")
      * @Method("GET")
