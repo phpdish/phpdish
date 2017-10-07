@@ -104,7 +104,7 @@ class CategoryManager implements CategoryManagerInterface
     public function unFollowCategory(CategoryInterface $category, UserInterface $user)
     {
         $category->removeFollower($user);
-        $category->setFollowerCount($category->getFollowerCount() - 1);
+        $category->setFollowerCount($category->getFollowerCount() - 1 ?: 0);
         return $this->saveCategory($category);
     }
 
