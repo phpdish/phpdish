@@ -6,7 +6,7 @@
 <div class="container narrow-layout">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default panel-u category-detail">
+            <div class="panel panel-u category-detail">
                 <div class="panel-heading">
                     <div class="media category">
                         <div class="media-left media-middle">
@@ -25,6 +25,9 @@
                             </div>
                             <h4 class="media-heading name">
                                 <a href="{{ categoryUrl }}">{{ category.name }}</a>
+                                {% if is_granted('edit', category) %}
+                                    <a href="{{ path('category_edit', {'slug': category.slug}) }}" title="编辑"><i class="if i-edit"></i></a>
+                                {% endif %}
                             </h4>
                             <ul class="list-unstyled list-inline meta">
                                 <li>文章 {{ category.postCount }}</li>
