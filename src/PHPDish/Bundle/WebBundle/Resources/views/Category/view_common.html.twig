@@ -23,8 +23,8 @@
                                     <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 订阅本专栏</button>
                                 {% endif %}
                             </div>
-                            <h4 class="media-heading name">
-                                <a href="{{ categoryUrl }}">{{ category.name }}</a>
+                            <h4 class="media-heading">
+                                <a class="name" href="{{ categoryUrl }}">{{ category.name }}</a>
                                 {% if is_granted('edit', category) %}
                                     <a class="meta" href="{{ path('category_edit', {'slug': category.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑专栏</a>
                                 {% endif %}
