@@ -46,4 +46,29 @@ class CommentController extends RestController
         }
         return $this->handleView($view);
     }
+
+
+    /**
+     * 删除评论
+     * @Route("/comments/{id}", name="comment_delete")
+     * @Method("DELETE")
+     * @param int $id
+     * @return Response
+     */
+    public function deleteAction($id)
+    {
+        $manager = $this->getPostCommentManager();
+        $comment = $manager->findCommentById($id);
+
+        if (!$comment) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $comment);
+
+        $manager->blockComment($comment);
+
+        return $this->handleView($this->view([
+            'result' => true
+        ]));
+    }
 }

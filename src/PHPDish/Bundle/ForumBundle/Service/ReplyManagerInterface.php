@@ -9,6 +9,13 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface ReplyManagerInterface
 {
     /**
+     * 根据id查找回复
+     * @param int $id
+     * @return ReplyInterface
+     */
+    public function findReplyById($id);
+
+    /**
      * 获取话题下的回复
      * @param TopicInterface $topic
      * @param int $page
@@ -33,6 +40,12 @@ interface ReplyManagerInterface
      * @return ReplyInterface
      */
     public function createReply(TopicInterface $topic, UserInterface $user = null);
+
+    /**
+     * 封禁回复
+     * @param ReplyInterface $reply
+     */
+    public function blockReply(ReplyInterface $reply);
 
     /**
      * 保存回复

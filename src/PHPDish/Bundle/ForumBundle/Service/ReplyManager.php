@@ -64,7 +64,11 @@ class ReplyManager  implements ReplyManagerInterface
         $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
         $reply->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
-        $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
+
+        if (!$reply->getId()) {
+            $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
+        }
+
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
         return true;
@@ -90,5 +94,22 @@ class ReplyManager  implements ReplyManagerInterface
             ->where('r.user = :userId')->setParameter('userId', $user->getId())
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findReplyById($id)
+    {
+        return $this->replyRepository->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function blockReply(ReplyInterface $reply)
+    {
+        $reply->disable();
+        $this->saveReply($reply);
     }
 }

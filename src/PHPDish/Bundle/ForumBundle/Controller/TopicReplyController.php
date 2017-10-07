@@ -1,14 +1,14 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TopicReplyController extends FOSRestController
+class TopicReplyController extends RestController
 {
     use ManagerTrait;
 
@@ -20,7 +20,16 @@ class TopicReplyController extends FOSRestController
      */
     public function deleteAction($id)
     {
-
+        $manager = $this->getReplyManager();
+        $reply = $manager->findReplyById($id);
+        if (!$reply) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $reply);
+        $manager->blockReply($reply);
+        return $this->handleView($this->view([
+            'result' => true
+        ]));
     }
 
     /**

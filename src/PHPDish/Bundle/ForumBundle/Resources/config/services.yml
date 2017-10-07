@@ -34,3 +34,11 @@ services:
         tags:
             - {name: "security.voter"}
         public: false
+
+    phpdish.security.topic_reply_voter:
+        class: PHPDish\Bundle\ForumBundle\Security\TopicReplyVoter
+        arguments:
+            - "@security.access.decision_manager"
+        tags:
+            - {name: "security.voter"}
+        public: false

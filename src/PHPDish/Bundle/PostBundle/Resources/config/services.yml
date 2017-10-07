@@ -33,3 +33,11 @@ services:
         tags:
              - { name: security.voter}
         public: false
+
+
+    phpdish.security.comment_voter:
+        class: PHPDish\Bundle\PostBundle\Security\CommentVoter
+        arguments: ['@security.access.decision_manager']
+        tags:
+             - { name: security.voter}
+        public: false

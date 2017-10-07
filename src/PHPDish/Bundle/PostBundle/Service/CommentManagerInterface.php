@@ -10,6 +10,13 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface CommentManagerInterface
 {
     /**
+     * 根据id获取评论
+     * @param int $id
+     * @return CommentInterface
+     */
+    public function findCommentById($id);
+
+    /**
      * 创建评论
      * @param PostInterface $post
      * @param UserInterface $user
@@ -23,6 +30,12 @@ interface CommentManagerInterface
      * @return boolean
      */
     public function saveComment(CommentInterface $comment);
+
+    /**
+     * 封禁comment
+     * @param CommentInterface $comment
+     */
+    public function blockComment(CommentInterface $comment);
 
     /**
      * 获取评论

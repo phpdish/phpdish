@@ -45,6 +45,15 @@ class CommentManager implements CommentManagerInterface
         $this->mentionParser = $mentionParser;
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCommentById($id)
+    {
+        return $this->commentRepository->find($id);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -69,6 +78,15 @@ class CommentManager implements CommentManagerInterface
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function blockComment(CommentInterface $comment)
+    {
+        $comment->disable();
+        $this->saveComment($comment);
     }
 
     /**
