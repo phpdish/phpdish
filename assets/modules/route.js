@@ -25,6 +25,7 @@ const routes = {
     'topic.addReply': {path: '/topics/{id}/replies', method: 'POST'},
     'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
     'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
+    'topicReply.delete': {path: '/replies/{id}', method: 'DELETE'},
 
     //其它
     'upload': {path: '/uploads', method: 'POST'},

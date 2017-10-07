@@ -77,7 +77,12 @@ class TopicController extends RestController
         if (!$topic || !$topic->isEnabled()) {
             throw $this->createNotFoundException();
         }
-        $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
+        $replies = $this->getReplyManager()->findTopicReplies(
+            $topic,
+            $request->query->getInt('page', 1),
+            null,
+            Criteria::create()->where(Criteria::expr()->eq('enabled', true))
+        );
 
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
         $form =  $this->createForm(TopicReplyType::class, $reply);

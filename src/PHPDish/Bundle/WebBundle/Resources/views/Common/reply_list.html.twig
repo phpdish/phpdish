@@ -11,6 +11,9 @@
                 <ul class="list-unstyled list-inline meta">
                     <li>#{{ loop.index }}</li>
                     <li><span class="reply-user" data-action="mention"><i class="if i-reply" title="回复TA"></i></span></li>
+                    {% if is_granted('edit', reply) %}
+                        <li><a href="javascript:void(0);" class="remove" data-action="remove"><i class="if i-trash" title="删除"></i></a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="body markdown-body">{{ reply.body|raw }}</div>

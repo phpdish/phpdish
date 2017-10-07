@@ -74,11 +74,14 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
     (function(){
         const $replyTopic = $('#reply-topic');
         const $addReplyForm = $('#add-reply-form');
+        const $repliesPanel = $('#reply-list');
+        let editor;
+        //form 表单
         if ($addReplyForm.length > 0) {
             const $replyBody = $('#reply_original_body');
             const $preview = $replyTopic.find('[data-action="preview"]');
             const $previewPanel = $replyTopic.find('[data-role="preview-panel"]');
-            const editor = new Editor($replyBody, $preview, $previewPanel);
+            editor = new Editor($replyBody, $preview, $previewPanel);
             //添加回复表单提交
             $addReplyForm.on('submit', function(){
                 if($addReplyForm.lock){
@@ -97,20 +100,43 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
                 });
                 return false;
             });
+        }
 
-
-            //Reply list
-            const $repliesPanel = $('#reply-list');
-            $repliesPanel.find('[data-role="reply"]').each(function(){
-                const $this = $(this);
-                const replyId = $this.data('reply-id');
-                const username = $this.data('username');
+        //Reply list
+        $repliesPanel.find('[data-role="reply"]').each(function(){
+            const $this = $(this);
+            const replyId = $this.data('reply-id');
+            const username = $this.data('username');
+            //回复层主
+            if (editor) {
                 $this.find('[data-action="mention"]').on('click', function(){
                     editor.appendContent(`@${username} `);
                     Util.goHash('#add-reply-form');
                 });
+            }
+            //删除回复
+            const $removeAction = $this.find('[data-action="remove"]');
+            const buttonLock = lockButton($removeAction);
+            $removeAction.on('click', function(){
+                if (buttonLock.isDisabled()) {
+                    return false;
+                }
+                buttonLock.lock();
+                Util.dialog.confirm('确认删除这个回复吗？').then(() => {
+                    Util.request('topicReply.delete', replyId).done(() => {
+                        Util.dialog.message('回复已经被删除').flash(2, () => {
+                            $this.fadeOut();
+                        });
+                    }).fail((response) => {
+                        Util.dialog.message(response.responseObj.error).flash(3);
+                    }).always(()  => {
+                        buttonLock.release();
+                    });
+                }, () => {
+                    buttonLock.release();
+                });
             });
-        }
+        });
 
     })();
 

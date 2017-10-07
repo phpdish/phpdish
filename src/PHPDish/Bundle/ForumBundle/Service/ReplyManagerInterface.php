@@ -1,6 +1,7 @@
 <?php
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Doctrine\Common\Collections\Criteria;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
@@ -20,9 +21,10 @@ interface ReplyManagerInterface
      * @param TopicInterface $topic
      * @param int $page
      * @param null|int $limit
+     * @param Criteria $criteria
      * @return Pagerfanta
      */
-    public function findTopicReplies(TopicInterface $topic, $page, $limit = null);
+    public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null);
 
     /**
      * 获取话题下的回复

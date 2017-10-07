@@ -2,6 +2,7 @@
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
@@ -77,10 +78,11 @@ class ReplyManager  implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findTopicReplies(TopicInterface $topic, $page, $limit = null)
+    public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null)
     {
         $query = $this->replyRepository->createQueryBuilder('r')
             ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId())
+            ->addCriteria($criteria)
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
@@ -110,6 +112,10 @@ class ReplyManager  implements ReplyManagerInterface
     public function blockReply(ReplyInterface $reply)
     {
         $reply->disable();
-        $this->saveReply($reply);
+        $topic = $reply->getTopic();
+        $topic->setReplyCount($topic->getReplyCount() > 1 ? $topic->getReplyCount() - 1 : 0);
+        $this->entityManager->persist($reply);
+        $this->entityManager->flush();
+        return true;
     }
 }
