@@ -71,4 +71,10 @@ interface PostManagerInterface
      * @return PostInterface[]
      */
     public function findPostsByCriteria(Criteria $criteria);
+
+    /**
+     * 封禁文章
+     * @param PostInterface $post
+     */
+    public function blockPost(PostInterface $post);
 }

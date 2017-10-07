@@ -76,7 +76,6 @@ class TopicManager implements TopicManagerInterface
         $topic->disable();
         $this->entityManager->persist($topic);
         $this->entityManager->flush();
-        return true;
     }
 
     /**

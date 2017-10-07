@@ -11,31 +11,60 @@ import InlineAttachment from '../modules/inline-attachment.js';
 /**
  * Post Details
  */
-$('#add-reply-form').on('submit', function(){
-    const $form = $(this);
-    const $btn = $form.find('[data-role="submit" ]');
-    const csrfToken = $('#comment__token').val();
-    const body = editor.getContent();
-    if (body.length === 0) {
-        return false;
-    }
-    const buttonLock = lockButton($btn).text('提交中').lock();
-    Util.request('comment.add', window.postId, {
-        comment: {
-            original_body: body,
-            _token:csrfToken
+(function($){
+    $('#add-comment-form').on('submit', function(){
+        const $form = $(this);
+        const $btn = $form.find('[data-role="submit" ]');
+        const csrfToken = $('#comment__token').val();
+        const body = editor.getContent();
+        if (body.length === 0) {
+            return false;
         }
-    }).done(function(response){
-        editor.setContent('');
-        Util.dialog.message('回复成功').flash();
-    }).fail(function(response){
-        Util.dialog.message(response.responseObj.error);
-    }).always(() => {
-        console.log('释放锁');
-        buttonLock.release();
+        const buttonLock = lockButton($btn).text('提交中').lock();
+        Util.request('comment.add', window.postId, {
+            comment: {
+                original_body: body,
+                _token:csrfToken
+            }
+        }).done(function(response){
+            editor.setContent('');
+            Util.dialog.message('回复成功').flash();
+        }).fail(function(response){
+            Util.dialog.message(response.responseObj.error);
+        }).always(() => {
+            console.log('释放锁');
+            buttonLock.release();
+        });
+        return false;
     });
-    return false;
-});
+
+
+    //Post Action
+    const $postAction = $('[data-role="post-action"]');
+    const $removeAction = $postAction.find('[data-action="remove"]');
+    const buttonLock = lockButton($removeAction);
+    $removeAction.on('click', () => {
+        if (buttonLock.isDisabled()) {
+            return false;
+        }
+        buttonLock.lock();
+        Util.dialog.confirm('确认删除这篇文章吗？').then(() => {
+            Util.request('post.delete', window.postId).done(() => {
+                Util.dialog.message('文章已经被删除').flash(2, () => {
+                    location.href = Util.route.getRoutePath('posts');
+                });
+            }).fail((response) => {
+                Util.dialog.message(response.responseObj.error).flash(3);
+            }).always(()  => {
+                buttonLock.release();
+            });
+        }, () => {
+            buttonLock.release();
+        });
+    });
+})($);
+
+
 
 /**
  * 添加文章

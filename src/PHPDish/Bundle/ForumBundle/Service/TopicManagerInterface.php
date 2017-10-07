@@ -32,7 +32,6 @@ interface TopicManagerInterface
     /**
      * 封禁topic
      * @param TopicInterface $topic
-     * @return boolean
      */
     public function blockTopic(TopicInterface $topic);
 

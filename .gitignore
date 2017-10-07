@@ -18,4 +18,9 @@
 /.idea/*
 /node_modules/*
 /web/media/uploads/*
+!/web/media/uploads/avatar
+/web/media/uploads/avatar/*
+!/web/media/uploads/avatar/.gitkeep
+
 /web/media/cache/*
+!web/media/cache

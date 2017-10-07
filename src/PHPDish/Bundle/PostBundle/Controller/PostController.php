@@ -10,16 +10,17 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\PostBundle\Entity\Post;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
 
-class PostController extends Controller
+class PostController extends RestController
 {
     use ManagerTrait;
     use UserManagerTrait;
@@ -70,12 +71,16 @@ class PostController extends Controller
     /**
      * 查看文章
      * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
+     * @Method("GET")
      * @param Post $post
      * @param Request $request
      * @return Response
      */
     public function viewAction(Post $post,  Request $request)
     {
+        if (!$post->isEnabled()) {
+            throw $this->createNotFoundException();
+        }
         $form = $this->createForm(CommentType::class);
         $criteria = Criteria::create()->where(Criteria::expr()->eq('post', $post->getId()));
         $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));
@@ -96,8 +101,8 @@ class PostController extends Controller
     public function editAction($id, Request $request)
     {
         $post = $this->getPostManager()->findPostById($id);
-        if ($post) {
-            $this->createNotFoundException();
+        if (!$post) {
+            throw $this->createNotFoundException();
         }
         $this->denyAccessUnlessGranted('edit', $post);
         $form = $this->createForm(PostType::class, $post, [
@@ -114,6 +119,27 @@ class PostController extends Controller
             'form' => $form->createView(),
             'post' => $post
         ]);
+    }
+
+    /**
+     * 删除文章
+     * @Route("/posts/{id}", name="post_delete", requirements={"id": "\d+"})
+     * @Method("DELETE")
+     * @param int $id
+     * @return Response
+     */
+    public function deleteAction($id)
+    {
+        $manager = $this->getPostManager();
+        $post = $manager->findPostById($id);
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $post);
+        $manager->blockPost($post);
+        return $this->handleView($this->view([
+            'result' => true
+        ]));
     }
 
     /**

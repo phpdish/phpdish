@@ -29,8 +29,8 @@
                                 <span class="comment-num">评论 {{ post.commentCount }}</span>
                                 <span class="view-num">浏览 {{ post.viewCount }}</span>
                             </div>
-                            <div class="action">
-                                {% if is_granted('edit', post) or true %}
+                            <div class="action" data-role="post-action">
+                                {% if is_granted('edit', post) %}
                                     <span><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i> 删除</a></span>
                                     <span><a href="{{ path('post_edit', {'id': post.id}) }}" title="修改"><i class="if i-edit"></i> 修改</a></span>
                                 {% endif %}
@@ -78,7 +78,7 @@
                                 </a>
                                 <textarea class="form-control" placeholder="点击头像登录后发表评论" disabled="disabled"></textarea>
                             {% else %}
-                                {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
+                                {{ form_start(form, {'attr': {'id': 'add-comment-form'}}) }}
                                     <div class="form-group md-editor" data-role="md-editor">
                                         <a class="avatar">
                                             <img src="{{ app.user.avatar|imagine_filter('middle_square')}}" class="img-responsive img-circle"/>

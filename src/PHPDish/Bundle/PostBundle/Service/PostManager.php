@@ -137,6 +137,16 @@ class PostManager implements PostManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function blockPost(PostInterface $post)
+    {
+        $post->disable();
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
+    }
+
+    /**
      * @return PostRepository
      */
     protected function getRepository()

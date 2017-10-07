@@ -27,7 +27,7 @@ class TopicController extends RestController
     {
         $manager = $this->getTopicManager();
         $criteria = Criteria::create();
-        $criteria->orderBy(['repliedAt' => 'desc']);
+        $criteria->orderBy(['repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');
         if ($tab && $tab === 'good') {
@@ -66,6 +66,7 @@ class TopicController extends RestController
     /**
      * 查看话题
      * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"})
+     * @Method("GET")
      * @param int $id
      * @param Request $request
      * @return Response
@@ -73,8 +74,8 @@ class TopicController extends RestController
     public function viewAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
-        if ($topic) {
-            $this->createNotFoundException();
+        if (!$topic || !$topic->isEnabled()) {
+            throw $this->createNotFoundException();
         }
         $replies = $this->getReplyManager()->findTopicReplies($topic, $request->query->getInt('page', 1));
 
@@ -97,7 +98,9 @@ class TopicController extends RestController
     public function editAction($id, Request $request)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
-        $topic || $this->createNotFoundException();
+        if (!$topic) {
+            throw $this->createNotFoundException();
+        }
         $this->denyAccessUnlessGranted('edit', $topic);
 
         $form = $this->createForm(TopicType::class, $topic);
@@ -115,26 +118,6 @@ class TopicController extends RestController
     }
 
     /**
-     * 切换话题推荐状态
-     * @Route("/topics/{id}/toggle_recommend", name="topic_toggle_recommend", requirements={"id": "\d+"})
-     * @param int $id
-     * @return Response
-     */
-    public function toggleRecommendAction($id)
-    {
-        $topic = $this->getTopicManager()->findTopicById($id);
-        $topic || $this->createNotFoundException();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', $topic);
-        $topic->setRecommended(!$topic->isRecommended());
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($topic);
-        $manager->flush();
-        return $this->handleView($this->view([
-            'is_recommended' => $topic->isRecommended()
-        ]));
-    }
-
-    /**
      * 删除话题
      * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
@@ -144,13 +127,36 @@ class TopicController extends RestController
     public function deleteAction($id)
     {
         $topic = $this->getTopicManager()->findTopicById($id);
-        $topic || $this->createNotFoundException();
-        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic || !$topic->isEnabled()) {
+            throw $this->createNotFoundException();
+        }
         $this->denyAccessUnlessGranted('edit', $topic);
 
         $this->getTopicManager()->blockTopic($topic);
         return $this->handleView($this->view([
             'result' => true
+        ]));
+    }
+
+    /**
+     * 切换话题推荐状态
+     * @Route("/topics/{id}/toggle_recommend", name="topic_toggle_recommend", requirements={"id": "\d+"})
+     * @param int $id
+     * @return Response
+     */
+    public function toggleRecommendAction($id)
+    {
+        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic || !$topic->isEnabled()) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', $topic);
+        $topic->setRecommended(!$topic->isRecommended());
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($topic);
+        $manager->flush();
+        return $this->handleView($this->view([
+            'is_recommended' => $topic->isRecommended()
         ]));
     }
 
