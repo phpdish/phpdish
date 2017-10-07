@@ -18,9 +18,12 @@
                     </a>
                 </h3>
                 <div class="summary">{{ post.summary }}</div>
-                <ul class="list-unstyled list-inline meta">
+                <ul class="list-unstyled list-inline meta" data-role="post-action">
                     <li><a href="{{ postUrl }}#comments"><i class="if i-comment"></i> {{ post.commentCount }}</a></li>
                     <li><i class="if i-view"></i> {{ post.viewCount }}</li>
+                    {% if is_granted('edit', post) %}
+                        <li><a href="{{ path('post_edit', {id: post.id}) }}" title="编辑"><i class="if i-edit"></i> 编辑</a></li>
+                    {% endif %}
                 </ul>
             </div>
             {% if post.images %}

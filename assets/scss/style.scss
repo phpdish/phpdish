@@ -89,6 +89,9 @@
     background-color:#fff;
     border-color:$borderColor;
   }
+  .panel-footer{
+    @extend .panel-heading;
+  }
   .list-group-item{
     border: 1px solid $borderColor;
   }

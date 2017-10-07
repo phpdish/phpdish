@@ -29,7 +29,7 @@
                                 <span class="comment-num">评论 {{ post.commentCount }}</span>
                                 <span class="view-num">浏览 {{ post.viewCount }}</span>
                             </div>
-                            <div class="action" data-role="post-action">
+                            <div class="meta action" data-role="post-action">
                                 {% if is_granted('edit', post) %}
                                     <span><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i> 删除</a></span>
                                     <span><a href="{{ path('post_edit', {'id': post.id}) }}" title="修改"><i class="if i-edit"></i> 修改</a></span>

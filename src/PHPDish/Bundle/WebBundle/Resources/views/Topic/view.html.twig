@@ -23,7 +23,7 @@
                             <ul class="list-unstyled list-inline">
                                 <li><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
                                 <li><i class="if i-user"></i> {{ topic.user.username }}</li>
-                                <li><i class="if i-comment"></i> <a href="#add-reply-form"  data-action="go-reply">{{ topic.replyCount }}回复</a></li>
+                                <li><i class="if i-comment"></i> <a href="#reply-list"  data-action="go-reply">{{ replies|length }} 回复</a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,8 +43,8 @@
                         <div class="social-share-container"></div>
                     </div>
                 </div>
-                <div class="panel panel-default panel-u">
-                    <div class="panel-heading"><h5>{{ replies.count }}个回复</h5></div>
+                <div class="panel panel-u">
+                    <div class="panel-heading"><h5>{{ replies|length }} 回复</h5></div>
                     <ul class="list-group reply-list" id="reply-list" data-role="replies-panel">
                         {% include 'PHPDishWebBundle:Common:reply_list.html.twig'%}
                     </ul>

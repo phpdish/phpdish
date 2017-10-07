@@ -26,10 +26,11 @@
     }
     .meta{
       float:right;
-      color: $metaColor;
       .reply-user{
         cursor: pointer;
-        color: #8590a6
+      }
+      .if{
+        font-size:12px;
       }
     }
     .body{
