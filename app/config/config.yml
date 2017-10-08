@@ -149,6 +149,11 @@ fos_rest:
 
 # 社交网站登录
 hwi_oauth:
+    http_client:
+          timeout: 10
+          verify_peer: false
+          ignore_errors: false
+          
     firewall_names:
         - 'main'
     resource_owners:
