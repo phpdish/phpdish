@@ -13,15 +13,16 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */
-class User implements UserInterface
+class User extends BaseUser implements UserInterface
 {
-    use IdentifiableTrait, DateTimeTrait, EnabledTrait;
+    use DateTimeTrait;
 
     /**
      * 男性
@@ -49,7 +50,7 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
-    private $plainPassword;
+    protected $plainPassword;
 
     /**
      * @ORM\Column(type="string")
@@ -339,26 +340,6 @@ class User implements UserInterface
     public function removeFollower(UserInterface $follower)
     {
         $this->followers->removeElement($follower);
-    }
-
-    /**
-     * Add role
-     * @param Role $role
-     * @return User
-     */
-    public function addRole(Role $role)
-    {
-        $this->roles[] = $role;
-        return $this;
-    }
-
-    /**
-     * Remove role
-     * @param Role $role
-     */
-    public function removeRole(Role $role)
-    {
-        $this->roles->removeElement($role);
     }
 
     /**

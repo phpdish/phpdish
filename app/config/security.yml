@@ -34,9 +34,15 @@ security:
                 path: logout
                 target: homepage
             anonymous:  ~
+            oauth:
+                    resource_owners:
+                        phpdish_weibo: "/login/check-weibo"
+                    login_path:  /login
+                    use_forward: false
+                    failure_path: /login
+                    oauth_user_provider:
+                        service:  phpdish.oauth_aware.user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/write, role: ROLE_USER }
-        - { path: ^/settings, role: ROLE_USER }
