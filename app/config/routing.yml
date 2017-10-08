@@ -1,6 +1,15 @@
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
     prefix:   /
@@ -34,13 +43,6 @@ php_dish_admin:
     resource: "@PHPDishAdminBundle/Controller/"
     prefix: /admin
     type: annotation
-
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }
-
 
 # app/config/routing.yml
 hwi_oauth_redirect:

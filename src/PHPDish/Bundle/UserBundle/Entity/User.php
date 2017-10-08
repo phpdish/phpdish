@@ -37,25 +37,13 @@ class User extends BaseUser implements UserInterface
     const GENDER_WOMEN = 1;
 
     /**
-     * @ORM\Column(type="string")
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $email;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    protected $plainPassword;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $password;
+    protected $id;
 
     /**
      * @ORM\Column(type="smallint", length=1);
@@ -100,14 +88,14 @@ class User extends BaseUser implements UserInterface
      */
     protected $following;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
-     * @ORM\JoinTable(name="users_roles",
-     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
-     * )
-     */
-    protected $roles;
+//    /**
+//     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+//     * @ORM\JoinTable(name="users_roles",
+//     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+//     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
+//     * )
+//     */
+//    protected $roles;
 
     /**
      * 订阅的专栏
@@ -129,6 +117,7 @@ class User extends BaseUser implements UserInterface
 
     public function __construct()
     {
+        parent::__construct();
         //关注我的
         $this->followers = new ArrayCollection();
         //我关注的
@@ -147,85 +136,6 @@ class User extends BaseUser implements UserInterface
     public function getRoles()
     {
         return ['ROLE_USER', 'ROLE_SUPER_ADMIN'];
-    }
-
-    /**
-     * Set email
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * Get email
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set username
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string $plainPassword
-     */
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * Set password
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**
@@ -394,5 +304,15 @@ class User extends BaseUser implements UserInterface
     {
         $this->avatar = $avatar;
         return $this;
+    }
+
+    public function enable()
+    {
+        $this->setEnabled(true);
+    }
+
+    public function disable()
+    {
+        $this->setEnabled(false);
     }
 }
