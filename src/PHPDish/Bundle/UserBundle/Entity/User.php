@@ -129,15 +129,6 @@ class User extends BaseUser implements UserInterface
         return null;
     }
 
-    public function eraseCredentials()
-    {
-    }
-
-    public function getRoles()
-    {
-        return ['ROLE_USER', 'ROLE_SUPER_ADMIN'];
-    }
-
     /**
      * Set gender
      * @param integer $gender

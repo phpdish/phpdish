@@ -44,7 +44,6 @@ php_dish_admin:
     prefix: /admin
     type: annotation
 
-# app/config/routing.yml
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect

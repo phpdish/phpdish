@@ -7,6 +7,13 @@
   border: solid 1px #eee;
   box-shadow: 0 0 3px #eee;
 
+  .group{
+    margin-bottom: 20px;
+    label.error{
+      margin-left: 10%;
+    }
+  }
+
   .input-group{
     .input-group-addon{
       background-color:transparent;
@@ -15,8 +22,8 @@
     .form-control{
       height:40px;
     }
-    margin-bottom: 20px;
   }
+
   .forgot-password{
     display: inline-block;
     vertical-align: middle;

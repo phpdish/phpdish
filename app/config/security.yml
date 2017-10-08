@@ -2,10 +2,11 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        PHPDish\Bundle\UserBundle\Model\UserInterface:
+        FOS\UserBundle\Model\UserInterface:
             algorithm: md5
             encode_as_base64: false
             iterations: 0
+
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -27,6 +28,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            anonymous:  ~
             pattern: ^/
             form_login:
                 provider: fos_userbundle
@@ -35,16 +37,15 @@ security:
             logout:
                 path: logout
                 target: homepage
-                
-            anonymous:  ~
+
             oauth:
-                    resource_owners:
-                        phpdish_weibo: "/login/check-weibo"
-                    login_path:  /login
-                    use_forward: false
-                    failure_path: /login
-                    oauth_user_provider:
-                        service:  phpdish.oauth_aware.user_provider
+                login_path:  hwi_oauth_connect
+                use_forward: false
+                failure_path: hwi_oauth_connect
+                resource_owners:
+                    weibo: "/login/check-weibo"
+                oauth_user_provider:
+                    service:  phpdish.oauth_aware.user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

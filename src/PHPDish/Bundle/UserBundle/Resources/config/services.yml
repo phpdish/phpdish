@@ -15,3 +15,9 @@ services:
     phpdish.mention.parser:
         class: PHPDish\Component\Mention\MentionParser
         arguments: ['@phpdish.mention.adapter']
+
+    phpdish.event_lsitener.user_register:
+        class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener
+        arguments: ['@router']
+        tags:
+            - {name: kernel.event_listener, event:  fos_user.registration.success,  method: onRegisterSuccess}

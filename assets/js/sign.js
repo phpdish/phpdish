@@ -5,23 +5,22 @@ require('jquery-validation');
 //登录
 (function(){
     $("#login-form").validate({
-        errorClass: 'error-message',
         errorPlacement: function(error, element) {
-            $(element).parent().before(error);
+            error.insertAfter($(element).parent());
         },
         rules: {
-            username: {
+            _username: {
                 required: true
             },
-            pwd: {
+            _password: {
                 required: true
             }
         },
         messages: {
-            username: {
+            _username: {
                 required: "请输入用户名"
             },
-            pwd: {
+            _password: {
                 required: '请输入密码!',
             }
         }
@@ -31,43 +30,49 @@ require('jquery-validation');
 //注册
 (function(){
     $("#register-form").validate({
-        errorClass: 'error-message',
         errorPlacement: function(error, element) {
             if($(element).attr('type') == 'checkbox'){
                 $('#for_policy').append(error);
             }else{
-                error.insertAfter($(element).prev());
+                error.insertAfter($(element).parent());
             }
         },
         rules: {
-            username: {
-                required: true
-            },
-            pwd: {
+            'fos_user_registration_form[username]': {
                 required: true,
                 rangelength: [6,15]
             },
-            repassword: {
+            'fos_user_registration_form[email]': {
                 required: true,
-                equalTo: '#password',
+                email: true
+            },
+            'fos_user_registration_form[plainPassword][first]': {
+                required: true,
                 rangelength: [6,15]
+            },
+            'fos_user_registration_form[plainPassword][second]': {
+                required: true,
+                equalTo: '#fos_user_registration_form_plainPassword_first',
             },
             agree_policy: {
                 required: true
             }
         },
         messages: {
-            username: {
+            'fos_user_registration_form[username]': {
                 required: "请输入用户名"
             },
-            pwd: {
+            'fos_user_registration_form[email]': {
+                required: "请输入邮箱",
+                email: "邮箱格式错误"
+            },
+            'fos_user_registration_form[plainPassword][first]': {
                 required: '请输入密码!',
                 rangelength: "密码在6到15位之间"
             },
-            repassword: {
-                required: '请重复密码!',
-                equalTo: '重复密码不一致',
-                rangelength: "密码在6到15位之间"
+            'fos_user_registration_form[plainPassword][second]': {
+                required: '请再次输入密码!',
+                equalTo: '密码不一致'
             },
             agree_policy: {
                 required: '请先同意条款!',

@@ -120,7 +120,7 @@ liip_imagine:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: PHPDishUserBundle\Entity\User
+    user_class: PHPDish\Bundle\UserBundle\Entity\User
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
@@ -152,7 +152,7 @@ hwi_oauth:
     firewall_names:
         - 'main'
     resource_owners:
-        phpdish_weibo:
+        weibo:
             type:                sina_weibo
             client_id:           870514869
             client_secret:   4e7539f7b16f669579f70244ca8ac3b4

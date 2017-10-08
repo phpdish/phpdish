@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            {{ form_start(form, {'attr':{'class': 'reg-page', 'id': 'register-form'}}) }}
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr':{'class': 'reg-page', 'id': 'register-form'}}) }}
                 <div class="reg-header">
                     <h2>注册一个新账户</h2>
                     <p>已经有账户?点此<a href="{{ path('login') }}">登录</a>你的账户</p>
@@ -18,32 +18,40 @@
                 {% for flashMessage in app.session.flashbag.get('notice') %}
                     <span class="black-text">{ flashMessage }}</span>
                 {% endfor %}
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="if i-user"></i></span>
-                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': '你的用户名'}})  }}
+                <div class="group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="if i-user"></i></span>
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': '你的用户名'}})  }}
+                    </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="if i-email"></i></span>
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '你的邮箱'}})  }}
+                <div class="group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="if i-email"></i></span>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '你的邮箱'}})  }}
+                    </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="if i-password"></i></span>
-                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': '设置密码'}})  }}
+                <div class="group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="if i-password"></i></span>
+                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': '设置密码'}})  }}
+                    </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="if i-password"></i></span>
-                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': '重复上面的密码'}})  }}
+                <div class="group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="if i-password"></i></span>
+                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': '重复上面的密码'}})  }}
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 checkbox">
-                        <label>
-                            <input type="checkbox" name="agree_policy">
-                            <span>我同意</span> <a href="<?=$this->Url->build(['prefix'=>false, 'controller'=>'Fragments', 'action'=>'terms']);?>" target="_blank">注册用户协议</a>
-                        </label>
-                        <span id="for_policy"></span>
-                    </div>
-                    <div class="col-lg-6 text-right">
-                        <button class="btn btn-md u-btn-primary" type="submit">注册</button>
+                    {#<div class="col-lg-6 checkbox">#}
+                        {#<label>#}
+                            {#<input type="checkbox" name="agree_policy">#}
+                            {#<span>我同意</span> <a href="#" target="_blank">注册用户协议</a>#}
+                        {#</label>#}
+                        {#<span id="for_policy"></span>#}
+                    {#</div>#}
+                    <div class="col-lg-12 text-center">
+                        <button class="btn btn-block u-btn-primary" type="submit">注册</button>
                     </div>
                 </div>
             {{ form_end(form) }}
