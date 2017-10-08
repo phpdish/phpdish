@@ -39,9 +39,8 @@ security:
                 target: homepage
 
             oauth:
-                login_path:  hwi_oauth_connect
-                use_forward: false
-                failure_path: hwi_oauth_connect
+                login_path:  "/login"
+                failure_path: "/login"
                 resource_owners:
                     weibo: "/login/check-weibo"
                 oauth_user_provider:
