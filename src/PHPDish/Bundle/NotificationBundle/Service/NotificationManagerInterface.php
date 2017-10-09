@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
@@ -36,4 +37,20 @@ interface NotificationManagerInterface
      * @return NotificationInterface
      */
     public function createReplyTopicNotification(TopicInterface $topic, ReplyInterface $reply);
+
+    /**
+     * 获取用户未读通知的数量
+     * @param UserInterface $user
+     * @return int
+     */
+    public function getUserUnSeenNotificationCount(UserInterface $user);
+
+    /**
+     * 查找用户的通知
+     * @param UserInterface $user
+     * @param int $page
+     * @param null $limit
+     * @return Pagerfanta
+     */
+    public function findUserNotifications(UserInterface $user, $page, $limit = null);
 }

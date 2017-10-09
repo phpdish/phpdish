@@ -3,8 +3,9 @@
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Carbon\Carbon;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Entity\Notification;
@@ -13,13 +14,15 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class NotificationManager implements NotificationManagerInterface
 {
+    use PaginatorTrait;
+
     /**
      * @var EntityManagerInterface
      */
     protected $entityManager;
 
     /**
-     * @var ObjectRepository
+     * @var EntityRepository
      */
     protected $notificationRepository;
 
@@ -49,6 +52,7 @@ class NotificationManager implements NotificationManagerInterface
         $notification->setUser($topic->getUser())
             ->setTopic($topic)
             ->setReply($reply)
+            ->setMessage($reply->getBody())
             ->setFromUser($reply->getUser())
             ->setSubject(Notification::SUBJECT_REPLY_TOPIC);
         $this->saveNotification($notification);
@@ -72,5 +76,26 @@ class NotificationManager implements NotificationManagerInterface
     {
         $this->entityManager->persist($notification);
         $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserUnSeenNotificationCount(UserInterface $user)
+    {
+        return count($this->notificationRepository->findBy([
+            'user' => $user
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserNotifications(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->notificationRepository->createQueryBuilder('n')
+            ->where('user = :userId')->setParameter('userId', $user)
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
     }
 }
