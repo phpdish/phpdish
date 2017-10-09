@@ -65,8 +65,12 @@ class FOSUBUserProvider extends BaseFOSUBProvider
             ->setCreatedAt($now = Carbon::now())
             ->setUpdatedAt($now);
 
-        $avatar = $this->fileDownloader->download($response->getProfilePicture());
-        $user->setAvatar($avatar->getKey());
+        try {
+            $avatar = $this->fileDownloader->download($response->getProfilePicture());
+            $user->setAvatar($avatar->getKey());
+        } catch (\Exception $exception) {
+            $user->setAvatar('');
+        }
         return $user;
     }
 

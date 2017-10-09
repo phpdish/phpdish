@@ -34,9 +34,13 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
 
-            logout:
-                path: logout
-                target: homepage
+            logout: true
+
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                always_remember_me: true
 
             oauth:
                 login_path:  "/login"
