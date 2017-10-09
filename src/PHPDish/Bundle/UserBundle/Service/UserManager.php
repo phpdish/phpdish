@@ -124,7 +124,7 @@ class UserManager implements UserManagerInterface
     public function followUser(UserInterface $user, UserInterface $follower)
     {
         if ($user->getId() == $follower->getId()) {
-//            throw new \LogicException('你不能关注你自己');
+            throw new \LogicException('你不能关注你自己');
         }
         $user->addFollower($follower);
         $user->setFollowerCount($user->getFollowerCount() + 1);
@@ -148,6 +148,26 @@ class UserManager implements UserManagerInterface
         $this->entityManager->persist($follower);
         $this->entityManager->flush();
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkEmailExist($email)
+    {
+        return (boolean)$this->getRepository()->findOneBy([
+            'email' => $email
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkUsernameExist($username)
+    {
+        return (boolean)$this->getRepository()->findOneBy([
+            'username' => $username
+        ]);
     }
 
     /**

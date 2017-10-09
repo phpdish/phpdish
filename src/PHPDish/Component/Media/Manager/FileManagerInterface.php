@@ -18,4 +18,11 @@ interface FileManagerInterface
      * @param FileInterface $file
      */
     public function download(FileInterface $file);
+
+    /**
+     * 是否存在文件
+     * @param FileInterface|string $file
+     * @return boolean
+     */
+    public function has($file);
 }

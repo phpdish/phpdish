@@ -88,14 +88,22 @@ jms_serializer:
 # KNP Gaufrette:
 knp_gaufrette:
     adapters:
-        local:
+        uploads:
             local:
                 directory: '%kernel.project_dir%/web/media/uploads'
                 create: true
+        avatar:
+            local:
+                directory: '%kernel.project_dir%/web/media/uploads/avatar'
+                create: true
+
     filesystems:
         local:
-          adapter: local
-          alias: phpdish.local_filesystem
+          adapter: uploads
+          alias: phpdish.filesystem.uploads
+        avatar:
+          adapter: avatar
+          alias: phpdish.filesystem.avatar
 
 # Liip Imagine
 liip_imagine:
@@ -156,6 +164,7 @@ hwi_oauth:
 
     firewall_names:
         - 'main'
+
     resource_owners:
         weibo:
             type:                sina_weibo

@@ -33,4 +33,13 @@ class FileManager implements FileManagerInterface
         $content = $this->filesystem->read($file->getKey());
         $file->setContent($content);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($file)
+    {
+        $key = $file instanceof FileInterface ? $file->getKey() : $file;
+        return $this->filesystem->has($key);
+    }
 }

@@ -5,7 +5,7 @@ namespace PHPDish\Component\Media\Namer;
 use Carbon\Carbon;
 use Gaufrette\Filesystem;
 
-class GeneralNamer implements NamerInterface
+class DatePathNamer implements NamerInterface
 {
     /**
      * @var Filesystem
@@ -22,9 +22,26 @@ class GeneralNamer implements NamerInterface
      */
     public function transform(\SplFileInfo $file)
     {
+        return $this->transformWithExtension($file->guessExtension());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transformFromUrl($url)
+    {
+        $extension = ltrim(strrchr(parse_url($url, PHP_URL_PATH), '.'), '.');
+        return $this->transformWithExtension(strrchr($url, $extension));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transformWithExtension($extension)
+    {
         $baseDir = Carbon::now()->format('Y/md');
         do {
-            $path = "{$baseDir}/{$this->generateKey()}." . $file->guessExtension();
+            $path = "{$baseDir}/{$this->generateKey()}." . $extension;
         } while ($this->filesystem->has($path));
         return $path;
     }

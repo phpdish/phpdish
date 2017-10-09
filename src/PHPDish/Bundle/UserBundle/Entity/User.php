@@ -115,6 +115,26 @@ class User extends BaseUser implements UserInterface
      */
     protected $topicCount = 0;
 
+    /**
+     * @ORM\Column(type="string", nullable=true))
+     */
+    protected $weiboId;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true))
+     */
+    protected $weiboAccessToken;
+
+    /**
+     * @ORM\Column(type="string", nullable=true))
+     */
+    protected $githubId;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true))
+     */
+    protected $githubAccessToken;
+
     public function __construct()
     {
         parent::__construct();
@@ -294,6 +314,78 @@ class User extends BaseUser implements UserInterface
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeiboId()
+    {
+        return $this->weiboId;
+    }
+
+    /**
+     * @param mixed $weiboId
+     * @return User
+     */
+    public function setWeiboId($weiboId)
+    {
+        $this->weiboId = $weiboId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeiboAccessToken()
+    {
+        return $this->weiboAccessToken;
+    }
+
+    /**
+     * @param mixed $weiboAccessToken
+     * @return User
+     */
+    public function setWeiboAccessToken($weiboAccessToken)
+    {
+        $this->weiboAccessToken = $weiboAccessToken;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGithubId()
+    {
+        return $this->githubId;
+    }
+
+    /**
+     * @param mixed $githubId
+     * @return User
+     */
+    public function setGithubId($githubId)
+    {
+        $this->githubId = $githubId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGithubAccessToken()
+    {
+        return $this->githubAccessToken;
+    }
+
+    /**
+     * @param mixed $githubAccessToken
+     * @return User
+     */
+    public function setGithubAccessToken($githubAccessToken)
+    {
+        $this->githubAccessToken = $githubAccessToken;
         return $this;
     }
 

@@ -28,9 +28,3 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
-    phpdish.oauth_aware.user_provider:
-        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
-        arguments:
-          - '@fos_user.user_manager'
-          - []

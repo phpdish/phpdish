@@ -91,4 +91,18 @@ interface UserManagerInterface
      * @return boolean
      */
     public function unFollowUser(UserInterface $user, UserInterface $follower);
+
+    /**
+     * 检查用户名是否存在
+     * @param string $username
+     * @return boolean
+     */
+    public function checkUsernameExist($username);
+
+    /**
+     * 检查邮箱是否存在
+     * @param string $email
+     * @return boolean
+     */
+    public function checkEmailExist($email);
 }

@@ -21,3 +21,10 @@ services:
         arguments: ['@router']
         tags:
             - {name: kernel.event_listener, event:  fos_user.registration.success,  method: onRegisterSuccess}
+
+    phpdish.oauth_aware.user_provider:
+#        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
+        class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
+        arguments:
+          - '@fos_user.user_manager'
+          - {weibo: weiboId}

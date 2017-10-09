@@ -10,4 +10,18 @@ interface NamerInterface
      * @return string
      */
     public function transform(\SplFileInfo $file);
+
+    /**
+     * 从资源的url生成存储键
+     * @param string $url
+     * @return string
+     */
+    public function transformFromUrl($url);
+
+    /**
+     * 根据扩展名生成
+     * @param string $extension
+     * @return string
+     */
+    public function transformWithExtension($extension);
 }
