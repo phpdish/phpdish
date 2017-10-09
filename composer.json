@@ -33,6 +33,7 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
         "liip/imagine-bundle": "^1.9",
+        "mgilet/notification-bundle": "*@dev",
         "nesbot/carbon": "^1.22",
         "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",

@@ -135,6 +135,54 @@ class User extends BaseUser implements UserInterface
      */
     protected $githubAccessToken;
 
+    // link to notifications
+    /**
+     * @var Notification
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user", orphanRemoval=true)
+     */
+    protected $notifications;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addNotification($notification)
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeNotification($notification)
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        $this->getId();
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -142,6 +190,8 @@ class User extends BaseUser implements UserInterface
         $this->followers = new ArrayCollection();
         //我关注的
         $this->following =  new ArrayCollection();
+
+        $this->notifications = new ArrayCollection();
     }
 
     public function getSalt()

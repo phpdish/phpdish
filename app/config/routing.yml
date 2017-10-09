@@ -1,3 +1,7 @@
+php_dish_notification:
+    resource: "@PHPDishNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
@@ -32,12 +36,19 @@ php_dish_post:
 
 php_dish_user:
     resource: "@PHPDishUserBundle/Controller/"
+    prefix: /
     type: annotation
 
 php_dish_forum:
     resource: "@PHPDishForumBundle/Controller/"
     prefix: /
     type: annotation
+
+php_dish_notification:
+    resource: "@PHPDishNotificationBundle/Controller/"
+    prefix: /
+    type: annotation
+
 
 php_dish_admin:
     resource: "@PHPDishAdminBundle/Controller/"
@@ -54,3 +65,5 @@ hwi_oauth_connect:
 
 weibo_login:
     path: "/login/check-weibo"
+
+
