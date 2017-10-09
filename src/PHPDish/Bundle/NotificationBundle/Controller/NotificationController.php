@@ -16,8 +16,9 @@ class NotificationController extends Controller
     public function count()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $count = $this->get('phpdish.manager.notification')->getUserUnSeenNotificationCount($this->getUser());
         return $this->json([
-            'count' => $this->get('phpdish.manager.notification')->getUserUnSeenNotificationCount($this->getUser())
+            'count' => $count
         ]);
     }
 

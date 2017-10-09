@@ -1,0 +1,31 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="container" role="main">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item">私信</li>
+                    <li class="list-group-item">关注</li>
+                    <li class="list-group-item">
+                        <a href="{{ path('notifications') }}">通知</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="panel panel-u">
+                    <div class="panel-heading">提醒</div>
+                    <ul class="list-group">
+                        {% for notification in notifications %}
+                        <li class="list-group-item">
+
+                        </li>
+                        {% else %}
+                            
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

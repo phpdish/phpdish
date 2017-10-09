@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -83,9 +84,11 @@ class NotificationManager implements NotificationManagerInterface
      */
     public function getUserUnSeenNotificationCount(UserInterface $user)
     {
-        return count($this->notificationRepository->findBy([
-            'user' => $user
-        ]));
+        $qb = $this->notificationRepository->createQueryBuilder('n');
+        return $qb->select($qb->expr()->count('n'))
+            ->where('n.user = :userId')->setParameter('userId', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -94,7 +97,7 @@ class NotificationManager implements NotificationManagerInterface
     public function findUserNotifications(UserInterface $user, $page, $limit = null)
     {
         $query = $this->notificationRepository->createQueryBuilder('n')
-            ->where('user = :userId')->setParameter('userId', $user)
+            ->where('n.user = :userId')->setParameter('userId', $user)
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
