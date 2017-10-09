@@ -2,6 +2,8 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ForumBundle\Event\Events;
+use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -67,6 +69,10 @@ class TopicReplyController extends RestController
         $view = $this->view()->setFormat('json');
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getReplyManager()->saveReply($reply);
+
+            //触发事件
+            $this->get('event_dispatcher')->dispatch(Events::TOPIC_REPLIED, new TopicRepliedEvent($topic, $reply));
+
             $view->setData(['reply' => $reply])
                 ->getContext()
                 ->addGroups(['Default']);

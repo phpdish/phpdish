@@ -2,3 +2,24 @@ services:
 #    php_dish_notification.example:
 #        class: PHPDish\Bundle\NotificationBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    phpdish.manager.notification:
+        class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+
+    phpdish.event_listener.notification.follow_user:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: user.followed, method: onFollowUser}
+        public: false
+
+
+    phpdish.event_listener.notification.reply_topic:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\ReplyTopicListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: topic.replied, method: onReplyTopic}
+        public: false

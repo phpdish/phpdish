@@ -6,6 +6,7 @@ services:
         class: PHPDish\Bundle\UserBundle\Service\UserManager
         arguments:
              - '@doctrine.orm.entity_manager'
+             - '@event_dispatcher'
 
     # PHPDish Adapter
     phpdish.mention.adapter:

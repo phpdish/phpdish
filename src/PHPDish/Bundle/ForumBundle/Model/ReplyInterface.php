@@ -3,6 +3,7 @@ namespace PHPDish\Bundle\ForumBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface ReplyInterface extends CommentInterface, VotableInterface
 {
@@ -18,4 +19,11 @@ interface ReplyInterface extends CommentInterface, VotableInterface
      * @return TopicInterface
      */
     public function getTopic();
+
+    /**
+     * 回复是否属于指定用户
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isBelongsTo(UserInterface $user);
 }

@@ -7,6 +7,7 @@ use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use JMS\Serializer\Annotation as JMS;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity
@@ -53,5 +54,13 @@ class Reply extends BaseComment implements ReplyInterface
     public function getTopic()
     {
         return $this->topic;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBelongsTo(UserInterface $user)
+    {
+        return $this->getUser() === $user;
     }
 }

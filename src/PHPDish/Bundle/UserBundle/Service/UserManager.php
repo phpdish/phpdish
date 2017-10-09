@@ -7,7 +7,10 @@ use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Event\Events;
+use PHPDish\Bundle\UserBundle\Event\UserFollowedEvent;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UserManager implements UserManagerInterface
 {
@@ -17,9 +20,15 @@ class UserManager implements UserManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -133,6 +142,10 @@ class UserManager implements UserManagerInterface
         $this->entityManager->persist($user);
         $this->entityManager->persist($follower);
         $this->entityManager->flush();
+
+        //触发事件
+        $this->eventDispatcher->dispatch(Events::USER_FOLLOWEd, new UserFollowedEvent($user, $follower));
+
         return true;
     }
 

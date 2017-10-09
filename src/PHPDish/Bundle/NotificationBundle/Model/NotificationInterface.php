@@ -3,9 +3,10 @@
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
 
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface NotificationInterface
+interface NotificationInterface extends IdentifiableInterface
 {
     /**
      * 获取通知的接收人
@@ -24,6 +25,4 @@ interface NotificationInterface
      * @return string
      */
     public function getSubject();
-
-    public function get
 }

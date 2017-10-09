@@ -9,14 +9,12 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
-use Mgilet\NotificationBundle\Model\UserNotificationInterface;
 
 interface UserInterface extends
     BaseUserInterface,
     IdentifiableInterface,
     DateTimeInterface,
-    EnabledInterface,
-    UserNotificationInterface
+    EnabledInterface
 {
     /**
      * 是否是女性
