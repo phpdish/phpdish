@@ -27,4 +27,5 @@ services:
         class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
         arguments:
           - '@fos_user.user_manager'
+          - '@phpdish.media.avatar_file_downloader'
           - {weibo: weiboId}

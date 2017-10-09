@@ -1,7 +1,6 @@
 services:
-#    php_dish_media.example:
-#        class: PHPDish\Bundle\MediaBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    # Uploads 目录操作
     phpdish.media.file_manager:
        class: PHPDish\Component\Media\Manager\FileManager
        arguments: ['@phpdish.filesystem.uploads']
@@ -25,3 +24,17 @@ services:
     phpdish.media.file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
        arguments: ['@phpdish.media.file_manager',  '@phpdish.media.file_namer']
+
+
+    ## Avatar目录操作
+    phpdish.media.avatar_file_manager:
+       class: PHPDish\Component\Media\Manager\FileManager
+       arguments: ['@phpdish.filesystem.avatar']
+
+    phpdish.media.avatar_file_namer:
+       class: PHPDish\Component\Media\Namer\DatePathNamer
+       arguments: ['@phpdish.filesystem.avatar']
+
+    phpdish.media.avatar_file_downloader:
+       class: PHPDish\Component\Media\Downloader\FileDownloader
+       arguments: ['@phpdish.media.avatar_file_manager',  '@phpdish.media.avatar_file_namer']

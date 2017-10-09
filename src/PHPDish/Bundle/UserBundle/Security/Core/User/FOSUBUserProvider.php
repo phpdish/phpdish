@@ -3,18 +3,24 @@
 namespace PHPDish\Bundle\UserBundle\Security\Core\User;
 
 use Carbon\Carbon;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
-use PHPDish\Component\Media\Manager\FileManagerInterface;
-use PHPDish\Component\Media\Model\Image;
+use PHPDish\Component\Media\Downloader\FileDownloaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProvider extends BaseFOSUBProvider
 {
     /**
-     * @var FileManagerInterface
+     * @var FileDownloaderInterface
      */
-    protected $fileManager;
+    protected $fileDownloader;
+
+    public function __construct(UserManagerInterface $userManager, FileDownloaderInterface $fileDownloader, array $properties)
+    {
+        $this->fileDownloader = $fileDownloader;
+        parent::__construct($userManager, $properties);
+    }
 
     /**
      * {@inheritDoc}
@@ -59,8 +65,8 @@ class FOSUBUserProvider extends BaseFOSUBProvider
             ->setCreatedAt($now = Carbon::now())
             ->setUpdatedAt($now);
 
-        $avatar = $this->downloadAvatar($response->getProfilePicture());
-        $user->setAvatar();
+        $avatar = $this->fileDownloader->download($response->getProfilePicture());
+        $user->setAvatar($avatar->getKey());
         return $user;
     }
 
@@ -75,20 +81,5 @@ class FOSUBUserProvider extends BaseFOSUBProvider
         return $this->userManager->findUserByUsername($username)
             ? $username . $response->getUsername()
             : $username;
-    }
-
-    /**
-     * 下载用户的头像
-     * @param string $avatarUrl
-     * @return Image
-     */
-    protected function downloadAvatar($avatarUrl)
-    {
-        $image = new Image();
-        $image->setContent(file_get_contents($avatarUrl))
-            ->setKey(md5(uniqid() . $avatarUrl) . strrchr($avatarUrl, '.'));
-
-        $this->fileManager->upload($image);
-        return $image;
     }
 }
