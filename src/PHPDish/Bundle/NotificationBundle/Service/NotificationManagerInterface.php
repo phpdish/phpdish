@@ -55,7 +55,7 @@ interface NotificationManagerInterface
      * @param ReplyInterface $reply
      * @return NotificationInterface
      */
-    public function createMentionUserInTopicNotification(UserInterface $user, ReplyInterface $reply);
+    public function createAtUserInTopicNotification(UserInterface $user, ReplyInterface $reply);
 
     /**
      * 创建在话题艾特用户通知

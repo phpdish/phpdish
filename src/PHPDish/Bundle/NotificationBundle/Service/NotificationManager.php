@@ -97,7 +97,7 @@ class NotificationManager implements NotificationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function createMentionUserInTopicNotification(UserInterface $user, ReplyInterface $reply)
+    public function createAtUserInTopicNotification(UserInterface $user, ReplyInterface $reply)
     {
         $notification = $this->createNotification();
         $notification->setUser($user)

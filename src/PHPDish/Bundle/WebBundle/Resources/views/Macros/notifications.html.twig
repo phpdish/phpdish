@@ -6,6 +6,12 @@
         {{ render.render_reply_topic(notification) }}
     {% elseif notification.subject ==  'comment_post' %}
         {{ render.render_comment_post(notification) }}
+    {% elseif notification.subject ==  'mention_user_in_topic' %}
+        {{ render.render_at_user_in_topic(notification) }}
+    {% elseif notification.subject ==  'mention_user_in_post' %}
+        {{ render.render_at_user_in_post(notification) }}
+    {% elseif notification.subject ==  'follow_category' %}
+        {{ render.render_follow_category(notification) }}
     {% endif %}
 {% endmacro %}
 
@@ -27,7 +33,7 @@
             <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
-        <div class="body markdown-body">{{ notification.message }}</div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
     </div>
 {% endmacro %}
 
@@ -39,7 +45,7 @@
             <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>提到了你
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
-        <div class="body markdown-body">{{ notification.message }}</div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
     </div>
 {% endmacro %}
 
@@ -51,7 +57,7 @@
             <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>提到了你
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
-        <div class="body markdown-body">{{ notification.message }}</div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
     </div>
 {% endmacro %}
 
@@ -63,6 +69,17 @@
             <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
-        <div class="body markdown-body">{{ notification.message }}</div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染订阅专栏通知 #}
+{% macro render_follow_category(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 订阅了你的专栏
+            <a href="{{ path('category_view', {slug: notification.category.slug}) }}">{{ notification.category.name }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
     </div>
 {% endmacro %}

@@ -32,7 +32,7 @@ final class MentionUserListener extends EventListener
             if ($event->getReply()->getUser() === $user) {
                 continue;
             }
-            $this->notificationManager->createMentionUserInTopicNotification($user, $event->getReply());
+            $this->notificationManager->createAtUserInTopicNotification($user, $event->getReply());
         }
     }
 }

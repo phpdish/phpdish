@@ -309,3 +309,31 @@ form{
     color: #d04949;
   }
 }
+
+/*------------------------------------
+  侧边导航
+------------------------------------*/
+
+.vertical-nav{
+  font-size: 16px;
+  .if{
+    font-size: 20px;
+    color: $contrastColor;
+    vertical-align: middle;
+    margin-right:15px;
+    font-weight: 700;
+  }
+  .nav-item{
+    border:none;
+    padding: 10px 25px;
+    a{
+      text-decoration: none;
+      &:active{
+        color: $linkColor;
+      }
+    }
+    &:hover, &.active{
+      background-color: #f0f0f0;
+    }
+  }
+}

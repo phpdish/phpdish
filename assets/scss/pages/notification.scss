@@ -6,16 +6,21 @@
 .notification-list{
   .notification{
     .avatar{
-      width: 48px;
-      height:  48px;
+      width: 45px;
+      height:  45px;
       border-radius: 50%;
       border: 1px solid $borderColor;
     }
     a{
       color: #3194d0;
+      &.username{
+        color: $linkColor;
+      }
     }
-    .username{
-
+    .body{
+      font-size:14px;
+      line-height: 1.5em;
+      margin-top:10px;
     }
   }
 }
