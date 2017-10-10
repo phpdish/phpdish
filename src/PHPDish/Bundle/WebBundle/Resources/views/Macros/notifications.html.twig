@@ -1,0 +1,68 @@
+{% macro render_notification(notification) %}
+    {% import _self as render %}
+    {% if  notification.subject ==  'follow_user'%}
+        {{ render.render_follow_user(notification) }}
+    {% elseif notification.subject ==  'reply_topic' %}
+        {{ render.render_reply_topic(notification) }}
+    {% elseif notification.subject ==  'comment_post' %}
+        {{ render.render_comment_post(notification) }}
+    {% endif %}
+{% endmacro %}
+
+{# 渲染好友关注 #}
+{% macro render_follow_user(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 关注了你
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+    </div>
+{% endmacro %}
+
+{# 渲染回复话题 #}
+{% macro render_reply_topic(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 回复了你的话题
+            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染在话题@ #}
+{% macro render_at_user_in_topic(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 在话题
+            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>提到了你
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染在文章艾特 #}
+{% macro render_at_user_in_post(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 在文章
+            <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>提到了你
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染评论文章 #}
+{% macro render_comment_post(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 评论了你的文章
+            <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message }}</div>
+    </div>
+{% endmacro %}

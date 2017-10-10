@@ -3,10 +3,13 @@
 namespace PHPDish\Bundle\NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 /**
@@ -26,6 +29,10 @@ class Notification  implements NotificationInterface
     const SUBJECT_REPLY_TOPIC = 'reply_topic';
 
     const SUBJECT_COMMENT_POST = 'comment_post';
+
+    const SUBJECT_AT_USER_IN_TOPIC = 'at_user_in_topic';
+
+    const SUBJECT_AT_USER_IN_POST = 'at_user_in_post';
 
     const SUBJECT_VOTEUP_TOPIC = 'voteup_topic';
 
@@ -78,6 +85,24 @@ class Notification  implements NotificationInterface
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\ForumBundle\Entity\Reply")
      */
     protected $reply;
+
+    /**
+     * @var PostInterface
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post")
+     */
+    protected $post;
+
+    /**
+     * @var CommentInterface
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Comment")
+     */
+    protected $comment;
+
+    /**
+     * @var CategoryInterface
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category")
+     */
+    protected $category;
 
     /**
      * @return UserInterface
@@ -220,6 +245,60 @@ class Notification  implements NotificationInterface
     public function setReply($reply)
     {
         $this->reply = $reply;
+        return $this;
+    }
+
+    /**
+     * @return PostInterface
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param PostInterface $post
+     * @return Notification
+     */
+    public function setPost($post)
+    {
+        $this->post = $post;
+        return $this;
+    }
+
+    /**
+     * @return CommentInterface
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param CommentInterface $comment
+     * @return Notification
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+        return $this;
+    }
+
+    /**
+     * @return CategoryInterface
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param CategoryInterface $category
+     * @return Notification
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
         return $this;
     }
 }

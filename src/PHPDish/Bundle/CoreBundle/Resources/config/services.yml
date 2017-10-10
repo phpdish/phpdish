@@ -1,4 +1,6 @@
 services:
-#    php_dish_core.example:
-#        class: PHPDish\Bundle\CoreBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    twig_extension.date:
+         class: Twig\Extensions\DateExtension
+         public: false
+         tags:
+            - { name: twig.extension}
