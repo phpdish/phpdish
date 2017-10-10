@@ -79,18 +79,19 @@ class ReplyManager  implements ReplyManagerInterface
         $reply->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
 
-        if (!$reply->getId()) {
+        if ($new = !$reply->getId()) {
             $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
-
-            //如果提及用户则触发事件
-            $this->mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::USER_MENTIONED_REPLY, new ReplyMentionUserEvent(
-                $reply,
-                $this->mentionParser->getMentionedUsers()
-            ));
         }
 
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
+
+        //如果是新生成的并且提及了用户则触发事件
+        $new && $this->mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::USER_MENTIONED_REPLY, new ReplyMentionUserEvent(
+            $reply,
+            $this->mentionParser->getMentionedUsers()
+        ));
+
         return true;
     }
 

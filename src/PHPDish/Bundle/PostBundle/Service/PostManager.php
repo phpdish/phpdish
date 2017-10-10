@@ -37,8 +37,11 @@ class PostManager implements PostManagerInterface
      */
     protected $markdownParser;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
+        MarkdownParserInterface $markdownParser
+    ){
         $this->eventDispatcher = $eventDispatcher;
         $this->entityManager = $entityManager;
         $this->markdownParser = $markdownParser;

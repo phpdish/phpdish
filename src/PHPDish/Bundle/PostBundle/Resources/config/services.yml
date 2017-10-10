@@ -5,14 +5,15 @@ services:
     phpdish.manager.post:
         class: PHPDish\Bundle\PostBundle\Service\PostManager
         arguments:
-            - '@event_dispatcher'
             - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
             - '@markdown.parser'
 
     phpdish.manager.category:
         class: PHPDish\Bundle\PostBundle\Service\CategoryManager
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
 
     phpdish.manager.post.comment:
         class: PHPDish\Bundle\PostBundle\Service\CommentManager

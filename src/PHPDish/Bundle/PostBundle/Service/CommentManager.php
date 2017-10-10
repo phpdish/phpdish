@@ -84,23 +84,23 @@ class CommentManager implements CommentManagerInterface
      */
     public function saveComment(CommentInterface $comment)
     {
+        $new = !$comment->getId();
         $body = $this->markdownParser->transformMarkdown($comment->getOriginalBody());
-
         $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
 
+        $comment->setUpdatedAt(Carbon::now())
+            ->setBody($parsedBody);
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
+
         //如果评论中有艾特用户则触发事件
-        if (!$comment->getId() && $this->mentionParser->getMentionedUsers()) {
+        if ($new && $this->mentionParser->getMentionedUsers()) {
             $this->eventDispatcher->dispatch(Events::USER_MENTIONED_COMMENT, new CommentMentionUserEvent(
                 $comment,
                 $this->mentionParser->getMentionedUsers()
             ));
         }
 
-
-        $comment->setUpdatedAt(Carbon::now())
-            ->setBody($parsedBody);
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
         return true;
     }
 
