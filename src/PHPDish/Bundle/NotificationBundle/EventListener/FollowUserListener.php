@@ -9,9 +9,13 @@ final class FollowUserListener extends EventListener
     /**
      * 用户被关注时，生成通知
      * @param UserFollowedEvent $event
+     * @return boolean
      */
     public function onUserFollowed(UserFollowedEvent $event)
     {
-        $this->notificationManager->createFollowUserNotification($event->getUser(), $event->getFollower());
+        if ($event->getUser() === $event->getFollower()) {
+            return false;
+        }
+        return $this->notificationManager->createFollowUserNotification($event->getUser(), $event->getFollower()) !== false;
     }
 }

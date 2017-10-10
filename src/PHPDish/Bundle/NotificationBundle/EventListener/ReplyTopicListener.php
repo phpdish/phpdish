@@ -9,9 +9,13 @@ final class ReplyTopicListener extends EventListener
     /**
      * 话题被回复时触发
      * @param TopicRepliedEvent $event
+     * @return boolean
      */
     public function onTopicReplied(TopicRepliedEvent $event)
     {
-        $this->notificationManager->createReplyTopicNotification($event->getTopic(), $event->getReply());
+        if ($event->getTopic()->getUser() === $event->getReply()->getUser()) {
+            return false;
+        }
+        return $this->notificationManager->createReplyTopicNotification($event->getTopic(), $event->getReply()) !== false;
     }
 }

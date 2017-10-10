@@ -9,9 +9,13 @@ class CommentPostListener extends EventListener
     /**
      * 文章被评论时触发
      * @param PostCommentedEvent $event
+     * @return boolean
      */
     public function onPostCommented(PostCommentedEvent $event)
     {
-        $this->notificationManager->createCommentPostNotification($event->getPost(), $event->getComment());
+        if ($event->getPost()->getUser() === $event->getComment()->getUser()) {
+            return false;
+        }
+        return $this->notificationManager->createCommentPostNotification($event->getPost(), $event->getComment()) !== false;
     }
 }

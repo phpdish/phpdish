@@ -15,7 +15,10 @@ final class MentionUserListener extends EventListener
     public function onUserMentionedInComment(CommentMentionUserEvent $event)
     {
         foreach ($event->getMentionedUsers() as $user) {
-            $this->notificationManager->createAtUserInPostNotification($user, $event->getComment());
+            if ($event->getComment()->getUser() === $user) {
+                continue;
+            }
+            $this->notificationManager->createMentionUserInPostNotification($user, $event->getComment());
         }
     }
 
@@ -26,7 +29,10 @@ final class MentionUserListener extends EventListener
     public function onUserMentionedInReply(ReplyMentionUserEvent $event)
     {
         foreach ($event->getMentionedUsers() as $user) {
-            $this->notificationManager->createAtUserInTopicNotification($user, $event->getReply());
+            if ($event->getReply()->getUser() === $user) {
+                continue;
+            }
+            $this->notificationManager->createMentionUserInTopicNotification($user, $event->getReply());
         }
     }
 }
