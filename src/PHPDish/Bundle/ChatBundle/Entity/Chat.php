@@ -106,7 +106,7 @@ class Chat implements ChatInterface
     }
 
     /**
-     * @return mixed
+     * @return UserInterface
      */
     public function getSender()
     {
