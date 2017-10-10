@@ -15,5 +15,5 @@ final class Events
      * 回复中提及用户
      * @var string
      */
-    const REPLY_AT_USER = 'reply.at_user';
+    const USER_MENTIONED_REPLY = 'user.mentioned.reply';
 }

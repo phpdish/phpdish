@@ -9,7 +9,7 @@ use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Event\Events;
-use PHPDish\Bundle\ForumBundle\Event\ReplyAtUserEvent;
+use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -83,7 +83,7 @@ class ReplyManager  implements ReplyManagerInterface
             $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
 
             //如果提及用户则触发事件
-            $this->mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::REPLY_AT_USER, new ReplyAtUserEvent(
+            $this->mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::USER_MENTIONED_REPLY, new ReplyMentionUserEvent(
                 $reply,
                 $this->mentionParser->getMentionedUsers()
             ));

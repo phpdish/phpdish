@@ -30,13 +30,13 @@ class Notification  implements NotificationInterface
 
     const SUBJECT_COMMENT_POST = 'comment_post';
 
-    const SUBJECT_AT_USER_IN_TOPIC = 'at_user_in_topic';
+    const SUBJECT_MENTION_USER_IN_TOPIC = 'mention_user_in_topic';
 
-    const SUBJECT_AT_USER_IN_POST = 'at_user_in_post';
+    const SUBJECT_MENTION_USER_IN_POST = 'mention_user_in_post';
 
-    const SUBJECT_VOTEUP_TOPIC = 'voteup_topic';
+    const SUBJECT_VOTE_UP_TOPIC = 'vote_up_topic';
 
-    const SUBJECT_VOTEUP_POST = 'voteup_post';
+    const SUBJECT_VOTE_UP_POST = 'vote_up_post';
 
     /**
      * @var string

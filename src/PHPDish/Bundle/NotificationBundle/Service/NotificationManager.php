@@ -5,13 +5,13 @@ namespace PHPDish\Bundle\NotificationBundle\Service;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Entity\Notification;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
@@ -81,15 +81,15 @@ class NotificationManager implements NotificationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function createAtUserInPostNotification(UserInterface $user, PostInterface $post, CommentInterface $comment)
+    public function createAtUserInPostNotification(UserInterface $user, CommentInterface $comment)
     {
         $notification = $this->createNotification();
         $notification->setUser($user)
-            ->setPost($post)
+            ->setPost($comment->getPost())
             ->setComment($comment)
             ->setMessage($comment->getBody())
             ->setFromUser($comment->getUser())
-            ->setSubject(Notification::SUBJECT_AT_USER_IN_POST);
+            ->setSubject(Notification::SUBJECT_MENTION_USER_IN_POST);
         $this->saveNotification($notification);
         return $notification;
     }
@@ -97,15 +97,15 @@ class NotificationManager implements NotificationManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function createAtUserInTopicNotification(UserInterface $user, TopicInterface $topic, ReplyInterface $reply)
+    public function createAtUserInTopicNotification(UserInterface $user, ReplyInterface $reply)
     {
         $notification = $this->createNotification();
         $notification->setUser($user)
-            ->setTopic($topic)
+            ->setTopic($reply->getTopic())
             ->setReply($reply)
             ->setMessage($reply->getBody())
             ->setFromUser($reply->getUser())
-            ->setSubject(Notification::SUBJECT_AT_USER_IN_TOPIC);
+            ->setSubject(Notification::SUBJECT_MENTION_USER_IN_TOPIC);
         $this->saveNotification($notification);
         return $notification;
     }

@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Entity\Comment;
-use PHPDish\Bundle\PostBundle\Event\CommentAtUserEvent;
+use PHPDish\Bundle\PostBundle\Event\CommentMentionUserEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -90,7 +90,7 @@ class CommentManager implements CommentManagerInterface
 
         //如果评论中有艾特用户则触发事件
         if (!$comment->getId() && $this->mentionParser->getMentionedUsers()) {
-            $this->eventDispatcher->dispatch(Events::COMMENT_AT_USER, new CommentAtUserEvent(
+            $this->eventDispatcher->dispatch(Events::USER_MENTIONED_COMMENT, new CommentMentionUserEvent(
                 $comment,
                 $this->mentionParser->getMentionedUsers()
             ));

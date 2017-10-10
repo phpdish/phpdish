@@ -10,7 +10,7 @@ final class ReplyTopicListener extends EventListener
      * 话题被回复时触发
      * @param TopicRepliedEvent $event
      */
-    public function onReplyTopic(TopicRepliedEvent $event)
+    public function onTopicReplied(TopicRepliedEvent $event)
     {
         $this->notificationManager->createReplyTopicNotification($event->getTopic(), $event->getReply());
     }

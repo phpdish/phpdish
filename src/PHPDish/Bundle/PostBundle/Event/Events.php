@@ -19,7 +19,7 @@ final class Events
      * 评论中提及用户
      * @var string
      */
-    const COMMENT_AT_USER = 'comment.at_user';
+    const USER_MENTIONED_COMMENT = 'user.mentioned.comment';
 
     /**
      * 专栏被订阅

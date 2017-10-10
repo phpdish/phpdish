@@ -13,7 +13,7 @@ services:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
         arguments: ['@phpdish.manager.notification']
         tags:
-            - {name: kernel.event_listener, event: user.followed, method: onFollowUser}
+            - {name: kernel.event_listener, event: user.followed, method: onUserFollowed}
         public: false
 
 
@@ -21,5 +21,28 @@ services:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\ReplyTopicListener
         arguments: ['@phpdish.manager.notification']
         tags:
-            - {name: kernel.event_listener, event: topic.replied, method: onReplyTopic}
+            - {name: kernel.event_listener, event: topic.replied, method: onTopicReplied}
+        public: false
+
+
+    phpdish.event_listener.notification.follow_category:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowCategoryListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: category.followed, method: onCategoryFollowed}
+        public: false
+
+    phpdish.event_listener.notification.comment_post:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\CommentPostListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: post.commented, method: onPostCommented}
+        public: false
+
+    phpdish.event_listener.notification.mention_user:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\MentionUserListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: user.mentioned.comment, method: onUserMentionedInComment}
+            - {name: kernel.event_listener, event: user.mentioned.reply, method: onUserMentionedInReply}
         public: false

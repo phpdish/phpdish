@@ -1,45 +1,45 @@
 <?php
 
-namespace PHPDish\Bundle\PostBundle\Event;
+namespace PHPDish\Bundle\ForumBundle\Event;
 
 
-use PHPDish\Bundle\PostBundle\Model\CommentInterface;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class CommentAtUserEvent extends Event
+class ReplyMentionUserEvent extends Event
 {
     /**
-     * @var CommentInterface
+     * @var ReplyInterface
      */
-    protected $comment;
+    protected $reply;
 
     /**
      * @var UserInterface[]
      */
     protected $mentionedUsers;
 
-    public function __construct(CommentInterface $comment, $mentionUsers)
+    public function __construct(ReplyInterface $reply, $mentionUsers)
     {
-        $this->comment = $comment;
+        $this->reply = $reply;
         $this->mentionedUsers = $mentionUsers;
     }
 
     /**
-     * @return CommentInterface
+     * @return ReplyInterface
      */
-    public function getComment()
+    public function getReply()
     {
-        return $this->comment;
+        return $this->reply;
     }
 
     /**
-     * @param CommentInterface $comment
-     * @return CommentAtUserEvent
+     * @param ReplyInterface $reply
+     * @return ReplyMentionUserEvent
      */
-    public function setComment($comment)
+    public function setReply($reply)
     {
-        $this->comment = $comment;
+        $this->reply = $reply;
         return $this;
     }
 
@@ -53,7 +53,7 @@ class CommentAtUserEvent extends Event
 
     /**
      * @param UserInterface[] $mentionedUsers
-     * @return CommentAtUserEvent
+     * @return ReplyMentionUserEvent
      */
     public function setMentionedUsers($mentionedUsers)
     {
