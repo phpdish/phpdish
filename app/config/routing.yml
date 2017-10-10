@@ -1,3 +1,7 @@
+php_dish_chat:
+    resource: "@PHPDishChatBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

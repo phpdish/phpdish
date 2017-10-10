@@ -1,0 +1,4 @@
+services:
+#    php_dish_chat.example:
+#        class: PHPDish\Bundle\ChatBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
