@@ -7,9 +7,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Entity\Category;
+use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
+use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CategoryManager implements CategoryManagerInterface
 {
@@ -20,9 +23,15 @@ class CategoryManager implements CategoryManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    public function __construct(EntityManagerInterface $entityManager,  EventDispatcherInterface $eventDispatcher)
     {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -95,7 +104,10 @@ class CategoryManager implements CategoryManagerInterface
     {
         $category->addFollower($user);
         $category->setFollowerCount($category->getFollowerCount() + 1);
-        return $this->saveCategory($category);
+        $result = $this->saveCategory($category);
+        //触发订阅事件
+        $this->eventDispatcher->dispatch(Events::CATEGORY_FOLLOWED, new CategoryFollowedEvent($category, $user));
+        return $result;
     }
 
     /**

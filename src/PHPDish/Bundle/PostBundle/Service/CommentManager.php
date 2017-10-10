@@ -7,11 +7,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Entity\Comment;
+use PHPDish\Bundle\PostBundle\Event\CommentAtUserEvent;
+use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Component\Mention\MentionParserInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CommentManager implements CommentManagerInterface
 {
@@ -37,9 +40,19 @@ class CommentManager implements CommentManagerInterface
      */
     protected $commentRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser, MentionParserInterface $mentionParser)
-    {
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
+        MarkdownParserInterface $markdownParser,
+        MentionParserInterface $mentionParser
+    ){
         $this->entityManager  = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
         $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
         $this->markdownParser = $markdownParser;
         $this->mentionParser = $mentionParser;
@@ -72,7 +85,18 @@ class CommentManager implements CommentManagerInterface
     public function saveComment(CommentInterface $comment)
     {
         $body = $this->markdownParser->transformMarkdown($comment->getOriginalBody());
+
         $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
+
+        //如果评论中有艾特用户则触发事件
+        if (!$comment->getId() && $this->mentionParser->getMentionedUsers()) {
+            $this->eventDispatcher->dispatch(Events::COMMENT_AT_USER, new CommentAtUserEvent(
+                $comment,
+                $this->mentionParser->getMentionedUsers()
+            ));
+        }
+
+
         $comment->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
         $this->entityManager->persist($comment);

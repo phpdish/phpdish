@@ -11,5 +11,9 @@ final class Events
      */
     const TOPIC_REPLIED = 'topic.replied';
 
-
+    /**
+     * 回复中提及用户
+     * @var string
+     */
+    const REPLY_AT_USER = 'reply.at_user';
 }

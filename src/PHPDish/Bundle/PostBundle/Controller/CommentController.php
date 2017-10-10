@@ -2,6 +2,8 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\PostBundle\Event\Events;
+use PHPDish\Bundle\PostBundle\Event\PostCommentedEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,6 +35,10 @@ class CommentController extends RestController
         $view = $this->view();
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getPostCommentManager()->saveComment($comment);
+
+            //触发文章评论事件
+            $this->get('event_dispatcher')->dispatch(Events::POST_COMMENTED, new PostCommentedEvent($post, $comment));
+
             $view->setData([
                     'comment' => $comment
                 ])

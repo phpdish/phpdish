@@ -18,6 +18,7 @@ services:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
         arguments:
             - "@doctrine.orm.entity_manager"
+            - '@event_dispatcher'
             - "@markdown.parser"
             - "@phpdish.mention.parser"
 
