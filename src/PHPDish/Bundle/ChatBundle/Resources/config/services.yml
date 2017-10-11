@@ -1,4 +1,4 @@
 services:
     phpdish.manager.chat:
         class: PHPDish\Bundle\ChatBundle\Service\ChatsManager
-        arguments: ["@"]
+        arguments: ["@doctrine.orm.entity_manager"]

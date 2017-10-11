@@ -8,9 +8,8 @@ namespace PHPDish\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
-use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -20,7 +19,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser implements UserInterface
+class User extends BaseUser implements UserInterface, ParticipantInterface
 {
     use DateTimeTrait;
 

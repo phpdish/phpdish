@@ -10,6 +10,10 @@ fos_comment_api:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /inbox
+
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
     prefix:   /
@@ -65,5 +69,4 @@ hwi_oauth_connect:
 
 weibo_login:
     path: "/login/check-weibo"
-
 
