@@ -1,0 +1,21 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} 我的提醒{% endblock %}
+
+{% block content %}
+    <div class="container" role="main">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <ul class="list-group vertical-nav">
+                    <li class="list-group-item nav-item"><i class="if i-envelope-o"></i> 私信</li>
+                    <li class="list-group-item nav-item active">
+                        <a href="{{ path('notifications') }}"><i class="if i-bell-o"></i> 通知</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                {% block notification_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

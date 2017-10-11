@@ -16,8 +16,6 @@ class ChatsController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-
         return $this->render('PHPDishChatBundle:Default:index.html.twig');
     }
 }
