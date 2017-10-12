@@ -8,6 +8,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
 
+# Listeners
 
     phpdish.event_listener.notification.follow_user:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
@@ -46,3 +47,11 @@ services:
             - {name: kernel.event_listener, event: user.mentioned.comment, method: onUserMentionedInComment}
             - {name: kernel.event_listener, event: user.mentioned.reply, method: onUserMentionedInReply}
         public: false
+
+# Twig Extension
+    phpdish.twig_extension.notification:
+       class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension
+       arguments: ['@phpdish.manager.notification', 'security.token_storage']
+       tags:
+           - {name: twig.extension}
+       public: false

@@ -24,3 +24,35 @@
     }
   }
 }
+
+/*------------------------------------
+  对话框
+------------------------------------*/
+.chat-list{
+  .chat{
+    .avatar{
+      width: 45px;
+      height:  45px;
+      border-radius: 50%;
+      border: 1px solid $borderColor;
+    }
+    .body{
+      font-size:14px;
+      line-height: 1.5em;
+      margin-top:5px;
+      &.preview{
+        a{
+          color: #999;
+        }
+      }
+    }
+  }
+}
+
+.reply-chat{
+  padding-top:40px;
+  .body{
+    height: 65px;
+    resize:vertical;
+  }
+}

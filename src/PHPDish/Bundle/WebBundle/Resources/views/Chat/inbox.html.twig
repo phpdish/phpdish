@@ -1,10 +1,10 @@
 {% extends 'PHPDishWebBundle:Common:notification_layout.html.twig' %}
 
+{% block title %} 收件箱 {% endblock %}
+
 {% block notification_content %}
     <div class="panel panel-u">
         <div class="panel-heading">收件箱</div>
-        <ul class="list-group">
-            {% include 'PHPDishWebBundle:Chat:thread_list.html.twig' with threads %}
-        </ul>
+        {% include 'PHPDishWebBundle:Chat:thread_list.html.twig' with threads %}
     </div>
 {% endblock %}

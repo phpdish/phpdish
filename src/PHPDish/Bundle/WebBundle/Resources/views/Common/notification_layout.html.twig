@@ -2,16 +2,15 @@
 
 {% block title %} 我的提醒{% endblock %}
 
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/notification.js') }}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="container" role="main">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <ul class="list-group vertical-nav">
-                    <li class="list-group-item nav-item"><i class="if i-envelope-o"></i> 私信</li>
-                    <li class="list-group-item nav-item active">
-                        <a href="{{ path('notifications') }}"><i class="if i-bell-o"></i> 通知</a>
-                    </li>
-                </ul>
+                {{ knp_menu_render('notification_menu', {'currentClass': 'active', 'ancestorClass': 'on'}) }}
             </div>
             <div class="col-lg-9 col-md-9">
                 {% block notification_content %}{% endblock %}

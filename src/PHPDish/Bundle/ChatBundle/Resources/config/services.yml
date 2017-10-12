@@ -2,3 +2,9 @@ services:
     phpdish.manager.chat:
         class: PHPDish\Bundle\ChatBundle\Service\ChatsManager
         arguments: ["@doctrine.orm.entity_manager"]
+
+    phpdish.menu_builder.notification_menu:
+        class: PHPDish\Bundle\ChatBundle\Menu\NotificationMenuBuilder
+        arguments: ['@knp_menu.factory']
+        tags:
+           - { name: knp_menu.menu_builder, method: createMenu, alias: notification_menu}

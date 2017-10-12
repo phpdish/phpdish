@@ -105,6 +105,12 @@ knp_gaufrette:
           adapter: avatar
           alias: phpdish.filesystem.avatar
 
+knp_menu:
+    twig:
+        template: KnpMenuBundle::menu.html.twig
+    templating: false
+    default_renderer: twig
+
 # Liip Imagine
 liip_imagine:
     loaders:

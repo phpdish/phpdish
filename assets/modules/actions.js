@@ -60,3 +60,29 @@ $('[data-role="follow"]').on('click', '[data-action="follow"]', function(){
         buttonLock.release();
     });
 });
+
+//属性菜单collapse
+$('.vertical-menu').find('[data-action="collapse"] span').on('click', '', function(){
+    const $subMenu = $(this).find('.sub-menu');
+    $(this).parent().toggleClass('on');
+});
+
+/**
+ * 未读消息
+ */
+(function(){
+    const $notificationNumber = $('#notification-number');
+    if ($notificationNumber.length > 0) {
+        const originalDocumentTitle = document.title;
+        setInterval(() => {
+            Util.request('notification.count').done((response) => {
+                if (response.count > 0) {
+                    $notificationNumber.text(response.count).attr('data-number', response.count);
+                    document.title = `[${response.count}]` + originalDocumentTitle;
+                } else {
+                    $notificationNumber.removeAttr('data-number');
+                }
+            });
+        },  10000);
+    }
+})($);

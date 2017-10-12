@@ -1,21 +1,28 @@
-{% for thread in threads %}
-    <li class="list-group-item">
-        <div class="media notification">
-            <div class="media-left">
-                <a href="{{ path('user_view', {username: thread.createdBy.username}) }}">
-                    <img class="media-object avatar" src="{{ asset(thread.createdBy.avatar)|imagine_filter('middle_square') }}">
-                </a>
-            </div>
-            <div class="media-body">
-                <div class="media-heading">{{ thread.createdBy.username }}</div>
-                <div>
-                    {{ thread.lastMessage.body }}
+<ul class="list-group chat-list">
+    {% for thread in threads %}
+        <li class="list-group-item">
+            <div class="media chat">
+                <div class="media-left">
+                    <a href="{{ path('user_view', {username: thread.createdBy.username}) }}">
+                        <img class="media-object avatar" src="{{ asset(thread.createdBy.avatar)|imagine_filter('middle_square') }}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="media-heading">
+                        {{ thread.createdBy.username }}
+                        <span class="meta pull-right">{{ thread.lastMessage.createdAt|time_diff }}</span>
+                    </div>
+                    <div class="body preview">
+                        <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}">
+                            {{ thread.lastMessage.body }}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
-{% else %}
-    <li class="list-group-item empty-data">
-        <i class="if i-envelope"></i> 还没有私信哟
-    </li>
-{% endfor %}
+        </li>
+    {% else %}
+        <li class="list-group-item empty-data">
+            <i class="if i-envelope"></i> 还没有私信哟
+        </li>
+    {% endfor %}
+</ul>

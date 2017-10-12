@@ -31,6 +31,7 @@ const routes = {
     'upload': {path: '/uploads', method: 'POST'},
     'message.add': {path:'/user/messages/add', method: 'POST'},
     'captcha': '/captcha', ///验证码
+    'notification.count': '/notifications/count'
 };
 
 function Route()

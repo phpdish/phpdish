@@ -5,6 +5,7 @@
   "build/js/category.js": "http://127.0.0.1:8080/js/category.js",
   "build/js/default.js": "http://127.0.0.1:8080/js/default.js",
   "build/js/gift.js": "http://127.0.0.1:8080/js/gift.js",
+  "build/js/notification.js": "http://127.0.0.1:8080/js/notification.js",
   "build/js/post.js": "http://127.0.0.1:8080/js/post.js",
   "build/js/sign.js": "http://127.0.0.1:8080/js/sign.js",
   "build/js/topic.js": "http://127.0.0.1:8080/js/topic.js",

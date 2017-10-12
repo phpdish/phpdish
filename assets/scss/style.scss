@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
-//下margin 10px
+/*------------------------------------
+  下margin 10px
+------------------------------------*/
 .margin-bottom-10{
   margin-bottom: 10px !important;
 }
 
-//圆形图片
+/*------------------------------------
+  圆形图片
+------------------------------------*/
 .img-circle{
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -18,7 +22,9 @@
   cursor: pointer;
 }
 
-//Badge
+/*------------------------------------
+  Badge
+------------------------------------*/
 .badge-u{
   color: #fff;
 }
@@ -29,7 +35,9 @@
   background-color:orange !important;
 }
 
-//推荐印章
+/*------------------------------------
+  推荐印章
+------------------------------------*/
 .sticky-tag{
   border:1px solid #ea6f5a;
   padding: 0 2px;
@@ -45,7 +53,9 @@
   }
 }
 
-//关注按钮组
+/*------------------------------------
+  关注按钮组
+------------------------------------*/
 .follow-panel{
   .btn-unfollow{
     @extend .u-btn-outline-primary;
@@ -55,7 +65,9 @@
   }
 }
 
-//tab导航
+/*------------------------------------
+  tab导航
+------------------------------------*/
 .tab-nav{
   margin-bottom: -1px;
   margin-left: 0;
@@ -78,7 +90,9 @@
   }
 }
 
-//自定义panel
+/*------------------------------------
+  自定义panel
+------------------------------------*/
 .panel-u{
   //border-color: $borderColor;
   border: none;
@@ -97,14 +111,20 @@
   }
 }
 
-//widget panel
+/*------------------------------------
+  widget panel
+------------------------------------*/
 .panel-widget{
   @extend .panel-u;
   .panel-heading{
     text-align:left;
   }
 }
-//导航区域
+
+
+/*------------------------------------
+  导航区域
+------------------------------------*/
 .nav-profile{
   margin-right: 0;
   .btn-register{
@@ -114,6 +134,20 @@
     border-radius: 999px;
     padding: 0 15px;
     margin-top: 14px;
+  }
+
+  .nav-notifications{
+    .if{
+      font-size:18px;
+      vertical-align: middle;
+    }
+    .notification-number{
+      display:none;
+      &[data-number]{
+        display: inline-block;
+        background-color:#e64b3b;
+      }
+    }
   }
 
   .nav-user{
@@ -313,27 +347,64 @@ form{
 /*------------------------------------
   侧边导航
 ------------------------------------*/
-
-.vertical-nav{
-  font-size: 16px;
+.vertical-menu{
+  font-size: 18px;
   .if{
-    font-size: 20px;
     color: $contrastColor;
     vertical-align: middle;
     margin-right:15px;
-    font-weight: 700;
+    &:hover, &.active{
+      color: $contrastColor;
+    }
   }
-  .nav-item{
+  .list-group-item{
     border:none;
     padding: 10px 25px;
+    span{
+      font:{
+        size: 15px;
+        family: "微软雅黑";
+      }
+      cursor:pointer;
+    }
     a{
       text-decoration: none;
+      font:{
+        size: 15px;
+        family: "微软雅黑";
+      }
       &:active{
         color: $linkColor;
       }
     }
+
+    //鼠标悬停或者选中变背景色
     &:hover, &.active{
       background-color: #f0f0f0;
+    }
+
+    &.on{
+      .sub-menu{
+        display:block;
+      }
+    }
+    .sub-menu{
+      display:none;
+      padding-left: 18px;
+      transition: display 0.5s ease-in;
+      list-style: none;
+      li{
+        padding: 5px;
+        &.active{
+          background-color: #f0f0f0;
+        }
+      }
+      a{
+        font:{
+          size: 13px;
+          family: "微软雅黑";
+        }
+      }
     }
   }
 }
