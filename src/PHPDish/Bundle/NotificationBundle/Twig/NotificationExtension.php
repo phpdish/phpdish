@@ -30,7 +30,7 @@ class NotificationExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('notification_unseen_number', array($this, 'priceFilter')),
+            new \Twig_SimpleFunction('notification_unseen_number', [$this, 'getUnSeenNotificationNumber']),
         );
     }
 

@@ -51,7 +51,7 @@ services:
 # Twig Extension
     phpdish.twig_extension.notification:
        class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension
-       arguments: ['@phpdish.manager.notification', 'security.token_storage']
+       arguments: ['@phpdish.manager.notification', '@security.token_storage']
        tags:
            - {name: twig.extension}
        public: false
