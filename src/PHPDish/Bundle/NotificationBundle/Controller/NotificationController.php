@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Controller;
 
+use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,12 +33,22 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $notifications = $this->get('phpdish.manager.notification')->findUserNotifications(
+        $manager = $this->getNotificationManager();
+        $notifications = $manager->findUserNotifications(
             $this->getUser(),
             $request->query->getInt('page', 1)
         );
+        $manager->readNotifications($notifications->getCurrentPageResults());
         return $this->render('PHPDishWebBundle:Notification:index.html.twig', [
             'notifications' => $notifications
         ]);
+    }
+
+    /**
+     * @return NotificationManagerInterface
+     */
+    protected function getNotificationManager()
+    {
+        return $this->get('phpdish.manager.notification');
     }
 }

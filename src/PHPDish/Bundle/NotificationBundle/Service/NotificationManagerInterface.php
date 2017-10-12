@@ -88,4 +88,10 @@ interface NotificationManagerInterface
      * @return Pagerfanta
      */
     public function findUserNotifications(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 将多个通知设置为已读
+     * @param array $notifications
+     */
+    public function readNotifications($notifications);
 }

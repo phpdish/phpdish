@@ -2,6 +2,7 @@
 
 import Util from './util.js';
 import lockButton from '../modules/button-lock.js';
+import $ from 'jquery';
 
 //关注专栏
 $('[data-role="follow-category"]').on('click', '[data-action="follow"]', function(){
@@ -62,10 +63,10 @@ $('[data-role="follow"]').on('click', '[data-action="follow"]', function(){
 });
 
 //属性菜单collapse
-$('.vertical-menu').find('[data-action="collapse"] span').on('click', '', function(){
+/*$('.vertical-menu').find('[data-action="collapse"] span').on('click', '', function(){
     const $subMenu = $(this).find('.sub-menu');
     $(this).parent().toggleClass('on');
-});
+});*/
 
 /**
  * 未读消息
@@ -78,7 +79,7 @@ $('.vertical-menu').find('[data-action="collapse"] span').on('click', '', functi
             Util.request('notification.count').done((response) => {
                 if (response.count > 0) {
                     $notificationNumber.text(response.count).attr('data-number', response.count);
-                    document.title = `[${response.count}]` + originalDocumentTitle;
+                    document.title = `(${response.count}) ` + originalDocumentTitle;
                 } else {
                     $notificationNumber.removeAttr('data-number');
                 }

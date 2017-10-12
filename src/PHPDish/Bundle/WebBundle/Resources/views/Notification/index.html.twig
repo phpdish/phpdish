@@ -6,7 +6,6 @@
     <div class="panel panel-u">
         <div class="panel-heading">全部提醒</div>
         <ul class="list-group notification-list">
-            {{ notification_unseen_number() }}
             {% import 'PHPDishWebBundle:Macros:notifications.html.twig' as renderer %}
             {% for notification in notifications %}
                 <li class="list-group-item">

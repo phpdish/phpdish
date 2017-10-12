@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -151,6 +152,7 @@ class NotificationManager implements NotificationManagerInterface
         $qb = $this->notificationRepository->createQueryBuilder('n');
         return $qb->select($qb->expr()->count('n'))
             ->where('n.user = :userId')->setParameter('userId', $user)
+            ->andWhere('n.seen = :seen')->setParameter('seen', false)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -164,5 +166,22 @@ class NotificationManager implements NotificationManagerInterface
             ->where('n.user = :userId')->setParameter('userId', $user)
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function readNotifications($notifications)
+    {
+        $notificationIds = [];
+        foreach ($notifications as $notification) {
+            $notificationIds[] = $notification->getId();
+        }
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->update('PHPDishNotificationBundle:Notification', 'n')
+            ->set('n.seen', true)
+            ->where($qb->expr()->in('n.id', $notificationIds))
+            ->getQuery()
+            ->execute();
     }
 }
