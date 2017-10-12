@@ -12,7 +12,7 @@ fos_user:
 
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
-    prefix: /inbox
+    prefix: /chats
 
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
