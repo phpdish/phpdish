@@ -5,6 +5,7 @@ namespace PHPDish\Bundle\UserBundle\Form\Type;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,10 @@ class ChangeUserProfileType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => '邮箱'
             ])
-            ->add('profile', ProfileType::class);
+            ->add('profile', ProfileType::class)
+            ->add('avatar', HiddenType::class, [
+                'label' => '头像'
+            ]);
     }
 
     /**

@@ -13,7 +13,7 @@ class SettingController extends Controller
     use ManagerTrait;
 
     /**
-     * @Route("/settings/basic", name="setting_profile")
+     * @Route("/settings", name="setting_profile")
      *
      * @param Request $request
      *

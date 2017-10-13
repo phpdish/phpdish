@@ -7,8 +7,8 @@
   "build/js/gift.js": "http://127.0.0.1:8080/js/gift.js",
   "build/js/notification.js": "http://127.0.0.1:8080/js/notification.js",
   "build/js/post.js": "http://127.0.0.1:8080/js/post.js",
+  "build/js/setting.js": "http://127.0.0.1:8080/js/setting.js",
   "build/js/sign.js": "http://127.0.0.1:8080/js/sign.js",
   "build/js/topic.js": "http://127.0.0.1:8080/js/topic.js",
-  "build/js/user.js": "http://127.0.0.1:8080/js/user.js",
   "build/manifest.js": "http://127.0.0.1:8080/manifest.js"
 }

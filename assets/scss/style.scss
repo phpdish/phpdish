@@ -320,15 +320,50 @@
 /*------------------------------------
   上传的照相机按钮
 ------------------------------------*/
-.upload-camera-icon{
-  display:inline-block;
-  padding: 10px 15px;
-  cursor: pointer;
-  color: $metaColor;
-  i{
-    font-size: 22px;
+.upload-cover{
+  position: relative;
+  width: 55px;
+  height: 55px;
+
+  &.uploaded{
+    .upload-camera-icon{
+      display:none;
+    }
+    &:hover{
+      .upload-camera-icon{
+        display:block;
+      }
+    }
   }
-  border: 1px dashed $metaColor;
+  //图标区域
+  .upload-camera-icon{
+    width: 55px;
+    height: 55px;
+    z-index:999 !important;
+    border: 1px dashed $metaColor;
+    display:block;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: $metaColor;
+    i{
+      font-size: 22px;
+    }
+    &:hover{
+      background-color:rgba(0,0,0,0.5);
+      i{
+        color:#fff0f0;
+      }
+    }
+  }
+  .preview-image{
+    position: absolute;
+    left:0;
+    top:0;
+    z-index:1;
+    width: 55px;
+    height: 55px;
+    border: 1px dashed $metaColor;
+  }
 }
 
 .i-plus{
