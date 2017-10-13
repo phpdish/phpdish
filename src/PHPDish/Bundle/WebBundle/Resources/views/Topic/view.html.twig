@@ -46,7 +46,7 @@
                 <div class="panel panel-u">
                     <div class="panel-heading"><h5>{{ replies|length }} 回复</h5></div>
                     <ul class="list-group reply-list" id="reply-list" data-role="replies-panel">
-                        {% include 'PHPDishWebBundle:Common:reply_list.html.twig'%}
+                        {% include 'PHPDishWebBundle:TopicReply:reply_list.html.twig'%}
                     </ul>
                     {% if replies.haveToPaginate %}
                     <div class="panel-footer">

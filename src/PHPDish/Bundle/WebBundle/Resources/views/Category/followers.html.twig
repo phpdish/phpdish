@@ -5,7 +5,7 @@
 {% block category_content %}
      {% if users.count %}
         <div class="panel-body user-list">
-            {% include 'PHPDishWebBundle:Common:user_list.html.twig' %}
+            {% include 'PHPDishWebBundle:User:user_list.html.twig' %}
         </div>
         {% if users.haveToPaginate %}
             <footer class="panel-footer">

@@ -9,7 +9,7 @@
 {% block category_content %}
     {% if posts.count %}
         <ul class="list-group post-list">
-            {% include 'PHPDishWebBundle:Common:post_list.html.twig' %}
+            {% include 'PHPDishWebBundle:Post:post_list.html.twig' %}
         </ul>
         {% if posts.haveToPaginate %}
         <footer class="panel-footer">

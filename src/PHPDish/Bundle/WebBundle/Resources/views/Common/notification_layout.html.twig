@@ -10,7 +10,17 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                {{ knp_menu_render('notification_menu', {'currentClass': 'active', 'ancestorClass': 'on'}) }}
+                <ul class="list-group vertical-menu">
+                    <li class="list-group-item {% if is_route_matched('fos_message_inbox') %}active{% endif %}">
+                        <a href="{{ path('fos_message_inbox') }}"><i class="if i-envelope-o"></i> 收件箱</a>
+                    </li>
+                    <li class="list-group-item {% if is_route_matched('fos_message_sent') %}active{% endif %}">
+                        <a href="{{ path('fos_message_sent') }}"> <i class="if i-sent"></i> 已发送</a>
+                    </li>
+                    <li class="list-group-item {% if is_route_matched('notifications') %}active{% endif %}">
+                        <a href="{{ path('notifications') }}"><i class="if i-bell-o"></i> 通知</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-9 col-md-9">
                 {% block notification_content %}{% endblock %}
