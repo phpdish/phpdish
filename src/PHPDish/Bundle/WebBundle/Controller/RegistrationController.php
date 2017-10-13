@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\WebBundle\Controller;
 
 use PHPDish\Bundle\UserBundle\Entity\User;
@@ -13,7 +14,9 @@ class RegistrationController extends Controller
 {
     /**
      * @Route("/register", name="register")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function registerAction(Request $request)
@@ -27,12 +30,14 @@ class RegistrationController extends Controller
             $user->setPassword($password);
 
             $this->getUserManager()->saveUser($user);
+
             return $this->redirectToRoute('user_view', [
-                'username' => $user->getUsername()
+                'username' => $user->getUsername(),
             ]);
         }
+
         return $this->render('PHPDishWebBundle:Registration:register.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

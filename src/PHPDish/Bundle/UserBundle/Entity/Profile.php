@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,29 +16,37 @@ class Profile implements ProfileInterface
     use IdentifiableTrait;
 
     /**
-     * 个人主页
+     * 个人主页.
+     *
      * @ORM\Column(type="string")
+     *
      * @var string
      */
     protected $url;
 
     /**
-     * 公司
+     * 公司.
+     *
      * @ORM\Column(type="string")
+     *
      * @var string
      */
     protected $company;
 
     /**
-     * 所在位置
+     * 所在位置.
+     *
      * @ORM\Column(type="string")
+     *
      * @var string
      */
     protected $location;
 
     /**
-     * 用户
+     * 用户.
+     *
      * @ORM\OneToOne(targetEntity="User", inversedBy="profile")
+     *
      * @var UserInterface
      */
     protected $user;
@@ -52,11 +61,13 @@ class Profile implements ProfileInterface
 
     /**
      * @param string $url
+     *
      * @return Profile
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -70,11 +81,13 @@ class Profile implements ProfileInterface
 
     /**
      * @param string $company
+     *
      * @return Profile
      */
     public function setCompany($company)
     {
         $this->company = $company;
+
         return $this;
     }
 
@@ -88,11 +101,13 @@ class Profile implements ProfileInterface
 
     /**
      * @param string $location
+     *
      * @return Profile
      */
     public function setLocation($location)
     {
         $this->location = $location;
+
         return $this;
     }
 }

@@ -34,13 +34,11 @@ class TopicRepliedEvent extends Event
 
     /**
      * @param TopicInterface $topic
-     *
      * @return TopicRepliedEvent
      */
     public function setTopic($topic)
     {
         $this->topic = $topic;
-
         return $this;
     }
 
@@ -54,13 +52,11 @@ class TopicRepliedEvent extends Event
 
     /**
      * @param ReplyInterface $reply
-     *
      * @return TopicRepliedEvent
      */
     public function setReply($reply)
     {
         $this->reply = $reply;
-
         return $this;
     }
 }

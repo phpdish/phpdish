@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\ChatBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Entity\ThreadMetadata as BaseThreadMetadata;
 
@@ -24,12 +23,14 @@ class ThreadMetadata extends BaseThreadMetadata
      *   targetEntity="Thread",
      *   inversedBy="metadata"
      * )
+     *
      * @var \FOS\MessageBundle\Model\ThreadInterface
      */
     protected $thread;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     *
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $participant;

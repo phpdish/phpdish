@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
@@ -18,7 +19,9 @@ class CategoryController extends RestController
 
     /**
      * @Route("/categories/new", name="category_add")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function createAction(Request $request)
@@ -37,21 +40,26 @@ class CategoryController extends RestController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveCategory($category);
             $this->addFlash('notice', '专栏创建成功');
+
             return $this->redirectToRoute('category_view', [
-                'slug' => $category->getSlug()
+                'slug' => $category->getSlug(),
             ]);
         }
+
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [
             'form' => $form->createView(),
-            'hasManyCategories' => $number >= 2
+            'hasManyCategories' => $number >= 2,
         ]);
     }
 
     /**
-     * 专栏详情
+     * 专栏详情.
+     *
      * @Route("/categories/{slug}", name="category_view")
-     * @param string $slug
+     *
+     * @param string  $slug
      * @param Request $request
+     *
      * @return Response
      */
     public function viewAction($slug, Request $request)
@@ -61,25 +69,29 @@ class CategoryController extends RestController
         if ($request->query->get('orderby') === 'hot') {
             $criteria->orderBy([
                 'viewCount' => 'desc',
-                'createdAt' => 'desc'
+                'createdAt' => 'desc',
             ]);
         } else {
             $criteria->orderBy([
-                'createdAt' => 'desc'
+                'createdAt' => 'desc',
             ]);
         }
         $posts = $this->getPostManager()->findPosts($criteria, $request->query->getInt('page', 1));
+
         return $this->render('PHPDishWebBundle:Category:view.html.twig', [
             'category' => $category,
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 
     /**
-     * 编辑专栏信息
+     * 编辑专栏信息.
+     *
      * @Route("/categories/{slug}/edit", name="category_edit")
-     * @param string $slug
+     *
+     * @param string  $slug
      * @param Request $request
+     *
      * @return Response
      */
     public function editAction($slug, Request $request)
@@ -95,39 +107,48 @@ class CategoryController extends RestController
         if ($form->isValid() && $form->isSubmitted()) {
             $manager->saveCategory($category);
             $this->addFlash('success', '专栏修改成功');
+
             return $this->redirectToRoute('category_view', [
-                'slug' => $category->getSlug()
+                'slug' => $category->getSlug(),
             ]);
         }
+
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [
             'form' => $form->createView(),
-            'category' => $category
+            'category' => $category,
         ]);
     }
 
     /**
-     * 专栏的关注者
+     * 专栏的关注者.
+     *
      * @Route("/categories/{slug}/followers", name="category_followers")
      * @Method("GET")
-     * @param string $slug
+     *
+     * @param string  $slug
      * @param Request $request
+     *
      * @return Response
      */
     public function getFollowersAction($slug, Request $request)
     {
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $users = $this->getUserManager()->findCategoryFollowers($category, $request->query->getInt('page', 1));
-        return $this->render('PHPDishWebBundle:Category:followers.html.twig',  [
+
+        return $this->render('PHPDishWebBundle:Category:followers.html.twig', [
             'category' => $category,
-            'users'  => $users
+            'users' => $users,
         ]);
     }
 
     /**
-     * 关注话题
+     * 关注话题.
+     *
      * @Route("/categories/{slug}/followers", name="category_follow")
      * @Method("POST")
+     *
      * @param string $slug
+     *
      * @return Response
      */
     public function followAction($slug)
@@ -136,16 +157,20 @@ class CategoryController extends RestController
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $this->getCategoryManager()->followCategory($category, $this->getUser());
         $view = $this->view([
-            'follower_count' => $category->getFollowerCount()
+            'follower_count' => $category->getFollowerCount(),
         ]);
+
         return $this->handleView($view);
     }
 
     /**
-     * 取消关注话题
+     * 取消关注话题.
+     *
      * @Route("/categories/{slug}/followers", name="category_unfollow")
      * @Method("DELETE")
+     *
      * @param string $slug
+     *
      * @return Response
      */
     public function unFollowAction($slug)
@@ -154,22 +179,26 @@ class CategoryController extends RestController
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $this->getCategoryManager()->unFollowCategory($category, $this->getUser());
         $view = $this->view([
-            'follower_count' => $category->getFollowerCount()
+            'follower_count' => $category->getFollowerCount(),
         ]);
+
         return $this->handleView($view);
     }
 
     /**
-     * 获取用户的专栏
+     * 获取用户的专栏.
+     *
      * @param UserInterface $user
+     *
      * @return Response
      */
     public function userCategoriesAction(UserInterface $user)
     {
         $categories = $this->getCategoryManager()->findUserCategories($user);
+
         return $this->render('PHPDishWebBundle:Category:user_categories.html.twig', [
             'categories' => $categories,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CommentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use FOS\CommentBundle\Entity\Thread as BaseThread;
 class Thread extends BaseThread
 {
     /**
-     * @var string $id
+     * @var string
      *
      * @ORM\Id
      * @ORM\Column(type="string")

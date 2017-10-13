@@ -9,7 +9,8 @@ use PHPDish\Component\Media\Model\MediaInterface;
 class GeneralBuilder implements UrlBuilderInterface
 {
     /**
-     * 基本url
+     * 基本url.
+     *
      * @var string
      */
     protected $baseUrl;
@@ -19,7 +20,7 @@ class GeneralBuilder implements UrlBuilderInterface
     public function __construct(ImagineCacheManager $cacheManager, $baseUrl)
     {
         $this->imagineCacheManager = $cacheManager;
-        $this->baseUrl = '/' . trim($baseUrl,  '/')  . '/';
+        $this->baseUrl = '/'.trim($baseUrl, '/').'/';
     }
 
     /**

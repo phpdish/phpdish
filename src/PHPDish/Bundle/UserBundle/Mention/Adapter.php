@@ -8,6 +8,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
+
 namespace PHPDish\Bundle\UserBundle\Mention;
 
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
@@ -46,7 +47,7 @@ class Adapter implements AdapterInterface
     public function createUserLink($user)
     {
         return sprintf('<a href="%s" target="_blank" data-username="%s">@%s</a> ', $this->router->generate('user_view', [
-            'username' => $user->getUsername()
+            'username' => $user->getUsername(),
         ]), $user->getUsername(), $user->getUsername());
     }
 }

@@ -1,8 +1,8 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PHPDish\Bundle\CoreBundle\Model\CommentableTrait;
 use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
@@ -66,13 +66,14 @@ class Post implements PostInterface
     protected $category;
 
     /**
-     * 文章插图
+     * 文章插图.
+     *
      * @var array
      */
     protected $images;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -86,6 +87,7 @@ class Post implements PostInterface
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -103,6 +105,7 @@ class Post implements PostInterface
     public function setCover($cover)
     {
         $this->cover = $cover;
+
         return $this;
     }
 
@@ -112,6 +115,7 @@ class Post implements PostInterface
     public function getCover()
     {
         return true;
+
         return $this->cover;
     }
 
@@ -121,6 +125,7 @@ class Post implements PostInterface
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
+
         return $this;
     }
 
@@ -138,6 +143,7 @@ class Post implements PostInterface
     public function setCommentCount($commentCount)
     {
         $this->commentCount = $commentCount;
+
         return $this;
     }
 
@@ -158,7 +164,8 @@ class Post implements PostInterface
     }
 
     /**
-     * Gets the summary of the post
+     * Gets the summary of the post.
+     *
      * @return string
      */
     public function getSummary()
@@ -212,13 +219,16 @@ class Post implements PostInterface
     public function setCategory(CategoryInterface $category)
     {
         $this->category = $category;
+
         return $this;
     }
 
     /**
-     * 检查文章是否是属于指定用户
+     * 检查文章是否是属于指定用户.
+     *
      * @param UserInterface $user
-     * @return boolean
+     *
+     * @return bool
      */
     public function isBelongsTo(UserInterface $user)
     {
@@ -233,6 +243,7 @@ class Post implements PostInterface
         if (!is_null($this->images)) {
             return $this->images;
         }
-         return $this->images = Utility::extractImagesFromMarkdown($this->getOriginalBody());
+
+        return $this->images = Utility::extractImagesFromMarkdown($this->getOriginalBody());
     }
 }

@@ -21,7 +21,8 @@ abstract class EntityVoter extends Voter
     }
 
     /**
-     * 获取资源实体类
+     * 获取资源实体类.
+     *
      * @return string
      */
     abstract protected function getResourceClass();
@@ -32,6 +33,7 @@ abstract class EntityVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $entityClass = $this->getResourceClass();
+
         return in_array($attribute, [static::ACTION_VIEW, static::ACTION_EDIT])
             && $subject instanceof $entityClass;
     }
@@ -59,13 +61,16 @@ abstract class EntityVoter extends Voter
                 $result = $this->canEdit($subject, $user);
                 break;
         }
+
         return $result;
     }
 
     /**
-     * 如果资源已经公开，或者资源属于该用户则公开查看
-     * @param mixed $entity
+     * 如果资源已经公开，或者资源属于该用户则公开查看.
+     *
+     * @param mixed         $entity
      * @param UserInterface $user
+     *
      * @return bool
      */
     protected function canView($entity, UserInterface $user)
@@ -74,8 +79,9 @@ abstract class EntityVoter extends Voter
     }
 
     /**
-     * @param mixed $entity
+     * @param mixed         $entity
      * @param UserInterface $user
+     *
      * @return bool
      */
     protected function canEdit($entity, UserInterface $user)

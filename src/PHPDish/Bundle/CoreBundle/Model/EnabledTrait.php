@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -12,17 +13,21 @@ trait EnabledTrait
 
     /**
      * Set if is enabled.
+     *
      * @param bool $enabled enabled value
+     *
      * @return $this Self object
      */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+
         return $this;
     }
 
     /**
      * Get is enabled.
+     *
      * @return bool is enabled
      */
     public function isEnabled()
@@ -32,6 +37,7 @@ trait EnabledTrait
 
     /**
      * Enable.
+     *
      * @return $this Self object
      */
     public function enable()
@@ -41,6 +47,7 @@ trait EnabledTrait
 
     /**
      * Disable.
+     *
      * @return $this Self object
      */
     public function disable()

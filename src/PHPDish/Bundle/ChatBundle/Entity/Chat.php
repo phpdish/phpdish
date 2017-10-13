@@ -17,18 +17,21 @@ class Chat implements ChatInterface
 
     /**
      * @ORM\Column(type="string", length=500)
+     *
      * @var string
      */
     protected $body;
 
     /**
      * @ORM\Column(type="datetime")
+     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     protected $readAt;
@@ -47,7 +50,8 @@ class Chat implements ChatInterface
 
     /**
      * @ORM\Column(type="boolean")
-     * @var boolean
+     *
+     * @var bool
      */
     protected $read = false;
 
@@ -61,11 +65,13 @@ class Chat implements ChatInterface
 
     /**
      * @param string $body
+     *
      * @return Chat
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -79,11 +85,13 @@ class Chat implements ChatInterface
 
     /**
      * @param \DateTime $createdAt
+     *
      * @return Chat
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -97,11 +105,13 @@ class Chat implements ChatInterface
 
     /**
      * @param \DateTime $readAt
+     *
      * @return Chat
      */
     public function setReadAt($readAt)
     {
         $this->readAt = $readAt;
+
         return $this;
     }
 
@@ -115,11 +125,13 @@ class Chat implements ChatInterface
 
     /**
      * @param mixed $sender
+     *
      * @return Chat
      */
     public function setSender($sender)
     {
         $this->sender = $sender;
+
         return $this;
     }
 
@@ -133,11 +145,13 @@ class Chat implements ChatInterface
 
     /**
      * @param UserInterface $recipient
+     *
      * @return Chat
      */
     public function setRecipient($recipient)
     {
         $this->recipient = $recipient;
+
         return $this;
     }
 

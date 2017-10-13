@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +11,9 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function loginAction(Request $request)
@@ -33,6 +36,5 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
-
     }
 }

@@ -28,14 +28,15 @@ class NotificationMenuBuilder
             ->setChildrenAttribute('class', 'sub-menu');
 
         $chat->addChild('收件箱', [
-            'route' => 'fos_message_inbox'
+            'route' => 'fos_message_inbox',
         ]);
         $chat->addChild('已发送', [
-            'route' => 'fos_message_sent'
+            'route' => 'fos_message_sent',
         ]);
 
         $menu->addChild('通知', ['route' => 'notifications'])
             ->setAttribute('class', 'list-group-item if i-bell-o');
+
         return $menu;
     }
 }

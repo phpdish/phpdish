@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
@@ -8,7 +9,8 @@ class Controller extends BaseController
 {
     public function createJsonResponse($data, $status = 200)
     {
-        $response =  new JsonResponse($data, $status);
+        $response = new JsonResponse($data, $status);
+
         return $response;
     }
 }

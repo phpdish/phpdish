@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Carbon\Carbon;
@@ -38,6 +39,7 @@ class UserManager implements UserManagerInterface
     {
         $user = new User();
         $user->setCreatedAt(Carbon::now());
+
         return $user;
     }
 
@@ -49,6 +51,7 @@ class UserManager implements UserManagerInterface
         $user->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
         return true;
     }
 
@@ -88,6 +91,7 @@ class UserManager implements UserManagerInterface
     public function findUsersByNames($userNames)
     {
         $qb = $this->getRepository()->createQueryBuilder('u');
+
         return $qb->where($qb->expr()->in('u.username', $userNames))->getQuery()->getResult();
     }
 
@@ -100,6 +104,7 @@ class UserManager implements UserManagerInterface
             ->innerJoin('u.followers', 'f')
             ->where('f.id = :userId')->setParameter('userId', $user->getId())
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 
@@ -112,6 +117,7 @@ class UserManager implements UserManagerInterface
             ->innerJoin('u.following', 'f')
             ->where('f.id = :userId')->setParameter('userId', $user->getId())
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 
@@ -124,6 +130,7 @@ class UserManager implements UserManagerInterface
             ->innerJoin('u.followingCategories', 'f')
             ->where('f.id = :categoryId')->setParameter('categoryId', $category->getId())
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 
@@ -160,6 +167,7 @@ class UserManager implements UserManagerInterface
         $this->entityManager->persist($user);
         $this->entityManager->persist($follower);
         $this->entityManager->flush();
+
         return true;
     }
 
@@ -168,8 +176,8 @@ class UserManager implements UserManagerInterface
      */
     public function checkEmailExist($email)
     {
-        return (boolean)$this->getRepository()->findOneBy([
-            'email' => $email
+        return (bool) $this->getRepository()->findOneBy([
+            'email' => $email,
         ]);
     }
 
@@ -178,8 +186,8 @@ class UserManager implements UserManagerInterface
      */
     public function checkUsernameExist($username)
     {
-        return (boolean)$this->getRepository()->findOneBy([
-            'username' => $username
+        return (bool) $this->getRepository()->findOneBy([
+            'username' => $username,
         ]);
     }
 

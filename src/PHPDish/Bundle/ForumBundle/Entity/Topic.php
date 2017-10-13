@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -32,6 +33,7 @@ class Topic implements TopicInterface
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
      * @var UserInterface
      */
     protected $user;
@@ -69,7 +71,8 @@ class Topic implements TopicInterface
     protected $lastReplyUser;
 
     /**
-     * 文章插图
+     * 文章插图.
+     *
      * @var array
      */
     protected $images;
@@ -88,6 +91,7 @@ class Topic implements TopicInterface
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -139,16 +143,15 @@ class Topic implements TopicInterface
         return $this->repliedAt;
     }
 
-
     /**
      * {@inheritdoc}
      */
     public function setRepliedAt(\DateTime $reliedAt)
     {
         $this->repliedAt = $reliedAt;
+
         return $this;
     }
-
 
     /**
      * {@inheritdoc}
@@ -164,6 +167,7 @@ class Topic implements TopicInterface
     public function setReplyCount($replyCount)
     {
         $this->replyCount = $replyCount;
+
         return $this;
     }
 
@@ -231,7 +235,7 @@ class Topic implements TopicInterface
         if (!is_null($this->images)) {
             return $this->images;
         }
+
         return $this->images = Utility::extractImagesFromMarkdown($this->getOriginalBody());
     }
 }
-

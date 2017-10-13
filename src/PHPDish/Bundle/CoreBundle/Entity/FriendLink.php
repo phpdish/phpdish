@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -37,9 +38,9 @@ class FriendLink
     protected $priority = 0;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -47,7 +48,7 @@ class FriendLink
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -61,7 +62,7 @@ class FriendLink
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -71,7 +72,7 @@ class FriendLink
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
      *
@@ -85,7 +86,7 @@ class FriendLink
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -95,7 +96,7 @@ class FriendLink
     }
 
     /**
-     * Set logo
+     * Set logo.
      *
      * @param string $logo
      *
@@ -109,7 +110,7 @@ class FriendLink
     }
 
     /**
-     * Get logo
+     * Get logo.
      *
      * @return string
      */
@@ -119,9 +120,9 @@ class FriendLink
     }
 
     /**
-     * Set priority
+     * Set priority.
      *
-     * @param integer $priority
+     * @param int $priority
      *
      * @return FriendLink
      */
@@ -133,9 +134,9 @@ class FriendLink
     }
 
     /**
-     * Get priority
+     * Get priority.
      *
-     * @return integer
+     * @return int
      */
     public function getPriority()
     {

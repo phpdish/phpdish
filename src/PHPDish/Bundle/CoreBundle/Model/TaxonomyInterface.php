@@ -1,45 +1,53 @@
 <?php
-namespace PHPDish\Bundle\CoreBundle\Model;
 
-use DateTime;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
 interface TaxonomyInterface extends IdentifiableInterface, DateTimeInterface
 {
     /**
-     * 设置分类名称
+     * 设置分类名称.
+     *
      * @param string $name
+     *
      * @return TaxonomyInterface
      */
     public function setName($name);
 
     /**
-     * 获取分类
+     * 获取分类.
+     *
      * @return string
      */
     public function getName();
 
     /**
-     * 设置slug
+     * 设置slug.
+     *
      * @param string $slug
+     *
      * @return TaxonomyInterface
      */
     public function setSlug($slug);
 
     /**
-     * 获取slug
+     * 获取slug.
+     *
      * @return string
      */
     public function getSlug();
 
     /**
-     * 设置描述
+     * 设置描述.
+     *
      * @param string $description
+     *
      * @return TaxonomyInterface
      */
     public function setDescription($description);
 
     /**
-     * 获取描述
+     * 获取描述.
+     *
      * @return string
      */
     public function getDescription();

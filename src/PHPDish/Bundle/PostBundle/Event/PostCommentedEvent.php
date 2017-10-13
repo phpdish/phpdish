@@ -8,7 +8,8 @@ use PHPDish\Bundle\PostBundle\Model\PostInterface;
 class PostCommentedEvent extends PostEvent
 {
     /**
-     * 评论
+     * 评论.
+     *
      * @var CommentInterface
      */
     protected $comment;
@@ -29,11 +30,13 @@ class PostCommentedEvent extends PostEvent
 
     /**
      * @param CommentInterface $comment
+     *
      * @return PostCommentedEvent
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 }

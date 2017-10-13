@@ -34,11 +34,13 @@ class CommentMentionUserEvent extends Event
 
     /**
      * @param CommentInterface $comment
+     *
      * @return CommentMentionUserEvent
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -52,11 +54,13 @@ class CommentMentionUserEvent extends Event
 
     /**
      * @param UserInterface[] $mentionedUsers
+     *
      * @return CommentMentionUserEvent
      */
     public function setMentionedUsers($mentionedUsers)
     {
         $this->mentionedUsers = $mentionedUsers;
+
         return $this;
     }
 }

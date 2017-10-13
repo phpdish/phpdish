@@ -8,7 +8,7 @@ use PHPDish\Component\Media\Namer\NamerInterface;
 use PHPDish\Component\Media\UrlBuilder\UrlBuilderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileFactory  implements FileFactoryInterface
+class FileFactory implements FileFactoryInterface
 {
     /**
      * @var UrlBuilderInterface
@@ -44,13 +44,16 @@ class FileFactory  implements FileFactoryInterface
     }
 
     /**
-     * 判断上传的文件是否是图片
+     * 判断上传的文件是否是图片.
+     *
      * @param UploadedFile $uploadedFile
+     *
      * @return bool
      */
     public function isImage(UploadedFile $uploadedFile)
     {
         $contentType = $uploadedFile->getMimeType();
+
         return strpos($contentType, 'image') !== false;
     }
 
@@ -61,6 +64,7 @@ class FileFactory  implements FileFactoryInterface
     {
         $file = new File($key);
         $file->setUrl($this->urlBuilder->build($file));
+
         return $file;
     }
 }

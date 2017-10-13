@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface FileUploaderInterface
 {
     /**
-     * 上传文件
+     * 上传文件.
+     *
      * @param UploadedFile $file
+     *
      * @return FileInterface
      */
     public function upload(UploadedFile $file);

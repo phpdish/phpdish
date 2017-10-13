@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
@@ -13,60 +14,74 @@ class UserController extends RestController
 {
     /**
      * @Route("/users/{username}", name="user_view")
+     *
      * @param string $username
+     *
      * @return Response
      */
     public function viewAction($username)
     {
         return $this->forward('PHPDishPostBundle:Post:userPosts', [
-            'username' => $username
+            'username' => $username,
         ]);
     }
 
     /**
-     * 最近注册的用户
+     * 最近注册的用户.
+     *
      * @param int $limit
+     *
      * @return Response
      */
     public function latestUsersAction($limit)
     {
         $users = $this->getUserManager()->findLatestUsers($limit);
+
         return $this->render('PHPDishWebBundle:User:latest.html.twig', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
     /**
-     * 用户关注的人
+     * 用户关注的人.
+     *
      * @param UserInterface $user
+     *
      * @return Response
      */
     public function userFollowingAction(UserInterface $user)
     {
         $following = $this->getUserManager()->findUserFollowing($user, 1);
+
         return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
-            'users' => $following
+            'users' => $following,
         ]);
     }
 
     /**
-     * 用户的粉丝
+     * 用户的粉丝.
+     *
      * @param UserInterface $user
+     *
      * @return Response
      */
     public function userFollowersAction(UserInterface $user)
     {
         $following = $this->getUserManager()->findUserFollowers($user, 1);
+
         return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
-            'users' => $following
+            'users' => $following,
         ]);
     }
 
     /**
-     * 获取用户关注的人
+     * 获取用户关注的人.
+     *
      * @Route("/users/{username}/following", name="user_following")
-     * @param string $username
+     *
+     * @param string  $username
      * @param Request $request
+     *
      * @return Response
      */
     public function getUserFollowingAction($username, Request $request)
@@ -74,17 +89,20 @@ class UserController extends RestController
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         $following = $manager->findUserFollowing($user, $request->query->getInt('page', 1));
+
         return $this->render('PHPDishWebBundle:User:user_following.html.twig', [
             'user' => $user,
-            'users' => $following
+            'users' => $following,
         ]);
     }
 
     /**
      * @Route("/users/{username}/followers.{_format}", name="user_followers", defaults={"_format"="html"})
      * @Method("GET")
-     * @param string $username
+     *
+     * @param string  $username
      * @param Request $request
+     *
      * @return Response
      */
     public function getUserFollowersAction($username, Request $request)
@@ -95,15 +113,18 @@ class UserController extends RestController
 
         $view = $this->view([
                 'user' => $user,
-                'followers' => $followers
+                'followers' => $followers,
             ])->setTemplate('PHPDishWebBundle:User:user_followers.html.twig');
+
         return $this->handleView($view);
     }
 
     /**
      * @Route("/users/{username}/followers", name="follower_add")
      * @Method("POST")
+     *
      * @param string $username
+     *
      * @return Response
      */
     public function followAction($username)
@@ -115,21 +136,24 @@ class UserController extends RestController
         try {
             $manager->followUser($user, $this->getUser());
             $view->setStatusCode(static::HTTP_CREATED)->setData([
-                'follower_count' => $user->getFollowerCount()
+                'follower_count' => $user->getFollowerCount(),
             ]);
         } catch (\Exception $exception) {
             $view->setStatusCode(static::HTTP_BAD_REQUEST)
                 ->setData([
-                    'error' => $exception->getMessage()
+                    'error' => $exception->getMessage(),
                 ]);
         }
+
         return $this->handleView($view);
     }
 
     /**
      * @Route("/users/{username}/followers", name="follower_delete")
      * @Method("DELETE")
+     *
      * @param string $username
+     *
      * @return Response
      */
     public function unFollowAction($username)
@@ -140,8 +164,9 @@ class UserController extends RestController
         $view = $this->view();
         $manager->unFollowUser($user, $this->getUser());
         $view->setStatusCode(static::HTTP_OK)->setData([
-            'follower_count' => $user->getFollowerCount()
+            'follower_count' => $user->getFollowerCount(),
         ]);
+
         return $this->handleView($view);
     }
 

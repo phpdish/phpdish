@@ -2,7 +2,6 @@
 
 namespace PHPDish\Component\Media\Uploader;
 
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader extends FileUploader

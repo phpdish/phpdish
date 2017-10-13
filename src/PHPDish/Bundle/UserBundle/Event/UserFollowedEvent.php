@@ -33,11 +33,13 @@ class UserFollowedEvent extends Event
 
     /**
      * @param UserInterface $user
+     *
      * @return UserFollowedEvent
      */
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -51,11 +53,13 @@ class UserFollowedEvent extends Event
 
     /**
      * @param UserInterface $follower
+     *
      * @return UserFollowedEvent
      */
     public function setFollower($follower)
     {
         $this->follower = $follower;
+
         return $this;
     }
 }

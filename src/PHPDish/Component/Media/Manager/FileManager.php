@@ -40,6 +40,7 @@ class FileManager implements FileManagerInterface
     public function has($file)
     {
         $key = $file instanceof FileInterface ? $file->getKey() : $file;
+
         return $this->filesystem->has($key);
     }
 }

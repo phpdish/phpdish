@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -16,7 +17,7 @@ class UserType extends AbstractType
             ->add('email', TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
+                'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ));
     }

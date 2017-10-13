@@ -53,13 +53,16 @@ class TopicVoter extends Voter
                 $result = $this->canEdit($subject, $user);
                 break;
         }
+
         return $result;
     }
 
     /**
-     * 如果话题已经公开，或者话题属于该用户则公开查看
+     * 如果话题已经公开，或者话题属于该用户则公开查看.
+     *
      * @param TopicInterface $topic
-     * @param UserInterface $user
+     * @param UserInterface  $user
+     *
      * @return bool
      */
     protected function canView(TopicInterface $topic, UserInterface $user)
@@ -69,7 +72,8 @@ class TopicVoter extends Voter
 
     /**
      * @param TopicInterface $topic
-     * @param UserInterface $user
+     * @param UserInterface  $user
+     *
      * @return bool
      */
     protected function canEdit(TopicInterface $topic, UserInterface $user)

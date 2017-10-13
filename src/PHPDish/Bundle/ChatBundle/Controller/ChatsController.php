@@ -11,7 +11,9 @@ class ChatsController extends Controller
 {
     /**
      * @Route("/chats", name="chats")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Form\Type;
 
 use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
@@ -23,16 +24,16 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class, [
-                'label' => '标题'
+                'label' => '标题',
             ])
             ->add('thread', EntityType::class, [
                 'label' => '所属分类',
                 'choice_label' => 'name',
                 'class' => 'PHPDishForumBundle:Thread',
-                'choices' => $this->threadManager->findEnabledThreads()
+                'choices' => $this->threadManager->findEnabledThreads(),
             ])
             ->add('originalBody', TextareaType::class, [
-                'label' => '内容'
+                'label' => '内容',
             ]);
     }
 }

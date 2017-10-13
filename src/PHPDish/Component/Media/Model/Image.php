@@ -22,6 +22,7 @@ class Image extends File implements ImageInterface
     protected $height;
 
     protected $resizeUrl;
+
     /**
      * Set image width in pixels.
      *

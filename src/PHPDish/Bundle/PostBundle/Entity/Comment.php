@@ -1,8 +1,10 @@
 <?php
 /**
- * PHPDish comment component
+ * PHPDish comment component.
+ *
  * @author Tao <taosikai@yeah.net>
  */
+
 namespace  PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +21,7 @@ use JMS\Serializer\Annotation as JMS;
 class Comment extends BaseComment implements CommentInterface
 {
     use VotableTrait;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Post")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
@@ -41,6 +43,7 @@ class Comment extends BaseComment implements CommentInterface
     public function setPost(PostInterface $post)
     {
         $this->post = $post;
+
         return $this;
     }
 

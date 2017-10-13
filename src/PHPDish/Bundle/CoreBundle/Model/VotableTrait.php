@@ -1,8 +1,10 @@
 <?php
 /**
- * PHPDish comment component
+ * PHPDish comment component.
+ *
  * @author Tao <taosikai@yeah.net>
  */
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,19 +23,23 @@ trait VotableTrait
 //    protected $votes;
 
     /**
-     * Set voteCount
-     * @param integer $voteCount
+     * Set voteCount.
+     *
+     * @param int $voteCount
+     *
      * @return $this
      */
     public function setVoteCount($voteCount)
     {
         $this->voteCount = $voteCount;
+
         return $this;
     }
 
     /**
-     * Get voteCount
-     * @return integer
+     * Get voteCount.
+     *
+     * @return int
      */
     public function getVoteCount()
     {

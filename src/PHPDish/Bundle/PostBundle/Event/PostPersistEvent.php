@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Event;
 
 class PostPersistEvent extends PostEvent
@@ -19,6 +20,7 @@ class PostPersistEvent extends PostEvent
     /**
      * Checks if a listener has set the event to abort the persisting
      * operation.
+     *
      * @return bool
      */
     public function isPersistenceAborted()

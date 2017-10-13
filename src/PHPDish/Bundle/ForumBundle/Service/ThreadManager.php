@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;

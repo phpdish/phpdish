@@ -12,9 +12,12 @@ class DefaultController extends Controller
     const UPLOAD_FIELD_NAME = 'file';
 
     /**
-     * 附件上传接口
+     * 附件上传接口.
+     *
      * @Route("/uploads", name="upload")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function upload(Request $request)
@@ -24,9 +27,10 @@ class DefaultController extends Controller
             throw new \InvalidArgumentException('Bad arguments');
         }
         $file = $this->get('phpdish.media.file_uploader')->upload($uploadedFile);
+
         return $this->json([
             'key' => $file->getKey(),
-            'path' => $this->get('phpdish.media.url_builder')->buildImageResizeUrl($file, 'middle_square')
+            'path' => $this->get('phpdish.media.url_builder')->buildImageResizeUrl($file, 'middle_square'),
         ]);
     }
 }

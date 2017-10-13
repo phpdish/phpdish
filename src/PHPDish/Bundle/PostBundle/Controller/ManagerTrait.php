@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
@@ -9,6 +10,7 @@ trait ManagerTrait
 {
     /**
      * 获取post管理服务
+     *
      * @return PostManagerInterface
      */
     protected function getPostManager()
@@ -17,7 +19,8 @@ trait ManagerTrait
     }
 
     /**
-     * 获取分类管理
+     * 获取分类管理.
+     *
      * @return CategoryManagerInterface
      */
     protected function getCategoryManager()
@@ -27,6 +30,7 @@ trait ManagerTrait
 
     /**
      * 获取评论管理服务
+     *
      * @return CommentManagerInterface
      */
     public function getPostCommentManager()

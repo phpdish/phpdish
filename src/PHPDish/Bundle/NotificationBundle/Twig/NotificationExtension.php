@@ -35,8 +35,10 @@ class NotificationExtension extends \Twig_Extension
     }
 
     /**
-     * 获取当前用户未读的消息数量
+     * 获取当前用户未读的消息数量.
+     *
      * @param UserInterface $user
+     *
      * @return int
      */
     public function getUnSeenNotificationNumber(UserInterface $user = null)
@@ -53,7 +55,8 @@ class NotificationExtension extends \Twig_Extension
     }
 
     /**
-     * 获取当前登录用户
+     * 获取当前登录用户.
+     *
      * @return UserInterface
      */
     protected function getUser()
@@ -62,6 +65,7 @@ class NotificationExtension extends \Twig_Extension
         if (!$user instanceof UserInterface) {
             throw new \RuntimeException('There is no authenticated user');
         }
+
         return $user;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Component\Mention\MentionParserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ReplyManager  implements ReplyManagerInterface
+class ReplyManager implements ReplyManagerInterface
 {
     use PaginatorTrait;
     /**
@@ -66,6 +67,7 @@ class ReplyManager  implements ReplyManagerInterface
         $reply->setTopic($topic)
             ->setCreatedAt(Carbon::now());
         $user && $reply->setUser($user);
+
         return $reply;
     }
 
@@ -104,6 +106,7 @@ class ReplyManager  implements ReplyManagerInterface
             ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId())
             ->addCriteria($criteria)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 
@@ -115,6 +118,7 @@ class ReplyManager  implements ReplyManagerInterface
         $query = $this->replyRepository->createQueryBuilder('r')
             ->where('r.user = :userId')->setParameter('userId', $user->getId())
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 
@@ -136,6 +140,7 @@ class ReplyManager  implements ReplyManagerInterface
         $topic->setReplyCount($topic->getReplyCount() > 1 ? $topic->getReplyCount() - 1 : 0);
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
+
         return true;
     }
 }

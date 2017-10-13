@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Form\Type;
 
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
@@ -36,27 +37,29 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => '标题'
+                'label' => '标题',
             ])
             ->add('category', EntityType::class, [
                 'class' => 'PHPDishPostBundle:Category',
                 'choice_label' => 'name',
-                'choices' => $this->getCurrentUserCategories($options)
+                'choices' => $this->getCurrentUserCategories($options),
             ])
             ->add('originalBody', TextareaType::class, [
-                'label' => '内容'
+                'label' => '内容',
             ]);
     }
 
     /**
-     * 获取当前用户的专栏
+     * 获取当前用户的专栏.
+     *
      * @return \PHPDish\Bundle\PostBundle\Model\CategoryInterface[]
      */
     protected function getCurrentUserCategories($options)
     {
-       if (!isset($options['user'])) {
+        if (!isset($options['user'])) {
             throw new \InvalidArgumentException('You musts provide the option "user"');
         }
+
         return $this->categoryManager->findUserCategories($options['user']);
     }
 }

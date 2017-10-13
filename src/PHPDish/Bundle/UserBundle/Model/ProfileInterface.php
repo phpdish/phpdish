@@ -6,5 +6,4 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 
 interface ProfileInterface extends IdentifiableInterface
 {
-
 }

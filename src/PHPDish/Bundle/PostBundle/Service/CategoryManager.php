@@ -1,8 +1,8 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
-use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -28,7 +28,7 @@ class CategoryManager implements CategoryManagerInterface
      */
     protected $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager,  EventDispatcherInterface $eventDispatcher)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
@@ -61,14 +61,17 @@ class CategoryManager implements CategoryManagerInterface
     public function getUserCategoriesNumber(UserInterface $user)
     {
         $qb = $this->createGetUserCategoriesQueryBuilder($user);
+
         return $qb->select($qb->expr()->count('c'))
             ->getQuery()
             ->getSingleScalarResult();
     }
 
     /**
-     * 创建用户专栏查询的query builder
+     * 创建用户专栏查询的query builder.
+     *
      * @param UserInterface $user
+     *
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function createGetUserCategoriesQueryBuilder(UserInterface $user)
@@ -84,7 +87,7 @@ class CategoryManager implements CategoryManagerInterface
     public function findCategoryBySlug($slug)
     {
         return $this->getRepository()->findOneBy([
-            'slug' => $slug
+            'slug' => $slug,
         ]);
     }
 
@@ -94,6 +97,7 @@ class CategoryManager implements CategoryManagerInterface
     public function addManagerForCategory(CategoryInterface $category, UserInterface $user)
     {
         $category->addManager($user);
+
         return $this->saveCategory($category);
     }
 
@@ -107,6 +111,7 @@ class CategoryManager implements CategoryManagerInterface
         $result = $this->saveCategory($category);
         //触发订阅事件
         $this->eventDispatcher->dispatch(Events::CATEGORY_FOLLOWED, new CategoryFollowedEvent($category, $user));
+
         return $result;
     }
 
@@ -117,6 +122,7 @@ class CategoryManager implements CategoryManagerInterface
     {
         $category->removeFollower($user);
         $category->setFollowerCount($category->getFollowerCount() - 1 ?: 0);
+
         return $this->saveCategory($category);
     }
 
@@ -128,6 +134,7 @@ class CategoryManager implements CategoryManagerInterface
         $category = new Category();
         $category->setCreator($user)
             ->setCreatedAt(Carbon::now());
+
         return $category;
     }
 
@@ -139,6 +146,7 @@ class CategoryManager implements CategoryManagerInterface
         $category->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($category);
         $this->entityManager->flush();
+
         return true;
     }
 

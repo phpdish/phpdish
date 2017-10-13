@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
@@ -12,19 +13,23 @@ trait CommentableTrait
     protected $commentCount = 0;
 
     /**
-     * Set commentCount
-     * @param integer $commentCount
+     * Set commentCount.
+     *
+     * @param int $commentCount
+     *
      * @return $this
      */
     public function setCommentCount($commentCount)
     {
         $this->commentCount = $commentCount;
+
         return $this;
     }
 
     /**
-     * Get commentCount
-     * @return integer
+     * Get commentCount.
+     *
+     * @return int
      */
     public function getCommentCount()
     {

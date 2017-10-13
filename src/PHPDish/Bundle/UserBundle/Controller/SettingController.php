@@ -13,6 +13,5 @@ class SettingController extends Controller
     public function basicAction()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
     }
 }

@@ -1,12 +1,10 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
@@ -41,7 +39,7 @@ class PostManager implements PostManagerInterface
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         MarkdownParserInterface $markdownParser
-    ){
+    ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->entityManager = $entityManager;
         $this->markdownParser = $markdownParser;
@@ -54,6 +52,7 @@ class PostManager implements PostManagerInterface
     {
         $post = new Post();
         $post->setUser($user)->setCreatedAt(Carbon::now());
+
         return $post;
     }
 
@@ -78,6 +77,7 @@ class PostManager implements PostManagerInterface
         }
         $this->entityManager->persist($post);
         $this->entityManager->flush();
+
         return true;
     }
 
@@ -98,9 +98,9 @@ class PostManager implements PostManagerInterface
         $query = $this->getRepository()->createQueryBuilder('p')
             ->addCriteria($criteria)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
-
 
     /**
      * {@inheritdoc}
@@ -108,15 +108,17 @@ class PostManager implements PostManagerInterface
     public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
     {
         $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()))->orderBy(['createdAt' => 'desc']);
+
         return $this->findPosts($criteria, $page, $limit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findCategoryPosts(CategoryInterface $category, $page  = 1, $limit = null)
+    public function findCategoryPosts(CategoryInterface $category, $page = 1, $limit = null)
     {
         $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
+
         return $this->findPosts($criteria, $page, $limit);
     }
 
@@ -125,7 +127,8 @@ class PostManager implements PostManagerInterface
      */
     public function findLatestPosts($page, $limit = null)
     {
-        $criteria = Criteria::create()->orderBy(['createdAt'  => 'desc']);
+        $criteria = Criteria::create()->orderBy(['createdAt' => 'desc']);
+
         return $this->findPosts($criteria, $page, $limit);
     }
 

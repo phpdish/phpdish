@@ -51,7 +51,7 @@ class ChatManager implements ChatManagerInterface
             ->where('c.recipient = :recipientId and c.sender = :senderId')
             ->setParameters([
                 'recipientId' => $recipient,
-                'senderId' => $sender
+                'senderId' => $sender,
             ])
             ->getQuery()
             ->getResult();

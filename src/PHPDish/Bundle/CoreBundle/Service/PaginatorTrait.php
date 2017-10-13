@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Service;
 
 use Doctrine\ORM\Query;
@@ -16,10 +17,12 @@ trait PaginatorTrait
     }
 
     /**
-     * 创建分页
-     * @param Query $query
-     * @param int $page
+     * 创建分页.
+     *
+     * @param Query    $query
+     * @param int      $page
      * @param int|null $limit
+     *
      * @return Pagerfanta
      */
     protected function createPaginator(Query $query, $page, $limit = null)
@@ -27,6 +30,7 @@ trait PaginatorTrait
         $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
         $paginator->setCurrentPage($page);
         $paginator->setMaxPerPage($limit ?: $this->getMaxPerPage());
+
         return $paginator;
     }
 }

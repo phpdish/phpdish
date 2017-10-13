@@ -37,6 +37,7 @@ class FileDownloader implements FileDownloaderInterface
         $file->setContent($content)
             ->setKey($this->namer->transformFromUrl($mediaUrl));
         $this->fileManager->upload($file);
+
         return $file;
     }
 }

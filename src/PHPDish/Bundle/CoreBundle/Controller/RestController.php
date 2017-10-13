@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;

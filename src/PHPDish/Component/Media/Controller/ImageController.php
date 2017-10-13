@@ -29,6 +29,5 @@ class ImageController
         $width = $request->query->get('width');
         $height = $request->query->get('height');
         $file = $this->fileFactory->createFileByKey($key);
-
     }
 }

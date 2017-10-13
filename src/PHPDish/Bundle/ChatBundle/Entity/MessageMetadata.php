@@ -23,12 +23,14 @@ class MessageMetadata extends BaseMessageMetadata
      *   targetEntity="Message",
      *   inversedBy="metadata"
      * )
+     *
      * @var \FOS\MessageBundle\Model\MessageInterface
      */
     protected $message;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     *
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $participant;

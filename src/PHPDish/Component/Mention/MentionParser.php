@@ -8,6 +8,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
+
 namespace PHPDish\Component\Mention;
 
 class MentionParser implements MentionParserInterface
@@ -71,17 +72,19 @@ class MentionParser implements MentionParserInterface
         if ($this->mentionedNames) {
             $this->mentionedUsers = $this->adapter->findUsers($this->mentionedNames);
             foreach ($this->mentionedUsers as $user) {
-                $search = '@' . $user->getUsername();
+                $search = '@'.$user->getUsername();
                 $replace = $this->adapter->createUserLink($user);
                 $this->parsedBody = str_replace($search, $replace, $this->parsedBody);
             }
         }
+
         return $this;
     }
 
     protected static function extractUserNames($body)
     {
         preg_match_all("/@(\w+)/i", $body, $mentionItems);
+
         return array_unique($mentionItems[1]);
     }
 }

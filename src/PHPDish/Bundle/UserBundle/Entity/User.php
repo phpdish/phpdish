@@ -1,8 +1,10 @@
 <?php
 /**
- * PHPDish comment component
+ * PHPDish comment component.
+ *
  * @author Tao <taosikai@yeah.net>
  */
+
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +13,6 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -25,13 +26,15 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     use DateTimeTrait;
 
     /**
-     * 男性
+     * 男性.
+     *
      * @var int
      */
     const GENDER_MEN = 0;
 
     /**
-     * 女性
+     * 女性.
+     *
      * @var int
      */
     const GENDER_WOMEN = 1;
@@ -71,26 +74,32 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     protected $followerCount = 0;
 
     /**
-     * 个人资料
+     * 个人资料.
+     *
      * @ORM\OneToOne(targetEntity="Profile", mappedBy="user")
+     *
      * @var ProfileInterface
      */
     protected $profile;
 
     /**
-     * 关注我的用户
+     * 关注我的用户.
+     *
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="following")
      * @ORM\JoinTable(name="users_followers",
      *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id")}
      * )
+     *
      * @var ArrayCollection|UserInterface[]
      */
     protected $followers;
 
     /**
-     * 我关注的用户
+     * 我关注的用户.
+     *
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="followers")
+     *
      * @var ArrayCollection|UserInterface[]
      */
     protected $following;
@@ -105,19 +114,22 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 //    protected $roles;
 
     /**
-     * 订阅的专栏
+     * 订阅的专栏.
+     *
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", mappedBy="followers")
      */
     protected $followingCategories;
 
     /**
-     * 文章数量
+     * 文章数量.
+     *
      * @ORM\Column(type="integer")
      */
     protected $postCount = 0;
 
     /**
-     * 话题数量
+     * 话题数量.
+     *
      * @ORM\Column(type="integer")
      */
     protected $topicCount = 0;
@@ -142,14 +154,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $githubAccessToken;
 
-
     public function __construct()
     {
         parent::__construct();
         //关注我的
         $this->followers = new ArrayCollection();
         //我关注的
-        $this->following =  new ArrayCollection();
+        $this->following = new ArrayCollection();
     }
 
     public function getSalt()
@@ -158,19 +169,23 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * Set gender
-     * @param integer $gender
+     * Set gender.
+     *
+     * @param int $gender
+     *
      * @return User
      */
     public function setGender($gender)
     {
         $this->gender = $gender;
+
         return $this;
     }
 
     /**
-     * Get gender
-     * @return integer
+     * Get gender.
+     *
+     * @return int
      */
     public function getGender()
     {
@@ -209,6 +224,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function setFollowerCount($count)
     {
         $this->followerCount = $count;
+
         return $this;
     }
 
@@ -221,9 +237,11 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * 检查用户是否被某个用户关注
+     * 检查用户是否被某个用户关注.
+     *
      * @param UserInterface $user
-     * @return boolean
+     *
+     * @return bool
      */
     public function isFollowedBy(UserInterface $user)
     {
@@ -231,7 +249,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -245,7 +263,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -260,6 +278,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function addFollower(UserInterface $follower)
     {
         $this->followers[] = $follower;
+
         return $this;
     }
 
@@ -281,11 +300,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param int $postCount
+     *
      * @return User
      */
     public function setPostCount($postCount)
     {
         $this->postCount = $postCount;
+
         return $this;
     }
 
@@ -299,11 +320,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param int $topicCount
+     *
      * @return User
      */
     public function setTopicCount($topicCount)
     {
         $this->topicCount = $topicCount;
+
         return $this;
     }
 
@@ -317,11 +340,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param string $avatar
+     *
      * @return User
      */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
         return $this;
     }
 
@@ -335,11 +360,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param mixed $weiboId
+     *
      * @return User
      */
     public function setWeiboId($weiboId)
     {
         $this->weiboId = $weiboId;
+
         return $this;
     }
 
@@ -353,11 +380,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param mixed $weiboAccessToken
+     *
      * @return User
      */
     public function setWeiboAccessToken($weiboAccessToken)
     {
         $this->weiboAccessToken = $weiboAccessToken;
+
         return $this;
     }
 
@@ -371,11 +400,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param mixed $githubId
+     *
      * @return User
      */
     public function setGithubId($githubId)
     {
         $this->githubId = $githubId;
+
         return $this;
     }
 
@@ -389,11 +420,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 
     /**
      * @param mixed $githubAccessToken
+     *
      * @return User
      */
     public function setGithubAccessToken($githubAccessToken)
     {
         $this->githubAccessToken = $githubAccessToken;
+
         return $this;
     }
 
@@ -427,6 +460,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function setProfile($profile)
     {
         $this->profile = $profile;
+
         return $this;
     }
 }

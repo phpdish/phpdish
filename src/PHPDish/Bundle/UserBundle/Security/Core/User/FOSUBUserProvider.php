@@ -23,7 +23,7 @@ class FOSUBUserProvider extends BaseFOSUBProvider
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
@@ -31,7 +31,7 @@ class FOSUBUserProvider extends BaseFOSUBProvider
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
@@ -42,17 +42,19 @@ class FOSUBUserProvider extends BaseFOSUBProvider
         }
 
         $serviceName = $response->getResourceOwner()->getName();
-        $accessTokenSetter = 'set' . ucfirst($serviceName) . 'AccessToken';
+        $accessTokenSetter = 'set'.ucfirst($serviceName).'AccessToken';
         $user->$accessTokenSetter($response->getAccessToken());
-        $idSetter = 'set' . ucfirst($serviceName) . 'Id';
+        $idSetter = 'set'.ucfirst($serviceName).'Id';
         $user->$idSetter($response->getUsername());
 
         return $user;
     }
 
     /**
-     * 创建一个新用户
+     * 创建一个新用户.
+     *
      * @param UserResponseInterface $response
+     *
      * @return \PHPDish\Bundle\UserBundle\Model\UserInterface
      */
     protected function createNewUser(UserResponseInterface $response)
@@ -71,19 +73,23 @@ class FOSUBUserProvider extends BaseFOSUBProvider
         } catch (\Exception $exception) {
             $user->setAvatar('');
         }
+
         return $user;
     }
 
     /**
-     * 生成用户名
+     * 生成用户名.
+     *
      * @param UserResponseInterface $response
+     *
      * @return string
      */
     protected function generateUsername(UserResponseInterface $response)
     {
         $username = $response->getNickname();
+
         return $this->userManager->findUserByUsername($username)
-            ? $username . $response->getUsername()
+            ? $username.$response->getUsername()
             : $username;
     }
 }

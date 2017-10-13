@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -18,18 +19,22 @@ trait ContentTrait
     protected $originalBody;
 
     /**
-     * Set body
+     * Set body.
+     *
      * @param string $body
+     *
      * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
     /**
-     * Get body
+     * Get body.
+     *
      * @return string
      */
     public function getBody()
@@ -38,18 +43,22 @@ trait ContentTrait
     }
 
     /**
-     * Set originalBody
+     * Set originalBody.
+     *
      * @param string $originalBody
+     *
      * @return $this
      */
     public function setOriginalBody($originalBody)
     {
         $this->originalBody = $originalBody;
+
         return $this;
     }
 
     /**
-     * Get originalBody
+     * Get originalBody.
+     *
      * @return string
      */
     public function getOriginalBody()

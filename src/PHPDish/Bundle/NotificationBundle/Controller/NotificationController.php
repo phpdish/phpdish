@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class NotificationController extends Controller
 {
     /**
-     * 当前用户的通知数量
+     * 当前用户的通知数量.
+     *
      * @Route("/notifications/count", name="notification_count")
      */
     public function count()
@@ -19,15 +20,19 @@ class NotificationController extends Controller
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $count = $this->get('phpdish.manager.notification')->getUserUnSeenNotificationCount($this->getUser());
         $nbMessageCount = $this->get('fos_message.provider')->getNbUnreadMessages();
+
         return $this->json([
-            'count' => $count + $nbMessageCount
+            'count' => $count + $nbMessageCount,
         ]);
     }
 
     /**
-     * 当前用户的通知
+     * 当前用户的通知.
+     *
      * @Route("/notifications", name="notifications")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function index(Request $request)
@@ -39,8 +44,9 @@ class NotificationController extends Controller
             $request->query->getInt('page', 1)
         );
         $manager->readNotifications($notifications->getCurrentPageResults());
+
         return $this->render('PHPDishWebBundle:Notification:index.html.twig', [
-            'notifications' => $notifications
+            'notifications' => $notifications,
         ]);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -46,6 +47,7 @@ abstract class Taxonomy implements TaxonomyInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -63,6 +65,7 @@ abstract class Taxonomy implements TaxonomyInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 

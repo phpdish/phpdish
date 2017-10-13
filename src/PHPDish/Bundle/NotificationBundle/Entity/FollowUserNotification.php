@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Entity;
 
-
 use Carbon\Carbon;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 

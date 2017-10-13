@@ -3,7 +3,6 @@
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Carbon\Carbon;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -44,6 +43,7 @@ class NotificationManager implements NotificationManagerInterface
         $notification = $this->createNotification();
         $notification->setUser($user)->setFromUser($follower)->setSubject(Notification::SUBJECT_FOLLOW_USER);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -60,6 +60,7 @@ class NotificationManager implements NotificationManagerInterface
             ->setFromUser($reply->getUser())
             ->setSubject(Notification::SUBJECT_REPLY_TOPIC);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -76,6 +77,7 @@ class NotificationManager implements NotificationManagerInterface
             ->setFromUser($comment->getUser())
             ->setSubject(Notification::SUBJECT_COMMENT_POST);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -92,6 +94,7 @@ class NotificationManager implements NotificationManagerInterface
             ->setFromUser($comment->getUser())
             ->setSubject(Notification::SUBJECT_MENTION_USER_IN_POST);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -108,6 +111,7 @@ class NotificationManager implements NotificationManagerInterface
             ->setFromUser($reply->getUser())
             ->setSubject(Notification::SUBJECT_MENTION_USER_IN_TOPIC);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -122,6 +126,7 @@ class NotificationManager implements NotificationManagerInterface
             ->setFromUser($user)
             ->setSubject(Notification::SUBJECT_FOLLOW_CATEGORY);
         $this->saveNotification($notification);
+
         return $notification;
     }
 
@@ -132,6 +137,7 @@ class NotificationManager implements NotificationManagerInterface
     {
         $notification = new Notification();
         $notification->setCreatedAt(Carbon::now());
+
         return $notification;
     }
 
@@ -150,6 +156,7 @@ class NotificationManager implements NotificationManagerInterface
     public function getUserUnSeenNotificationCount(UserInterface $user)
     {
         $qb = $this->notificationRepository->createQueryBuilder('n');
+
         return $qb->select($qb->expr()->count('n'))
             ->where('n.user = :userId')->setParameter('userId', $user)
             ->andWhere('n.seen = :seen')->setParameter('seen', false)
@@ -165,6 +172,7 @@ class NotificationManager implements NotificationManagerInterface
         $query = $this->notificationRepository->createQueryBuilder('n')
             ->where('n.user = :userId')->setParameter('userId', $user)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 

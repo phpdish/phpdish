@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,18 +18,22 @@ trait DateTimeTrait
     protected $updatedAt;
 
     /**
-     * 设置创建时间
+     * 设置创建时间.
+     *
      * @param DateTime $createdAt
+     *
      * @return $this
      */
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
     /**
-     * 获取创建时间
+     * 获取创建时间.
+     *
      * @return DateTime
      */
     public function getCreatedAt()
@@ -37,18 +42,22 @@ trait DateTimeTrait
     }
 
     /**
-     * 设置更新时间
+     * 设置更新时间.
+     *
      * @param DateTime $updatedAt
+     *
      * @return $this
      */
     public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
     /**
-     * 获取更新时间
+     * 获取更新时间.
+     *
      * @return DateTime
      */
     public function getUpdatedAt()

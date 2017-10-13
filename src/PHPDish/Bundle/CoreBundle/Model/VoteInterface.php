@@ -1,17 +1,19 @@
 <?php
 /**
- * PHPDish vote component
+ * PHPDish vote component.
+ *
  * @author Tao <taosikai@yeah.net>
  */
+
 namespace  PHPDish\Bundle\CoreBundle\Model;
 
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface VoteInterface extends DateTimeInterface, IdentifiableInterface, UserAwareInterface
 {
     /**
-     * 获取id
+     * 获取id.
+     *
      * @return int
      */
     public function getId();

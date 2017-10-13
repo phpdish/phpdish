@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use PHPDish\Bundle\ForumBundle\Service\ReplyManagerInterface;

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
@@ -28,9 +29,9 @@ class Role extends BaseRole
     protected $users;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -38,7 +39,7 @@ class Role extends BaseRole
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -52,7 +53,7 @@ class Role extends BaseRole
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -62,7 +63,7 @@ class Role extends BaseRole
     }
 
     /**
-     * Add user
+     * Add user.
      *
      * @param \PHPDish\Bundle\UserBundle\Entity\User $user
      *
@@ -76,7 +77,7 @@ class Role extends BaseRole
     }
 
     /**
-     * Remove user
+     * Remove user.
      *
      * @param \PHPDish\Bundle\UserBundle\Entity\User $user
      */
@@ -86,7 +87,7 @@ class Role extends BaseRole
     }
 
     /**
-     * Get users
+     * Get users.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

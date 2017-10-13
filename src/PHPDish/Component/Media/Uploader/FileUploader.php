@@ -31,6 +31,7 @@ class FileUploader implements FileUploaderInterface
     {
         $file = $this->fileFactory->createFileFromUploadedFile($uploadedFile);
         $this->fileManager->upload($file, true);
+
         return $file;
     }
 }

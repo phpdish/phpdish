@@ -16,7 +16,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
  * @ORM\Entity
  * @ORM\Table(name="notifications")
  */
-class Notification  implements NotificationInterface
+class Notification implements NotificationInterface
 {
     use IdentifiableTrait;
 
@@ -57,7 +57,7 @@ class Notification  implements NotificationInterface
     protected $createdAt;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="seen", type="boolean")
      */
     protected $seen = false;
@@ -114,11 +114,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param UserInterface $user
+     *
      * @return Notification
      */
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -132,11 +134,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param string $subject
+     *
      * @return Notification
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -150,11 +154,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param string $message
+     *
      * @return Notification
      */
     public function setMessage($message)
     {
         $this->message = $message;
+
         return $this;
     }
 
@@ -168,11 +174,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param \DateTime $createdAt
+     *
      * @return Notification
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -186,11 +194,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param bool $seen
+     *
      * @return Notification
      */
     public function setSeen($seen)
     {
         $this->seen = $seen;
+
         return $this;
     }
 
@@ -204,11 +214,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param UserInterface $fromUser
+     *
      * @return Notification
      */
     public function setFromUser($fromUser)
     {
         $this->fromUser = $fromUser;
+
         return $this;
     }
 
@@ -222,11 +234,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param TopicInterface $topic
+     *
      * @return Notification
      */
     public function setTopic($topic)
     {
         $this->topic = $topic;
+
         return $this;
     }
 
@@ -240,11 +254,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param ReplyInterface $reply
+     *
      * @return Notification
      */
     public function setReply($reply)
     {
         $this->reply = $reply;
+
         return $this;
     }
 
@@ -258,11 +274,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param PostInterface $post
+     *
      * @return Notification
      */
     public function setPost($post)
     {
         $this->post = $post;
+
         return $this;
     }
 
@@ -276,11 +294,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param CommentInterface $comment
+     *
      * @return Notification
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -294,11 +314,13 @@ class Notification  implements NotificationInterface
 
     /**
      * @param CategoryInterface $category
+     *
      * @return Notification
      */
     public function setCategory($category)
     {
         $this->category = $category;
+
         return $this;
     }
 }

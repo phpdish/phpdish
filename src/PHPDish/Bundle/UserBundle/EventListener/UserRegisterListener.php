@@ -12,7 +12,7 @@ final class UserRegisterListener
     /**
      * @var RouterInterface
      */
-    protected $router;
+    private $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -25,7 +25,7 @@ final class UserRegisterListener
         $now = Carbon::now();
         $user->setCreatedAt($now)->setUpdatedAt($now);
         $response = new RedirectResponse($this->router->generate('user_view', [
-            'username' => $user->getUsername()
+            'username' => $user->getUsername(),
         ]));
         $event->setResponse($response);
     }

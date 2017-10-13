@@ -24,12 +24,14 @@ class Message extends BaseMessage
      *   targetEntity="Thread",
      *   inversedBy="messages"
      * )
+     *
      * @var \FOS\MessageBundle\Model\ThreadInterface
      */
     protected $thread;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     *
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $sender;
@@ -40,6 +42,7 @@ class Message extends BaseMessage
      *   mappedBy="message",
      *   cascade={"all"}
      * )
+     *
      * @var MessageMetadata[]|Collection
      */
     protected $metadata;

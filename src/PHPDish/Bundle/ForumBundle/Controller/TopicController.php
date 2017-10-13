@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
@@ -6,7 +7,6 @@ use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +17,13 @@ class TopicController extends RestController
     use ManagerTrait;
 
     /**
-     * 话题列表
+     * 话题列表.
+     *
      * @Route("/", name="homepage")
      * @Route("/topics", name="topic")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
@@ -34,15 +37,19 @@ class TopicController extends RestController
             $criteria->where(Criteria::expr()->eq('recommended', true));
         }
         $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
+
         return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
-            'topics' => $topics
+            'topics' => $topics,
         ]);
     }
 
     /**
-     * 创建话题
+     * 创建话题.
+     *
      * @Route("/topics/new", name="topic_add")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function createAction(Request $request)
@@ -54,21 +61,26 @@ class TopicController extends RestController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveTopic($topic);
+
             return $this->redirectToRoute('topic_view', [
-                'id' => $topic->getId()
+                'id' => $topic->getId(),
             ]);
         }
-        return $this->render('PHPDishWebBundle:Topic:create.html.twig',  [
-            'form' => $form->createView()
+
+        return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * 查看话题
+     * 查看话题.
+     *
      * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"})
      * @Method("GET")
-     * @param int $id
+     *
+     * @param int     $id
      * @param Request $request
+     *
      * @return Response
      */
     public function viewAction($id, Request $request)
@@ -85,19 +97,23 @@ class TopicController extends RestController
         );
 
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
-        $form =  $this->createForm(TopicReplyType::class, $reply);
+        $form = $this->createForm(TopicReplyType::class, $reply);
+
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * 修改话题
+     * 修改话题.
+     *
      * @Route("/topics/{id}/edit", name="topic_edit", requirements={"id": "\d+"})
-     * @param int $id
+     *
+     * @param int     $id
      * @param Request $request
+     *
      * @return Response
      */
     public function editAction($id, Request $request)
@@ -112,21 +128,26 @@ class TopicController extends RestController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getTopicManager()->saveTopic($topic);
+
             return $this->redirectToRoute('topic_view', [
-                'id' => $topic->getId()
+                'id' => $topic->getId(),
             ]);
         }
+
         return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
             'form' => $form->createView(),
-            'topic' => $topic
+            'topic' => $topic,
         ]);
     }
 
     /**
-     * 删除话题
+     * 删除话题.
+     *
      * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"})
      * @Method("DELETE")
+     *
      * @param int $id
+     *
      * @return Response
      */
     public function deleteAction($id)
@@ -138,15 +159,19 @@ class TopicController extends RestController
         $this->denyAccessUnlessGranted('edit', $topic);
 
         $this->getTopicManager()->blockTopic($topic);
+
         return $this->handleView($this->view([
-            'result' => true
+            'result' => true,
         ]));
     }
 
     /**
      * 切换话题推荐状态
+     *
      * @Route("/topics/{id}/toggle_recommend", name="topic_toggle_recommend", requirements={"id": "\d+"})
+     *
      * @param int $id
+     *
      * @return Response
      */
     public function toggleRecommendAction($id)
@@ -160,39 +185,47 @@ class TopicController extends RestController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($topic);
         $manager->flush();
+
         return $this->handleView($this->view([
-            'is_recommended' => $topic->isRecommended()
+            'is_recommended' => $topic->isRecommended(),
         ]));
     }
 
     /**
-     * 用户的帖子
+     * 用户的帖子.
+     *
      * @Route("/users/{username}/topics", name="user_topics")
-     * @param string $username
+     *
+     * @param string  $username
      * @param Request $request
+     *
      * @return Response
      */
     public function getUserTopicsAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
         $topics = $this->getTopicManager()->findUserTopics($user, $request->query->getInt('page', 1));
+
         return $this->render('PHPDishWebBundle:Topic:user_topics.html.twig', [
             'user' => $user,
-            'topics' => $topics
+            'topics' => $topics,
         ]);
     }
 
     /**
-     * 今日热帖
+     * 今日热帖.
+     *
      * @param int|null $max
+     *
      * @return Response
      */
     public function todayHotTopicsAction($max = null)
     {
         $date = Carbon::today()->modify('-100 days');
         $topics = $this->getTopicManager()->findHotTopics($date, $max ?: 10);
+
         return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
-            'topics' => $topics
+            'topics' => $topics,
         ]);
     }
 }

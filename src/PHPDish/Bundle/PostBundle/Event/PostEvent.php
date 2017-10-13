@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Event;
 
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -17,7 +18,8 @@ class PostEvent extends Event
     }
 
     /**
-     * Gets the post for the event
+     * Gets the post for the event.
+     *
      * @return PostInterface
      */
     public function getPost()

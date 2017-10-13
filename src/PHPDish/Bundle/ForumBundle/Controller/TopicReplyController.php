@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
@@ -15,9 +16,12 @@ class TopicReplyController extends RestController
     use ManagerTrait;
 
     /**
-     * 删除回复
+     * 删除回复.
+     *
      * @Route("/replies/{id}", name="topic_reply_delete", requirements={"id": "\d+"})
+     *
      * @param int $id
+     *
      * @return Response
      */
     public function deleteAction($id)
@@ -29,15 +33,18 @@ class TopicReplyController extends RestController
         }
         $this->denyAccessUnlessGranted('edit', $reply);
         $manager->blockReply($reply);
+
         return $this->handleView($this->view([
-            'result' => true
+            'result' => true,
         ]));
     }
 
     /**
      * @Route("/users/{username}/replies", name="user_replies")
-     * @param string $username
+     *
+     * @param string  $username
      * @param Request $request
+     *
      * @return Response
      */
     public function getUserRepliesAction($username, Request $request)
@@ -45,17 +52,20 @@ class TopicReplyController extends RestController
         $user = $this->getUserManager()->findUserByName($username);
         $replies = $this->getReplyManager()
             ->findUserReplies($user, $request->query->getInt('page', 1));
+
         return $this->render('PHPDishWebBundle:TopicReply:user_replies.html.twig', [
             'user' => $user,
-            'replies' => $replies
+            'replies' => $replies,
         ]);
     }
 
     /**
      * @Route("/topics/{id}/replies", name="topic_add_reply")
      * @Method("POST")
-     * @param int $id
+     *
+     * @param int     $id
      * @param Request $request
+     *
      * @return Response
      */
     public function addTopicReply($id, Request $request)
@@ -64,7 +74,7 @@ class TopicReplyController extends RestController
 
         $topic = $this->getTopicManager()->findTopicById($id);
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
-        $form =  $this->createForm(TopicReplyType::class, $reply);
+        $form = $this->createForm(TopicReplyType::class, $reply);
         $form->handleRequest($request);
         $view = $this->view()->setFormat('json');
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,6 +92,7 @@ class TopicReplyController extends RestController
                     'form' => $form,
                 ));
         }
+
         return $this->handleView($view);
     }
 }

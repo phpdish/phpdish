@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Pagerfanta\Pagerfanta;
@@ -8,101 +9,127 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface UserManagerInterface
 {
     /**
-     * 创建新用户
+     * 创建新用户.
+     *
      * @return UserInterface
      */
     public function createUser();
 
     /**
-     * 保存新用户
+     * 保存新用户.
+     *
      * @param UserInterface $user
-     * @return boolean
+     *
+     * @return bool
      */
     public function saveUser(UserInterface $user);
 
     /**
-     * 根据用户名获取用户
+     * 根据用户名获取用户.
+     *
      * @param string $username
+     *
      * @return UserInterface
      */
     public function findUserByName($username);
 
     /**
-     * 根据邮箱获取用户
-     * @param string  $email
+     * 根据邮箱获取用户.
+     *
+     * @param string $email
+     *
      * @return UserInterface
      */
     public function findUserByEmail($email);
 
     /**
-     * 获取最近注册的用户
+     * 获取最近注册的用户.
+     *
      * @param int $limit
+     *
      * @return UserInterface[]
      */
     public function findLatestUsers($limit);
 
     /**
-     * 根据用户名获取多个用户
+     * 根据用户名获取多个用户.
+     *
      * @param array $userNames
+     *
      * @return UserInterface[]
      */
     public function findUsersByNames($userNames);
 
     /**
-     * 查找用户的粉丝
+     * 查找用户的粉丝.
+     *
      * @param UserInterface $user
-     * @param int $page
-     * @param int|null $limit
+     * @param int           $page
+     * @param int|null      $limit
+     *
      * @return Pagerfanta
      */
     public function findUserFollowers(UserInterface $user, $page, $limit = null);
 
     /**
-     * 查找用户正在关注的人
+     * 查找用户正在关注的人.
+     *
      * @param UserInterface $user
-     * @param int $page
-     * @param int|null $limit
+     * @param int           $page
+     * @param int|null      $limit
+     *
      * @return Pagerfanta
      */
     public function findUserFollowing(UserInterface $user, $page, $limit = null);
 
     /**
-     * 查找专栏的订阅者
+     * 查找专栏的订阅者.
+     *
      * @param CategoryInterface $category
-     * @param int $page
-     * @param int|null $limit
+     * @param int               $page
+     * @param int|null          $limit
+     *
      * @return Pagerfanta
      */
     public function findCategoryFollowers(CategoryInterface $category, $page, $limit = null);
 
     /**
-     * 关注用户
+     * 关注用户.
+     *
      * @param UserInterface $user
      * @param UserInterface $follower
+     *
      * @throws \LogicException
-     * @return boolean
+     *
+     * @return bool
      */
     public function followUser(UserInterface $user, UserInterface $follower);
 
     /**
-     * 取消关注用户
+     * 取消关注用户.
+     *
      * @param UserInterface $user
      * @param UserInterface $follower
-     * @return boolean
+     *
+     * @return bool
      */
     public function unFollowUser(UserInterface $user, UserInterface $follower);
 
     /**
-     * 检查用户名是否存在
+     * 检查用户名是否存在.
+     *
      * @param string $username
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkUsernameExist($username);
 
     /**
-     * 检查邮箱是否存在
+     * 检查邮箱是否存在.
+     *
      * @param string $email
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkEmailExist($email);
 }

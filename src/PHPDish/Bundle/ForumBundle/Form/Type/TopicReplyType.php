@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Form\Type;
 
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
@@ -12,14 +13,14 @@ class TopicReplyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('original_body', TextareaType::class, [
-            'label' => '内容'
+            'label' => '内容',
         ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Reply::class
+            'data_class' => Reply::class,
         ]);
     }
 

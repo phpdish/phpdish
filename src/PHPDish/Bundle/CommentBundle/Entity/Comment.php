@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CommentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -21,7 +22,7 @@ class Comment extends BaseComment implements SignedCommentInterface
     protected $id;
 
     /**
-     * Thread of this comment
+     * Thread of this comment.
      *
      * @var Thread
      * @ORM\ManyToOne(targetEntity="Thread")
@@ -29,9 +30,10 @@ class Comment extends BaseComment implements SignedCommentInterface
     protected $thread;
 
     /**
-     * Author of the comment
+     * Author of the comment.
      *
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     *
      * @var UserInterface
      */
     protected $author;

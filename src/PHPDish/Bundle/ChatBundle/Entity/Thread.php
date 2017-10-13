@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\ChatBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Entity\Thread as BaseThread;
@@ -22,6 +21,7 @@ class Thread extends BaseThread
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
+     *
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $createdBy;
@@ -31,6 +31,7 @@ class Thread extends BaseThread
      *   targetEntity="Message",
      *   mappedBy="thread"
      * )
+     *
      * @var Message[]|Collection
      */
     protected $messages;
@@ -41,6 +42,7 @@ class Thread extends BaseThread
      *   mappedBy="thread",
      *   cascade={"all"}
      * )
+     *
      * @var ThreadMetadata[]|Collection
      */
     protected $metadata;

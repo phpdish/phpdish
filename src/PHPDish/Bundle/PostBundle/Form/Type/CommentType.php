@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Form\Type;
 
 use PHPDish\Bundle\PostBundle\Entity\Comment;
@@ -12,14 +13,14 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('original_body', TextareaType::class, [
-            'label' => '内容'
+            'label' => '内容',
         ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Comment::class
+            'data_class' => Comment::class,
         ]);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
@@ -50,6 +51,7 @@ class TopicManager implements TopicManagerInterface
             ->setRepliedAt($now)
             ->setCreatedAt($now)
             ->setLastReplyUser($user);
+
         return $topic;
     }
 
@@ -65,6 +67,7 @@ class TopicManager implements TopicManagerInterface
 
         $this->entityManager->persist($topic);
         $this->entityManager->flush();
+
         return true;
     }
 
@@ -93,8 +96,9 @@ class TopicManager implements TopicManagerInterface
     {
         $criteria = Criteria::create()->where(Criteria::expr()->eq('thread', $thread->getId()))
             ->orderBy([
-                'updatedAt' => 'DESC'
+                'updatedAt' => 'DESC',
             ]);
+
         return $this->findTopics($criteria, $page, $limit);
     }
 
@@ -105,8 +109,9 @@ class TopicManager implements TopicManagerInterface
     {
         $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()))
             ->orderBy([
-                'createdAt' => 'DESC'
+                'createdAt' => 'DESC',
             ]);
+
         return $this->findTopics($criteria, $page, $limit);
     }
 
@@ -118,9 +123,9 @@ class TopicManager implements TopicManagerInterface
         $query = $this->getTopicRepository()->createQueryBuilder('t')
             ->addCriteria($criteria)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
-
 
     /**
      * {@inheritdoc}

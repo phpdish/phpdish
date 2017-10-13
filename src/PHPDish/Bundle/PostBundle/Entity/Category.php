@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,7 +40,8 @@ class Category extends Taxonomy implements CategoryInterface
     protected $followerCount = 0;
 
     /**
-     * 订阅者
+     * 订阅者.
+     *
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followingCategories")
      * @ORM\JoinTable(name="categories_followers",
      *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
@@ -49,14 +51,16 @@ class Category extends Taxonomy implements CategoryInterface
     protected $followers;
 
     /**
-     * 创建人
+     * 创建人.
+     *
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $creator;
 
     /**
-     * 管理员
+     * 管理员.
+     *
      * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinTable(name="categories_managers",
      *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
@@ -66,7 +70,7 @@ class Category extends Taxonomy implements CategoryInterface
     protected $managers;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -80,6 +84,7 @@ class Category extends Taxonomy implements CategoryInterface
     public function setPostCount($postCount)
     {
         $this->postCount = $postCount;
+
         return $this;
     }
 
@@ -137,6 +142,7 @@ class Category extends Taxonomy implements CategoryInterface
     public function setCreator(UserInterface $creator)
     {
         $this->creator = $creator;
+
         return $this;
     }
 
@@ -154,6 +160,7 @@ class Category extends Taxonomy implements CategoryInterface
     public function addManager(UserInterface $user)
     {
         $this->managers[] = $user;
+
         return $this;
     }
 
@@ -187,6 +194,7 @@ class Category extends Taxonomy implements CategoryInterface
     public function setFollowerCount($count)
     {
         $this->followerCount = $count;
+
         return $this;
     }
 

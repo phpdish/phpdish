@@ -2,7 +2,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Twig;
 
- use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class UrlPatternExtension extends \Twig_Extension
 {
@@ -25,8 +25,10 @@ class UrlPatternExtension extends \Twig_Extension
     }
 
     /**
-     * 当前匹配的是否是指定路由
+     * 当前匹配的是否是指定路由.
+     *
      * @param string $routeName
+     *
      * @return bool
      */
     public function isRouteMatched($routeName)
@@ -35,12 +37,14 @@ class UrlPatternExtension extends \Twig_Extension
     }
 
     /**
-     * 检查当前路由是否匹配正则
+     * 检查当前路由是否匹配正则.
+     *
      * @param string $pattern
-     * @return boolean
+     *
+     * @return bool
      */
     public function isUrlPatternMatched($pattern)
     {
-        return (boolean)preg_match("#{$pattern}#i", $this->request->getPathInfo());
+        return (bool) preg_match("#{$pattern}#i", $this->request->getPathInfo());
     }
 }

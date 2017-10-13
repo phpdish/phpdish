@@ -9,6 +9,5 @@ class ReplyTopicNotification extends Notification
 {
     public function __construct(TopicInterface $topic, UserInterface $user)
     {
-        
     }
 }

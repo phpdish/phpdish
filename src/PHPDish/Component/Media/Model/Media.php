@@ -31,11 +31,13 @@ abstract class Media implements MediaInterface
 
     /**
      * @param string $key
+     *
      * @return Media
      */
     public function setKey($key)
     {
         $this->key = $key;
+
         return $this;
     }
 
@@ -49,11 +51,13 @@ abstract class Media implements MediaInterface
 
     /**
      * @param string $url
+     *
      * @return Media
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 }

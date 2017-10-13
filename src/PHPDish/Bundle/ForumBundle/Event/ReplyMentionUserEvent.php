@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\ForumBundle\Event;
 
-
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -35,11 +34,13 @@ class ReplyMentionUserEvent extends Event
 
     /**
      * @param ReplyInterface $reply
+     *
      * @return ReplyMentionUserEvent
      */
     public function setReply($reply)
     {
         $this->reply = $reply;
+
         return $this;
     }
 
@@ -53,11 +54,13 @@ class ReplyMentionUserEvent extends Event
 
     /**
      * @param UserInterface[] $mentionedUsers
+     *
      * @return ReplyMentionUserEvent
      */
     public function setMentionedUsers($mentionedUsers)
     {
         $this->mentionedUsers = $mentionedUsers;
+
         return $this;
     }
 }

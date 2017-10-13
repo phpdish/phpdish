@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -7,8 +8,10 @@ use PHPDish\Bundle\CoreBundle\Entity\FriendLink;
 class FriendLinkRepository extends EntityRepository
 {
     /**
-     * 获取友情链接列表
+     * 获取友情链接列表.
+     *
      * @param int $limit
+     *
      * @return FriendLink[]
      */
     public function findList($limit)

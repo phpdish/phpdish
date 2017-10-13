@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,6 +10,7 @@ class SearchController extends Controller
 {
     /**
      * @Route("/search", name="search")
+     *
      * @param Request $request
      */
     public function searchAction(Request $request)

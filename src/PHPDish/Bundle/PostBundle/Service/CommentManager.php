@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
@@ -50,14 +51,13 @@ class CommentManager implements CommentManagerInterface
         EventDispatcherInterface $eventDispatcher,
         MarkdownParserInterface $markdownParser,
         MentionParserInterface $mentionParser
-    ){
-        $this->entityManager  = $entityManager;
+    ) {
+        $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
         $this->markdownParser = $markdownParser;
         $this->mentionParser = $mentionParser;
     }
-
 
     /**
      * {@inheritdoc}
@@ -76,6 +76,7 @@ class CommentManager implements CommentManagerInterface
         $comment->setPost($post)->setUser($user)
             ->setCreatedAt(Carbon::now());
         $post->increaseCommentCount();
+
         return $comment;
     }
 
@@ -121,6 +122,7 @@ class CommentManager implements CommentManagerInterface
         $query = $this->commentRepository->createQueryBuilder('c')
             ->addCriteria($criteria)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 }

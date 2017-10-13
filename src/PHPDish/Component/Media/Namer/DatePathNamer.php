@@ -31,6 +31,7 @@ class DatePathNamer implements NamerInterface
     public function transformFromUrl($url)
     {
         $extension = ltrim(strrchr(parse_url($url, PHP_URL_PATH), '.'), '.');
+
         return $this->transformWithExtension(strrchr($url, $extension));
     }
 
@@ -41,8 +42,9 @@ class DatePathNamer implements NamerInterface
     {
         $baseDir = Carbon::now()->format('Y/md');
         do {
-            $path = "{$baseDir}/{$this->generateKey()}." . $extension;
+            $path = "{$baseDir}/{$this->generateKey()}.".$extension;
         } while ($this->filesystem->has($path));
+
         return $path;
     }
 
