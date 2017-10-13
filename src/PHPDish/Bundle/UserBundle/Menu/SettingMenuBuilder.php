@@ -37,7 +37,13 @@ final class SettingMenuBuilder
                 'label' => '修改密码',
                 'route' => 'fos_user_change_password'
             ])
-            ->setAttribute('class', 'list-group-item if i-envelope-o');
+            ->setAttribute('class', 'list-group-item if i-password');
+
+        $menu->addChild('Social Binding', [
+                'label' => '社交账户绑定',
+                'route' => 'setting_social_binding'
+            ])
+            ->setAttribute('class', 'list-group-item if i-weibo');
         return $menu;
     }
 }

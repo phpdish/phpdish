@@ -340,7 +340,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getWeiboId()
     {
@@ -348,9 +348,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param mixed $weiboId
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setWeiboId($weiboId)
     {
@@ -360,7 +358,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getWeiboAccessToken()
     {
@@ -368,9 +366,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param mixed $weiboAccessToken
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setWeiboAccessToken($weiboAccessToken)
     {
@@ -380,7 +376,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getGithubId()
     {
@@ -388,9 +384,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param mixed $githubId
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setGithubId($githubId)
     {
@@ -400,7 +394,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getGithubAccessToken()
     {
@@ -408,9 +402,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param mixed $githubAccessToken
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setGithubAccessToken($githubAccessToken)
     {

@@ -13,6 +13,7 @@ class SettingController extends Controller
     use ManagerTrait;
 
     /**
+     * 修改资料
      * @Route("/settings", name="setting_profile")
      *
      * @param Request $request
@@ -32,6 +33,20 @@ class SettingController extends Controller
         }
         return $this->render('PHPDishWebBundle:Setting:profile.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * 绑定社交账户
+     * @Route("/settings/social-binding", name="setting_social_binding")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function bindSocialSiteAction(Request $request)
+    {
+        return $this->render('PHPDishWebBundle:Setting:bind_social.html.twig', [
         ]);
     }
 }

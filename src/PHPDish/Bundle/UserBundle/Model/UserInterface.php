@@ -12,7 +12,7 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
-interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTimeInterface, EnabledInterface
+interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTimeInterface, EnabledInterface, SocialAwareInterface
 {
     /**
      * 男性.
