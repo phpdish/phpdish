@@ -2,9 +2,7 @@
 
 namespace PHPDish\Bundle\UserBundle\Form\Type;
 
-
 use PHPDish\Bundle\UserBundle\Entity\User;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,7 +37,7 @@ class ChangeUserProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UserInterface::class
+            'data_class' => User::class
         ]);
     }
 }

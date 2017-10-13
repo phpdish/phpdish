@@ -442,10 +442,10 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * {@inheritdoc}
      */
-    public function setProfile($profile)
+    public function setProfile(ProfileInterface $profile)
     {
+        $profile->setUser($this);
         $this->profile = $profile;
-
         return $this;
     }
 }

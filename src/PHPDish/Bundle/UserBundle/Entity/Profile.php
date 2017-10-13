@@ -110,4 +110,22 @@ class Profile implements ProfileInterface
 
         return $this;
     }
+
+    /**
+     * @return UserInterface
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @return Profile
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
 }

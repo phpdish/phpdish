@@ -140,7 +140,7 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      *
      * @return UserInterface
      */
-    public function setProfile($profile);
+    public function setProfile(ProfileInterface $profile);
 
     /**
      * 获取详细资料.
