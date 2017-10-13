@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity

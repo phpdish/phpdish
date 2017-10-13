@@ -15,6 +15,7 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -148,6 +149,9 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->following = new ArrayCollection();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSalt()
     {
         return null;
