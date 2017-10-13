@@ -15,6 +15,20 @@ use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTimeInterface, EnabledInterface
 {
     /**
+     * 男性.
+     *
+     * @var int
+     */
+    const GENDER_MEN = 1;
+
+    /**
+     * 女性.
+     *
+     * @var int
+     */
+    const GENDER_WOMEN = 2;
+
+    /**
      * 是否是女性.
      *
      * @return bool

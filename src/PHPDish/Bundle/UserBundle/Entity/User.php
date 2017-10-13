@@ -24,21 +24,6 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser implements UserInterface, ParticipantInterface
 {
     use DateTimeTrait;
-
-    /**
-     * 男性.
-     *
-     * @var int
-     */
-    const GENDER_MEN = 0;
-
-    /**
-     * 女性.
-     *
-     * @var int
-     */
-    const GENDER_WOMEN = 1;
-
     /**
      * @var int
      *
