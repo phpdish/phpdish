@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -68,6 +69,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      * @ORM\Column(type="integer")
      */
     protected $followerCount = 0;
+
+    /**
+     * 个人资料
+     * @ORM\OneToOne(targetEntity="Profile", mappedBy="user")
+     * @var ProfileInterface
+     */
+    protected $profile;
 
     /**
      * 关注我的用户
@@ -389,13 +397,36 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function enable()
     {
         $this->setEnabled(true);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function disable()
     {
         $this->setEnabled(false);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProfile($profile)
+    {
+        $this->profile = $profile;
+        return $this;
     }
 }

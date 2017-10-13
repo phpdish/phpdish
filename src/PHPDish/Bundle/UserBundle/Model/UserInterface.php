@@ -100,4 +100,17 @@ interface UserInterface extends
      * @return UserInterface
      */
     public function setAvatar($avatar);
+
+    /**
+     * 设置详细资料
+     * @param ProfileInterface $profile
+     * @return UserInterface
+     */
+    public function setProfile($profile);
+
+    /**
+     * 获取详细资料
+     * @return ProfileInterface
+     */
+    public function getProfile();
 }
