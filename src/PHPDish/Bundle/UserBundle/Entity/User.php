@@ -140,6 +140,16 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $githubAccessToken;
 
+    /**
+     * @ORM\Column(type="string", nullable=true))
+     */
+    protected $wechatId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true))
+     */
+    protected $wechatAccessToken;
+
     public function __construct()
     {
         parent::__construct();
@@ -409,6 +419,38 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->githubAccessToken = $githubAccessToken;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWechatId()
+    {
+        return $this->wechatId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWechatId($wechatId)
+    {
+        $this->wechatId = $wechatId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWechatAccessToken()
+    {
+        return $this->wechatAccessToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWechatAccessToken($wechatAccessToken)
+    {
+        $this->wechatAccessToken = $wechatAccessToken;
     }
 
     /**

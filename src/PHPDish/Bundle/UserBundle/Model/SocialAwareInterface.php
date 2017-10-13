@@ -60,4 +60,27 @@ interface SocialAwareInterface
      */
     public function setGithubAccessToken($githubAccessToken);
 
+    /**
+     * 获取Wechat id
+     * @return string
+     */
+    public function getWechatId();
+
+    /**
+     * 设置Wechat id
+     * @param string $wechatId
+     */
+    public function setWechatId($wechatId);
+
+    /**
+     * 获取wechat access token
+     * @return string
+     */
+    public function getWechatAccessToken();
+
+    /**
+     * 设置Wechat access token
+     * @param string $wechatAccessToken
+     */
+    public function setWechatAccessToken($wechatAccessToken);
 }
