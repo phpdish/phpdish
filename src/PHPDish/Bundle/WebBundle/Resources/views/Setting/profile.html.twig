@@ -6,7 +6,34 @@
         <div class="panel-heading">编辑资料</div>
         <div class="panel-heading">
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '邮箱'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.gender) }}
+                {{ form_widget(form.gender, {'attr': {'class': 'form-control', 'placeholder': '性别'}}) }}
+                {{ form_errors(form.gender) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.profile.url) }}
+                {{ form_widget(form.profile.url, {'attr': {'class': 'form-control', 'placeholder': '个人主页'}, 'required': false}) }}
+                {{ form_errors(form.profile.url) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.profile.company) }}
+                {{ form_widget(form.profile.company, {'attr': {'class': 'form-control', 'placeholder': '公司'}, 'required': false}) }}
+                {{ form_errors(form.profile.company) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.profile.location) }}
+                {{ form_widget(form.profile.location, {'attr': {'class': 'form-control', 'placeholder': '位置'}, 'required': false}) }}
+                {{ form_errors(form.profile.location) }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 修改</button>
+            </div>
             {{ form_end(form) }}
         </div>
     </div>

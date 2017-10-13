@@ -22,10 +22,13 @@ class SettingController extends Controller
     public function editProfileAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $form = $this->createForm(ChangeUserProfileType::class, $this->getUser());
+        $user = $this->getUser();
+        $form = $this->createForm(ChangeUserProfileType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $this->getUserManager()->saveUser($user);
+            $this->addFlash('success', '资料修改成功');
+            return $this->redirectToRoute('setting_profile');
         }
         return $this->render('PHPDishWebBundle:Setting:profile.html.twig', [
             'form' => $form->createView()

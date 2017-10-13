@@ -61,7 +61,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * 个人资料.
      *
-     * @ORM\OneToOne(targetEntity="Profile", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Profile", mappedBy="user", cascade={"persist"})
      *
      * @var ProfileInterface
      */

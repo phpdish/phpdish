@@ -18,7 +18,7 @@ class Profile implements ProfileInterface
     /**
      * 个人主页.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var string
      */
@@ -27,7 +27,7 @@ class Profile implements ProfileInterface
     /**
      * 公司.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var string
      */
@@ -36,7 +36,7 @@ class Profile implements ProfileInterface
     /**
      * 所在位置.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var string
      */

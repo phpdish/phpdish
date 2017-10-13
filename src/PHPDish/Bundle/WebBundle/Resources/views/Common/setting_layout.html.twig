@@ -8,6 +8,8 @@
 
 {% block content %}
     <div class="container" role="main">
+        {% from  'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
+        {{ flashes() }}
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 {{ knp_menu_render('setting_menu', {'currentClass': 'active'}) }}
