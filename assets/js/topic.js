@@ -7,6 +7,8 @@ import SocialShare from 'social-share-button.js';
 import lockButton from '../modules/button-lock.js';
 import Editor from '../modules/md-editor/editor.js';
 import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
+import hljs from 'highlight.js';
+
 
 //话题详情页
 (function($){
@@ -14,6 +16,10 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
     //分享
     new SocialShare('.social-share-container', {
         'theme': 'default'
+    });
+    //代码高亮
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
     });
 
     (function(){
@@ -155,11 +161,11 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
         const editor = new CodeMirrorEditor($topicBody, $preview, $previewPanel);
         //提交表单
         $('#add-topic-form').on('submit', function(){
-            if ($topicTitle.val().length === 0 || editor.getValue().length === 0) {
+            if ($topicTitle.val().length === 0 || editor.getContent().length === 0) {
                 Util.dialog.message('请填写空缺的内容').flash();
                 return false;
             }
-            $topicBody.val(editor.getValue());
+            $topicBody.val(editor.getContent());
             store.remove('topic_draft');
         });
     }

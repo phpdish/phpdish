@@ -7,11 +7,18 @@ import lockButton from '../modules/button-lock.js';
 
 import SimpleMDE from 'simplemde';
 import InlineAttachment from '../modules/inline-attachment.js';
+import hljs from 'highlight.js';
 
 /**
  * Post Details
  */
 (function($){
+    
+    //代码高亮
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+
     $('#add-comment-form').on('submit', function(){
         const $form = $(this);
         const $btn = $form.find('[data-role="submit" ]');

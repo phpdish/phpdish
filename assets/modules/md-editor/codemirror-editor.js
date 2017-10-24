@@ -4,8 +4,6 @@ import BaseEditor from './base-editor.js';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import draft from './draft-plugin.js';
-import mention from './mention-plugin.js';
-import emoji from './emoji-plugin.js';
 import inlineAttachment from './inline-attachment-plugin.js';
 
 class CodeMirrorEditor extends BaseEditor {

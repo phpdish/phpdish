@@ -258,7 +258,7 @@
 }
 
 /*------------------------------------
-  话题页右上角用户区域
+  User Plate 话题页右上角用户区域
 ------------------------------------*/
 .community-description{
   .register-action{
@@ -272,12 +272,16 @@
     display: inline-block;
   }
   .badge-icons{
-     font-size:14px;
-     margin-top: 12px;
-    .notification-num{
-      .badge{
-        margin-left: 5px;
-      }
+    font:{
+      size: 14px;
+    }
+    .if{
+      font-size:18px;
+      vertical-align: middle;
+    }
+    a{
+      text-decoration: none;
+      color: $metaColor;
     }
   }
 }

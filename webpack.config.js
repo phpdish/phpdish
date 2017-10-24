@@ -59,6 +59,7 @@ Encore.createSharedEntry('common', [
     'codemirror/theme/yeti.css',
     'simplemde/src/css/simplemde.css',
     'social-share-button.js/dist/social-share.min.css',
+    'highlight.js/styles/tomorrow.css',
 ]);
 
 //add style entries

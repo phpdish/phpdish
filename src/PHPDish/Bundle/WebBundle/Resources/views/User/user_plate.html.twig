@@ -1,4 +1,4 @@
-<div class="panel panel-default panel-widget">
+<div class="panel panel-widget">
     <div class="panel-body">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="media user-plate">
@@ -8,12 +8,8 @@
             <div class="media-body user-title">
                 <div class="media-heading username"><a href="{{ path('user_view', {'username': app.user.username}) }}">{{ app.user.username }}</a></div>
                 <ul class="list-inline badge-icons">
-                    <li><a href="{{ path('user_topics',  {'username': app.user.username}) }}">话题</a></li>
-                    <li><a href="{{ path('user_posts',  {'username': app.user.username}) }}">文章</a></li>
-                    <li class="notification-num">
-                        <a><i class="if i-envelope"></i></a>
-                        <span class="badge badge-u badge-u-orange">10</span>
-                    </li>
+                    <li><a href="{{ path('user_topics',  {'username': app.user.username}) }}"><i class="if i-comment-square"></i> 话题</a></li>
+                    <li><a href="{{ path('user_posts',  {'username': app.user.username}) }}"><i class="if i-post-o"></i> 文章</a></li>
                 </ul>
             </div>
         </div>
