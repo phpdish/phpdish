@@ -178,6 +178,12 @@ hwi_oauth:
 
     resource_owners:
         weibo:
-            type:                sina_weibo
-            client_id:           870514869
-            client_secret:   4e7539f7b16f669579f70244ca8ac3b4
+            type: sina_weibo
+            client_id: 870514869
+            client_secret: 4e7539f7b16f669579f70244ca8ac3b4
+
+        github:
+            type: github
+            client_id: b98da1a3aeb86b4f9e4a
+            client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
+            scope: 'user:email,public_repo'

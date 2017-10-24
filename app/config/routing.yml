@@ -70,3 +70,5 @@ hwi_oauth_connect:
 weibo_login:
     path: "/login/check-weibo"
 
+github_login:
+    path: "/login/check-github"

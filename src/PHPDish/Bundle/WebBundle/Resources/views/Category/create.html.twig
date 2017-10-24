@@ -36,7 +36,9 @@
                                 <div class="preview-image"><img data-role="preview" class="img-responsive" src=""/></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" {% if hasManyCategories %}disabled="disabled"{% endif %} class="btn u-btn-primary"><i class="if i-plus-bold"></i> 创建</button>
+                                <button type="submit" {% if hasManyCategories %}disabled="disabled"{% endif %} class="btn u-btn-primary">
+                                    {% if category is defined %}修改{% else %}<i class="if i-plus-bold"></i> 创建{% endif %}
+                                </button>
                             </div>
                         {{ form_end(form) }}
                     </div>

@@ -40,7 +40,7 @@ final class SettingMenuBuilder
             ->setAttribute('class', 'list-group-item if i-password');
 
         $menu->addChild('Social Binding', [
-                'label' => '社交账户绑定',
+                'label' => '社交账号',
                 'route' => 'setting_social_binding'
             ])
             ->setAttribute('class', 'list-group-item if i-weibo');

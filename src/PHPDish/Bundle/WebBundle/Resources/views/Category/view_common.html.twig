@@ -4,6 +4,8 @@
 
 {% block content %}
 <div class="container narrow-layout">
+    {% from  'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
+    {{ flashes() }}
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-u category-detail">

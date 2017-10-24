@@ -9,14 +9,14 @@
 
     <div class="panel panel-u">
         <div class="panel-heading">社交账户 </div>
-        <ul class="list-group">
+        <ul class="list-group social-connection">
             <li class="list-group-item">
                 <span class="if i-weibo"></span>
 
                 {% if app.user.weiboId %}
                     <i  class="if i-check"></i> 已绑定
                 {% else %}
-                    绑定微博
+                    <a href="{{ hwi_oauth_login_url('weibo') }}">绑定微博</a>
                 {% endif %}
             </li>
             <li class="list-group-item">
@@ -25,7 +25,7 @@
                 {% if app.user.githubId %}
                     <i  class="if i-check"></i> 已绑定
                 {% else %}
-                    绑定GitHub
+                    <a href="{{ hwi_oauth_login_url('github') }}">绑定GitHub</a>
                 {% endif %}
             </li>
         </ul>
