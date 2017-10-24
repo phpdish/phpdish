@@ -9,6 +9,16 @@ imports:
 parameters:
     locale: zh_CN
 
+    oauth.weibo.client_id: 870514869
+    oauth.weibo.client_secret: 4e7539f7b16f669579f70244ca8ac3b4
+
+    oauth.github.client_id: b98da1a3aeb86b4f9e4a
+    oauth.github.client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
+
+    app.path.media: '%kernel.project_dir%/web/media'
+    app.path.uploads: '%kernel.project_dir%/web/media/uploads'
+    app.path.avatar: '%kernel.project_dir%/web/media/uploads/avatar'
+
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }
@@ -87,11 +97,11 @@ knp_gaufrette:
     adapters:
         uploads:
             local:
-                directory: '%kernel.project_dir%/web/media/uploads'
+                directory: '%app.path.uploads%'
                 create: true
         avatar:
             local:
-                directory: '%kernel.project_dir%/web/media/uploads/avatar'
+                directory: '%app.path.avatar%'
                 create: true
 
     filesystems:
@@ -114,8 +124,8 @@ liip_imagine:
         default:
             filesystem:
                 data_root:
-                  - '%kernel.root_dir%/../web/media/uploads'
-                  - '%kernel.root_dir%/../web/media/uploads/avatar'
+                  - '%kernel.project_dir%/web/media/uploads'
+                  - '%kernel.project_dir%/web/media/uploads/avatar'
 
     resolvers:
         default:
@@ -167,6 +177,10 @@ fos_message:
 
 vich_uploader:
     db_driver: orm
+    mappings:
+        user_avatar:
+            uri_prefix: '/web/media/uploads/avatar'
+            upload_destination: '%app.path.avatar%'
 
 # 社交网站登录
 hwi_oauth:

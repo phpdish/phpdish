@@ -102,5 +102,5 @@ easy_admin:
                 fields:
                       - { property: 'name', label: '名称' }
                       - { property: 'url', label: '链接', type: 'url'}
-                      - { property: 'logo', label: 'logo'}
+                      - { property: 'logoFile', label: 'Logo', type: 'vich_image' }
                       - { property: 'priority', label: '优先级', type: 'number'}

@@ -50,6 +50,7 @@
         "symfony/symfony": "3.3.*",
         "twig/extensions": "^1.5",
         "twig/twig": "^1.0||^2.0",
+        "vich/uploader-bundle": "^1.6",
         "white-october/pagerfanta-bundle": "^1.0",
         "willdurand/hateoas-bundle": "^1.3"
     },
