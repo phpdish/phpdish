@@ -142,15 +142,19 @@
 ------------------------------------*/
 .nav-profile{
   margin-right: 0;
+  height:50px;
+
+  //注册登录按钮
   .btn-register{
     vertical-align: middle;
     -webkit-border-radius:999px;
     -moz-border-radius:999px;
     border-radius: 999px;
-    padding: 0 15px;
-    margin-top: 14px;
+    padding: 4px 10px;
+    margin-top: 10px;
   }
 
+  //通知数量区域
   .nav-notifications{
     .if{
       font-size:18px;
@@ -165,6 +169,7 @@
     }
   }
 
+  //用户信息区域
   .nav-user{
     position:relative;
     cursor:pointer;
@@ -172,7 +177,7 @@
       background-color: #f5f5f5;
     }
     .avatar{
-      padding: 13px 10px 13px 18px;;
+      padding: 8px 10px 8px 18px;
       img{
         width: 35px;
         height: 35px;

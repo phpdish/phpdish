@@ -25,17 +25,22 @@
     margin-bottom: 0;
 }
 //banner nav
-.navbar-brand{
-    padding: 0 15px;
-    height: 60px;
-}
 .navbar-default{
+    //border-bottom:1px solid rgba(30,35,42,.06);
+    //box-shadow:0 1px 3px 0 rgba(0,34,77,.05);
     background-color:#fff;
 }
-.navbar-nav li a{
-    line-height:30px;
-    font-size: 14px;
+.navbar-brand{
+    padding: 0 15px;
+    img{
+        height: 100%;
+    }
 }
-.navbar-form{
-    margin-top:10px;
-}
+
+//.navbar-nav li a{
+//    line-height:30px;
+//    font-size: 14px;
+//}
+//.navbar-form{
+//    margin-top:10px;
+//}
