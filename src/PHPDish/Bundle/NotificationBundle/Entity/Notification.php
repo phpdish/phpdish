@@ -7,6 +7,7 @@ use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\NotificationBundle\Model\ActionInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -16,7 +17,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
  * @ORM\Entity
  * @ORM\Table(name="notifications")
  */
-class Notification implements NotificationInterface
+class Notification implements NotificationInterface, ActionInterface
 {
     use IdentifiableTrait;
 

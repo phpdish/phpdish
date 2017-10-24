@@ -8,6 +8,10 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
 
+    phpdish.manager.timeline:
+        class: PHPDish\Bundle\NotificationBundle\Service\TimelineManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
 # Listeners
 
     phpdish.event_listener.notification.follow_user:

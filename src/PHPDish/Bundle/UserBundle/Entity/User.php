@@ -342,6 +342,41 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * {@inheritdoc}
      */
+    public function enable()
+    {
+        $this->setEnabled(true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->setEnabled(false);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProfile(ProfileInterface $profile)
+    {
+        $profile->setUser($this);
+        $this->profile = $profile;
+        return $this;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getWeiboId()
     {
         return $this->weiboId;
@@ -408,40 +443,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     {
         $this->githubAccessToken = $githubAccessToken;
 
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enable()
-    {
-        $this->setEnabled(true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function disable()
-    {
-        $this->setEnabled(false);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProfile()
-    {
-        return $this->profile;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProfile(ProfileInterface $profile)
-    {
-        $profile->setUser($this);
-        $this->profile = $profile;
         return $this;
     }
 }
