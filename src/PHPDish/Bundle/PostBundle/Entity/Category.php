@@ -206,6 +206,9 @@ class Category extends Taxonomy implements CategoryInterface
         return $this->followers->contains($user);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isBelongsTo(UserInterface $user)
     {
         return $this->creator === $user;

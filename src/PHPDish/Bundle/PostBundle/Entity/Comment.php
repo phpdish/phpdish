@@ -13,6 +13,7 @@ use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use JMS\Serializer\Annotation as JMS;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\CommentRepository")
@@ -61,5 +62,13 @@ class Comment extends BaseComment implements CommentInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBelongsTo(UserInterface $user)
+    {
+        return $this->user === $user;
     }
 }

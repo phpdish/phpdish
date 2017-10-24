@@ -118,4 +118,11 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      * @return bool
      */
     public function isFollowedBy(UserInterface $user);
+
+    /**
+     * 是否属于某个用户
+     *
+     * @param UserInterface $user
+     */
+    public function isBelongsTo(UserInterface $user);
 }

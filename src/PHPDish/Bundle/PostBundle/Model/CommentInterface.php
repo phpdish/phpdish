@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\PostBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\CommentInterface as BaseCommentInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface CommentInterface extends BaseCommentInterface, VotableInterface
 {
@@ -22,4 +23,11 @@ interface CommentInterface extends BaseCommentInterface, VotableInterface
      * @return PostInterface
      */
     public function getPost();
+
+    /**
+     * 是否属于某个用户
+     *
+     * @param UserInterface $user
+     */
+    public function isBelongsTo(UserInterface $user);
 }
