@@ -78,6 +78,11 @@ class Category extends Taxonomy implements CategoryInterface
         $this->followers = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * {@inheritdoc}
      */

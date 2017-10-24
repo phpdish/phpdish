@@ -14,4 +14,9 @@ use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
 class Thread extends Taxonomy implements ThreadInterface
 {
     use EnabledTrait;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

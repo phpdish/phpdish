@@ -13,7 +13,7 @@ import hljs from 'highlight.js';
  * Post Details
  */
 (function($){
-    
+
     //代码高亮
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);

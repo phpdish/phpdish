@@ -100,13 +100,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
 //    protected $roles;
 
     /**
-     * 订阅的专栏.
-     *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", mappedBy="followers")
-     */
-    protected $followingCategories;
-
-    /**
      * 文章数量.
      *
      * @ORM\Column(type="integer")
@@ -280,7 +273,23 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getPostCount()
     {
@@ -288,9 +297,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param int $postCount
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setPostCount($postCount)
     {
@@ -300,7 +307,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getTopicCount()
     {
@@ -308,9 +315,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @param int $topicCount
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setTopicCount($topicCount)
     {
@@ -320,17 +325,15 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getAvatar()
     {
-        return $this->avatar ?: 'avatar/user1.jpg';
+        return $this->avatar ?: 'user1.jpg';
     }
 
     /**
-     * @param string $avatar
-     *
-     * @return User
+     * {@inheritdoc}
      */
     public function setAvatar($avatar)
     {
