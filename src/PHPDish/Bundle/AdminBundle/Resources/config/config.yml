@@ -1,0 +1,106 @@
+easy_admin:
+    site_name: 'PHPDish'
+    formats:
+        date:     'Y-m-d'
+        time:     'H:i:s'
+        datetime: 'Y-m-d H:i:s'
+
+    design:
+        brand_color: '#3c8dbc'
+        color_scheme: 'dark'
+        menu:
+            - {entity: 'User', label: '用户', icon: 'users'}
+            - {entity: 'Post', label: '文章', icon: 'bookmark', default: true }
+            - {entity: 'Topic', label: '话题', icon: 'comment'}
+            - {entity: 'Thread', label: '节点', icon: 'flag'}
+            - {entity: 'FriendLink', label: '友情链接', icon: 'link'}
+
+    entities:
+        User:
+            class: PHPDish\Bundle\UserBundle\Entity\User
+            label: '用户'
+            disabled_actions: ['new']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                    - id
+                    - { property: 'avatar', type: 'image', label: '头像', base_path: '/media/uploads/avatar'}
+                    - { property: 'email', label: '邮箱' }
+                    - { property: 'username', label: '用户名' }
+                    - { property: 'lastLogin', label: '上次登录' }
+                    - { property: 'enabled', label: '状态',  type: 'toggle'}
+
+            edit:
+                title: "编辑%%entity_label%%"
+                fields:
+                    - { property: 'avatar', label: '头像', base_path: '/media/uploads/avatar'}
+                    - { property: 'email', label: '邮箱' }
+                    - { property: 'username', label: '用户名' }
+                    - { property: 'enabled', label: '状态'}
+
+
+        Post:
+            class: PHPDish\Bundle\PostBundle\Entity\Post
+            label: '文章'
+            disabled_actions: ['edit']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                      - id
+                      - { property: 'title', label: '标题' }
+                      - { property: 'category', label: '所属专栏' }
+                      - { property: 'recommended', label: '是否推荐', type: 'toggle' }
+                      - { property: 'enabled', label: '状态',  type: 'toggle'}
+                      - { property: 'comment_count', label: '评论数量' }
+                      - { property: 'view_count', label: 'View数量' }
+                      - { property: 'createdAt', label: '创建时间' }
+
+        Topic:
+            class: PHPDish\Bundle\ForumBundle\Entity\Topic
+            label: '话题'
+            disabled_actions: ['edit']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                      - id
+                      - { property: 'title', label: '标题' }
+                      - { property: 'thread', label: '所属节点' }
+                      - { property: 'recommended', label: '是否推荐', type: 'toggle' }
+                      - { property: 'enabled', label: '状态',  type: 'toggle'}
+                      - { property: 'replyCount', label: '回复数量' }
+                      - { property: 'createdAt', label: '创建回复' }
+                      - { property: 'repliedAt', label: '最后回复' }
+
+
+        Thread:
+            class: PHPDish\Bundle\ForumBundle\Entity\Thread
+            label: '话题节点'
+            disabled_actions: ['delete']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                      - id
+                      - { property: 'name', label: '名称' }
+                      - { property: 'slug', label: 'Slug' }
+                      - { property: 'enabled', label: '状态',  type: 'toggle'}
+                      - { property: 'createdAt', label: '创建回复' }
+
+            form:
+                fields:
+                      - { property: 'name', label: '名称' }
+                      - { property: 'enabled', label: '状态'}
+
+        # 友情链接
+        FriendLink:
+            class: PHPDish\Bundle\CoreBundle\Entity\FriendLink
+            label: '友情链接'
+            list:
+                title: "%%entity_label%%列表"
+            new:
+                title: "新增%%entity_label%%"
+            form:
+                fields:
+                      - { property: 'name', label: '名称' }
+                      - { property: 'url', label: '链接', type: 'url'}
+                      - { property: 'logo', label: 'logo'}
+                      - { property: 'priority', label: '优先级', type: 'number'}

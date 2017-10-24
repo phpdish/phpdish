@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: '@PHPDishAdminBundle/Resources/config/config.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -76,9 +77,6 @@ fos_comment:
         model:
             comment: PHPDish\Bundle\CommentBundle\Entity\Comment
             thread: PHPDish\Bundle\CommentBundle\Entity\Thread
-
-assetic:
-    bundles: [ "FOSCommentBundle" ]
 
 # JMS Serializer
 jms_serializer:
@@ -167,6 +165,9 @@ fos_message:
     thread_class: PHPDish\Bundle\ChatBundle\Entity\Thread
     message_class: PHPDish\Bundle\ChatBundle\Entity\Message
 
+vich_uploader:
+    db_driver: orm
+
 # 社交网站登录
 hwi_oauth:
     http_client:
@@ -180,82 +181,11 @@ hwi_oauth:
     resource_owners:
         weibo:
             type: sina_weibo
-            client_id: 870514869
-            client_secret: 4e7539f7b16f669579f70244ca8ac3b4
+            client_id: '%oauth.weibo.client_id%'
+            client_secret: '%oauth.weibo.client_secret%'
 
         github:
             type: github
-            client_id: b98da1a3aeb86b4f9e4a
-            client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
+            client_id: '%oauth.github.client_id%'
+            client_secret: '%oauth.github.client_id%'
             scope: 'user:email,public_repo'
-
-easy_admin:
-    site_name: 'PHPDish'
-    formats:
-        date:     'Y-m-d'
-        time:     'H:i:s'
-        datetime: 'Y-m-d H:i:s'
-
-    design:
-        brand_color: '#3c8dbc'
-        color_scheme: 'dark'
-        menu:
-            - {entity: 'User', label: '用户', icon: 'users'}
-            - {entity: 'Post', label: '文章', icon: 'bookmark', default: true }
-            - {entity: 'Topic', label: '话题', icon: 'comment'}
-
-    entities:
-        User:
-            class: PHPDish\Bundle\UserBundle\Entity\User
-            label: '用户'
-            disabled_actions: ['new']
-            list:
-                title: "%%entity_label%%列表"
-                fields:
-                    - id
-                    - { property: 'avatar', type: 'image', label: '头像', base_path: '/media/uploads/avatar'}
-                    - { property: 'email', label: '邮箱' }
-                    - { property: 'username', label: '用户名' }
-                    - { property: 'lastLogin', label: '上次登录' }
-                    - { property: 'enabled', label: '状态',  type: 'toggle'}
-
-            edit:
-                title: "编辑%%entity_label%%"
-                fields:
-                    - { property: 'avatar', label: '头像', base_path: '/media/uploads/avatar'}
-                    - { property: 'email', label: '邮箱' }
-                    - { property: 'username', label: '用户名' }
-                    - { property: 'enabled', label: '状态'}
-
-
-        Post:
-            class: PHPDish\Bundle\PostBundle\Entity\Post
-            label: '文章'
-            disabled_actions: ['edit']
-            list:
-                title: "%%entity_label%%列表"
-                fields:
-                      - id
-                      - { property: 'title', label: '标题' }
-                      - { property: 'category', label: '所属专栏' }
-                      - { property: 'recommended', label: '是否推荐', type: 'toggle' }
-                      - { property: 'enabled', label: '状态',  type: 'toggle'}
-                      - { property: 'comment_count', label: '评论数量' }
-                      - { property: 'view_count', label: 'View数量' }
-                      - { property: 'createdAt', label: '创建时间' }
-
-        Topic:
-            class: PHPDish\Bundle\ForumBundle\Entity\Topic
-            label: '话题'
-            disabled_actions: ['edit']
-            list:
-                title: "%%entity_label%%列表"
-                fields:
-                      - id
-                      - { property: 'title', label: '标题' }
-                      - { property: 'thread', label: '所属节点' }
-                      - { property: 'recommended', label: '是否推荐', type: 'toggle' }
-                      - { property: 'enabled', label: '状态',  type: 'toggle'}
-                      - { property: 'replyCount', label: '回复数量' }
-                      - { property: 'createdAt', label: '创建回复' }
-                      - { property: 'repliedAt', label: '最后回复' }

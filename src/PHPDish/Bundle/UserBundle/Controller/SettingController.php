@@ -46,6 +46,7 @@ class SettingController extends Controller
      */
     public function bindSocialSiteAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('PHPDishWebBundle:Setting:bind_social.html.twig', [
         ]);
     }
