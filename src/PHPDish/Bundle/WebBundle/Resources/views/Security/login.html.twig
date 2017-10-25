@@ -16,7 +16,7 @@
                     <p>还没有账户?点此<a href="{{ path('register') }}">注册</a></p>
                 </div>
                 {% if error %}
-                <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
                 <div class="group">
                     <div class="input-group">

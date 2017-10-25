@@ -60,6 +60,16 @@
     i{
       font-size:22px;
     }
+    a{
+      &:hover{
+        .i-github{
+          color: #fff;
+        }
+        .i-weibo{
+          color: #fff;
+        }
+      }
+    }
   }
 }
 
