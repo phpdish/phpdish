@@ -11,6 +11,7 @@ easy_admin:
         menu:
             - {entity: 'User', label: '用户', icon: 'users'}
             - {entity: 'Post', label: '文章', icon: 'bookmark', default: true }
+            - {entity: 'Category', label: '专栏', icon: 'bookmark'}
             - {entity: 'Topic', label: '话题', icon: 'comment'}
             - {entity: 'Thread', label: '节点', icon: 'flag'}
             - {entity: 'FriendLink', label: '友情链接', icon: 'link'}
@@ -19,24 +20,27 @@ easy_admin:
         User:
             class: PHPDish\Bundle\UserBundle\Entity\User
             label: '用户'
-            disabled_actions: ['new']
+            disabled_actions: ['new', 'delete']
             list:
                 title: "%%entity_label%%列表"
                 fields:
                     - id
-                    - { property: 'avatar', type: 'image', label: '头像', base_path: '/media/uploads/avatar'}
-                    - { property: 'email', label: '邮箱' }
+                    - { property: 'avatar', type: 'image', label: '头像', base_path: '%app.path.avatar%'}
+                    - { property: 'email', label: '邮箱', type:  'email' }
                     - { property: 'username', label: '用户名' }
                     - { property: 'lastLogin', label: '上次登录' }
-                    - { property: 'enabled', label: '状态',  type: 'toggle'}
+                    - { property: 'enabled', label: '是否封禁',  type: 'toggle'}
 
             edit:
                 title: "编辑%%entity_label%%"
                 fields:
-                    - { property: 'avatar', label: '头像', base_path: '/media/uploads/avatar'}
+                    - { property: 'avatar', label: '头像', base_path: '%app.path.avatar%'}
                     - { property: 'email', label: '邮箱' }
                     - { property: 'username', label: '用户名' }
-                    - { property: 'enabled', label: '状态'}
+                    - { property: 'enabled', label: '是否封禁'}
+                    - { property: 'plainPassword', label: '密码', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', label: '角色', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN': 'ROLE_SUPER_ADMIN' } } }
+
 
 
         Post:
@@ -49,11 +53,42 @@ easy_admin:
                       - id
                       - { property: 'title', label: '标题' }
                       - { property: 'category', label: '所属专栏' }
+                      - { property: 'user', label: '所属用户' }
                       - { property: 'recommended', label: '是否推荐', type: 'toggle' }
                       - { property: 'enabled', label: '状态',  type: 'toggle'}
                       - { property: 'comment_count', label: '评论数量' }
                       - { property: 'view_count', label: 'View数量' }
                       - { property: 'createdAt', label: '创建时间' }
+
+        Category:
+            class: PHPDish\Bundle\PostBundle\Entity\Category
+            label: '专栏'
+            disabled_actions: ['delete']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                      - id
+                      - { property: 'name', label: '专栏名称' }
+                      - { property: 'slug', label: 'Slug' }
+                      - { property: 'creator', label: '所属用户' }
+                      - { property: 'cover', label: '封面', type: image, base_path: '%app.path.uploads%' }
+                      - { property: 'recommended', label: '是否推荐', type: 'toggle' }
+                      - { property: 'enabled', label: '是否删除',  type: 'toggle'}
+                      - { property: 'description', label: '专栏简述' }
+                      - { property: 'postCount', label: '文章数量' }
+                      - { property: 'followerCount', label: '订阅数量' }
+                      - { property: 'createdAt', label: '创建时间' }
+
+            form:
+                fields:
+                      - { property: 'name', label: '专栏名称' }
+                      - { property: 'slug', label: 'Slug' }
+                      - { property: 'recommended', label: '是否推荐'}
+                      - { property: 'enabled', label: '是否删除'}
+                      - { property: 'description', label: '专栏简述' }
+                      - { property: 'managers', label: '管理员' }
+                      - { property: 'creator', label: '创建人' }
+
 
         Topic:
             class: PHPDish\Bundle\ForumBundle\Entity\Topic
@@ -96,6 +131,11 @@ easy_admin:
             label: '友情链接'
             list:
                 title: "%%entity_label%%列表"
+                fields:
+                      - { property: 'name', label: '名称' }
+                      - { property: 'url', label: '链接', type: 'url'}
+                      - { property: 'logo', label: 'Logo', type: 'image' }
+                      - { property: 'priority', label: '优先级', type: 'number'}
             new:
                 title: "新增%%entity_label%%"
             form:

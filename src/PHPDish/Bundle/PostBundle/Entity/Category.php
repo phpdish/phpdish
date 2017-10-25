@@ -27,7 +27,7 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isRecommended = false;
+    protected $recommended = false;
 
     /**
      * @ORM\Column(type="integer", length=10)
@@ -138,7 +138,7 @@ class Category extends Taxonomy implements CategoryInterface
      */
     public function isRecommended()
     {
-        return $this->isRecommended;
+        return $this->recommended;
     }
 
     /**
@@ -175,6 +175,23 @@ class Category extends Taxonomy implements CategoryInterface
     public function addFollower(UserInterface $user)
     {
         $this->followers[] = $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFollowers(array $followers)
+    {
+        $this->followers = $followers;
+        return $this;
     }
 
     /**

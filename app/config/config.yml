@@ -15,9 +15,12 @@ parameters:
     oauth.github.client_id: b98da1a3aeb86b4f9e4a
     oauth.github.client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
 
-    app.path.media: '%kernel.project_dir%/web/media'
-    app.path.uploads: '%kernel.project_dir%/web/media/uploads'
-    app.path.avatar: '%kernel.project_dir%/web/media/uploads/avatar'
+    app.dir.media: '%kernel.project_dir%/web/media'
+    app.dir.uploads: '%kernel.project_dir%/web/media/uploads'
+    app.dir.avatar: '%kernel.project_dir%/web/media/uploads/avatar'
+    app.path.media: '/media'
+    app.path.uploads: '/media/uploads'
+    app.path.avatar: '/media/uploads/avatar'
 
 framework:
     #esi: ~
@@ -97,11 +100,11 @@ knp_gaufrette:
     adapters:
         uploads:
             local:
-                directory: '%app.path.uploads%'
+                directory: '%app.dir.uploads%'
                 create: true
         avatar:
             local:
-                directory: '%app.path.avatar%'
+                directory: '%app.dir.avatar%'
                 create: true
 
     filesystems:
@@ -124,8 +127,8 @@ liip_imagine:
         default:
             filesystem:
                 data_root:
-                  - '%kernel.project_dir%/web/media/uploads'
-                  - '%kernel.project_dir%/web/media/uploads/avatar'
+                  - '%app.dir.uploads%'
+                  - '%app.dir.avatar%'
 
     resolvers:
         default:

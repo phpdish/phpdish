@@ -97,6 +97,19 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function removeFollower(UserInterface $user);
 
     /**
+     * 获取订阅者
+     * @return UserInterface[]
+     */
+    public function getFollowers();
+
+    /**
+     * 设置订阅者
+     * @param UserInterface[] $followers
+     * @return $this
+     */
+    public function setFollowers(array $followers);
+
+    /**
      * 获取管理员.
      *
      * @return UserInterface[]|ArrayCollection
