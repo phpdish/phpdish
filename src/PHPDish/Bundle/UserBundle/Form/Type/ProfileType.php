@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\UserBundle\Form\Type;
 
-
 use PHPDish\Bundle\UserBundle\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,13 +17,13 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('url', UrlType::class, [
-                'label' => '个人主页'
+                'label' => '个人主页',
             ])
             ->add('location', TextType::class, [
-                'label' => '城市'
+                'label' => '城市',
             ])
             ->add('company', TextType::class, [
-                'label' => '公司'
+                'label' => '公司',
             ]);
     }
 

@@ -106,7 +106,7 @@ class PostController extends RestController
      *
      * @Route("/post/{id}/edit", name="post_edit", requirements={"id": "\d+"})
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return Response

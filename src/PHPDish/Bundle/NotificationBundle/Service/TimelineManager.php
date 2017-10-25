@@ -1,4 +1,5 @@
 <?php
+
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,7 @@ class TimelineManager implements TimelineManagerInterface
         $this->entityManager = $entityManager;
         $this->notificationRepository = $entityManager->getRepository('PHPDishNotificationBundle:Notification');
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +35,7 @@ class TimelineManager implements TimelineManagerInterface
         $query = $this->notificationRepository->createQueryBuilder('n')
             ->where('n.fromUser = :user')->setParameter('user', $user)
             ->getQuery();
+
         return $this->createPaginator($query, $page, $limit);
     }
 }

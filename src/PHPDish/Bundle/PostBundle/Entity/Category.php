@@ -191,6 +191,7 @@ class Category extends Taxonomy implements CategoryInterface
     public function setFollowers(array $followers)
     {
         $this->followers = $followers;
+
         return $this;
     }
 

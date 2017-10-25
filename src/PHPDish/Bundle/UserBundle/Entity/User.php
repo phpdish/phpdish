@@ -15,8 +15,6 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -374,9 +372,9 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     {
         $profile->setUser($this);
         $this->profile = $profile;
+
         return $this;
     }
-
 
     /**
      * {@inheritdoc}

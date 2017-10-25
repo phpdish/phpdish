@@ -9,7 +9,7 @@ final class MainMenuBuilder
     /**
      * @var FactoryInterface
      */
-    protected $factory;
+    private $factory;
 
     public function __construct(FactoryInterface $factory)
     {
@@ -17,8 +17,10 @@ final class MainMenuBuilder
     }
 
     /**
-     * 创建主菜单
+     * 创建主菜单.
+     *
      * @param array $options
+     *
      * @return \Knp\Menu\ItemInterface
      */
     public function createMenu(array $options = [])
@@ -27,25 +29,26 @@ final class MainMenuBuilder
 
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
-        $menu->addChild('homepage',  [
+        $menu->addChild('homepage', [
             'label' => '首页',
-            'route' => 'homepage'
+            'route' => 'homepage',
         ]);
 
         $menu->addChild('Category', [
             'label' => '专栏',
-            'route' => 'post'
+            'route' => 'post',
         ]);
 
         $menu->addChild('Topic', [
             'label' => '问答',
-            'route' => 'topic'
+            'route' => 'topic',
         ]);
 
         $menu->addChild('job', [
             'label' => '招聘',
-            'route' => 'topic'
+            'route' => 'topic',
         ]);
+
         return $menu;
     }
 }

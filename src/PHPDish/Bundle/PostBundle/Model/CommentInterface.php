@@ -25,7 +25,7 @@ interface CommentInterface extends BaseCommentInterface, VotableInterface
     public function getPost();
 
     /**
-     * 是否属于某个用户
+     * 是否属于某个用户.
      *
      * @param UserInterface $user
      */

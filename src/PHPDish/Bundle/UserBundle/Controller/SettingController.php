@@ -13,7 +13,8 @@ class SettingController extends Controller
     use ManagerTrait;
 
     /**
-     * 修改资料
+     * 修改资料.
+     *
      * @Route("/settings", name="setting_profile")
      *
      * @param Request $request
@@ -29,15 +30,18 @@ class SettingController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getUserManager()->saveUser($user);
             $this->addFlash('success', '资料修改成功');
+
             return $this->redirectToRoute('setting_profile');
         }
+
         return $this->render('PHPDishWebBundle:Setting:profile.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * 绑定社交账户
+     * 绑定社交账户.
+     *
      * @Route("/settings/social-binding", name="setting_social_binding")
      *
      * @param Request $request
@@ -47,6 +51,7 @@ class SettingController extends Controller
     public function bindSocialSiteAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
         return $this->render('PHPDishWebBundle:Setting:bind_social.html.twig', [
         ]);
     }

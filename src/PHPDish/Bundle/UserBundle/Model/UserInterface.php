@@ -150,14 +150,14 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
     public function getProfile();
 
     /**
-     * 获取用户的粉丝
+     * 获取用户的粉丝.
      *
      * @return UserInterface
      */
     public function getFollowers();
 
     /**
-     * 获取正在关注的用户
+     * 获取正在关注的用户.
      *
      * @return UserInterface[]
      */

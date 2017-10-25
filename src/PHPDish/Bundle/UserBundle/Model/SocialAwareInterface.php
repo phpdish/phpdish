@@ -5,13 +5,15 @@ namespace PHPDish\Bundle\UserBundle\Model;
 interface SocialAwareInterface
 {
     /**
-     * 获取微博id
+     * 获取微博id.
+     *
      * @return string
      */
     public function getWeiboId();
 
     /**
-     * 设置获取微博id
+     * 设置获取微博id.
+     *
      * @param string $weiboId
      *
      * @return $this
@@ -19,13 +21,15 @@ interface SocialAwareInterface
     public function setWeiboId($weiboId);
 
     /**
-     * 获取微博授权token
+     * 获取微博授权token.
+     *
      * @return string
      */
     public function getWeiboAccessToken();
 
     /**
-     * 设置微博token
+     * 设置微博token.
+     *
      * @param string $weiboAccessToken
      *
      * @return $this
@@ -33,13 +37,15 @@ interface SocialAwareInterface
     public function setWeiboAccessToken($weiboAccessToken);
 
     /**
-     * 获取GitHub ID
+     * 获取GitHub ID.
+     *
      * @return string
      */
     public function getGithubId();
 
     /**
-     * 设置GitHub id
+     * 设置GitHub id.
+     *
      * @param string $githubId
      *
      * @return $this
@@ -47,13 +53,15 @@ interface SocialAwareInterface
     public function setGithubId($githubId);
 
     /**
-     * 获取github  token
+     * 获取github  token.
+     *
      * @return string
      */
     public function getGithubAccessToken();
 
     /**
-     * 设置Github token
+     * 设置Github token.
+     *
      * @param string $githubAccessToken
      *
      * @return $this

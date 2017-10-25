@@ -116,7 +116,7 @@ class CategoryController extends RestController
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [
             'form' => $form->createView(),
             'category' => $category,
-            'hasManyCategories'  => false
+            'hasManyCategories' => false,
         ]);
     }
 

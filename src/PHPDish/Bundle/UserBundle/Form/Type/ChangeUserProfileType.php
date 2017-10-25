@@ -21,17 +21,17 @@ class ChangeUserProfileType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                      '男' => User::GENDER_MEN,
-                     '女' => User::GENDER_WOMEN
+                     '女' => User::GENDER_WOMEN,
                 ],
                 'placeholder' => '未选择',
-                'label' => '性别'
+                'label' => '性别',
             ])
             ->add('email', TextType::class, [
-                'label' => '邮箱'
+                'label' => '邮箱',
             ])
             ->add('profile', ProfileType::class)
             ->add('avatar', HiddenType::class, [
-                'label' => '头像'
+                'label' => '头像',
             ]);
     }
 
@@ -41,7 +41,7 @@ class ChangeUserProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class
+            'data_class' => User::class,
         ]);
     }
 }
