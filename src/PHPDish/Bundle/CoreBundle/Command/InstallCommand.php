@@ -15,17 +15,17 @@ class InstallCommand extends AbstractInstallCommand
      */
     protected $commands = [
         [
-            'command' => 'check-requirements',
+            'command' => 'phpdish:install:check-requirements',
             'message' => 'Checking system requirements.',
         ],
-        [
-            'command' => 'phpdish:install:database',
-            'message' => 'Setting up the database.',
-        ],
-        [
-            'command' => 'phpdish:create:admin',
-            'message' => 'Creats the super admin acount.',
-        ],
+//        [
+//            'command' => 'phpdish:install:database',
+//            'message' => 'Setting up the database.',
+//        ],
+//        [
+//            'command' => 'phpdish:create:admin',
+//            'message' => 'Creats the super admin acount.',
+//        ],
     ];
 
     /**
@@ -49,11 +49,11 @@ class InstallCommand extends AbstractInstallCommand
 
         $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
-        foreach ($this->commands as $index => $command) {
-            $outputStyle->writeln("<info>Step {$index}:</info>");
-            $command = $this->getApplication()->get($command['command']);
-            $command->run($input, $output);
-        }
+//        foreach ($this->commands as $index => $command) {
+//            $outputStyle->writeln("<info>Step {$index}:</info>");
+//            $command = $this->getApplication()->get($command['command']);
+//            $command->run($input, $output);
+//        }
 
         $output->writeln('PHPDish has been successfully installed.');
     }

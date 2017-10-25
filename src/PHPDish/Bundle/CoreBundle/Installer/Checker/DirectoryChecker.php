@@ -6,7 +6,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DirectoryChecker
+class DirectoryChecker extends IOAwareChecker
 {
     /**
      * @var Filesystem
@@ -23,9 +23,21 @@ class DirectoryChecker
      */
     protected $name;
 
+    protected $director;
+
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function check()
+    {
+        $this->ensureExists($this->director);
+        $this->ensureIsWritable($this->director);
+        return true;
     }
 
     /**
@@ -77,6 +89,15 @@ class DirectoryChecker
                 $this->name
             ));
         }
+    }
+
+    /**
+     * 设置目录
+     * @param string $director
+     */
+    public function setDirector($director)
+    {
+        $this->director = $director;
     }
 
     /**
