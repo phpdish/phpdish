@@ -3,3 +3,11 @@ services:
       class: PHPDish\Bundle\CoreBundle\Installer\Checker\DirectoryChecker
       arguments:
           - '@filesystem'
+
+  phpdish.installer.requirements:
+        class: PHPDish\Bundle\CoreBundle\Installer\Requirement\PHPDishRequirements
+
+  phpdish.installer.requirements_checker:
+      class: PHPDish\Bundle\CoreBundle\Installer\Checker\RequirementsChecker
+      arguments:
+          - '@phpdish.installer.requirements'

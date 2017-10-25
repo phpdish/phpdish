@@ -28,7 +28,9 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fulfilled = $this->getContainer()->get('phpdish.installer.checker.phpdish_requirements')->check($output);
+        $checker = $this->getContainer()->get('phpdish.installer.requirements_checker');
+        $checker->setOutput($output);
+        $fulfilled = $checker->check($output);
 
         if (!$fulfilled) {
             throw new RuntimeException(

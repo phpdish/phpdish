@@ -23,7 +23,10 @@ class DirectoryChecker extends IOAwareChecker
      */
     protected $name;
 
-    protected $director;
+    /**
+     * @var string
+     */
+    protected $directory;
 
     public function __construct(Filesystem $filesystem)
     {
@@ -35,8 +38,8 @@ class DirectoryChecker extends IOAwareChecker
      */
     public function check()
     {
-        $this->ensureExists($this->director);
-        $this->ensureIsWritable($this->director);
+        $this->ensureExists($this->directory);
+        $this->ensureIsWritable($this->directory);
         return true;
     }
 
@@ -93,11 +96,11 @@ class DirectoryChecker extends IOAwareChecker
 
     /**
      * 设置目录
-     * @param string $director
+     * @param string $directory
      */
-    public function setDirector($director)
+    public function setDirectory($directory)
     {
-        $this->director = $director;
+        $this->directory = $directory;
     }
 
     /**

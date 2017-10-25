@@ -35,7 +35,7 @@ EOT;
     {
         $checker = $this->getContainer()->get('phpdish.installer.directory_checker');
         $checker->setOutput($output);
-        $checker->ensureExists($directory);
-        $checker->ensureIsWritable($directory);
+        $checker->setDirectory($directory);
+        $checker->check();
     }
 }
