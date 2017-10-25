@@ -29,7 +29,7 @@ services:
         arguments:
           - '@fos_user.user_manager'
           - '@phpdish.media.avatar_file_downloader'
-          - {weibo: weiboId}
+          - {weibo: weiboId, github: githubId}
 
 
    # Setting Menu

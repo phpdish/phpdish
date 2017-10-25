@@ -197,5 +197,5 @@ hwi_oauth:
         github:
             type: github
             client_id: '%oauth.github.client_id%'
-            client_secret: '%oauth.github.client_id%'
+            client_secret: '%oauth.github.client_secret%'
             scope: 'user:email,public_repo'
