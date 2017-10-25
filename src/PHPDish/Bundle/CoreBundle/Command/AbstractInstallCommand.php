@@ -57,8 +57,7 @@ EOT;
         }
 
         $options = array_merge($options, [
-            'command' => $command,
-            '--no-interaction' => true,
+            'command' => $command
         ]);
 
         $this

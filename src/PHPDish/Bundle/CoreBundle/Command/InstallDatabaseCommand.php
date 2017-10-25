@@ -5,6 +5,7 @@ namespace PHPDish\Bundle\CoreBundle\Command;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,7 +23,7 @@ class InstallDatabaseCommand extends AbstractInstallCommand
         1 => [
             'command' => 'doctrine:database:create',
             'options' => [
-                ' --if-not-exists' => true
+                '--if-not-exists' => true
             ]
         ],
         3 => 'doctrine:migrations:migrate',
@@ -88,7 +89,7 @@ EOT
                 $command = $commandItem['command'];
                 $options = $commandItem['options'];
             }
-            $this->executeCommand($command, $output, $options);
+            $this->executeCommand($command, null, $options);
             $progressbar->advance(1);
         }
         $progressbar->finish();
