@@ -1,3 +1,6 @@
+imports:
+    - {resource: 'services/installer.yml'}
+
 services:
     twig_extension.date:
          class: Twig\Extensions\DateExtension

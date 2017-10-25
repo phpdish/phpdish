@@ -1,0 +1,4 @@
+phpdish.installer.directory_checker:
+    class: PHPDish\Bundle\CoreBundle\Installer\Checker\DirectoryChecker
+    arguments:
+        - '@filesystem'
