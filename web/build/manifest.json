@@ -1,6 +1,4 @@
 {
-  "build/common.css": "http://127.0.0.1:8080/common.css",
-  "build/common.js": "http://127.0.0.1:8080/common.js",
   "build/css/style.css": "http://127.0.0.1:8080/css/style.css",
   "build/js/category.js": "http://127.0.0.1:8080/js/category.js",
   "build/js/default.js": "http://127.0.0.1:8080/js/default.js",
@@ -10,5 +8,7 @@
   "build/js/setting.js": "http://127.0.0.1:8080/js/setting.js",
   "build/js/sign.js": "http://127.0.0.1:8080/js/sign.js",
   "build/js/topic.js": "http://127.0.0.1:8080/js/topic.js",
-  "build/manifest.js": "http://127.0.0.1:8080/manifest.js"
+  "build/manifest.js": "http://127.0.0.1:8080/manifest.js",
+  "build/vendor.css": "http://127.0.0.1:8080/vendor.css",
+  "build/vendor.js": "http://127.0.0.1:8080/vendor.js"
 }

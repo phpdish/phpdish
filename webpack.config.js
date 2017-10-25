@@ -49,8 +49,9 @@ const foundEntries = findEntries(config.jsPath);
 for (const entryName in foundEntries) {
     Encore.addEntry(entryName, foundEntries[entryName]);
 }
+
 //add shared entry
-Encore.createSharedEntry('common', [
+Encore.createSharedEntry('vendor', [
     path.resolve(config.modulesPath, 'common.js'),
     path.resolve(config.modulesPath, 'dialog.js'),
     'github-markdown-css',
