@@ -3,13 +3,10 @@
 namespace PHPDish\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\CoreBundle\Repository\FriendLinkRepository")
  * @ORM\Table(name="friend_links")
- * @Vich\Uploadable
  */
 class FriendLink
 {
@@ -34,12 +31,6 @@ class FriendLink
      * @ORM\Column(type="string")
      */
     protected $logo = '';
-
-    /**
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="logo")
-     * @var File
-     */
-    protected $logoFile;
 
     /**
      * @ORM\Column(type="integer")
@@ -150,15 +141,5 @@ class FriendLink
     public function getPriority()
     {
         return $this->priority;
-    }
-
-    public function setLogoFile(File $image = null)
-    {
-        $this->logoFile = $image;
-    }
-
-    public function getLogoFile()
-    {
-        return $this->logoFile;
     }
 }

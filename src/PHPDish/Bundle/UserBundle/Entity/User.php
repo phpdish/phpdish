@@ -17,13 +17,11 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
- * @Vich\Uploadable
  */
 class User extends BaseUser implements UserInterface, ParticipantInterface
 {
@@ -51,12 +49,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      * @ORM\Column(type="string")
      */
     protected $avatar = '';
-
-    /**
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
-     * @var File
-     */
-    protected $avatarImageFile;
 
     /**
      * @ORM\Column(type="integer")
@@ -157,16 +149,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function getSalt()
     {
         return null;
-    }
-
-    public function setAvatarImageFile(File $image = null)
-    {
-        $this->avatarImageFile = $image;
-    }
-
-    public function getAvatarImageFile()
-    {
-        return $this->avatarImageFile;
     }
 
     /**
