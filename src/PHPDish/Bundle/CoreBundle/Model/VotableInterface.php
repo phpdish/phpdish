@@ -24,25 +24,4 @@ interface VotableInterface
      * @return int
      */
     public function getVoteCount();
-
-    //
-//    /**
-//     * 获取所有的赞
-//     * @return VoteInterface[]
-//     */
-//    public function getVotes();
-//
-//    /**
-//     * 添加投票记录
-//     * @param VoteInterface $vote
-//     * @return VotableInterface
-//     */
-//    public function addVote(VoteInterface $vote);
-//
-//    /**
-//     * 移除投票记录
-//     * @param VoteInterface $vote
-//     * @return VotableInterface
-//     */
-//    public function removeVote(VoteInterface $vote);
 }

@@ -7,7 +7,7 @@ interface IdentifiableInterface
     /**
      * 获取id.
      *
-     * @return mixed
+     * @return int
      */
     public function getId();
 }

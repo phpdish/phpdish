@@ -17,11 +17,6 @@ trait VotableTrait
      */
     protected $voteCount = 0;
 
-//    /**
-//     * @var ArrayCollection
-//     */
-//    protected $votes;
-
     /**
      * Set voteCount.
      *
@@ -45,33 +40,4 @@ trait VotableTrait
     {
         return $this->voteCount;
     }
-
-//    /**
-//     * 添加投票记录
-//     * @param VoteInterface $vote
-//     * @return $this
-//     */
-//    public function addVote(VoteInterface $vote)
-//    {
-//        $this->votes[] = $vote;
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove vote
-//     * @param VoteInterface
-//     */
-//    public function removeVote(VoteInterface $vote)
-//    {
-//        $this->votes->removeElement($vote);
-//    }
-//
-//    /**
-//     * Get votes
-//     * @return VoteInterface[]|ArrayCollection
-//     */
-//    public function getVotes()
-//    {
-//        return $this->votes;
-//    }
 }
