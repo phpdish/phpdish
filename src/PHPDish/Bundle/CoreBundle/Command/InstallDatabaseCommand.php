@@ -43,6 +43,11 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Creating PHPDish database.');
 
+        $this->executeCommand('doctrine:database:create', $output)
+//            ->executeCommand('doctrine:schema:update', $output, [
+//                '--force' => true
+//            ])
+            ->executeCommand('cache:clear');
 
         $outputStyle->newLine();
     }

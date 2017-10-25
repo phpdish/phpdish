@@ -49,6 +49,8 @@ class InstallCommand extends AbstractInstallCommand
 
         $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
+        $this->getApplication()->setAutoExit(false);
+
         foreach ($this->commands as $index => $command) {
             $outputStyle->newLine();
             $outputStyle->section(sprintf(
@@ -57,8 +59,7 @@ class InstallCommand extends AbstractInstallCommand
                 count($this->commands),
                 $command['message']
             ));
-            $command = $this->getApplication()->get($command['command']);
-            $command->run($input, $output);
+            $this->executeCommand($command['command'], $output);
         }
 
         $output->writeln('PHPDish has been successfully installed.');
