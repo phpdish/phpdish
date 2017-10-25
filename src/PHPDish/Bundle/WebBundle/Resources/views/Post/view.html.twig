@@ -72,7 +72,7 @@
                 <div class="panel-body margin-bottom-10">
                     <div class="row">
                         <div class="col-md-10 add-comment">
-                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <a href="{{ path('login') }}" class="avatar">
                                     <img src="{{ asset('img/default_user.png') }}" class="img-responsive img-circle"/>
                                 </a>

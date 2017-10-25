@@ -22,7 +22,7 @@ class SettingController extends Controller
      */
     public function editProfileAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $user = $this->getUser();
         $form = $this->createForm(ChangeUserProfileType::class, $user);
         $form->handleRequest($request);
@@ -46,7 +46,7 @@ class SettingController extends Controller
      */
     public function bindSocialSiteAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         return $this->render('PHPDishWebBundle:Setting:bind_social.html.twig', [
         ]);
     }

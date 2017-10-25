@@ -42,7 +42,7 @@
                         </form>
 
                         <ul class="nav navbar-nav navbar-right nav-profile">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <li class="nav-notifications">
                                     <a href="{{ path('notifications') }}">
                                         <i class="if i-bell-o"></i>
