@@ -46,7 +46,7 @@ interface PostManagerInterface
      *
      * @return Pagerfanta
      */
-    public function findUserPosts(UserInterface $user, $page = 1, $limit = null);
+    public function findUserEnabledPosts(UserInterface $user, $page = 1, $limit = null);
 
     /**
      * 获取分类下的文章.
@@ -78,7 +78,7 @@ interface PostManagerInterface
      *
      * @return Pagerfanta
      */
-    public function findLatestPosts($page, $limit = null);
+    public function findLatestEnabledPosts($page, $limit = null);
 
     /**
      * 根据criteria获取一组文章，不支持翻页.

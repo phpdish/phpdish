@@ -34,7 +34,7 @@ class PostController extends RestController
      */
     public function indexAction(Request $request)
     {
-        $posts = $this->getPostManager()->findLatestPosts($request->query->getInt('page', 1));
+        $posts = $this->getPostManager()->findLatestEnabledPosts($request->query->getInt('page', 1));
 
         return $this->render('PHPDishWebBundle:Post:index.html.twig', [
             'posts' => $posts,
@@ -174,7 +174,7 @@ class PostController extends RestController
     public function userPostsAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
-        $posts = $this->getPostManager()->findUserPosts($user, $request->query->getInt('page', 1));
+        $posts = $this->getPostManager()->findUserEnabledPosts($user, $request->query->getInt('page', 1));
 
         return $this->render('PHPDishWebBundle:Post:user_posts.html.twig', [
             'user' => $user,

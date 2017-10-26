@@ -105,9 +105,12 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findUserPosts(UserInterface $user, $page = 1, $limit = null)
+    public function findUserEnabledPosts(UserInterface $user, $page = 1, $limit = null)
     {
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('user', $user->getId()))->orderBy(['createdAt' => 'desc']);
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq('user', $user))
+            ->where(Criteria::expr()->eq('enabled', true))
+            ->orderBy(['createdAt' => 'desc']);
 
         return $this->findPosts($criteria, $page, $limit);
     }
@@ -125,9 +128,11 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findLatestPosts($page, $limit = null)
+    public function findLatestEnabledPosts($page, $limit = null)
     {
-        $criteria = Criteria::create()->orderBy(['createdAt' => 'desc']);
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq('enabled', true))
+            ->orderBy(['createdAt' => 'desc']);
 
         return $this->findPosts($criteria, $page, $limit);
     }
