@@ -3,8 +3,6 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
-use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
