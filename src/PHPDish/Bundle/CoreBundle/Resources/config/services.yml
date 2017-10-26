@@ -21,7 +21,7 @@ services:
          arguments: ['@security.token_storage', '@security.authorization_checker', '@router']
          public: false
          tags:
-            - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException'}
+            - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException', priority: 1}
 
 
 

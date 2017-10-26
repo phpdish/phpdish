@@ -59,6 +59,7 @@ final class KernelExceptionListener
             }
         }
         $filteredResponse && $event->setResponse($filteredResponse);
+        $event->stopPropagation();
     }
 
     /**
