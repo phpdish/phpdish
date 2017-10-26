@@ -17,7 +17,7 @@
                     <span class="meta">
                     {{ reply.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
                     </span>
-                    <blockquote>{{ reply.topic.body|raw }}</blockquote>
+                    <blockquote>{{ reply.topic.summary|raw }}</blockquote>
                 </li>
             {% endfor %}
         </ul>

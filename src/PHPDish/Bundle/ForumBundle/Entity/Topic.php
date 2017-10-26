@@ -214,6 +214,16 @@ class Topic implements TopicInterface
     }
 
     /**
+     * Gets the summary of the post.
+     *
+     * @return string
+     */
+    public function getSummary()
+    {
+        return strip_tags(mb_substr($this->body, 0, 250));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function stickTop()

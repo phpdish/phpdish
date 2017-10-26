@@ -141,6 +141,13 @@ interface TopicInterface extends IdentifiableInterface, DateTimeInterface, UserA
     public function stickTop();
 
     /**
+     * 获取概述
+     *
+     * @return string
+     */
+    public function getSummary();
+
+    /**
      * 检查话题是否是属于指定用户.
      *
      * @param UserInterface $user
