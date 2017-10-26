@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -65,5 +66,30 @@ EOT;
             ->run(new ArrayInput($options), $output);
 
         return $this;
+    }
+
+    /**
+     * 批量执行命令
+     * @param array $commands
+     * @param OutputInterface|null $output
+     * @param bool $renderProgressbar
+     */
+    protected function bulkRunCommands(array $commands, OutputInterface $output = null, $renderProgressbar = false)
+    {
+        if ($renderProgressbar) {
+            $progressbar = new ProgressBar($output, count($commands));
+        }
+        foreach ($commands as $commandItem) {
+            if (is_string($commandItem)) {
+                $command = $commandItem;
+                $options = [];
+            } else {
+                $command = $commandItem['command'];
+                $options = $commandItem['options'];
+            }
+            $this->executeCommand($command, null, $options);
+            $renderProgressbar && $progressbar->advance(1);
+        }
+        $renderProgressbar && $progressbar->finish();
     }
 }

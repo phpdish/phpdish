@@ -22,10 +22,17 @@ class InstallCommand extends AbstractInstallCommand
             'command' => 'phpdish:install:database',
             'message' => 'Setting up the database.',
         ],
-//        [
-//            'command' => 'phpdish:create:admin',
-//            'message' => 'Creats the super admin acount.',
-//        ],
+        [
+            'command' => 'fos:user:create',
+            'message' => 'Creats the super admin acount.',
+            'options' =>  [
+                '--super-admin' => true
+            ]
+        ],
+        [
+            'command' => 'phpdish:install:fixture',
+            'message' => 'Install sample data.',
+        ],
     ];
 
     /**
@@ -59,7 +66,7 @@ class InstallCommand extends AbstractInstallCommand
                 count($this->commands),
                 $command['message']
             ));
-            $this->executeCommand($command['command'], $output);
+            $this->executeCommand($command['command'], $output, isset($command['options']) ? $command['options'] : []);
         }
 
         $output->writeln('PHPDish has been successfully installed.');

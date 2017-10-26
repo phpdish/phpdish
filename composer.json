@@ -23,6 +23,7 @@
         "php": ">=5.5.9",
         "cakephp/chronos": "^1.1",
         "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-fixtures-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/comment-bundle": "^2.0",

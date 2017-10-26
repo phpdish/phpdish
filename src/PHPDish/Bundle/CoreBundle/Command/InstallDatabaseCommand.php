@@ -80,19 +80,7 @@ EOT
      */
     protected function createSchemaWithProgressbar(OutputInterface $output)
     {
-        $progressbar = new ProgressBar($output,count($this->commands));
-        foreach ($this->commands as $commandItem) {
-            if (is_string($commandItem)) {
-                $command = $commandItem;
-                $options = [];
-            } else {
-                $command = $commandItem['command'];
-                $options = $commandItem['options'];
-            }
-            $this->executeCommand($command, null, $options);
-            $progressbar->advance(1);
-        }
-        $progressbar->finish();
+        $this->bulkRunCommands($this->commands, $output, true);
     }
 
     /**
