@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends RestController
 {
+    use ManagerTrait;
+    
     /**
      * @Route("/users/{username}", name="user_view")
      *
@@ -129,7 +131,7 @@ class UserController extends RestController
      */
     public function followAction($username)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         $view = $this->view();
@@ -158,7 +160,7 @@ class UserController extends RestController
      */
     public function unFollowAction($username)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         $view = $this->view();
@@ -168,13 +170,5 @@ class UserController extends RestController
         ]);
 
         return $this->handleView($view);
-    }
-
-    /**
-     * @return UserManagerInterface
-     */
-    protected function getUserManager()
-    {
-        return $this->get('phpdish.manager.user');
     }
 }
