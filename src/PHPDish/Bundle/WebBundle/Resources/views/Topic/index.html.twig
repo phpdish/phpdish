@@ -29,9 +29,9 @@
                                         {% endif %}
                                     </div>
                                     <ul class="list-inline list-unstyled meta">
-                                        <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|date('Y-m-d') }}</li>
+                                        <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|time_diff }}</li>
                                         <li><a href="{{ path('thread_view', {'slug': topic.thread.slug}) }}">{{ topic.thread.name }}</a></li>
-                                        <li>最后回复：{{ topic.repliedAt|date('Y-m-d') }}</li>
+                                        <li>最后回复：{{ topic.repliedAt|time_diff }}</li>
                                     </ul>
                                 </div>
                             </div>
