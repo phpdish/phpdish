@@ -29,4 +29,14 @@ class CategoryFixtures extends AbstractFixtures
     {
         return $this->container->get('phpdish.manager.category');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
+    }
 }

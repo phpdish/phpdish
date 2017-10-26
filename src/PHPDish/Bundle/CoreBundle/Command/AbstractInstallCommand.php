@@ -74,7 +74,7 @@ EOT;
      * @param OutputInterface|null $output
      * @param bool $renderProgressbar
      */
-    protected function bulkRunCommands(array $commands, OutputInterface $output = null, $renderProgressbar = false)
+    protected function bulkRunCommands(array $commands, OutputInterface $output, $renderProgressbar = false)
     {
         if ($renderProgressbar) {
             $progressbar = new ProgressBar($output, count($commands));
@@ -87,7 +87,7 @@ EOT;
                 $command = $commandItem['command'];
                 $options = $commandItem['options'];
             }
-            $this->executeCommand($command, $output, $options);
+            $this->executeCommand($command, null, $options);
             $renderProgressbar && $progressbar->advance(1);
         }
         $renderProgressbar && $progressbar->finish();

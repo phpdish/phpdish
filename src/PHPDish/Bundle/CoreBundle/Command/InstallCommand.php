@@ -23,15 +23,15 @@ class InstallCommand extends AbstractInstallCommand
             'message' => 'Setting up the database.',
         ],
         [
+            'command' => 'phpdish:install:fixture',
+            'message' => 'Install sample data.',
+        ],
+        [
             'command' => 'fos:user:create',
             'message' => 'Creats the super admin acount.',
             'options' =>  [
                 '--super-admin' => true
             ]
-        ],
-        [
-            'command' => 'phpdish:install:fixture',
-            'message' => 'Install sample data.',
         ],
     ];
 

@@ -33,7 +33,7 @@ class InstallDatabaseCommand extends AbstractInstallCommand
                 '--no-interaction' => true
             ]
         ],
-        5 => 'cache:clear',
+//        5 => 'cache:clear',
     ];
     /**
      * {@inheritdoc}
@@ -87,7 +87,7 @@ EOT
     protected function createSchemaWithProgressbar(OutputInterface $output)
     {
         ksort($this->commands);
-        $this->bulkRunCommands($this->commands, null, true);
+        $this->bulkRunCommands($this->commands, $output, true);
     }
 
     /**

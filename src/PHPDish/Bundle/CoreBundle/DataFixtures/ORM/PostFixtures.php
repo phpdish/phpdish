@@ -81,15 +81,15 @@ echo number_format((microtime(true) - \$startTime) / 100, 10);
 如图：
 
 PHP5.6
-![clipboard.png](/img/bVVLt1)
+![clipboard.png](https://sfault-image.b0.upaiyun.com/149/676/1496767840-59c89c789d4b7_articlex)
 
 Node7.9:
 
-![clipboard.png](/img/bVVLug)
+![clipboard.png](https://sfault-image.b0.upaiyun.com/249/881/2498819097-59c89cb282dee_articlex)
 
 PHP7.1
 
-![clipboard.png](/img/bVVLuX)
+![clipboard.png](https://sfault-image.b0.upaiyun.com/378/208/3782083225-59c89d1b4f96b_articlex)
 
 
 ## 结论
@@ -104,7 +104,7 @@ PHP7.1
 
 测试机器
 
-![clipboard.png](/img/bVVLvQ)
+![clipboard.png](https://sfault-image.b0.upaiyun.com/311/584/3115849489-59c89dbd5178b_articlex)
 
 从本次测试的结果来看在执行速度上 PHP7.1 > PHP5.6 > Node7.9;
 EOT;

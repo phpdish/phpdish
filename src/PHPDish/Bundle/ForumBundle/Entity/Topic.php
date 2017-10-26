@@ -117,6 +117,8 @@ class Topic implements TopicInterface
     public function setThread(ThreadInterface $thread)
     {
         $this->thread = $thread;
+
+        return $this;
     }
 
     /**

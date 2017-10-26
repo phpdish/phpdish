@@ -142,7 +142,7 @@ EOT;
      */
     protected function getTopicManager()
     {
-        return $this->container->get();
+        return $this->container->get('phpdish.manager.topic');
     }
 
     /**

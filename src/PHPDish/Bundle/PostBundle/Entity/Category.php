@@ -22,7 +22,7 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * @ORM\Column(type="string")
      */
-    protected $cover;
+    protected $cover = '';
 
     /**
      * @ORM\Column(type="boolean")
@@ -114,7 +114,7 @@ class Category extends Taxonomy implements CategoryInterface
      */
     public function getCover()
     {
-        return $this->cover;
+        return $this->cover ?: '/avatar/user1.jpg';
     }
 
     /**

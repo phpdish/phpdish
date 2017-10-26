@@ -142,6 +142,8 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->following = new ArrayCollection();
         //创建时间
         $this->setCreatedAt(Carbon::now());
+        //更新时间
+        $this->setUpdatedAt(Carbon::now());
     }
 
     /**

@@ -29,12 +29,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $commands = [
-            [
-                'command' => 'doctrine:fixtures:load',
-                'options' => []
-            ]
-        ];
-        $this->bulkRunCommands($commands, $output);
+        $this->executeCommand('doctrine:fixtures:load', $output, [
+            '--no-interaction' => true
+        ]);
     }
 }
