@@ -29,7 +29,10 @@
       margin-top:5px;
       font-weight:700;
       font-size:18px;
-      color: $focusFontColor
+      color: $focusFontColor;
+      a:focus{
+        color: $linkColor;
+      }
     }
     .meta{
       margin-top: 5px;

@@ -30,7 +30,7 @@ class CommentController extends RestController
      */
     public function addAction($id, Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $post = $this->getPostManager()->findPostById($id);
         $comment = $this->getPostCommentManager()->createComment($post, $this->getUser());
         $form = $this->createForm(CommentType::class, $comment);

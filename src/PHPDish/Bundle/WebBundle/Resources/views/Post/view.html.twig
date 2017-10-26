@@ -68,10 +68,10 @@
                     </div>
                 </div>
             </article>
-            <div class="panel panel-default panel-u">
-                <div class="panel-body margin-bottom-10">
+            <div class="panel panel-u">
+                <div class="panel-body comment-panel add-comment" id="add-comment">
                     <div class="row">
-                        <div class="col-md-10 add-comment">
+                        <div class="col-md-10">
                             {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <a href="{{ path('login') }}" class="avatar">
                                     <img src="{{ asset('img/default_user.png') }}" class="img-responsive img-circle"/>
@@ -79,24 +79,27 @@
                                 <textarea class="form-control" placeholder="点击头像登录后发表评论" disabled="disabled"></textarea>
                             {% else %}
                                 {{ form_start(form, {'attr': {'id': 'add-comment-form'}}) }}
-                                    <div class="form-group md-editor" data-role="md-editor">
+                                    <div>
                                         <a class="avatar">
                                             <img src="{{ app.user.avatar|imagine_filter('middle_square')}}" class="img-responsive img-circle"/>
                                         </a>
-                                        {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'role': 'md-editor-write',  'class': 'form-control', 'placeholder': '写下你的评论...'}}) }}
-                                        {#<textarea class="form-control" data-role="comment-body" placeholder="写下你的评论..."></textarea>#}
-                                        <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                        {{ form_widget(form.original_body, {'attr': {'class': 'form-control', 'placeholder': '写下你的评论...'}}) }}
                                     </div>
-                                    <div class="form-group">
-                                        <button data-role="submit" class="btn u-btn-primary">评论</button>
+                                    <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                    <div class="actions">
+                                        <button type="submit" class="btn u-btn-primary">回复</button>
+                                        <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
                                     </div>
                                 {{ form_end(form) }}
+                                <div class="preview-panel markdown-body hidden" data-role="preview-panel">
+                                    预览区域
+                                </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="panel-heading"><h5>{{ post.commentCount }}个评论</h5></div>
-                <ul class="list-group reply-list" data-role="replies-panel">
+                <div class="panel-heading">{{ post.commentCount }}个评论</div>
+                <ul class="list-group reply-list" id="reply-list">
                    {% include 'PHPDishWebBundle:TopicReply:reply_list.html.twig' with {
                        replies: comments
                    } %}

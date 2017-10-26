@@ -9,6 +9,7 @@ const routes = {
     'post.show': '/posts/{id}', //post展示页
     'post.delete': {path: '/posts/{id}', method: 'DELETE'},
     'comment.add': {path: '/posts/{id}/comments', 'method': 'POST'},
+    'comment.delete': {path: '/comments/{id}', 'method': 'DELETE'},
 
     //专栏相关
     'category.follow': {path: '/categories/{slug}/followers', method: 'POST'},

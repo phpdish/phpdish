@@ -2,7 +2,7 @@
 
 import '../modules/common.js';
 import Util from '../modules/util.js';
-import {editor} from '../modules/blocks/reply';
+import Editor from '../modules/md-editor/editor.js'
 import lockButton from '../modules/button-lock.js';
 
 import SimpleMDE from 'simplemde';
@@ -19,32 +19,80 @@ import hljs from 'highlight.js';
         hljs.highlightBlock(block);
     });
 
-    $('#add-comment-form').on('submit', function(){
-        const $form = $(this);
-        const $btn = $form.find('[data-role="submit" ]');
-        const csrfToken = $('#comment__token').val();
-        const body = editor.getContent();
-        if (body.length === 0) {
-            return false;
-        }
-        const buttonLock = lockButton($btn).text('提交中').lock();
-        Util.request('comment.add', window.postId, {
-            comment: {
-                original_body: body,
-                _token:csrfToken
-            }
-        }).done(function(response){
-            editor.setContent('');
-            Util.dialog.message('回复成功').flash();
-        }).fail(function(response){
-            Util.dialog.message(response.responseObj.error);
-        }).always(() => {
-            console.log('释放锁');
-            buttonLock.release();
-        });
-        return false;
-    });
+    //添加评论的表单
+    const $addComment = $('#add-comment');
+    const $addCommentForm = $('#add-comment-form');
+    let editor;
 
+    if ($addCommentForm.length > 0) {
+        const $commentBody = $('#comment_original_body');
+        const $preview = $addComment.find('[data-action="preview"]');
+        const $previewPanel = $addComment.find('[data-role="preview-panel"]');
+        editor = new Editor($commentBody, $preview, $previewPanel);
+        $addCommentForm.on('submit', function(){
+            const $form = $(this);
+            const $btn = $form.find('[data-role="submit"]');
+            const csrfToken = $('#comment__token').val();
+
+            const body = editor.getContent();
+            if (body.length === 0) {
+                return false;
+            }
+            const buttonLock = lockButton($btn).text('提交中').lock();
+            Util.request('comment.add', window.postId, {
+                comment: {
+                    original_body: body,
+                    _token:csrfToken
+                }
+            }).done(function(response){
+                editor.setContent('');
+                Util.dialog.message('回复成功').flash();
+            }).fail(function(response){
+                Util.dialog.message(response.responseObj.error);
+            }).always(() => {
+                console.log('释放锁');
+                buttonLock.release();
+            });
+            return false;
+        });
+    }
+
+    //Reply list
+    const $repliesPanel = $('#reply-list');
+    $repliesPanel.find('[data-role="reply"]').each(function(){
+        const $this = $(this);
+        const replyId = $this.data('reply-id');
+        const username = $this.data('username');
+        //回复层主
+        if (editor) {
+            $this.find('[data-action="mention"]').on('click', function(){
+                editor.appendContent(`@${username} `);
+                Util.goHash('#add-comment-form');
+            });
+        }
+        //删除回复
+        const $removeAction = $this.find('[data-action="remove"]');
+        const buttonLock = lockButton($removeAction);
+        $removeAction.on('click', function(){
+            if (buttonLock.isDisabled()) {
+                return false;
+            }
+            buttonLock.lock();
+            Util.dialog.confirm('确认删除这个评论吗？').then(() => {
+                Util.request('comment.delete', replyId).done(() => {
+                    Util.dialog.message('评论已经被删除').flash(2, () => {
+                        $this.fadeOut();
+                    });
+                }).fail((response) => {
+                    Util.dialog.message(response.responseObj.error).flash(3);
+                }).always(()  => {
+                    buttonLock.release();
+                });
+            }, () => {
+                buttonLock.release();
+            });
+        });
+    });
 
     //Post Action
     const $postAction = $('[data-role="post-action"]');
@@ -69,6 +117,7 @@ import hljs from 'highlight.js';
             buttonLock.release();
         });
     });
+
 })($);
 
 
