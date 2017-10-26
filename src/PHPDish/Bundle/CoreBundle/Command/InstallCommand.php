@@ -55,6 +55,9 @@ class InstallCommand extends AbstractInstallCommand
         $outputStyle->writeln(static::PHPDISH_LOGO);
 
         $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('kernel.cache_dir'), $output);
+        $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('app.dir.media'), $output);
+        $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('app.dir.uploads'), $output);
+        $this->ensureDirectoryWritableAndExists($this->getContainer()->getParameter('app.dir.avatar'), $output);
 
         $this->getApplication()->setAutoExit(false);
 

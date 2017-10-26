@@ -29,8 +29,6 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->executeCommand('doctrine:fixtures:load', $output, [
-            '--no-interaction' => true
-        ]);
+        $this->executeCommand('doctrine:fixtures:load', $output);
     }
 }
