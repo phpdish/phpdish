@@ -15,6 +15,15 @@ services:
          tags:
             - { name: twig.extension}
 
+    # 核心响应事件
+    phpdish.event_listener.core.kernel:
+         class: PHPDish\Bundle\CoreBundle\EventListener\KernelExceptionListener
+         arguments: ['@security.token_storage', '@security.authorization_checker', '@router']
+         public: false
+         tags:
+            - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException'}
+
+
 
    # Main Menu
     phpdish.menu_builder.main_menu:
