@@ -13,7 +13,7 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-md-9">
-                <div class="panel panel-default panel-u topic-view">
+                <div class="panel panel-u topic-view">
                     <div class="panel-heading clearfix">
                         <div class="author">
                             <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" class="avatar"/></a>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <article class="body markdown-body">{{ topic.body|raw }}</article>
+                        <article class="markdown-body body">{{ topic.body|raw }}</article>
                     </div>
                     <div class="panel-footer clearfix">
                         <ul class="list-inline list-unstyled action" data-role="topic-action">
