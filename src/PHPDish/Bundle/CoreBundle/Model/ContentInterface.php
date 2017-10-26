@@ -32,7 +32,7 @@ interface ContentInterface
      *
      * @param string $body
      *
-     * @return string
+     * @return $this
      */
     public function setOriginalBody($body);
 }

@@ -87,7 +87,7 @@ EOT;
                 $command = $commandItem['command'];
                 $options = $commandItem['options'];
             }
-            $this->executeCommand($command, null, $options);
+            $this->executeCommand($command, $output, $options);
             $renderProgressbar && $progressbar->advance(1);
         }
         $renderProgressbar && $progressbar->finish();

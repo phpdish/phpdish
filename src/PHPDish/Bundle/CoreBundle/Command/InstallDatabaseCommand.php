@@ -23,10 +23,16 @@ class InstallDatabaseCommand extends AbstractInstallCommand
         1 => [
             'command' => 'doctrine:database:create',
             'options' => [
-                '--if-not-exists' => true
+                '--if-not-exists' => true,
+                '--no-interaction' => true
             ]
         ],
-        3 => 'doctrine:migrations:migrate',
+        3 => [
+            'command' => 'doctrine:migrations:migrate',
+            'options' => [
+                '--no-interaction' => true
+            ]
+        ],
         5 => 'cache:clear',
     ];
     /**
@@ -80,7 +86,8 @@ EOT
      */
     protected function createSchemaWithProgressbar(OutputInterface $output)
     {
-        $this->bulkRunCommands($this->commands, $output, true);
+        ksort($this->commands);
+        $this->bulkRunCommands($this->commands, null, true);
     }
 
     /**

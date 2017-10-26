@@ -32,10 +32,9 @@ EOT
         $commands = [
             [
                 'command' => 'doctrine:fixtures:load',
-                'options' => [
-                ]
+                'options' => []
             ]
         ];
-        $this->bulkRunCommands($commands);
+        $this->bulkRunCommands($commands, $output);
     }
 }

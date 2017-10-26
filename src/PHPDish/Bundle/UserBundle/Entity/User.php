@@ -7,6 +7,7 @@
 
 namespace PHPDish\Bundle\UserBundle\Entity;
 
+use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -139,6 +140,8 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->followers = new ArrayCollection();
         //我关注的
         $this->following = new ArrayCollection();
+        //创建时间
+        $this->setCreatedAt(Carbon::now());
     }
 
     /**

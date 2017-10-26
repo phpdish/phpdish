@@ -1,34 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taosikai
- * Date: 2017/10/26
- * Time: 10:32
- */
 
 namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Util\UserManipulator;
 
 class UserFixtures extends AbstractFixtures
 {
-
     /**
-     * 获取fos user manager
-     * @return UserManagerInterface
+     * {@inheritdoc}
      */
-    protected function getUserManager()
-    {
-        return $this->container->get('fos.user_manager');
-    }
-
     public function load(ObjectManager $manager)
     {
-        $user =  $this->getUserManager()->createUser();
-        $user->setEmail('admin@phpdish.com')
-            ->setUsername('admin')
-            ->setPlainPassword('admin');
+        $user1 = $this->getUserManipulator()->create('优雅的风', '123456', 'user1@phpdish.com', true, false);
+        $this->getUserManipulator()->create('风中的少年', '123456', 'user2@phpdish.com', true, false);
+        $this->addReference('general-user', $user1);
+    }
+
+    /**
+     * @return UserManipulator
+     */
+    protected function getUserManipulator()
+    {
+        return $this->container->get('fos_user.util.user_manipulator');
     }
 }

@@ -9,7 +9,7 @@ interface TaxonomyInterface extends IdentifiableInterface, DateTimeInterface
      *
      * @param string $name
      *
-     * @return TaxonomyInterface
+     * @return self
      */
     public function setName($name);
 
@@ -25,7 +25,7 @@ interface TaxonomyInterface extends IdentifiableInterface, DateTimeInterface
      *
      * @param string $slug
      *
-     * @return TaxonomyInterface
+     * @return self
      */
     public function setSlug($slug);
 
@@ -41,7 +41,7 @@ interface TaxonomyInterface extends IdentifiableInterface, DateTimeInterface
      *
      * @param string $description
      *
-     * @return TaxonomyInterface
+     * @return self
      */
     public function setDescription($description);
 
