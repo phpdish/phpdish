@@ -5,12 +5,19 @@ namespace PHPDish\Bundle\CoreBundle\EventListener;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class KernelExceptionListener
 {
+    /**
+     * 默认的状态码
+     * @var string
+     */
+    const DEFAULT_STATUS_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
+
     /**
      * @var TokenStorageInterface
      */
@@ -42,24 +49,57 @@ final class KernelExceptionListener
         if (!$event->isMasterRequest()) {
             return;
         }
-        $response = $event->getResponse();
+
+        //当前请求
         $request =  $event->getRequest();
         $isRequestApi = $request->getRequestFormat() === 'json' || $request->isXmlHttpRequest();
+
         $filteredResponse = false;
         if ($isRequestApi) {
-            switch ($response->getStatusCode()) {
+            $exception = $event->getException();
+            $statusCode = $this->resolveStatusCode($exception);
+            switch ($statusCode) {
                 //403
                 case Response::HTTP_FORBIDDEN:
                     $filteredResponse  = $this->createForbiddenResponseForAPI();
                     break;
+
                 // 404处理
                 case Response::HTTP_NOT_FOUND:
-                    $filteredResponse = $this->createNotFoundResponseForAPI();
+                    $filteredResponse = $this->createNotFoundResponseForAPI($exception);
+                    break;
+
+                // 400处理
+                case Response::HTTP_BAD_REQUEST:
+                    $filteredResponse = $this->createBadRequestResponseForAPI($exception);
+                    break;
+
+                // 500处理
+                case Response::HTTP_INTERNAL_SERVER_ERROR:
+                    $filteredResponse = $this->createServerErrorResponseForAPI($exception);
                     break;
             }
         }
         $filteredResponse && $event->setResponse($filteredResponse);
-        $event->stopPropagation();
+    }
+
+    /**
+     * 计算该异常对应的错误码
+     * @param \Exception $exception
+     * @return int
+     */
+    protected function resolveStatusCode(\Exception $exception)
+    {
+        if ($exception instanceof HttpExceptionInterface) {
+            $statusCode = $exception->getStatusCode();
+        } else {
+            if (in_array($exception->getCode(), array_keys(Response::$statusTexts))) {
+                $statusCode = $exception->getCode();
+            } else {
+                $statusCode = static::DEFAULT_STATUS_CODE;
+            }
+        }
+        return $statusCode;
     }
 
     /**
@@ -83,12 +123,37 @@ final class KernelExceptionListener
 
     /**
      * 创建接口 404 response
+     * @param \Exception $exception
      * @return JsonResponse
      */
-    protected function createNotFoundResponseForAPI()
+    protected function createNotFoundResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
-            'error' => 'The requested resource does not exist',
+            'error' => $exception->getMessage() ?: 'The requested resource does not exist',
         ], Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * 创建接口 400 response
+     * @param \Exception $exception
+     * @return JsonResponse
+     */
+    protected function createBadRequestResponseForAPI(\Exception $exception)
+    {
+        return new JsonResponse([
+            'error' => $exception->getMessage() ?: 'Bad Request',
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * 创建接口 500 response
+     * @param \Exception $exception
+     * @return JsonResponse
+     */
+    protected function createServerErrorResponseForAPI(\Exception $exception)
+    {
+        return new JsonResponse([
+            'error' => $exception->getMessage() ?: 'Internal Server Error',
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
