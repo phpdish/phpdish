@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ThreadController extends Controller
 {
+    use ManagerTrait;
+
     /**
      * @Route("/thread/{slug}", name="thread_view")
      *
@@ -22,27 +25,23 @@ class ThreadController extends Controller
     public function viewAction($slug, Request $request)
     {
         $thread = $this->getThreadManager()->findThreadBySlug($slug);
-        $topics = $this->getTopicManager()->findThreadTopics($thread, $request->query->getInt('page', 1));
+        $thread || $this->createNotFoundException();
+
+        $criteria = Criteria::create();
+        $criteria->orderBy(['repliedAt' => 'desc'])
+            ->where(Criteria::expr()->eq('enabled', true))
+            ->where(Criteria::expr()->eq('thread', $thread));
+
+        $tab = $request->query->get('tab');
+        if ($tab && $tab === 'good') {
+            $criteria->where(Criteria::expr()->eq('recommended', true));
+        }
+
+        $topics = $this->getTopicManager()->findTopics($criteria, $request->query->getInt('page', 1));
 
         return $this->render('PHPDishWebBundle:Thread:view.html.twig', [
             'thread' => $thread,
             'topics' => $topics,
         ]);
-    }
-
-    /**
-     * @return ThreadManagerInterface
-     */
-    protected function getThreadManager()
-    {
-        return $this->get('phpdish.manager.thread');
-    }
-
-    /**
-     * @return TopicManagerInterface
-     */
-    protected function getTopicManager()
-    {
-        return $this->get('phpdish.manager.topic');
     }
 }

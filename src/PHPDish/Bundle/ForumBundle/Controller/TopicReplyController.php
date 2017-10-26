@@ -15,6 +15,8 @@ class TopicReplyController extends RestController
 {
     use ManagerTrait;
 
+    use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
     /**
      * 删除回复.
      *

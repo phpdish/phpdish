@@ -41,12 +41,18 @@ final class MainMenuBuilder
 
         $menu->addChild('Topic', [
             'label' => '问答',
-            'route' => 'topic',
+            'route' => 'thread_view',
+            'routeParameters' => [
+                'slug' =>  'question'
+            ]
         ]);
 
         $menu->addChild('job', [
             'label' => '招聘',
-            'route' => 'topic',
+            'route' => 'thread_view',
+            'routeParameters' => [
+                'slug' =>  'job'
+            ]
         ]);
 
         return $menu;

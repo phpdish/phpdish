@@ -22,6 +22,14 @@ class ThreadFixtures extends AbstractFixtures
             ->setSlug('job')
             ->setDescription('招聘节点');
 
+        $question = new Thread();
+        $question->setCreatedAt(Carbon::now())
+            ->setUpdatedAt(Carbon::now())
+            ->setEnabled(true)
+            ->setName('问答')
+            ->setSlug('question')
+            ->setDescription('问答节点');
+
         $share = new Thread();
         $share->setCreatedAt(Carbon::now())
             ->setUpdatedAt(Carbon::now())
@@ -31,6 +39,7 @@ class ThreadFixtures extends AbstractFixtures
             ->setDescription('创造与分享');
 
         $manager->persist($job);
+        $manager->persist($question);
         $manager->persist($share);
         $manager->flush();
 

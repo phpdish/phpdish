@@ -16,6 +16,8 @@ class TopicController extends RestController
 {
     use ManagerTrait;
 
+    use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
     /**
      * 话题列表.
      *
