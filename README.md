@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://www.phpdish.com/" target="_blank" >
-    <img alt="PHPDish" src="./web/img/5.png" width="400"/> <h2>PHPDish</h2>
+    <img alt="PHPDish" src="./web/img/5.png"/> <span>PHPDish</span>
   </a>
 </p>
 
@@ -78,8 +78,7 @@ $ php bin/console server:run
 - 邮箱：taosikai@yeah.net
 - Github： https://github.com/slince
 - 微信：
-
-![微信](./app/resources/assets/wechat.jpg)
+![微信](./app/Resources/assets/wechat.jpg)
 
 
 ## License
