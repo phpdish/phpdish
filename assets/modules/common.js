@@ -2,6 +2,8 @@
 
 import 'bootstrap-select';
 import 'scrolltofixed';
+import 'jquery-pjax';
+
 import './actions.js';
 import Util from './util.js';
 import {default as Dialog} from './dialog.js';
@@ -59,3 +61,11 @@ import {default as Dialog} from './dialog.js';
         }
     });
 })($);
+
+//Pjax
+$.pjax.defaults.timeout = 50000;
+$('[data-pjax-container]').each(function(){
+    const $this = $(this);
+    const containerId = $this.data('pjax-container');
+    $this.pjax('a', `#${containerId}`);
+});

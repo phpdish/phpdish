@@ -8,6 +8,7 @@
   "build/js/setting.js": "http://127.0.0.1:8080/js/setting.js",
   "build/js/sign.js": "http://127.0.0.1:8080/js/sign.js",
   "build/js/topic.js": "http://127.0.0.1:8080/js/topic.js",
+  "build/js/user.js": "http://127.0.0.1:8080/js/user.js",
   "build/manifest.js": "http://127.0.0.1:8080/manifest.js",
   "build/vendor.css": "http://127.0.0.1:8080/vendor.css",
   "build/vendor.js": "http://127.0.0.1:8080/vendor.js"

@@ -15,6 +15,17 @@ services:
          tags:
             - { name: twig.extension}
 
+    # Pjax
+    phpdish.pjax.helper:
+         class: PHPDish\Component\Pjax\Helper\PjaxHelper
+
+    phpdish.twig_extension.pjax:
+         class: PHPDish\Component\Pjax\Twig\PjaxExtension
+         arguments: ['@phpdish.pjax.helper']
+         public: false
+         tags:
+            - { name: twig.extension}
+
     # 核心响应事件
     phpdish.event_listener.core.kernel:
          class: PHPDish\Bundle\CoreBundle\EventListener\KernelExceptionListener
@@ -22,7 +33,6 @@ services:
          public: false
          tags:
             - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException', priority: 1}
-
 
 
    # Main Menu

@@ -3,7 +3,7 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="{{ asset('build/js/setting.js') }}"></script>
+<script type="text/javascript" src="{{ asset('build/js/user.js') }}"></script>
 {% endblock %}
 
 {% set isMe = app.user is same as (user) %}
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <ul class="list-unstyled list-inline tab-nav">
+                <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
                     <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
                     <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
@@ -52,11 +52,13 @@
                         <span>还没有发表过内容</span>
                     {% endblock %}
                 </div>
-                {% block user_content %}
-                    <div class="panel-content">
-                        没有记录
-                    </div>
-                {% endblock %}
+                <div id="list-container">
+                    {% block user_content %}
+                        <div class="panel-content">
+                            没有记录
+                        </div>
+                    {% endblock %}
+                </div>
             </div>
         </article>
         {% set appellation = isMe ? '我' : (user.isWomen ? '她' : '他')%}

@@ -9,6 +9,7 @@
 {% endif %}
 
 {% block user_content %}
+
     {% if replies.count %}
         <ul class="list-group resource-list">
             {% for reply in replies %}
@@ -31,4 +32,5 @@
             <p><i class="if i-comment"></i> 还没有发表过回复</p>
         </div>
     {% endif %}
+
 {% endblock %}
