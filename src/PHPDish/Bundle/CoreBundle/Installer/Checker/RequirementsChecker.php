@@ -27,18 +27,19 @@ class RequirementsChecker extends IOAwareChecker
         foreach ($this->requirements as $requirement) {
             $row = [$requirement->getLabel()];
             if ($requirement->isFulfilled()) {
-                $row[] = "<info>Yes</info>";
+                $row[] = '<info>Yes</info>';
                 $fulfilled = $fulfilled && true;
             } elseif ($requirement->isRequired()) {
-                $row[] = "<error>Error</error>";
+                $row[] = '<error>Error</error>';
                 $fulfilled = $fulfilled && false;
             } else {
-                $row[] = "<comment>Warning</comment>";
+                $row[] = '<comment>Warning</comment>';
                 $fulfilled = $fulfilled && true;
             }
             $table->addRow($row);
         }
         $table->render();
+
         return $fulfilled;
     }
 }

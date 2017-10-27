@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CommentableTrait

@@ -8,7 +8,6 @@ use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
 
 class TopicFixtures extends AbstractFixtures
 {
-
     /**
      * {@inheritdoc}
      */
@@ -121,7 +120,8 @@ EOT;
     }
 
     /**
-     * 创建话题
+     * 创建话题.
+     *
      * @param string $title
      * @param string $body
      */
@@ -152,7 +152,7 @@ EOT;
     {
         return [
             UserFixtures::class,
-            ThreadFixtures::class
+            ThreadFixtures::class,
         ];
     }
 }

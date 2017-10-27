@@ -16,7 +16,8 @@ final class CheckRequirementsCommand extends AbstractInstallCommand
         $this
             ->setName('phpdish:install:check-requirements')
             ->setDescription('Checks if all PHPDish requirements are satisfied.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command checks system requirements.
 EOT
             )

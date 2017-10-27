@@ -2,13 +2,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Command;
 
-use Doctrine\DBAL\Connection;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -16,7 +10,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class InstallDatabaseCommand extends AbstractInstallCommand
 {
     /**
-     * 需要执行的命令
+     * 需要执行的命令.
+     *
      * @var array
      */
     protected $commands = [
@@ -24,17 +19,18 @@ class InstallDatabaseCommand extends AbstractInstallCommand
             'command' => 'doctrine:database:create',
             'options' => [
                 '--if-not-exists' => true,
-                '--no-interaction' => true
-            ]
+                '--no-interaction' => true,
+            ],
         ],
         3 => [
             'command' => 'doctrine:migrations:migrate',
             'options' => [
-                '--no-interaction' => true
-            ]
+                '--no-interaction' => true,
+            ],
         ],
 //        5 => 'cache:clear',
     ];
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +39,8 @@ class InstallDatabaseCommand extends AbstractInstallCommand
         $this
             ->setName('phpdish:install:database')
             ->setDescription('Install PHPDish database.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command creates PHPDish database.
 EOT
             );
@@ -70,7 +67,7 @@ EOT
                     'options' => [
                         '--force' => true,
                         '--full-database' => true,
-                    ]
+                    ],
                 ];
             }
         }
@@ -81,7 +78,8 @@ EOT
     }
 
     /**
-     * 执行创建命令
+     * 执行创建命令.
+     *
      * @param OutputInterface $output
      */
     protected function createSchemaWithProgressbar(OutputInterface $output)
@@ -91,8 +89,10 @@ EOT
     }
 
     /**
-     * 检查是否已经创建过数据库
+     * 检查是否已经创建过数据库.
+     *
      * @throws \Exception
+     *
      * @return bool
      */
     protected function isDatabasePresent()
@@ -116,12 +116,14 @@ EOT
     }
 
     /**
-     * 检查是否已经创建过表
+     * 检查是否已经创建过表.
+     *
      * @return bool
      */
     protected function isSchemaPresent()
     {
         $connection = $this->getContainer()->get('doctrine.dbal.default_connection');
+
         return count($connection->getSchemaManager()->listTables()) > 0;
     }
 }

@@ -5,16 +5,14 @@ namespace PHPDish\Bundle\CoreBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
     /**
-     * 文字logo
+     * 文字logo.
+     *
      * @var string
      */
     const PHPDISH_LOGO = <<<EOT
@@ -29,9 +27,9 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 EOT;
 
     /**
-     * 确认文件目录存在并且可读
+     * 确认文件目录存在并且可读.
      *
-     * @param string $directory
+     * @param string          $directory
      * @param OutputInterface $output
      */
     protected function ensureDirectoryWritableAndExists($directory, $output)
@@ -43,11 +41,11 @@ EOT;
     }
 
     /**
-     * Execute a command
+     * Execute a command.
      *
-     * @param string $command
+     * @param string          $command
      * @param OutputInterface $output
-     * @param array  $options Command options
+     * @param array           $options Command options
      *
      * @return $this Self object
      */
@@ -58,7 +56,7 @@ EOT;
         }
 
         $options = array_merge($options, [
-            'command' => $command
+            'command' => $command,
         ]);
 
         $this
@@ -69,10 +67,11 @@ EOT;
     }
 
     /**
-     * 批量执行命令
-     * @param array $commands
+     * 批量执行命令.
+     *
+     * @param array                $commands
      * @param OutputInterface|null $output
-     * @param bool $renderProgressbar
+     * @param bool                 $renderProgressbar
      */
     protected function bulkRunCommands(array $commands, OutputInterface $output, $renderProgressbar = false)
     {

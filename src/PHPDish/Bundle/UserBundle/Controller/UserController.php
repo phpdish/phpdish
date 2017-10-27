@@ -4,7 +4,6 @@ namespace PHPDish\Bundle\UserBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends RestController
 {
     use ManagerTrait;
-    
+
     /**
      * @Route("/users/{username}", name="user_view")
      *

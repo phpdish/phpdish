@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\CoreBundle\Installer\Requirement;
 
-
 class PHPDishRequirements implements \IteratorAggregate
 {
     /**
@@ -14,9 +13,9 @@ class PHPDishRequirements implements \IteratorAggregate
     {
         $this->requirements = [
             new ExtensionRequirement('GD', 'gd', true),
-            new ExtensionRequirement('Intl','intl', true),
-            new ExtensionRequirement('PDO','pdo', true),
-            new ExtensionRequirement('PDO-Mysql','pdo_mysql', true),
+            new ExtensionRequirement('Intl', 'intl', true),
+            new ExtensionRequirement('PDO', 'pdo', true),
+            new ExtensionRequirement('PDO-Mysql', 'pdo_mysql', true),
         ];
     }
 

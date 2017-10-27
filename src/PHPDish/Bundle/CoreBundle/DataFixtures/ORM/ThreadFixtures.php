@@ -8,7 +8,6 @@ use PHPDish\Bundle\ForumBundle\Entity\Thread;
 
 class ThreadFixtures extends AbstractFixtures
 {
-
     /**
      * {@inheritdoc}
      */

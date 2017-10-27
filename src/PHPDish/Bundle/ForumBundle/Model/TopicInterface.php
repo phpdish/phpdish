@@ -141,7 +141,7 @@ interface TopicInterface extends IdentifiableInterface, DateTimeInterface, UserA
     public function stickTop();
 
     /**
-     * 获取概述
+     * 获取概述.
      *
      * @return string
      */

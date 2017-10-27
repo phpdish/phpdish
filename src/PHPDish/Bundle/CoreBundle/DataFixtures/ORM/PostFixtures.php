@@ -131,7 +131,7 @@ EOT;
     {
         return [
             UserFixtures::class,
-            CategoryFixtures::class
+            CategoryFixtures::class,
         ];
     }
 }

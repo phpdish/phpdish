@@ -14,6 +14,7 @@ final class KernelExceptionListener
 {
     /**
      * 默认的状态码
+     *
      * @var string
      */
     const DEFAULT_STATUS_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
@@ -21,17 +22,17 @@ final class KernelExceptionListener
     /**
      * @var TokenStorageInterface
      */
-    protected $tokenStorage;
+    private $tokenStorage;
 
     /**
      * @var AuthorizationCheckerInterface
      */
-    protected $authorizationChecker;
+    private $authorizationChecker;
 
     /**
      * @var Router
      */
-    protected $router;
+    private $router;
 
     public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker, Router $router)
     {
@@ -40,9 +41,6 @@ final class KernelExceptionListener
         $this->router = $router;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         //忽略子请求
@@ -51,7 +49,7 @@ final class KernelExceptionListener
         }
 
         //当前请求
-        $request =  $event->getRequest();
+        $request = $event->getRequest();
         $isRequestApi = $request->getRequestFormat() === 'json' || $request->isXmlHttpRequest();
 
         $filteredResponse = false;
@@ -61,7 +59,7 @@ final class KernelExceptionListener
             switch ($statusCode) {
                 //403
                 case Response::HTTP_FORBIDDEN:
-                    $filteredResponse  = $this->createForbiddenResponseForAPI();
+                    $filteredResponse = $this->createForbiddenResponseForAPI();
                     break;
 
                 // 404处理
@@ -85,10 +83,12 @@ final class KernelExceptionListener
 
     /**
      * 计算该异常对应的错误码
+     *
      * @param \Exception $exception
+     *
      * @return int
      */
-    protected function resolveStatusCode(\Exception $exception)
+    private function resolveStatusCode(\Exception $exception)
     {
         if ($exception instanceof HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
@@ -99,34 +99,39 @@ final class KernelExceptionListener
                 $statusCode = static::DEFAULT_STATUS_CODE;
             }
         }
+
         return $statusCode;
     }
 
     /**
-     * 创建接口 403 response
+     * 创建接口 403 response.
+     *
      * @return JsonResponse
      */
-    protected function createForbiddenResponseForAPI()
+    private function createForbiddenResponseForAPI()
     {
         if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $response = new JsonResponse([
-                'error' => 'Access denied'
+                'error' => 'Access denied',
             ], Response::HTTP_FORBIDDEN);
         } else {
             $response = new JsonResponse([
                 'error' => 'Please sign in first',
-                'redirect' => $this->router->generate('login')
+                'redirect' => $this->router->generate('login'),
             ], Response::HTTP_FORBIDDEN);
         }
+
         return $response;
     }
 
     /**
-     * 创建接口 404 response
+     * 创建接口 404 response.
+     *
      * @param \Exception $exception
+     *
      * @return JsonResponse
      */
-    protected function createNotFoundResponseForAPI(\Exception $exception)
+    private function createNotFoundResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
             'error' => $exception->getMessage() ?: 'The requested resource does not exist',
@@ -134,11 +139,13 @@ final class KernelExceptionListener
     }
 
     /**
-     * 创建接口 400 response
+     * 创建接口 400 response.
+     *
      * @param \Exception $exception
+     *
      * @return JsonResponse
      */
-    protected function createBadRequestResponseForAPI(\Exception $exception)
+    private function createBadRequestResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
             'error' => $exception->getMessage() ?: 'Bad Request',
@@ -146,11 +153,13 @@ final class KernelExceptionListener
     }
 
     /**
-     * 创建接口 500 response
+     * 创建接口 500 response.
+     *
      * @param \Exception $exception
+     *
      * @return JsonResponse
      */
-    protected function createServerErrorResponseForAPI(\Exception $exception)
+    private function createServerErrorResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
             'error' => $exception->getMessage() ?: 'Internal Server Error',

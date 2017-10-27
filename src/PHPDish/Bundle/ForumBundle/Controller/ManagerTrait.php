@@ -5,7 +5,6 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 use PHPDish\Bundle\ForumBundle\Service\ReplyManagerInterface;
 use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
-use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 
 trait ManagerTrait
 {

@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
-
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
 
@@ -36,7 +35,7 @@ class CategoryFixtures extends AbstractFixtures
     public function getDependencies()
     {
         return [
-            UserFixtures::class
+            UserFixtures::class,
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\CoreBundle\Installer\Checker;
 
-
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class IOAwareChecker implements CheckInterface
@@ -13,7 +12,8 @@ abstract class IOAwareChecker implements CheckInterface
     protected $output;
 
     /**
-     * 设置输出实例
+     * 设置输出实例.
+     *
      * @param OutputInterface $output
      */
     public function setOutput($output)

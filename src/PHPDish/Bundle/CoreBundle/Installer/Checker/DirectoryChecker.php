@@ -40,11 +40,13 @@ class DirectoryChecker extends IOAwareChecker
     {
         $this->ensureExists($this->directory);
         $this->ensureIsWritable($this->directory);
+
         return true;
     }
 
     /**
-     * 检查目录是否可写
+     * 检查目录是否可写.
+     *
      * @param string $directory
      */
     public function ensureIsWritable($directory)
@@ -68,7 +70,8 @@ class DirectoryChecker extends IOAwareChecker
     }
 
     /**
-     * 检查目录是否存在
+     * 检查目录是否存在.
+     *
      * @param string $directory
      */
     public function ensureExists($directory)
@@ -95,7 +98,8 @@ class DirectoryChecker extends IOAwareChecker
     }
 
     /**
-     * 设置目录
+     * 设置目录.
+     *
      * @param string $directory
      */
     public function setDirectory($directory)
@@ -104,7 +108,8 @@ class DirectoryChecker extends IOAwareChecker
     }
 
     /**
-     * 设置命令
+     * 设置命令.
+     *
      * @param string $name
      */
     public function setCommandName($name)
