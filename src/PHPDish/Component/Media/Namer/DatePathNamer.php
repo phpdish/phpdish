@@ -4,6 +4,7 @@ namespace PHPDish\Component\Media\Namer;
 
 use Carbon\Carbon;
 use Gaufrette\Filesystem;
+use PHPDish\Component\Util\ExtensionFinder;
 
 class DatePathNamer implements NamerInterface
 {
@@ -30,7 +31,7 @@ class DatePathNamer implements NamerInterface
      */
     public function transformFromUrl($url)
     {
-        $extension = ltrim(strrchr(parse_url($url, PHP_URL_PATH), '.'), '.');
+        $extension = ExtensionFinder::find($url);
 
         return $this->transformWithExtension(strrchr($url, $extension));
     }

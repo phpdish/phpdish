@@ -205,3 +205,15 @@ hwi_oauth:
             client_id: '%oauth.github.client_id%'
             client_secret: '%oauth.github.client_secret%'
             scope: 'user:email,public_repo'
+
+
+httplug:
+    plugins:
+        logger: ~
+    clients:
+        default:
+            factory: 'httplug.factory.guzzle6'
+            plugins: ['httplug.plugin.logger']
+            config:
+                verify: false
+                timeout: 20
