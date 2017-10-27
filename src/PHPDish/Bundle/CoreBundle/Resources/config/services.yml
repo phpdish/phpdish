@@ -15,7 +15,7 @@ services:
          tags:
             - { name: twig.extension}
 
-    # Pjax
+    # Pjax服务设置
     phpdish.pjax.helper:
          class: PHPDish\Component\Pjax\Helper\PjaxHelper
 
@@ -25,6 +25,13 @@ services:
          public: false
          tags:
             - { name: twig.extension}
+
+    phpdish.event_listener.pjax:
+         class: PHPDish\Component\Pjax\EventListener\KernelResponseListener
+         arguments: ['@phpdish.pjax.helper']
+         public: false
+         tags:
+            - { name: kernel.event_listener, event: 'kernel.response', method: 'onKernelResponse'}
 
     # 核心响应事件
     phpdish.event_listener.core.kernel:

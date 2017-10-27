@@ -37,14 +37,13 @@
   "dependencies": {
     "air-datepicker": "^2.0",
     "art-dialog": "^7.0",
-    "blueimp-file-upload": "^9.19.1",
     "bootstrap-select": "^1.12.4",
     "clipboard": "^1.0",
     "codemirror": "^5.29.0",
-    "editor.md": "^1.5.0",
     "github-markdown-css": "^2.8.0",
     "highlight.js": "^9.12.0",
     "inline-attachment": "^2.0.3",
+    "jquery-pjax": "^2.0.1",
     "jquery-validation": "^1.17.0",
     "marked": "^0.3",
     "memory-fs": "^0.4",
@@ -53,7 +52,6 @@
     "simplemde": "^1.11.2",
     "social-share-button.js": "^1.0.0",
     "store": "^2.0.12",
-    "textcomplete": "^0.13.1",
-    "wangeditor": "^3.0.7"
+    "textcomplete": "^0.13.1"
   }
 }

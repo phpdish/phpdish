@@ -14,4 +14,12 @@ final class PjaxHelper implements PjaxHelperInterface
     {
         return (bool)$request->headers->get('X-PJAX', false);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainer(Request $request)
+    {
+        return $request->headers->get('X-PJAX-Container');
+    }
 }

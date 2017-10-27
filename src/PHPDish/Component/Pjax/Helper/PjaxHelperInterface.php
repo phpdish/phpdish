@@ -13,4 +13,12 @@ interface PjaxHelperInterface
      * @return boolean
      */
     public function isPjaxRequest(Request $request);
+
+    /**
+     * 获取container
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function getContainer(Request $request);
 }
