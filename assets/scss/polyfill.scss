@@ -12,7 +12,7 @@
 //覆盖markdown的字体
 .markdown-body{
     font:{
-        family: "微软雅黑", "宋体";
+        family: $mainfontFamily;
     }
     pre{
         border:none;

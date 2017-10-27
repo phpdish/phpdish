@@ -1,7 +1,13 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
 {% block content %}
-    <h2 class="text-center">
-        服务器内部错误
-    </h2>
+    <div class="container" role="main">
+        <div class="row">
+            <div class="col-md-12 error-page">
+                <h2 class="text-center">
+                    <i class="if i-500"></i> 服务器内部错误
+                </h2>
+            </div>
+        </div>
+    </div>
 {% endblock %}

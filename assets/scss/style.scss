@@ -422,7 +422,7 @@ form{
     span{
       font:{
         size: 15px;
-        family: "微软雅黑";
+        family: $mainfontFamily;
       }
       cursor:pointer;
     }
@@ -430,7 +430,7 @@ form{
       text-decoration: none;
       font:{
         size: 15px;
-        family: "微软雅黑";
+        family: $mainfontFamily;
       }
       &:active{
         color: $linkColor;
@@ -460,9 +460,21 @@ form{
       a{
         font:{
           size: 13px;
-          family: "微软雅黑";
+          family: $mainfontFamily;
         }
       }
     }
+  }
+}
+
+/*------------------------------------
+  错误页面
+------------------------------------*/
+.error-page{
+  padding-top: 10%;
+  .i-404, .i-500{
+    font-size: 62px;
+    color: $metaColor;
+    vertical-align: middle;
   }
 }
