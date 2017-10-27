@@ -37,4 +37,4 @@ services:
 
     phpdish.media.avatar_file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
-       arguments: ['httplug.client.default', '@httplug.message_factory', '@phpdish.media.avatar_file_manager',  '@phpdish.media.avatar_file_namer']
+       arguments: ['@httplug.client.default', '@httplug.message_factory', '@phpdish.media.avatar_file_manager',  '@phpdish.media.avatar_file_namer']
