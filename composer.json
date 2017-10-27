@@ -1,5 +1,5 @@
 {
-    "name": "taosikai/dish",
+    "name": "phpdish/phpdish",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -21,7 +21,6 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "cakephp/chronos": "^1.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^1.2",
@@ -37,7 +36,6 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.6",
         "liip/imagine-bundle": "^1.9",
-        "mgilet/notification-bundle": "*@dev",
         "nesbot/carbon": "^1.22",
         "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",
