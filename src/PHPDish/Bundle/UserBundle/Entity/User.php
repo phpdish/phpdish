@@ -90,6 +90,14 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $following;
 
+    /**
+     * 订阅者的专栏
+     *
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", mappedBy="followers")
+     * )
+     */
+    protected $followingCategories;
+
 //    /**
 //     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
 //     * @ORM\JoinTable(name="users_roles",
