@@ -4,7 +4,8 @@ import 'bootstrap-select';
 import 'scrolltofixed';
 import 'jquery-pjax';
 
-import './actions.js';
+import * as Actions from './actions.js';
+
 import Util from './util.js';
 import {default as Dialog} from './dialog.js';
 
@@ -62,10 +63,28 @@ import {default as Dialog} from './dialog.js';
     });
 })($);
 
-//Pjax
-$.pjax.defaults.timeout = 50000;
-$('[data-pjax-container]').each(function(){
-    const $this = $(this);
-    const containerId = $this.data('pjax-container');
-    $this.pjax('a', `#${containerId}`);
-});
+
+/**
+ * 未读消息
+ */
+(function(){
+    const $notificationNumber = $('#notification-number');
+    if ($notificationNumber.length > 0) {
+        const originalDocumentTitle = document.title;
+        setInterval(() => {
+            Util.request('notification.count').done((response) => {
+                if (response.count > 0) {
+                    $notificationNumber.text(response.count).attr('data-number', response.count);
+                    document.title = `(${response.count}) ` + originalDocumentTitle;
+                } else {
+                    $notificationNumber.removeAttr('data-number');
+                }
+            });
+        },  10000);
+    }
+})($);
+
+//初始化follow
+const $document = $(document);
+new Actions.FollowUserIntialization($document);
+new Actions.FollowCategoryIntialization($document);

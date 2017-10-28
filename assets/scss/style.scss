@@ -80,6 +80,7 @@
     a{
       display:block;
       padding: 10px 30px;
+      color:$mainFontColor;
     }
     &.active{
       font-weight: 600;
@@ -476,5 +477,97 @@ form{
     font-size: 62px;
     color: $metaColor;
     vertical-align: middle;
+  }
+}
+
+/*------------------------------------
+  占位位置样式
+------------------------------------*/
+
+@keyframes shortLoading {
+  from {
+    left: 0;
+  }
+  to {
+    left: 200px;
+  }
+}
+
+@keyframes shortLoading {
+  0% {
+    width: 20%
+  }
+  50% {
+    width: 40%
+  }
+  to {
+    width: 20%
+  }
+}
+
+@-webkit-keyframes shortLoading {
+  0% {
+    width: 20%
+  }
+  50% {
+    width: 40%
+  }
+  to {
+    width: 20%
+  }
+}
+
+@keyframes loading {
+  0% {
+    width: 60%
+  }
+  50% {
+    width: 100%
+  }
+  to {
+    width: 60%
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    width: 60%
+  }
+  50% {
+    width: 100%
+  }
+  to {
+    width: 60%
+  }
+}
+.resource-placeholder {
+  padding:10px;
+  .bar {
+    height: 16px;
+    background-color: #eaeaea;
+    border: 1px solid #eaeaea;
+    animation: shortLoading 1s ease-in-out infinite;
+    -webkit-animation: shortLoading 1s ease-in-out infinite;
+    -moz-animation: shortLoading 1s ease-in-out infinite;
+    -o-animation: shortLoading 1s ease-in-out infinite;
+    margin: 10px 0;
+  }
+   .bar1{
+     -webkit-animation-name: loading;
+     -moz-animation-name: loading;
+     -o-animation-name: loading;
+     animation-name: loading;
+     -webkit-animation-delay: -.5s;
+     -moz-animation-delay: -.5s;
+     -o-animation-delay: -.5s;
+     animation-delay: -.5s;
+   }
+  .bar2{
+    -webkit-animation-name: loading;
+    -moz-animation-name: loading;
+    -o-animation-name: loading;
+    animation-name: loading;
+  }
+  .bar3{
   }
 }

@@ -49,5 +49,10 @@ export default {
     },
     getAuthUser: function() {
         return authUser;
+    },
+
+    htmlPlaceholder: ($container) => {
+        let placeholder = '<div class="resource-placeholder"><div class="bar bar1"></div><div class="bar bar2"></div><div class="bar bar3"></div></div>';
+        $container.html(placeholder);
     }
 };
