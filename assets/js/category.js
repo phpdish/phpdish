@@ -4,6 +4,8 @@ import '../modules/common.js';
 import 'jquery-validation';
 import UploadFile from '../modules/upload-file.js';
 import Util from '../modules/util.js';
+import AjaxTab from '../modules/ajaxtab.js';
+import {FollowUserIntialization} from '../modules/actions.js';
 
 //上传 封面
 (function(){
@@ -45,3 +47,16 @@ import Util from '../modules/util.js';
         }
     });
 })($);
+
+//View Category
+//AjaxTab
+new AjaxTab($('[data-pjax-container]'), {
+    container: '#list-container',
+    loader: '#loader',
+    before: (container) => {
+        Util.htmlPlaceholder(container);
+    },
+    success: (container) => {
+        new FollowUserIntialization(container);
+    }
+});

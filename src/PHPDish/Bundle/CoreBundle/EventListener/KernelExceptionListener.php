@@ -112,11 +112,11 @@ final class KernelExceptionListener
     {
         if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $response = new JsonResponse([
-                'error' => 'Access denied',
+                'error' => '访问拒绝',
             ], Response::HTTP_FORBIDDEN);
         } else {
             $response = new JsonResponse([
-                'error' => 'Please sign in first',
+                'error' => '请先登录',
                 'redirect' => $this->router->generate('login'),
             ], Response::HTTP_FORBIDDEN);
         }
@@ -134,7 +134,7 @@ final class KernelExceptionListener
     private function createNotFoundResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
-            'error' => $exception->getMessage() ?: 'The requested resource does not exist',
+            'error' => $exception->getMessage() ?: '您所请求的资源不存在',
         ], Response::HTTP_NOT_FOUND);
     }
 
@@ -148,7 +148,7 @@ final class KernelExceptionListener
     private function createBadRequestResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
-            'error' => $exception->getMessage() ?: 'Bad Request',
+            'error' => $exception->getMessage() ?: '错误请求',
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -162,7 +162,7 @@ final class KernelExceptionListener
     private function createServerErrorResponseForAPI(\Exception $exception)
     {
         return new JsonResponse([
-            'error' => $exception->getMessage() ?: 'Internal Server Error',
+            'error' => $exception->getMessage() ?: '服务器内部错误',
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

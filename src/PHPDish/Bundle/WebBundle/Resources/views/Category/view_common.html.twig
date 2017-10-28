@@ -2,6 +2,10 @@
 
 {% block title %} {{ category.name }} {% endblock %}
 
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/category.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container narrow-layout">
     {% from  'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
@@ -39,14 +43,16 @@
                         </div>
                     </div>
                 </div>
-                <ul class="list-unstyled list-inline tab-nav">
+                <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'new' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug}) }}">新发布</a></li>
                     <li {% if tab == 'hot' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
                     <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': category.slug}) }}">订阅</a></li>
                 </ul>
-                {% block category_content %}
-                没有任何数据
-                {% endblock %}
+                <div id="list-container">
+                    {% block category_content %}
+                        <div class="empty-data">没有任何数据</div>
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
