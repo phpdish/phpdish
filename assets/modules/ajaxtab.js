@@ -30,8 +30,8 @@ class AjaxTab
         });
 
         $(document).on('pjax:success', (event, data, status, xhr, options) => {
-            if (typeof this.options.complete === 'function') {
-                this.options.complete.call(this, event, data, status, xhr, options);
+            if (typeof this.options.success === 'function') {
+                this.options.success.call(this, this.container, xhr, data, status, options);
             }
         });
 
