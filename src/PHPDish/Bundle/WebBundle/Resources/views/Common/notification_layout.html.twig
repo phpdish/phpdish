@@ -10,15 +10,25 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <ul class="list-group vertical-menu">
+                <ul class="list-group vertical-menu notification-nav">
                     <li class="list-group-item {% if is_route_matched('fos_message_inbox') %}active{% endif %}">
-                        <a href="{{ path('fos_message_inbox') }}"><i class="if i-envelope-o"></i> 收件箱</a>
+                        <a href="{{ path('fos_message_inbox') }}">
+                            <i class="if i-envelope-o"></i> 收件箱
+                            {% if fos_message_nb_unread() > 0 %}
+                                <span class="badge badge-warning">{{ fos_message_nb_unread() }}</span>
+                            {% endif %}
+                        </a>
                     </li>
                     <li class="list-group-item {% if is_route_matched('fos_message_sent') %}active{% endif %}">
                         <a href="{{ path('fos_message_sent') }}"> <i class="if i-sent"></i> 已发送</a>
                     </li>
                     <li class="list-group-item {% if is_route_matched('notifications') %}active{% endif %}">
-                        <a href="{{ path('notifications') }}"><i class="if i-bell-o"></i> 通知</a>
+                        <a href="{{ path('notifications') }}">
+                            <i class="if i-bell-o"></i> 通知
+                            {% if notification_unseen_number() > 0 %}
+                                <span class="badge badge-warning">{{ notification_unseen_number() }}</span>
+                            {% endif %}
+                        </a>
                     </li>
                 </ul>
             </div>

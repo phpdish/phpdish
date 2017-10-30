@@ -53,6 +53,7 @@ a {
   width: 960px;
 }
 
+//meta 样式
 .meta{
   font-size: 12px;
   color: $metaColor;
@@ -62,4 +63,15 @@ a {
   .if{
     font-size: 16px;
   }
+}
+
+/*------------------------------------
+  Badge
+------------------------------------*/
+.badge{
+  font-size:12px !important;
+  vertical-align: middle !important;
+}
+.badge-warning{
+  background-color:#e64b3b;
 }

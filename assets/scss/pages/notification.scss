@@ -1,6 +1,15 @@
 @charset "UTF-8";
 
 /*------------------------------------
+  通知导航
+------------------------------------*/
+.notification-nav{
+  .badge{
+    margin-left:20px;
+    vertical-align: middle;
+  }
+}
+/*------------------------------------
   通知页面
 ------------------------------------*/
 .notification-list{
@@ -62,7 +71,7 @@
     img{
       border-radius:50%;
       width: 45px;
-      border:1px solid 1px solid #f5f5f5;
+      border:1px solid #f5f5f5;
       padding:1px;
     }
   }
