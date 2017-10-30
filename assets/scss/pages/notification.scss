@@ -56,3 +56,14 @@
     resize:vertical;
   }
 }
+
+.new-chat{
+  .recipient{
+    img{
+      border-radius:50%;
+      width: 45px;
+      border:1px solid 1px solid #f5f5f5;
+      padding:1px;
+    }
+  }
+}
