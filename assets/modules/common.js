@@ -80,7 +80,7 @@ import {default as Dialog} from './dialog.js';
                     $notificationNumber.removeAttr('data-number');
                 }
             });
-        },  10000);
+        },  50000);
     }
 })($);
 

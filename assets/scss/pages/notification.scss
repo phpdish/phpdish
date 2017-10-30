@@ -56,6 +56,14 @@
       }
     }
   }
+  //未读的chat
+  .list-group-item.un-seen{
+    background-color: rgba(255, 247, 234, 0.5);
+    &:hover{
+      background-color: #fff7ea;
+    }
+    transition: background-color .5s;
+  }
 }
 
 .reply-chat{
