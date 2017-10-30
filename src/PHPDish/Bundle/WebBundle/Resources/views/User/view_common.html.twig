@@ -22,7 +22,7 @@
                             <div class="media-body summary">
                                 <h1 class="username">{{ user.username }}</h1>
                                 <p class="description">{{ user.description|default('Hello world') }}</p>
-                                <p class="small register-at">在{{ user.createdAt|date('Y-m-d') }}注册</p>
+                                <p class="small register-at">在{{ user.createdAt|time_diff }}注册</p>
                             </div>
                             <div class="media-right">
                                 <div data-role="follow">
