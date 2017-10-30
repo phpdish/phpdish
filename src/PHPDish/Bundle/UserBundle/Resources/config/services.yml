@@ -28,6 +28,7 @@ services:
         class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
         arguments:
           - '@fos_user.user_manager'
+          - '@security.token_storage'
           - '@phpdish.media.avatar_file_downloader'
           - {weibo: weiboId, github: githubId}
 

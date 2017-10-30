@@ -7,6 +7,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
 use PHPDish\Component\Media\Downloader\FileDownloaderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProvider extends BaseFOSUBProvider
@@ -16,8 +17,18 @@ class FOSUBUserProvider extends BaseFOSUBProvider
      */
     protected $fileDownloader;
 
-    public function __construct(UserManagerInterface $userManager, FileDownloaderInterface $fileDownloader, array $properties)
-    {
+    /**
+     * @var TokenStorageInterface
+     */
+    protected $tokenStorage;
+
+    public function __construct(
+        UserManagerInterface $userManager,
+        TokenStorageInterface $tokenStorage,
+        FileDownloaderInterface $fileDownloader,
+        array $properties
+    ) {
+        $this->tokenStorage = $tokenStorage;
         $this->fileDownloader = $fileDownloader;
         parent::__construct($userManager, $properties);
     }
@@ -35,12 +46,15 @@ class FOSUBUserProvider extends BaseFOSUBProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        //如果当前用户已经登录，则直接绑定到当前账户否则从数据库尝试加载
+        if (!$user = $this->getAuthenticatedUser()) {
+            $username = $response->getUsername();
+            $user = $this->getAuthenticatedUser() ?: $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        }
+        //如果数据库没有则创建新用户
         if (is_null($user)) {
             $user = $this->createNewUser($response);
         }
-
         $serviceName = $response->getResourceOwner()->getName();
         $accessTokenSetter = 'set'.ucfirst($serviceName).'AccessToken';
         $user->$accessTokenSetter($response->getAccessToken());
@@ -91,5 +105,16 @@ class FOSUBUserProvider extends BaseFOSUBProvider
         return $this->userManager->findUserByUsername($username)
             ? $username.$response->getUsername()
             : $username;
+    }
+
+    /**
+     * 获取当前登录的用户
+     * @return UserInterface
+     */
+    protected function getAuthenticatedUser()
+    {
+        return ($token = $this->tokenStorage->getToken())
+            ? ($token->getUser() instanceof UserInterface ? $token->getUser() : null)
+            : null;
     }
 }

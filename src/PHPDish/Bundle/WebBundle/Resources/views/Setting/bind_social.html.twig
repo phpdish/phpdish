@@ -14,7 +14,7 @@
                 <span class="if i-weibo"></span>
 
                 {% if app.user.weiboId %}
-                    <i  class="if i-check"></i> 已绑定
+                     已绑定 <i class="if i-check"></i>
                 {% else %}
                     <a href="{{ hwi_oauth_login_url('weibo') }}">绑定微博</a>
                 {% endif %}
