@@ -8,7 +8,17 @@ import lockButton from '../modules/button-lock.js';
 import Editor from '../modules/md-editor/editor.js';
 import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
 import hljs from 'highlight.js';
+import AjaxTab from '../modules/ajaxtab.js';
 
+//话题列表页
+//AjaxTab
+new AjaxTab($('[data-pjax-container]'), {
+    container: '#list-container',
+    loader: '#loader',
+    before: (container) => {
+        Util.htmlPlaceholder(container);
+    }
+});
 
 //话题详情页
 (function($){
