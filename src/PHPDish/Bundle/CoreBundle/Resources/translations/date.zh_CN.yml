@@ -1,0 +1,16 @@
+diff:
+    ago:
+        second: '%count%秒前'
+        minute: '%count%分钟前'
+        hour: '%count%小时前'
+        day: '%count%天前'
+        month: '%count%月前'
+        year: '%count%年前'
+
+    in:
+        second: '%count%秒内'
+        minute: '%count%分钟内'
+        hour: '%count%小时内'
+        day: '%count%天内'
+        month: '%count%月内'
+        year: '%count%年内'

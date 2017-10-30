@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class MediaController extends Controller
 {
     const UPLOAD_FIELD_NAME = 'file';
 
@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
         return $this->json([
             'key' => $file->getKey(),
-            'path' => $this->get('phpdish.media.url_builder')->buildImageResizeUrl($file, 'middle_square'),
+            'path' => $this->get('phpdish.media.url_builder')->build($file)
         ]);
     }
 }

@@ -5,6 +5,7 @@ services:
     twig_extension.date:
          class: Twig\Extensions\DateExtension
          public: false
+         arguments: ['@translator']
          tags:
             - { name: twig.extension}
 
