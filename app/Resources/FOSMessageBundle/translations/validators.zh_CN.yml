@@ -1,0 +1,16 @@
+fos_message:
+  recipient:
+    blank: 请填写收件人
+  recipients:
+    blank: 请填写多个收件人
+  subject:
+    blank: 请输入主题
+    short: 主题太短
+    long: 主题太长
+  body:
+    blank: 请输入消息内容
+    short: 消息内容过短
+    spam: 抱歉，你的消息像是垃圾内容
+  not_authorized: 你没有权限发送消息
+  reply_not_authorized: 你没有权限回复这条消息
+  self_recipient: 你不能发送消息给你自己
