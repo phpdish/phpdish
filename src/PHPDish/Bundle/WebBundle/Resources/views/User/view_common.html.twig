@@ -27,7 +27,7 @@
                                     <span class="register-at"><i class="if i-calendar"></i> 在{{ user.createdAt|time_diff }}注册</span>
                                     {% if user.profile %}
                                         {% if user.profile.url %}
-                                            <span><i class="if i-link"></i> <a href="{{ user.profile.url }}">{{ user.profile.url }}</a></span>
+                                            <span><i class="if i-link"></i> <a href="{{ user.profile.url }}" target="_blank">{{ user.profile.url }}</a></span>
                                         {% endif %}
                                         {% if user.profile.company %}
                                             <span><i class="if i-users"></i> {{ user.profile.company }}</span>
