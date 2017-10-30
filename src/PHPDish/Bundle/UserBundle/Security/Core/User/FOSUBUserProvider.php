@@ -46,15 +46,14 @@ class FOSUBUserProvider extends BaseFOSUBProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        //如果当前用户已经登录，则直接绑定到当前账户否则从数据库尝试加载
-        if (!$user = $this->getAuthenticatedUser()) {
-            $username = $response->getUsername();
-            $user = $this->getAuthenticatedUser() ?: $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $username = $response->getUsername();
+        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+
+        //优先查找对应用户，如果没有则使用当前登录用户，否则创建新用户
+        if (!$user) {
+            $user = $this->getAuthenticatedUser() ?: $this->createNewUser($response);
         }
-        //如果数据库没有则创建新用户
-        if (is_null($user)) {
-            $user = $this->createNewUser($response);
-        }
+
         $serviceName = $response->getResourceOwner()->getName();
         $accessTokenSetter = 'set'.ucfirst($serviceName).'AccessToken';
         $user->$accessTokenSetter($response->getAccessToken());

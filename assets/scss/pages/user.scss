@@ -36,6 +36,22 @@
         color: #888
       }
     }
+    .actions{
+      width:25%;
+      .send-message{
+        .if{
+          font-size:17px;
+          vertical-align: middle;
+        }
+      }
+      .follow{
+        display:inline-block;
+        .if{
+          font-size:17px;
+          vertical-align: middle;
+        }
+      }
+    }
   }
 
   .entry-meta {

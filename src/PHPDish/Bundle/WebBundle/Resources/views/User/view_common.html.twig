@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% set isMe = app.user is same as (user) %}
+{% set appellation = isMe ? '我' : (user.isWomen ? '她' : '他')%}
 
 {% block content %}
     <div class="container">
@@ -24,15 +25,18 @@
                                 <p class="description">{{ user.description|default('Hello world') }}</p>
                                 <p class="small register-at">在{{ user.createdAt|time_diff }}注册</p>
                             </div>
-                            <div class="media-right">
-                                <div data-role="follow">
+                            <div class="media-right actions">
+                                <a href="{{ path('add_chat', {'mail_to': user.username}) }}" class="btn btn-sm u-btn-outline-primary send-message">
+                                    <i class="if i-envelope-o"></i> 发信息
+                                </a>
+                                <div data-role="follow" class="follow">
                                     {% if app.user and user.isFollowedBy(app.user) %}
                                         <button type="button" class="btn btn-sm btn-default" data-action="unfollow">
                                             <i class="if i-check"></i> 已关注
                                         </button>
                                     {%else %}
-                                        <button type="button" class="btn btn-md u-btn-outline-primary" data-action="follow">
-                                            <i class="if i-plus"></i> 关注
+                                        <button type="button" class="btn btn-sm u-btn-primary" data-action="follow">
+                                            <i class="if i-plus"></i> 关注{{ appellation }}
                                         </button>
                                     {% endif %}
                                 </div>
@@ -61,7 +65,6 @@
                 </div>
             </div>
         </article>
-        {% set appellation = isMe ? '我' : (user.isWomen ? '她' : '他')%}
         <div class="col-md-3">
             <div class="panel panel-widget">
                 <div class="panel-heading">{{ appellation }}的专栏</div>
