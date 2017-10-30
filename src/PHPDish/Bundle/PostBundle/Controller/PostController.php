@@ -52,7 +52,7 @@ class PostController extends RestController
      */
     public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $manager = $this->getPostManager();
         $post = $manager->createPost($this->getUser());
         $form = $this->createForm(PostType::class, $post, [

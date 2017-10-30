@@ -72,7 +72,7 @@ class TopicReplyController extends RestController
      */
     public function addTopicReply($id, Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $topic = $this->getTopicManager()->findTopicById($id);
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());

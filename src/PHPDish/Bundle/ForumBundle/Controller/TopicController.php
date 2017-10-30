@@ -56,7 +56,7 @@ class TopicController extends RestController
      */
     public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $manager = $this->getTopicManager();
         $topic = $manager->createTopic($this->getUser());
         $form = $this->createForm(TopicType::class, $topic);

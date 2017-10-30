@@ -26,7 +26,7 @@ class CategoryController extends RestController
      */
     public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $manager = $this->getCategoryManager();
 
         $category = $manager->createCategory($this->getUser());
@@ -154,7 +154,7 @@ class CategoryController extends RestController
      */
     public function followAction($slug)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $this->getCategoryManager()->followCategory($category, $this->getUser());
         $view = $this->view([
@@ -176,7 +176,7 @@ class CategoryController extends RestController
      */
     public function unFollowAction($slug)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $this->getCategoryManager()->unFollowCategory($category, $this->getUser());
         $view = $this->view([

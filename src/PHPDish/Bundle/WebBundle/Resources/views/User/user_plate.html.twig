@@ -1,6 +1,6 @@
 <div class="panel panel-widget">
     <div class="panel-body">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <div class="media user-plate">
             <div class="media-left">
                 <a class="avatar"><img src="{{ asset(app.user.avatar)|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"></a>
