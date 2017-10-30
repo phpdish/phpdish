@@ -16,7 +16,7 @@ class FollowCategoryIntialization{
 
                 Util.request('category.follow', {'slug': slug}).done(function(response){
                     $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
-                        .html('<i class="if i-check"></i> 已关注');
+                        .html('<i class="if i-check"></i> 已订阅');
 
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
@@ -29,7 +29,7 @@ class FollowCategoryIntialization{
                 const buttonLock = lockButton($this);
                 Util.request('category.unfollow', {'slug': slug}).done(function(response){
                     $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
-                        .html('<i class="if i-plus"></i> 关注');
+                        .html('<i class="if i-plus"></i> 订阅');
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
                 }).always(() => {
