@@ -30,6 +30,11 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': '个性签名'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="form-group">
                 {{ form_label(form.profile.url) }}
                 {{ form_widget(form.profile.url, {'attr': {'class': 'form-control', 'placeholder': '个人主页'}, 'required': false}) }}
                 {{ form_errors(form.profile.url) }}

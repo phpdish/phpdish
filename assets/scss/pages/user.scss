@@ -29,11 +29,12 @@
         margin: 0 0 5px 0;
         line-height: 20px
       }
-      .register-at {
+      .profile {
         margin-top: 15px;
-        font-size: 12px;
         line-height: 14px;
-        color: #888
+        .if{
+          vertical-align: middle;
+        }
       }
     }
     .actions{

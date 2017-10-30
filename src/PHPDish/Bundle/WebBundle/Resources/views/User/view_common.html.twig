@@ -22,8 +22,21 @@
                             </div>
                             <div class="media-body summary">
                                 <h1 class="username">{{ user.username }}</h1>
-                                <p class="description">{{ user.description|default('Hello world') }}</p>
-                                <p class="small register-at">在{{ user.createdAt|time_diff }}注册</p>
+                                <p class="description">{{ user.description|default('要说点什么呢？') }}</p>
+                                <p class="small profile meta">
+                                    <span class="register-at"><i class="if i-calendar"></i> 在{{ user.createdAt|time_diff }}注册</span>
+                                    {% if user.profile %}
+                                        {% if user.profile.url %}
+                                            <span><i class="if i-link"></i> <a href="{{ user.profile.url }}">{{ user.profile.url }}</a></span>
+                                        {% endif %}
+                                        {% if user.profile.company %}
+                                            <span><i class="if i-users"></i> {{ user.profile.company }}</span>
+                                        {% endif %}
+                                        {% if user.profile.location %}
+                                            <span><i class="if i-map"></i> {{ user.profile.location }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="media-right actions">
                                 <a href="{{ path('add_chat', {'mail_to': user.username}) }}" class="btn btn-sm u-btn-outline-primary send-message">
@@ -75,15 +88,15 @@
                     <div class="row">
                         <div class="col-md-4 cell">
                             <h6 class="title">粉丝</h6>
-                            <p class="number">{{ user.followerCount }}</p>
+                            <p class="number"><a href="{{ path('user_followers', {'username': user.username}) }}">{{ user.followerCount }}</a></p>
                         </div>
                         <div class="col-md-4 cell">
                             <h6 class="title">关注</h6>
-                            <p class="number">{{ user.followingCount }}</p>
+                            <p class="number"><a href="{{ path('user_following', {'username': user.username}) }}">{{ user.followingCount }}</a></p>
                         </div>
                         <div class="col-md-4 cell">
                             <h6 class="title">文章</h6>
-                            <p class="number">{{ user.postCount }}</p>
+                            <p class="number"><a href="{{ path('user_posts', {'username': user.username}) }}">{{ user.postCount }}</a></p>
                         </div>
                     </div>
                 </div>
