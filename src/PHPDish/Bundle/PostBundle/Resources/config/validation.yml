@@ -1,0 +1,45 @@
+PHPDish\Bundle\PostBundle\Entity\Category:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+             fields: [slug]
+             message: '该slug已经被占用'
+
+    properties:
+       name:
+           - NotBlank:
+               message: 名称不得为空
+           - Length:
+               min: 2
+               max: 50
+               minMessage: '名称至少{{ limit }}字符长度'
+               maxMessage: '名称最多{{ limit }}字符长度'
+
+       slug:
+           - NotBlank:
+               message: 专栏的Uri不得为空
+
+       description:
+           - Length:
+                 min: 5
+                 max: 500
+                 minMessage: '描述最少{{ limit }}字符长度'
+                 maxMessage: '描述最多{{ limit }}字符长度'
+
+
+PHPDish\Bundle\PostBundle\Entity\Post:
+    properties:
+        title:
+            - NotBlank:
+                message: '文章标题不得为空'
+            - Length:
+                 min: 10
+                 max: 150
+                 minMessage: '标题至少{{ limit }}字符长度'
+                 maxMessage: '标题最多{{ limit }}字符长度'
+
+        originalBody:
+            - NotBlank:
+                 message: '文章内容不得为空'
+            - Length:
+                 min: 150
+                 minMessage: '文章至少{{ limit }}字符长度'

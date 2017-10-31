@@ -8,6 +8,7 @@ import lockButton from '../modules/button-lock.js';
 import SimpleMDE from 'simplemde';
 import InlineAttachment from '../modules/inline-attachment.js';
 import hljs from 'highlight.js';
+require('jquery-validation');
 
 /**
  * Post Details
@@ -175,6 +176,22 @@ import hljs from 'highlight.js';
             return false;
         });
     }
+
+    //添加文章验证
+    $addPostForm.validate({
+        rules: {
+            'post[title]': {
+                required: true,
+                rangelength: [10,150]
+            }
+        },
+        messages: {
+            'post[title]': {
+                required: "请输入用户名",
+                rangelength: "文章标题长度在10到150位之间"
+            },
+        }
+    });
 })($);
 
 

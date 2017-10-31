@@ -40,7 +40,7 @@ require('jquery-validation');
         rules: {
             'fos_user_registration_form[username]': {
                 required: true,
-                rangelength: [6,15]
+                rangelength: [2,15]
             },
             'fos_user_registration_form[email]': {
                 required: true,
@@ -60,7 +60,8 @@ require('jquery-validation');
         },
         messages: {
             'fos_user_registration_form[username]': {
-                required: "请输入用户名"
+                required: "请输入用户名",
+                rangelength: "用户名在2到15位之间"
             },
             'fos_user_registration_form[email]': {
                 required: "请输入邮箱",

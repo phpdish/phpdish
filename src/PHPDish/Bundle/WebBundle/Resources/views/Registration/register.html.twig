@@ -23,24 +23,28 @@
                         <span class="input-group-addon"><i class="if i-user"></i></span>
                         {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': '你的用户名'}})  }}
                     </div>
+                    {{ form_errors(form.username) }}
                 </div>
                 <div class="group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="if i-email"></i></span>
                         {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': '你的邮箱'}})  }}
                     </div>
+                    {{ form_errors(form.email) }}
                 </div>
                 <div class="group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="if i-password"></i></span>
                         {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': '设置密码'}})  }}
                     </div>
+                    {{ form_errors(form.plainPassword.first) }}
                 </div>
                 <div class="group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="if i-password"></i></span>
                         {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': '重复上面的密码'}})  }}
                     </div>
+                    {{ form_errors(form.plainPassword.second) }}
                 </div>
                 <div class="row">
                     {#<div class="col-lg-6 checkbox">#}
