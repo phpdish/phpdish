@@ -219,3 +219,10 @@ httplug:
             config:
                 verify: false
                 timeout: 20
+
+
+algolia:
+    application_id: 4UT5BZJVBU
+    api_key: dc396bbc61f32b939e3941df69b89d2c
+    catch_log_exceptions: true
+    index_name_prefix: staging

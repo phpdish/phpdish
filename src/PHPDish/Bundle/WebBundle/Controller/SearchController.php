@@ -16,8 +16,12 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('q');
-
-        dump($keyword);
+        $posts = $this->get('algolia.indexer')->search(
+            $this->get('doctrine.orm.entity_manager'),
+            'PHPDishPostBundle:Post',
+            $keyword
+        );
+        dump($posts);
         exit;
     }
 }

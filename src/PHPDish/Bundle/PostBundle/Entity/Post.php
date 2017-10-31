@@ -14,6 +14,7 @@ use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 /**
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
@@ -31,6 +32,7 @@ class Post implements PostInterface
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Algolia\Attribute
      */
     protected $title;
 
