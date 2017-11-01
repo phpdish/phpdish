@@ -10,9 +10,7 @@
 
 {% block user_content %}
     {% if posts.count %}
-        <ul class="list-group post-list">
-            {% include 'PHPDishWebBundle:Post:post_list.html.twig' %}
-        </ul>
+        {% include 'PHPDishWebBundle:Post:post_list.html.twig' %}
         {% if posts.haveToPaginate %}
         <footer class="panel-footer">
             {{ pagerfanta(posts, 'twitter_bootstrap3') }}

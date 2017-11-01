@@ -13,6 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
+    const TYPE_POST = 'post';
+
+    const TYPE_TOPIC = 'topic';
+
+    const TYPE_USER = 'user';
+
     /**
      * @Route("/search", name="search")
      * @param Request $request
@@ -21,7 +27,7 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('q');
-        $searchResult = $this->searcFromAlgolia($keyword, [
+        $searchResult = $this->searcFromAlgolia($keyword, $request->query->get('type', static::TYPE_POST), [
             'hitsPerPage' => 2,
             'page' => $request->query->getInt('page', 1) - 1
         ]);
@@ -49,14 +55,22 @@ class SearchController extends Controller
     /**
      * 从Algolia获取搜索结果
      * @param string $keyword
+     * @param string $type
      * @param array $options
      * @return SearchResult
      */
-    protected function searcFromAlgolia($keyword, $options)
+    protected function searcFromAlgolia($keyword, $type, $options)
     {
+        if ($type === static::TYPE_TOPIC) {
+            $entityName = 'PHPDishForumBundle:Topic';
+        } elseif ($type === static::TYPE_USER) {
+            $entityName = 'PHPDishUserBundle:User';
+        } else {
+            $entityName = 'PHPDishPostBundle:Post';
+        }
         return $this->get('algolia.indexer')->search(
             $this->get('doctrine.orm.entity_manager'),
-            'PHPDishPostBundle:Post',
+            $entityName,
             $keyword,
             $options
         );

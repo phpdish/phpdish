@@ -16,6 +16,7 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 /**
  * @ORM\Entity
@@ -159,7 +160,16 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     public function getSalt()
     {
-        return null;
+        return $this->salt;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @Algolia\Attribute
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 
     /**
@@ -260,6 +270,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      * Get description.
      *
      * @return string
+     * @Algolia\Attribute
      */
     public function getDescription()
     {
