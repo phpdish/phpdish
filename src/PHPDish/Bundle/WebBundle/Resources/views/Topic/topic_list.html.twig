@@ -22,4 +22,8 @@
     {% if loop.last == false %}
         <hr class="margin-vertical-10"/>
     {% endif %}
+{% else %}
+    <div class="empty-data">
+        <i class="if i-comment"></i> 没有话题
+    </div>
 {% endfor %}
