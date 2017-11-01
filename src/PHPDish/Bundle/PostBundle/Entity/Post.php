@@ -69,7 +69,6 @@ class Post implements PostInterface
 
     /**
      * 文章插图.
-     *
      * @var array
      */
     protected $images;
@@ -104,6 +103,14 @@ class Post implements PostInterface
     /**
      * {@inheritdoc}
      */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setCover($cover)
     {
         $this->cover = $cover;
@@ -116,8 +123,6 @@ class Post implements PostInterface
      */
     public function getCover()
     {
-        return true;
-
         return $this->cover;
     }
 
@@ -169,6 +174,8 @@ class Post implements PostInterface
      * Gets the summary of the post.
      *
      * @return string
+     *
+     * @Algolia\Attribute
      */
     public function getSummary()
     {

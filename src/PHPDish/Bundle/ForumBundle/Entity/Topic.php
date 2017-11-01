@@ -15,6 +15,7 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 /**
  * @ORM\Entity
@@ -27,6 +28,7 @@ class Topic implements TopicInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Algolia\Attribute
      */
     protected $title;
 
@@ -214,9 +216,10 @@ class Topic implements TopicInterface
     }
 
     /**
-     * Gets the summary of the post.
+     * Gets the summary of the topic.
      *
      * @return string
+     * @Algolia\Attribute
      */
     public function getSummary()
     {

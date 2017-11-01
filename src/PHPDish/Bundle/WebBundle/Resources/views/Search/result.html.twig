@@ -1,0 +1,65 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} 搜索 {{ keyword }} {% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container narrow-layout">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-u add-post">
+                    <div class="panel-heading">综合排序</div>
+                    <ul class="list-group post-list">
+                        {{ dump(searchResult) }}
+                        {% for post in searchResult %}
+                            <li class="list-group-item">
+                                {% set postUrl =  path('post_view', {'id': post.id}) %}
+                                {% set authorUrl = path('user_view', {'username': post.user.username}) %}
+                                <article class="media post clearfix" role="article">
+                                    <div class="media-body content-box">
+                                        <div class="author">
+                                            <a class="avatar" href="{{ authorUrl }}"><img src="{{ asset(post.user.avatar)|imagine_filter('middle_square') }}" class="img-circle img-responsive"></a>
+                                            <span class="username"><a href="{{ authorUrl }}">{{ post.user.username }}</a></span>
+                                            <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|date('Y-m-d') }}</time>
+                                        </div>
+                                        <h3 class="title">
+                                            {% if post.isRecommended %}
+                                                <span class="sticky-tag">推荐</span>
+                                            {% endif %}
+                                            <a href="{{ postUrl }}">
+                                                <span>{{ post.title }}</span>
+                                            </a>
+                                        </h3>
+                                        <div class="summary">{{ post.summary }}</div>
+                                        <ul class="list-unstyled list-inline meta" data-role="post-action">
+                                            <li><a href="{{ postUrl }}#comments"><i class="if i-comment"></i> {{ post.commentCount }}</a></li>
+                                            <li><i class="if i-view"></i> {{ post.viewCount }}</li>
+                                            {% if is_granted('edit', post) %}
+                                                <li><a href="{{ path('post_edit', {id: post.id}) }}" title="编辑"><i class="if i-edit"></i> 编辑</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    {% if post.images %}
+                                        <div class="media-right media-middle cover">
+                                            <a href="{{ postUrl }}" title="{{ post.title }}">
+                                                <img src="{{ post.images[0] }}" class="media-object">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </article>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if searchResult.haveToPaginate %}
+                        <footer class="panel-footer">
+                            {{ pagerfanta(searchResult, 'twitter_bootstrap3') }}
+                        </footer>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
