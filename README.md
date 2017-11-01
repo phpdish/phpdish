@@ -79,13 +79,15 @@ $ php bin/console server:run
 - Github： https://github.com/slince
 - 微信：
 
-![微信](https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg)
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="320"/>
 
 
 ## License
 
 > PHPDish 是一款对开源社区友好但并不是一款自由的软件
 
-PHPDish 对个人开发者，开源或者公益等非盈利性组织免费；
-商用请联系本人获取商业授权；
-你可以随意对本系统进行修改以适应你的业务需求，但切记不可再次公开发行或者出售。
+1. 你可以将 PHPDish 用于非商业用途而不必支付费用，希望但非必须保留页尾“Powered by PHPDish”标识；
+2. 在未获取商业授权之前不得将 PHPDish 用于商业项目（包括但不限于企业网站、经营性网站、以营利为目或实现盈利的网站），如果需要商用请联系本人获取商业授权；
+3. 无论你是否获得商业授权你都可以随意对本系统进行修改以适应你的业务需求，比如文案修改或者网站美化，但不得再次公开发行或者出售。
+4. 获取商业授权之后你可以终身免费升级。
+5. 其它功能可以联系本人定制。

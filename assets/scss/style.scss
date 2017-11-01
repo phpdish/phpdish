@@ -257,6 +257,15 @@
       background-color: #fff;
     }
   }
+  .targets{
+    color: #969696;
+    a{
+      color: #969696;
+      &:hover{
+        color: $linkColor;
+      }
+    }
+  }
 }
 
 /*------------------------------------
