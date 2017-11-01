@@ -1,0 +1,3 @@
+{% macro paginator(pager) %}
+    {{ pagerfanta(pager, 'twitter_bootstrap3', {'prev_message': '上一页', 'next_message': '下一页'}) }}
+{% endmacro %}

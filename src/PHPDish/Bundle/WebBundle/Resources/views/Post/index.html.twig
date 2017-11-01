@@ -11,7 +11,8 @@
                 {% include 'PHPDishWebBundle:Post:post_list.html.twig' %}
                 {% if posts.haveToPaginate %}
                 <footer class="panel-footer">
-                    {{ pagerfanta(posts, 'twitter_bootstrap3') }}
+                    {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                    {{ paginator(posts) }}
                 </footer>
                 {% endif %}
             </div>

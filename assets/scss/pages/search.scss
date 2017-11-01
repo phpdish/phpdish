@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.search-page{
+  .powered-by{
+    color:$metaColor;
+    font-size:14px;
+    margin-bottom:10px;
+    text-align:right;
+    .logo{
+      text-indent:999px;
+      display:inline-block;
+      width: 53px;
+      height: 14px;
+      vertical-align: middle;
+      margin: 0 2px;
+      background: url("../../img/algolia-logo-light.svg") no-repeat;
+    }
+  }
+}

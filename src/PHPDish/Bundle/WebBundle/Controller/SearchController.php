@@ -28,7 +28,7 @@ class SearchController extends Controller
     {
         $keyword = $request->query->get('q');
         $searchResult = $this->searcFromAlgolia($keyword, $request->query->get('type', static::TYPE_POST), [
-            'hitsPerPage' => 2,
+            'hitsPerPage' => 10,
             'page' => $request->query->getInt('page', 1) - 1
         ]);
         $pagerfanta = $this->createPagerfanta($searchResult);

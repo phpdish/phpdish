@@ -3,13 +3,13 @@
 {% block title %} 搜索 {{ keyword }} {% endblock %}
 
 {% block script %}
-    <script type="text/javascript" src="{{ asset('build/js/post.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/search.js') }}"></script>
 {% endblock %}
 
 {% set tab = app.request.query.get('type') ?: 'post' %}
 
 {% block content %}
-    <div class="container narrow-layout">
+    <div class="container narrow-layout search-page">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-u">
@@ -18,22 +18,28 @@
                         <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'topic'}) }}">话题</a></li>
                         <li {% if tab == 'user' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'user'}) }}">用户</a></li>
                     </ul>
-                    {% if tab == 'topic' %}
-                        <div class="panel-body topic-list">
-                            {% include 'PHPDishWebBundle:Topic:topic_list.html.twig' with {'topics': searchResult} %}
-                        </div>
-                    {% elseif tab == 'user' %}
-                        <div class="panel-body user-list">
-                            {% include 'PHPDishWebBundle:User:user_list.html.twig' with {'users': searchResult} %}
-                        </div>
-                    {% else %}
-                        {% include 'PHPDishWebBundle:Post:post_list.html.twig' with {'posts': searchResult} %}
-                    {% endif %}
-                    {% if searchResult.haveToPaginate %}
-                        <footer class="panel-footer">
-                            {{ pagerfanta(searchResult, 'twitter_bootstrap3') }}
-                        </footer>
-                    {% endif %}
+                    <div id="list-container">
+                        {% if tab == 'topic' %}
+                            <div class="panel-body topic-list">
+                                {% include 'PHPDishWebBundle:Topic:topic_list.html.twig' with {'topics': searchResult} %}
+                            </div>
+                        {% elseif tab == 'user' %}
+                            <div class="panel-body user-list">
+                                {% include 'PHPDishWebBundle:User:user_list.html.twig' with {'users': searchResult} %}
+                            </div>
+                        {% else %}
+                            {% include 'PHPDishWebBundle:Post:post_list.html.twig' with {'posts': searchResult} %}
+                        {% endif %}
+                        {% if searchResult.haveToPaginate %}
+                            <footer class="panel-footer">
+                                {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                                {{ paginator(searchResult) }}
+                            </footer>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="powered-by">
+                    搜索由<a href="https://www.algolia.com/"><span class="logo">Algolia</span></a>提供
                 </div>
             </div>
         </div>

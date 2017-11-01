@@ -22,7 +22,8 @@
                         </div>
                         {% if topics.haveToPaginate %}
                             <div class="panel-footer">
-                                {{ pagerfanta(topics, 'twitter_bootstrap3') }}
+                                {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                                {{ paginator(topics) }}
                             </div>
                         {% endif %}
                     </div>
