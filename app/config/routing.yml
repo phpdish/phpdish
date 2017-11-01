@@ -1,22 +1,11 @@
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
-    prefix:   /
-    type: annotation
-
-php_dish_comment:
-    resource: "@PHPDishCommentBundle/Controller/"
     prefix:   /
     type: annotation
 

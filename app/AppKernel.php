@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new FOS\CommentBundle\FOSCommentBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
@@ -42,7 +41,6 @@ class AppKernel extends Kernel
             new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
             new PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
-            new PHPDish\Bundle\CommentBundle\PHPDishCommentBundle(),
             new PHPDish\Bundle\MediaBundle\PHPDishMediaBundle(),
             new PHPDish\Bundle\NotificationBundle\PHPDishNotificationBundle(),
             new PHPDish\Bundle\ChatBundle\PHPDishChatBundle(),

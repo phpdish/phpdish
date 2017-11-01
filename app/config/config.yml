@@ -91,14 +91,6 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-# FOSComment
-fos_comment:
-    db_driver: orm
-    class:
-        model:
-            comment: PHPDish\Bundle\CommentBundle\Entity\Comment
-            thread: PHPDish\Bundle\CommentBundle\Entity\Thread
-
 # JMS Serializer
 jms_serializer:
     enable_short_alias: false

@@ -26,7 +26,6 @@
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
-        "friendsofsymfony/comment-bundle": "^2.0",
         "friendsofsymfony/message-bundle": "^1.3",
         "friendsofsymfony/user-bundle": "^2.0",
         "hwi/oauth-bundle": "^0.5.3",
