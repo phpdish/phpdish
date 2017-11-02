@@ -91,10 +91,6 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-# JMS Serializer
-jms_serializer:
-    enable_short_alias: false
-
 # KNP Gaufrette:
 knp_gaufrette:
     adapters:
