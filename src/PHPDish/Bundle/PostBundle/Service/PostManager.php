@@ -158,6 +158,16 @@ class PostManager implements PostManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function increasePostViews(PostInterface $post, $views = 1)
+    {
+        $post->setViewCount($post->getViewCount() + $views);
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
+    }
+
+    /**
      * @return PostRepository
      */
     protected function getRepository()

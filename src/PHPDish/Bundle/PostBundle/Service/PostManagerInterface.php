@@ -95,4 +95,11 @@ interface PostManagerInterface
      * @param PostInterface $post
      */
     public function blockPost(PostInterface $post);
+
+    /**
+     * 增加或者减少文章的view数量
+     * @param PostInterface $post
+     * @param int $views
+     */
+    public function increasePostViews(PostInterface $post, $views = 1);
 }

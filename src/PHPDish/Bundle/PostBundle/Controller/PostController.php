@@ -94,6 +94,7 @@ class PostController extends RestController
         $criteria = Criteria::create()->where(Criteria::expr()->eq('post', $post->getId()));
         $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));
 
+        $this->getPostManager()->increasePostViews($post);
         return $this->render('PHPDishWebBundle:Post:view.html.twig', [
             'post' => $post,
             'comments' => $comments,

@@ -14,8 +14,8 @@
                 <div class="panel panel-u">
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                         {% set tab = app.request.query.get('tab') %}
-                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('homepage') }}">看帖</a></li>
-                        <li {% if tab == 'recommend' %}class="active"{% endif %}><a href="{{ path('homepage', {'tab': 'recommend'}) }}">推荐</a></li>
+                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('thread_view', {'slug': thread.slug}) }}">看帖</a></li>
+                        <li {% if tab == 'recommend' %}class="active"{% endif %}><a href="{{ path('thread_view', {'slug': thread.slug, 'tab': 'recommend'}) }}">推荐</a></li>
                     </ul>
                     <div id="list-container">
                         <div class="panel-body topic-list">
