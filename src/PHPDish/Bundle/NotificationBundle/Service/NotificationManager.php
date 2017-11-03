@@ -185,6 +185,9 @@ class NotificationManager implements NotificationManagerInterface
         foreach ($notifications as $notification) {
             $notificationIds[] = $notification->getId();
         }
+        if (!$notificationIds) {
+            return;
+        }
         $qb = $this->entityManager->createQueryBuilder();
         $qb->update('PHPDishNotificationBundle:Notification', 'n')
             ->set('n.seen', true)
