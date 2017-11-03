@@ -36,22 +36,13 @@ class FOSUBUserProvider extends BaseFOSUBProvider
     /**
      * {@inheritdoc}
      */
-    public function connect(UserInterface $user, UserResponseInterface $response)
-    {
-        $this->userManager->updateUser($user);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
+        //优先查找对应用户，否则使用当前登录用户，否则按照邮箱查找，否则创建新用户
         $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
-
-        //优先查找对应用户，如果没有则使用当前登录用户，否则创建新用户
+        $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]) ?: $this->getAuthenticatedUser();
         if (!$user) {
-            $user = $this->getAuthenticatedUser() ?: $this->createNewUser($response);
+            $user = $this->userManager->findUserByEmail($response->getEmail()) ?: $this->createNewUser($response);
         }
 
         $serviceName = $response->getResourceOwner()->getName();
