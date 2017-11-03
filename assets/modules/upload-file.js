@@ -9,6 +9,9 @@ class UploadFile{
 
         this.selectorId = selectorId;
         this.options = $.extend({
+            headers: {
+
+            },
             onUploaded: (response, file) => {
             },
             onError: (error) => {
@@ -27,6 +30,7 @@ class UploadFile{
                     {title : "图片文件", extensions : "jpg,gif,png"},
                 ]
             },
+            headers: this.options.headers,
             init: {
                 FilesAdded: function(uploader) {
                     uploader.start();

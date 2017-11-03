@@ -21,10 +21,13 @@ import Util from '../modules/util.js';
                         const response = $.parseJSON(result.response);
                         $uploadCover.addClass('uploaded');
                         $avatar.val(response.key);
-                        $previewImage.attr('src', response.path);
+                        $previewImage.attr('src', response.thumb);
                     } else {
                         Util.dialog.message(result.response.message || '服务器错误，请刷新后重试');
                     }
+                },
+                headers: {
+                    'Upload_Avatar': true
                 }
             });
         }

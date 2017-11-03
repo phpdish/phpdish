@@ -11,7 +11,7 @@ services:
 
     phpdish.media.url_builder:
        class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
-       arguments: ['@liip_imagine.cache.manager', '/media/uploads/']
+       arguments: ['@liip_imagine.cache.manager', '%app.path.uploads%']
 
     phpdish.media.file_factory:
         class: PHPDish\Component\Media\Manager\FileFactory
@@ -35,6 +35,18 @@ services:
        class: PHPDish\Component\Media\Namer\DatePathNamer
        arguments: ['@phpdish.filesystem.avatar']
 
+    phpdish.media.avatar_url_builder:
+       class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
+       arguments: ['@liip_imagine.cache.manager', '%app.path.avatar%/']
+
+    phpdish.media.avatar_file_factory:
+        class: PHPDish\Component\Media\Manager\FileFactory
+        arguments: ['@phpdish.media.avatar_url_builder', '@phpdish.media.avatar_file_namer']
+
     phpdish.media.avatar_file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
        arguments: ['@httplug.client.default', '@httplug.message_factory', '@phpdish.media.avatar_file_manager',  '@phpdish.media.avatar_file_namer']
+
+    phpdish.media.avatar_file_uploader:
+       class: PHPDish\Component\Media\Uploader\FileUploader
+       arguments: ['@phpdish.media.avatar_file_factory',  '@phpdish.media.avatar_file_manager']

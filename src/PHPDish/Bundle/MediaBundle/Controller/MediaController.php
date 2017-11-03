@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\MediaBundle\Controller;
 
+use PHPDish\Component\Media\Model\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,11 +27,34 @@ class MediaController extends Controller
         if (is_null($uploadedFile)) {
             throw new \InvalidArgumentException('Bad arguments');
         }
-        $file = $this->get('phpdish.media.file_uploader')->upload($uploadedFile);
 
-        return $this->json([
+        list($uploader, $urlBuilder) = $this->getUploaderAndBuilder($request);
+
+        $file = $uploader->upload($uploadedFile);
+        $response = [
             'key' => $file->getKey(),
-            'path' => $this->get('phpdish.media.url_builder')->build($file)
-        ]);
+            'path' => $file->getUrl()
+        ];
+        if ($file instanceof Image) {
+            $response['thumb'] = $urlBuilder->buildImageResizeUrl($file, 'middle_square');
+        }
+        return $this->json($response);
+    }
+
+    /**
+     * 获取上传处理器和url构建
+     * @param Request $request
+     * @return array
+     */
+    protected function getUploaderAndBuilder(Request $request)
+    {
+        if ($request->headers->has('upload_avatar')) {
+            $uploader = $this->get('phpdish.media.avatar_file_uploader');
+            $urlBuilder = $this->get('phpdish.media.avatar_url_builder');
+        } else {
+            $uploader = $this->get('phpdish.media.file_uploader');
+            $urlBuilder = $this->get('phpdish.media.url_builder');
+        }
+        return [$uploader, $urlBuilder];
     }
 }
