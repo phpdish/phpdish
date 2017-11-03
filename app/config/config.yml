@@ -25,6 +25,8 @@ parameters:
     app.path.uploads: '/media/uploads'
     app.path.avatar: '/media/uploads/avatar'
 
+    phpdish.site.description: 'PHPDish是一个以PHP内容为主的IT技术社区，致力于为文字爱好者、技术爱好者提供知识分享以及互动交流的平台。'
+
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }

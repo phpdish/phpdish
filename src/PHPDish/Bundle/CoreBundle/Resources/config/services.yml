@@ -16,6 +16,14 @@ services:
          tags:
             - { name: twig.extension}
 
+    # 配置参数读取扩展
+    phpdish.twig_extension.container:
+         class: PHPDish\Component\Core\Twig\ContainerExtension
+         arguments: ['@service_container']
+         public: false
+         tags:
+            - { name: twig.extension}
+
     # Pjax服务设置
     phpdish.pjax.helper:
          class: PHPDish\Component\Pjax\Helper\PjaxHelper
