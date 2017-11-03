@@ -15,6 +15,9 @@ parameters:
     oauth.github.client_id: b98da1a3aeb86b4f9e4a
     oauth.github.client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
 
+    algolia.application_id: 4UT5BZJVBU
+    algolia.api_key: dc396bbc61f32b939e3941df69b89d2c
+
     app.dir.media: '%kernel.project_dir%/web/media'
     app.dir.uploads: '%kernel.project_dir%/web/media/uploads'
     app.dir.avatar: '%kernel.project_dir%/web/media/uploads/avatar'
@@ -210,7 +213,7 @@ httplug:
 
 
 algolia:
-    application_id: 4UT5BZJVBU
-    api_key: dc396bbc61f32b939e3941df69b89d2c
+    application_id: '%algolia.application_id%'
+    api_key: '%algolia.api_key%'
     catch_log_exceptions: true
     index_name_prefix: staging
