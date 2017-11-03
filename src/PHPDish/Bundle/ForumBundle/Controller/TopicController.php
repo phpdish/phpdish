@@ -36,7 +36,7 @@ class TopicController extends RestController
 
         $tab = $request->query->get('tab');
         if ($tab && $tab === 'recommend') {
-            $criteria->where(Criteria::expr()->eq('recommended', true));
+            $criteria->andWhere(Criteria::expr()->eq('recommended', true));
         }
         $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
 

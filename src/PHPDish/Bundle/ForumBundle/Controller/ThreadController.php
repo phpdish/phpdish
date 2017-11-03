@@ -28,11 +28,11 @@ class ThreadController extends Controller
         $criteria = Criteria::create();
         $criteria->orderBy(['repliedAt' => 'desc'])
             ->where(Criteria::expr()->eq('enabled', true))
-            ->where(Criteria::expr()->eq('thread', $thread));
+            ->andWhere(Criteria::expr()->eq('thread', $thread));
 
         $tab = $request->query->get('tab');
-        if ($tab && $tab === 'good') {
-            $criteria->where(Criteria::expr()->eq('recommended', true));
+        if ($tab && $tab === 'recommend') {
+            $criteria->andWhere(Criteria::expr()->eq('recommended', true));
         }
 
         $topics = $this->getTopicManager()->findTopics($criteria, $request->query->getInt('page', 1));
