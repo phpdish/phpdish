@@ -39,7 +39,7 @@ class CategoryController extends RestController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveCategory($category);
-            $this->addFlash('notice', '专栏创建成功');
+            $this->addFlash('success', '专栏创建成功');
 
             return $this->redirectToRoute('category_view', [
                 'slug' => $category->getSlug(),
