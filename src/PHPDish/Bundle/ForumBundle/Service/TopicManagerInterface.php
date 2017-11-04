@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Doctrine\Common\Collections\Criteria;
 use Pagerfanta\Pagerfanta;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -84,4 +85,13 @@ interface TopicManagerInterface
      * @return TopicInterface[]
      */
     public function findHotTopics(\DateTime $date, $limit);
+
+    /**
+     * 回复主题
+     * @param UserInterface $user
+     * @param TopicInterface $topic
+     * @param string $body
+     * @return ReplyInterface
+     */
+    public function replyTopic(UserInterface $user, TopicInterface $topic, $body);
 }

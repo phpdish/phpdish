@@ -5,6 +5,8 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ForumBundle\Event\Events;
+use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -165,6 +167,43 @@ class TopicController extends RestController
         return $this->handleView($this->view([
             'result' => true,
         ]));
+    }
+
+    /**
+     * 回复话题
+     * @Route("/topics/{id}/replies", name="topic_add_reply")
+     * @Method("POST")
+     *
+     * @param int     $id
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function replyTopicAction($id, Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $topic = $this->getTopicManager()->findTopicById($id);
+        $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
+        $form = $this->createForm(TopicReplyType::class, $reply);
+        $form->handleRequest($request);
+        $view = $this->view()->setFormat('json');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getReplyManager()->saveReply($reply);
+
+            //触发事件
+            $this->get('event_dispatcher')->dispatch(Events::TOPIC_REPLIED, new TopicRepliedEvent($topic, $reply));
+
+            $view->setData(['reply' => $reply])
+                ->getContext()
+                ->addGroups(['Default']);
+        } else {
+            $view->setStatusCode(400)
+                ->setData(array(
+                    'form' => $form,
+                ));
+        }
+        return $this->handleView($view);
     }
 
     /**

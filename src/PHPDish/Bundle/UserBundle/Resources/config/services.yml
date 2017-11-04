@@ -1,21 +1,9 @@
 services:
-#    php_dish_user.example:
-#        class: PHPDish\Bundle\UserBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
     phpdish.manager.user:
         class: PHPDish\Bundle\UserBundle\Service\UserManager
         arguments:
              - '@doctrine.orm.entity_manager'
              - '@event_dispatcher'
-
-    # PHPDish Mention Adapter
-    phpdish.mention.adapter:
-        class: PHPDish\Bundle\UserBundle\Mention\Adapter
-        arguments: ['@phpdish.manager.user', '@router']
-
-    phpdish.mention.parser:
-        class: PHPDish\Component\Mention\MentionParser
-        arguments: ['@phpdish.mention.adapter']
 
     phpdish.event_lsitener.user_register:
         class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener

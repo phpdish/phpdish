@@ -60,41 +60,4 @@ class TopicReplyController extends RestController
             'replies' => $replies,
         ]);
     }
-
-    /**
-     * @Route("/topics/{id}/replies", name="topic_add_reply")
-     * @Method("POST")
-     *
-     * @param int     $id
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function addTopicReply($id, Request $request)
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-
-        $topic = $this->getTopicManager()->findTopicById($id);
-        $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
-        $form = $this->createForm(TopicReplyType::class, $reply);
-        $form->handleRequest($request);
-        $view = $this->view()->setFormat('json');
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getReplyManager()->saveReply($reply);
-
-            //触发事件
-            $this->get('event_dispatcher')->dispatch(Events::TOPIC_REPLIED, new TopicRepliedEvent($topic, $reply));
-
-            $view->setData(['reply' => $reply])
-                ->getContext()
-                ->addGroups(['Default']);
-        } else {
-            $view->setStatusCode(400)
-                ->setData(array(
-                    'form' => $form,
-                ));
-        }
-
-        return $this->handleView($view);
-    }
 }

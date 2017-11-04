@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Event\Events;
@@ -14,6 +13,7 @@ use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
 use PHPDish\Component\Mention\MentionParserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -31,14 +31,9 @@ class ReplyManager implements ReplyManagerInterface
     protected $replyRepository;
 
     /**
-     * @var MarkdownParserInterface
+     * @var BodyProcessorInterface
      */
-    protected $markdownParser;
-
-    /**
-     * @var MentionParserInterface
-     */
-    protected $mentionParser;
+    protected $bodyProcessor;
 
     /**
      * @var EventDispatcherInterface
@@ -48,14 +43,12 @@ class ReplyManager implements ReplyManagerInterface
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
-        MarkdownParserInterface $markdownParser,
-        MentionParserInterface $mentionParser
+        BodyProcessorInterface $bodyProcessor
     ) {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->replyRepository = $entityManager->getRepository('PHPDishForumBundle:Reply');
-        $this->markdownParser = $markdownParser;
-        $this->mentionParser = $mentionParser;
+        $this->bodyProcessor = $bodyProcessor;
     }
 
     /**
@@ -76,8 +69,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function saveReply(ReplyInterface $reply)
     {
-        $body = $this->markdownParser->transformMarkdown($reply->getOriginalBody());
-        $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
+        $parsedBody = $this->bodyProcessor->process($reply->getOriginalBody());
         $reply->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
 
@@ -89,9 +81,10 @@ class ReplyManager implements ReplyManagerInterface
         $this->entityManager->flush();
 
         //如果是新生成的并且提及了用户则触发事件
-        $new && $this->mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::USER_MENTIONED_REPLY, new ReplyMentionUserEvent(
+        $mentionParser = $this->bodyProcessor->getMentionParser();
+        $new && $mentionParser->getMentionedUsers() && $this->eventDispatcher->dispatch(Events::USER_MENTIONED_REPLY, new ReplyMentionUserEvent(
             $reply,
-            $this->mentionParser->getMentionedUsers()
+            $mentionParser->getMentionedUsers()
         ));
 
         return true;

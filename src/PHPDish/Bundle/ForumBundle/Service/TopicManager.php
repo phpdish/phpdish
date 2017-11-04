@@ -6,13 +6,12 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Topic;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Component\Mention\MentionParserInterface;
+use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
 
 class TopicManager implements TopicManagerInterface
 {
@@ -24,20 +23,23 @@ class TopicManager implements TopicManagerInterface
     protected $entityManager;
 
     /**
-     * @var MarkdownParserInterface
+     * @var BodyProcessorInterface
      */
-    protected $markdownParser;
+    protected $bodyProcessor;
 
     /**
-     * @var MentionParserInterface
+     * @var ReplyManagerInterface
      */
-    protected $mentionParser;
+    protected $replyManager;
 
-    public function __construct(EntityManagerInterface $entityManager, MarkdownParserInterface $markdownParser, MentionParserInterface $mentionParser)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        BodyProcessorInterface $bodyProcessor,
+        ReplyManagerInterface $replyManager
+    ) {
         $this->entityManager = $entityManager;
-        $this->markdownParser = $markdownParser;
-        $this->mentionParser = $mentionParser;
+        $this->bodyProcessor = $bodyProcessor;
+        $this->replyManager = $replyManager;
     }
 
     /**
@@ -60,8 +62,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function saveTopic(TopicInterface $topic)
     {
-        $body = $this->markdownParser->transformMarkdown($topic->getOriginalBody());
-        $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
+        $parsedBody = $this->bodyProcessor->process($topic->getOriginalBody());
         $topic->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
 
@@ -132,13 +133,23 @@ class TopicManager implements TopicManagerInterface
      */
     public function findHotTopics(\DateTime $date, $limit)
     {
-//        echo $date->format(\DateTime::ATOM);exit;
         return $this->getTopicRepository()->createQueryBuilder('t')
             ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
             ->orderBy('t.replyCount', 'desc')
             ->addOrderBy('t.createdAt', 'desc')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function replyTopic(UserInterface $user, TopicInterface $topic, $body)
+    {
+        $reply = $this->replyManager->createReply($topic, $user);
+        $reply->setOriginalBody($body);
+        $this->replyManager->saveReply($reply);
+        return $reply;
     }
 
     /**

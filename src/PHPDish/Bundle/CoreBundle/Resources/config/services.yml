@@ -1,5 +1,6 @@
 imports:
     - {resource: 'services/installer.yml'}
+    - {resource: 'services/core.yml'}
 
 services:
     twig_extension.date:

@@ -11,16 +11,15 @@ services:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@markdown.parser"
-            - "@phpdish.mention.parser"
+            - "@phpdish.body_processor"
+            - "@phpdish.manager.reply"
 
     phpdish.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@event_dispatcher'
-            - "@markdown.parser"
-            - "@phpdish.mention.parser"
+            - "@phpdish.body_processor"
 
     phpdish.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType
