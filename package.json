@@ -40,6 +40,7 @@
     "bootstrap-select": "^1.12.4",
     "clipboard": "^1.0",
     "codemirror": "^5.29.0",
+    "emojilib": "^2.2.9",
     "github-markdown-css": "^2.8.0",
     "highlight.js": "^9.12.0",
     "inline-attachment": "^2.0.3",
@@ -52,6 +53,7 @@
     "simplemde": "^1.11.2",
     "social-share-button.js": "^1.0.0",
     "store": "^2.0.12",
-    "textcomplete": "^0.13.1"
+    "textcomplete": "^0.13.1",
+    "twemoji": "^2.5.0"
   }
 }

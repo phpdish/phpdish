@@ -3,7 +3,7 @@
 import 'bootstrap-select';
 import 'scrolltofixed';
 import 'jquery-pjax';
-
+import twemoji from 'twemoji';
 import * as Actions from './actions.js';
 
 import Util from './util.js';
@@ -88,3 +88,6 @@ import {default as Dialog} from './dialog.js';
 const $document = $(document);
 new Actions.FollowUserIntialization($document);
 new Actions.FollowCategoryIntialization($document);
+
+//Emoji 渲染
+twemoji.parse(document.body);
