@@ -123,6 +123,8 @@ easy_admin:
             form:
                 fields:
                       - { property: 'name', label: '名称' }
+                      - { property: 'slug', label: 'Slug' }
+                      - { property: 'description', label: '描述' }
                       - { property: 'enabled', label: '状态'}
 
         # 友情链接
