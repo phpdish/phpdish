@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
@@ -52,8 +53,11 @@ class TopicReplyController extends RestController
     public function getUserRepliesAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('enabled', true))
+            ->orderBy(['createdAt' => 'desc']);
+
         $replies = $this->getReplyManager()
-            ->findUserReplies($user, $request->query->getInt('page', 1));
+            ->findUserReplies($user, $request->query->getInt('page', 1), null, $criteria);
 
         return $this->render('PHPDishWebBundle:TopicReply:user_replies.html.twig', [
             'user' => $user,

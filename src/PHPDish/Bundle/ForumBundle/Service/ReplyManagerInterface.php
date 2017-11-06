@@ -37,10 +37,10 @@ interface ReplyManagerInterface
      * @param UserInterface $user
      * @param int           $page
      * @param null|int      $limit
-     *
+     * @param Criteria       $criteria
      * @return Pagerfanta
      */
-    public function findUserReplies(UserInterface $user, $page, $limit = null);
+    public function findUserReplies(UserInterface $user, $page, $limit = null, Criteria $criteria = null);
 
     /**
      * 创建一条回复.

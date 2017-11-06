@@ -95,23 +95,26 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null)
     {
-        $query = $this->replyRepository->createQueryBuilder('r')
-            ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId())
-            ->addCriteria($criteria)
-            ->getQuery();
-
+        $qb = $this->replyRepository->createQueryBuilder('r')
+            ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId());
+        if ($criteria) {
+            $qb->addCriteria($criteria);
+        }
+        $query = $qb->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findUserReplies(UserInterface $user, $page, $limit = null)
+    public function findUserReplies(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
     {
-        $query = $this->replyRepository->createQueryBuilder('r')
-            ->where('r.user = :userId')->setParameter('userId', $user->getId())
-            ->getQuery();
-
+        $qb = $this->replyRepository->createQueryBuilder('r')
+            ->where('r.user = :userId')->setParameter('userId', $user->getId());
+        if ($criteria) {
+            $qb->addCriteria($criteria);
+        }
+        $query = $qb->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
 
