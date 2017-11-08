@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://www.phpdish.com/" target="_blank" >
-    <img alt="PHPDish" src="https://raw.githubusercontent.com/slince/phpdish/master/web/img/5.png"/>
+    <img alt="PHPDish" src="https://raw.githubusercontent.com/slince/phpdish/master/assets/img/logo1.png"/>
   </a>
 </p>
 
