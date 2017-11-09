@@ -9,8 +9,8 @@ imports:
 parameters:
     locale: zh_CN
 
-    oauth.weibo.client_id: 870514869
-    oauth.weibo.client_secret: 4e7539f7b16f669579f70244ca8ac3b4
+    oauth.weibo.client_id: 1275258879
+    oauth.weibo.client_secret: b9f61a4954b4e7e8389d0d94d3804d6a
 
     oauth.github.client_id: b98da1a3aeb86b4f9e4a
     oauth.github.client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
