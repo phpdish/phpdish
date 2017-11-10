@@ -171,6 +171,7 @@ class NotificationManager implements NotificationManagerInterface
     {
         $query = $this->notificationRepository->createQueryBuilder('n')
             ->where('n.user = :userId')->setParameter('userId', $user)
+            ->orderBy('n.createdAt', 'desc')
             ->getQuery();
 
         return $this->createPaginator($query, $page, $limit);
