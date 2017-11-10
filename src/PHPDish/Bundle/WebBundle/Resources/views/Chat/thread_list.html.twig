@@ -9,7 +9,7 @@
                 </div>
                 <div class="media-body">
                     <div class="media-heading">
-                        {{ thread.createdBy.username }}
+                        {{ thread.lastMessage.sender.username }}
                         <span class="meta pull-right">{{ thread.lastMessage.createdAt|time_diff }}</span>
                     </div>
                     <div class="body preview">
