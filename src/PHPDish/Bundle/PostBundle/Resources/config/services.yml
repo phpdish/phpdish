@@ -50,3 +50,14 @@ services:
         tags:
              - { name: security.voter}
         public: false
+
+    phpdish.avatar_generator.category:
+        class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator
+        arguments: ['@phpdish.media.file_manager', '@phpdish.media.file_namer']
+
+    phpdish.event_listener.category_persist:
+        class: PHPDish\Bundle\PostBundle\EventListener\CategoryPersistListener
+        arguments: ['@phpdish.avatar_generator.category']
+        tags:
+             - { name: kernel.event_listener, event: category.pre_persist, method: onCategoryPersist}
+        public: false

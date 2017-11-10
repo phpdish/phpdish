@@ -42,9 +42,10 @@ class File extends Media implements FileInterface
      */
     protected $content;
 
-    public function __construct($key = null)
+    public function __construct($key = null, $content = null)
     {
         $this->key = $key;
+        $this->content = $content;
     }
 
     /**

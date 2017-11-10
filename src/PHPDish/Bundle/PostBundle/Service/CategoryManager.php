@@ -8,6 +8,7 @@ use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Entity\Category;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
+use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
@@ -143,6 +144,12 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function saveCategory(CategoryInterface $category)
     {
+        $event = new CategoryPersistEvent($category);
+        $this->eventDispatcher->dispatch(Events::CATEGORY_PRE_PERSIST, $event);
+        if ($event->isPersistenceAborted()) {
+            return false;
+        }
+
         $category->setUpdatedAt(Carbon::now());
         $this->entityManager->persist($category);
         $this->entityManager->flush();

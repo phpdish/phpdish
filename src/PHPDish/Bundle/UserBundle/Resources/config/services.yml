@@ -5,9 +5,13 @@ services:
              - '@doctrine.orm.entity_manager'
              - '@event_dispatcher'
 
+    phpdish.avatar_generator.user:
+        class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator
+        arguments: ['@phpdish.media.avatar_file_manager', '@phpdish.media.avatar_file_namer']
+
     phpdish.event_lsitener.user_register:
         class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener
-        arguments: ['@router']
+        arguments: ['@router', '@phpdish.avatar_generator.user']
         tags:
             - {name: kernel.event_listener, event:  fos_user.registration.success,  method: onRegisterSuccess}
 

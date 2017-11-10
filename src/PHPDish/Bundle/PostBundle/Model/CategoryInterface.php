@@ -22,11 +22,18 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function getCover();
 
     /**
+     * 设置封面
+     * @param string $cover
+     * @return CategoryInterface
+     */
+    public function setCover($cover);
+
+    /**
      * 设置创建人.
      *
      * @param UserInterface $creator
      *
-     * @return $this
+     * @return CategoryInterface
      */
     public function setCreator(UserInterface $creator);
 
@@ -42,7 +49,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      *
      * @param int $postCount
      *
-     * @return int
+     * @return CategoryInterface
      */
     public function setPostCount($postCount);
 
@@ -65,7 +72,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      *
      * @param int $count
      *
-     * @return $this
+     * @return CategoryInterface
      */
     public function setFollowerCount($count);
 
@@ -83,7 +90,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      *
      * @param UserInterface $user
      *
-     * @return $this
+     * @return CategoryInterface
      */
     public function addFollower(UserInterface $user);
 
@@ -92,7 +99,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      *
      * @param UserInterface $user
      *
-     * @return $this
+     * @return CategoryInterface
      */
     public function removeFollower(UserInterface $user);
 
@@ -108,7 +115,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      *
      * @param UserInterface[] $followers
      *
-     * @return $this
+     * @return CategoryInterface
      */
     public function setFollowers(array $followers);
 

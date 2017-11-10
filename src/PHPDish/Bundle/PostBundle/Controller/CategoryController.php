@@ -4,6 +4,8 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\PostBundle\Event\CategoryCreateEvent;
+use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Form\Type\CategoryType;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,12 +40,21 @@ class CategoryController extends RestController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->saveCategory($category);
-            $this->addFlash('success', '专栏创建成功');
 
-            return $this->redirectToRoute('category_view', [
-                'slug' => $category->getSlug(),
-            ]);
+            //触发专栏创建事件
+            $event = new CategoryCreateEvent($category);
+            $this->get('event_dispatcher')->dispatch(Events::CATEGORY_PRE_CREATED, $event);
+
+            if ($event->isCreationAborted()) {
+                $this->addFlash('success', '专栏创建失败');
+            } else {
+                $manager->saveCategory($category);
+                $this->addFlash('success', '专栏创建成功');
+
+                return $this->redirectToRoute('category_view', [
+                    'slug' => $category->getSlug(),
+                ]);
+            }
         }
 
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [

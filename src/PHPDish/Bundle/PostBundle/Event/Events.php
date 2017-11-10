@@ -31,4 +31,16 @@ final class Events
      * @var string
      */
     const CATEGORY_FOLLOWED = 'category.followed';
+
+    /**
+     * 专栏被创建之前
+     * @var string
+     */
+    const CATEGORY_PRE_CREATED = 'category.pre_created';
+
+    /**
+     * 专栏保存时创建
+     * @var string
+     */
+    const CATEGORY_PRE_PERSIST = 'category.pre_persist';
 }
