@@ -29,7 +29,5 @@ final class CategoryPersistListener
             $avatar = $this->avatarGenerator->generate($category->getName());
             $category->setCover($avatar->getKey());
         }
-        $avatar = $this->avatarGenerator->generate($category->getName());
-        $category->setCover($avatar->getKey());
     }
 }
