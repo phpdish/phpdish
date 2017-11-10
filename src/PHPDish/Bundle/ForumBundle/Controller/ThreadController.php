@@ -14,7 +14,7 @@ class ThreadController extends Controller
     use ManagerTrait;
 
     /**
-     * @Route("/thread/{slug}", name="thread_view")
+     * @Route("/threads/{slug}", name="thread_view")
      *
      * @param string  $slug
      * @param Request $request
@@ -24,7 +24,9 @@ class ThreadController extends Controller
     public function viewAction($slug, Request $request)
     {
         $thread = $this->getThreadManager()->findThreadBySlug($slug);
-        $thread || $this->createNotFoundException();
+        if (!$thread) {
+            throw $this->createNotFoundException();
+        }
 
         $criteria = Criteria::create();
         $criteria->orderBy(['repliedAt' => 'desc'])
