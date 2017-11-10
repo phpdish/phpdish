@@ -44,7 +44,6 @@
         "php-http/httplug-bundle": "^1.7",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "sonata-project/admin-bundle": "^3.20",
         "sonata-project/seo-bundle": "^2.2",
         "symfony/assetic-bundle": "^2.8",
         "symfony/monolog-bundle": "^3.1.0",
