@@ -25,6 +25,8 @@ parameters:
     app.path.uploads: '/media/uploads'
     app.path.avatar: '/media/uploads/avatar'
 
+    phpdish.site.title:  'PHPDish 社区'
+    phpdish.site.keywords:  'php,symfony,laravel,cakephp,thinkphp,php论坛,php社区,php教程,laravel教程,laravel视频,php开源'
     phpdish.site.description: 'PHPDish是一个以PHP内容为主的IT技术社区，致力于为文字爱好者、技术爱好者提供知识分享以及互动交流的平台。'
 
 framework:
@@ -146,7 +148,7 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
-                background: { size: [120, 120], position: center, color: '#000000' }
+                background: { size: [120, 120], position: center, color: '#ffffff' }
 ## FOSUser
 fos_user:
     db_driver: orm
@@ -223,3 +225,21 @@ algolia:
     api_key: '%algolia.api_key%'
     catch_log_exceptions: true
     index_name_prefix: staging
+
+
+sonata_seo:
+    page:
+        title:            '%phpdish.site.title%'
+        metas:
+            name:
+                keywords:             '%phpdish.site.keywords%'
+                description:          '%phpdish.site.description%'
+                apple-mobile-web-app-title: '%phpdish.site.title%'
+
+            property:
+                'og:site_name':      '%phpdish.site.title%'
+                'og:description':    '%phpdish.site.description%'
+
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+                #'X-Ua-Compatible':      IE=EmulateIE7

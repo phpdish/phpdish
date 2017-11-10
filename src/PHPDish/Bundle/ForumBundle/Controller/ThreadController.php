@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ThreadController extends Controller
 {
@@ -36,6 +37,17 @@ class ThreadController extends Controller
         }
 
         $topics = $this->getTopicManager()->findTopics($criteria, $request->query->getInt('page', 1));
+
+
+        //SEO
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($thread->getName())
+            ->removeMeta('name', 'keywords')
+            ->addMeta('name', 'description', $thread->getDescription())
+            ->addMeta('property', 'og:title', $thread->getName())
+            ->addMeta('property', 'og:url',  $this->generateUrl('thread_view', ['slug' => $thread->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description', $thread->getDescription());
 
         return $this->render('PHPDishWebBundle:Thread:view.html.twig', [
             'thread' => $thread,

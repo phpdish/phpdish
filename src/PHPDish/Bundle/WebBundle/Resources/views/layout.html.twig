@@ -3,13 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Cache-Control" content="no-siteapp">
-        <meta http-equiv="Cache-Control" content="no-transform ">
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-        <title>{% block title %} {% endblock %} - PHPDish</title>
-        {% block keywords %}<meta name="keywords" content="phpdish"/>{% endblock %}
-        {% block description %}<meta name="description" content="phpdish"/>{% endblock %}
+        {% if block('title') is defined %} <title>{{ block('title') }} - PHPDish</title> {% else %}{{ sonata_seo_title() }} {% endif %}
+        {{ sonata_seo_metadatas() }}
+        {{ sonata_seo_link_canonical() }}
+        {{ sonata_seo_lang_alternates() }}
         <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

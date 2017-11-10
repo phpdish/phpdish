@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Algolia\AlgoliaSearchBundle\AlgoliaAlgoliaSearchBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
 
             new PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
             new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),

@@ -19,6 +19,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
+use PHPDish\Component\Util\StringManipulator;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PostController extends RestController
 {
@@ -95,6 +97,19 @@ class PostController extends RestController
         $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));
 
         $this->getPostManager()->increasePostViews($post);
+
+        //SEO
+        $seoPage = $this->get('sonata.seo.page');
+        $summary = StringManipulator::stripLineBreak($post->getSummary());
+        $seoPage
+            ->setTitle($post->getTitle())
+            ->removeMeta('name', 'keywords')
+            ->addMeta('name', 'description', $summary)
+            ->addMeta('property', 'og:title', $post->getTitle())
+            ->addMeta('property', 'og:type', 'article')
+            ->addMeta('property', 'og:url',  $this->generateUrl('post_view', ['id' => $post->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description', $summary);
+
         return $this->render('PHPDishWebBundle:Post:view.html.twig', [
             'post' => $post,
             'comments' => $comments,
