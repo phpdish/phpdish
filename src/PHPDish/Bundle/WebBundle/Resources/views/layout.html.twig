@@ -45,8 +45,9 @@
                                 <li class="nav-notifications">
                                     <a href="{{ path('notifications') }}">
                                         <i class="if i-bell-o"></i>
-                                        <span class="badge notification-number" id="notification-number">
-                                            {{ fos_message_nb_unread() + notification_unseen_number() }}
+                                        {% set unreadNotificationNumber = fos_message_nb_unread() + notification_unseen_number() %}
+                                        <span class="badge notification-number{% if unreadNotificationNumber %} has-message {% endif %}" id="notification-number" data-number="{{ unreadNotificationNumber }}">
+                                            {{ unreadNotificationNumber }}
                                         </span>
                                     </a>
                                 </li>

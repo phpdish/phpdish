@@ -74,10 +74,11 @@ import {default as Dialog} from './dialog.js';
         setInterval(() => {
             Util.request('notification.count').done((response) => {
                 if (response.count > 0) {
-                    $notificationNumber.text(response.count).attr('data-number', response.count);
+                    $notificationNumber.text(response.count).attr('data-number', response.count)
+                        .addClass('has-message');
                     document.title = `(${response.count}) ` + originalDocumentTitle;
                 } else {
-                    $notificationNumber.removeAttr('data-number');
+                    $notificationNumber.removeClass('has-message');
                 }
             });
         }, 20000);

@@ -164,7 +164,7 @@
     }
     .notification-number{
       display:none;
-      &[data-number]{
+      &.has-message{
         display: inline-block;
         background-color:#e64b3b;
       }
