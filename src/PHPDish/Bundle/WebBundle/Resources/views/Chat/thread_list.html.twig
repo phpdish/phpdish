@@ -14,7 +14,7 @@
                     </div>
                     <div class="body preview">
                         <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}">
-                            {{ thread.lastMessage.body }}
+                            {{ thread.lastMessage.body|striptags }}
                         </a>
                     </div>
                 </div>

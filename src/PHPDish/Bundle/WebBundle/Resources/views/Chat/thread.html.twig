@@ -17,7 +17,7 @@
                                 {{ message.sender }}
                                 <span class="meta pull-right">{{ message.createdAt|time_diff }}</span>
                             </div>
-                            {{ message.body }}
+                            {{ message.body|raw }}
                         </div>
                     </div>
                 </li>
