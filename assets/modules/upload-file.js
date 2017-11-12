@@ -30,7 +30,6 @@ class UploadFile{
                     {title : "图片文件", extensions : "jpg,gif,png"}
                 ]
             },
-            drop_element: this.options.dropElement,
             headers: this.options.headers,
             init: {
                 FilesAdded: function(uploader) {
