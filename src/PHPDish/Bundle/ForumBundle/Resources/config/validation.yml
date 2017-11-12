@@ -41,5 +41,5 @@ PHPDish\Bundle\ForumBundle\Entity\Topic:
             - NotBlank:
                  message: '内容不得为空'
             - Length:
-                 min: 150
+                 min: 10
                  minMessage: '内容至少{{ limit }}字符长度'
