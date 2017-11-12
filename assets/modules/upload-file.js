@@ -27,9 +27,10 @@ class UploadFile{
             filters : {
                 max_file_size : '2mb',
                 mime_types: [
-                    {title : "图片文件", extensions : "jpg,gif,png"},
+                    {title : "图片文件", extensions : "jpg,gif,png"}
                 ]
             },
+            drop_element: this.options.dropElement,
             headers: this.options.headers,
             init: {
                 FilesAdded: function(uploader) {

@@ -75,3 +75,16 @@ a {
 .badge-warning{
   background-color:#e64b3b;
 }
+
+/*------------------------------------
+  Alert
+------------------------------------*/
+.alert-light-blue{
+  color: #31708f;
+  a{
+    color: #31708f;
+    text-decoration: underline;
+  }
+  background-color: rgba(217,237,247,0.5);
+  border-color: rgba(217,237,247,0.8);
+}

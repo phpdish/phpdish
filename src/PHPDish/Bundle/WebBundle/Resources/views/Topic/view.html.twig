@@ -57,10 +57,21 @@
                 <div class="panel panel-u reply-topic" id="reply-topic">
                     <div class="panel-heading"><h4>回复</h4></div>
                     <div class="panel-body comment-panel">
+                        <div class="notice alert alert-light-blue alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <ul class="helpblock list-unstyled">
+                                <li>支持 Markdown 格式，常用的Markdown语法 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md" target="_blank">参考这里</a></li>
+                                <li>支持Emoji表情，使用方法参考 <a href="https://www.phpdish.com/topics/6" target="_blank">Emoji 使用教学</a>, Emoji 快速查询看<a href="http://emoji.muan.co/" target="_blank">这里</a></li>
+                                <li>上传图片, 支持拖拽和剪切板黏贴上传, 格式的格式：jpg，png, gif</li>
+                                <li>支持“@”其他用户</li>
+                            </ul>
+                        </div>
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
                                 {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': '写下你的评论...'}}) }}
-                                <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                <div class="tips"><i class="if i-markdown"></i> 请使用 Markdown 语法书写</div>
                                 <div class="actions">
                                     <button type="submit" class="btn u-btn-primary">回复</button>
                                     <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
