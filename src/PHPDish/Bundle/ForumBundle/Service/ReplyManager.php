@@ -76,6 +76,7 @@ class ReplyManager implements ReplyManagerInterface
         if ($new = !$reply->getId()) {
             $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
             $reply->getTopic()->setRepliedAt(Carbon::now());
+            $reply->getTopic()->setLastReplyUser($reply->getUser());
         }
 
         $this->entityManager->persist($reply);
