@@ -187,7 +187,7 @@ class PostController extends RestController
      *
      * @return Response
      */
-    public function userPostsAction($username, Request $request)
+    public function getUserPostsAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
         $posts = $this->getPostManager()->findUserEnabledPosts($user, $request->query->getInt('page', 1));

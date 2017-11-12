@@ -22,7 +22,7 @@ class UserController extends RestController
      */
     public function viewAction($username)
     {
-        return $this->forward('PHPDishPostBundle:Post:userPosts', [
+        return $this->forward('PHPDishForumBundle:Topic:getUserTopics', [
             'username' => $username,
         ]);
     }

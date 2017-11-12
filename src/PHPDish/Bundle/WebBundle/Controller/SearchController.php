@@ -27,7 +27,7 @@ class SearchController extends Controller
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('q');
-        $searchResult = $this->searcFromAlgolia($keyword, $request->query->get('type', static::TYPE_POST), [
+        $searchResult = $this->searcFromAlgolia($keyword, $request->query->get('type', static::TYPE_TOPIC), [
             'hitsPerPage' => 10,
             'page' => $request->query->getInt('page', 1) - 1
         ]);

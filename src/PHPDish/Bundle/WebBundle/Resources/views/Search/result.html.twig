@@ -6,7 +6,7 @@
     <script type="text/javascript" src="{{ asset('build/js/search.js') }}"></script>
 {% endblock %}
 
-{% set tab = app.request.query.get('type') ?: 'post' %}
+{% set tab = app.request.query.get('type') ?: 'topic' %}
 
 {% block content %}
     <div class="container narrow-layout search-page">
@@ -14,8 +14,8 @@
             <div class="col-md-12">
                 <div class="panel panel-u">
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
-                        <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'post'}) }}">文章</a></li>
                         <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'topic'}) }}">话题</a></li>
+                        <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'post'}) }}">文章</a></li>
                         <li {% if tab == 'user' %}class="active"{% endif %}><a href="{{ path('search', {'q': keyword, 'type': 'user'}) }}">用户</a></li>
                     </ul>
                     <div id="list-container">
