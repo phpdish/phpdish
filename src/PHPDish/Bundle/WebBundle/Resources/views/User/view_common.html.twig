@@ -59,7 +59,7 @@
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
-                    <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">文章</a></li>
+                    <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">专栏</a></li>
                     <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
                     <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
                     <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
