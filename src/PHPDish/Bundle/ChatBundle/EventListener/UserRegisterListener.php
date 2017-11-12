@@ -43,7 +43,7 @@ final class UserRegisterListener
         $message = <<<EOT
 %s 您好，<br/>
 欢迎注册 PHPDish 社区，我是 PHPDish的发起人和维护人，PHPDish 致力于为广大phper以及文字爱好者<br/>
-提供了一个知识分享的平台，如果你有任何问题或者建议请联系我。<br/>
+提供一个知识分享的平台，如果你有任何问题或者建议请私信我。<br/>
 EOT;
         $user = $event->getUser();
         $threadBuilder = $this->composer->newThread();
