@@ -18,6 +18,10 @@ class ButtonLock{
     }
 
     lock(){
+        const loadingText = this.element.data('loading');
+        if (loadingText) {
+            this.text(loadingText);
+        }
         this.element.addClass('disabled').attr('disabled', true).data('_lock', true);
         return this;
     }
