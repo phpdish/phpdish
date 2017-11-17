@@ -8,7 +8,7 @@
                     <div class="author">
                         <a class="avatar" href="{{ authorUrl }}"><img src="{{ asset(post.user.avatar)|imagine_filter('middle_square') }}" class="img-circle img-responsive"></a>
                         <span class="username"><a href="{{ authorUrl }}">{{ post.user.username }}</a></span>
-                        <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|date('Y-m-d') }}</time>
+                        <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|time_diff }}</time>
                     </div>
                     <h3 class="title">
                         {% if post.isRecommended %}

@@ -24,7 +24,7 @@
                                 </span>
                             </div>
                             <div class="meta">
-                                <span class="publish-date">{{ post.createdAt|date('Y-m-d H:i:s') }}</span>
+                                <span class="publish-date">{{ post.createdAt|time_diff }}</span>
                                 <span class="word-num">字数 {{ post.wordCount }}</span>
                                 <span class="comment-num">评论 {{ post.commentCount }}</span>
                                 <span class="view-num">浏览 {{ post.viewCount }}</span>
