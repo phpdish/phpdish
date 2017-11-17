@@ -16,7 +16,7 @@
                 <li class="list-group-item">
                     <div class="text">{{ reply.body|raw }}</div>
                     <span class="meta">
-                    {{ reply.createdAt|date('Y-m-d H:i:s') }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
+                    {{ reply.createdAt|time_diff }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
                     </span>
                     <blockquote>{{ reply.topic.summary|raw }}</blockquote>
                 </li>

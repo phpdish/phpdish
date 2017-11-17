@@ -7,7 +7,7 @@
         <div class="media-body">
             <div class="media-heading">
                 <a href="{{ userUrl }}" class="username">{{ reply.user.username }}</a>
-                <span class="publish-at">{{ reply.createdAt|date('Y-m-d') }}</span>
+                <span class="publish-at">{{ reply.createdAt|time_diff) }}</span>
                 <ul class="list-unstyled list-inline meta">
                     <li>#{{ loop.index }}</li>
                     <li><span class="reply-user" data-action="mention"><i class="if i-reply" title="回复TA"></i></span></li>

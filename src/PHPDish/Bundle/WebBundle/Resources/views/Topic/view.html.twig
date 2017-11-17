@@ -21,7 +21,7 @@
                         <h3 class="title">{{ topic.title }} {% if topic.recommended %}<i class="if i-badge" title="精品话题"></i>{% endif %}</h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
-                                <li><i class="if i-calendar"></i> {{ topic.createdAt|date('Y-m-d') }}</li>
+                                <li><i class="if i-calendar"></i> {{ topic.createdAt|time_diff }}</li>
                                 <li><i class="if i-user"></i> {{ topic.user.username }}</li>
                                 <li><i class="if i-comment"></i> <a href="#reply-list"  data-action="go-reply">{{ replies|length }} 回复</a></li>
                             </ul>
