@@ -18,7 +18,7 @@ require('jquery-validation');
         },
         messages: {
             _username: {
-                required: "请输入用户名"
+                required: "请输入用户名或者邮箱"
             },
             _password: {
                 required: '请输入密码!',
