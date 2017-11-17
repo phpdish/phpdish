@@ -200,6 +200,7 @@ hwi_oauth:
             type: sina_weibo
             client_id: '%oauth.weibo.client_id%'
             client_secret: '%oauth.weibo.client_secret%'
+            scope: 'all'
 
         github:
             type: github
