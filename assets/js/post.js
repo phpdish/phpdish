@@ -30,16 +30,20 @@ require('jquery-validation');
         const $preview = $addComment.find('[data-action="preview"]');
         const $previewPanel = $addComment.find('[data-role="preview-panel"]');
         editor = new Editor($commentBody, $preview, $previewPanel);
-        $addCommentForm.on('submit', function(){
-            const $form = $(this);
-            const $btn = $form.find('[data-role="submit"]');
-            const csrfToken = $('#comment__token').val();
 
-            const body = editor.getContent();
-            if (body.length === 0) {
+        const $btn = $addCommentForm.find('[data-role="submit"]');
+        const buttonLock = lockButton($btn);
+        $addCommentForm.on('submit', function(){
+            if(buttonLock.isDisabled()){
                 return false;
             }
-            const buttonLock = lockButton($btn).text('提交中').lock();
+            const body = editor.getContent();
+            if (body.length === 0) {
+                Util.dialog.message('请填写内容').flash();
+                return false;
+            }
+            buttonLock.lock();
+            const csrfToken = $('#comment__token').val();
             Util.request('comment.add', window.postId, {
                 comment: {
                     original_body: body,
@@ -47,11 +51,10 @@ require('jquery-validation');
                 }
             }).done(function(response){
                 editor.setContent('');
-                Util.dialog.message('回复成功').flash();
+                Util.dialog.message('回复成功').flash(() => location.reload());
             }).fail(function(response){
                 Util.dialog.message(response.responseObj.error);
             }).always(() => {
-                console.log('释放锁');
                 buttonLock.release();
             });
             return false;

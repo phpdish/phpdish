@@ -14,6 +14,7 @@ use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
 use PHPDish\Component\Mention\MentionParserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -27,16 +28,6 @@ class CommentManager implements CommentManagerInterface
     protected $entityManager;
 
     /**
-     * @var MarkdownParserInterface
-     */
-    protected $markdownParser;
-
-    /**
-     * @var MentionParserInterface
-     */
-    protected $mentionParser;
-
-    /**
      * @var EntityRepository
      */
     protected $commentRepository;
@@ -46,17 +37,20 @@ class CommentManager implements CommentManagerInterface
      */
     protected $eventDispatcher;
 
+    /**
+     * @var BodyProcessorInterface
+     */
+    protected $bodyProcessor;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
-        MarkdownParserInterface $markdownParser,
-        MentionParserInterface $mentionParser
+        BodyProcessorInterface $bodyProcessor
     ) {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
-        $this->markdownParser = $markdownParser;
-        $this->mentionParser = $mentionParser;
+        $this->bodyProcessor = $bodyProcessor;
     }
 
     /**
@@ -86,8 +80,7 @@ class CommentManager implements CommentManagerInterface
     public function saveComment(CommentInterface $comment)
     {
         $new = !$comment->getId();
-        $body = $this->markdownParser->transformMarkdown($comment->getOriginalBody());
-        $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
+        $parsedBody = $this->bodyProcessor->process($comment->getOriginalBody());
 
         $comment->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
@@ -95,10 +88,11 @@ class CommentManager implements CommentManagerInterface
         $this->entityManager->flush();
 
         //如果评论中有艾特用户则触发事件
-        if ($new && $this->mentionParser->getMentionedUsers()) {
+        $mentionParser = $this->bodyProcessor->getMentionParser();
+        if ($new && $mentionParser->getMentionedUsers()) {
             $this->eventDispatcher->dispatch(Events::USER_MENTIONED_COMMENT, new CommentMentionUserEvent(
                 $comment,
-                $this->mentionParser->getMentionedUsers()
+                $mentionParser->getMentionedUsers()
             ));
         }
 

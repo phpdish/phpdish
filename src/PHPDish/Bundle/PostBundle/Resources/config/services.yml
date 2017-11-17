@@ -20,8 +20,7 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
-            - "@markdown.parser"
-            - "@phpdish.mention.parser"
+            - "@phpdish.body_processor"
 
     phpdish.form.type.post:
          class: PHPDish\Bundle\PostBundle\Form\Type\PostType
