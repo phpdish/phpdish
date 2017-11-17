@@ -113,5 +113,15 @@
         <script type="text/javascript" src="{{ asset('build/manifest.js') }}"></script>
         <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
         {% block script %}{% endblock %}
+
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?2c90d5dd217ebc4a0d14a61fde2aa1fa";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
     </body>
 </html>
