@@ -9,10 +9,12 @@ use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
+use PHPDish\Component\Util\StringManipulator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TopicController extends RestController
 {
@@ -102,6 +104,19 @@ class TopicController extends RestController
 
         $reply = $this->getReplyManager()->createReply($topic, $this->getUser());
         $form = $this->createForm(TopicReplyType::class, $reply);
+
+        //SEO
+        $seoPage = $this->get('sonata.seo.page');
+        $summary = StringManipulator::stripLineBreak($topic->getSummary());
+        $seoPage
+            ->setTitle($topic->getTitle())
+            ->removeMeta('name', 'keywords')
+            ->addMeta('name', 'description', $summary)
+            ->addMeta('property', 'og:title', $topic->getTitle())
+            ->addMeta('property', 'og:type', 'article')
+            ->addMeta('property', 'og:url',  $this->generateUrl('topic_view', ['id' => $topic->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description', $summary);
+
 
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
