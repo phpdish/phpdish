@@ -97,10 +97,12 @@ new AjaxTab($('[data-pjax-container]'), {
             const $replyBody = $('#reply_original_body');
             const $preview = $replyTopic.find('[data-action="preview"]');
             const $previewPanel = $replyTopic.find('[data-role="preview-panel"]');
+            const $submitBtn = $addReplyForm.find('[data-role="submit-form"]');
             editor = new Editor($replyBody, $preview, $previewPanel);
+            const replyTopicLock = lockButton($submitBtn);
             //添加回复表单提交
             $addReplyForm.on('submit', function(){
-                if($addReplyForm.lock){
+                if(replyTopicLock.isDisabled()){
                     return false;
                 }
                 let body = editor.getContent();
@@ -108,11 +110,12 @@ new AjaxTab($('[data-pjax-container]'), {
                     Util.dialog.message('请填写内容').flash();
                     return false;
                 }
-                $addReplyForm.lock = true;
+                replyTopicLock.lock();
                 Util.request('topic.addReply', window.topicId, $addReplyForm).success(function(response){
+                    $replyBody.val('');
                     Util.dialog.message('回复成功').flash(() => location.reload());
                 }).complete(function(){
-                    $addReplyForm.lock = false;
+                    replyTopicLock.release();
                 });
                 return false;
             });
