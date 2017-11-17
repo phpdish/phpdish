@@ -15,7 +15,6 @@ const emoji = function() {
             id: 'emoji',
             match: /(^|\s)[:：]([a-z0-9+\-\_]*)$/,
             search: function (term, callback) {
-                console.log(term);
                 const emojiNames = [];
                  _.forEach(emojis, (emoji, name)=> {
                     if (emoji.keywords.join(' ').toLowerCase().indexOf(term.toLowerCase()) > -1) {

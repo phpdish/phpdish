@@ -4,6 +4,8 @@ import $ from 'jquery';
 import marked from 'marked';
 import TextComplete from 'textcomplete/lib/textcomplete';
 import TextArea from 'textcomplete/lib/textarea';
+import emojione from 'emojione';
+import twemoji from 'twemoji';
 
 class BaseEditor
 {
@@ -54,7 +56,11 @@ class BaseEditor
      * @returns {*}
      */
     getHtml(){
-        return marked(this.getContent());
+        return twemoji.parse(
+            emojione.shortnameToUnicode(
+                marked(this.getContent())
+            )
+        );
     }
 
     /**
