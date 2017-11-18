@@ -159,4 +159,12 @@ class TopicManager implements TopicManagerInterface
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Topic');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMaxPerPage()
+    {
+        return 20;
+    }
 }
