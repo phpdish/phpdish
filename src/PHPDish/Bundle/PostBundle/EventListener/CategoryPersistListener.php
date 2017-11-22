@@ -25,7 +25,8 @@ final class CategoryPersistListener
     public function onCategoryPersist(CategoryPersistEvent $event)
     {
         $category = $event->getCategory();
-        if (!$category->getCover()) {
+        $cover = $category->getCover();
+        if (!$cover || $cover === '/avatar/user1.jpg') {
             $avatar = $this->avatarGenerator->generate($category->getName());
             $category->setCover($avatar->getKey());
         }
