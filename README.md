@@ -94,6 +94,7 @@ $ php bin/console server:run
 
 - 邮箱：taosikai@yeah.net
 - Github： https://github.com/slince
+- Gitee： https://gitee.com/slince
 - 微信：
 
 <img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="320"/>
