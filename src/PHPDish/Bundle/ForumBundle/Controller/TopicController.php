@@ -271,14 +271,14 @@ class TopicController extends RestController
     /**
      * 今日热帖.
      *
-     * @param int|null $max
+     * @param int|null $limit
      *
      * @return Response
      */
-    public function todayHotTopicsAction($max = null)
+    public function todayHotTopicsAction($limit = null)
     {
         $date = Carbon::today()->modify('-100 days');
-        $topics = $this->getTopicManager()->findHotTopics($date, $max ?: 10);
+        $topics = $this->getTopicManager()->findHotTopics($date, $limit ?: 10);
 
         return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
             'topics' => $topics,

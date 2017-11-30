@@ -1,4 +1,4 @@
 services:
-#    php_dish_web.example:
-#        class: PHPDish\Bundle\WebBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    phpdish.manager.song:
+        class: PHPDish\Bundle\WebBundle\Service\SongManager
+        arguments: ["@doctrine.orm.entity_manager"]

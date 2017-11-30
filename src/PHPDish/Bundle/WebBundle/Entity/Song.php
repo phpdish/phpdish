@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\WebBundle\Entity;
 
+use Carbon\Carbon;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\WebBundle\Model\SongInterface;
@@ -33,6 +34,11 @@ class Song implements SongInterface
      * @var string
      */
     protected $src;
+
+    public function __construct()
+    {
+        $this->createdAt = $this->updatedAt = Carbon::now();
+    }
 
     /**
      * {@inheritdoc}

@@ -137,6 +137,7 @@ class TopicManager implements TopicManagerInterface
             ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
             ->orderBy('t.replyCount', 'desc')
             ->addOrderBy('t.createdAt', 'desc')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
