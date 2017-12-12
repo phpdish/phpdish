@@ -923,6 +923,9 @@ a{
         weight:600;
       }
     }
+    a{
+      color: $mainFontColor;
+    }
   }
 }
 //右侧边栏
@@ -938,6 +941,10 @@ a{
     blockquote{
       margin: 10px;
       border-left-color: $contrastColor;
+      font-size: 14px;
+      &:hover{
+        box-shadow: #00a7d0;
+      }
     }
 
     //每一个卡片
@@ -956,6 +963,7 @@ a{
           text-indent: -9999;
         }
       }
+
       .text-muted{
         color: $metaColor;
       }
@@ -963,9 +971,9 @@ a{
         list-style: decimal;
         margin: 10px;
         padding-left: 16px;
+        font-size:13px;
       }
     }
-
 
   }
 }
