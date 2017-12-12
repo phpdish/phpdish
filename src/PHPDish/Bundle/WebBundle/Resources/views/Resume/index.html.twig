@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>Slince 简历</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//at.alicdn.com/t/font_506726_8suzpigw93i0be29.css" rel="stylesheet">
+    <link href="{{ asset('build/css/resume.css') }}" rel="stylesheet"></head>
+
+<body itemscope="itemscope" itemtype="http://schema.org/Person">
+    <div class="container-fluid">
+        <div class="row main clearfix">
+            <section class="col-md-3 card-wrapper profile-card-wrapper affix">
+                <div class="panel panel-u">
+                    <span class="profile-pic-container">
+                        <div class="profile-pic">
+                            <img class="media-object img-circle center-block" data-src="{{ asset(user.avatar)|imagine_filter('middle_square') }}" alt="{{ user.username }}" src="{{ asset(user.avatar)|imagine_filter('middle_square') }}" itemprop="image" />
+                        </div>
+
+                        <div class="name-and-profession text-center">
+                            <h3 itemprop="name"><b>{{ user.username }}</b></h3>
+                            <h5 class="text-muted" itemprop="jobTitle">PHP 开发工程师</h5>
+                        </div>
+                    </span>
+                    <hr/>
+                    <div class="contact-details clearfix">
+                        <div class="detail">
+                            <span class="icon"><i class="fs-lg if i-location"></i></span>
+                            <span class="info">中国 南京</span>
+                        </div>
+                        <div class="detail">
+                            <span class="icon"><i class="fs-lg if i-email"></i></span>
+                            <span class="info">
+                                <a class="link-disguise" href="mailto:taosikai@yeah.net" itemprop="email">
+                                    <span class="__cf_email__">taosikai@yeah.net</span>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="detail">
+                            <span class="icon"><i class="fs-lg if i-link"></i></span>
+                            <span class="info">
+                                <a href="https://www.phpdish.com" target="_blank">https://www.phpdish.com</a>
+                            </span>
+                        </div>
+                        <div class="detail">
+                            <span class="icon" title="Github"><i class="fs-lg if i-github"></i></span>
+                            <span class="info"><a href="https://github.com/slince" target="_blank">https://github.com/slince</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-9 card-wrapper pull-right">
+                <div class="panel panel-u card">
+                    <div class="panel-body background-details">
+                        <div class="detail" id="about">
+                            <div class="icon">
+                                <i class="fs-lg if i-id-card"></i>
+                                <span class="mobile-title">关于我</span>
+                            </div>
+                            <div class="info">
+                                <h4 class="title text-uppercase">关于我</h4>
+                                <div class="card card-nested">
+                                    <div class="content mop-wrapper" itemprop="description">
+                                        <p>一个潜心的php修道者，thinkphp框架开发组成员，slince框架作者，擅长cakephp,symfony等框架，
+                                            并有相关框架开发经验。喜欢研究，喜欢分享，平时喜欢开发一些php的功能组件和开源项目并公开在github上，
+                                            个人github地址 <a href="https://github.com/slince">https://github.com/slince</a> ,有时候会写或者分享一些东西到个人网站上，
+                                            网站<a href="http://www.phpdish.com">http://www.phpdish.com</a>，欢迎有相同爱好的人与我交流</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail" id="work-experience">
+                            <div class="icon">
+                                <i class="fs-lg if i-company"></i>
+                                <span class="mobile-title">工作经历</span>
+                            </div>
+                            <div class="info">
+                                <h4 class="title text-uppercase">工作经历</h4>
+                                <ul class="list-unstyled clear-margin">
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>开发负责人</strong>
+                                                <a href="http://www.sellazy.com" target="_blank">南京懒商</a>
+                                            </p>
+                                            <p class="text-muted">
+                                                <small>
+                                                    <span class="space-right">2016/9 - 2017/12</span>
+                                                    <span><i class="icon-clock mr-5"></i>1.3年</span>
+                                                </small>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                <p>
+                                                    这是出来创业的项目，主要做b2b的订单代发系统，面向国外的中小卖家，对接他们的个人店铺，将订单交付给供应商由供应商完成发货。我主要负责主站，供应商系统，以及物流轨迹跟踪系统，协调前端与后端的工作，并完成后端的基本架构，包括技术选型，基础服务如队列，定时任务，数据表设计，代码发布系统，以及服务器简单维护等。
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>商城组业务小组长</strong>
+                                                <a href="http://www.shein.com" target="_blank">南京领添</a>
+                                            </p>
+                                            <p class="text-muted">
+                                                <small>
+                                                    <span class="space-right">2014/3 - 2016/9</span>
+                                                    <span><i class="icon-clock mr-5"></i>2.5年</span>
+                                                </small>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                <ul class="lists">
+                                                    <li>完成商城从面向过程到面向对象的重写</li>
+                                                    <li>app开发期间负责大多数接口工作的开发</li>
+                                                    <li>负责购物车、订单、支付等模块的日常功能开发与维护</li>
+                                                    <li>商城架构组成员，建立以邮件发送中心为主的消息队列模型</li>
+                                                    <li>商城第二次重构负责订单、支付、购物车、促销活动模块的代码迁移重写审核工作</li>
+                                                    <li>在商城担任订单组以及支付组组长（后面两组合并），兼任过用户组组长</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="detail" id="project-experience">
+                            <div class="icon">
+                                <i class="fs-lg if i-project"></i>
+                                <span class="mobile-title">项目经验</span>
+                            </div>
+                            <div class="info">
+                                <h4 class="title text-uppercase">项目经验</h4>
+                                <ul class="list-unstyled clear-margin">
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>Social Share一键分享</strong>
+                                                <a href="https://github.com/slince/social-share.js" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                <p>
+                                                    这是一个前端js库，采用es6语法，webpack打包，项目开源，托管在https://github.com/slince/social-share.js
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>PHPDish 内容社区系统</strong>
+                                                <a href="https://github.com/slince/phpdish" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                现代化的内容社区系统，基于symfony框架，高度的面向对象，模块化代码，扁平化设计，支持guthub和微博登录，完善的通知系统和站内信功能，项目开源代码托管在https://github.com/slince/phpdish； 网站 https://www.phpdish.com
+                                                <ul class="lists">
+                                                    <li>社区话题/回复</li>
+                                                    <li>专栏文章/评论</li>
+                                                    <li>Notification通知</li>
+                                                    <li>Markdown编辑器</li>
+                                                    <li>Github风格Emoji表情支持</li>
+                                                    <li>在回复中@他人</li>
+                                                    <li>个人主页</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>Spike 内网穿透工具</strong>
+                                                <a href="https://github.com/slince/spike" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                使用php实现的内网穿透系统，基于reactphp的io多路复用模型，灵感来自于ngrok和frp可以将你本地的服务比如http,mysql,redis等暴露到公网，非常适合微信公众号开发，以及团队异地协作；项目开源，开源协议 MIT，代码托管在https://github.com/slince/spike.
+                                                <blockquote>
+                                                    ps 说点其它的东西，大家一直以来都认为php只适合做web系统，殊不知在系统服务上php是有完善的核心库的，我做这个也是想告诉大家，php并不是大家想的那么局限。
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>Sellazy 订单代发系统</strong>
+                                                <a href="http://www.sellazy.com" target="_blank" class="link" >项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                创业项目，订单代发系统，主要为国外中小卖家解决货源问题，一件代发，支持woocomerce和shopify电商平台，自动同步商家订单，系统同步供应商上传的跟踪号到卖家的系统，项目仍在运行，https://www.sellazy.com
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>Slince 框架</strong>
+                                                <a href="https://github.com/slince/slince" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                基于composer的现代化框架，灵感主要来源于symfony和cakephp；由于采用拆包机制，功能进行了组建化设计，项目地址不止一个，核心库地址https://github.com/slince/slince
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>跨境电商app</strong>
+                                                <a href="https://github.com/slince/slince" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                公司的商城系统对应的app项目，主要负责绝大多数接口开发工作
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="card card-nested clearfix">
+                                        <div class="content">
+                                            <p class="title">
+                                                <strong>跨境电商商城系统</strong>
+                                                <a href="http://shein.com" target="_blank">项目地址</a>
+                                            </p>
+                                            <div class="mop-wrapper space-bottom">
+                                                公司的核心项目，跨境电商商城系统，完成由早期面向过程到面向对象的重写。日常维护订单，支付等模块的开发工作。
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="detail" id="skills">
+                            <div class="icon">
+                                <i class="fs-lg if i-skill"></i>
+                                <span class="mobile-title">专业技能</span></div>
+                            <div class="info">
+                                <h4 class="title text-uppercase">专业技能</h4>
+                                <div class="content">
+                                    <ul class="list-unstyled clear-margin">
+                                        <li class="card card-nested card-skills">
+                                            <div class="skill-level" data-toggle="tooltip" title="Master" data-placement="left">
+                                                <div class="skill-progress master"></div>
+                                            </div>
+                                            <div class="skill-info">
+                                                <strong>后端</strong>
+                                                <div class="space-top labels">
+                                                    <span class="label label-keyword">PHP</span>
+                                                    <span class="label label-keyword">Symfony</span>
+                                                    <span class="label label-keyword">CakePHP</span>
+                                                    <span class="label label-keyword">Mysql</span>
+                                                    <span class="label label-keyword">Composer</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="card card-nested card-skills">
+                                            <div class="skill-level" data-toggle="tooltip" title="Master" data-placement="left">
+                                                <div class="skill-progress master"></div>
+                                            </div>
+                                            <div class="skill-info">
+                                                <strong>前端开发</strong>
+                                                <div class="space-top labels">
+                                                    <span class="label label-keyword">HTML</span>
+                                                    <span class="label label-keyword">CSS</span>
+                                                    <span class="label label-keyword">Javascript</span>
+                                                    <span class="label label-keyword">ES6</span>
+                                                    <span class="label label-keyword">Webpack</span>
+                                                    <span class="label label-keyword">Sass</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail" id="education">
+                            <div class="icon">
+                                <i class="fs-lg if i-education"></i>
+                                <span class="mobile-title">教育</span>
+                            </div>
+                            <div class="info">
+                                <h4 class="title text-uppercase">教育</h4>
+                                <div class="content">
+                                    <ul class="list-unstyled clear-margin">
+                                        <li class="card card-nested">
+                                            <div class="content">
+                                                <p class="title">
+                                                    <strong>网络工程，本科，安徽工业大学</strong>
+                                                </p>
+                                                <p class="text-muted"><small>2010/9 - 2014/7</small></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            var toggleFloatingMenu = function() {
+                $('.js-floating-nav').toggleClass('is-visible');
+                $('.js-floating-nav-trigger').toggleClass('is-open');
+            };
+
+            $(".background-card").css("min-height", window.screen.availHeight + "px");
+            $("[data-toggle=tooltip]").tooltip();
+            $('.js-floating-nav-trigger').on('click',
+                function(e) {
+                    e.preventDefault();
+                    toggleFloatingMenu();
+                });
+            $('.js-floating-nav a').on('click', toggleFloatingMenu);
+
+            $("#remaining-profiles").on('show.bs.collapse',
+                function() {
+                    $('.js-profiles-collapse > i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
+                });
+
+            $("#remaining-profiles").on('hidden.bs.collapse',
+                function() {
+                    $('.js-profiles-collapse > i').removeClass('icon-chevron-up').addClass('icon-chevron-down');
+                });
+        });
+    </script>
+</body>
+
+</html>

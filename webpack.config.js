@@ -21,7 +21,7 @@ Encore
 
 if (!Encore.isProduction()) {
     Encore.enableVersioning(false);
-    Encore.setPublicPath('http://127.0.0.1:8080')
+    Encore.setPublicPath('http://127.0.0.1:8088')
         .setManifestKeyPrefix('build/');
 }
 const config = {
@@ -67,6 +67,7 @@ Encore.createSharedEntry('vendor', [
 
 //add style entries
 Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
+Encore.addStyleEntry('css/resume', config.scssPath + '/resume.scss');
 
 //final webpack config
 const webpackConfig = Encore.getWebpackConfig();

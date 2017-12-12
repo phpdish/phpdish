@@ -39,6 +39,11 @@ php_dish_chat:
     prefix:   /
     type: annotation
 
+php_dish_resume:
+    resource: "@PHPDishResumeBundle/Controller"
+    prefix:   /
+    type: annotation
+
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /chats
