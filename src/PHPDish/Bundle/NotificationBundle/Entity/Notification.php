@@ -47,7 +47,7 @@ class Notification implements NotificationInterface, ActionInterface
 
     /**
      * @var string
-     * @ORM\Column(name="message", type="string", nullable=true)
+     * @ORM\Column(name="message", type="text", nullable=true)
      */
     protected $message;
 
