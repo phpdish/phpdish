@@ -14,7 +14,7 @@
         <ul class="list-group resource-list">
             {% for reply in replies %}
                 <li class="list-group-item">
-                    <div class="text">{{ reply.body|raw }}</div>
+                    <div class="text markdown-body">{{ reply.body|raw }}</div>
                     <span class="meta">
                     {{ reply.createdAt|time_diff }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
                     </span>
