@@ -135,6 +135,7 @@ class TopicManager implements TopicManagerInterface
     {
         return $this->getTopicRepository()->createQueryBuilder('t')
             ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
+            ->andWhere('t.enabled = :enabled')->setParameter('enabled', true)
             ->orderBy('t.replyCount', 'desc')
             ->addOrderBy('t.createdAt', 'desc')
             ->setMaxResults($limit)
