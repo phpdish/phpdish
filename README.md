@@ -17,7 +17,6 @@ QQ群号：138307655，欢迎进群讨论。
 - Github风格Emoji表情支持
 - 在回复中@他人
 - 个人主页
-- 更多 ...
 
 关于部分功能的使用以及实现请关注”[PHPDish开发手记](https://www.phpdish.com/categories/phpdish-development-notes)“专栏，我会在该专栏内记录一些开发经历与使用方法；
 
@@ -98,13 +97,24 @@ $ php bin/console server:run
 - Gitee： https://gitee.com/slince
 - 微信：
 
-<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="320"/>
-
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="200"/>
 
 ## License
 
-1. 你可以将 PHPDish 用于非商业用途而不必支付费用，希望但非必须保留页尾“Powered by PHPDish”标识；
-2. 在未获取商业授权之前不得将 PHPDish 用于商业项目（包括但不限于企业网站、经营性网站、以营利为目或实现盈利的网站），如果需要商用请联系本人获取商业授权；
-3. 无论你是否获得商业授权你都可以随意对本系统进行修改以适应你的业务需求，比如文案修改或者网站美化，但不得再次公开发行或者出售。
-4. 获取商业授权之后你可以终身免费升级。
-5. 其它功能可以联系本人定制。
+PHPDish 采用 [MIT](www.opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
+开发而不必支付费用。
+
+## 赞助 Donate
+
+开源项目的发展离不开大家的支持，如果项目对你有所帮助你可以赞助我帮助我把 PHPDish 做的更好。
+
+- 微信/支付宝
+
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/alipay.png" height="350"/>
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat-pay.png" width="350"/>
+
+- PayPal
+
+[https://www.paypal.me/slince](https://www.paypal.me/slince)
+
+捐赠时请留下您的 GitHub 或者个人主页等相关的个人信息 :heart:。
