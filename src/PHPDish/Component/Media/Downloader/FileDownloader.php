@@ -2,7 +2,7 @@
 
 namespace PHPDish\Component\Media\Downloader;
 
-use Http\Client\HttpClient;
+use GuzzleHttp\Client as HttpClient;
 use Http\Message\MessageFactory;
 use PHPDish\Component\Media\Manager\FileManagerInterface;
 use PHPDish\Component\Media\Model\File;
@@ -34,12 +34,10 @@ class FileDownloader implements FileDownloaderInterface
 
     public function __construct(
         HttpClient $httpClient,
-        MessageFactory $messageFactory,
         FileManagerInterface $fileManager,
         NamerInterface $namer
     ) {
         $this->httpClient = $httpClient;
-        $this->messageFactory = $messageFactory;
         $this->fileManager = $fileManager;
         $this->namer = $namer;
     }
@@ -49,10 +47,8 @@ class FileDownloader implements FileDownloaderInterface
      */
     public function download($mediaUrl)
     {
-        $request = $this->messageFactory->createRequest('GET', $mediaUrl);
-
         try {
-            $response = $this->httpClient->sendRequest($request);
+            $response = $this->httpClient->get($mediaUrl);
         } catch(\Exception $exception) {
             throw new \RuntimeException(sprintf('Fail to donwload the resource "%s"', $mediaUrl));
         }
