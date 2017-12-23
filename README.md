@@ -110,8 +110,7 @@ PHPDish 采用 [MIT](www.opensource.org/licenses/MIT) 开源许可证，你可�
 
 - 微信/支付宝
 
-<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/alipay.png" height="350"/>
-<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat-pay.png" width="350"/>
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/alipay.png" height="350"/><img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat-pay.png" width="350"/>
 
 - PayPal
 
