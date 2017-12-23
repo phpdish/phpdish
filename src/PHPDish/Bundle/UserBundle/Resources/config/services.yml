@@ -13,7 +13,13 @@ services:
         class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener
         arguments: ['@router', '@phpdish.avatar_generator.user']
         tags:
-            - {name: kernel.event_listener, event:  fos_user.registration.success,  method: onRegisterSuccess}
+            - {name: kernel.event_listener, event: fos_user.registration.success,  method: onRegisterSuccess}
+
+    phpdish.event_lsitener.change_password:
+        class: PHPDish\Bundle\UserBundle\EventListener\ChangePasswordListener
+        arguments: ['@router']
+        tags:
+            - {name: kernel.event_listener, event: fos_user.change_password.edit.success,  method: onChangePassword}
 
     phpdish.oauth_aware.user_provider:
 #        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider

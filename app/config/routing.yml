@@ -24,6 +24,9 @@ php_dish_user:
     prefix: /
     type: annotation
 
+php_dish_user_ex:
+    resource: "@PHPDishUserBundle/Resources/config/routing.yml"
+
 php_dish_forum:
     resource: "@PHPDishForumBundle/Controller/"
     prefix: /
