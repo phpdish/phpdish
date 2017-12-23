@@ -23,30 +23,4 @@ services:
 
     phpdish.media.file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
-       arguments: ['@phpdish.media.file_manager',  '@phpdish.media.file_namer']
-
-
-    ## Avatar目录操作
-    phpdish.media.avatar_file_manager:
-       class: PHPDish\Component\Media\Manager\FileManager
-       arguments: ['@phpdish.filesystem.avatar']
-
-    phpdish.media.avatar_file_namer:
-       class: PHPDish\Component\Media\Namer\DatePathNamer
-       arguments: ['@phpdish.filesystem.avatar']
-
-    phpdish.media.avatar_url_builder:
-       class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
-       arguments: ['@liip_imagine.cache.manager', '%app.path.avatar%/']
-
-    phpdish.media.avatar_file_factory:
-        class: PHPDish\Component\Media\Manager\FileFactory
-        arguments: ['@phpdish.media.avatar_url_builder', '@phpdish.media.avatar_file_namer']
-
-    phpdish.media.avatar_file_downloader:
-       class: PHPDish\Component\Media\Downloader\FileDownloader
-       arguments: ['@httplug.client.default', '@httplug.message_factory', '@phpdish.media.avatar_file_manager',  '@phpdish.media.avatar_file_namer']
-
-    phpdish.media.avatar_file_uploader:
-       class: PHPDish\Component\Media\Uploader\FileUploader
-       arguments: ['@phpdish.media.avatar_file_factory',  '@phpdish.media.avatar_file_manager']
+       arguments: ['@phpdish.http_client', '@phpdish.media.file_manager',  '@phpdish.media.file_namer']

@@ -20,7 +20,11 @@ class GeneralBuilder implements UrlBuilderInterface
     public function __construct(ImagineCacheManager $cacheManager, $baseUrl)
     {
         $this->imagineCacheManager = $cacheManager;
-        $this->baseUrl = '/'.trim($baseUrl, '/').'/';
+        if (strpos($baseUrl, 'http://') !== false || strpos($baseUrl, 'https://') !== false ) {
+            $this->baseUrl = rtrim($baseUrl, '/').'/';
+        } else {
+            $this->baseUrl = '/'.trim($baseUrl, '/').'/';
+        }
     }
 
     /**

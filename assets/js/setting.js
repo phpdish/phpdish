@@ -45,6 +45,9 @@ import Util from '../modules/util.js';
                 },
                 'change_user_profile[gender]': {
                     required: '请选择您的性别'
+                },
+                'change_user_profile[description]': {
+                    required: '请填写您的签名'
                 }
             }
         });

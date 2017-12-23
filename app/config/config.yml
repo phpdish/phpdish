@@ -244,3 +244,12 @@ sonata_seo:
             http-equiv:
                 'Content-Type':         text/html; charset=utf-8
                 #'X-Ua-Compatible':      IE=EmulateIE7
+
+
+# Media
+
+php_dish_media:
+    maps:
+        avatar:
+            filesystem_service: phpdish.filesystem.avatar
+            path: '%app.path.avatar%'

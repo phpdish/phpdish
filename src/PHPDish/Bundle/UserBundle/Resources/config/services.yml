@@ -8,7 +8,7 @@ services:
 
     phpdish.avatar_generator.user:
         class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator
-        arguments: ['@phpdish.media.avatar_file_manager', '@phpdish.media.avatar_file_namer']
+        arguments: ['@phpdish.media.file_manager.avatar', '@phpdish.media.file_namer.avatar']
 
     phpdish.event_lsitener.user_register:
         class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener
@@ -28,7 +28,7 @@ services:
         arguments:
           - '@fos_user.user_manager'
           - '@security.token_storage'
-          - '@phpdish.media.avatar_file_downloader'
+          - '@phpdish.media.file_downloader.avatar'
           - {weibo: weiboId, github: githubId}
 
 
