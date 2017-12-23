@@ -3,8 +3,8 @@
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Entity\User;
@@ -13,22 +13,20 @@ use PHPDish\Bundle\UserBundle\Event\UserFollowedEvent;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class UserManager implements UserManagerInterface
+class UserManager extends BaseUserManager implements UserManagerInterface
 {
     use PaginatorTrait;
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
 
     /**
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function setEventDispatcher($eventDispatcher)
     {
-        $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -49,8 +47,8 @@ class UserManager implements UserManagerInterface
     public function saveUser(UserInterface $user)
     {
         $user->setUpdatedAt(Carbon::now());
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->objectManager->persist($user);
+        $this->objectManager->flush();
 
         return true;
     }
@@ -60,7 +58,7 @@ class UserManager implements UserManagerInterface
      */
     public function findUserByName($username)
     {
-        return $this->entityManager->getRepository('PHPDishUserBundle:User')
+        return $this->objectManager->getRepository('PHPDishUserBundle:User')
             ->findOneBy(['username' => $username]);
     }
 
@@ -146,9 +144,9 @@ class UserManager implements UserManagerInterface
         $user->setFollowerCount($user->getFollowerCount() + 1);
         $follower->setFollowingCount($follower->getFollowingCount() + 1);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->persist($follower);
-        $this->entityManager->flush();
+        $this->objectManager->persist($user);
+        $this->objectManager->persist($follower);
+        $this->objectManager->flush();
 
         //触发事件
         $this->eventDispatcher->dispatch(Events::USER_FOLLOWEd, new UserFollowedEvent($user, $follower));
@@ -164,9 +162,9 @@ class UserManager implements UserManagerInterface
         $user->removeFollower($follower);
         $user->setFollowerCount($user->getFollowerCount() - 1);
         $follower->setFollowingCount($follower->getFollowingCount() - 1);
-        $this->entityManager->persist($user);
-        $this->entityManager->persist($follower);
-        $this->entityManager->flush();
+        $this->objectManager->persist($user);
+        $this->objectManager->persist($follower);
+        $this->objectManager->flush();
 
         return true;
     }
@@ -196,6 +194,6 @@ class UserManager implements UserManagerInterface
      */
     protected function getRepository()
     {
-        return $this->entityManager->getRepository('PHPDishUserBundle:User');
+        return $this->objectManager->getRepository('PHPDishUserBundle:User');
     }
 }

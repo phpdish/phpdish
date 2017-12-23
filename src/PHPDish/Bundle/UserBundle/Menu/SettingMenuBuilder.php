@@ -36,7 +36,7 @@ final class SettingMenuBuilder
 
         $menu->addChild('Change Password', [
                 'label' => '修改密码',
-                'route' => 'fos_user_change_password',
+                'route' => 'setting_change_password',
             ])
             ->setAttribute('class', 'list-group-item if i-password');
 

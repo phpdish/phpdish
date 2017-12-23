@@ -5,8 +5,9 @@ namespace PHPDish\Bundle\UserBundle\Service;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface as BaseUserManagerInterface;
 
-interface UserManagerInterface
+interface UserManagerInterface extends BaseUserManagerInterface
 {
     /**
      * 创建新用户.

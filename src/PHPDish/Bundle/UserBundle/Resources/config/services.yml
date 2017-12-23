@@ -1,9 +1,10 @@
 services:
     phpdish.manager.user:
         class: PHPDish\Bundle\UserBundle\Service\UserManager
-        arguments:
-             - '@doctrine.orm.entity_manager'
-             - '@event_dispatcher'
+        parent: fos_user.user_manager
+        calls:
+             - [setEventDispatcher, [ '@event_dispatcher']]
+        public: true
 
     phpdish.avatar_generator.user:
         class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator

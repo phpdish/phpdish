@@ -22,7 +22,7 @@ final class ChangePasswordListener
     public function onChangePassword(FormEvent $event)
     {
         $event->setResponse(new RedirectResponse(
-            $this->router->generate('phpdish_setting_change_password') //跳转回修改密码页面
+            $this->router->generate('setting_change_password') //跳转回修改密码页面
         ));
     }
 }

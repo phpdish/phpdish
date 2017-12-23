@@ -3,8 +3,10 @@
 namespace PHPDish\Bundle\ChatBundle\Controller;
 
 use FOS\MessageBundle\FormModel\NewThreadMessage;
+use FOS\MessageBundle\Provider\ProviderInterface;
 use PHPDish\Bundle\ChatBundle\Entity\Chat;
 use PHPDish\Bundle\ChatBundle\Form\Type\NewChatType;
+use PHPDish\Bundle\ChatBundle\Message\Provider;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,9 +17,42 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ChatsController extends Controller
 {
     use ManagerTrait;
+
+    /**
+     * 收件箱
+     * @Route("/chats/inbox", name="chat_inbox")
+     * @param Request $request
+     * @return Response
+     */
+    public function inboxAction(Request $request)
+    {
+        $threads = $this->getProvider()->getInboxThreadsPaginator(
+            $request->query->get('page', 1)
+        );
+        return $this->render('PHPDishWebBundle:Chat:inbox.html.twig', [
+            'threads' => $threads
+        ]);
+    }
+
+    /**
+     * 发送箱
+     * @Route("/chats/sent", name="chat_sent")
+     * @param Request $request
+     * @return Response
+     */
+    public function sentAction(Request $request)
+    {
+        $threads = $this->getProvider()->getSentThreadsPaginator(
+            $request->query->get('page', 1)
+        );
+        return $this->render('PHPDishWebBundle:Chat:sent.html.twig', [
+            'threads' => $threads
+        ]);
+    }
+
     /**
      * 添加新的聊天
-     * @Route("/chats/new", name="add_chat")
+     * @Route("/chats/new", name="chat_add")
      * @param Request $request
      * @return Response
      */
@@ -56,14 +91,12 @@ class ChatsController extends Controller
     }
 
     /**
-     * @Route("/chats", name="chats")
+     * Gets the provider service.
      *
-     * @param Request $request
-     *
-     * @return Response
+     * @return Provider
      */
-    public function indexAction(Request $request)
+    protected function getProvider()
     {
-        return $this->render('PHPDishChatBundle:Default:index.html.twig');
+        return $this->get('phpdish.chat.message_provider');
     }
 }

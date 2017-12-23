@@ -3,6 +3,11 @@ services:
         class: PHPDish\Bundle\ChatBundle\Service\ChatsManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    phpdish.chat.message_provider:
+        class: PHPDish\Bundle\ChatBundle\Message\Provider
+        parent: fos_message.provider
+        public: true
+
     phpdish.menu_builder.notification_menu:
         class: PHPDish\Bundle\ChatBundle\Menu\NotificationMenuBuilder
         arguments: ['@knp_menu.factory']
