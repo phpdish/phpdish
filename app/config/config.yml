@@ -15,6 +15,9 @@ parameters:
     oauth.github.client_id: b98da1a3aeb86b4f9e4a
     oauth.github.client_secret: bc9db0b0a9f2f1e086d99fec73b84948687266d0
 
+    oauth.qq.client_id: 101452818
+    oauth.qq.client_secret: 38e91b7a31da345d25aa430bc36b186f
+
     algolia.application_id: 4UT5BZJVBU
     algolia.api_key: dc396bbc61f32b939e3941df69b89d2c
 
@@ -210,7 +213,6 @@ hwi_oauth:
             client_id: '%oauth.github.client_id%'
             client_secret: '%oauth.github.client_secret%'
             scope: 'user:email,public_repo'
-
 
 httplug:
     plugins:

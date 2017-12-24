@@ -70,6 +70,21 @@ export const message = function(message, options){
 };
 
 /**
+ * 创建dialg
+ * @param title
+ * @param content
+ * @param options
+ * @returns {Dialog}
+ */
+export const create = (title, content, options) => {
+    options = options || {};
+    return new Dialog($.extend(options, {
+        "title": title,
+        "content": content
+    }));
+};
+
+/**
  * 确认框
  * @param message
  * @param options

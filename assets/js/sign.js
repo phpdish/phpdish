@@ -1,10 +1,12 @@
 'use strict';
 require('module/common.js');
 require('jquery-validation');
+import Util from '../modules/util.js';
 
 //登录
 (function(){
-    $("#login-form").validate({
+    const $loginForm = $("#login-form");
+    $loginForm.validate({
         errorPlacement: function(error, element) {
             error.insertAfter($(element).parent());
         },
@@ -24,6 +26,14 @@ require('jquery-validation');
                 required: '请输入密码!',
             }
         }
+    });
+
+    //找回密码
+    $loginForm.find('.forgot-password').on('click', () => {
+        Util.dialog.create('提示', '请使用社交账户登录，如果社交账户绑定的邮箱与旧账号邮箱一致则可直接登录到旧账户。', {
+            width: 300
+        });
+        return false;
     });
 })($);
 
@@ -81,6 +91,9 @@ require('jquery-validation');
         }
     });
 })($);
+
+
+
 
 //forgot
 (function(){

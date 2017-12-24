@@ -20,8 +20,25 @@ use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Table(name="users", indexes={
+ *      @ORM\Index(columns="email"),
+ *      @ORM\Index(columns="email_canonical"),
+ * })
  * @ORM\HasLifecycleCallbacks
+ * @ORM\AttributeOverrides({
+ *     @ORM\AttributeOverride(name="email",
+ *         column=@ORM\Column(
+ *             nullable=true,
+ *             unique=false
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="emailCanonical",
+ *         column=@ORM\Column(
+ *             nullable=true,
+ *             unique=false
+ *         )
+ *     )
+ * })
  */
 class User extends BaseUser implements UserInterface, ParticipantInterface
 {

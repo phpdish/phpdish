@@ -1,0 +1,10 @@
+PHPDish\Bundle\UserBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+             fields: [email]
+             message: '该邮箱已经被占用'
+
+    properties:
+       email:
+           - Email:
+               message: 请输入合法邮箱

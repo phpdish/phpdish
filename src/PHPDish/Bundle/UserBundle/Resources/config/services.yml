@@ -10,13 +10,20 @@ services:
         class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator
         arguments: ['@phpdish.media.file_manager.avatar', '@phpdish.media.file_namer.avatar']
 
-    phpdish.event_lsitener.user_register:
-        class: PHPDish\Bundle\UserBundle\EventListener\UserRegisterListener
+    phpdish.event_listener.user_listener:
+        class: PHPDish\Bundle\UserBundle\EventListener\UserListener
+        arguments: ['@event_dispatcher']
+        tags:
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Entity\User, event: postPersist,  method: postPersist}
+
+    phpdish.event_listener.user_create:
+        class: PHPDish\Bundle\UserBundle\EventListener\UserCreateListener
         arguments: ['@router', '@phpdish.avatar_generator.user']
         tags:
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Entity\User, event: prePersist,  method: prePersist}
             - {name: kernel.event_listener, event: fos_user.registration.success,  method: onRegisterSuccess}
 
-    phpdish.event_lsitener.change_password:
+    phpdish.event_listener.change_password:
         class: PHPDish\Bundle\UserBundle\EventListener\ChangePasswordListener
         arguments: ['@router']
         tags:

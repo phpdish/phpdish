@@ -4,8 +4,8 @@ namespace PHPDish\Bundle\ChatBundle\EventListener;
 
 use FOS\MessageBundle\Composer\ComposerInterface;
 use FOS\MessageBundle\Sender\SenderInterface;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Model\UserManagerInterface;
+use PHPDish\Bundle\UserBundle\Event\UserEvent;
 
 final class UserRegisterListener
 {
@@ -35,7 +35,7 @@ final class UserRegisterListener
         $this->sender = $sender;
     }
 
-    public function onRegistrationCompleted(FilterUserResponseEvent $event)
+    public function onRegistrationCompleted(UserEvent $event)
     {
         if (!$sender = $this->getAdminAccount()) {
             return;
