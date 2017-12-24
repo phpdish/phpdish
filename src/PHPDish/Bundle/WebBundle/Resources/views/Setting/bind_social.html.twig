@@ -11,6 +11,15 @@
         <div class="panel-heading">社交账户 </div>
         <ul class="list-group social-connection">
             <li class="list-group-item">
+                <span class="if i-qq"></span>
+
+                {% if app.user.qqId %}
+                    已绑定 <i class="if i-check"></i>
+                {% else %}
+                    <a href="{{ hwi_oauth_login_url('qq') }}">绑定QQ</a>
+                {% endif %}
+            </li>
+            <li class="list-group-item">
                 <span class="if i-weibo"></span>
 
                 {% if app.user.weiboId %}

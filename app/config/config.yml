@@ -214,6 +214,12 @@ hwi_oauth:
             client_secret: '%oauth.github.client_secret%'
             scope: 'user:email,public_repo'
 
+        qq:
+            type: qq
+            client_id: '%oauth.qq.client_id%'
+            client_secret: '%oauth.qq.client_secret%'
+            scope: 'get_user_info'
+
 httplug:
     plugins:
         logger: ~

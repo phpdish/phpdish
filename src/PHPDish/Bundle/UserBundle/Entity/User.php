@@ -142,6 +142,16 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * @ORM\Column(type="string", nullable=true))
      */
+    protected $qqId;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true))
+     */
+    protected $qqAccessToken;
+
+    /**
+     * @ORM\Column(type="string", nullable=true))
+     */
     protected $weiboId;
 
     /**
@@ -413,6 +423,42 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     {
         $profile->setUser($this);
         $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQqId()
+    {
+        return $this->qqId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQqId($qqId)
+    {
+        $this->qqId = $qqId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQqAccessToken()
+    {
+        return $this->qqAccessToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQqAccessToken($qqAccessToken)
+    {
+        $this->qqAccessToken = $qqAccessToken;
 
         return $this;
     }

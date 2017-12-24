@@ -75,6 +75,9 @@ weibo_login:
 github_login:
     path: "/login/check-github"
 
+qq_login:
+    path: "/login/check-qq"
+
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"
     type: annotation
