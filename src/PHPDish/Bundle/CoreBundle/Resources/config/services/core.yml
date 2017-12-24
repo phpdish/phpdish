@@ -18,3 +18,7 @@ services:
         class: GuzzleHttp\Client
         arguments:
             - {verify: false}
+
+    phpdish.qcloud_factory:
+        class: PHPDish\Component\QCloud\QCloudFactory
+        arguments: ['%qcloud.secret_id%', '%qcloud.secret_key%']

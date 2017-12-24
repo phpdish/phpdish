@@ -55,6 +55,12 @@ final class MainMenuBuilder
             ],
         ]);
 
+        $github = $menu->addChild('GitHub', [
+            'label' => 'GitHub',
+            'uri' => 'https://github.com/slince/phpdish'
+        ]);
+        $github->setLinkAttribute('target', '_blank');
+
         return $menu;
     }
 }

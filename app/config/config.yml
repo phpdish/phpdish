@@ -18,6 +18,9 @@ parameters:
     algolia.application_id: 4UT5BZJVBU
     algolia.api_key: dc396bbc61f32b939e3941df69b89d2c
 
+    qcloud.secret_id: AKIDzxmPq6TC06CC2jGvqGajgR7laLxUsRhm
+    qcloud.secret_key: 3vc7RZp8OVTIvOgolhu5A4nOn14lNLCs
+
     app.dir.media: '%kernel.project_dir%/web/media'
     app.dir.uploads: '%kernel.project_dir%/web/media/uploads'
     app.dir.avatar: '%kernel.project_dir%/web/media/uploads/avatar'

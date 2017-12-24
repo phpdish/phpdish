@@ -8,6 +8,11 @@ PHPDish 是一个基于Symfony框架开发的内容社区系统；得益于大�
 由于PHPDish目前规划了很多碎片化的功能因此没有采取标准的代码版本的概念；你可以使用composer或者直接下载本仓库进行程序的安装。
 QQ群号：138307655，欢迎进群讨论。
 
+## Requirements:
+
+- PHP 5.5.9+
+- MYSQL 5.6+
+
 ## Features
 
 - 社区话题/回复
@@ -24,80 +29,41 @@ PHPDish功能仍在继续实现中，陆续会有新的功能发布出来，欢�
 可以在[Issue](https://github.com/slince/phpdish/issues) 发布新贴；或者到PHPDish社区 [http://www.phpdish.com](http://www.phpdish.com) 
 发布新的话题。如果没有及时回复你可以在PHPDish私信我[@slince](http://www.phpdish.com/users/slince)；
 
+## 文档
 
-## Requirements:
+安装文档查看这里 [/app/Resources/doc/install.md](./app/Resources/doc/install.md)
 
-- PHP 5.5.9+
-- MYSQL 5.6+
+## 开源库
 
-## Installation
+项目中使用的第三方库比较多不能一一列举，这里提一些比较核心功能使用到的库
 
-### 使用 Composer
+- 后端
 
-```bash
-$ composer create-project phpdish/phpdish -s dev
-```
+| 名称 | 说明 |
+| --- | --- |
+| [friendsofsymfony/user-bundle](https://github.com/FriendsOfSymfony/FOSUserBundle) | 用户管理基础组件 |
+| [friendsofsymfony/message-bundle](https://github.com/FriendsOfSymfony/FOSMessageBundle) | 站内信实现的基础组件 |
+| [knplabs/knp-markdown-bundle](https://github.com/KnpLabs/KnpMarkdownBundle) | Markdown 解析组件 |
+| [knplabs/knp-menu-bundle](https://github.com/KnpLabs/KnpGaufretteBundle) | 文件系统管理组件 |
+| [knplabs/knp-gaufrette-bundle](https://github.com/KnpLabs/KnpMenuBundle) | 菜单栏生成组件 |
+| [hwi/oauth-bundle](https://github.com/hwi/HWIOAuthBundle) | OAuth登录 |
+| [emojione/emojione](https://github.com/emojione/emojione) | Emoji 表情解析的后端组件 |
+| [lincanbin/material-design-avatars](https://github.com/lincanbin/Material-Design-Avatars) | 字符头像生成库 |
 
-### 使用 GIT 克隆
+- 前端
 
-```bash
-$ git clone https://github.com/slince/phpdish.git
-```
-
-下载完成之后，安装依赖
-
-```bash
-$ composer install
-```
-
-修改 `/app/config/parameters.yml` 下的数据库连接参数.
-
-### 执行安装命令
-
-```bash
-$ php bin/console phpdish:install
-```
-
-根据向导执行安装操作，如果你在安装过程中遇到问题，可以通过上面提到的方式进行反馈；
-
-### 构建前端资源（可选）
-
-前端资源默认已经构建，如果你需要定制自己的样式则需要自行构建才可生效，PHPDish 前端资源基于 Webpack 构建；
- 
- - 安装前端依赖
- 
-```bash
-$ npm install
-```
-
- - 执行构建命令
-    
-```bash
-$ npm run build  // 构建生产环境
-```
-  
-```bash
-$ npm run build:dev // 构建开发环境
-```
-
-### 运行程序
-
-开发环境执行下面命令即可启动
-
-```bash
-$ php bin/console server:run
-```
-
-生产环境请自行配置 Apache 或者 Nginx
-
-## 联系我
-
-- 邮箱：taosikai@yeah.net
-- Github： https://github.com/slince
-- Gitee： https://gitee.com/slince
-- 微信：
-
-<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="200"/>
+| 名称 | 说明 |
+| --- | --- |
+| [jquery-pjax](https://github.com/defunkt/jquery-pjax) | PJax |
+| [marked](https://github.com/chjj/marked) | Markdown 解析组件，前端用 |
+| [plupload](https://github.com/moxiecode/plupload) | 文件上传 |
+| [twemoji](https://github.com/twitter/twemoji) | Emoji 解析 |
+| [textcomplete](https://github.com/yuku-t/textcomplete) | 文本域内自动完成，@用户和emoji提示由此组件实现 |
+| [store](https://github.com/marcuswestin/store.js) | 数据存储组件，可将数据写入到多个媒介 |
+| [highlight.js](https://github.com/isagalaev/highlight.js) | 正文内代码高亮 |
+| [inline-attachment](https://github.com/Rovak/InlineAttachment) | 粘贴板复制粘贴上传以及文件拖拽上传 |
+| [codemirror](https://github.com/codemirror/CodeMirror) | 前端编辑器 |
+| [simplemde](https://github.com/sparksuite/simplemde-markdown-editor) | Markdown编辑器 |
 
 ## License
 
@@ -117,3 +83,12 @@ PHPDish 采用 [MIT](www.opensource.org/licenses/MIT) 开源许可证，你可�
 [https://www.paypal.me/slince](https://www.paypal.me/slince)
 
 捐赠时请留下您的 GitHub 或者个人主页等相关的个人信息 :heart:。
+
+## 联系我
+
+- 邮箱：taosikai@yeah.net
+- Github： https://github.com/slince
+- Gitee： https://gitee.com/slince
+- 微信：
+
+<img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="200"/>

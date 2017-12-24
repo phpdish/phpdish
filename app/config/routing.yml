@@ -4,6 +4,11 @@ _liip_imagine:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+php_dish_core:
+    resource: "@PHPDishCoreBundle/Controller"
+    prefix:   /
+    type: annotation
+
 php_dish_media:
     resource: "@PHPDishMediaBundle/Controller"
     prefix:   /
