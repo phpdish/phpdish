@@ -67,7 +67,7 @@ PHPDish功能仍在继续实现中，陆续会有新的功能发布出来，欢�
 
 ## License
 
-PHPDish 采用 [MIT](www.opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
+PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
 开发而不必支付费用。
 
 ## 赞助 Donate
