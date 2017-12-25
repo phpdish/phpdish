@@ -32,7 +32,7 @@
                 <span class="if i-github"></span>
 
                 {% if app.user.githubId %}
-                    <i  class="if i-check"></i> 已绑定
+                     已绑定 <i  class="if i-check"></i>
                 {% else %}
                     <a href="{{ hwi_oauth_login_url('github') }}">绑定GitHub</a>
                 {% endif %}
