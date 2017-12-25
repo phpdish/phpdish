@@ -36,7 +36,7 @@ services:
           - '@fos_user.user_manager'
           - '@security.token_storage'
           - '@phpdish.media.file_downloader.avatar'
-          - {weibo: weiboId, github: githubId}
+          - {weibo: weiboId, github: githubId, qq: qqId}
 
 
    # Setting Menu
