@@ -21,4 +21,18 @@ interface ThreadManagerInterface
      * @return ThreadInterface
      */
     public function findThreadBySlug($slug);
+
+    /**
+     * 根据名称获取多个thread
+     * @param array $names
+     * @return ThreadInterface[]
+     */
+    public function findThreadsByNames($names);
+
+    /**
+     * 搜索thread
+     * @param string $term
+     * @return ThreadInterface[]
+     */
+    public function searchThreads($term);
 }

@@ -39,10 +39,13 @@ class Topic implements TopicInterface
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Thread")
-     * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Thread")
+     * @ORM\JoinTable(name="topics_threads",
+     *      joinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="thread_id", referencedColumnName="id")}
+     * )
      */
-    protected $thread;
+    protected $threads;
 
     /**
      * @ORM\Column(type="datetime")
@@ -106,17 +109,17 @@ class Topic implements TopicInterface
     /**
      * {@inheritdoc}
      */
-    public function getThread()
+    public function getThreads()
     {
-        return $this->thread;
+        return $this->threads;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setThread(ThreadInterface $thread)
+    public function setThreads($threads)
     {
-        $this->thread = $thread;
+        $this->threads = $threads;
 
         return $this;
     }

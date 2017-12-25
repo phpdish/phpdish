@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
 class ThreadManager implements ThreadManagerInterface
 {
@@ -33,7 +34,32 @@ class ThreadManager implements ThreadManagerInterface
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository
+     * {@inheritdoc}
+     */
+    public function findThreadsByNames($names)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t');
+        return $qb->where($qb->expr()->in('t.name', $names))
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function searchThreads($term)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t');
+        return $qb->where($qb->expr()->like('t.name', ':term'))
+            ->orWhere($qb->expr()->like('t.description', ':term'))
+            ->setParameter('term', "%{$term}%")
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return EntityRepository
      */
     protected function getThreadRepository()
     {

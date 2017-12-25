@@ -37,16 +37,16 @@ interface TopicInterface extends IdentifiableInterface, DateTimeInterface, UserA
     /**
      * 获取所属thread.
      *
-     * @return ThreadInterface
+     * @return ThreadInterface[]
      */
-    public function getThread();
+    public function getThreads();
 
     /**
-     * @param ThreadInterface $thread
+     * @param ThreadInterface[] $threads
      *
      * @return $this
      */
-    public function setThread(ThreadInterface $thread);
+    public function setThreads($threads);
 
     /**
      * 获取回复数量.

@@ -2,8 +2,8 @@
 
 namespace PHPDish\Bundle\ForumBundle\Form\Type;
 
-use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use PHPDish\Bundle\ForumBundle\Form\DataTransformer\StringToThreadsTransformer;
+use PHPDish\Bundle\ForumBundle\Form\DataTransformer\StringToThreadTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,13 +12,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 class TopicType extends AbstractType
 {
     /**
-     * @var ThreadManagerInterface
+     * @var StringToThreadsTransformer
      */
-    protected $threadManager;
+    protected $stringToThreadTransformer;
 
-    public function __construct(ThreadManagerInterface $threadManager)
-    {
-        $this->threadManager = $threadManager;
+    public function __construct(
+        StringToThreadsTransformer $stringToThreadsTransformer
+    ) {
+        $this->stringToThreadTransformer = $stringToThreadsTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -26,14 +27,13 @@ class TopicType extends AbstractType
         $builder->add('title', TextType::class, [
                 'label' => '标题',
             ])
-            ->add('thread', EntityType::class, [
-                'label' => '所属分类',
-                'choice_label' => 'name',
-                'class' => 'PHPDishForumBundle:Thread',
-                'choices' => $this->threadManager->findEnabledThreads(),
+            ->add('threads', TextType::class, [
+                'label' => '所属节点'
             ])
             ->add('originalBody', TextareaType::class, [
                 'label' => '内容',
             ]);
+
+        $builder->get('threads')->addModelTransformer($this->stringToThreadTransformer);
     }
 }

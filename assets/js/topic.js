@@ -9,6 +9,7 @@ import Editor from '../modules/md-editor/editor.js';
 import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
 import hljs from 'highlight.js';
 import AjaxTab from '../modules/ajaxtab.js';
+import 'selectize';
 
 //话题列表页
 //AjaxTab
@@ -170,6 +171,7 @@ new AjaxTab($('[data-pjax-container]'), {
     const $previewPanel = $('[data-role="preview-panel"]');
     const $topicTitle = $('#topic_title');
     const $topicBody = $(editorElement);
+
     if (editorElement) {
         const editor = new CodeMirrorEditor($topicBody, $preview, $previewPanel);
         //提交表单
@@ -180,6 +182,15 @@ new AjaxTab($('[data-pjax-container]'), {
             }
             $topicBody.val(editor.getContent());
             store.remove('topic_draft');
+        });
+
+        //tags input
+        const $topicThread = $('#topic_thread');
+        $topicThread.selectize({
+            load: function(query, callback){
+                console.log(query);
+                console.log(callback);
+            }
         });
     }
 })($);

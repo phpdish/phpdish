@@ -21,9 +21,13 @@ services:
             - '@event_dispatcher'
             - "@phpdish.body_processor"
 
+    phpdish.form.data_transformer.string_to_threads:
+        class: PHPDish\Bundle\ForumBundle\Form\DataTransformer\StringToThreadsTransformer
+        arguments: ["@phpdish.manager.thread"]
+
     phpdish.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType
-        arguments: ["@phpdish.manager.thread"]
+        arguments: ["@phpdish.form.data_transformer.string_to_threads"]
         tags:
            - {name: "form.type"}
 

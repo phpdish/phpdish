@@ -51,6 +51,7 @@
     "memory-fs": "^0.4",
     "plupload": "^2.3.3",
     "scrolltofixed": "^1.0",
+    "selectize": "^0.12.4",
     "simplemde": "^1.11.2",
     "social-share-button.js": "^1.0.0",
     "store": "^2.0.12",

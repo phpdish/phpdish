@@ -61,6 +61,7 @@ Encore.createSharedEntry('vendor', [
     'simplemde/src/css/simplemde.css',
     'social-share-button.js/dist/social-share.min.css',
     'highlight.js/styles/tomorrow.css',
+    'selectize/dist/css/selectize.bootstrap3.css',
     'emojione',
     'twemoji'
 ]);

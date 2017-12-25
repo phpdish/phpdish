@@ -14,6 +14,22 @@ class ThreadController extends Controller
     use ManagerTrait;
 
     /**
+     * 自动完成获取数据
+     * @Route("/threads/autocomplete", name="thread_autocomplete")
+     * @param Request $request
+     * @return Response
+     */
+    public function autoCompleteAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $threads = $this->getThreadManager()->searchThreads($query);
+        var_dump($threads);exit;
+        return $this->json([
+            'threads' => $threads
+        ]);
+    }
+
+    /**
      * @Route("/threads/{slug}", name="thread_view")
      *
      * @param string  $slug
