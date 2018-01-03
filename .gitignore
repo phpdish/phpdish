@@ -24,6 +24,5 @@
 *~
 /web/media/cache/*
 !web/media/cache
-composer.lock
 yarn.lock
 yarn-error.log

@@ -63,7 +63,9 @@ import {default as Dialog} from './dialog.js';
     });
 })($);
 
-
+if (window.Notification) {
+    Notification.requestPermission();
+}
 /**
  * 未读消息
  */
@@ -77,6 +79,24 @@ import {default as Dialog} from './dialog.js';
                     $notificationNumber.text(response.count).attr('data-number', response.count)
                         .addClass('has-message');
                     document.title = `(${response.count}) ` + originalDocumentTitle;
+                    //Html5提醒
+                    if (window.Notification) {
+                        Notification.requestPermission().then(function(result) {
+                            // result可能是是granted, denied, 或default.
+                            if (result === 'granted') {
+                                const notification = new Notification('社区消息', {
+                                    body: `你有${response.count}未读提醒`,
+                                    icon: '/img/logo64.png',
+                                    renotify: true,
+                                    tag: 'phpdish'
+                                });
+                                notification.onclick = function() {
+                                    location.href = Util.route.getRoutePath('notifications');
+                                    notification.close();
+                                };
+                            }
+                        });
+                    }
                 } else {
                     $notificationNumber.removeClass('has-message');
                 }

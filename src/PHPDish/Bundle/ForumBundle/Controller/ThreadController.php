@@ -23,7 +23,6 @@ class ThreadController extends Controller
     {
         $query = $request->query->get('query');
         $threads = $this->getThreadManager()->searchThreads($query);
-        var_dump($threads);exit;
         return $this->json([
             'threads' => $threads
         ]);
@@ -46,15 +45,14 @@ class ThreadController extends Controller
 
         $criteria = Criteria::create();
         $criteria->orderBy(['repliedAt' => 'desc'])
-            ->where(Criteria::expr()->eq('enabled', true))
-            ->andWhere(Criteria::expr()->eq('thread', $thread));
+            ->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');
         if ($tab && $tab === 'recommend') {
             $criteria->andWhere(Criteria::expr()->eq('recommended', true));
         }
 
-        $topics = $this->getTopicManager()->findTopics($criteria, $request->query->getInt('page', 1));
+        $topics = $this->getTopicManager()->findThreadTopics($thread, $request->query->getInt('page', 1), null, $criteria);
 
 
         //SEO

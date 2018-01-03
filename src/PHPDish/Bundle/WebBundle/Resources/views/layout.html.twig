@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-        {% if block('title') is defined %} <title>{{ block('title') }} - PHPDish</title> {% else %}{{ sonata_seo_title() }} {% endif %}
+        {% if block('title') is defined %} <title>{{ block('title') }} - {{ read_config_parameter('phpdish.site.title') }}</title> {% else %}{{ sonata_seo_title() }} {% endif %}
         {{ sonata_seo_metadatas() }}
         {{ sonata_seo_link_canonical() }}
         {{ sonata_seo_lang_alternates() }}

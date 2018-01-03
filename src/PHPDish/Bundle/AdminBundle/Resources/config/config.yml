@@ -94,13 +94,13 @@ easy_admin:
         Topic:
             class: PHPDish\Bundle\ForumBundle\Entity\Topic
             label: '话题'
-            disabled_actions: ['edit']
+            disabled_actions: ['edit', 'new']
             list:
                 title: "%%entity_label%%列表"
                 fields:
                       - id
                       - { property: 'title', label: '标题' }
-                      - { property: 'thread', label: '所属节点' }
+#                      - { property: 'threads', label: '所属节点' }
                       - { property: 'recommended', label: '是否推荐', type: 'toggle' }
                       - { property: 'enabled', label: '状态',  type: 'toggle'}
                       - { property: 'replyCount', label: '回复数量' }

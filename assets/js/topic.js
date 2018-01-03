@@ -181,15 +181,23 @@ new AjaxTab($('[data-pjax-container]'), {
                 return false;
             }
             $topicBody.val(editor.getContent());
+            
             store.remove('topic_draft');
         });
 
         //tags input
-        const $topicThread = $('#topic_thread');
-        $topicThread.selectize({
+        const $topicThreads = $('#topic_threads');
+        $topicThreads.selectize({
+            valueField: 'name',
+            labelField: 'name',
+            searchField: 'name',
+            create: false,
+            maxItems: 5,
             load: function(query, callback){
-                console.log(query);
-                console.log(callback);
+                if (!query.length) return callback();
+                Util.request('thread.autocomplete', {}, {'query': query}).done(function(response){
+                    callback(response.threads.slice(0, 10));
+                });
             }
         });
     }

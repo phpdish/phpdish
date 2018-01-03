@@ -27,11 +27,13 @@ const routes = {
     'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
     'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
     'topicReply.delete': {path: '/replies/{id}', method: 'DELETE'},
-
+    //threads
+    'thread.autocomplete': '/threads/autocomplete',
     //其它
     'upload': {path: '/uploads', method: 'POST'},
     'message.add': {path:'/user/messages/add', method: 'POST'},
     'captcha': '/captcha', ///验证码
+    'notifications': '/notifications',
     'notification.count': '/notifications/count'
 };
 

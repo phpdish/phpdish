@@ -20,7 +20,7 @@ PHPDish\Bundle\ForumBundle\Entity\Thread:
 
        description:
            - Length:
-                 min: 5
+                 min: 4
                  max: 500
                  minMessage: '描述最少{{ limit }}字符长度'
                  maxMessage: '描述最多{{ limit }}字符长度'
@@ -43,3 +43,7 @@ PHPDish\Bundle\ForumBundle\Entity\Topic:
             - Length:
                  min: 10
                  minMessage: '内容至少{{ limit }}字符长度'
+
+        threads:
+            - NotBlank:
+                message: '节点不得为空'

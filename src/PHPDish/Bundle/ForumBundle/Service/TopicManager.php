@@ -93,14 +93,14 @@ class TopicManager implements TopicManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findThreadTopics(ThreadInterface $thread, $page, $limit = null)
+    public function findThreadTopics(ThreadInterface $thread, $page, $limit = null, Criteria $criteria = null)
     {
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('thread', $thread->getId()))
-            ->orderBy([
-                'updatedAt' => 'DESC',
-            ]);
+        $qb = $this->getTopicRepository()->createQueryBuilder('t')
+            ->innerJoin('t.threads', 'th')
+            ->where('th.id = :threadId')->setParameter('threadId', $thread);
+        $criteria && $qb->addCriteria($criteria);
 
-        return $this->findTopics($criteria, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**

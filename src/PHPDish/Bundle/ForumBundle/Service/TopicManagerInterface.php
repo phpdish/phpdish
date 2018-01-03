@@ -49,10 +49,11 @@ interface TopicManagerInterface
      * @param ThreadInterface $thread
      * @param int             $page
      * @param int             $limit
+     * @param Criteria $criteria
      *
      * @return Pagerfanta
      */
-    public function findThreadTopics(ThreadInterface $thread, $page, $limit = null);
+    public function findThreadTopics(ThreadInterface $thread, $page, $limit = null, Criteria $criteria = null);
 
     /**
      * 查找指定用户的话题.

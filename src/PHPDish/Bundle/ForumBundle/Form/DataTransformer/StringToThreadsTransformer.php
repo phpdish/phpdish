@@ -35,13 +35,14 @@ class StringToThreadsTransformer implements DataTransformerInterface
         if (null === $value) {
             return '';
         }
-
-        return implode(' ', array_map(function($thread) use ($value){
+        $threadNames = [];
+        foreach ($value as $thread) {
             if (!$thread instanceof ThreadInterface) {
-                throw new UnexpectedTypeException($value, ThreadInterface::class);
+                throw new UnexpectedTypeException($thread, ThreadInterface::class);
             }
-            return $thread->getName();
-        }, $value));
+            $threadNames[] = $thread->getName();
+        }
+        return implode(',', $threadNames);
     }
 
     /**
@@ -53,7 +54,7 @@ class StringToThreadsTransformer implements DataTransformerInterface
             return null;
         }
 
-        $threadNames = array_unique(array_filter(array_map('trim', explode(' ', $value))));
+        $threadNames = array_unique(array_filter(array_map('trim', explode(',', $value))));
         if (count($threadNames) === 0) {
             return null;
         }

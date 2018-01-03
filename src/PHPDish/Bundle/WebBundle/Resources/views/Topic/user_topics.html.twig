@@ -15,7 +15,10 @@
             <li class="list-group-item">
                 <div class="title"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
                 <span class="meta">
-                    {{ topic.createdAt|time_diff }} 发表在 <a href="{{ path('thread_view', {'slug':  topic.thread.slug}) }}">{{ topic.thread.name }}</a>
+                    {{ topic.createdAt|time_diff }} 发表在
+                    {% for thread in topic.threads %}
+                        <a class="tag" href="{{ path('thread_view', {'slug': thread.slug}) }}">{{ thread.name }}</a>
+                    {% endfor %}
                 </span>
             </li>
             {% endfor %}

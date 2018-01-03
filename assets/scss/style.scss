@@ -592,3 +592,23 @@ form{
     width:108%;
   }
 }
+/*------------------------------------
+  Tags
+------------------------------------*/
+.tag{
+  display: inline-block;
+  padding: 0 6px;
+  color: $contrastColor !important;
+  background-color: rgba(1,126,102,0.08);
+  //border-color: $contrastColor;
+  height: 22px;
+  line-height: 22px;
+  font-weight: normal;
+  font-size: 13px;
+  text-align: center;
+  &:hover, &:focus{
+    background-color: $contrastColor;
+    color: #fff !important;
+    text-decoration: none;
+  }
+}
