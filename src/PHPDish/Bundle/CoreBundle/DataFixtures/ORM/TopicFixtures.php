@@ -132,7 +132,7 @@ EOT;
         $topic->setUpdatedAt(Carbon::now())
             ->setTitle($title)
             ->setOriginalBody($body)
-            ->setThread($this->getReference('thread-share'))
+            ->setThreads([$this->getReference('thread-share')])
             ->setEnabled(true);
         $manager->saveTopic($topic);
     }

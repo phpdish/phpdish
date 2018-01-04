@@ -5,7 +5,7 @@ services:
 
     phpdish.manager.thread:
        class: PHPDish\Bundle\ForumBundle\Service\ThreadManager
-       arguments: ["@doctrine.orm.entity_manager"]
+       arguments: ["@doctrine.orm.entity_manager", "@phpdish.pinyin_translator"]
 
     phpdish.manager.topic:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager

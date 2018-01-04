@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Form\DataTransformer;
 
+use Overtrue\Pinyin\Pinyin;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Service\ThreadManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -58,6 +59,13 @@ class StringToThreadsTransformer implements DataTransformerInterface
         if (count($threadNames) === 0) {
             return null;
         }
-        return $this->threadManager->findThreadsByNames($threadNames);
+        $threads =  $this->threadManager->findThreadsByNames($threadNames);
+        $existingThreadNames = array_map(function(ThreadInterface $thread){
+            return $thread->getName();
+        }, $threads);
+
+        //创建新的thread
+        $nonExistThreads = $this->threadManager->createThreadsByNames(array_diff($threadNames, $existingThreadNames));
+        return array_slice(array_merge($threads, $nonExistThreads), 0, 5); //只要五个
     }
 }

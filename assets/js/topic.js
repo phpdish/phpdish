@@ -191,7 +191,9 @@ new AjaxTab($('[data-pjax-container]'), {
             valueField: 'name',
             labelField: 'name',
             searchField: 'name',
-            create: false,
+            create: true,
+            createOnBlur: true,
+            placeholder: '添加话题',
             maxItems: 5,
             load: function(query, callback){
                 if (!query.length) return callback();
@@ -199,6 +201,13 @@ new AjaxTab($('[data-pjax-container]'), {
                     callback(response.threads.slice(0, 10));
                 });
             }
+        });
+        const selectize = $topicThreads.get(0).selectize;
+        //recommend thread
+        $('#add-topic').find('[data-role="recommend-threads"] a').on('click', function(){
+            const value = $(this).text();
+            selectize.createItem(value);
+            selectize.addItem(value, false);
         });
     }
 })($);

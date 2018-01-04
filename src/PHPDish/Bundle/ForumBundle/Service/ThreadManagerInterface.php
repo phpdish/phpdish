@@ -9,9 +9,10 @@ interface ThreadManagerInterface
     /**
      * 查找所有启用的thread.
      *
+     * @param int|null $limit
      * @return ThreadInterface[]
      */
-    public function findEnabledThreads();
+    public function findEnabledThreads($limit = null);
 
     /**
      * 根据slug查找thredd.
@@ -35,4 +36,23 @@ interface ThreadManagerInterface
      * @return ThreadInterface[]
      */
     public function searchThreads($term);
+
+    /**
+     * 创建thread
+     * @return ThreadInterface
+     */
+    public function createThread();
+
+    /**
+     * 保存thread
+     * @param ThreadInterface $thread
+     */
+    public function saveThread(ThreadInterface $thread);
+
+    /**
+     * 创建多个thread
+     * @param array $names
+     * @return ThreadInterface[]
+     */
+    public function createThreadsByNames($names);
 }

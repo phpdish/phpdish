@@ -14,7 +14,7 @@
     <div class="container" role="main">
         <div class="row">
             <article class="col-md-9">
-                <div class="panel panel-u add-topic">
+                <div class="panel panel-u add-topic" id="add-topic">
                     <div class="panel-heading">
                         {{ title }}
                     </div>
@@ -30,8 +30,13 @@
                             {{ form_errors(form.originalBody) }}
                         </div>
                         <div class="form-group">
-                            {{ form_widget(form.threads, {'attr': {'class': 'thread'}}) }}
+                            {{ form_widget(form.threads, {'attr': {'class': 'thread', placeholder: '添加节点'}}) }}
                             {{ form_errors(form.threads) }}
+                            <div class="recommend-threads" data-role="recommend-threads">
+                                {% for thread in threads %}
+                                    <a href="javascript:void(0);" class="tag">{{ thread.name }}</a>
+                                {% endfor %}
+                            </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 发布</button>

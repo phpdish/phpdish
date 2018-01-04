@@ -40,6 +40,7 @@
         "liip/imagine-bundle": "^1.9",
         "lincanbin/material-design-avatars": "^1.4",
         "nesbot/carbon": "^1.22",
+        "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.7",
         "sensio/distribution-bundle": "^5.0.19",

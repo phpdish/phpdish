@@ -39,7 +39,7 @@ class Topic implements TopicInterface
     protected $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Thread")
+     * @ORM\ManyToMany(targetEntity="Thread", cascade={"persist"})
      * @ORM\JoinTable(name="topics_threads",
      *      joinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="thread_id", referencedColumnName="id")}

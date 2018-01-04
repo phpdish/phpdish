@@ -75,6 +75,7 @@ class TopicController extends RestController
 
         return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
             'form' => $form->createView(),
+            'threads' => $this->getThreadManager()->findEnabledThreads(10)
         ]);
     }
 
@@ -156,6 +157,7 @@ class TopicController extends RestController
         return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
             'form' => $form->createView(),
             'topic' => $topic,
+            'threads' => $this->getThreadManager()->findEnabledThreads(10)
         ]);
     }
 

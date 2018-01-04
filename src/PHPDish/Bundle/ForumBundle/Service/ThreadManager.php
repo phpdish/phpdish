@@ -2,8 +2,12 @@
 
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Overtrue\Pinyin\Pinyin;
+use PHPDish\Bundle\ForumBundle\Entity\Thread;
+use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 
 class ThreadManager implements ThreadManagerInterface
 {
@@ -12,17 +16,23 @@ class ThreadManager implements ThreadManagerInterface
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var Pinyin
+     */
+    protected $pinyin;
+
+    public function __construct(EntityManagerInterface $entityManager, Pinyin $pinyin)
     {
         $this->entityManager = $entityManager;
+        $this->pinyin = $pinyin;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findEnabledThreads()
+    public function findEnabledThreads($limit = null)
     {
-        return $this->getThreadRepository()->findBy(['enabled' => true]);
+        return $this->getThreadRepository()->findBy(['enabled' => true], null, $limit);
     }
 
     /**
@@ -42,6 +52,41 @@ class ThreadManager implements ThreadManagerInterface
         return $qb->where($qb->expr()->in('t.name', $names))
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createThread()
+    {
+        $thread = new Thread();
+        $thread->setCreatedAt(Carbon::now());
+        return $thread;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveThread(ThreadInterface $thread)
+    {
+        $this->entityManager->persist($thread);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createThreadsByNames($names)
+    {
+        $threads = [];
+        foreach ($names as $name) {
+            $thread = $this->createThread();
+            $thread->setName($name)
+                ->setSlug($this->pinyin->permalink($name))
+                ->setDescription($name);
+            $threads[] = $thread;
+        }
+        return $threads;
     }
 
     /**
