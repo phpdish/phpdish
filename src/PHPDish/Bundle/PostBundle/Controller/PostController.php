@@ -55,6 +55,13 @@ class PostController extends RestController
     public function createAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        //如果用户没有专栏，则跳转专栏创建页面
+        if ($this->getCategoryManager()->getUserCategoriesNumber($this->getUser()) === 0) {
+            $this->addFlash('warning', '请先创建专栏');
+            return $this->redirectToRoute('category_add');
+        }
+
         $manager = $this->getPostManager();
         $post = $manager->createPost($this->getUser());
         $form = $this->createForm(PostType::class, $post, [

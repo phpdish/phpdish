@@ -10,11 +10,11 @@ interface UrlBuilderInterface
     /**
      * 为媒体文件创造url.
      *
-     * @param MediaInterface $media
+     * @param MediaInterface|string $media
      *
      * @return string
      */
-    public function build(MediaInterface $media);
+    public function build($media);
 
     /**
      * 给图片生成resize url.

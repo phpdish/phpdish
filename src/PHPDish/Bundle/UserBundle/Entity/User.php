@@ -116,6 +116,13 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $followingCategories;
 
+    /**
+     * 订阅的节点
+     *
+     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\ForumBundle\Entity\Thread", mappedBy="followers")
+     */
+    protected $followingThreads;
+
 //    /**
 //     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
 //     * @ORM\JoinTable(name="users_roles",

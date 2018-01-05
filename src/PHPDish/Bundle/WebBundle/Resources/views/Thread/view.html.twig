@@ -11,7 +11,37 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-md-9">
-                <div class="panel panel-u">
+                <div class="panel panel-u thread-detail">
+                    <div class="panel-heading">
+                        <div class="media thread">
+                            <div class="media-left media-middle">
+                                {% set threadUrl = path('thread_view', {'slug': thread.slug}) %}
+                                <a href="{{ threadUrl }}" class="avatar">
+                                    <img src="{{ thread.cover|default('avatar/user.jpg')|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="pull-right follow-panel" data-role="follow-thread" data-slug="{{ thread.slug }}">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and thread.isFollowedBy(app.user) %}
+                                        <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已订阅</button>
+                                    {% else %}
+                                        <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 订阅</button>
+                                    {% endif %}
+                                </div>
+                                <h4 class="media-heading">
+                                    <a class="name" href="{{ threadUrl }}">{{ thread.name }}</a>
+                                    {% if is_granted('edit', thread) %}
+                                        <a class="meta" href="{{ path('thread_edit', {'slug': thread.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑节点</a>
+                                    {% endif %}
+                                </h4>
+                                <ul class="list-unstyled list-inline meta">
+                                    <li>话题 {{ thread.topicCount|default(0) }}</li>
+                                    <li>订阅 {{ category.followerCount|default(0) }}</li>
+                                </ul>
+                                <div>{{ thread.description }}</div>
+                            </div>
+                        </div>
+                    </div>
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                         {% set tab = app.request.query.get('tab') %}
                         <li {% if not tab%}class="active"{% endif %}><a href="{{ path('thread_view', {'slug': thread.slug}) }}">看帖</a></li>

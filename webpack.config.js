@@ -21,7 +21,7 @@ Encore
 
 if (!Encore.isProduction()) {
     Encore.enableVersioning(false);
-    Encore.setPublicPath('http://127.0.0.1:8088')
+    Encore.setPublicPath('http://127.0.0.1:8089')
         .setManifestKeyPrefix('build/');
 }
 const config = {

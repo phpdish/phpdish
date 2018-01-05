@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
+use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,6 +69,37 @@ class ThreadController extends Controller
         return $this->render('PHPDishWebBundle:Thread:view.html.twig', [
             'thread' => $thread,
             'topics' => $topics,
+        ]);
+    }
+
+    /**
+     * @Route("/threads/{slug}/edit", name="thread_edit")
+     *
+     * @param string  $slug
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction($slug, Request $request)
+    {
+        $thread = $this->getThreadManager()->findThreadBySlug($slug);
+        if (!$thread) {
+            throw $this->createNotFoundException();
+        }
+        $form = $this->createForm(ThreadType::class, $thread);
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+
+            $this->getThreadManager()->saveThread($thread);
+            $this->addFlash('success', '专栏修改成功');
+
+            return $this->redirectToRoute('thread_view', [
+                'slug' => $thread->getSlug(),
+            ]);
+        }
+        return $this->render('PHPDishWebBundle:Thread:create.html.twig', [
+            'thread' => $thread,
+            'form' => $form->createView()
         ]);
     }
 }

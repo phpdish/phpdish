@@ -24,3 +24,9 @@ services:
     phpdish.media.file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
        arguments: ['@phpdish.http_client', '@phpdish.media.file_manager',  '@phpdish.media.file_namer']
+
+    phpdish.media.twig_extension:
+        class: PHPDish\Bundle\MediaBundle\Twig\MediaExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension}

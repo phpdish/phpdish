@@ -63,7 +63,7 @@ class CategoryManager implements CategoryManagerInterface
     {
         $qb = $this->createGetUserCategoriesQueryBuilder($user);
 
-        return $qb->select($qb->expr()->count('c'))
+        return (int)$qb->select($qb->expr()->count('c'))
             ->getQuery()
             ->getSingleScalarResult();
     }

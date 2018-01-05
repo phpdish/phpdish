@@ -117,3 +117,27 @@
     }
   }
 }
+/*------------------------------------
+  thread页面
+------------------------------------*/
+.thread-detail{
+  .thread{
+    .avatar{
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+    }
+  }
+}
+
+/*------------------------------------
+  添加专栏页面
+------------------------------------*/
+.add-thread{
+  .thread{
+    .description{
+      height: 120px;
+      resize: vertical;
+    }
+  }
+}

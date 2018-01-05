@@ -30,9 +30,10 @@ class GeneralBuilder implements UrlBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build(MediaInterface $media)
+    public function build($media)
     {
-        return "{$this->baseUrl}{$media->getKey()}";
+        $key = $media instanceof MediaInterface ? $media->getKey() : $media;
+        return "{$this->baseUrl}{$key}";
     }
 
     /**
