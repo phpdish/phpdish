@@ -32,9 +32,14 @@
                         <div class="form-group">
                             {{ form_widget(form.threads, {'attr': {'class': 'thread', placeholder: '添加节点'}}) }}
                             {{ form_errors(form.threads) }}
-                            <div class="recommend-threads" data-role="recommend-threads">
+                            <div class="recommend-threads tags" data-role="recommend-threads">
                                 {% for thread in threads %}
-                                    <a href="javascript:void(0);" class="tag">{{ thread.name }}</a>
+                                    <a href="javascript:void(0);" class="tag">
+                                        {% if thread.cover %}
+                                            <img src="{{ asset(thread.cover)|imagine_filter('middle_square') }}" class="tag-image"/>
+                                        {% endif %}
+                                        {{ thread.name }}
+                                    </a>
                                 {% endfor %}
                             </div>
                         </div>

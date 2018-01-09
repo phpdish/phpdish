@@ -31,6 +31,18 @@ class ThreadController extends Controller
     }
 
     /**
+     * 热点threads （tag）
+     * @return Response
+     */
+    public function hotThreadsAction()
+    {
+        $threads = $this->getThreadManager()->findEnabledThreads(15);
+        return $this->render('PHPDishWebBundle:Thread:hot_threads.html.twig', [
+            'threads' => $threads
+        ]);
+    }
+
+    /**
      * threads 探索
      * @Route("/threads", name="threads")
      * @param Request $request

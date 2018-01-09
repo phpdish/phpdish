@@ -66,6 +66,12 @@ class TopicManager implements TopicManagerInterface
         $topic->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
 
+        //给节点增加话题数
+        if (!$topic->getId()) {
+            foreach ($topic->getThreads() as $thread) {
+                $thread->setTopicCount($thread->getTopicCount() + 1);
+            }
+        }
         $this->entityManager->persist($topic);
         $this->entityManager->flush();
 

@@ -34,6 +34,7 @@
                 {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
                 {{ render(controller('PHPDishWebBundle:Song:getSong')) }}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics', {'limit': 8})) }}
+                {{ render(controller('PHPDishForumBundle:Thread:hotThreads')) }}
                 {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 6})) }}
                 {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
             </div>

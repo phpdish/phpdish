@@ -597,18 +597,30 @@ form{
 ------------------------------------*/
 .tag{
   display: inline-block;
-  padding: 0 6px;
   color: $contrastColor !important;
   background-color: rgba(1,126,102,0.08);
   //border-color: $contrastColor;
-  height: 22px;
-  line-height: 22px;
+  //height: 22px;
+  //line-height: 22px;
   font-weight: normal;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
+  padding: 2px 5px;
   &:hover, &:focus{
     background-color: $contrastColor;
     color: #fff !important;
     text-decoration: none;
+  }
+}
+
+.tags{
+  .tag{
+    img{
+      width:20px;
+      height:20px;
+      margin-top: -1px;
+      margin-right:5px;
+      border-radius: 50%;
+    }
   }
 }

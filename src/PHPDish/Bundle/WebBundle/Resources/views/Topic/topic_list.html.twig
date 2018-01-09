@@ -15,10 +15,8 @@
             <ul class="list-unstyled list-inline meta">
                 <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|time_diff }}</li>
                 <li>最后回复：{{ topic.repliedAt|time_diff }}</li>
-                <li class="tags">
-                    {% for thread in topic.threads %}
-                    <a class="tag" href="{{ path('thread_view', {'slug': thread.slug}) }}">{{ thread.name }}</a>
-                    {% endfor %}
+                <li>
+                    {% include 'PHPDishWebBundle:Thread:thread_tagify.html.twig' with {'threads': topic.threads} %}
                 </li>
             </ul>
         </div>

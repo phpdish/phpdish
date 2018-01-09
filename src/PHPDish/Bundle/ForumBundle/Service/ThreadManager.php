@@ -37,7 +37,9 @@ class ThreadManager implements ThreadManagerInterface
      */
     public function findEnabledThreads($limit = null)
     {
-        return $this->getThreadRepository()->findBy(['enabled' => true], null, $limit);
+        return $this->getThreadRepository()->findBy(['enabled' => true], [
+            'followerCount' => 'desc'
+        ], $limit);
     }
 
     /**

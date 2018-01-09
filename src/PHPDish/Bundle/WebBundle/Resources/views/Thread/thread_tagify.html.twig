@@ -1,0 +1,10 @@
+<div class="tags">
+    {% for thread in threads %}
+        <a class="tag" href="{{ path('thread_view', {'slug': thread.slug}) }}">
+            {% if thread.cover %}
+                <img src="{{ asset(thread.cover)|imagine_filter('middle_square') }}" class="tag-image"/>
+            {% endif %}
+            {{ thread.name }}
+        </a>
+    {% endfor %}
+</div>
