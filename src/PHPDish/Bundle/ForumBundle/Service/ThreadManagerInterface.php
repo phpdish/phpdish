@@ -2,7 +2,10 @@
 
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Doctrine\Common\Collections\Criteria;
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface ThreadManagerInterface
 {
@@ -55,4 +58,35 @@ interface ThreadManagerInterface
      * @return ThreadInterface[]
      */
     public function createThreadsByNames($names);
+
+    /**
+     * 关注thread.
+     *
+     * @param ThreadInterface $thread
+     * @param UserInterface     $user
+     *
+     * @return bool
+     */
+    public function followThread(ThreadInterface $thread, UserInterface $user);
+
+    /**
+     * 取消关注thread
+     *
+     * @param ThreadInterface $thread
+     * @param UserInterface     $user
+     *
+     * @return bool
+     */
+    public function unFollowThread(ThreadInterface $thread, UserInterface $user);
+
+    /**
+     * 获取节点
+     *
+     * @param int $page
+     * @param int|null $limit
+     * @param Criteria|null $criteria
+     * @return Pagerfanta
+     */
+    public function findThreads($page, $limit = null, Criteria $criteria = null);
+
 }

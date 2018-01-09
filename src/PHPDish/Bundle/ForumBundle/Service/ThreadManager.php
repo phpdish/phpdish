@@ -3,14 +3,19 @@
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Overtrue\Pinyin\Pinyin;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Thread;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class ThreadManager implements ThreadManagerInterface
 {
+    use PaginatorTrait;
+
     /**
      * @var EntityManagerInterface
      */
@@ -101,6 +106,38 @@ class ThreadManager implements ThreadManagerInterface
             ->setMaxResults(10)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function followThread(ThreadInterface $thread, UserInterface $user)
+    {
+        $thread->addFollower($user);
+        $thread->setFollowerCount($thread->getFollowerCount() + 1);
+        $this->saveThread($thread);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unFollowThread(ThreadInterface $thread, UserInterface $user)
+    {
+        $thread->removeFollower($user);
+        $thread->setFollowerCount($thread->getFollowerCount() - 1 ?: 0);
+        $this->saveThread($thread);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findThreads($page, $limit = null, Criteria $criteria = null)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t')
+            ->orderBy('t.followerCount', 'desc')
+            ->addOrderBy('t.createdAt', 'desc');
+        $criteria && $qb->addCriteria($criteria);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**

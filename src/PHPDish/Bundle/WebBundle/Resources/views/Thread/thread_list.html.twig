@@ -1,0 +1,27 @@
+{% for thread in threads %}
+    {% set threadUrl = path('thread_view', {'slug': thread.slug}) %}
+    <div class="media thread">
+        <div class="media-left">
+            <a href="{{ threadUrl }}">
+                <img src="{{ asset(thread.cover|default('avatar/user.jpg'))|imagine_filter('middle_square') }}" class="media-object avatar" role="avatar">
+            </a>
+        </div>
+        <div class="media-body">
+            <div class="media-heading title">
+                <a href="{{ threadUrl }}">{{ thread.name }}</a>
+            </div>
+            <p>{{ thread.description }}</p>
+            <ul class="list-unstyled list-inline meta">
+                <li>{{ thread.topicCount|default(0) }}</li>
+                <li>{{ thread.followerCount|default(0) }}</li>
+            </ul>
+        </div>
+    </div>
+    {% if loop.last == false %}
+        <hr class="margin-vertical-10"/>
+    {% endif %}
+{% else %}
+    <div class="empty-data">
+        <i class="if i-comment"></i> 还没有节点
+    </div>
+{% endfor %}

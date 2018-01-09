@@ -9,7 +9,7 @@ class FollowCategoryIntialization{
         $container.find('[data-role="follow-category"]').each(function(){
             const $follow = $(this);
             //关注专栏
-            $('[data-role="follow-category"]').on('click', '[data-action="follow"]', function(){
+            $follow.on('click', '[data-action="follow"]', function(){
                 const $this = $(this);
                 const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
                 const buttonLock = lockButton($this);
@@ -40,6 +40,41 @@ class FollowCategoryIntialization{
     }
 }
 
+class FollowThreadIntialization{
+    constructor($container){
+        $container.find('[data-role="follow-thread"]').each(function(){
+            const $follow = $(this);
+            //关注节点
+            $follow.on('click', '[data-action="follow"]', function(){
+                const $this = $(this);
+                const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
+                const buttonLock = lockButton($this);
+
+                Util.request('thread.follow', {'slug': slug}).done(function(response){
+                    $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
+                        .html('<i class="if i-check"></i> 已关注');
+
+                }).fail(function(response){
+                    Util.dialog.message(response.responseJSON.error).flash();
+                }).always(() => {
+                    buttonLock.release();
+                });
+            }).on('click', '[data-action="unfollow"]', function(){
+                const $this = $(this);
+                const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
+                const buttonLock = lockButton($this);
+                Util.request('thread.unfollow', {'slug': slug}).done(function(response){
+                    $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
+                        .html('<i class="if i-plus"></i> 关注');
+                }).fail(function(response){
+                    Util.dialog.message(response.responseJSON.error).flash();
+                }).always(() => {
+                    buttonLock.release();
+                });
+            });
+        });
+    }
+}
 
 /**
  * 用户关注
@@ -79,5 +114,5 @@ class FollowUserIntialization {
 }
 
 
-export { FollowCategoryIntialization, FollowUserIntialization };
+export { FollowCategoryIntialization, FollowThreadIntialization, FollowUserIntialization };
 

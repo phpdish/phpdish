@@ -17,15 +17,15 @@
                             <div class="media-left media-middle">
                                 {% set threadUrl = path('thread_view', {'slug': thread.slug}) %}
                                 <a href="{{ threadUrl }}" class="avatar">
-                                    <img src="{{ thread.cover|default('avatar/user.jpg')|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
+                                    <img src="{{ asset(thread.cover|default('avatar/user.jpg'))|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
                                 </a>
                             </div>
                             <div class="media-body">
                                 <div class="pull-right follow-panel" data-role="follow-thread" data-slug="{{ thread.slug }}">
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and thread.isFollowedBy(app.user) %}
-                                        <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已订阅</button>
+                                        <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
                                     {% else %}
-                                        <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 订阅</button>
+                                        <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 关注</button>
                                     {% endif %}
                                 </div>
                                 <h4 class="media-heading">
@@ -36,7 +36,7 @@
                                 </h4>
                                 <ul class="list-unstyled list-inline meta">
                                     <li>话题 {{ thread.topicCount|default(0) }}</li>
-                                    <li>订阅 {{ category.followerCount|default(0) }}</li>
+                                    <li>订阅 {{ thread.followerCount|default(0) }}</li>
                                 </ul>
                                 <div>{{ thread.description }}</div>
                             </div>

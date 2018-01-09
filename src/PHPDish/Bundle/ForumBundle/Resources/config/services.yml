@@ -46,3 +46,11 @@ services:
         tags:
             - {name: "security.voter"}
         public: false
+
+    phpdish.security.thread_voter:
+        class: PHPDish\Bundle\ForumBundle\Security\ThreadVoter
+        arguments:
+            - "@security.access.decision_manager"
+        tags:
+            - {name: "security.voter"}
+        public: false

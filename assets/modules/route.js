@@ -29,6 +29,9 @@ const routes = {
     'topicReply.delete': {path: '/replies/{id}', method: 'DELETE'},
     //threads
     'thread.autocomplete': '/threads/autocomplete',
+    'thread.follow': {path: '/threads/{slug}/followers', method: 'POST'},
+    'thread.unfollow': {path: '/threads/{slug}/followers', method: 'DELETE'},
+
     //其它
     'upload': {path: '/uploads', method: 'POST'},
     'message.add': {path:'/user/messages/add', method: 'POST'},

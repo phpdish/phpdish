@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,6 +26,20 @@ class ThreadController extends Controller
         $query = $request->query->get('query');
         $threads = $this->getThreadManager()->searchThreads($query);
         return $this->json([
+            'threads' => $threads
+        ]);
+    }
+
+    /**
+     * threads 探索
+     * @Route("/threads", name="threads")
+     * @param Request $request
+     * @return Response
+     */
+    public function indexAction(Request $request)
+    {
+        $threads = $this->getThreadManager()->findThreads($request->query->getInt('page', 1));
+        return $this->render('PHPDishWebBundle:Thread:index.html.twig', [
             'threads' => $threads
         ]);
     }
@@ -86,6 +101,8 @@ class ThreadController extends Controller
         if (!$thread) {
             throw $this->createNotFoundException();
         }
+        $this->denyAccessUnlessGranted('edit', $thread);
+
         $form = $this->createForm(ThreadType::class, $thread);
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
@@ -100,6 +117,46 @@ class ThreadController extends Controller
         return $this->render('PHPDishWebBundle:Thread:create.html.twig', [
             'thread' => $thread,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * 关注节点.
+     *
+     * @Route("/threads/{slug}/followers", name="thread_follow")
+     * @Method("POST")
+     *
+     * @param string $slug
+     *
+     * @return Response
+     */
+    public function followAction($slug)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $thread = $this->getThreadManager()->findThreadBySlug($slug);
+        $this->getThreadManager()->followThread($thread, $this->getUser());
+        return $this->json([
+            'follower_count' => $thread->getFollowerCount(),
+        ]);
+    }
+
+    /**
+     * 取消关注节点.
+     *
+     * @Route("/threads/{slug}/followers", name="thread_unfollow")
+     * @Method("DELETE")
+     *
+     * @param string $slug
+     *
+     * @return Response
+     */
+    public function unFollowAction($slug)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $thread = $this->getThreadManager()->findThreadBySlug($slug);
+        $this->getThreadManager()->unFollowThread($thread, $this->getUser());
+        return $this->json([
+            'follower_count' => $thread->getFollowerCount(),
         ]);
     }
 }

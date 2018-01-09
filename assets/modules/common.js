@@ -109,6 +109,7 @@ if (window.Notification) {
 const $document = $(document);
 new Actions.FollowUserIntialization($document);
 new Actions.FollowCategoryIntialization($document);
+new Actions.FollowThreadIntialization($document);
 
 //Emoji 渲染
 twemoji.parse(document.body);

@@ -39,11 +39,15 @@ class TopicController extends RestController
         $criteria->orderBy(['repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');
-        if ($tab && $tab === 'recommend') {
-            $criteria->andWhere(Criteria::expr()->eq('recommended', true));
+        if ($tab === 'following') {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED'); //关注的需要登录
+            $topics = $manager->findFollowingThreadsTopics($this->getUser(), $request->query->getInt('page', 1));
+        } else {
+            if ($tab === 'recommend') {
+                $criteria->andWhere(Criteria::expr()->eq('recommended', true));
+            }
+            $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
         }
-        $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
-
         return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
             'topics' => $topics,
         ]);

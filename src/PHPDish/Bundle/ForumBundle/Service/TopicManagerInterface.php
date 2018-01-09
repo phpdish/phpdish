@@ -95,4 +95,13 @@ interface TopicManagerInterface
      * @return ReplyInterface
      */
     public function replyTopic(UserInterface $user, TopicInterface $topic, $body);
+
+    /**
+     * 获取订阅的节点下的话题
+     * @param UserInterface $user
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null);
 }

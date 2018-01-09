@@ -48,7 +48,7 @@ abstract class EntityVoter extends Voter
             return false;
         }
 
-        if ($this->accessDecisionManager->decide($token, ['ROLE_SUPER_ADMIN'])) {
+        if ($this->accessDecisionManager->decide($token, ['ROLE_ADMIN'])) {
             return true;
         }
 

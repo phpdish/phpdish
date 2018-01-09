@@ -143,6 +143,26 @@ class TopicManager implements TopicManagerInterface
             ->getResult();
     }
 
+    public function findFollowingThreadsTopicsQuery(UserInterface $user)
+    {
+        return $this->getTopicRepository()->createQueryBuilder('t')
+            ->leftJoin('t.threads', 'tt')
+            ->leftJoin('tt.followers', 'f')
+            ->where('f.id = :userId')
+            ->setParameter('userId', $user)
+            ->orderBy('t.createdAt', 'desc')
+            ->getQuery();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->findFollowingThreadsTopicsQuery($user);
+        return $this->createPaginator($query, $page, $limit);
+    }
+
     /**
      * {@inheritdoc}
      */

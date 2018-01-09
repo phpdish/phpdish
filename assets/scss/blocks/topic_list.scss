@@ -1,4 +1,34 @@
 /*------------------------------------
+  thread列表
+------------------------------------*/
+.thread-list {
+  .thread{
+    .avatar{
+      width:80px;
+      border-radius: 2%;
+    }
+    .title{
+      font-weight: bold;
+      font-size: 18px;
+      color: #2D2D2F;
+      line-height:1.5em;
+    }
+    .meta{
+      margin-bottom:0;
+      a{
+        color: $metaColor;
+      }
+      .tags{
+      }
+    }
+    margin-bottom: 15px;
+  }
+  hr{
+    margin: 10px auto;
+  }
+}
+
+/*------------------------------------
   话题列表
 ------------------------------------*/
 .topic-list {
