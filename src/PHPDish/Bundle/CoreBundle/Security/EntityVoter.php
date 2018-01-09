@@ -86,6 +86,6 @@ abstract class EntityVoter extends Voter
      */
     protected function canEdit($entity, UserInterface $user)
     {
-        return $entity->isBelongsTo($user);
+        return method_exists($entity, 'isBelongsTo') && $entity->isBelongsTo($user);
     }
 }
