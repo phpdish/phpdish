@@ -89,4 +89,14 @@ interface ThreadManagerInterface
      */
     public function findThreads($page, $limit = null, Criteria $criteria = null);
 
+    /**
+     * 获取用户关注的节点
+     *
+     * @param UserInterface $user
+     * @param int $page
+     * @param int|null $limit
+     * @param Criteria|null $criteria
+     * @return Pagerfanta
+     */
+    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null);
 }

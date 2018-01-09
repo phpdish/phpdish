@@ -12,14 +12,20 @@
             </div>
             <p>{{ thread.description }}</p>
             <ul class="list-unstyled list-inline meta">
-                <li>{{ thread.topicCount|default(0) }}</li>
-                <li>{{ thread.followerCount|default(0) }}</li>
+                <li>话题数 {{ thread.topicCount|default(0) }}</li>
+                <li>订阅数{{ thread.followerCount|default(0) }}</li>
             </ul>
         </div>
+        <div class="media-right">
+            <div data-role="follow-thread" data-slug="{{ thread.slug }}">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and thread.isFollowedBy(app.user) %}
+                    <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
+                {% else %}
+                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 关注</button>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    {% if loop.last == false %}
-        <hr class="margin-vertical-10"/>
-    {% endif %}
 {% else %}
     <div class="empty-data">
         <i class="if i-comment"></i> 还没有节点

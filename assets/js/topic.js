@@ -10,6 +10,7 @@ import CodeMirrorEditor from '../modules/md-editor/codemirror-editor.js';
 import hljs from 'highlight.js';
 import AjaxTab from '../modules/ajaxtab.js';
 import 'selectize';
+import {FollowUserIntialization, FollowThreadIntialization} from "../modules/actions";
 
 //话题列表页
 //AjaxTab
@@ -18,6 +19,10 @@ new AjaxTab($('[data-pjax-container]'), {
     loader: '#loader',
     before: (container) => {
         Util.htmlPlaceholder(container);
+    },
+    success: (container) => {
+        new FollowUserIntialization(container);
+        new FollowThreadIntialization(container);
     }
 });
 

@@ -141,6 +141,21 @@ class ThreadManager implements ThreadManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t')
+            ->leftJoin('t.followers', 'f')
+            ->where('f.id = :userId')
+            ->setParameter('userId', $user)
+            ->orderBy('t.followerCount', 'desc')
+            ->addOrderBy('t.createdAt', 'desc');
+        $criteria && $qb->addCriteria($criteria);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
+    }
+
+    /**
      * @return EntityRepository
      */
     protected function getThreadRepository()

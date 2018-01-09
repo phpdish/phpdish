@@ -38,7 +38,22 @@ class ThreadController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $threads = $this->getThreadManager()->findThreads($request->query->getInt('page', 1));
+
+        if ($request->query->get('tab') === 'following') {
+            $threads = $this->getThreadManager()->findUserFollowingThreads($this->getUser(), $request->query->getInt('page', 1));
+        } else {
+            $threads = $this->getThreadManager()->findThreads($request->query->getInt('page', 1));
+        }
+
+        $seoPage = $this->get('sonata.seo.page');
+        $seoPage
+            ->setTitle('发现节点')
+            ->removeMeta('name', 'keywords')
+            ->addMeta('name', 'description', '发现节点')
+            ->addMeta('property', 'og:title', '发现节点')
+            ->addMeta('property', 'og:url',  $this->generateUrl('threads', [],UrlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description', '发现节点');
+
         return $this->render('PHPDishWebBundle:Thread:index.html.twig', [
             'threads' => $threads
         ]);
