@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
+use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
 use Psr\Cache\CacheItemPoolInterface;
@@ -40,7 +41,8 @@ class ThreadController extends Controller
         $cachePool = $this->get('cache.app');
         $cacheItem = $cachePool->getItem('hot_threads');
         if (!$cacheItem->isHit()) {
-            $cacheItem->set($this->getThreadManager()->findEnabledThreads(15));
+            $cacheItem->set($this->getThreadManager()->findEnabledThreads(15))
+                ->expiresAt(Carbon::parse('1 day'));
             $cachePool->save($cacheItem);
         }
         return $this->render('PHPDishWebBundle:Thread:hot_threads.html.twig', [

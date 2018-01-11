@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\UserBundle\Controller;
 
+use Carbon\Carbon;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -36,10 +37,17 @@ class UserController extends RestController
      */
     public function latestUsersAction($limit)
     {
-        $users = $this->getUserManager()->findLatestUsers($limit);
+        $cachePool = $this->get('cache.app');
+        $cacheItem = $cachePool->getItem("latest_users_{$limit}");
+
+        if (!$cacheItem->isHit()) {
+            $users = $this->getUserManager()->findLatestUsers($limit);
+            $cacheItem->set($users)->expiresAt(Carbon::parse('1 day'));
+            $cachePool->save($cacheItem);
+        }
 
         return $this->render('PHPDishWebBundle:User:latest.html.twig', [
-            'users' => $users,
+            'users' => $cacheItem->get(),
         ]);
     }
 

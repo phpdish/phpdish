@@ -283,11 +283,17 @@ class TopicController extends RestController
      */
     public function todayHotTopicsAction($limit = null)
     {
-        $date = Carbon::today()->modify('-100 days');
-        $topics = $this->getTopicManager()->findHotTopics($date, $limit ?: 10);
+        $cachePool = $this->get('cache.app');
+        $cacheItem = $cachePool->getItem("hot_topics_{$limit}");
+        if (!$cacheItem->isHit()) {
+            $date = Carbon::today()->modify('-100 days');
+            $topics = $this->getTopicManager()->findHotTopics($date, $limit ?: 10);
+            $cacheItem->set($topics)->expiresAt(Carbon::now()->addHour(6));
+            $cachePool->save($cacheItem);
+        }
 
         return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
-            'topics' => $topics,
+            'topics' => $cacheItem->get(),
         ]);
     }
 }
