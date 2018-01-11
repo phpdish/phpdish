@@ -8,11 +8,16 @@ class FriendLinkController extends Controller
 {
     public function listAction($limit = 10)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $friendLinks = $em->getRepository('PHPDishCoreBundle:FriendLink')->findList($limit);
+        $cachePool = $this->get('cache.app');
+        $cacheItem = $cachePool->getItem("hot_threads_{$limit}");
+        if (!$cacheItem->isHit()) {
+            $em = $this->getDoctrine()->getManager();
+            $friendLinks = $em->getRepository('PHPDishCoreBundle:FriendLink')->findBy([], [], $limit);
+            $cacheItem->set($friendLinks);
+        }
 
         return $this->render('PHPDishWebBundle:FriendLink:list.html.twig', [
-            'friendLinks' => $friendLinks,
+            'friendLinks' => $cacheItem->get(),
         ]);
     }
 }

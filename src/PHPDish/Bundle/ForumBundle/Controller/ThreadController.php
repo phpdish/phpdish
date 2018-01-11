@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -36,9 +37,14 @@ class ThreadController extends Controller
      */
     public function hotThreadsAction()
     {
-        $threads = $this->getThreadManager()->findEnabledThreads(15);
+        $cachePool = $this->get('cache.app');
+        $cacheItem = $cachePool->getItem('hot_threads');
+        if (!$cacheItem->isHit()) {
+            $cacheItem->set($this->getThreadManager()->findEnabledThreads(15));
+            $cachePool->save($cacheItem);
+        }
         return $this->render('PHPDishWebBundle:Thread:hot_threads.html.twig', [
-            'threads' => $threads
+            'threads' => $cacheItem->get()
         ]);
     }
 

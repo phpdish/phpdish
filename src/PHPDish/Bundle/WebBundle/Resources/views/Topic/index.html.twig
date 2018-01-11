@@ -13,7 +13,7 @@
                 <div class="panel panel-u">
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                         {% set tab = app.request.query.get('tab') %}
-                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('homepage') }}">看帖</a></li>
+                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('homepage') }}">全部</a></li>
                         <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('homepage', {'tab': 'following'}) }}">我关注的</a></li>
                         <li {% if tab == 'recommend' %}class="active"{% endif %}><a href="{{ path('homepage', {'tab': 'recommend'}) }}">推荐</a></li>
                     </ul>
