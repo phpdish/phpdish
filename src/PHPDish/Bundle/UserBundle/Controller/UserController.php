@@ -37,17 +37,9 @@ class UserController extends RestController
      */
     public function latestUsersAction($limit)
     {
-        $cachePool = $this->get('cache.app');
-        $cacheItem = $cachePool->getItem("latest_users_{$limit}");
-
-        if (!$cacheItem->isHit()) {
-            $users = $this->getUserManager()->findLatestUsers($limit);
-            $cacheItem->set($users)->expiresAt(Carbon::parse('1 day'));
-            $cachePool->save($cacheItem);
-        }
-
+        $users = $this->getUserManager()->findLatestUsers(999, true);
         return $this->render('PHPDishWebBundle:User:latest.html.twig', [
-            'users' => $cacheItem->get(),
+            'users' => $users,
         ]);
     }
 

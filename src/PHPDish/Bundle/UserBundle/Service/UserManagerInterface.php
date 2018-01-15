@@ -44,13 +44,20 @@ interface UserManagerInterface extends BaseUserManagerInterface
     public function findUserByEmail($email);
 
     /**
+     * 获取最近注册的用户query.
+     * @param int $limit
+     * @return \Doctrine\ORM\Query
+     */
+    public function getLatestUsersQuery($limit);
+
+    /**
      * 获取最近注册的用户.
      *
      * @param int $limit
-     *
+     * @param boolean $caching
      * @return UserInterface[]
      */
-    public function findLatestUsers($limit);
+    public function findLatestUsers($limit, $caching = false);
 
     /**
      * 根据用户名获取多个用户.

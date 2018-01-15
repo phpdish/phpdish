@@ -74,13 +74,24 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findLatestUsers($limit)
+    public function getLatestUsersQuery($limit)
     {
         return $this->getRepository()->createQueryBuilder('u')
             ->orderBy('u.createdAt', 'desc')
             ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatestUsers($limit, $caching = false)
+    {
+        $query = $this->getLatestUsersQuery($limit);
+        if ($caching) {
+            $query->useResultCache(true);
+        }
+        return $query->getResult();
     }
 
     /**
