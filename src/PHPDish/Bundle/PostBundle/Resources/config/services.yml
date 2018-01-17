@@ -15,6 +15,12 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
 
+    phpdish.manager.book:
+        class: PHPDish\Bundle\PostBundle\Service\BookManager
+        arguments:
+            - '@phpdish.manager.post'
+            - '@phpdish.manager.category'
+
     phpdish.manager.post.comment:
         class: PHPDish\Bundle\PostBundle\Service\CommentManager
         arguments:

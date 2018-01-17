@@ -3,11 +3,13 @@
 namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
+use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 
@@ -38,6 +40,12 @@ class Category extends Taxonomy implements CategoryInterface
      * @ORM\Column(type="integer", length=10)
      */
     protected $followerCount = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
+     * @var PostInterface[]|Collection
+     */
+    protected $posts;
 
     /**
      * 订阅者.
@@ -74,6 +82,7 @@ class Category extends Taxonomy implements CategoryInterface
      */
     public function __construct()
     {
+        $this->posts = new ArrayCollection();
         $this->managers = new ArrayCollection();
         $this->followers = new ArrayCollection();
     }
@@ -130,7 +139,7 @@ class Category extends Taxonomy implements CategoryInterface
      */
     public function setRecommended($recommended)
     {
-        $this->isRecommended = $recommended;
+        $this->recommended = $recommended;
     }
 
     /**
@@ -149,6 +158,14 @@ class Category extends Taxonomy implements CategoryInterface
         $this->creator = $creator;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use PHPDish\Bundle\PostBundle\Service\BookManagerInterface;
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
 use PHPDish\Bundle\PostBundle\Service\CommentManagerInterface;
 use PHPDish\Bundle\PostBundle\Service\PostManagerInterface;
@@ -36,5 +37,14 @@ trait ManagerTrait
     public function getPostCommentManager()
     {
         return $this->get('phpdish.manager.post.comment');
+    }
+
+    /**
+     * 获取 book 管理
+     * @return BookManagerInterface
+     */
+    public function getBookManager()
+    {
+        return $this->get('phpdish.manager.book');
     }
 }

@@ -19,6 +19,7 @@
         {% block css %}{% endblock %}
     </head>
     <body>
+        {% block root %}
         <div class="main-body">
             <div class="navbar navbar-default navbar-fixed-top" role="banner" data-role="navbar">
                 <div class="container">
@@ -110,6 +111,7 @@
             </footer>
             {% endblock %}
         </div>
+        {% endblock %}
         <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>

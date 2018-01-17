@@ -127,6 +127,13 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function getManagers();
 
     /**
+     * 获取所有文档
+     *
+     * @return PostInterface[]|ArrayCollection
+     */
+    public function getPosts();
+
+    /**
      * 是否推荐.
      *
      * @return bool
