@@ -1,11 +1,23 @@
 .book{
+  position: relative;
+  width: 100%;
+  height: 100%;
 
   &.with-summary{
     .book-summary{
       left:0;
     }
     .book-body{
-      left:300px;
+      @media (min-width: 600px) {
+        left:300px;
+      }
+      @media (max-width: 600px) {
+        -webkit-transform: translate(calc(100% - 60px),0);
+        -moz-transform: translate(calc(100% - 60px),0);
+        -ms-transform: translate(calc(100% - 60px),0);
+        -o-transform: translate(calc(100% - 60px),0);
+        transform: translate(calc(100% - 60px),0);
+      }
     }
   }
 
@@ -26,8 +38,19 @@
     -o-transition: left 250ms ease;
     transition: left 250ms ease;
 
+    @media (max-width:600px) {
+      width: calc(100% - 60px);
+      bottom: 0;
+      left: -100%;
+    }
+
     .book-name{
       font-weight: 600;
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      margin-bottom:10px;
     }
 
     ul.summary{
@@ -48,7 +71,7 @@
         }
         a,span{
           display: block;
-          padding: 10px 15px;
+          padding: 5px 15px;
           border-bottom: none;
           color: #364149;
           background: 0 0;
@@ -56,12 +79,13 @@
           overflow: hidden;
           white-space: nowrap;
           position: relative;
+          text-decoration: none;
         }
 
         &.active{
           a{
-            color: #008cff;
-            background: 0 0;
+            color: #333;
+            background: #e5e5e5;
             text-decoration: none;
           }
         }
@@ -84,8 +108,9 @@
     -o-transition: left 250ms ease;
     transition: left 250ms ease;
 
-    @media screen and (min-width: 600px){
-      //left: 300px;
+    @media(max-width: 600px){
+      transition: transform 250ms ease;
+      padding-bottom: 20px;
     }
     //Book Inner
     .body-inner {
@@ -105,8 +130,8 @@
         font-size: .85em;
         color: #7e888b;
         background: 0 0;
-
-        .btn {
+        border-bottom: 2px solid $contrastColor;
+        .btn, .social-share-button {
           display: block;
           height: 50px;
           padding: 0 15px;
@@ -118,7 +143,27 @@
           box-shadow: none!important;
           position: relative;
           font-size: 14px;
+
+          &:hover{
+            position: relative;
+            text-decoration: none;
+            color: #444;
+            background: 0 0;
+          }
         }
+
+        .social-share-button{
+          .social-share-icon{
+            border:none;
+            color: #ccc;
+            font-size:14px;
+            &:hover{
+              color: #444;
+              background: none;
+            }
+          }
+        }
+
         h1 {
           margin: 0;
           font-size: 20px;
@@ -147,6 +192,10 @@
             color: inherit;
             text-decoration: none;
           }
+
+          @media screen and (max-width: 1000px){
+            display: none;
+          }
         }
 
         &:hover{
@@ -166,11 +215,29 @@
           max-width: 800px;
           margin: 0 auto;
           padding: 20px 15px 40px 15px;
+          .markdown-body{
+            font-size:14px;
+          }
+          section{
+            display: block;
+            word-wrap: break-word;
+          }
         }
+      }
+
+      @media screen and (max-width: 1240px){
+        position: static;
+        min-height: calc(100% - 50px);
       }
     }
 
     //左右导航切换
+    .navigation-unique{
+      @media (max-width: 1240px) {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
     .navigation {
       position: absolute;
       top: 50px;
@@ -192,6 +259,14 @@
       &:hover{
         text-decoration: none;
         color: #444;
+      }
+      @media screen and (max-width: 1240px) {
+        position: static;
+        top: auto;
+        max-width: 50%;
+        width: 50%;
+        display: inline-block;
+        float: left;
       }
       &.navigation-next {
         right: 0;

@@ -49,6 +49,7 @@
     "jquery-validation": "^1.17.0",
     "marked": "^0.3",
     "memory-fs": "^0.4",
+    "nprogress": "^0.2.0",
     "plupload": "^2.3.3",
     "scrolltofixed": "^1.0",
     "selectize": "^0.12.4",
