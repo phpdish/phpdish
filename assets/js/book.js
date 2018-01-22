@@ -1,6 +1,8 @@
 import '../modules/common.js';
 import hljs from 'highlight.js';
 import SocialShare from 'social-share-button.js';
+import NProgress from 'nprogress';
+import 'jquery-pjax';
 
 (function($) {
     //代码高亮
@@ -11,6 +13,7 @@ import SocialShare from 'social-share-button.js';
 
 (function($){
     const $bookDetail = $('[data-role="book-detail"]');
+    const $bookSummary = $bookDetail.find('[data-role="summary"]');
     const $summaryToggleBtn = $bookDetail.find('[data-role="toggle-summary"]');
     $summaryToggleBtn.on('click', function(){
         $bookDetail.toggleClass('with-summary');
@@ -21,26 +24,23 @@ import SocialShare from 'social-share-button.js';
         'facebook': false,
         'twitter': false
     });
+    (function($){
+        const $document = $(document);
+        const $characters = $bookSummary.find('li.chapter');
+        $.pjax.defaults.timeout = 50000;
+        $(document).pjax('ul.summary li a', '#pjax-container')
+        $document.on('pjax:start', function() {
+            NProgress.start();
+        });
+        $document.on('pjax:end', function(event) {
+            if (event.relatedTarget) {
+                const $relatedTarget = $(event.relatedTarget);
+                $characters.removeClass('active');
+                $relatedTarget.closest('.chapter').addClass('active');
+            }
+            NProgress.done();
+        });
+    })($);
 })($);
 
-(function($){
-    const SITES = {
-        'google': {
-            'label': 'Google+',
-            'icon': 'fa fa-google-plus',
-            'onClick': function(e) {
-                e.preventDefault();
-                window.open("https://plus.google.com/share?url="+encodeURIComponent(location.href));
-            }
-        },
-        'weibo': {
-            'label': 'Weibo',
-            'icon': 'fa fa-weibo',
-            'onClick': function(e) {
-                e.preventDefault();
-                window.open("http://service.weibo.com/share/share.php?content=utf-8&url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title));
-            }
-        },
-    };
-})($);
 

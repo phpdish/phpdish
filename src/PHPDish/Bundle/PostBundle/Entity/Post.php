@@ -10,6 +10,7 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\CoreBundle\Utility;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\ChapterInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -21,7 +22,7 @@ use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
  * @ORM\Table(name="posts")
  * @ORM\HasLifecycleCallbacks
  */
-class Post implements PostInterface
+class Post implements PostInterface, ChapterInterface
 {
     use IdentifiableTrait,
         ContentTrait,
@@ -68,6 +69,19 @@ class Post implements PostInterface
     protected $category;
 
     /**
+     * 子章节
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * 父章节
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    protected $parent;
+
+    /**
      * 文章插图.
      * @var array
      */
@@ -78,8 +92,7 @@ class Post implements PostInterface
      */
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -230,6 +243,20 @@ class Post implements PostInterface
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function getNext()
+    {
     }
 
     /**

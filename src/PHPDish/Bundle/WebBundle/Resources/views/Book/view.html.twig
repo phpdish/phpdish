@@ -9,7 +9,7 @@
                     {% for _character in book.posts %}
                     <li class="chapter {% if character.id == _character.id %}active{% endif %}">
                         <a href="{{ path('book_character_view', {'slug': book.slug, 'characterId': _character.id}) }}">
-                            <i class="fa fa-angle-right"></i> {{ _character.title }}
+                            <i class="fa fa-caret-down"></i> {{ _character.title }}
                         </a>
                     </li>
                     {% endfor %}
@@ -30,7 +30,7 @@
                 </div>
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
-                        <section class="normal markdown-body">
+                        <section class="normal markdown-body" id="pjax-container">
                             <h1>{{ character.title|raw }}</h1>
                             {{ character.body|raw }}
                         </section>

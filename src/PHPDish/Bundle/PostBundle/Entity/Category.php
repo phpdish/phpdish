@@ -4,11 +4,13 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
+use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
@@ -17,14 +19,14 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
  * @ORM\Entity
  * @ORM\Table(name="categories")
  */
-class Category extends Taxonomy implements CategoryInterface
+class Category extends Taxonomy implements CategoryInterface, BookInterface
 {
     use EnabledTrait;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $cover = '';
+    protected $cover;
 
     /**
      * @ORM\Column(type="boolean")
@@ -76,6 +78,18 @@ class Category extends Taxonomy implements CategoryInterface
      * )
      */
     protected $managers;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @var boolean
+     */
+    protected $isBook;
+
+    /**
+     * 书籍目录
+     * @var array
+     */
+    protected $summary;
 
     /**
      * Constructor.
@@ -249,8 +263,32 @@ class Category extends Taxonomy implements CategoryInterface
     /**
      * {@inheritdoc}
      */
+    public function getSummary()
+    {
+        return $this->getPosts()->matching(Criteria::create()->where(Criteria::expr()->isNull('parent')));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isBelongsTo(UserInterface $user)
     {
         return $this->creator === $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function asBook()
+    {
+        $this->isBook = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBook()
+    {
+        return $this->isBook;
     }
 }

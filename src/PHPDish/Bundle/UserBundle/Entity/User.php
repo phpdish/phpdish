@@ -58,14 +58,14 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     protected $gender = 0;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $description = '';
+    protected $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $avatar = '';
+    protected $avatar;
 
     /**
      * @ORM\Column(type="integer")

@@ -63,7 +63,8 @@ Encore.createSharedEntry('vendor', [
     'highlight.js/styles/tomorrow.css',
     'selectize/dist/css/selectize.bootstrap3.css',
     'emojione',
-    'twemoji'
+    'twemoji',
+    'nprogress/nprogress.css'
 ]);
 
 //add style entries
