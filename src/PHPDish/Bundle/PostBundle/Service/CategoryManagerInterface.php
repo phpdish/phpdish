@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -89,4 +90,11 @@ interface CategoryManagerInterface
      * @return bool
      */
     public function saveCategory(CategoryInterface $category);
+
+    /**
+     * 创建查询用户专栏的query builder
+     * @param UserInterface $user
+     * @return QueryBuilder
+     */
+    public function createGetUserCategoriesQueryBuilder(UserInterface $user);
 }

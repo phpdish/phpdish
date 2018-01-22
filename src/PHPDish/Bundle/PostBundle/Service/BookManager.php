@@ -2,6 +2,8 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
+
 class BookManager implements BookManagerInterface
 {
     /**
@@ -29,7 +31,13 @@ class BookManager implements BookManagerInterface
         return $category;
     }
 
-    public function findCharacter($id)
+    public function findUserBooks(UserInterface $user)
+    {
+        $qb = $this->categoryManager->createGetUserCategoriesQueryBuilder($user);
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findChapter($id)
     {
         return $this->postManager->findPostById($id);
     }

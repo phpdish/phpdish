@@ -83,7 +83,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      * @ORM\Column(type="boolean", options={"default": false})
      * @var boolean
      */
-    protected $isBook;
+    protected $isBook = false;
 
     /**
      * 书籍目录

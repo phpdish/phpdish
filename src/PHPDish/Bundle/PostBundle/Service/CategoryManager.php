@@ -75,7 +75,7 @@ class CategoryManager implements CategoryManagerInterface
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function createGetUserCategoriesQueryBuilder(UserInterface $user)
+    public function createGetUserCategoriesQueryBuilder(UserInterface $user)
     {
         return $this->getRepository()->createQueryBuilder('c')
             ->where('c.creator = :userId')->setParameter('userId', $user->getId())
