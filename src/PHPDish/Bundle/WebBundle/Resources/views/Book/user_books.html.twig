@@ -1,6 +1,7 @@
 {% extends 'PHPDishWebBundle:User:view_common.html.twig' %}
 
 {% set tab = 'book' %}
+{% set isMe = app.user is same as (user) %}
 
 {% if books|length %}
     {% block entry_meta %}
@@ -10,31 +11,36 @@
 
 {% block user_content %}
     {% if books|length %}
-        <ul class="list-group book-list">
+        <ul class="book-list list-inline">
         {% for book in books %}
             {% set bookViewUrl = path('book_view', {'slug': book.slug}) %}
-            <li class="list-group-item">
-                <article class="media book clearfix" role="article">
-                    <div class="media-left media-middle cover">
+            <li>
+                <div class="book">
+                    <div class="cover">
                         <a href="{{ bookViewUrl }}">
-                            <img src="{{ asset(book.cover|default('user.jpg'))|imagine_filter('middle_square') }}" class="media-object"/>
+                            <img src="{{ asset(book.cover|default('user.jpg'))|imagine_filter('middle_rectangle') }}" class="media-object"/>
                         </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <a href="{{ bookViewUrl }}">{{ book.name }}</a>
-                        </h4>
-                        <p class="summary">{{ book.description }}</p>
-                        <ul class="list-unstyled list-inline meta" data-role="post-action">
-                            <li>订阅 {{ book.followerCount|default(0) }}</li>
-                            {% if is_granted('edit', book) %}
-                            <li><a href="/post/5/edit" title="编辑"><i class="if i-edit"></i> 编辑</a></li>
-                            {% endif %}
-                        </ul>
+                    <div class="details">
+                        <a href="{{ bookViewUrl }}">
+                            <h4 class="title">
+                               {{ book.name }}
+                            </h4>
+                        </a>
+                        {% if is_granted('edit', book) %}
+                            <div class="edit"><a href="/post/5/edit" title="编辑"><i class="if i-edit"></i></a></div>
+                        {% endif %}
                     </div>
-                </article>
+                </div>
             </li>
         {% endfor %}
+        {% if isMe %}
+            <li>
+                <div class="add-book">
+                    <a title="写书"><i class="if i-plus-bold"></i></a>
+                </div>
+            </li>
+        {% endif %}
         </ul>
     {% else %}
             <div class="empty-data">

@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,10 +25,31 @@ class BookController extends Controller
     public function viewAction($slug, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        $character = $this->getBookManager()->findCharacter(1);
+
         return $this->render('PHPDishWebBundle:Book:view.html.twig', [
             'book' => $book,
-            'character' => $character
+        ]);
+    }
+
+    /**
+     * 专栏的关注者.
+     *
+     * @Route("/books/{slug}/followers", name="book_followers")
+     * @Method("GET")
+     *
+     * @param string $slug
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getFollowersAction($slug, Request $request)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        $users = $this->getUserManager()->findCategoryFollowers($book, $request->query->getInt('page', 1));
+
+        return $this->render('PHPDishWebBundle:Book:followers.html.twig', [
+            'book' => $book,
+            'users' => $users,
         ]);
     }
 
@@ -43,8 +65,8 @@ class BookController extends Controller
     public function viewCharacterAction($slug, $characterId, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        $character = $this->getBookManager()->findCharacter($characterId);
-        return $this->render('PHPDishWebBundle:Book:view.html.twig', [
+        $character = $this->getBookManager()->findChapter($characterId);
+        return $this->render('PHPDishWebBundle:Book:read.html.twig', [
             'book' => $book,
             'character' => $character
         ]);

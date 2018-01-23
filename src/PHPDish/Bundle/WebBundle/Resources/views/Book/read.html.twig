@@ -1,0 +1,55 @@
+{% extends "PHPDishWebBundle::layout.html.twig" %}
+
+{% block root %}
+    <div class="book-view with-summary" data-role="book-detail">
+        <div class="book-summary" data-role="summary">
+            <div class="book-name"><a href="{{ path('book_view', {'slug': book.slug}) }}" class="custom-link">{{ book.name }}</a></div>
+            <nav role="navigation">
+                <ul class="summary">
+                    {% for _character in book.posts %}
+                    <li class="chapter {% if character.id == _character.id %}active{% endif %}">
+                        <a href="{{ path('book_character_view', {'slug': book.slug, 'characterId': _character.id}) }}">
+                            <i class="fa fa-caret-down"></i> {{ _character.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="book-body" data-role="body">
+            <div class="body-inner">
+                <div class="book-header" role="navigation">
+                    <!-- Title -->
+                    <a class="btn pull-left js-toolbar-action" data-role="toggle-summary" aria-label="" href="#"><i class="fa fa-align-justify"></i></a>
+                    <div data-role="social-share" class="pull-right">
+                    </div>
+                    <h1>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        <a href=".">{{ character.title }}</a>
+                    </h1>
+                </div>
+                <div class="page-wrapper" tabindex="-1" role="main">
+                    <div class="page-inner">
+                        <section class="normal markdown-body" id="pjax-container">
+                            <h1>{{ character.title|raw }}</h1>
+                            {{ character.body|raw }}
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <a href="" class="navigation navigation-left navigation-unique">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a href="" class="navigation navigation-next navigation-unique">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/book.js') }}"></script>
+    <script type="text/javascript">
+        window.bookId = {{ book.id }};
+    </script>
+{% endblock %}

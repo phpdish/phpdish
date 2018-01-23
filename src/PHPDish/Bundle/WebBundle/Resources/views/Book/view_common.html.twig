@@ -1,0 +1,60 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %} {{ book.name }} {% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{{ asset('build/js/book.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container narrow-layout">
+    {% from  'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
+    {{ flashes() }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-u category-detail book-detail">
+                <div class="panel-heading">
+                    <div class="media category">
+                        <div class="media-left media-middle">
+                            {% set bookUrl = path('book_view', {'slug': book.slug}) %}
+                            <a href="{{ bookUrl }}" class="avatar">
+                                <img src="{{ book.cover|imagine_filter('middle_rectangle') }}" class="media-object img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ book.slug }}">
+                                {% if app.user and book.isFollowedBy(app.user) %}
+                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已订阅</button>
+                                {% else %}
+                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 订阅</button>
+                                {% endif %}
+                            </div>
+                            <h4 class="media-heading">
+                                <a class="name" href="{{ bookUrl }}">{{ book.name }}</a>
+                                {% if is_granted('edit', book) %}
+                                    <a class="meta" href="{{ path('category_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑书籍</a>
+                                {% endif %}
+                            </h4>
+                            <ul class="list-unstyled list-inline meta">
+                                <li>文章 {{ book.postCount }}</li>
+                                <li>订阅 {{ book.followerCount }}</li>
+                            </ul>
+                            <div>{{ book.description }}</div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
+                    <li {% if tab == 'about' %} class="active" {% endif %}><a href="{{ path('book_view', {'slug': book.slug}) }}">前言</a></li>
+                    <li {% if tab == 'summary' %} class="active" {% endif %}><a href="{{ path('book_view', {'slug': book.slug, 'tab': 'summary'}) }}">目录</a></li>
+                    <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': book.slug}) }}">订阅</a></li>
+                </ul>
+                <div id="list-container">
+                    {% block book_content %}
+                        <div class="empty-data">没有任何数据</div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

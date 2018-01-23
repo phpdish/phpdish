@@ -3,16 +3,13 @@ import hljs from 'highlight.js';
 import SocialShare from 'social-share-button.js';
 import NProgress from 'nprogress';
 import 'jquery-pjax';
+import AjaxTab from "../modules/ajaxtab";
+import Util from "../modules/util";
+import {FollowUserIntialization} from "../modules/actions";
 
-(function($) {
-    //代码高亮
-    $('pre code').each(function (i, block) {
-        hljs.highlightBlock(block);
-    });
-})($);
-
-(function($){
-    const $bookDetail = $('[data-role="book-detail"]');
+//书籍阅读页面
+const $bookDetail = $('[data-role="book-detail"]');
+$bookDetail.length > 0 && (function($){
     const $bookSummary = $bookDetail.find('[data-role="summary"]');
     const $summaryToggleBtn = $bookDetail.find('[data-role="toggle-summary"]');
     $summaryToggleBtn.on('click', function(){
@@ -24,6 +21,11 @@ import 'jquery-pjax';
         'facebook': false,
         'twitter': false
     });
+    //代码高亮
+    $('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+    });
+
     (function($){
         const $document = $(document);
         const $characters = $bookSummary.find('li.chapter');
@@ -44,3 +46,16 @@ import 'jquery-pjax';
 })($);
 
 
+
+//View Category
+//AjaxTab
+new AjaxTab($('[data-pjax-container]'), {
+    container: '#list-container',
+    loader: '#loader',
+    before: (container) => {
+        Util.htmlPlaceholder(container);
+    },
+    success: (container) => {
+        new FollowUserIntialization(container);
+    }
+});

@@ -2,14 +2,76 @@
   用户书籍
 ------------------------------------*/
 .book-list{
+  li{
+    padding:10px 15px;
+    padding-right:0;
+  }
   .book{
-    .cover{
-      img{
-        width: 80px;
+    position: relative;
+    border:1px solid #dedede;
+    overflow: hidden;
+    &:hover{
+      .details {
+        display: block;
+      }
+      .cover{
+        img{
+          transform: scale(1.05);
+        }
       }
     }
-    .media-heading{
-      font-weight: 600;
+    .cover{
+      img{
+        width: 135px;
+        height:180px;
+        transition: transform 250ms ease;
+      }
+    }
+    .details{
+      a{
+        color: #fff !important;
+        text-decoration: none;
+      }
+      position:absolute;
+      text-align: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.3);
+      display:none;
+      z-index: 2;
+      color: #fff;
+      .title{
+        margin-top:45%;
+      }
+      .edit{
+        position:absolute;
+        top:0;
+        right:5px;
+      }
+    }
+  }
+
+  .add-book{
+    height:180px;
+    width:120px;
+    display: inline-block;
+    vertical-align: bottom;
+    padding-top:35%;
+    text-align: center;
+    img{
+      width: 135px;
+      height:180px;
+      transition: transform 250ms ease;
+      border:1px solid #dedede;
+    }
+    a{
+      text-decoration: none;
+      color:$metaColor;
+    }
+    .if{
+      font-size:38px;
     }
   }
 }
@@ -18,6 +80,14 @@
   书籍详情
 ------------------------------------*/
 .book-detail{
+  .book-description{
+    padding:10px 15px;
+  }
+}
+/*------------------------------------
+  书籍阅读详情
+------------------------------------*/
+.book-view{
   position: relative;
   width: 100%;
   height: 100%;

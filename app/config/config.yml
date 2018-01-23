@@ -145,6 +145,12 @@ liip_imagine:
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
                 background: { size: [120, 120], position: center, color: '#ffffff' }
+
+        middle_rectangle:
+            quality: 75
+            filters:
+                thumbnail: { size: [220, 300], mode: outbound }
+                background: { size: [220, 300], position: center, color: '#ffffff' }
 ## FOSUser
 fos_user:
     db_driver: orm
