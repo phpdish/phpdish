@@ -32,7 +32,7 @@
                             <h4 class="media-heading">
                                 <a class="name" href="{{ bookUrl }}">{{ book.name }}</a>
                                 {% if is_granted('edit', book) %}
-                                    <a class="meta" href="{{ path('category_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑书籍</a>
+                                    <a class="meta" href="{{ path('category_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑</a>
                                 {% endif %}
                             </h4>
                             <ul class="list-unstyled list-inline meta">
@@ -45,10 +45,10 @@
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'about' %} class="active" {% endif %}><a href="{{ path('book_view', {'slug': book.slug}) }}">前言</a></li>
-                    <li {% if tab == 'summary' %} class="active" {% endif %}><a href="{{ path('book_view', {'slug': book.slug, 'tab': 'summary'}) }}">目录</a></li>
+                    <li {% if tab == 'summary' %} class="active" {% endif %}><a href="{{ path('book_summary', {'slug': book.slug}) }}">目录</a></li>
                     <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': book.slug}) }}">订阅</a></li>
                 </ul>
-                <div id="list-container">
+                <div id="book-details">
                     {% block book_content %}
                         <div class="empty-data">没有任何数据</div>
                     {% endblock %}

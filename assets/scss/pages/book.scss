@@ -80,8 +80,32 @@
   书籍详情
 ------------------------------------*/
 .book-detail{
-  .book-description{
+  .book-box{
     padding:10px 15px;
+  }
+
+  .book-summary{
+    .chapter{
+      padding: 10px 5px;
+      //&:before{
+      //  font-family:FontAwesome;
+      //  content: "\f15c"
+      //}
+      .action{
+        padding-left: 15px;
+        display:none;
+      }
+      .fa{
+        color: $metaColor;
+        margin-right:5px;
+      }
+      &:hover{
+        .action{
+          display: inline-block;
+        }
+        background-color:rgba(0,0,0, 0.1)
+      }
+    }
   }
 }
 /*------------------------------------

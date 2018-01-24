@@ -25,8 +25,22 @@ class BookController extends Controller
     public function viewAction($slug, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-
         return $this->render('PHPDishWebBundle:Book:view.html.twig', [
+            'book' => $book,
+        ]);
+    }
+
+    /**
+     * 查看书籍目录
+     *
+     * @Route("/books/{slug}/summary", name="book_summary")
+     * @param string $slug
+     * @return Response
+     */
+    public function getSummaryAction($slug)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        return $this->render('PHPDishWebBundle:Book:summary.html.twig', [
             'book' => $book,
         ]);
     }
@@ -56,16 +70,16 @@ class BookController extends Controller
     /**
      * 查看书籍具体章节
      *
-     * @Route("/books/{slug}/characters/{characterId}", name="book_character_view", requirements={"slug": "[\w-]+", "characterId": "\d+"})
+     * @Route("/books/{slug}/chapter/{chapterId}", name="book_chapter_view", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
      * @param string $slug
-     * @param int $characterId
+     * @param int $chapterId
      * @param Request $request
      * @return Response
      */
-    public function viewCharacterAction($slug, $characterId, Request $request)
+    public function viewCharacterAction($slug, $chapterId, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        $character = $this->getBookManager()->findChapter($characterId);
+        $character = $this->getBookManager()->findChapter($chapterId);
         return $this->render('PHPDishWebBundle:Book:read.html.twig', [
             'book' => $book,
             'character' => $character

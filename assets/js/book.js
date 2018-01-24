@@ -6,12 +6,42 @@ import 'jquery-pjax';
 import AjaxTab from "../modules/ajaxtab";
 import Util from "../modules/util";
 import {FollowUserIntialization} from "../modules/actions";
+import lockButton from '../modules/button-lock.js';
+
+//书籍详情页面
+const $bookDetails = $('#book-details');
+
+(function(){
+    const $addChapter = $bookDetails.find('[data-role="add-chapter"]');
+    const btnLock = lockButton($addChapter);
+    $addChapter.on('click', function(){
+        if (btnLock.isDisabled()) {
+            return false;
+        }
+        btnLock.lock();
+        Util.dialog.inputs('章节名称', [{name: 'name', required: true}], {
+            messages: {
+                name: {
+                    "required": "请输入章节标题"
+                }
+            }
+        }, {
+            'okValue': '创建',
+            'cancelValue': '取消'
+        }).then((data)=>{
+            console.log(data);
+            btnLock.release();
+        }, ()=>{
+            btnLock.release();
+        });
+    });
+})($);
 
 //书籍阅读页面
-const $bookDetail = $('[data-role="book-detail"]');
-$bookDetail.length > 0 && (function($){
-    const $bookSummary = $bookDetail.find('[data-role="summary"]');
-    const $summaryToggleBtn = $bookDetail.find('[data-role="toggle-summary"]');
+const $bookView = $('[data-role="book-view"]');
+$bookView.length > 0 && (function($){
+    const $bookSummary = $bookView.find('[data-role="summary"]');
+    const $summaryToggleBtn = $bookView.find('[data-role="toggle-summary"]');
     $summaryToggleBtn.on('click', function(){
         $bookDetail.toggleClass('with-summary');
     });
@@ -47,10 +77,10 @@ $bookDetail.length > 0 && (function($){
 
 
 
-//View Category
+//View Book
 //AjaxTab
 new AjaxTab($('[data-pjax-container]'), {
-    container: '#list-container',
+    container: '#book-details',
     loader: '#loader',
     before: (container) => {
         Util.htmlPlaceholder(container);

@@ -1,7 +1,7 @@
 {% extends "PHPDishWebBundle::layout.html.twig" %}
 
 {% block root %}
-    <div class="book-view with-summary" data-role="book-detail">
+    <div class="book-view with-summary" data-role="book-view">
         <div class="book-summary" data-role="summary">
             <div class="book-name"><a href="{{ path('book_view', {'slug': book.slug}) }}" class="custom-link">{{ book.name }}</a></div>
             <nav role="navigation">

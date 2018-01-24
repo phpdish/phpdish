@@ -3,7 +3,9 @@
 {% set tab = 'about' %}
 
 {% block book_content %}
-    <div class="markdown-body book-description">
-        {{ book.description|raw }}
+    <div class="book-box">
+        <div class="markdown-body book-description">
+            {{ book.description|raw }}
+        </div>
     </div>
 {% endblock %}

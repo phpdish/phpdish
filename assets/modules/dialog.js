@@ -2,6 +2,9 @@
 
 import artDialog from 'art-dialog';
 import 'art-dialog/css/dialog.css';
+import _ from 'lodash';
+import 'jquery-validation';
+import util from './util.js';
 
 function Dialog(options){
     options = options || {};
@@ -105,4 +108,43 @@ export const confirm = (message, options) => {
     });
 };
 
+export const inputs = (title, inputs, validateOptions, options) => {
+    options = options || {};
+    const dialogFormId = '_dialog_form_' + util.generateMixed(10);
+    let html = `<form id="${dialogFormId}">`;
+    _.each(inputs, (input)=>{
+        html += '<div class="form-group">'
+            + (input.label ? `<label>${input.label}</label>` : '')
+            + `<input class="form-control" type="text" name="${input.name}" ${input.required ? "required=\"required\"" : ''}/>`
+        + '</div>';
+    });
+    html += '</form>';
+    return new Promise((resolve, reject)=>{
+
+        const yes = function(){
+            const $form = $('#' + dialogFormId);
+            $form.validate(validateOptions || {});
+
+            if (!$form.valid()) {
+                return false;
+            }
+            let data = {};
+            const array = $form.serializeArray();
+            array.forEach((item)=>{
+                data[item.name] = item.value;
+            });
+            resolve(data);
+        };
+
+        new Dialog(_.merge({
+            title: title,
+            content: html,
+            ok: yes,
+            cancel: reject,
+            okValue: '是',
+            cancelValue: '否'
+        }, options));
+    });
+
+};
 export default Dialog;
