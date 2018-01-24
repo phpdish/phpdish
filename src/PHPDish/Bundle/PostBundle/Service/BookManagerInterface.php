@@ -30,4 +30,6 @@ interface BookManagerInterface
      * @return PostInterface
      */
     public function findChapter($id);
+
+    public function addBookChapter(BookInterface $book, $chapter);
 }

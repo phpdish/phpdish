@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class BookManager implements BookManagerInterface
@@ -40,5 +41,17 @@ class BookManager implements BookManagerInterface
     public function findChapter($id)
     {
         return $this->postManager->findPostById($id);
+    }
+
+    public function addBookChapter(BookInterface $book, $chapter)
+    {
+        if (is_string($chapter)) {
+            $title = $chapter;
+            $chapter = $this->postManager->createPost($book->getCreator());
+            $chapter->setTitle($title);
+        }
+        $book->getPosts()->add($chapter);
+        $this->categoryManager->saveCategory($book);
+        return $chapter;
     }
 }

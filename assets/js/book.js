@@ -19,9 +19,9 @@ const $bookDetails = $('#book-details');
             return false;
         }
         btnLock.lock();
-        Util.dialog.inputs('章节名称', [{name: 'name', required: true}], {
+        Util.dialog.inputs('章节名称', [{name: 'title', required: true}], {
             messages: {
-                name: {
+                title: {
                     "required": "请输入章节标题"
                 }
             }
@@ -30,6 +30,11 @@ const $bookDetails = $('#book-details');
             'cancelValue': '取消'
         }).then((data)=>{
             console.log(data);
+            Util.request('book.add_chapter', {slug: window.book.slug}, data).done(()=>{
+                location.reload();
+            }).fail(()=>{
+                Util.dialog.message('创建章节失败').flash();
+            });
             btnLock.release();
         }, ()=>{
             btnLock.release();

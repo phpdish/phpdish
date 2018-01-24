@@ -4,6 +4,9 @@
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/book.js') }}"></script>
+    <script>
+        window.book = {{ book|serialize('json', serialization_context().setGroups(['Default']))|raw }};
+    </script>
 {% endblock %}
 
 {% block content %}

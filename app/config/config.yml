@@ -29,6 +29,7 @@ framework:
     serializer:
       enable_annotations: true
       enabled: true
+      cache: serializer.mapping.cache.apc
 
     templating:
         engines: ['twig']

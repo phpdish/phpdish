@@ -14,6 +14,7 @@ use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -44,8 +45,9 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     protected $followerCount = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="category", cascade={"persist"})
      * @var PostInterface[]|Collection
+     * @JMS\Groups({"details"})
      */
     protected $posts;
 
@@ -57,6 +59,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
      * )
+     * @JMS\Groups({"details"})
      */
     protected $followers;
 
@@ -65,6 +68,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      *
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @JMS\Groups({"details"})
      */
     protected $creator;
 
@@ -76,6 +80,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
      * )
+     * @JMS\Groups({"details"})
      */
     protected $managers;
 
@@ -84,12 +89,6 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      * @var boolean
      */
     protected $isBook = false;
-
-    /**
-     * 书籍目录
-     * @var array
-     */
-    protected $summary;
 
     /**
      * Constructor.
@@ -144,6 +143,14 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      * {@inheritdoc}
      */
     public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthor()
     {
         return $this->creator;
     }

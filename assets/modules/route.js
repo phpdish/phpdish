@@ -15,6 +15,8 @@ const routes = {
     'category.follow': {path: '/categories/{slug}/followers', method: 'POST'},
     'category.unfollow': {path: '/categories/{slug}/followers', method: 'DELETE'},
 
+    //书籍
+    'book.add_chapter': {path: '/books/{slug}/chapters', method: 'POST'},
 
     //用户相关
     'user.follow': {path:'/users/{username}/followers', method: 'POST'},

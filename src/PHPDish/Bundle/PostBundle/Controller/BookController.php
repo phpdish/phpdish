@@ -2,13 +2,14 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class BookController extends Controller
+class BookController extends RestController
 {
     use ManagerTrait;
 
@@ -105,5 +106,24 @@ class BookController extends Controller
             'user' => $user,
             'books' => $books
         ]);
+    }
+
+    /**
+     * 添加章节
+     *
+     * @Route("/books/{slug}/chapters", name="book_add_chapter")
+     * @Method("POST")
+     * @param string  $slug
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function addChapterAction($slug, Request $request)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        $chapter = $this->getBookManager()->addBookChapter($book, $request->request->get('title'));
+        return $this->handleView($this->view([
+            'chapter' => $chapter
+        ]));
     }
 }

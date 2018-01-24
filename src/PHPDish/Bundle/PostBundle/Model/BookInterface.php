@@ -2,11 +2,20 @@
 
 namespace PHPDish\Bundle\PostBundle\Model;
 
-interface BookInterface
+use Doctrine\Common\Collections\Collection;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
+
+interface BookInterface extends CategoryInterface
 {
     /**
      * 获取书籍的目录
-     * @return array
+     * @return Collection|ChapterInterface[]
      */
     public function getSummary();
+
+    /**
+     * 获取作者
+     * @return UserInterface
+     */
+    public function getAuthor();
 }

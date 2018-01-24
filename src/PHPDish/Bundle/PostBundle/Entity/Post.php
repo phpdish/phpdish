@@ -95,6 +95,11 @@ class Post implements PostInterface, ChapterInterface
         $this->children = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     /**
      * {@inheritdoc}
      */
