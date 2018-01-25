@@ -1,0 +1,50 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% set title = book is defined ? '编辑章节' : '添加章节' %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ asset('build/js/book.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container narrow-layout">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-u add-post">
+                <div class="panel-heading">{{ title }}</div>
+                <div class="panel-body">
+                    {{ form_start(form, {'attr': {'id': 'add-chapter-form'}}) }}
+                    {{ form_errors(form) }}
+                    <div class="form-group">
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': '请输入标题'}}) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.originalBody, {'required': false, 'attr': {
+                            'class': 'form-control body',
+                            'placeholder': "请使用 Markdown 格式书写,注意代码高亮。" }}
+                        ) }}
+                        {{ form_errors(form.originalBody) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.parent) }}
+                        {{ form_widget(form.parent, {'attr': {'class': 'selectpicker form-control category'}}) }}
+                        {{ form_errors(form.parent) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="action-popover">
+    <div class="container narrow-layout">
+        <button type="submit" form="add-chapter-form" data-action="add-chapter" class="btn u-btn-primary pull-right"><i class="if i-publish"></i> 发布</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -14,7 +14,6 @@ trait ContentTrait
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
      */
     protected $originalBody;
 

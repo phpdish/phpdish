@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -77,7 +78,7 @@ class BookController extends RestController
      * @param Request $request
      * @return Response
      */
-    public function viewCharacterAction($slug, $chapterId, Request $request)
+    public function viewChapterAction($slug, $chapterId, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
         $character = $this->getBookManager()->findChapter($chapterId);
@@ -111,8 +112,47 @@ class BookController extends RestController
     /**
      * 添加章节
      *
-     * @Route("/books/{slug}/chapters", name="book_add_chapter")
+     * @Route("/books/{slug}/summary", name="book_add_summary")
      * @Method("POST")
+     * @param string  $slug
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function addSummaryAction($slug, Request $request)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        $chapter = $this->getBookManager()->addBookChapter($book, $request->request->get('title'));
+        return $this->handleView($this->view([
+            'chapter' => $chapter
+        ]));
+    }
+
+    /**
+     * 添加章节
+     *
+     * @Route("/books/{slug}/summary/{id}/edit", name="book_edit_summary")
+     * @Method("POST")
+     * @param string  $slug
+     * @param int  $id
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editSummaryAction($slug, $id, Request $request)
+    {
+        $chapter = $this->getBookManager()->findChapter($id);
+        $chapter->setTitle($request->request->get('title'));
+        $this->getPostManager()->savePost($chapter);
+        return $this->handleView($this->view([
+            'chapter' => $chapter
+        ]));
+    }
+
+    /**
+     * 添加章节
+     *
+     * @Route("/books/{slug}/chapters/new", name="book_add_chapter")
      * @param string  $slug
      * @param Request $request
      *
@@ -121,9 +161,69 @@ class BookController extends RestController
     public function addChapterAction($slug, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        $chapter = $this->getBookManager()->addBookChapter($book, $request->request->get('title'));
-        return $this->handleView($this->view([
+        $this->denyAccessUnlessGranted('edit', $book);
+
+        //创建from
+        $chapter = $this->getPostManager()->createPost($this->getUser());
+        $chapter->setCategory($book);
+        $defaultChapter = null;
+        if ($defaultChapterId = $request->query->get('summary')) {
+            $defaultChapter = $this->getBookManager()->findChapter($defaultChapterId);
+        }
+        $form = $this->createForm(ChapterType::class, $chapter, [
+            'book' => $book,
+            'default_character' => $defaultChapter
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getPostManager()->savePost($chapter)) {
+                $this->addFlash('success', '章节创建成功');
+                return $this->redirectToRoute('book_view', [
+                    'slug' => $slug
+                ]);
+            } else {
+                $this->addFlash('error', '章节创建失败');
+            }
+        }
+        return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * 添加章节
+     *
+     * @Route("/books/{slug}/chapters/{id}/edit", name="book_edit_chapter")
+     * @param string  $slug
+     * @param int $id
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editChapterAction($slug, $id, Request $request)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        $this->denyAccessUnlessGranted('edit', $book);
+
+        //创建from
+        $chapter = $this->getBookManager()->findChapter($id);
+        $form = $this->createForm(ChapterType::class, $chapter, [
+            'book' => $book,
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->getPostManager()->savePost($chapter)) {
+                $this->addFlash('success', '章节修改成功');
+                return $this->redirectToRoute('book_view', [
+                    'slug' => $slug
+                ]);
+            } else {
+                $this->addFlash('error', '章节修改失败');
+            }
+        }
+        return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [
+            'form' => $form->createView(),
             'chapter' => $chapter
-        ]));
+        ]);
     }
 }

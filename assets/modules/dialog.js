@@ -115,7 +115,7 @@ export const inputs = (title, inputs, validateOptions, options) => {
     _.each(inputs, (input)=>{
         html += '<div class="form-group">'
             + (input.label ? `<label>${input.label}</label>` : '')
-            + `<input class="form-control" type="text" name="${input.name}" ${input.required ? "required=\"required\"" : ''}/>`
+            + `<input class="form-control" type="text" value="${input.default || ''}" name="${input.name}" ${input.required ? "required=\"required\"" : ''}/>`
         + '</div>';
     });
     html += '</form>';

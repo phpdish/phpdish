@@ -7,40 +7,158 @@ import AjaxTab from "../modules/ajaxtab";
 import Util from "../modules/util";
 import {FollowUserIntialization} from "../modules/actions";
 import lockButton from '../modules/button-lock.js';
+import InlineAttachment from "../modules/inline-attachment";
+import SimpleMDE from "simplemde";
 
 //书籍详情页面
 const $bookDetails = $('#book-details');
+$bookDetails.length > 0 && (function($){
+    new AjaxTab($('[data-pjax-container]'), {
+        container: '#book-details',
+        loader: '#loader',
+        before: (container) => {
+            Util.htmlPlaceholder(container);
+        },
+        success: (container) => {
+            new FollowUserIntialization(container);
+            initBookSummary();
+        }
+    });
+    function initBookSummary(){
+        const $addChapter = $bookDetails.find('[data-role="add-chapter"]');
+        const btnLock = lockButton($addChapter);
+        $addChapter.on('click', function(){
+            if (btnLock.isDisabled()) {
+                return false;
+            }
+            btnLock.lock();
+            Util.dialog.inputs('章节名称', [{name: 'title', required: true}], {
+                messages: {
+                    title: {
+                        "required": "请输入章节标题"
+                    }
+                }
+            }, {
+                'okValue': '创建',
+                'cancelValue': '取消',
+                width: 350
+            }).then((data)=>{
+                console.log(data);
+                Util.request('book.add_summary', {slug: window.book.slug}, data).done(()=>{
+                    location.reload();
+                }).fail(()=>{
+                    Util.dialog.message('创建章节失败').flash();
+                });
+                btnLock.release();
+            }, ()=>{
+                btnLock.release();
+            });
+        });
+        //处理action
+        const $bookChapters = $bookDetails.find('[data-role="chapter"]');
+        $bookChapters.each(function(){
+            const $this = $(this);
+            const $edit = $this.find('[data-role="edit"]');
+            const $addSub = $this.find('[data-role="add-sub"]');
+            const $delete = $this.find('[data-role="delete"]');
+            $edit.on('click', function(){
+                Util.dialog.inputs('章节名称', [{
+                    name: 'title',
+                    default: $this.data('title'),
+                    required: true
+                }], {
+                    messages: {
+                        title: {
+                            "required": "请输入章节标题"
+                        }
+                    }
+                }, {
+                    'okValue': '修改',
+                    'cancelValue': '取消',
+                    width: 350
+                }).then((data)=>{
+                    console.log(data);
+                    Util.request('book.edit_summary', {slug: window.book.slug, id: $this.data('id')}, data).done(()=>{
+                        location.reload();
+                    }).fail(()=>{
+                        Util.dialog.message('修改章节失败').flash();
+                    });
+                }, ()=>{
+                });
+            });
+        });
+    }
+    initBookSummary();
+})($);
 
-(function(){
-    const $addChapter = $bookDetails.find('[data-role="add-chapter"]');
-    const btnLock = lockButton($addChapter);
-    $addChapter.on('click', function(){
-        if (btnLock.isDisabled()) {
+
+//添加章节
+const chapterBody = document.getElementById('chapter_originalBody');
+const $chapterBody = $(chapterBody);
+$chapterBody.length > 0 && (function($){
+    const $postTitle = $('#chapter_title');
+    const $addChapterForm = $('#add-chapter-form');
+    const $addChapterBtn = $('[data-action="add-chapter"]');
+
+    const simplemde = new SimpleMDE({
+        element: chapterBody,
+        autofocus: true,
+        spellChecker: false,
+        status: false,
+        indentWithTabs: false,
+        tabSize: 4,
+        autosave: {
+            enabled: true,
+            uniqueId: 'chapter_draft',
+            delay: 1000,
+        },
+        toolbar: [
+            "bold", "italic", "heading", "|", "quote", "code", "table",
+            "horizontal-rule", "unordered-list", "ordered-list", "|",
+            "link", "image", "|",  "side-by-side", "fullscreen", "preview", "|",
+            {
+                name: 'guide',
+                action: 'https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md',
+                className: 'fa fa-info-circle',
+                title: 'Markdown 语法',
+            }
+        ],
+    });
+    new InlineAttachment(simplemde.codemirror); //处理附件上传的功能
+    $addChapterBtn.on('click', () => {
+        if ($postTitle.val().length === 0) {
+            Util.dialog.message('标题不能为空').flash();
             return false;
         }
-        btnLock.lock();
-        Util.dialog.inputs('章节名称', [{name: 'title', required: true}], {
-            messages: {
-                title: {
-                    "required": "请输入章节标题"
-                }
-            }
-        }, {
-            'okValue': '创建',
-            'cancelValue': '取消'
-        }).then((data)=>{
-            console.log(data);
-            Util.request('book.add_chapter', {slug: window.book.slug}, data).done(()=>{
-                location.reload();
-            }).fail(()=>{
-                Util.dialog.message('创建章节失败').flash();
-            });
-            btnLock.release();
-        }, ()=>{
-            btnLock.release();
+        const buttonLock = lockButton($addChapterBtn).lock();
+        Util.dialog.confirm('确认发布？').then(()=> {
+            $addChapterForm.submit();
+            return true;
+        }, () => {
+            buttonLock.release();
+            return false;
         });
+        return false;
+    });
+
+    //添加文章验证
+    $addChapterForm.validate({
+        rules: {
+            'chapter[title]': {
+                required: true,
+                rangelength: [2,50]
+            }
+        },
+        messages: {
+            'chapter[title]': {
+                required: "请输入章节标题",
+                rangelength: "标题长度在2到50位之间"
+            },
+        }
     });
 })($);
+
+
 
 //书籍阅读页面
 const $bookView = $('[data-role="book-view"]');
@@ -48,10 +166,10 @@ $bookView.length > 0 && (function($){
     const $bookSummary = $bookView.find('[data-role="summary"]');
     const $summaryToggleBtn = $bookView.find('[data-role="toggle-summary"]');
     $summaryToggleBtn.on('click', function(){
-        $bookDetail.toggleClass('with-summary');
+        $bookView.toggleClass('with-summary');
     });
     //分享
-    new SocialShare($bookDetail.find('[data-role="social-share"]'), {
+    new SocialShare($bookView.find('[data-role="social-share"]'), {
         'theme': 'dark-square',
         'facebook': false,
         'twitter': false
@@ -79,18 +197,3 @@ $bookView.length > 0 && (function($){
         });
     })($);
 })($);
-
-
-
-//View Book
-//AjaxTab
-new AjaxTab($('[data-pjax-container]'), {
-    container: '#book-details',
-    loader: '#loader',
-    before: (container) => {
-        Util.htmlPlaceholder(container);
-    },
-    success: (container) => {
-        new FollowUserIntialization(container);
-    }
-});

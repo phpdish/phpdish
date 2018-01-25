@@ -21,6 +21,20 @@ use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
  * @ORM\Table(name="posts")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\AttributeOverrides({
+ *     @ORM\AttributeOverride(name="body",
+ *         column=@ORM\Column(
+ *             type="text",
+ *             nullable=true
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="originalBody",
+ *         column=@ORM\Column(
+ *             type="text",
+ *             nullable=true
+ *         )
+ *     )
+ * })
  */
 class Post implements PostInterface, ChapterInterface
 {
@@ -258,6 +272,12 @@ class Post implements PostInterface, ChapterInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function setParent(ChapterInterface $chapter)
+    {
+        $this->parent = $chapter;
+        return $this;
     }
 
     public function getNext()

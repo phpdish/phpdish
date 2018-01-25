@@ -6,19 +6,26 @@
     <div class="book-box">
         <ul class="list-unstyled book-summary" data-role="summary">
             {% for chapter in book.summary %}
-            <li class="chapter">
+            <li class="chapter" data-role="chapter" data-id="{{ chapter.id }}" data-title="{{ chapter.title }}">
                 <div class="clearfix">
                     <span class="name"><i class="fa fa-file-text"></i> {{ loop.index }}. {{ chapter.title }}</span>
                     <span class="action" data-role="action">
-                        <a title="修改本章" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
-                        <a title="添加子章节"  href="javascript:void(0);"><i class="fa fa-plus-square-o"></i></a>
-                        <a title="删除本章"  href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                        <a title="修改本章" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
+                        <a title="添加子章节" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
+                        <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
                     </span>
                 </div>
-                <ul class="sub-chapter">
+                <ul class="sub-chapter list-unstyled">
+                    {% set summaryIndex = loop.index %}
                     {% for children in chapter.children %}
-                        <li>
-                            <a href="{{ path('book_chapter_view', {'slug': book.slug, 'chapterId': children.id}) }}">{{ chapter.title }}</a>
+                        <li data-role="sub-chapter" data-id="{{ children.id  }}">
+                            <a href="{{ path('book_chapter_view', {'slug': book.slug, 'chapterId': children.id}) }}">
+                                <i class="fa fa-file-text"></i>  {{ summaryIndex }}.{{ loop.index }} {{ children.title }}
+                            </a>
+                            <span class="action" data-role="action">
+                                <a title="修改本章" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                            </span>
                         </li>
                     {% endfor %}
                 </ul>

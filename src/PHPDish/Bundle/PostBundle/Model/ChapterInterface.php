@@ -17,6 +17,13 @@ interface ChapterInterface
      */
     public function getChildren();
 
+    /**
+     * 设置上一级别章节
+     *
+     * @param ChapterInterface $chapter
+     * @return ChapterInterface
+     */
+    public function setParent(ChapterInterface $chapter);
 //    /**
 //     * 获取上一章
 //     * @return ChapterInterface|null

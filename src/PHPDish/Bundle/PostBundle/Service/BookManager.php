@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Carbon\Carbon;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
@@ -50,8 +51,9 @@ class BookManager implements BookManagerInterface
             $chapter = $this->postManager->createPost($book->getCreator());
             $chapter->setTitle($title);
         }
-        $book->getPosts()->add($chapter);
-        $this->categoryManager->saveCategory($book);
+        $chapter->setUpdatedAt(Carbon::now())
+            ->setCategory($book);
+        $this->postManager->savePost($chapter);
         return $chapter;
     }
 }
