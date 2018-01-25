@@ -2,36 +2,55 @@
 
 {% set tab = 'summary' %}
 
+{% set isGranted = is_granted('edit', book) %}
 {% block book_content %}
-    <div class="book-box">
-        <ul class="list-unstyled book-summary" data-role="summary">
+    {#<div class="book-box">#}
+        <ul class="list-group book-summary" data-role="summary">
             {% for chapter in book.summary %}
-            <li class="chapter" data-role="chapter" data-id="{{ chapter.id }}" data-title="{{ chapter.title }}">
+            <li class="chapter list-group-item" data-role="chapter" data-id="{{ chapter.id }}" data-title="{{ chapter.title }}">
                 <div class="clearfix">
-                    <span class="name"><i class="fa fa-file-text"></i> {{ loop.index }}. {{ chapter.title }}</span>
+                    <span class="name">
+                        {% if chapter.children|length > 0 %}
+                            <i class="fa fa-caret-down"></i>
+                            {{ loop.index }}. {{ chapter.title }}
+                        {% else %}
+                            <i class="fa fa-file-text"></i>
+                            {{ loop.index }}. <a href="{{ path('book_read', {slug: book.slug, chapterId: chapter.id}) }}">{{ chapter.title }}</a>
+                        {% endif %}
+                    </span>
+                    {% if isGranted %}
                     <span class="action" data-role="action">
                         <a title="修改本章" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
                         <a title="添加子章节" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
+                        {% if chapter.children|length == 0 %}
                         <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                        {% endif %}
                     </span>
+                    {% endif %}
                 </div>
+                {% if chapter.children|length > 0 %}
                 <ul class="sub-chapter list-unstyled">
                     {% set summaryIndex = loop.index %}
                     {% for children in chapter.children %}
                         <li data-role="sub-chapter" data-id="{{ children.id  }}">
-                            <a href="{{ path('book_chapter_view', {'slug': book.slug, 'chapterId': children.id}) }}">
+                            <a href="{{ path('book_read', {'slug': book.slug, 'chapterId': children.id}) }}">
                                 <i class="fa fa-file-text"></i>  {{ summaryIndex }}.{{ loop.index }} {{ children.title }}
                             </a>
+                            {% if isGranted %}
                             <span class="action" data-role="action">
                                 <a title="修改本章" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                                 <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
                             </span>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
+                {% endif %}
             </li>
             {% endfor %}
+            <li class="list-group-item">
+                <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> 添加章节</button>
+            </li>
         </ul>
-        <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> 添加章节</button>
-    </div>
+    {#</div>#}
 {% endblock %}

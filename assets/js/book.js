@@ -193,6 +193,10 @@ $bookView.length > 0 && (function($){
                 $characters.removeClass('active');
                 $relatedTarget.closest('.chapter').addClass('active');
             }
+            //代码高亮
+            $('pre code').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
             NProgress.done();
         });
     })($);

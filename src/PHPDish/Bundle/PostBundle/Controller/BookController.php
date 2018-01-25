@@ -72,7 +72,7 @@ class BookController extends RestController
     /**
      * 查看书籍具体章节
      *
-     * @Route("/books/{slug}/chapter/{chapterId}", name="book_chapter_view", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
+     * @Route("/books/{slug}/chapter/{chapterId}", name="book_read", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
      * @param string $slug
      * @param int $chapterId
      * @param Request $request
@@ -81,10 +81,10 @@ class BookController extends RestController
     public function viewChapterAction($slug, $chapterId, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        $character = $this->getBookManager()->findChapter($chapterId);
+        $chapter = $this->getBookManager()->findChapter($chapterId);
         return $this->render('PHPDishWebBundle:Book:read.html.twig', [
             'book' => $book,
-            'character' => $character
+            'chapter' => $chapter
         ]);
     }
 

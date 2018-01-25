@@ -49,7 +49,7 @@
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'about' %} class="active" {% endif %}><a href="{{ path('book_view', {'slug': book.slug}) }}">前言</a></li>
                     <li {% if tab == 'summary' %} class="active" {% endif %}><a href="{{ path('book_summary', {'slug': book.slug}) }}">目录</a></li>
-                    <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': book.slug}) }}">订阅</a></li>
+                    <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('book_followers', {'slug': book.slug}) }}">订阅</a></li>
                 </ul>
                 <div id="book-details">
                     {% block book_content %}

@@ -22,19 +22,22 @@ class ChapterType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $parentOptions = [
+            'class' => 'PHPDishPostBundle:Post',
+            'choice_label' => 'title',
+            'choices' => $options['book']->getSummary(),
+            'label' => '所属章节',
+            'placeholder' => '顶级章节',
+            'required' => false
+        ];
+        if ($options['default_character']) {
+            $parentOptions['data'] = $options['default_character'];
+        }
         $builder
             ->add('title', TextType::class, [
                 'label' => '标题',
             ])
-            ->add('parent', EntityType::class, [
-                'class' => 'PHPDishPostBundle:Post',
-                'choice_label' => 'title',
-                'choices' => $options['book']->getSummary(),
-                'label' => '所属章节',
-                'data' => $options['default_character'],
-                'placeholder' => '顶级章节',
-                'required' => false
-            ])
+            ->add('parent', EntityType::class, $parentOptions)
             ->add('originalBody', TextareaType::class, [
                 'label' => '内容',
             ]);

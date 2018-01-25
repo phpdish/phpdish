@@ -6,10 +6,10 @@
             <div class="book-name"><a href="{{ path('book_view', {'slug': book.slug}) }}" class="custom-link">{{ book.name }}</a></div>
             <nav role="navigation">
                 <ul class="summary">
-                    {% for _character in book.posts %}
-                    <li class="chapter {% if character.id == _character.id %}active{% endif %}">
-                        <a href="{{ path('book_character_view', {'slug': book.slug, 'characterId': _character.id}) }}">
-                            <i class="fa fa-caret-down"></i> {{ _character.title }}
+                    {% for _chapter in book.summary %}
+                    <li class="chapter {% if chapter.id == _chapter.id %}active{% endif %}">
+                        <a href="{{ path('book_read', {'slug': book.slug, 'chapterId': _chapter.id}) }}">
+                            <i class="fa fa-caret-down"></i> {{ _chapter.title }}
                         </a>
                     </li>
                     {% endfor %}
@@ -25,14 +25,14 @@
                     </div>
                     <h1>
                         <i class="fa fa-circle-o-notch fa-spin"></i>
-                        <a href=".">{{ character.title }}</a>
+                        <a href=".">{{ chapter.title }}</a>
                     </h1>
                 </div>
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
                         <section class="normal markdown-body" id="pjax-container">
-                            <h1>{{ character.title|raw }}</h1>
-                            {{ character.body|raw }}
+                            <h1>{{ chapter.title|raw }}</h1>
+                            {{ chapter.body|raw }}
                         </section>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% set title = book is defined ? '编辑章节' : '添加章节' %}
+{% set title = chapter is defined ? '编辑章节' : '添加章节' %}
 {% block title %} {{ title }} {% endblock %}
 
 {% block script %}

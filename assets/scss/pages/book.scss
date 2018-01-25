@@ -86,24 +86,45 @@
 
   .book-summary{
     .chapter{
-      padding: 10px 5px;
-      //&:before{
-      //  font-family:FontAwesome;
-      //  content: "\f15c"
-      //}
-      .action{
-        padding-left: 15px;
-        display:none;
+      padding: 10px 20px;
+      //border:1px solid $metaColor;
+      a{
+        text-decoration: none;
       }
       .fa{
         color: $metaColor;
         margin-right:5px;
+        &.fa-caret-down{
+          font-size:18px;
+        }
+      }
+      .action{
+        padding-left: 15px;
+        display:none;
+        .fa{
+          font-size:14px;
+        }
       }
       &:hover{
         .action{
           display: inline-block;
         }
         background-color:rgba(0,0,0, 0.1)
+      }
+
+      .sub-chapter{
+        margin-top:10px;
+        li{
+          padding:5px 25px;
+          .fa{
+            font-size:12px;
+          }
+          .action{
+            .fa{
+              font-size:14px;
+            }
+          }
+        }
       }
     }
   }
