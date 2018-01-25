@@ -156,7 +156,6 @@
   }
 
   .book-summary {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     position: absolute;
     top: 0;
     left: -300px;
@@ -348,13 +347,14 @@
         outline: 0;
         .page-inner {
           position: relative;
-          left: 0px;
+          left: 0;
           transition: 300ms ease left;
           max-width: 800px;
           margin: 0 auto;
           padding: 20px 15px 40px 15px;
           .markdown-body{
-            font-size:14px;
+            font-size:16px;
+            line-height: 1.7em;
           }
           section{
             display: block;
