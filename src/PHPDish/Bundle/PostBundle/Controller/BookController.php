@@ -36,6 +36,7 @@ class BookController extends RestController
      * 查看书籍目录
      *
      * @Route("/books/{slug}/summary", name="book_summary")
+     * @Method("GET")
      * @param string $slug
      * @return Response
      */
