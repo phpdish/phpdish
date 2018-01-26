@@ -194,7 +194,6 @@ class BookController extends RestController
     {
         $user = $this->getUserManager()->findUserByName($username);
         $books = $this->getBookManager()->findUserBooks($user);
-        dump($books);
         return $this->render('PHPDishWebBundle:Book:user_books.html.twig', [
             'user' => $user,
             'books' => $books
