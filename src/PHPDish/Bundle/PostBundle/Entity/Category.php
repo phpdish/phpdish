@@ -136,7 +136,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      */
     public function getCover()
     {
-        return $this->cover ?: '/avatar/user1.jpg';
+        return $this->cover;
     }
 
     /**

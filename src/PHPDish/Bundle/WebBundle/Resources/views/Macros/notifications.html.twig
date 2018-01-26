@@ -77,8 +77,8 @@
 {% macro render_follow_category(notification) %}
     <div class="media-body">
         <div class="heading">
-            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 订阅了你的专栏
-            <a href="{{ path('category_view', {slug: notification.category.slug}) }}">{{ notification.category.name }}</a>
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 订阅了你的{{ notification.category.isBook ? '书籍' : '专栏' }}
+            <a href="{{ path(notification.category.isBook ? 'book_view': 'category_view', {slug: notification.category.slug}) }}">{{ notification.category.name }}</a>
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
     </div>

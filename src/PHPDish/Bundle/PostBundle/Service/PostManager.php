@@ -132,6 +132,7 @@ class PostManager implements PostManagerInterface
     {
         $criteria = Criteria::create()
             ->where(Criteria::expr()->eq('enabled', true))
+            ->andWhere(Criteria::expr()->neq('body', ''))
             ->orderBy(['createdAt' => 'desc']);
 
         return $this->findPosts($criteria, $page, $limit);

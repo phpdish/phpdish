@@ -82,6 +82,13 @@
       padding: 10px 30px;
       color:$mainFontColor;
       text-decoration: none;
+      .if{
+        font-size:17px;
+        font-weight: 600;
+      }
+      i{
+        color:$metaColor;
+      }
     }
     &.active{
       font-weight: 600;

@@ -58,12 +58,24 @@
                     </div>
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
-                    <li {% if tab == 'topic' %}class="active"{% endif %}><a href="{{ path('user_topics', {'username': user.username}) }}">话题</a></li>
-                    <li {% if tab == 'post' %}class="active"{% endif %}><a href="{{ path('user_posts', {'username': user.username}) }}">专栏</a></li>
-                    <li {% if tab == 'book' %}class="active"{% endif %}><a href="{{ path('user_books', {'username': user.username}) }}">书籍</a></li>
-                    <li {% if tab == 'reply' %}class="active"{% endif %}><a href="{{ path('user_replies', {'username': user.username}) }}">回复</a></li>
-                    <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('user_following', {'username': user.username}) }}">关注</a></li>
-                    <li {% if tab == 'follower' %}class="active"{% endif %}><a href="{{ path('user_followers', {'username': user.username}) }}">粉丝</a></li>
+                    <li {% if tab == 'topic' %}class="active"{% endif %}>
+                        <a href="{{ path('user_topics', {'username': user.username}) }}"><i class="fa fa-comments-o"></i> 话题</a>
+                    </li>
+                    <li {% if tab == 'post' %}class="active"{% endif %}>
+                        <a href="{{ path('user_posts', {'username': user.username}) }}"><i class="fa fa-file-text-o"></i> 专栏</a>
+                    </li>
+                    <li {% if tab == 'book' %}class="active"{% endif %}>
+                        <a href="{{ path('user_books', {'username': user.username}) }}"><i class="fa fa-book"></i> 书籍</a>
+                    </li>
+                    <li {% if tab == 'reply' %}class="active"{% endif %}>
+                        <a href="{{ path('user_replies', {'username': user.username}) }}"><i class="fa fa-commenting-o"></i> 回复</a>
+                    </li>
+                    <li {% if tab == 'following' %}class="active"{% endif %}>
+                        <a href="{{ path('user_following', {'username': user.username}) }}"><i class="if i-following"></i> 关注</a>
+                    </li>
+                    <li {% if tab == 'follower' %}class="active"{% endif %}>
+                        <a href="{{ path('user_followers', {'username': user.username}) }}"><i class="if i-follower"></i> 粉丝</a>
+                    </li>
                 </ul>
                 <div class="entry-meta hidden">
                     {% block entry_meta %}

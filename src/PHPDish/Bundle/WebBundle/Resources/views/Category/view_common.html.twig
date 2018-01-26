@@ -18,7 +18,7 @@
                         <div class="media-left media-middle">
                             {% set categoryUrl = path('category_view', {'slug': category.slug}) %}
                             <a href="{{ categoryUrl }}" class="avatar">
-                                <img src="{{ category.cover|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
+                                <img src="{{ category.cover|default('user.jpg')|imagine_filter('middle_square') }}" class="media-object img-circle img-responsive"/>
                             </a>
                         </div>
                         <div class="media-body">
@@ -44,9 +44,13 @@
                     </div>
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
-                    <li {% if tab == 'new' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug}) }}">新发布</a></li>
-                    <li {% if tab == 'hot' %} class="active" {% endif %}><a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}">热门</a></li>
-                    <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': category.slug}) }}">订阅</a></li>
+                    <li {% if tab == 'new' %} class="active" {% endif %}>
+                        <a href="{{ path('category_view', {'slug': category.slug}) }}"><i class="fa fa-file-text-o"></i>  新发布</a>
+                    </li>
+                    <li {% if tab == 'hot' %} class="active" {% endif %}>
+                        <a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}"><i class="fa fa-fire"></i> 热门</a>
+                    </li>
+                    <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': category.slug}) }}"><i class="fa fa-rss"></i> 订阅</a></li>
                 </ul>
                 <div id="list-container">
                     {% block category_content %}

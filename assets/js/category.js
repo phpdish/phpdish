@@ -10,7 +10,10 @@ import {FollowUserIntialization} from '../modules/actions.js';
 //上传 封面
 (function(){
     const $uploadCover = $('#upload-cover');
-    const $categoryCover =$('#category_cover');
+    let $categoryCover = $('#category_cover');
+    if ($categoryCover.length === 0) {
+        $categoryCover = $('#book_cover');
+    }
     if ($uploadCover.length > 0) {
         const $previewImage = $uploadCover.find('[data-role="preview"]');
         new UploadFile('pick-image', {
@@ -29,7 +32,7 @@ import {FollowUserIntialization} from '../modules/actions.js';
     $('#add-category-form').validate({
         submitHandler: () => {
             if ($categoryCover.val().length === 0) {
-                Util.dialog.message('请为你的专栏上传封面').flash();
+                Util.dialog.message('请上传封面').flash();
                 return false;
             }
             return true;
@@ -42,6 +45,15 @@ import {FollowUserIntialization} from '../modules/actions.js';
                 required: '请输入专栏介绍'
             },
             'category[slug]': {
+                required: '请输入个性域名'
+            },
+            'book[name]': {
+                required: '请输入书籍名称'
+            },
+            'book[description]': {
+                required: '请输入书籍介绍'
+            },
+            'book[slug]': {
                 required: '请输入个性域名'
             }
         }

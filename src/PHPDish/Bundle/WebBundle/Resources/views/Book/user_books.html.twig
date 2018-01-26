@@ -34,7 +34,7 @@
                 </div>
             </li>
         {% endfor %}
-        {% if isMe %}
+        {% if isMe and books|length < 5 %}
             <li>
                 <div class="add-book">
                     <a title="写书" href="{{ path('book_add') }}"><i class="if i-plus-bold"></i></a>
