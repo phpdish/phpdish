@@ -24,26 +24,74 @@ class BookManager implements BookManagerInterface
         $this->categoryManager = $categoryManager;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function findBook($slug)
     {
         $category = $this->categoryManager->findCategoryBySlug($slug);
-        if (!$category) {
+        if (!$category || !$category->isBook()) {
             throw new \InvalidArgumentException('The book is not exists');
         }
         return $category;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function findUserBooks(UserInterface $user)
     {
-        $qb = $this->categoryManager->createGetUserCategoriesQueryBuilder($user);
+        $qb = $this->createGetUserBooksQueryBuilder($user);
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserBookNumber(UserInterface $user)
+    {
+        $qb = $this->createGetUserBooksQueryBuilder($user);
+
+        return (int)$qb->select($qb->expr()->count('c'))
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    protected function createGetUserBooksQueryBuilder($user)
+    {
+        return $this->categoryManager->createGetUserCategoriesQueryBuilder($user)
+            ->andWhere('c.isBook = :isBook')->setParameter('isBook', true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createBook(UserInterface $user)
+    {
+        $book = $this->categoryManager->createCategory($user);
+        $book->asBook();
+        return $book;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveBook(BookInterface $book)
+    {
+        $this->categoryManager->saveCategory($book);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findChapter($id)
     {
         return $this->postManager->findPostById($id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addBookChapter(BookInterface $book, $chapter)
     {
         if (is_string($chapter)) {

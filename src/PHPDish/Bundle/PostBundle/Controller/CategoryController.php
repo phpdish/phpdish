@@ -60,6 +60,7 @@ class CategoryController extends RestController
         return $this->render('PHPDishWebBundle:Category:create.html.twig', [
             'form' => $form->createView(),
             'hasManyCategories' => $number >= 2,
+            'isBook' => false
         ]);
     }
 
@@ -128,6 +129,7 @@ class CategoryController extends RestController
             'form' => $form->createView(),
             'category' => $category,
             'hasManyCategories' => false,
+            'isBook' => false
         ]);
     }
 

@@ -8,9 +8,27 @@
                 <ul class="summary">
                     {% for _chapter in book.summary %}
                     <li class="chapter {% if chapter.id == _chapter.id %}active{% endif %}">
-                        <a href="{{ path('book_read', {'slug': book.slug, 'chapterId': _chapter.id}) }}">
-                            <i class="fa fa-caret-down"></i> {{ _chapter.title }}
-                        </a>
+                        <span class="name">
+                            {% if _chapter.children|length > 0 %}
+                                <i class="fa fa-caret-down"></i>
+                                {{ loop.index }}. {{ chapter.title }}
+                            {% else %}
+                                <i class="fa fa-file-text"></i>
+                                {{ loop.index }}. <a href="{{ path('book_read', {slug: book.slug, chapterId: _chapter.id}) }}">{{ _chapter.title }}</a>
+                            {% endif %}
+                        </span>
+                        {% if _chapter.children|length > 0 %}
+                            <ul class="sub-chapter list-unstyled">
+                                {% set summaryIndex = loop.index %}
+                                {% for children in _chapter.children %}
+                                    <li class="sub-chapter-item {% if chapter.id == children.id %}active{% endif %}" data-role="sub-chapter" data-id="{{ children.id  }}">
+                                        <a href="{{ path('book_read', {'slug': book.slug, 'chapterId': children.id}) }}">
+                                            <i class="fa fa-file-text"></i>  {{ summaryIndex }}.{{ loop.index }} {{ children.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -24,14 +42,13 @@
                     <div data-role="social-share" class="pull-right">
                     </div>
                     <h1>
-                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        {#<i class="fa fa-circle-o-notch fa-spin"></i>#}
                         <a href=".">{{ chapter.title }}</a>
                     </h1>
                 </div>
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
                         <section class="normal markdown-body" id="pjax-container">
-                            <h1>{{ chapter.title|raw }}</h1>
                             {{ chapter.body|raw }}
                         </section>
                     </div>

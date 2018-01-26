@@ -52,6 +52,7 @@ class CategoryManager implements CategoryManagerInterface
     public function findUserCategories(UserInterface $user)
     {
         return $this->createGetUserCategoriesQueryBuilder($user)
+            ->andWhere('c.isBook = :isBook')->setParameter('isBook', false)
             ->getQuery()
             ->getResult();
     }
@@ -61,7 +62,8 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function getUserCategoriesNumber(UserInterface $user)
     {
-        $qb = $this->createGetUserCategoriesQueryBuilder($user);
+        $qb = $this->createGetUserCategoriesQueryBuilder($user)
+            ->andWhere('c.isBook = :isBook')->setParameter('isBook', false);
 
         return (int)$qb->select($qb->expr()->count('c'))
             ->getQuery()

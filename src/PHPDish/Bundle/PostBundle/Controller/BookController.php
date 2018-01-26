@@ -3,18 +3,59 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\PostBundle\Form\Type\BookType;
 use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
+use PHPDish\Component\Util\StringManipulator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class BookController extends RestController
 {
     use ManagerTrait;
 
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
+    /**
+     * 创建书籍
+     *
+     * @Route("/books/new", name="book_add")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $manager = $this->getBookManager();
+
+        $book = $manager->createBook($this->getUser());
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+
+        if (($number = $manager->getUserBookNumber($this->getUser())) >= 5) {
+            $this->addFlash('danger', sprintf('最多只能创建五本书，你现在已经拥有%d个', $number));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->saveBook($book);
+            $this->addFlash('success', '书籍创建成功');
+
+            return $this->redirectToRoute('book_view', [
+                'slug' => $book->getSlug(),
+            ]);
+        }
+
+        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+            'form' => $form->createView(),
+            'hasManyCategories' => $number >= 5,
+            'isBook' => true
+        ]);
+    }
 
     /**
      * 查看书籍
@@ -29,6 +70,43 @@ class BookController extends RestController
         $book = $this->getBookManager()->findBook($slug);
         return $this->render('PHPDishWebBundle:Book:view.html.twig', [
             'book' => $book,
+        ]);
+    }
+
+    /**
+     * 编辑书籍信息.
+     *
+     * @Route("/books/{slug}/edit", name="book_edit")
+     *
+     * @param string  $slug
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction($slug, Request $request)
+    {
+        $manager = $this->getBookManager();
+        $book = $manager->findBook($slug);
+        if (!$book) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('edit', $book);
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()) {
+            $manager->saveBook($book);
+            $this->addFlash('success', '书籍修改成功');
+
+            return $this->redirectToRoute('book_view', [
+                'slug' => $book->getSlug(),
+            ]);
+        }
+
+        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+            'form' => $form->createView(),
+            'category' => $book,
+            'hasManyCategories' => false,
+            'isBook' => true
         ]);
     }
 
@@ -83,6 +161,19 @@ class BookController extends RestController
     {
         $book = $this->getBookManager()->findBook($slug);
         $chapter = $this->getBookManager()->findChapter($chapterId);
+
+        //SEO
+        $seoPage = $this->get('sonata.seo.page');
+        $summary = StringManipulator::stripLineBreak($chapter->getSummary());
+        $seoPage
+            ->setTitle($chapter->getTitle())
+            ->removeMeta('name', 'keywords')
+            ->addMeta('name', 'description', $summary)
+            ->addMeta('property', 'og:title', $chapter->getTitle())
+            ->addMeta('property', 'og:type', 'article')
+            ->addMeta('property', 'og:url',  $this->generateUrl('book_read', ['slug' => $slug, 'chapterId' => $chapter->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description', $summary);
+
         return $this->render('PHPDishWebBundle:Book:read.html.twig', [
             'book' => $book,
             'chapter' => $chapter

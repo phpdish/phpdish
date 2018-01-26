@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} 创建专栏 {% endblock %}
+{% block title %} {{ category is defined ? '修改' : '创建'}}{{ isBook ? '书籍' : '专栏'}} {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/category.js') }}"></script>
 {% endblock %}
@@ -10,7 +10,7 @@
         <div class="row">
             <article class="col-md-12">
                 <div class="panel panel-u add-category">
-                    <div class="panel-heading">创建专栏</div>
+                    <div class="panel-heading">{{ category is defined ? '修改' : '创建'}}{{ isBook ? '书籍' : '专栏'}}</div>
                     {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
                     <div class="panel-body">
                         {{ flashes() }}
@@ -18,16 +18,22 @@
                         {{ form_errors(form) }}
                             <div class="form-group">
                                 {{ form_label(form.name) }}
-                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: '请填写专栏名称'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: '请填写名称'}}) }}
                                 {{ form_errors(form.name) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.description) }}
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '专栏介绍'}}) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '介绍'}}) }}
                                 {{ form_errors(form.description) }}
                             </div>
                             <div class="form-group">
-                                {{ form_label(form.slug) }} {{ url('category_view', {'slug': 'domain'})|raw }}
+                                {{ form_label(form.slug) }}
+
+                                {% if isBook %}
+                                    {{ url('book_view', {'slug': 'slug'})|raw }}
+                                {% else %}
+                                    {{ url('category_view', {'slug': 'slug'})|raw }}
+                                {% endif %}
                                 {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder: '访问域名'}}) }}
                                 {{ form_errors(form.slug) }}
                             </div>

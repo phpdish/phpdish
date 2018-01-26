@@ -28,7 +28,7 @@
                             </h4>
                         </a>
                         {% if is_granted('edit', book) %}
-                            <div class="edit"><a href="/post/5/edit" title="编辑"><i class="if i-edit"></i></a></div>
+                            <div class="edit"><a href="{{ path('book_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i></a></div>
                         {% endif %}
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         {% if isMe %}
             <li>
                 <div class="add-book">
-                    <a title="写书"><i class="if i-plus-bold"></i></a>
+                    <a title="写书" href="{{ path('book_add') }}"><i class="if i-plus-bold"></i></a>
                 </div>
             </li>
         {% endif %}

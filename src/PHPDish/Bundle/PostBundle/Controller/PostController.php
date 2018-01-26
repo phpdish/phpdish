@@ -99,6 +99,13 @@ class PostController extends RestController
         if (!$post->isEnabled()) {
             throw $this->createNotFoundException();
         }
+        //如果是书籍则跳转到阅读页面
+        if ($post->getCategory()->isBook()) {
+            return $this->redirectToRoute('book_read', [
+                'slug' => $post->getCategory()->getSlug(),
+                'chapterId' => $post->getId()
+            ], 301);
+        }
         $form = $this->createForm(CommentType::class);
         $criteria = Criteria::create()->where(Criteria::expr()->eq('post', $post->getId()));
         $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));

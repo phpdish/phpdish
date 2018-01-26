@@ -191,7 +191,13 @@ $bookView.length > 0 && (function($){
             if (event.relatedTarget) {
                 const $relatedTarget = $(event.relatedTarget);
                 $characters.removeClass('active');
-                $relatedTarget.closest('.chapter').addClass('active');
+                $bookSummary.find('li.sub-chapter-item').removeClass('active');
+                const $subCharacters = $relatedTarget.closest('.sub-chapter');
+                if ($subCharacters.length > 0) {
+                    $relatedTarget.closest('.sub-chapter-item').addClass('active');
+                } else {
+                    $relatedTarget.closest('.chapter').addClass('active');
+                }
             }
             //代码高亮
             $('pre code').each(function (i, block) {
