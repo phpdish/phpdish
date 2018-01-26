@@ -37,7 +37,7 @@ class UserController extends RestController
      */
     public function latestUsersAction($limit)
     {
-        $users = $this->getUserManager()->findLatestUsers(999, true);
+        $users = $this->getUserManager()->findLatestUsers($limit, true);
         return $this->render('PHPDishWebBundle:User:latest.html.twig', [
             'users' => $users,
         ]);

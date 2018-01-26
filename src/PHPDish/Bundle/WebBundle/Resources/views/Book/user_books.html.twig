@@ -44,7 +44,14 @@
         </ul>
     {% else %}
             <div class="empty-data">
-                <p><i class="if i-post-o"></i> 还没有书籍</p>
+                <p>
+                    {% if isMe %}
+                    <i class="if i-post-o"></i> 还没有书籍
+                    现在去 <a href="{{ path('book_add') }}">创建书籍</a>
+                    {% else %}
+                        <i class="if i-post-o"></i> 还没有书籍
+                    {% endif %}
+                </p>
             </div>
     {% endif %}
 {% endblock %}

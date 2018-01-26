@@ -13,8 +13,12 @@
                 <div class="panel panel-u">
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                         {% set tab = app.request.query.get('tab') %}
-                        <li {% if not tab%}class="active"{% endif %}><a href="{{ path('threads') }}">全部</a></li>
-                        <li {% if tab == 'following' %}class="active"{% endif %}><a href="{{ path('threads', {'tab': 'following'}) }}">我关注的</a></li>
+                        <li {% if not tab%}class="active"{% endif %}>
+                            <a href="{{ path('threads') }}"><i class="fa fa-comments-o"></i> 全部</a>
+                        </li>
+                        <li {% if tab == 'following' %}class="active"{% endif %}>
+                            <a href="{{ path('threads', {'tab': 'following'}) }}"><i class="fa fa-rss"></i> 关注</a>
+                        </li>
                     </ul>
                     <div id="list-container">
                         <div class="panel-body thread-list">
