@@ -149,15 +149,25 @@ class TopicManager implements TopicManagerInterface
             ->getResult();
     }
 
-    public function findFollowingThreadsTopicsQuery(UserInterface $user)
+    /**
+     * 创建查询关注话题下的帖子query
+     * @param UserInterface $user
+     * @param Criteria|null $criteria
+     * @return \Doctrine\ORM\Query
+     * @throws \Doctrine\ORM\Query\QueryException
+     */
+    public function findFollowingThreadsTopicsQuery(UserInterface $user, Criteria $criteria = null)
     {
-        return $this->getTopicRepository()->createQueryBuilder('t')
+        $qb = $this->getTopicRepository()->createQueryBuilder('t')
             ->leftJoin('t.threads', 'tt')
             ->leftJoin('tt.followers', 'f')
             ->where('f.id = :userId')
             ->setParameter('userId', $user)
-            ->orderBy('t.createdAt', 'desc')
-            ->getQuery();
+            ->orderBy('t.createdAt', 'desc');
+        if ($criteria) {
+            $qb->addCriteria($criteria);
+        }
+        return $qb->getQuery();
     }
 
     /**
@@ -165,7 +175,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null)
     {
-        $query = $this->findFollowingThreadsTopicsQuery($user);
+        $query = $this->findFollowingThreadsTopicsQuery($user, Criteria::expr()->eq('enabled', true));
         return $this->createPaginator($query, $page, $limit);
     }
 

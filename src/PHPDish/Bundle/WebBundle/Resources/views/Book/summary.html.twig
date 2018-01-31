@@ -52,9 +52,11 @@
                 {% endif %}
             </li>
             {% endfor %}
-            <li class="list-group-item">
-                <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> 添加章节</button>
-            </li>
+            {% if isGranted %}
+                <li class="list-group-item">
+                    <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> 添加章节</button>
+                </li>
+            {% endif %}
         </ul>
     {#</div>#}
 {% endblock %}
