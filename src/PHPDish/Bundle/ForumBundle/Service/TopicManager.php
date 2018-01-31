@@ -175,7 +175,9 @@ class TopicManager implements TopicManagerInterface
      */
     public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null)
     {
-        $query = $this->findFollowingThreadsTopicsQuery($user, Criteria::expr()->eq('enabled', true));
+        $query = $this->findFollowingThreadsTopicsQuery($user, Criteria::create()
+            ->where(Criteria::expr()->eq('enabled', true))
+        );
         return $this->createPaginator($query, $page, $limit);
     }
 
