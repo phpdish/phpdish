@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Entity;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
@@ -266,7 +267,7 @@ class Post implements PostInterface, ChapterInterface
 
     public function getChildren()
     {
-        return $this->children;
+        return $this->children->matching(Criteria::create()->where(Criteria::expr()->eq('enabled', true)));
     }
 
     public function getParent()

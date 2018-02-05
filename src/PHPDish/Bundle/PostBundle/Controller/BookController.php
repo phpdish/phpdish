@@ -213,6 +213,7 @@ class BookController extends RestController
     public function addSummaryAction($slug, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
+        $this->denyAccessUnlessGranted('edit', $book);
         $chapter = $this->getBookManager()->addBookChapter($book, $request->request->get('title'));
         return $this->handleView($this->view([
             'chapter' => $chapter
@@ -232,6 +233,8 @@ class BookController extends RestController
      */
     public function editSummaryAction($slug, $id, Request $request)
     {
+        $book = $this->getBookManager()->findBook($slug);
+        $this->denyAccessUnlessGranted('edit', $book);
         $chapter = $this->getBookManager()->findChapter($id);
         $chapter->setTitle($request->request->get('title'));
         $this->getPostManager()->savePost($chapter);
