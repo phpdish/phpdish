@@ -272,7 +272,10 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      */
     public function getSummary()
     {
-        return $this->getPosts()->matching(Criteria::create()->where(Criteria::expr()->isNull('parent')));
+        return $this->getPosts()->matching(Criteria::create()
+            ->where(Criteria::expr()->isNull('parent'))
+            ->andWhere(Criteria::expr()->eq('enabled', true))
+        );
     }
 
     /**

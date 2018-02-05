@@ -77,13 +77,38 @@ $bookDetails.length > 0 && (function($){
                     'cancelValue': '取消',
                     width: 350
                 }).then((data)=>{
-                    console.log(data);
                     Util.request('book.edit_summary', {slug: window.book.slug, id: $this.data('id')}, data).done(()=>{
                         location.reload();
                     }).fail(()=>{
                         Util.dialog.message('修改章节失败').flash();
                     });
                 }, ()=>{
+                });
+            });
+            const deleteLock = lockButton($delete);
+            $delete.on('click', ()=>{
+                "use strict";
+                if (deleteLock.isDisabled()) {
+                    return false;
+                }
+                deleteLock.lock();
+                Util.dialog.confirm('确认删除本章节？').then(()=>{
+                    let $chapter =  $delete.closest('[data-role="sub-chapter"]');
+                    if ($chapter.length === 0) {
+                        $chapter = $delete.closest('[data-role="chapter"]');
+                    }
+                    const chapterId =  $chapter.data('id');
+                    Util.request('post.delete', chapterId).done(()=>{
+                        Util.dialog.message('删除成功').flash(()=>{
+                            location.reload();
+                        });
+                    }).fail(()=>{
+                        Util.dialog.message('删除失败请重试！').flash();
+                    }).always(()=>{
+                        deleteLock.release();
+                    });
+                }, ()=>{
+                    deleteLock.release();
                 });
             });
         });

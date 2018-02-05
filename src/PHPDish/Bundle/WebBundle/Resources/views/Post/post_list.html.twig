@@ -1,14 +1,23 @@
 <ul class="list-group post-list">
     {% for post in posts %}
         <li class="list-group-item">
-            {% set postUrl =  path('post_view', {'id': post.id}) %}
+            {% set postUrl = post.category.isBook ?
+            path('book_read', {'slug': post.category.slug, 'chapterId': post.id}) :  path('post_view', {'id': post.id}) %}
             {% set authorUrl = path('user_view', {'username': post.user.username}) %}
             <article class="media post clearfix" role="article">
                 <div class="media-body content-box">
                     <div class="author">
                         <a class="avatar" href="{{ authorUrl }}"><img src="{{ asset(post.user.avatar)|imagine_filter('middle_square') }}" class="img-circle img-responsive"></a>
                         <span class="username"><a href="{{ authorUrl }}">{{ post.user.username }}</a></span>
-                        <time class="publish-time"><i class="if i-calendar"></i> {{ post.createdAt|time_diff }}</time>
+                        <span class="meta">发表于</span>
+                        {% if post.category.isBook %}
+                            <a class="category" href="{{ path('book_view', {'slug': post.category.slug}) }}">
+                                <i class="fa fa-book meta"></i> {{ post.category.name }}
+                            </a>
+                        {% else %}
+                            <a class="category" href="{{ path('category_view', {'slug': post.category.slug}) }}">{{ post.category.name }}</a>
+                        {% endif %}
+                        <time class="publish-time hidden"><i class="if i-calendar"></i> {{ post.createdAt|time_diff }}</time>
                     </div>
                     <h3 class="title">
                         {% if post.isRecommended %}
