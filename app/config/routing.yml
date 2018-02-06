@@ -1,3 +1,7 @@
+php_dish_payment:
+    resource: "@PHPDishPaymentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

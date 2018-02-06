@@ -46,6 +46,7 @@ class AppKernel extends Kernel
             new PHPDish\Bundle\NotificationBundle\PHPDishNotificationBundle(),
             new PHPDish\Bundle\ChatBundle\PHPDishChatBundle(),
             new PHPDish\Bundle\ResumeBundle\PHPDishResumeBundle(),
+            new PHPDish\Bundle\PaymentBundle\PHPDishPaymentBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

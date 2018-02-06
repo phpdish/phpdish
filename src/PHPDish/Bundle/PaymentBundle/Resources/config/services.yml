@@ -1,0 +1,4 @@
+services:
+#    php_dish_payment.example:
+#        class: PHPDish\Bundle\PaymentBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
