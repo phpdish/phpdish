@@ -15,8 +15,11 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
  * @ORM\Table(name="transactions", indexes={
  *     @ORM\Index(columns="serial_no")
  * })
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="transaction_type", type="string")
+ * @ORM\DiscriminatorMap({"category" = "PHPDish\Bundle\PostBundle\Entity\CategoryTransaction"})
  */
-class Transaction implements TransactionInterface
+abstract class Transaction implements TransactionInterface
 {
     use IdentifiableTrait, DateTimeTrait, EnabledTrait, UserAwareTrait;
 
@@ -33,6 +36,11 @@ class Transaction implements TransactionInterface
      * @var UserInterface
      */
     protected $user;
+
+    /**
+     * @var string
+     */
+    protected $type;
 
     /**
      * @return mixed
