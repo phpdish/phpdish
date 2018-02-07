@@ -27,8 +27,19 @@
                                 {{ form_errors(form.description) }}
                             </div>
                             <div class="form-group">
+                                {{ form_label(form.charge) }}
+                                <div class="prices-tags" data-role="choose-charge">
+                                    <span class="btn btn-default u-btn-primary" data-num="0">免费</span>
+                                    <span class="btn btn-default" data-num="590">￥5.9</span>
+                                    <span class="btn btn-default" data-num="990">￥9.9</span>
+                                    <span class="btn btn-default" data-num="2000">￥20</span>
+                                    <span class="btn btn-default" data-num="5000">￥50</span>
+                                    <span class="custom-charge"> ￥<input type="number" class="charge" data-role="custom-charge" placeholder="自定义金额"></span>
+                                </div>
+                                {{ form_errors(form.charge) }}
+                            </div>
+                            <div class="form-group">
                                 {{ form_label(form.slug) }}
-
                                 {% if isBook %}
                                     {{ url('book_view', {'slug': 'slug'})|raw }}
                                 {% else %}
@@ -48,6 +59,7 @@
                                     {% if category is defined %}修改{% else %}<i class="if i-plus-bold"></i> 创建{% endif %}
                                 </button>
                             </div>
+                        {{ form_widget(form.charge, {attr: {'data-role': 'charge'}}) }}
                         {{ form_end(form) }}
                     </div>
                 </div>

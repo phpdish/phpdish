@@ -6,6 +6,7 @@ use PHPDish\Bundle\PaymentBundle\Form\Type\PaymentType;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,7 +14,8 @@ class PaymentController extends Controller
 {
     /**
      * 创建交易
-     * @Route("/payments", name="payment_add" method="POST")
+     * @Route("/payments", name="payment_add")
+     * @Method("POST")
      * @param Request $request
      * @return Response
      */

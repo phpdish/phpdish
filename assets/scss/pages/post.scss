@@ -27,7 +27,35 @@
       height: 120px;
       resize: vertical;
     }
+
+    //订阅价格
+    .prices-tags{
+      .btn{
+        border-radius: 5%;
+        &.active{
+          background-color: $contrastColor;
+          border: 1px solid transparent;
+          box-shadow: none;
+          color: #fff;
+        }
+      }
+
+      .custom-charge{
+          vertical-align: bottom;
+          margin-left:15px;
+          .charge{
+            border:none;
+            vertical-align: bottom;
+            border-bottom: 1px solid #dedede;
+            padding-left:15px;
+            &:focus{
+              outline-style: none;
+            }
+          }
+      }
+    }
   }
+
 }
 
 

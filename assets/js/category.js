@@ -7,9 +7,12 @@ import Util from '../modules/util.js';
 import AjaxTab from '../modules/ajaxtab.js';
 import {FollowUserIntialization} from '../modules/actions.js';
 
-//上传 封面
-(function(){
+//添加专栏
+const $addCategoryForm = $('#add-category-form');
+$addCategoryForm.length > 0 && (function(){
     const $uploadCover = $('#upload-cover');
+    const $chooseCharge = $addCategoryForm.find('[data-role="choose-charge"]');
+    const $charge = $addCategoryForm.find('[data-role="charge"]');
     let $categoryCover = $('#category_cover');
     if ($categoryCover.length === 0) {
         $categoryCover = $('#book_cover');
@@ -29,10 +32,14 @@ import {FollowUserIntialization} from '../modules/actions.js';
             }
         });
     }
-    $('#add-category-form').validate({
+    $addCategoryForm.validate({
         submitHandler: () => {
             if ($categoryCover.val().length === 0) {
                 Util.dialog.message('请上传封面').flash();
+                return false;
+            }
+            if ($charge.val().length === 0) {
+                Util.dialog.message('请选择订阅价格').flash();
                 return false;
             }
             return true;
@@ -58,7 +65,25 @@ import {FollowUserIntialization} from '../modules/actions.js';
             }
         }
     });
+
+    $chooseCharge.on('click', '.btn', function(){
+        const $this = $(this);
+        $this.siblings('.btn').removeClass('u-btn-primary').end().addClass('u-btn-primary');
+        $charge.val($this.data('num'));
+    });
+    $chooseCharge.find(':input').on('blur', function(){
+        
+        $chooseCharge.find('.btn').removeClass('u-btn-primary'); //移除之前的选择
+        const $this = $(this);
+        const num = $.trim($this.val());
+        if (num) {
+            $charge.val(num * 100);
+        } else {
+            $charge.val(null);
+        }
+    });
 })($);
+
 
 //View Category
 //AjaxTab
