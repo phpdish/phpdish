@@ -20,10 +20,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('php_dish_payment');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
-
+        $rootNode->children()
+            ->arrayNode('youzan')
+                ->children()
+                    ->scalarNode('client_id')->cannotBeEmpty()->end()
+                    ->scalarNode('client_secret')->cannotBeEmpty()->end()
+                    ->scalarNode('kdt_id')->cannotBeEmpty()->end()
+                ->end()
+            ->end();
         return $treeBuilder;
     }
 }

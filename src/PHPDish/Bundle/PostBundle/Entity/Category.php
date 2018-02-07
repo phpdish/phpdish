@@ -45,6 +45,12 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     protected $followerCount = 0;
 
     /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $charge;
+
+    /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="category", cascade={"persist"})
      * @var PostInterface[]|Collection
      * @JMS\Groups({"details"})
@@ -300,5 +306,31 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     public function isBook()
     {
         return $this->isBook;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCharge()
+    {
+        return $this->charge;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCharge($charge)
+    {
+        $this->charge = $charge;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCharge()
+    {
+        return $this->charge > 0;
     }
 }

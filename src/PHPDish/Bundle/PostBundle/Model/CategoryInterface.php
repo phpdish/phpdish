@@ -169,4 +169,24 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      * @return boolean
      */
     public function isBook();
+
+    /**
+     * 是否要付费订阅
+     * @return boolean
+     */
+    public function isCharge();
+
+    /**
+     * 获取收费价格（单位：分）
+     * @return int
+     */
+    public function getCharge();
+
+    /**
+     * 设置收费价格
+     *
+     * @param int $charge
+     * @return CategoryInterface
+     */
+    public function setCharge($charge);
 }
