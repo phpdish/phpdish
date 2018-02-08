@@ -169,7 +169,14 @@ class CategoryController extends RestController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
-        $this->getCategoryManager()->followCategory($category, $this->getUser());
+
+        if ($category->isCharging()) {
+
+
+        } else {
+            $this->getCategoryManager()->followCategory($category, $this->getUser());
+        }
+
         $view = $this->view([
             'follower_count' => $category->getFollowerCount(),
         ]);
