@@ -329,7 +329,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     /**
      * {@inheritdoc}
      */
-    public function isCharge()
+    public function isCharging()
     {
         return $this->charge > 0;
     }

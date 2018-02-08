@@ -174,7 +174,7 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
      * 是否要付费订阅
      * @return boolean
      */
-    public function isCharge();
+    public function isCharging();
 
     /**
      * 获取收费价格（单位：分）
