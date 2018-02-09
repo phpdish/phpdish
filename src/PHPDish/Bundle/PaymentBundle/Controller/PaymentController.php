@@ -40,6 +40,24 @@ class PaymentController extends Controller
     }
 
     /**
+     * 检查支付结果
+     * @Route("/payments/result", name="payment_result")
+     * @param Request $request
+     * @return Response
+     */
+    public function getPaymentResultAction(Request $request)
+    {
+        $qrId = $request->query->get('qr_id');
+        if (!$qrId) {
+            throw new \InvalidArgumentException("Bad Request");
+        }
+        $result = $this->get('phpdish.payment_gateway.youzan')->checkQRStatus($qrId);
+        return $this->json([
+            'result' => $result
+        ]);
+    }
+
+    /**
      * 获取交易管理
      * @return PaymentManagerInterface
      */

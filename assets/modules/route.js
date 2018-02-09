@@ -40,7 +40,9 @@ const routes = {
     'message.add': {path:'/user/messages/add', method: 'POST'},
     'captcha': '/captcha', ///验证码
     'notifications': '/notifications',
-    'notification.count': '/notifications/count'
+    'notification.count': '/notifications/count',
+    //支付结果
+    'payment.result': '/payments/result'
 };
 
 function Route()

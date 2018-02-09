@@ -64,7 +64,8 @@ Encore.createSharedEntry('vendor', [
     'selectize/dist/css/selectize.bootstrap3.css',
     'emojione',
     'twemoji',
-    'nprogress/nprogress.css'
+    'nprogress/nprogress.css',
+    'loaders.css'
 ]);
 
 //add style entries

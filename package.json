@@ -47,6 +47,7 @@
     "inline-attachment": "^2.0.3",
     "jquery-pjax": "^2.0.1",
     "jquery-validation": "^1.17.0",
+    "loaders.css": "^0.1.2",
     "marked": "^0.3",
     "memory-fs": "^0.4",
     "nprogress": "^0.2.0",

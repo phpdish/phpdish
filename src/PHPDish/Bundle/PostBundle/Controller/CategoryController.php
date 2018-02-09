@@ -173,6 +173,7 @@ class CategoryController extends RestController
         if ($category->isCharging()) { //收费专栏/书籍
             $qrCode = $this->getCategoryManager()->payForCategory($category, $this->getUser());
             $view = $this->view([
+                'require_payment' => true,
                 'message' => '需要先付费',
                 'qrcode' => $qrCode
             ]);

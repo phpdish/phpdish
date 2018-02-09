@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
+use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
@@ -314,6 +315,11 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     public function getCharge()
     {
         return $this->charge;
+    }
+
+    public function getChargePrice()
+    {
+        return Money::CNY($this->charge);
     }
 
     /**

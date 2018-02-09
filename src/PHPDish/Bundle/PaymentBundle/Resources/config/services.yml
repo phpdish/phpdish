@@ -10,7 +10,16 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.payment_gateway.youzan"]
 
 
-
     phpdish.manager.wallet:
         class: PHPDish\Bundle\PaymentBundle\Service\WalletManager
         arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.manager.user"]
+
+    phpdish.money_formatter:
+        class: PHPDish\Bundle\PaymentBundle\Money\MoneyFormatter
+
+    phpdish.twig.extension.money:
+        class: PHPDish\Bundle\PaymentBundle\Twig\MoneyExtension
+        arguments: ["@phpdish.money_formatter"]
+        public: false
+        tags:
+            - { name: twig.extension}

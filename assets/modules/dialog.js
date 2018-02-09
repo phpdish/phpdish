@@ -147,4 +147,25 @@ export const inputs = (title, inputs, validateOptions, options) => {
     });
 
 };
+
+class Wait {
+    constructor(){
+        this.dialog =  null;
+    }
+    pacman(){
+        const html =  '<div class="pacman"><div></div><div></div><div></div><div></div><div></div></div>';
+        this.dialog = create(false, html);
+        return this;
+    }
+    ballPulse(){
+        const html =  '<div class="ball-pulse"><div></div><div></div><div></div></div>';
+        this.dialog = create(false, html);
+        return this;
+    }
+    close(){
+        this.dialog && this.dialog.destroy();
+    }
+}
+export const wait = new Wait();
+
 export default Dialog;
