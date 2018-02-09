@@ -21,7 +21,7 @@ class Wallet implements WalletInterface
      * @ORM\Column(type="integer")
      * @var int
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * @ORM\OneToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="wallet")
@@ -29,7 +29,7 @@ class Wallet implements WalletInterface
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="WalletHistory", mappedBy="wallet")
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="wallet")
      */
     protected $histories;
 

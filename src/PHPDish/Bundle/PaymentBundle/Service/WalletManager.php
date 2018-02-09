@@ -33,8 +33,8 @@ class WalletManager implements WalletManagerInterface
     protected $userManager;
 
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
         EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
         UserManagerInterface $userManager
     )
     {
@@ -79,7 +79,7 @@ class WalletManager implements WalletManagerInterface
      */
     public function createHistory()
     {
-        $history = new WalletHistory();
+        $history = new Payment();
         $now = Carbon::now();
         $history->setUpdatedAt($now)->setCreatedAt($now);
         return $history;
@@ -107,7 +107,7 @@ class WalletManager implements WalletManagerInterface
         $wallet = $this->getUserWallet($user);
         $history = $this->createHistory();
         $history->setAmount($amount)
-            ->setType(WalletHistoryInterface::TYPE_CATEGORY_INCOME);
+            ->setType(Payment::TYPE_CATEGORY_INCOME);
         $this->addHistory($wallet, $history);
     }
 

@@ -6,19 +6,26 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 
-interface WalletHistoryInterface extends IdentifiableInterface, DateTimeInterface, EnabledInterface
+interface WalletHistoryInterface extends DateTimeInterface
 {
-    /**
-     * 专栏收入
-     * @var string
-     */
-    const TYPE_CATEGORY_INCOME = 'category_income';
-
     /**
      * 获取金额
      * @return int
      */
     public function getAmount();
+
+    /**
+     * 获取所属钱包
+     * @return WalletInterface
+     */
+    public function getWallet();
+
+    /**
+     * 设置wallet
+     * @param WalletInterface $wallet
+     * @return WalletHistoryInterface
+     */
+    public function setWallet(WalletInterface $wallet);
 
     /**
      * 获取类型

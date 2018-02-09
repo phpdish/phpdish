@@ -151,7 +151,7 @@ class CategoryManager implements CategoryManagerInterface
             $payment = $this->paymentManager->createPayment($user)
                 ->setAmount($category->getCharge())
                 ->setDescription($message)
-                ->setPaymentType($category->isBook() ? PaymentInterface::TYPE_BUY_BOOK
+                ->setType($category->isBook() ? PaymentInterface::TYPE_BUY_BOOK
                     : PaymentInterface::TYPE_FOLLOW_CATEGORY)
                 ->setPayableId($category->getId());
 

@@ -29,14 +29,21 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected $youzanPay;
 
+    /**
+     * @var WalletManagerInterface
+     */
+    protected $walletManager;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
+        WalletManagerInterface $walletManager,
         YouzanPay $youzanPay
     )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->walletManager = $walletManager;
         $this->youzanPay = $youzanPay;
     }
 
@@ -59,6 +66,10 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function savePayment(PaymentInterface $payment)
     {
+        //如果没有钱包
+        if (!$payment->getWallet()) {
+            $payment->setWallet($this->walletManager->getUserWallet($payment->getUser()));
+        }
         $this->entityManager->persist($payment);
         $this->entityManager->flush();
     }

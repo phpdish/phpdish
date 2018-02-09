@@ -39,8 +39,8 @@ final class PaymentListener
         $payment = $event->getPayment();
         //买书的交易或者订阅专栏的交易处理
         if (
-            $payment->getPaymentType() === PaymentInterface::TYPE_FOLLOW_CATEGORY
-            || $payment->getPaymentType() === PaymentInterface::TYPE_BUY_BOOK
+            $payment->getType() === PaymentInterface::TYPE_FOLLOW_CATEGORY
+            || $payment->getType() === PaymentInterface::TYPE_BUY_BOOK
         ) {
             $category = $this->categoryManager->findCategoryById($payment->getPayableId());
             if ($category) { //用户支付成功，增加订阅

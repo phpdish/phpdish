@@ -7,7 +7,7 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 
-interface PaymentInterface extends DateTimeInterface, EnabledInterface, IdentifiableInterface, UserAwareInterface
+interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, IdentifiableInterface, UserAwareInterface
 {
     const STATUS_OK = 'ok';
 
@@ -26,6 +26,18 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
      * @var string
      */
     const TYPE_BUY_BOOK = 'buy_book';
+
+    /**
+     * 专栏收入
+     * @var string
+     */
+    const TYPE_CATEGORY_INCOME = 'category_income';
+
+    /**
+     * 书籍收入
+     * @var string
+     */
+    const TYPE_BOOK_INCOME = 'book_income';
 
     /**
      * 获取交易资源
@@ -65,7 +77,14 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
      * 获取支付类型
      * @return string
      */
-    public function getPaymentType();
+    public function getType();
+
+    /**
+     * 设置类型
+     * @param string $type
+     * @return PaymentInterface
+     */
+    public function setType($type);
 
     /**
      * 获取价格
@@ -109,9 +128,15 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
     public function setQrId($qrId);
 
     /**
-     * 设置类型
-     * @param string $paymentType
+     * 设置参数
+     * @param array $parameters
      * @return PaymentInterface
      */
-    public function setPaymentType($paymentType);
+    public function setParameters($parameters);
+
+    /**
+     * 获取参数
+     * @return array
+     */
+    public function getParameters();
 }

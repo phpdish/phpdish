@@ -7,7 +7,7 @@ services:
 
     phpdish.manager.payment:
         class: PHPDish\Bundle\PaymentBundle\Service\PaymentManager
-        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.payment_gateway.youzan"]
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.manager.wallet", "@phpdish.payment_gateway.youzan"]
 
 
     phpdish.manager.wallet:

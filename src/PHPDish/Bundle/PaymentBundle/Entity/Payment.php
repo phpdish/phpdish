@@ -6,6 +6,8 @@ use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
+use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
+use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -42,10 +44,16 @@ class Payment implements PaymentInterface
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Wallet", inversedBy="histories", cascade={"persist"})
+     * @var WalletInterface
+     */
+    protected $wallet;
+
+    /**
      * @ORM\Column(type="string", length=50)
      * @var string
      */
-    protected $paymentType;
+    protected $type;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -60,10 +68,16 @@ class Payment implements PaymentInterface
     protected $amount;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @var array
+     */
+    protected $parameters;
 
     /**
      * @ORM\Column(type="string")
@@ -139,18 +153,18 @@ class Payment implements PaymentInterface
     /**
      * @return string
      */
-    public function getPaymentType()
+    public function getType()
     {
-        return $this->paymentType;
+        return $this->type;
     }
 
     /**
-     * @param string $paymentType
+     * @param string $type
      * @return Payment
      */
-    public function setPaymentType($paymentType)
+    public function setType($type)
     {
-        $this->paymentType = $paymentType;
+        $this->type = $type;
 
         return $this;
     }
@@ -228,6 +242,42 @@ class Payment implements PaymentInterface
     {
         $this->qrId = $qrId;
 
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     * @return Payment
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWallet()
+    {
+        return $this->wallet;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWallet(WalletInterface $wallet)
+    {
+        $this->wallet = $wallet;
         return $this;
     }
 }
