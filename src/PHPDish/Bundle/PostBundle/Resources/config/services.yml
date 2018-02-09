@@ -68,3 +68,10 @@ services:
         tags:
              - { name: kernel.event_listener, event: category.pre_persist, method: onCategoryPersist}
         public: false
+
+    phpdish.event_listener.payment:
+        class: PHPDish\Bundle\PostBundle\EventListener\PaymentListener
+        arguments: ['@phpdish.manager.category', '@phpdish.manager.wallet']
+        tags:
+             - { name: kernel.event_listener, event: payment.paid, method: onPaymentPaid}
+        public: false

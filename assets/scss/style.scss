@@ -646,3 +646,15 @@ form{
     font-weight: 600;
   }
 }
+
+.payment-result{
+  text-align: center;
+  .if{
+    font-size: 48px;
+    color: #3ab54a;
+    transform: scale(2.0);
+  }
+  .text{
+    color: $metaColor;
+  }
+}

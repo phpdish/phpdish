@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\PaymentBundle\Entity\Payment;
+use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Slince\YouzanPay\YouzanPay;
@@ -75,6 +76,35 @@ class PaymentManager implements PaymentManagerInterface
         $payment->setQrId($qrCode->getId());
         $this->savePayment($payment);
         return $qrCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findPaymentByQrId($qrId)
+    {
+        return $this->getRepository()->findOneBy([
+            'qrId' => $qrId
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function notifyPayment($qrId)
+    {
+        $payment = $this->findPaymentByQrId($qrId);
+        if (!$payment) {
+            return null;
+        }
+        $payment->setStatus(PaymentInterface::STATUS_OK)
+            ->setUpdatedAt(Carbon::now()); //交易状态
+
+        $this->savePayment($payment);
+
+        //触发交易完成事件
+        $this->eventDispatcher->dispatch(PaymentEvent::PAYMENT_PAID, new PaymentEvent($payment));
+        return $payment;
     }
 
     /**

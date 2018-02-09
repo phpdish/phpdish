@@ -118,6 +118,14 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findCategoryById($id)
+    {
+        return $this->getRepository()->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addManagerForCategory(CategoryInterface $category, UserInterface $user)
     {
         $category->addManager($user);

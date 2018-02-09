@@ -36,6 +36,18 @@ class WalletHistory implements WalletHistoryInterface
     protected $wallet;
 
     /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="json_array")
+     * @var array
+     */
+    protected $parameters;
+
+    /**
      * @return string
      */
     public function getType()
@@ -88,6 +100,44 @@ class WalletHistory implements WalletHistoryInterface
     public function setWallet($wallet)
     {
         $this->wallet = $wallet;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return WalletHistory
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     * @return WalletHistory
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
 
         return $this;
     }

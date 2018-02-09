@@ -27,6 +27,13 @@ interface CategoryManagerInterface
     public function findCategoryBySlug($slug);
 
     /**
+     * 根据id获取专栏
+     * @param int $id
+     * @return CategoryInterface
+     */
+    public function findCategoryById($id);
+
+    /**
      * 获取用户的专栏.
      *
      * @param UserInterface $user

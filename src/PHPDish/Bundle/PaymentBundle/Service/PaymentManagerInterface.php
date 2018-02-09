@@ -26,4 +26,18 @@ interface PaymentManagerInterface
      * @return mixed
      */
     public function charge(PaymentInterface $payment);
+
+    /**
+     * 根据 qr id 查找 payment
+     * @return PaymentInterface
+     */
+    public function findPaymentByQrId($qrId);
+
+    /**
+     * 通知该qr对应的交易已经成功
+     *
+     * @param int $qrId
+     * @return PaymentInterface
+     */
+    public function notifyPayment($qrId);
 }

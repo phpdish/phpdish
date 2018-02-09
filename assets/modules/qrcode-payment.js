@@ -11,15 +11,23 @@ class QRPayment
             'qrcode': qrcode,
         }), {
             width: 220,
-            quickClose: true
+            quickClose: true,
+            onclose: () => {
+                this.timeout && clearTimeout(this.timeout);
+                this.timer && clearTimeout(this.timer);
+            },
+            onremove: () => {
+                this.timeout && clearTimeout(this.timeout);
+                this.timer && clearTimeout(this.timer);
+            },
         });
         this.loopLock = false;
         //定时查询
-        setTimeout(()=>{
+        this.timeout = setTimeout(()=>{
             this.timer = setInterval(()=>{
                 this.loopPaymentResult(qrcode.id);
             }, 2000);
-        }, 3000); //3s后开始查询
+        }, 2000); //3s后开始查询
     }
 
     loopPaymentResult(qrId){
@@ -34,12 +42,16 @@ class QRPayment
                     clearInterval(this.timer);
                 }
                 Util.dialog.create(false, '<div class="payment-result"><i class="if i-success"></i> <p>支付成功</p></div>', {
-                    'ok': ()=>{
+                    width: 180,
+                    okValue: '确定',
+                    ok: ()=>{
                         location.reload();
                     },
-                    'cancel': ()=>{
+                    cancelValue: '取消',
+                    cancel: ()=>{
                         location.reload();
-                    }
+                    },
+                    padding: 10
                 });
             }
         }).fail(()=>{

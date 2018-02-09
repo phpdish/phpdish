@@ -54,6 +54,14 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
     public function getStatus();
 
     /**
+     * 设置交易状态
+     *
+     * @param string $status
+     * @return PaymentInterface
+     */
+    public function setStatus($status);
+
+    /**
      * 获取支付类型
      * @return string
      */

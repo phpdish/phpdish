@@ -52,6 +52,9 @@ class PaymentController extends Controller
             throw new \InvalidArgumentException("Bad Request");
         }
         $result = $this->get('phpdish.payment_gateway.youzan')->checkQRStatus($qrId);
+        if ($result) { //如果支付成功，则通知
+            $this->getPaymentManager()->notifyPayment($qrId);
+        }
         return $this->json([
             'result' => $result
         ]);
