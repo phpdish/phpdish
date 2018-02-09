@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends RestController
 {
     use ManagerTrait;
-
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+    use \PHPDish\Bundle\PaymentBundle\Controller\ManagerTrait;
 
     /**
      * @Route("/categories/new", name="category_add")
@@ -170,16 +170,18 @@ class CategoryController extends RestController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
 
-        if ($category->isCharging()) {
-
-
+        if ($category->isCharging()) { //收费专栏/书籍
+            $qrCode = $this->getCategoryManager()->payForCategory($category, $this->getUser());
+            $view = $this->view([
+                'message' => '需要先付费',
+                'qrcode' => $qrCode
+            ]);
         } else {
             $this->getCategoryManager()->followCategory($category, $this->getUser());
+            $view = $this->view([
+                'follower_count' => $category->getFollowerCount(),
+            ]);
         }
-
-        $view = $this->view([
-            'follower_count' => $category->getFollowerCount(),
-        ]);
 
         return $this->handleView($view);
     }

@@ -6,6 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Slince\YouzanPay\Api\QRCode;
 
 interface CategoryManagerInterface
 {
@@ -97,4 +98,12 @@ interface CategoryManagerInterface
      * @return QueryBuilder
      */
     public function createGetUserCategoriesQueryBuilder(UserInterface $user);
+
+    /**
+     * 为专栏/书籍付费
+     * @param CategoryInterface $category
+     * @param UserInterface $user
+     * @return QRCode
+     */
+    public function payForCategory(CategoryInterface $category, UserInterface $user);
 }

@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
+use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
 use PHPDish\Bundle\PostBundle\Entity\Category;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
@@ -13,7 +15,9 @@ use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Slince\YouzanPay\Api\QRCode;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Routing\Router;
 
 class CategoryManager implements CategoryManagerInterface
 {
@@ -29,10 +33,27 @@ class CategoryManager implements CategoryManagerInterface
      */
     protected $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
+    /**
+     * @var PaymentManagerInterface
+     */
+    protected $paymentManager;
+
+    /**
+     * @var Router
+     */
+    protected $router;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
+        PaymentManagerInterface $paymentManager,
+        Router $router
+    )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->paymentManager = $paymentManager;
+        $this->router = $router;
     }
 
     /**
@@ -102,6 +123,36 @@ class CategoryManager implements CategoryManagerInterface
         $category->addManager($user);
 
         return $this->saveCategory($category);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function payForCategory(CategoryInterface $category, UserInterface $user)
+    {
+        if ($category->isCharging()) {
+            //发起付费
+            $message = $category->isBook() ? sprintf('购买书籍: <a href="%s">%s</a>',
+                $this->router->generate('book_view', ['slug' => $category->getSlug()]),
+                $category->getName()
+            ) : sprintf('订阅专栏: <a href="%s">%s</a>',
+                $this->router->generate('category_view', ['slug' => $category->getSlug()]),
+                $category->getName()
+            );
+            //创建交易
+            $payment = $this->paymentManager->createPayment($user)
+                ->setAmount($category->getCharge())
+                ->setDescription($message)
+                ->setPaymentType($category->isBook() ? PaymentInterface::TYPE_BUY_BOOK
+                    : PaymentInterface::TYPE_FOLLOW_CATEGORY)
+                ->setPayableId($category->getId());
+
+
+            $qrCode = $this->paymentManager->charge($payment);
+        } else {
+            throw new \LogicException('The category is free');
+        }
+        return $qrCode;
     }
 
     /**

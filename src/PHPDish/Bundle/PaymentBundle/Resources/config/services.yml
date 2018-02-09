@@ -1,10 +1,16 @@
 services:
-    phpdish.manager.payment:
-        class: PHPDish\Bundle\PaymentBundle\Service\PaymentManager
-        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher"]
-
     phpdish.payment_gateway.youzan:
         class: Slince\YouzanPay\YouzanPay
         arguments:
             -
             - {httpClient: "@phpdish.http_client"}
+
+    phpdish.manager.payment:
+        class: PHPDish\Bundle\PaymentBundle\Service\PaymentManager
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.payment_gateway.youzan"]
+
+
+
+    phpdish.manager.wallet:
+        class: PHPDish\Bundle\PaymentBundle\Service\WalletManager
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.manager.user"]

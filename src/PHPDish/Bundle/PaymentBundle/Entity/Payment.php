@@ -9,6 +9,8 @@ use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;
+use Rhumsaa\Uuid\Uuid;
 
 /**
  * @ORM\Entity
@@ -28,7 +30,7 @@ class Payment implements PaymentInterface
     protected $payableId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $serialNo;
@@ -68,6 +70,14 @@ class Payment implements PaymentInterface
      * @var string
      */
     protected $qrId;
+
+    public function __construct()
+    {
+        try {
+            $this->serialNo = Uuid::uuid1();
+        } catch (UnsatisfiedDependencyException $exception) {
+        }
+    }
 
     /**
      * @return int

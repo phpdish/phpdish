@@ -14,6 +14,8 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
+            - '@phpdish.manager.payment'
+            - '@router'
 
     phpdish.manager.book:
         class: PHPDish\Bundle\PostBundle\Service\BookManager

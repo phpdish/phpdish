@@ -16,11 +16,30 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
     const STATUS_WAITING = 'waiting';
 
     /**
+     * 订阅专栏
+     * @var string
+     */
+    const TYPE_FOLLOW_CATEGORY = 'follow_category';
+
+    /**
+     * 购买书籍
+     * @var string
+     */
+    const TYPE_BUY_BOOK = 'buy_book';
+
+    /**
      * 获取交易资源
      *
      * @return int
      */
     public function getPayableId();
+
+    /**
+     * 设置购买的资源的id
+     * @param int $payableId
+     * @return PaymentInterface
+     */
+    public function setPayableId($payableId);
 
     /**
      * 获取交易流水号
@@ -54,6 +73,13 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
     public function getDescription();
 
     /**
+     * 设置交易描述
+     * @param string $description
+     * @return PaymentInterface
+     */
+    public function setDescription($description);
+
+    /**
      * 设置价格
      *
      * @param int $amount
@@ -66,4 +92,18 @@ interface PaymentInterface extends DateTimeInterface, EnabledInterface, Identifi
      * @return string
      */
     public function getQrId();
+
+    /**
+     * 设置 QR ID
+     * @param int $qrId
+     * @return PaymentInterface
+     */
+    public function setQrId($qrId);
+
+    /**
+     * 设置类型
+     * @param string $paymentType
+     * @return PaymentInterface
+     */
+    public function setPaymentType($paymentType);
 }

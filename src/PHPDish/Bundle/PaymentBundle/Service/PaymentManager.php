@@ -29,8 +29,8 @@ class PaymentManager implements PaymentManagerInterface
     protected $youzanPay;
 
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
         EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
         YouzanPay $youzanPay
     )
     {
@@ -72,6 +72,8 @@ class PaymentManager implements PaymentManagerInterface
             'price' => $payment->getAmount(),
             'source' => $payment->getSerialNo()
         ]);
+        $payment->setQrId($qrCode->getId());
+        $this->savePayment($payment);
         return $qrCode;
     }
 
