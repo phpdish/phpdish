@@ -108,6 +108,10 @@ class PaymentManager implements PaymentManagerInterface
         if (!$payment) {
             return null;
         }
+        //已经成功的不再通知
+        if ($payment->getStatus() === PaymentInterface::STATUS_OK) {
+            return null;
+        }
         $payment->setStatus(PaymentInterface::STATUS_OK)
             ->setUpdatedAt(Carbon::now()); //交易状态
 

@@ -107,7 +107,9 @@ class WalletManager implements WalletManagerInterface
         $wallet = $this->getUserWallet($user);
         $history = $this->createHistory();
         $history->setAmount($amount)
-            ->setType(Payment::TYPE_CATEGORY_INCOME);
+            ->setType(Payment::TYPE_CATEGORY_INCOME)
+            ->setStatus(Payment::STATUS_OK)
+            ->setUser($wallet->getUser());
         $this->addHistory($wallet, $history);
     }
 

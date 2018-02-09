@@ -38,7 +38,7 @@ class UploadFile{
                 FileUploaded: (uploader, file, result) => {
                     this.options.onUploaded(result, file);
                 },
-                Error: function(uploader, error) {
+                Error: (uploader, error) => {
                     this.options.onError(error);
                 }
             }

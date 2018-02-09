@@ -26,7 +26,7 @@ class Payment implements PaymentInterface
     use IdentifiableTrait, DateTimeTrait, EnabledTrait, UserAwareTrait;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $payableId;
@@ -80,7 +80,7 @@ class Payment implements PaymentInterface
     protected $parameters;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $qrId;

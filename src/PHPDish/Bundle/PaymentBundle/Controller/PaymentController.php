@@ -61,6 +61,20 @@ class PaymentController extends Controller
     }
 
     /**
+     * 检查支付结果
+     * @Route("/payments/test", name="payment_test")
+     * @param Request $request
+     * @return Response
+     */
+    public function testAction()
+    {
+        $this->getPaymentManager()->notifyPayment('6410820');
+        return $this->json([
+            'result' => 'success'
+        ]);
+    }
+
+    /**
      * 获取交易管理
      * @return PaymentManagerInterface
      */
