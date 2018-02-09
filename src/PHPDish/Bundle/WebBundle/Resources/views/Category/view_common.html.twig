@@ -22,11 +22,11 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ category.slug }}">
+                            <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ category.slug }}" data-price="{{ category.chargePrice|money }}">
                                 {% if app.user and category.isFollowedBy(app.user) %}
                                     <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已订阅</button>
                                 {% else %}
-                                    <button class="btn u-btn-outline-primary" data-action="follow" data-price="{{ category.chargePrice|money }}"><i class="if i-plus"></i> {{ category.chargePrice|money }} 订阅</button>
+                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ category.charging ? "#{category.chargePrice|money} " : '免费' }}订阅</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">
