@@ -15,13 +15,17 @@
             <div class="panel panel-u">
                 <div class="panel-body wallet-details">
                     <div class="row">
-                        <div class="col-md-6 wallet-info">
-                            <p class="balance">账户余额: <span class="amount">{{ wallet.price|money }}</span></p>
-                            <button class="btn btn-md u-btn-outline-primary withdraw">提现</button>
+                        <div class="col-md-6 wallet-info" data-role="wallet-info">
+                            <div class="balance">
+                                账户余额: <span class="amount" data-amount="{{ wallet.amount }}">{{ wallet.price|money }}</span>
+                                <div class="freeze-balance">(冻结余额: <span class="amount">{{ wallet.freezePrice|money }}</span>)</div>
+                            </div>
+                            <button class="btn btn-md u-btn-outline-primary withdraw" data-role="withdraw">提现</button>
                         </div>
                         <div class="col-md-6 help">
                             <div>每次提现最小额度为￥100.00</div>
-                            <div>每次提现收取 5% 手续费</div>
+                            <div>提现金额必须是整数</div>
+                            <div>每次提现收取 10% 手续费</div>
                             <div>提现会在 3-5 个工作日内到账</div>
                         </div>
                     </div>

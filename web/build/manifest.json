@@ -14,6 +14,7 @@
   "build/js/thread.js": "http://127.0.0.1:8089/js/thread.js",
   "build/js/topic.js": "http://127.0.0.1:8089/js/topic.js",
   "build/js/user.js": "http://127.0.0.1:8089/js/user.js",
+  "build/js/wallet.js": "http://127.0.0.1:8089/js/wallet.js",
   "build/manifest.js": "http://127.0.0.1:8089/manifest.js",
   "build/vendor.css": "http://127.0.0.1:8089/vendor.css",
   "build/vendor.js": "http://127.0.0.1:8089/vendor.js"

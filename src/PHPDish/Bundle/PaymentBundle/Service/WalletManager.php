@@ -81,6 +81,12 @@ class WalletManager implements WalletManagerInterface
     public function addHistory(WalletInterface $wallet, WalletHistoryInterface $history)
     {
         $wallet->addHistory($history);
+        //收入的话，增加钱包余额
+        if ($history->isIncome()) {
+            $wallet->setAmount(
+                $wallet->getAmount() + $history->getAmount()
+            );
+        }
         $this->saveWallet($wallet);
     }
 
@@ -106,6 +112,7 @@ class WalletManager implements WalletManagerInterface
         if (!$wallet) {
             $wallet = $this->createWallet($user);
         }
+        $wallet->setUser($user);
         return $wallet;
     }
 
@@ -152,6 +159,68 @@ class WalletManager implements WalletManagerInterface
             ->getQuery();
         return $this->createPaginator($query, $page, $limit);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withdraw(WalletInterface $wallet, $amount, $alipay)
+    {
+        $amount = intval($amount);
+        if ($amount < PaymentInterface::WITHDRAW_MAX_AMOUNT) {
+            throw new \LogicException(sprintf('提现金额必须大于 %d', PaymentInterface::WITHDRAW_MAX_AMOUNT));
+        }
+        if ($wallet->getAmount() < $amount) {
+            throw new \LogicException('余额不足');
+        }
+        if (!$alipay) {
+            throw new \LogicException('需要提供支付宝账户');
+        }
+
+        $history = $this->createHistory();
+        $history->setType(PaymentInterface::TYPE_WITHDRAW)
+            ->setAmount($amount)
+            ->setDescription('')
+            ->setStatus(PaymentInterface::STATUS_WAITING)
+            ->setDescription(sprintf('提现到: %s', $alipay))
+            ->setUser($wallet->getUser());
+        //钱包余额冻结
+        $wallet->freeze($amount);
+        $this->addHistory($wallet, $history);
+
+        return $history;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function refuseWithdraw(WalletHistoryInterface $history, $reason = null)
+    {
+        $history->getWallet()->release($history->getAmount()); //钱包释放资本
+        $history->setDescription(
+            $history->getDescription() . ";拒绝原因：" . ($reason ?: '暂无原因')
+        );
+        $history->setStatus(PaymentInterface::STATUS_CLOSED);
+        $this->entityManager->persist($history);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function approveWithdraw(WalletHistoryInterface $history, $reason = null)
+    {
+        $wallet = $history->getWallet();
+        $history->getWallet()->setFreezeAmount(
+            $wallet->getFreezeAmount() - $history->getAmount()
+        ); //减去冻结的金额
+        $history->setDescription(
+            $history->getDescription() . ";完成：" . ($reason ?: '暂无原因')
+        );
+        $history->setStatus(PaymentInterface::STATUS_OK);
+        $this->entityManager->persist($history);
+        $this->entityManager->flush();
+    }
+
 
     /**
      * @return EntityRepository

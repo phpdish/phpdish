@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
@@ -41,12 +42,14 @@ class Payment implements PaymentInterface
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      * @var UserInterface
+     * @Serializer\Groups({"Details"})
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallet", inversedBy="histories", cascade={"persist"})
      * @var WalletInterface
+     * @Serializer\Groups({"Details"})
      */
     protected $wallet;
 

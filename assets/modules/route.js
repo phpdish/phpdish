@@ -42,7 +42,8 @@ const routes = {
     'notifications': '/notifications',
     'notification.count': '/notifications/count',
     //支付结果
-    'payment.result': '/payments/result'
+    'payment.result': '/payments/result',
+    'wallet.withdraw': {path:'/wallet/withdraw', method: 'POST'},
 };
 
 function Route()

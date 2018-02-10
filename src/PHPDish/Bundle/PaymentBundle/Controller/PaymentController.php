@@ -2,15 +2,17 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Controller;
 
+use FOS\RestBundle\Context\Context;
+use JMS\Serializer\SerializationContext;
+use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\PaymentBundle\Form\Type\PaymentType;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaymentController extends Controller
+class PaymentController extends RestController
 {
     use ManagerTrait;
 
@@ -92,6 +94,27 @@ class PaymentController extends Controller
         }
         $this->get('logger')->debug(print_r($return, true));
         return $this->json($return);
+    }
+
+    /**
+     * 处理消息推送
+     * @Route("/wallet/withdraw", name="wallet_withdraw")
+     * @param Request $request
+     * @return Response
+     */
+    public function withdrawAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $walletManager = $this->getWalletManager();
+        $wallet = $walletManager->getUserWallet($this->getUser());
+        $history = $walletManager->withdraw($wallet,
+            $request->request->get('amount'),
+            $request->request->get('alipay_account')
+        );
+        $view = $this->view([
+            'history' => $history
+        ])->setContext((new Context())->setGroups(['Default']));
+        return $this->handleView($view);
     }
 
     /**

@@ -24,6 +24,21 @@ interface WalletInterface extends IdentifiableInterface, DateTimeInterface
     public function setAmount($amount);
 
     /**
+     * 获取冻结余额
+     *
+     * @return int
+     */
+    public function getFreezeAmount();
+
+    /**
+     * 设置冻结余额
+     *
+     * @param int $amount
+     * @return WalletInterface
+     */
+    public function setFreezeAmount($amount);
+
+    /**
      * 获取用户
      * @return UserInterface
      */
@@ -48,4 +63,25 @@ interface WalletInterface extends IdentifiableInterface, DateTimeInterface
      * @return Money
      */
     public function getPrice();
+
+    /**
+     * 获取冻结余额
+     * @return Money
+     */
+    public function getFreezePrice();
+
+    /**
+     * 冻结部分余额
+     *
+     * @param int $amount
+     * @return WalletInterface
+     */
+    public function freeze($amount);
+
+    /**
+     * 释放冻结金额
+     * @param int $amount
+     * @return WalletInterface
+     */
+    public function release($amount);
 }

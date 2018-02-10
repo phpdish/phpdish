@@ -52,6 +52,18 @@ interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, Ide
     const TYPE_BOOK_INCOME = 'book_income';
 
     /**
+     * 书籍收入
+     * @var string
+     */
+    const TYPE_WITHDRAW = 'withdraw';
+
+    /**
+     * 最大提现金额
+     * @var int
+     */
+    const WITHDRAW_MAX_AMOUNT = 10000;
+
+    /**
      * 获取交易资源
      *
      * @return int

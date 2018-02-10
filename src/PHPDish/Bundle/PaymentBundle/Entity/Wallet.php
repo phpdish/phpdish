@@ -26,6 +26,13 @@ class Wallet implements WalletInterface
     protected $amount = 0;
 
     /**
+     * 冻结余额，单位分
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $freezeAmount = 0;
+
+    /**
      * @ORM\OneToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      */
     protected $user;
@@ -55,6 +62,25 @@ class Wallet implements WalletInterface
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFreezeAmount()
+    {
+        return $this->freezeAmount;
+    }
+
+    /**
+     * @param int $freezeAmount
+     * @return Wallet
+     */
+    public function setFreezeAmount($freezeAmount)
+    {
+        $this->freezeAmount = $freezeAmount;
 
         return $this;
     }
@@ -110,5 +136,39 @@ class Wallet implements WalletInterface
     public function getPrice()
     {
         return Money::CNY($this->amount);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFreezePrice()
+    {
+        return Money::CNY($this->freezeAmount);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function freeze($amount)
+    {
+        if ($this->amount < $amount) {
+            throw new \LogicException('没有足够的余额');
+        }
+        $this->amount -= $amount;
+        $this->freezeAmount += $amount;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function release($amount)
+    {
+        if ($this->freezeAmount < $amount) {
+            throw new \LogicException('没有足够的冻结余额');
+        }
+        $this->amount += $amount;
+        $this->freezeAmount -= $amount;
+        return $this;
     }
 }

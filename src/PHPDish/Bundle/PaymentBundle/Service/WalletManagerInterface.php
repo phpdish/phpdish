@@ -60,4 +60,27 @@ interface WalletManagerInterface
      * @return WalletHistoryInterface[]|Pagerfanta
      */
     public function findUserWalletHistories(WalletInterface $wallet,  $page, $limit = null);
+
+    /**
+     * 提现指定额度
+     * @param WalletInterface $wallet
+     * @param int $amount
+     * @param string $alipay
+     * @return WalletHistoryInterface
+     */
+    public function withdraw(WalletInterface $wallet, $amount, $alipay);
+
+    /**
+     * 拒绝提现
+     * @param WalletHistoryInterface $history
+     * @param string|null $reason
+     */
+    public function refuseWithdraw(WalletHistoryInterface $history, $reason = null);
+
+    /**
+     * 批准提现
+     * @param WalletHistoryInterface $history
+     * @param string|null $reason
+     */
+    public function approveWithdraw(WalletHistoryInterface $history, $reason = null);
 }

@@ -38,6 +38,9 @@ class WalletExtension extends \Twig_Extension
             case PaymentInterface::TYPE_BOOK_INCOME:
                 $text = '书籍收入';
                 break;
+            case PaymentInterface::TYPE_WITHDRAW:
+                $text = '提现';
+                break;
             default:
                 $text = '未知';
         }
@@ -55,12 +58,18 @@ class WalletExtension extends \Twig_Extension
             case PaymentInterface::STATUS_OK:
                 if ($history->isIncome()) {
                     $text = '已到账';
+                } elseif ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
+                    $text = '已打款';
                 } else {
                     $text = '已支付';
                 }
                 break;
             case PaymentInterface::STATUS_WAITING:
-                $text = '等待支付';
+                if ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
+                    $text = '处理中';
+                } else {
+                    $text = '等待支付';
+                }
                 break;
             case PaymentInterface::STATUS_CLOSED:
                 $text = '已关闭';
