@@ -66,6 +66,7 @@
   .body{
     line-height: 1.8em;
     font-size: 14px;
+    margin-top:20px;
   }
   //作者部分
   .author{
@@ -123,6 +124,25 @@
         padding-right: 0;
       }
     }
+  }
+}
+
+/*------------------------------------
+  付费部分
+------------------------------------*/
+.payfor{
+  margin-top:-50px;
+  position: relative;
+  z-index: 999;
+  text-align: center;
+  .mask{
+      height:80px;
+      background: -moz-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+      background: -webkit-gradient(linear,0 top,0 bottom,from(rgba(255,255,255,0)),to(#fff));
+      background: -o-linear-gradient(bottom,rgba(255,255,255,.1),rgba(255,255,255,0));
+  }
+  .action{
+    padding-top:15px;
   }
 }
 

@@ -9,19 +9,18 @@ import SimpleMDE from 'simplemde';
 import InlineAttachment from '../modules/inline-attachment.js';
 import hljs from 'highlight.js';
 require('jquery-validation');
+import QRCodePayment from '../modules/qrcode-payment.js';
 
 /**
  * Post Details
  */
-(function($){
-
-    //代码高亮
+const $addComment = $('#add-comment');
+$addComment.length > 0 && (function($){
+//代码高亮
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
-
     //添加评论的表单
-    const $addComment = $('#add-comment');
     const $addCommentForm = $('#add-comment-form');
     let editor;
 
@@ -122,6 +121,28 @@ require('jquery-validation');
         });
     });
 
+    //购买
+    const $buy = $('[data-role="buy"]');
+    $buy.length > 0 && (function(){
+        const buttonLock = lockButton($buy);
+        const slug = $buy.data('slug');
+        $buy.on('click', function(){
+            const wait = Util.dialog.wait.ballPulse();
+            Util.request('category.follow', {'slug': slug}).done(function(response){
+                if (response.require_payment) {
+                    new QRCodePayment(response.qrcode);
+                    return;
+                } else {
+                    location.reload();
+                }
+            }).fail(function(response){
+                Util.dialog.message(response.responseJSON.error).flash();
+            }).always(() => {
+                wait.close();
+                buttonLock.release();
+            });
+        });
+    })($);
 })($);
 
 
@@ -129,9 +150,9 @@ require('jquery-validation');
 /**
  * 添加文章
  */
-(function($){
-    const postBody = document.getElementById('post_originalBody');
-    const $postBody = $(postBody);
+const postBody = document.getElementById('post_originalBody');
+const $postBody = $(postBody);
+$postBody.length > 0 && (function($){
     const $postTitle = $('#post_title');
     const $addPostForm = $('#add-post-form');
     const $addPostBtn = $('[data-action="add-post"]');

@@ -39,7 +39,20 @@
                     </div>
                 </header>
                 <div class="panel-body">
-                    <article class="markdown-body body">{{ post.body|raw }}</article>
+                    {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted(post, 'edit') or post.category.isFollowedBy(app.user)) %}
+                    {% dump(isCanView) %}
+                    <article class="markdown-body body">
+                        {{ isCanView ? post.body|raw : post.body|slice(0, post.body|length / 2)|purify|raw}}
+                    </article>
+                    {% if not isCanView %}
+                        <div class="payfor">
+                            <div class="mask"></div>
+                            <div class="action">
+                                <p class="meta"><i class="if i-tips"></i> 购买本专栏之后即可阅读全文</p>
+                                <button class="btn u-btn-primary" data-slug="{{ post.category.slug }}" data-role="buy">{{ post.category.chargePrice|money }} 购买</button>
+                            </div>
+                        </div>
+                    {% endif %}
                     <hr/>
                     <div class="category media">
                         <div class="media-left media-middle">
@@ -49,11 +62,11 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <div class="pull-right" data-role="follow-category"  data-slug="{{ post.category.slug }}">
+                            <div class="pull-right" data-role="follow-category" data-price="{{ post.category.chargePrice|money }}"  data-slug="{{ post.category.slug }}">
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and post.category.isFollowedBy(app.user) %}
                                     <button class="btn  btn-sm btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
                                 {% else %}
-                                    <button class="btn btn-sm u-btn-deeporange" data-action="follow"><i class="if i-plus"></i> 关注本专栏</button>
+                                    <button class="btn btn-sm u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 关注本专栏</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">
