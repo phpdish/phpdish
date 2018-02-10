@@ -49,7 +49,7 @@ class FollowCategoryIntialization{
                     });
                 };
                 if (priceAmount > 0) {
-                    Util.dialog.confirm('这是个付费专栏/书籍，取消之后再次订阅需要再次付费，确认取消吗？', {width: 200}).then(()=>{
+                    Util.dialog.confirm('这是个付费专栏/书籍，取消之后再次订阅需要再次付费，确认继续吗？', {width: 200}).then(()=>{
                         unFollow();
                     }, ()=>{
 
