@@ -111,6 +111,7 @@ class WalletManager implements WalletManagerInterface
         ]);
         if (!$wallet) {
             $wallet = $this->createWallet($user);
+            $this->saveWallet($wallet);
         }
         $wallet->setUser($user);
         return $wallet;

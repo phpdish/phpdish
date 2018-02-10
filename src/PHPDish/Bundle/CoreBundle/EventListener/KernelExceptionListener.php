@@ -17,7 +17,7 @@ final class KernelExceptionListener
      *
      * @var string
      */
-    const DEFAULT_STATUS_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
+    const DEFAULT_STATUS_CODE = Response::HTTP_BAD_REQUEST;
 
     /**
      * @var TokenStorageInterface

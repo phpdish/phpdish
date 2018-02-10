@@ -32,6 +32,7 @@ $addCategoryForm.length > 0 && (function(){
             }
         });
     }
+
     $addCategoryForm.validate({
         submitHandler: () => {
             if ($categoryCover.val().length === 0) {
@@ -72,7 +73,6 @@ $addCategoryForm.length > 0 && (function(){
         $charge.val($this.data('num'));
     });
     $chooseCharge.find(':input').on('blur', function(){
-        
         $chooseCharge.find('.btn').removeClass('u-btn-primary'); //移除之前的选择
         const $this = $(this);
         const num = $.trim($this.val());
@@ -82,6 +82,17 @@ $addCategoryForm.length > 0 && (function(){
             $charge.val(null);
         }
     });
+
+    //编辑状态下，设置订阅价的状态
+    if ($charge.val() > 0) {
+        const charge =  $charge.val();
+        const $targetNode = $chooseCharge.find(`[data-num="${charge}"]`);
+        if ($targetNode.length > 0) {
+            $targetNode.siblings('.btn').removeClass('u-btn-primary').end().addClass('u-btn-primary');
+        } else {
+            $chooseCharge.find(':input').val(parseFloat(charge / 100).toFixed(2));
+        }
+    }
 })($);
 
 

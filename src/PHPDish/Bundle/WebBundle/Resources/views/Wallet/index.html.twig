@@ -39,15 +39,21 @@
                             <th>状态</th>
                         </tr>
                         {% for history in histories %}
-                        <tr>
-                            <td>{{ history.createdAt|time_diff }}</td>
-                            <td>{{ history|wallet_history_type }}</td>
-                            <td>{{ history.description|raw }}</td>
-                            <td class="{%  if history.isIncome %}income{% else %}expenses{% endif %}">
-                            {%  if history.isIncome %}+{% else %}-{% endif %}{{ history.price|money }}
-                            </td>
-                            <td>{{ history|wallet_history_status }}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ history.createdAt|time_diff }}</td>
+                                <td>{{ history|wallet_history_type }}</td>
+                                <td>{{ history.description|raw }}</td>
+                                <td class="{%  if history.isIncome %}income{% else %}expenses{% endif %}">
+                                {%  if history.isIncome %}+{% else %}-{% endif %}{{ history.price|money }}
+                                </td>
+                                <td>{{ history|wallet_history_status }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="empty-data" colspan="5">
+                                    <i class="fa fa-credit-card"></i> 还没有记录
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </div>

@@ -99,6 +99,15 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+monolog:
+    channels: ['notes']
+    handlers:
+        notes:
+            type: stream
+            path: '%kernel.logs_dir%/notes.log'
+            level: debug
+            channels: ['notes']
+
 # KNP Gaufrette:
 knp_gaufrette:
     adapters:

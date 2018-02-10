@@ -10,8 +10,9 @@ class FollowCategoryIntialization{
         $container.find('[data-role="follow-category"]').each(function(){
             const $follow = $(this);
             const price = $follow.data('price');
-            const priceAmount = parseFloat(price.replace(/[^\d]/, ''));
-            const btnText = priceAmount > 0 ? `${price} 订阅` : '免费订阅';
+            const callText = $follow.data('book') ? '购买' : '订阅';
+            const priceAmount = price ? parseFloat(price.replace(/[^\d]/, '')) : 0;
+            const btnText = priceAmount > 0 ? `${price} ${callText}` : callText;
 
             //关注专栏
             $follow.on('click', '[data-action="follow"]', function(){
@@ -25,7 +26,7 @@ class FollowCategoryIntialization{
                         return;
                     }
                     $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
-                        .html('<i class="if i-check"></i> 已订阅');
+                        .html(`<i class="if i-check"></i> 已${callText}`);
 
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();

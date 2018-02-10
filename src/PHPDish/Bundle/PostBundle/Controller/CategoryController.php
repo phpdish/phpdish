@@ -170,7 +170,7 @@ class CategoryController extends RestController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
 
-        if ($category->isCharging()) { //收费专栏/书籍
+        if ($category->isCharging() && !$category->isBelongsTo($this->getUser())) { //收费专栏/书籍
             $qrCode = $this->getCategoryManager()->payForCategory($category, $this->getUser());
             $view = $this->view([
                 'require_payment' => true,

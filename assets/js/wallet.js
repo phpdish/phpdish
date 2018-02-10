@@ -48,6 +48,8 @@ $walletInfo.length > 0 && (function($){
                 Util.dialog.message(response.responseJSON.error).flash(()=>{
                     // location.reload();
                 })
+            }).always(()=>{
+               btnLock.release();
             });
         }, ()=>{
             btnLock.release();

@@ -18,6 +18,9 @@ class BookType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => '书籍描述',
             ])
+            ->add('charge', HiddenType::class, [
+                'label' => '书籍售价',
+            ])
             ->add('slug', TextType::class, [
                 'label' => '访问域名',
             ])

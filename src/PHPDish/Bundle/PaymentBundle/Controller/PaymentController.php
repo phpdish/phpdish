@@ -92,7 +92,8 @@ class PaymentController extends RestController
                 'message' => $exception->getMessage()
             ];
         }
-        $this->get('logger')->debug(print_r($return, true));
+        $this->get('monolog.logger.notes')->debug(print_r($return, true));
+        $this->get('monolog.logger.notes')->debug($request->getContent());
         return $this->json($return);
     }
 
@@ -139,7 +140,6 @@ class PaymentController extends RestController
     /**
      * 检查支付结果
      * @Route("/payments/test", name="payment_test")
-     * @param Request $request
      * @return Response
      */
     public function testAction()

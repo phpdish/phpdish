@@ -25,11 +25,11 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ book.slug }}">
+                            <div class="pull-right follow-panel" data-role="follow-category" data-book="true" data-slug="{{ book.slug }}"  data-price="{{ book.chargePrice|money }}">
                                 {% if app.user and book.isFollowedBy(app.user) %}
-                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已订阅</button>
+                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> 已购买</button>
                                 {% else %}
-                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 订阅</button>
+                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ book.charging ? "#{book.chargePrice|money} " : '' }}购买</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">
