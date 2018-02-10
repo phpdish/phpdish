@@ -68,7 +68,7 @@ class WalletExtension extends \Twig_Extension
                 if ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
                     $text = '处理中';
                 } else {
-                    $text = '等待支付';
+                    $text = '未支付';
                 }
                 break;
             case PaymentInterface::STATUS_CLOSED:

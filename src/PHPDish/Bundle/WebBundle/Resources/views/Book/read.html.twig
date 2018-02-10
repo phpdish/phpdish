@@ -49,8 +49,18 @@
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
                         <section class="normal markdown-body" id="pjax-container">
-                            {{ chapter.body|raw }}
+                            {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted(chapter, 'edit') or book.isFollowedBy(app.user)) %}
+                            {{ isCanView ? chapter.body|raw : chapter.body|slice(0, chapter.body|length / 2)|purify|raw}}
                         </section>
+                        {% if not isCanView %}
+                            <div class="payfor">
+                                <div class="mask"></div>
+                                <div class="action">
+                                    <p class="meta"><i class="if i-tips"></i> 购买本书之后即可阅读全文</p>
+                                    <button class="btn u-btn-primary" data-slug="{{ book.slug }}" data-role="buy">{{ book.chargePrice|money }} 购买</button>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

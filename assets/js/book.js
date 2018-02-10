@@ -9,6 +9,7 @@ import {FollowUserIntialization} from "../modules/actions";
 import lockButton from '../modules/button-lock.js';
 import InlineAttachment from "../modules/inline-attachment";
 import SimpleMDE from "simplemde";
+import QRCodePayment from "../modules/qrcode-payment";
 
 //书籍详情页面
 const $bookDetails = $('#book-details');
@@ -229,6 +230,29 @@ $bookView.length > 0 && (function($){
                 hljs.highlightBlock(block);
             });
             NProgress.done();
+        });
+    })($);
+
+    //购买
+    const $buy = $('[data-role="buy"]');
+    $buy.length > 0 && (function(){
+        const buttonLock = lockButton($buy);
+        const slug = $buy.data('slug');
+        $buy.on('click', function(){
+            const wait = Util.dialog.wait.ballPulse();
+            Util.request('category.follow', {'slug': slug}).done(function(response){
+                if (response.require_payment) {
+                    new QRCodePayment(response.qrcode);
+                    return;
+                } else {
+                    location.reload();
+                }
+            }).fail(function(response){
+                Util.dialog.message(response.responseJSON.error).flash();
+            }).always(() => {
+                wait.close();
+                buttonLock.release();
+            });
         });
     })($);
 })($);
