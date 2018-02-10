@@ -10,7 +10,8 @@ class FollowCategoryIntialization{
         $container.find('[data-role="follow-category"]').each(function(){
             const $follow = $(this);
             const price = $follow.data('price');
-            const btnText = price ? `${price} 订阅` : '免费订阅';
+            const priceAmount = parseFloat(price.replace(/[^\d]/, ''));
+            const btnText = priceAmount > 0 ? `${price} 订阅` : '免费订阅';
 
             //关注专栏
             $follow.on('click', '[data-action="follow"]', function(){
@@ -33,17 +34,28 @@ class FollowCategoryIntialization{
                     buttonLock.release();
                 });
             }).on('click', '[data-action="unfollow"]', function(){
-                const $this = $(this);
-                const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
-                const buttonLock = lockButton($this);
-                Util.request('category.unfollow', {'slug': slug}).done(function(response){
-                    $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
-                        .html(`<i class="if i-plus"></i> ${btnText}`);
-                }).fail(function(response){
-                    Util.dialog.message(response.responseJSON.error).flash();
-                }).always(() => {
-                    buttonLock.release();
-                });
+                const unFollow = ()=>{
+                    const $this = $(this);
+                    const slug = $this.data('slug') || $this.closest('[data-slug]').data('slug');
+                    const buttonLock = lockButton($this);
+                    Util.request('category.unfollow', {'slug': slug}).done(function(response){
+                        $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
+                            .html(`<i class="if i-plus"></i> ${btnText}`);
+                    }).fail(function(response){
+                        Util.dialog.message(response.responseJSON.error).flash();
+                    }).always(() => {
+                        buttonLock.release();
+                    });
+                };
+                if (priceAmount > 0) {
+                    Util.dialog.confirm('这是个付费专栏/书籍，取消之后再次订阅需要再次付费，确认取消吗？', {width: 200}).then(()=>{
+                        unFollow();
+                    }, ()=>{
+
+                    });
+                } else {
+                    unFollow();
+                }
             });
         });
     }

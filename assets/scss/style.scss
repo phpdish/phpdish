@@ -165,7 +165,7 @@
 
   //通知数量区域
   .nav-notifications{
-    .if{
+    .if, .fa, .fas{
       font-size:18px;
       vertical-align: middle;
     }
@@ -214,10 +214,12 @@
     }
   }
 
-  .dropdown-menu{
-    li .if{
-      font-size: 18px;
-      vertical-align: middle;
+  .dropdown-menu {
+    li {
+      .if, .fa, .fas{
+        font-size: 18px;
+        vertical-align: middle;
+      }
     }
   }
 }

@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Model;
 
+use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -41,4 +42,10 @@ interface WalletInterface extends IdentifiableInterface, DateTimeInterface
      * @return WalletInterface
      */
     public function addHistory(WalletHistoryInterface $history);
+
+    /**
+     * 获取价格
+     * @return Money
+     */
+    public function getPrice();
 }

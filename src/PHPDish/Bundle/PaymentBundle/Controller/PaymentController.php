@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentController extends Controller
 {
+    use ManagerTrait;
+
     /**
      * 创建交易
      * @Route("/payments", name="payment_add")
@@ -57,6 +59,57 @@ class PaymentController extends Controller
         }
         return $this->json([
             'result' => $result
+        ]);
+    }
+
+    /**
+     * 处理消息推送
+     * @Route("/payments/notify", name="payment_notify")
+     * @param Request $request
+     * @return Response
+     */
+    public function notifyAction(Request $request)
+    {
+        $youZanPay = $this->get('phpdish.payment_gateway.youzan');
+        try {
+            $result = $youZanPay->verifyWebhook($request);
+            $trade = $youZanPay->getTrade($result['id']);
+            if ($trade) { //如果支付成功，则通知
+                $this->getPaymentManager()->notifyPayment($trade->getQrId());
+                $return = [
+                    'result' => 'success'
+                ];
+            } else {
+                $return = [
+                    'result' => 'error',
+                ];
+            }
+        } catch (\InvalidArgumentException $exception) {
+            $return = [
+                'result' => 'error',
+                'message' => $exception->getMessage()
+            ];
+        }
+        $this->get('logger')->debug(print_r($return, true));
+        return $this->json($return);
+    }
+
+    /**
+     * 处理消息推送
+     * @Route("/wallet", name="user_wallet")
+     * @param Request $request
+     * @return Response
+     */
+    public function getWalletAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $wallet = $this->getWalletManager()->getUserWallet($this->getUser());
+        $histories = $this->getWalletManager()->findUserWalletHistories($wallet,
+            $request->query->getInt('page', 1)
+        );
+        return $this->render('PHPDishWebBundle:Wallet:index.html.twig', [
+            'wallet' => $wallet,
+            'histories' => $histories
         ]);
     }
 

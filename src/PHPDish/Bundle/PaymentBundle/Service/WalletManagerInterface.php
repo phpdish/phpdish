@@ -2,8 +2,10 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Service;
 
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface WalletManagerInterface
@@ -31,9 +33,11 @@ interface WalletManagerInterface
     /**
      * 给用户添加订阅收入,语法糖
      * @param UserInterface $user
-     * @param $amount
+     * @param CategoryInterface $category
+     * @param UserInterface $follower
+     * @param int|null $amount
      */
-    public function addCategoryIncome(UserInterface $user, $amount);
+    public function addCategoryIncome(UserInterface $user, CategoryInterface $category, UserInterface $follower, $amount = null);
 
     /**
      * 创建一条历史记录
@@ -47,4 +51,13 @@ interface WalletManagerInterface
      * @return WalletInterface
      */
     public function getUserWallet(UserInterface $user);
+
+    /**
+     * 获取用户的钱包的记录
+     * @param WalletInterface $wallet
+     * @param int $page
+     * @param int $limit
+     * @return WalletHistoryInterface[]|Pagerfanta
+     */
+    public function findUserWalletHistories(WalletInterface $wallet,  $page, $limit = null);
 }

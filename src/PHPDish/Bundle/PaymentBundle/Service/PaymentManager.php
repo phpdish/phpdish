@@ -80,7 +80,7 @@ class PaymentManager implements PaymentManagerInterface
     public function charge(PaymentInterface $payment)
     {
         $qrCode = $this->youzanPay->charge([
-            'name' => $payment->getDescription(),
+            'name' => strip_tags($payment->getDescription()),
             'price' => $payment->getAmount(),
             'source' => $payment->getSerialNo()
         ]);

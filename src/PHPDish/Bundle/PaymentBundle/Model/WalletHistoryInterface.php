@@ -2,9 +2,8 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Model;
 
+use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 
 interface WalletHistoryInterface extends DateTimeInterface
 {
@@ -13,6 +12,12 @@ interface WalletHistoryInterface extends DateTimeInterface
      * @return int
      */
     public function getAmount();
+
+    /**
+     * 获取价格
+     * @return Money
+     */
+    public function getPrice();
 
     /**
      * 获取所属钱包
@@ -65,4 +70,24 @@ interface WalletHistoryInterface extends DateTimeInterface
      * @return array
      */
     public function getParameters();
+
+    /**
+     * 获取状态
+     * @return string
+     */
+    public function getStatus();
+
+    /**
+     * 设置交易状态
+     *
+     * @param string $status
+     * @return PaymentInterface
+     */
+    public function setStatus($status);
+
+    /**
+     * 是否是收入
+     * @return boolean
+     */
+    public function isIncome();
 }

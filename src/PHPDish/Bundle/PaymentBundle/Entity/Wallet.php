@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\PaymentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
@@ -101,5 +102,13 @@ class Wallet implements WalletInterface
     {
         $history->setWallet($this);
         $this->histories[] = $history;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return Money::CNY($this->amount);
     }
 }

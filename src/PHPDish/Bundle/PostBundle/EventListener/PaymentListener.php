@@ -46,7 +46,7 @@ final class PaymentListener
             if ($category) { //用户支付成功，增加订阅
                 $this->categoryManager->followCategory($category, $payment->getUser());
 
-                $this->walletManager->addCategoryIncome($category->getCreator(), $payment->getAmount()); //增加收入
+                $this->walletManager->addCategoryIncome($category->getCreator(), $category, $payment->getUser(), $payment->getAmount()); //增加收入
             }
         }
     }

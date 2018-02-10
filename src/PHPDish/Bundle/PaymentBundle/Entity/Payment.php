@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Entity;
 
+use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
@@ -68,7 +69,7 @@ class Payment implements PaymentInterface
     protected $amount;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     protected $description;
@@ -279,5 +280,24 @@ class Payment implements PaymentInterface
     {
         $this->wallet = $wallet;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIncome()
+    {
+        return in_array($this->type, [
+            static::TYPE_CATEGORY_INCOME,
+            static::TYPE_BOOK_INCOME,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return Money::CNY($this->amount);
     }
 }

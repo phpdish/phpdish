@@ -9,10 +9,22 @@ use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 
 interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, IdentifiableInterface, UserAwareInterface
 {
+    /**
+     * 已支付/已到账
+     * @var string
+     */
     const STATUS_OK = 'ok';
 
+    /**
+     * 已关闭
+     * @var string
+     */
     const STATUS_CLOSED = 'closed';
 
+    /**
+     * 等待支付
+     * @var string
+     */
     const STATUS_WAITING = 'waiting';
 
     /**
@@ -58,61 +70,6 @@ interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, Ide
      * @return string
      */
     public function getSerialNo();
-
-    /**
-     * 获取状态
-     * @return string
-     */
-    public function getStatus();
-
-    /**
-     * 设置交易状态
-     *
-     * @param string $status
-     * @return PaymentInterface
-     */
-    public function setStatus($status);
-
-    /**
-     * 获取支付类型
-     * @return string
-     */
-    public function getType();
-
-    /**
-     * 设置类型
-     * @param string $type
-     * @return PaymentInterface
-     */
-    public function setType($type);
-
-    /**
-     * 获取价格
-     *
-     * @return int
-     */
-    public function getAmount();
-
-    /**
-     * 获取交易描述
-     * @return string
-     */
-    public function getDescription();
-
-    /**
-     * 设置交易描述
-     * @param string $description
-     * @return PaymentInterface
-     */
-    public function setDescription($description);
-
-    /**
-     * 设置价格
-     *
-     * @param int $amount
-     * @return PaymentInterface
-     */
-    public function setAmount($amount);
 
     /**
      * 获取交易id

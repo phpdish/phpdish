@@ -7,7 +7,7 @@ class QRPayment
     constructor(qrcode){
         this.qrcode = qrcode;
         const html = require('../templates/qrcode_payment.njk');
-        Util.dialog.create(false, html.render({
+        this.paymentDialog = Util.dialog.create(false, html.render({
             'qrcode': qrcode,
         }), {
             width: 220,
@@ -27,7 +27,7 @@ class QRPayment
             this.timer = setInterval(()=>{
                 this.loopPaymentResult(qrcode.id);
             }, 2000);
-        }, 2000); //3s后开始查询
+        }, 1000); //1s后开始查询
     }
 
     loopPaymentResult(qrId){
@@ -41,6 +41,7 @@ class QRPayment
                 if (this.timer) {
                     clearInterval(this.timer);
                 }
+                this.paymentDialog && this.paymentDialog.close();
                 Util.dialog.create(false, '<div class="payment-result"><i class="if i-success"></i> <p>支付成功</p></div>', {
                     width: 180,
                     okValue: '确定',

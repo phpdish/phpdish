@@ -23,3 +23,9 @@ services:
         public: false
         tags:
             - { name: twig.extension}
+
+    phpdish.twig.extension.wallet:
+        class: PHPDish\Bundle\PaymentBundle\Twig\WalletExtension
+        public: false
+        tags:
+            - { name: twig.extension}
