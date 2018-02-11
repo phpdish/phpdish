@@ -29,7 +29,7 @@ class ThreadAdmin extends AbstractAdmin
             ->add('description', null, ['label' => '专栏描述'])
             ->add('topicCount', null, ['label' => '文章数量'])
             ->add('followerCount', null, ['label' => '订阅数量'])
-            ->add('createdAt');
+            ->add('createdAt', null, ['label' => '创建时间']);
     }
 
     protected function configureFormFields(FormMapper $form)

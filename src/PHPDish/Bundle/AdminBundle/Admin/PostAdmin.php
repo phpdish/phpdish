@@ -22,16 +22,17 @@ class PostAdmin extends AbstractAdmin
     {
         $list
             ->add('title', 'url', [
+                'label' => '标题',
                 'attributes' => ['target' => '_blank'],
                 'route'=> ['name' => 'post_view', 'identifier_parameter_name' => 'id']
             ])
-            ->add('category')
-            ->add('user')
+            ->add('category', null, ['label'=>'专栏'])
+            ->add('user', null, ['label'=>'作者'])
             ->add('recommended', null, ['editable'=>true])
-            ->add('commentCount')
-            ->add('viewCount')
-            ->add('createdAt')
-            ->add('enabled', null, ['editable'=>true]);
+            ->add('commentCount', null, ['label'=>'评论数量'])
+            ->add('viewCount', null, ['label'=>'查看次数'])
+            ->add('createdAt', null, ['label'=>'创建时间'])
+            ->add('enabled', null, ['editable'=>true, 'label'=>'是否删除']);
     }
 
     public function getParentAssociationMapping()

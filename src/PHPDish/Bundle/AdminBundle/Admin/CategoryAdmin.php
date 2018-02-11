@@ -23,10 +23,19 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->add('name', 'url', [
+            ->addIdentifier('name', null, [
                 'label' => '名称',
+                /* 暂时没实现
                 'attributes' => ['target' => '_blank'],
-                'route'=> ['name' => 'category_view', 'identifier_parameter_name' => 'slug']
+                'route'=> [
+                    'name' => 'category_view',
+                    'object_parameters' => [
+                        'slug' => function($entity){
+                            return $entity->getSlug();
+                        }
+                    ],
+                    'identifier_parameter_name' => 'slug'
+                ]*/
             ])
             ->add('slug', null, ['label' => 'slug'])
             ->add('creator', null, ['label' => '创建人'])
@@ -46,12 +55,12 @@ class CategoryAdmin extends AbstractAdmin
         $form
             ->add('name', null, ['label' => '名称'])
             ->add('slug', null, ['label' => 'slug'])
+            ->add('creator', null, ['label' => '创建人'])
             ->add('managers', null, ['label' => '管理员'])
             ->add('cover', null, ['label' => '封面'])
             ->add('recommended', null, ['label' => '是否推荐'])
             ->add('enabled', null, ['label' => '是否删除'])
-            ->add('description', null, ['label' => '专栏描述'])
-            ->add('createdAt');
+            ->add('description', null, ['label' => '专栏描述']);
     }
 
 
@@ -65,10 +74,6 @@ class CategoryAdmin extends AbstractAdmin
 
         $id = $admin->getRequest()->get('id');
 
-        $menu->addChild('查看专栏', [
-            'uri' => $admin->generateUrl('show', ['id' => $id])
-        ]);
-
         if ($this->isGranted('LIST')) {
             $menu->addChild('管理文章', [
                 'uri' => $admin->generateUrl('phpdish.admin.post.list', ['id' => $id])
@@ -79,5 +84,6 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
+        $collection->remove('show');
     }
 }

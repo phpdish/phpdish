@@ -22,16 +22,17 @@ class TopicAdmin extends AbstractAdmin
     {
         $list
             ->add('title', 'url', [
+                'label' => '标题',
                 'attributes' => ['target' => '_blank'],
                 'route'=> ['name' => 'topic_view', 'identifier_parameter_name' => 'id']
             ])
-            ->add('threads')
-            ->add('user')
-            ->add('recommended', null, ['editable'=>true])
-            ->add('replyCount')
-            ->add('viewCount')
-            ->add('createdAt')
-            ->add('enabled', null, ['editable'=>true]);
+            ->add('threads', null, ['label'=>'节点'])
+            ->add('user', null, ['label'=>'创建人'])
+            ->add('recommended', null, ['editable'=>true, 'label' => '是否推荐'])
+            ->add('replyCount', null, ['label'=>'回复数量'])
+            ->add('viewCount', null, ['label'=>'查看数量'])
+            ->add('createdAt', null, ['label'=>'创建日期'])
+            ->add('enabled', null, ['editable'=>true, 'label' => '是否删除']);
     }
 
     public function getParentAssociationMapping()
@@ -48,7 +49,6 @@ class TopicAdmin extends AbstractAdmin
     {
         $collection->remove('edit');
         $collection->remove('show');
-        $collection->remove('delete');
         $collection->remove('delete');
     }
 }
