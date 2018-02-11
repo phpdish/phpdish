@@ -223,9 +223,17 @@ sonata_admin:
 
            phpdish.admin.group.post:
               label: 文章
-              icon: '<i class="fa fa-post"></i>'
+              icon: '<i class="fa fa-file-text-o"></i>'
               items:
-#                 - phpdish.admin.post
+                 - phpdish.admin.category
+                 - phpdish.admin.post
+
+           phpdish.admin.group.forum:
+              label: 话题
+              icon: '<i class="fa fa-comment"></i>'
+              items:
+                 - phpdish.admin.thread
+                 - phpdish.admin.topic
 
            phpdish.admin.group.wallet:
               label: 钱包
@@ -233,3 +241,10 @@ sonata_admin:
               items:
                  - phpdish.admin.wallet
                  - phpdish.admin.payment
+
+           phpdish.admin.group.site:
+              label: 网站
+              icon: '<i class="fa fa-laptop"></i>'
+              items:
+                 - phpdish.admin.friend_link
+                 - phpdish.admin.song

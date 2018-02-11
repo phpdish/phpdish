@@ -9,39 +9,38 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class PaymentAdmin extends AbstractAdmin
+class TopicAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter->add('user.email', null, [], 'email', ['label'=>'邮箱'])
             ->add('user.username', null)
-            ->add('type')
-            ->add('status');
+            ->add('title', null);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('user')
-            ->add('amount', 'currency', [
-                'currency' => 'CNY'
-            ])
-            ->add('type')
-            ->add('status')
-            ->add('description', 'html')
+            ->addIdentifier('title')
+            ->add('threads')
+            ->add('user')
+            ->add('recommended', null, ['editable'=>true])
+            ->add('replyCount')
+            ->add('viewCount')
             ->add('createdAt')
-            ->add('enabled');
+            ->add('enabled', null, ['editable'=>true]);
     }
 
     public function getParentAssociationMapping()
     {
-        return 'wallet';
+        return 'threads';
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('edit');
-        $collection->remove('create');
+        $collection->remove('show');
+        $collection->remove('delete');
         $collection->remove('delete');
     }
 }
