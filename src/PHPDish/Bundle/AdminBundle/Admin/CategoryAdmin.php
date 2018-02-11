@@ -16,8 +16,8 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
-            ->add('creator.username')
-            ->add('name');
+            ->add('creator.username', null, ['label'=>'用户名'])
+            ->add('name', null, ['label'=>'标题']);
     }
 
     protected function configureListFields(ListMapper $list)

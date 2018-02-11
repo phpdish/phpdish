@@ -13,9 +13,9 @@ class PostAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email', null, [], 'email', ['label'=>'邮箱'])
-            ->add('user.username', null)
-            ->add('title', null);
+        $filter->add('user.email',null, ['label'=>'邮箱'])
+            ->add('user.username', null, ['label'=>'用户名'])
+            ->add('title', null, ['label'=>'标题']);
     }
 
     protected function configureListFields(ListMapper $list)
