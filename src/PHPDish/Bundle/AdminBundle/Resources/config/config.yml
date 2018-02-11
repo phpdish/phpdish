@@ -17,6 +17,7 @@ easy_admin:
             - {entity: 'FriendLink', label: '友情链接', icon: 'link'}
             - {entity: 'Song', label: '每日一曲', icon: 'play-circle'}
             - {entity: 'Wallet', label: '钱包', icon: 'credit-card'}
+            - {entity: 'Payment', label: '交易', icon: 'credit-card'}
 
     entities:
         User:
@@ -168,16 +169,36 @@ easy_admin:
                     - { property: 'src', label: '链接', type: 'url'}
                     - { property: 'srcId', label: '原始id' }
 
-        # 每日一曲
+        # 钱包
         Wallet:
             class: PHPDish\Bundle\PaymentBundle\Entity\Wallet
             label: '钱包'
-            disabled_actions: ['edit', 'delete']
+            disabled_actions: ['edit', 'delete', 'new']
             list:
                 title: "%%entity_label%%列表"
+                actions: ['restock']
                 fields:
-                      - { property: 'user', label: '用户',}
+                      - { property: 'user.username', label: '用户',}
                       - { property: 'id', label: 'ID' }
                       - { property: 'amount', label: '可用余额'}
                       - { property: 'freezeAmount', label: '冻结余额'}
                       - { property: 'createdAt', label: '创建时间'}
+            search:
+#                fields: ['user.username']
+
+        # 钱包
+        Payment:
+            class: PHPDish\Bundle\PaymentBundle\Entity\Payment
+            label: '交易历史'
+            disabled_actions: ['edit', 'delete', 'new']
+            list:
+                title: "%%entity_label%%列表"
+                fields:
+                      - { property: 'user', label: '用户',}
+                      - { property: 'wallet', label: '钱包',}
+                      - { property: 'amount', label: '交易金额'}
+                      - { property: 'type', label: '交易类型', template: 'PHPDishAdminBundle:Wallet:wallet_history_type.html.twig'}
+                      - { property: 'status', label: '状态', template: 'PHPDishAdminBundle:Wallet:wallet_history_status.html.twig'}
+                      - { property: 'description', label: '交易详情', type: 'raw'}
+                      - { property: 'createdAt', label: '创建时间'}
+
