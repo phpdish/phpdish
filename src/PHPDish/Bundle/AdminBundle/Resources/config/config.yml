@@ -202,3 +202,34 @@ easy_admin:
                       - { property: 'description', label: '交易详情', type: 'raw'}
                       - { property: 'createdAt', label: '创建时间'}
 
+
+# config/packages/sonata.yaml
+sonata_block:
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+   title: 'PHPDish'
+   title_logo: img/logo256.png
+   dashboard:
+       groups:
+           phpdish.admin.group.user:
+              label: 用户
+              icon: '<i class="fa fa-user"></i>'
+              items:
+                 - phpdish.admin.user
+
+           phpdish.admin.group.post:
+              label: 文章
+              icon: '<i class="fa fa-post"></i>'
+              items:
+#                 - phpdish.admin.post
+
+           phpdish.admin.group.wallet:
+              label: 钱包
+              icon: '<i class="fa fa-credit-card"></i>'
+              items:
+                 - phpdish.admin.wallet
+                 - phpdish.admin.payment

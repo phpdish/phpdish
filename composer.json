@@ -49,6 +49,8 @@
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "slince/youzan-pay": "*@dev",
+        "sonata-project/admin-bundle": "^3.31",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.4",
         "sonata-project/seo-bundle": "^2.2",
         "symfony/assetic-bundle": "^2.8",
         "symfony/monolog-bundle": "^3.1.0",

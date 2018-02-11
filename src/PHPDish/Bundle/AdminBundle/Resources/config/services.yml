@@ -1,4 +1,23 @@
 services:
-#    php_dish_admin.example:
-#        class: PHPDish\Bundle\AdminBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  phpdish.admin.user:
+        class: PHPDish\Bundle\AdminBundle\Admin\UserAdmin
+        arguments: [~, PHPDish\Bundle\UserBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 用户 }
+        public: true
+
+  phpdish.admin.wallet:
+        class: PHPDish\Bundle\AdminBundle\Admin\WalletAdmin
+        arguments: [~, PHPDish\Bundle\PaymentBundle\Entity\Wallet, ~]
+        calls:
+            - {method: addChild, arguments: ['@phpdish.admin.payment']}
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 钱包 }
+        public: true
+
+  phpdish.admin.payment:
+        class: PHPDish\Bundle\AdminBundle\Admin\PaymentAdmin
+        arguments: [~, PHPDish\Bundle\PaymentBundle\Entity\Payment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 流水 }
+        public: true
