@@ -23,7 +23,11 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('name', null, ['label' => '名称'])
+            ->add('name', 'url', [
+                'label' => '名称',
+                'attributes' => ['target' => '_blank'],
+                'route'=> ['name' => 'category_view', 'identifier_parameter_name' => 'slug']
+            ])
             ->add('slug', null, ['label' => 'slug'])
             ->add('creator', null, ['label' => '创建人'])
             ->add('cover', null, ['label' => '封面'])
@@ -32,7 +36,9 @@ class CategoryAdmin extends AbstractAdmin
             ->add('description', null, ['label' => '专栏描述'])
             ->add('postCount', null, ['label' => '文章数量'])
             ->add('followerCount', null, ['label' => '订阅数量'])
-            ->add('createdAt');
+            ->add('createdAt', null, [
+                'label' => '创建时间'
+            ]);
     }
 
     protected function configureFormFields(FormMapper $form)

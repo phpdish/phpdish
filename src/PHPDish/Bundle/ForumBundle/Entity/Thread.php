@@ -52,7 +52,7 @@ class Thread extends Taxonomy implements ThreadInterface
 
     public function __toString()
     {
-        return $this->getName();
+        return (string)$this->getName();
     }
 
     /**

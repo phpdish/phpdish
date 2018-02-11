@@ -21,7 +21,10 @@ class TopicAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('title')
+            ->add('title', 'url', [
+                'attributes' => ['target' => '_blank'],
+                'route'=> ['name' => 'topic_view', 'identifier_parameter_name' => 'id']
+            ])
             ->add('threads')
             ->add('user')
             ->add('recommended', null, ['editable'=>true])
@@ -34,6 +37,11 @@ class TopicAdmin extends AbstractAdmin
     public function getParentAssociationMapping()
     {
         return 'threads';
+    }
+
+    public function toString($object)
+    {
+        return '话题';
     }
 
     protected function configureRoutes(RouteCollection $collection)

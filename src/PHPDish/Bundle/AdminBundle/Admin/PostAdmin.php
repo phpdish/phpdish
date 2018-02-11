@@ -21,7 +21,10 @@ class PostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('title')
+            ->add('title', 'url', [
+                'attributes' => ['target' => '_blank'],
+                'route'=> ['name' => 'post_view', 'identifier_parameter_name' => 'id']
+            ])
             ->add('category')
             ->add('user')
             ->add('recommended', null, ['editable'=>true])
