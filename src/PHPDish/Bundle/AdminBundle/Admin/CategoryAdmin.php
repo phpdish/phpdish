@@ -85,5 +85,6 @@ class CategoryAdmin extends AbstractAdmin
     {
         $collection->remove('delete');
         $collection->remove('show');
+        $collection->remove('create');
     }
 }

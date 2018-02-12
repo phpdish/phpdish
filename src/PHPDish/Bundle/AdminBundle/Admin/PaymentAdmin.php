@@ -14,10 +14,10 @@ class PaymentAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email', null, [], 'email', ['label'=>'邮箱'])
-            ->add('user.username', null)
-            ->add('type')
-            ->add('status');
+        $filter->add('user.email', null,  ['label'=>'邮箱'])
+            ->add('user.username', null,  ['label'=>'用户名'])
+            ->add('type', null,  ['label'=>'类型'])
+            ->add('status', null,  ['label'=>'状态']);
     }
 
     protected function configureListFields(ListMapper $list)
@@ -26,6 +26,7 @@ class PaymentAdmin extends AbstractAdmin
             ->addIdentifier('serialNo', null, ['label' => '流水号'])
             ->addIdentifier('user', null, ['label' => '用户'])
             ->add('amount', 'currency', [
+                'label' => '交易金额',
                 'currency' => 'CNY'
             ])
             ->add('type', null, ['label' => '类型'])
@@ -41,6 +42,7 @@ class PaymentAdmin extends AbstractAdmin
             ->add('serialNo', null, ['label' => '流水号'])
             ->add('user', null, ['label' => '用户'])
             ->add('amount', 'currency', [
+                'label' => '交易金额',
                 'currency' => 'CNY'
             ])
             ->add('type', null, ['label' => '类型'])

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class WalletAdmin extends AbstractAdmin
 {
@@ -26,20 +27,19 @@ class WalletAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('id')
-            ->add('user')
-            ->add('amount')
-            ->add('freezeAmount')
-            ->add('createdAt');
+            ->add('user', null, ['label'=>'用户名'])
+            ->add('amount', null, ['label'=>'余额'])
+            ->add('freezeAmount', null, ['label'=>'冻结余额'])
+            ->add('createdAt', null, ['label'=>'创建时间']);
     }
 
-    protected function configureFormFields(FormMapper $list)
+    protected function configureShowFields(ShowMapper $show)
     {
-        $list
-//            ->addIdentifier('id')
-            ->add('user')
-            ->add('amount')
-            ->add('freezeAmount')
-            ->add('createdAt');
+        $show
+            ->add('user', null, ['label'=>'用户名'])
+            ->add('amount', null, ['label'=>'余额'])
+            ->add('freezeAmount', null, ['label'=>'冻结余额'])
+            ->add('createdAt', null, ['label'=>'创建时间']);
     }
 
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)

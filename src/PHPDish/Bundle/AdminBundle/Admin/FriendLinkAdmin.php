@@ -21,18 +21,18 @@ class FriendLinkAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('name')
-            ->add('url')
-            ->add('logo')
+            ->addIdentifier('name', null, ['label'=>'标题'])
+            ->add('url', null, ['label'=>'URL'])
+            ->add('logo', null, ['label'=>'LOGO'])
             ->add('priority', null, ['editable'=>true]);
     }
 
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('name')
-            ->add('url')
-            ->add('logo')
-            ->add('priority', null);
+            ->add('name', null, ['label'=>'标题'])
+            ->add('url', null, ['label'=>'URL'])
+            ->add('logo', null, ['label'=>'LOGO'])
+            ->add('priority', null, ['label'=>'优先级']);
     }
 }

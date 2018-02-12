@@ -17,10 +17,11 @@ class UserAdmin extends AbstractAdmin
             ->add('username', 'text', ['label'=>'用户名'])
             ->add('enabled', null, ['label'=>'是否启用']);
     }
+
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('email', null, [], 'email', ['label'=>'邮箱'])
-            ->add('username');
+        $filter->add('email',null, ['label'=>'邮箱'])
+            ->add('username', null, ['label'=>'用户名']);
     }
 
     protected function configureListFields(ListMapper $list)

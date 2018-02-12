@@ -21,16 +21,16 @@ class SongAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('name')
-            ->add('src')
-            ->add('srcId');
+            ->addIdentifier('name', null, ['label'=>'标题'])
+            ->add('src', null, ['label'=>'URL'])
+            ->add('srcId', null, ['label'=>'歌曲ID']);
     }
 
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('name')
-            ->add('src')
-            ->add('srcId');
+            ->add('name', null, ['label'=>'标题'])
+            ->add('src', null, ['label'=>'URL'])
+            ->add('srcId', null, ['label'=>'歌曲ID']);
     }
 }
