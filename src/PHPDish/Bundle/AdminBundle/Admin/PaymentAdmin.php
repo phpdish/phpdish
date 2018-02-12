@@ -25,15 +25,29 @@ class PaymentAdmin extends AbstractAdmin
         $list
             ->addIdentifier('serialNo', null, ['label' => '流水号'])
             ->addIdentifier('user', null, ['label' => '用户'])
-            ->add('amount', 'currency', [
+            ->add('price', 'currency', [
                 'label' => '交易金额',
-                'currency' => 'CNY'
+                'template' => 'PHPDishAdminBundle:Common:list_field_money.html.twig'
             ])
-            ->add('type', null, ['label' => '类型'])
-            ->add('status', null, ['label' => '状态'])
+            ->add('type', null, [
+                'label' => '类型',
+                'template' => 'PHPDishAdminBundle:Payment:list_field_history_type.html.twig'
+            ])
+            ->add('status', null, [
+                'label' => '状态',
+                'template' => 'PHPDishAdminBundle:Payment:list_field_history_status.html.twig'
+            ])
             ->add('description', 'html', ['label' => '描述'])
             ->add('createdAt', null, ['label' => '创建时间'])
-            ->add('enabled', null, ['label' => '是否有效']);
+            ->add('enabled', null, ['label' => '是否有效'])
+            ->add('_action', null, [
+                'label' => '操作',
+                'actions' => [
+                    'approve' => [
+                        'template' => 'PHPDishAdminBundle:Payment:list_action_approve.html.twig'
+                    ]
+                ]
+            ]);
     }
 
     protected function configureShowFields(ShowMapper $show)
@@ -59,6 +73,7 @@ class PaymentAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->add('approve', $this->getRouterIdParameter().'/approve');
         $collection->remove('edit');
         $collection->remove('create');
         $collection->remove('delete');

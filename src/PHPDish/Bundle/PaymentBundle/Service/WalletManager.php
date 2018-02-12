@@ -222,6 +222,13 @@ class WalletManager implements WalletManagerInterface
         $this->entityManager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findWalletHistoryById($id)
+    {
+        return $this->getHistoryRepository()->find($id);
+    }
 
     /**
      * @return EntityRepository

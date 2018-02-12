@@ -62,6 +62,12 @@ interface WalletManagerInterface
     public function findUserWalletHistories(WalletInterface $wallet,  $page, $limit = null);
 
     /**
+     * 根据 id 获取交易历史
+     * @return WalletHistoryInterface
+     */
+    public function findWalletHistoryById($id);
+
+    /**
      * 提现指定额度
      * @param WalletInterface $wallet
      * @param int $amount
@@ -69,6 +75,7 @@ interface WalletManagerInterface
      * @return WalletHistoryInterface
      */
     public function withdraw(WalletInterface $wallet, $amount, $alipay);
+
 
     /**
      * 拒绝提现

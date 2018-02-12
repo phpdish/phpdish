@@ -17,10 +17,12 @@ services:
 
   phpdish.admin.payment:
         class: PHPDish\Bundle\AdminBundle\Admin\PaymentAdmin
-        arguments: [~, PHPDish\Bundle\PaymentBundle\Entity\Payment, ~]
+        arguments: [~, PHPDish\Bundle\PaymentBundle\Entity\Payment, PHPDishAdminBundle:Payment]
         tags:
             - { name: sonata.admin, manager_type: orm, label: 流水 }
         public: true
+        calls:
+            - {method: 'setTemplates', arguments: [{inner_list_row2: 'PHPDishAdminBundle:Admin:inner_row_comment.html.twig',base_list_field: 'SonataAdminBundle:CRUD:base_list_field.html.twig'}]}
 
 
   phpdish.admin.category:

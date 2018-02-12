@@ -209,6 +209,8 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
 
 sonata_admin:
    title: 'PHPDish'

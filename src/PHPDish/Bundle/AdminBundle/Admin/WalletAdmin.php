@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\AdminBundle\Admin;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

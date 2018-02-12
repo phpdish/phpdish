@@ -10,6 +10,10 @@
                 <source>btn_advanced_filters</source>
                 <target>高级过滤</target>
             </trans-unit>
+             <trans-unit id="title_show">
+                <source>title_show</source>
+                <target>展示 "%name%"</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

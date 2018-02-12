@@ -1,0 +1,20 @@
+{# @App/Admin/inner_row_comment.html.twig #}
+
+{# Extend the default template, which provides batch and action cells #}
+{#     as well as the valid colspan computation #}
+{% extends '@SonataAdmin/CRUD/base_list_flat_inner_row.html.twig' %}
+
+{% block row %}
+
+    {# you can use fields defined in the the Admin class #}
+
+    {{ object|render_list_element(admin.list['amount']) }} -
+    {{ object|render_list_element(admin.list['user']) }} -
+    {#{{ object|render_list_element(admin.list['']) }} <br />#}
+
+    <small>
+        {# or you can use the object variable to render a property #}
+        {#{{ object.message }}#}
+    </small>
+
+{% endblock %}
