@@ -18,6 +18,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class WalletManager implements WalletManagerInterface
 {
@@ -46,11 +47,13 @@ class WalletManager implements WalletManagerInterface
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
+        RouterInterface $router,
         UserManagerInterface $userManager
     )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->router = $router;
         $this->userManager = $userManager;
     }
 

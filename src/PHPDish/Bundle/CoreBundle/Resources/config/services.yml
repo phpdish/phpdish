@@ -19,8 +19,16 @@ services:
 
     # 配置参数读取扩展
     phpdish.twig_extension.container:
-         class: PHPDish\Component\Core\Twig\ContainerExtension
+         class: PHPDish\Bundle\CoreBundle\Twig\ContainerExtension
          arguments: ['@service_container']
+         public: false
+         tags:
+            - { name: twig.extension}
+
+    # 核心twig扩展
+    phpdish.twig_extension.core:
+         class: PHPDish\Bundle\CoreBundle\Twig\CoreExtension
+         arguments: ['@phpdish.html_chunker']
          public: false
          tags:
             - { name: twig.extension}

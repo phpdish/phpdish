@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Component\Core\Twig;
+namespace PHPDish\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;

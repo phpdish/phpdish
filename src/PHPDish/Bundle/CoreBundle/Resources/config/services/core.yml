@@ -25,3 +25,7 @@ services:
 
     phpdish.pinyin_translator:
         class: Overtrue\Pinyin\Pinyin
+
+    phpdish.html_chunker:
+        class: PHPDish\Component\Util\HtmlChunker
+        arguments: ['@exercise_html_purifier.default']

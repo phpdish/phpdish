@@ -50,7 +50,7 @@
                     <div class="page-inner">
                         <section class="normal markdown-body" id="pjax-container">
                             {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted(chapter, 'edit') or book.isFollowedBy(app.user)) %}
-                            {{ isCanView ? chapter.body|raw : chapter.body|slice(0, chapter.body|length / 2)|purify|raw}}
+                            {{ isCanView ? chapter.body|raw : chapter.body|html_safe_chunk(0.5)|raw}}
                         </section>
                         {% if not isCanView %}
                             <div class="payfor">
