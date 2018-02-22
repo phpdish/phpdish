@@ -39,10 +39,9 @@
                     </div>
                 </header>
                 <div class="panel-body">
-                    {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted(post, 'edit') or post.category.isFollowedBy(app.user)) %}
-                    {% dump(isCanView) %}
+                    {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted('edit', post) or post.category.isFollowedBy(app.user)) %}
                     <article class="markdown-body body">
-                        {{ isCanView ? post.body|raw : post.body|slice(0, post.body|length / 2)|purify|raw}}
+                        {{ isCanView ? post.body|raw : post.body|html_safe_chunk(0.5)|raw}}
                     </article>
                     {% if not isCanView %}
                         <div class="payfor">

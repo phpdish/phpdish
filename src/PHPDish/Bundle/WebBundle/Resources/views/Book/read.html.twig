@@ -49,7 +49,7 @@
                 <div class="page-wrapper" tabindex="-1" role="main">
                     <div class="page-inner">
                         <section class="normal markdown-body" id="pjax-container">
-                            {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted(chapter, 'edit') or book.isFollowedBy(app.user)) %}
+                            {% set isCanView = is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted('edit', chapter) or book.isFollowedBy(app.user)) %}
                             {{ isCanView ? chapter.body|raw : chapter.body|html_safe_chunk(0.5)|raw}}
                         </section>
                         {% if not isCanView %}
