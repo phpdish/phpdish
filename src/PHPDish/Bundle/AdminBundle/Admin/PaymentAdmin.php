@@ -43,8 +43,8 @@ class PaymentAdmin extends AbstractAdmin
             ->add('_action', null, [
                 'label' => '操作',
                 'actions' => [
-                    'approve' => [
-                        'template' => 'PHPDishAdminBundle:Payment:list_action_approve.html.twig'
+                    'withdraw' => [
+                        'template' => 'PHPDishAdminBundle:Payment:list__action_withdraw.html.twig'
                     ]
                 ]
             ]);
@@ -73,7 +73,7 @@ class PaymentAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('approve', $this->getRouterIdParameter().'/approve');
+        $collection->add('withdraw', $this->getRouterIdParameter().'/withdraw');
         $collection->remove('edit');
         $collection->remove('create');
         $collection->remove('delete');

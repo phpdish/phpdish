@@ -198,7 +198,7 @@ class WalletManager implements WalletManagerInterface
     {
         $history->getWallet()->release($history->getAmount()); //钱包释放资本
         $history->setDescription(
-            $history->getDescription() . ";拒绝原因：" . ($reason ?: '暂无原因')
+            $history->getDescription() . "; 拒绝原因：" . ($reason ?: '暂无原因')
         );
         $history->setStatus(PaymentInterface::STATUS_CLOSED);
         $this->entityManager->persist($history);
@@ -215,7 +215,7 @@ class WalletManager implements WalletManagerInterface
             $wallet->getFreezeAmount() - $history->getAmount()
         ); //减去冻结的金额
         $history->setDescription(
-            $history->getDescription() . ";完成：" . ($reason ?: '暂无原因')
+            $history->getDescription() . "; 已确认：" . ($reason ?: '暂无原因')
         );
         $history->setStatus(PaymentInterface::STATUS_OK);
         $this->entityManager->persist($history);
