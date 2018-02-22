@@ -9,6 +9,7 @@ use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Model\ActionInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -20,8 +21,6 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 class Notification implements NotificationInterface, ActionInterface
 {
     use IdentifiableTrait;
-
-    const SUBJECT_SYSTEM_NOTIFICATION = 'system_notification';
 
     const SUBJECT_FOLLOW_USER = 'follow_user';
 
@@ -38,6 +37,8 @@ class Notification implements NotificationInterface, ActionInterface
     const SUBJECT_VOTE_UP_TOPIC = 'vote_up_topic';
 
     const SUBJECT_VOTE_UP_POST = 'vote_up_post';
+
+    const SUBJECT_HANDLE_WITHDRAW = 'handle_withdraw';
 
     /**
      * @var string
@@ -104,6 +105,20 @@ class Notification implements NotificationInterface, ActionInterface
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category")
      */
     protected $category;
+
+    /**
+     * @var PaymentInterface
+     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PaymentBundle\Entity\Payment")
+     */
+    protected $payment;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSystem()
+    {
+        return in_array($this->subject, [static::SUBJECT_HANDLE_WITHDRAW]);
+    }
 
     /**
      * @return UserInterface
@@ -321,6 +336,25 @@ class Notification implements NotificationInterface, ActionInterface
     public function setCategory($category)
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return PaymentInterface
+     */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @param PaymentInterface $payment
+     * @return Notification
+     */
+    public function setPayment($payment)
+    {
+        $this->payment = $payment;
 
         return $this;
     }

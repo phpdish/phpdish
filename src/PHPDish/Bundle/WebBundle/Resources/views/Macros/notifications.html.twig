@@ -12,6 +12,8 @@
         {{ render.render_at_user_in_post(notification) }}
     {% elseif notification.subject ==  'follow_category' %}
         {{ render.render_follow_category(notification) }}
+    {% elseif notification.subject ==  'handle_withdraw' %}
+        {{ render.render_handle_withdraw(notification) }}
     {% endif %}
 {% endmacro %}
 
@@ -81,5 +83,16 @@
             <a href="{{ path(notification.category.isBook ? 'book_view': 'category_view', {slug: notification.category.slug}) }}">{{ notification.category.name }}</a>
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
+    </div>
+{% endmacro %}
+
+{# 渲染处理提现通知 #}
+{% macro render_handle_withdraw(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <span>提现处理通知</span>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
     </div>
 {% endmacro %}

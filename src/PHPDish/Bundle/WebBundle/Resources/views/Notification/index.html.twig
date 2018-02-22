@@ -11,9 +11,15 @@
                 <li class="list-group-item">
                     <div class="media notification">
                         <div class="media-left">
-                            <a href="{{ path('user_view', {username: notification.fromUser.username}) }}">
-                                <img class="media-object avatar" src="{{ asset(notification.fromUser.avatar)|imagine_filter('middle_square') }}">
+                            {% if notification.isSystem %}
+                            <a href="javascript:void(0);">
+                                <img class="media-object avatar" src="{{ asset('img/logo64.png') }}">
                             </a>
+                            {% else %}
+                                <a href="{{ path('user_view', {username: notification.fromUser.username}) }}">
+                                    <img class="media-object avatar" src="{{ asset(notification.fromUser.avatar)|imagine_filter('middle_square') }}">
+                                </a>
+                            {% endif %}
                         </div>
                         {{ renderer.render_notification(notification) }}
                     </div>

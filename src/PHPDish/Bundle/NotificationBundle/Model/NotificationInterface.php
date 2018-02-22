@@ -6,11 +6,18 @@ use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface NotificationInterface extends IdentifiableInterface
 {
+    /**
+     * 是否是系统通知（没有发送人）
+     * @return boolean
+     */
+    public function isSystem();
+
     /**
      * 获取通知的接收人.
      *
@@ -59,4 +66,10 @@ interface NotificationInterface extends IdentifiableInterface
      * @return CommentInterface
      */
     public function getComment();
+
+    /**
+     * 获取交易历史
+     * @return PaymentInterface
+     */
+    public function getPayment();
 }

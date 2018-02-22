@@ -6,6 +6,7 @@ use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -86,6 +87,14 @@ interface NotificationManagerInterface
      * @return NotificationInterface
      */
     public function createFollowCategoryNotification(CategoryInterface $category, UserInterface $user);
+
+    /**
+     * 创建提现处理结果通知
+     *
+     * @param PaymentInterface $payment
+     * @return NotificationInterface
+     */
+    public function createWithdrawNotification(PaymentInterface $payment);
 
     /**
      * 获取用户未读通知的数量.

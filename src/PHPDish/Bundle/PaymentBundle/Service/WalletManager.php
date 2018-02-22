@@ -9,6 +9,7 @@ use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PaymentBundle\Entity\Payment;
 use PHPDish\Bundle\PaymentBundle\Entity\Wallet;
 use PHPDish\Bundle\PaymentBundle\Entity\WalletHistory;
+use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
@@ -203,6 +204,8 @@ class WalletManager implements WalletManagerInterface
         $history->setStatus(PaymentInterface::STATUS_CLOSED);
         $this->entityManager->persist($history);
         $this->entityManager->flush();
+        //提现拒绝之后
+        $this->eventDispatcher->dispatch(PaymentEvent::WITHDRAW_DECLINED, new PaymentEvent($history));
     }
 
     /**
@@ -211,7 +214,7 @@ class WalletManager implements WalletManagerInterface
     public function approveWithdraw(WalletHistoryInterface $history, $reason = null)
     {
         $wallet = $history->getWallet();
-        $history->getWallet()->setFreezeAmount(
+        $wallet->setFreezeAmount(
             $wallet->getFreezeAmount() - $history->getAmount()
         ); //减去冻结的金额
         $history->setDescription(
@@ -220,6 +223,8 @@ class WalletManager implements WalletManagerInterface
         $history->setStatus(PaymentInterface::STATUS_OK);
         $this->entityManager->persist($history);
         $this->entityManager->flush();
+        //提现
+        $this->eventDispatcher->dispatch(PaymentEvent::WITHDRAW_APPROVED, new PaymentEvent($history));
     }
 
     /**

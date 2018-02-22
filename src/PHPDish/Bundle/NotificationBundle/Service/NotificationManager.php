@@ -10,6 +10,7 @@ use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Entity\Notification;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -125,6 +126,25 @@ class NotificationManager implements NotificationManagerInterface
             ->setCategory($category)
             ->setFromUser($user)
             ->setSubject(Notification::SUBJECT_FOLLOW_CATEGORY);
+        $this->saveNotification($notification);
+
+        return $notification;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createWithdrawNotification(PaymentInterface $payment)
+    {
+        $message = $payment->getStatus() === PaymentInterface::STATUS_OK
+            ? sprintf('您的提现已通过；“%s”', $payment->getDescription())
+            : sprintf('您的提现已经被拒绝；“%s”', $payment->getDescription());
+
+        $notification = $this->createNotification();
+        $notification->setUser($payment->getUser())
+            ->setPayment($payment)
+            ->setMessage($message)
+            ->setSubject(Notification::SUBJECT_HANDLE_WITHDRAW);
         $this->saveNotification($notification);
 
         return $notification;

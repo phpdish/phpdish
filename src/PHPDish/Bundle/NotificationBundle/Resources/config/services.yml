@@ -52,6 +52,14 @@ services:
             - {name: kernel.event_listener, event: user.mentioned.reply, method: onUserMentionedInReply}
         public: false
 
+    phpdish.event_listener.notification.payment:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\PaymentListener
+        arguments: ['@phpdish.manager.notification']
+        tags:
+            - {name: kernel.event_listener, event: withdraw.approved, method: onWithdrawHandled}
+            - {name: kernel.event_listener, event: withdraw.declined, method: onWithdrawHandled}
+        public: false
+
 # Twig Extension
     phpdish.twig_extension.notification:
        class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension

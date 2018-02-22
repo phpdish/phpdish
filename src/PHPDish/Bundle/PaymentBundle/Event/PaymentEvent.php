@@ -14,6 +14,18 @@ class PaymentEvent extends Event
     const PAYMENT_PAID = 'payment.paid';
 
     /**
+     * 提现被确认
+     * @var string
+     */
+    const WITHDRAW_APPROVED = 'withdraw.approved';
+
+    /**
+     * 提现拒绝
+     * @var string
+     */
+    const WITHDRAW_DECLINED = 'withdraw.declined';
+
+    /**
      * @var PaymentInterface
      */
     protected $payment;
