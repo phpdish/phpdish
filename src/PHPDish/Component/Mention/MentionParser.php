@@ -83,7 +83,7 @@ class MentionParser implements MentionParserInterface
 
     protected static function extractUserNames($body)
     {
-        preg_match_all("/@([\x{4e00}-\x{9fa5}\w]+)/iu", $body, $mentionItems);
+        preg_match_all("/@([\x{4e00}-\x{9fa5}\w\-]+)/iu", $body, $mentionItems);
 
         return array_unique($mentionItems[1]);
     }

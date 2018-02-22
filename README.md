@@ -22,6 +22,9 @@ QQ群号：138307655，欢迎进群讨论。
 - Github风格Emoji表情支持
 - 在回复中@他人
 - 个人主页
+- 电子书编辑/阅读
+- 专栏/电子书付费订阅
+- 钱包管理
 
 关于部分功能的使用以及实现请关注”[PHPDish开发手记](https://www.phpdish.com/categories/phpdish-development-notes)“专栏，我会在该专栏内记录一些开发经历与使用方法；
 
@@ -65,6 +68,10 @@ PHPDish功能仍在继续实现中，陆续会有新的功能发布出来，欢�
 | [codemirror](https://github.com/codemirror/CodeMirror) | 前端编辑器 |
 | [simplemde](https://github.com/sparksuite/simplemde-markdown-editor) | Markdown编辑器 |
 
+## CHANGELOG
+
+更新日志 [CHANGELOG](./CHANGELOG.md)
+
 ## License
 
 PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
@@ -83,6 +90,7 @@ PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你�
 [https://www.paypal.me/slince](https://www.paypal.me/slince)
 
 捐赠时请留下您的 GitHub 或者个人主页等相关的个人信息 :heart:。
+
 
 ## 联系我
 
