@@ -56,3 +56,4 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/manager, role: ROLE_SUPER_ADMIN } # 旧管理界面，废除
