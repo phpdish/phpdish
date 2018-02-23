@@ -47,8 +47,8 @@ PHPDish功能仍在继续实现中，陆续会有新的功能发布出来，欢�
 | [friendsofsymfony/user-bundle](https://github.com/FriendsOfSymfony/FOSUserBundle) | 用户管理基础组件 |
 | [friendsofsymfony/message-bundle](https://github.com/FriendsOfSymfony/FOSMessageBundle) | 站内信实现的基础组件 |
 | [knplabs/knp-markdown-bundle](https://github.com/KnpLabs/KnpMarkdownBundle) | Markdown 解析组件 |
-| [knplabs/knp-menu-bundle](https://github.com/KnpLabs/KnpGaufretteBundle) | 文件系统管理组件 |
-| [knplabs/knp-gaufrette-bundle](https://github.com/KnpLabs/KnpMenuBundle) | 菜单栏生成组件 |
+| [knplabs/knp-gaufrette-bundle](https://github.com/KnpLabs/KnpGaufretteBundle) | 文件系统管理组件 |
+| [knplabs/knp-menu-bundle](https://github.com/KnpLabs/KnpMenuBundle) | 菜单栏生成组件 |
 | [hwi/oauth-bundle](https://github.com/hwi/HWIOAuthBundle) | OAuth登录 |
 | [emojione/emojione](https://github.com/emojione/emojione) | Emoji 表情解析的后端组件 |
 | [lincanbin/material-design-avatars](https://github.com/lincanbin/Material-Design-Avatars) | 字符头像生成库 |
