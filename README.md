@@ -8,6 +8,8 @@ PHPDish 是一个基于Symfony框架开发的内容社区系统；得益于大�
 你可以使用composer或者直接下载本仓库进行程序的安装，注意切换到tag。
 QQ群号：138307655，欢迎进群讨论。
 
+[Twig 2.x 文档翻译计划征集](https://www.phpdish.com/topics/49)；欢迎大家参与。
+
 ## Requirements:
 
 - PHP 5.5.9+
