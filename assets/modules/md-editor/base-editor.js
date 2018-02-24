@@ -6,6 +6,14 @@ import TextComplete from 'textcomplete/lib/textcomplete';
 import TextArea from 'textcomplete/lib/textarea';
 import emojione from 'emojione';
 import twemoji from 'twemoji';
+import hljs from 'highlight.js';
+
+marked.setOptions({
+    highlight: function (code) {
+        return hljs.highlightAuto(code).value;
+    },
+    sanitize: true
+});
 
 class BaseEditor
 {

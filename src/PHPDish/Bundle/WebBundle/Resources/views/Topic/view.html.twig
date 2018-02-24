@@ -50,7 +50,8 @@
                     </ul>
                     {% if replies.haveToPaginate %}
                     <div class="panel-footer">
-                        {{ pagerfanta(replies, 'twitter_bootstrap3') }}
+                        {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                        {{ paginator(replies) }}
                     </div>
                     {% endif %}
                 </div>

@@ -18,10 +18,20 @@ class BodyProcessor implements BodyProcessorInterface
      */
     protected $mentionParser;
 
-    public function __construct(MarkdownParserInterface $markdownParser, MentionParserInterface $mentionParser)
+    /**
+     * @var \HTMLPurifier
+     */
+    protected $htmlPurifier;
+
+    public function __construct(
+        MarkdownParserInterface $markdownParser,
+        MentionParserInterface $mentionParser,
+        \HTMLPurifier $htmlPurifier
+    )
     {
         $this->markdownParser = $markdownParser;
         $this->mentionParser = $mentionParser;
+        $this->htmlPurifier = $htmlPurifier;
     }
 
     /**
@@ -30,6 +40,7 @@ class BodyProcessor implements BodyProcessorInterface
     public function process($body)
     {
         $body = $this->markdownParser->transformMarkdown($body);
+        $body = $this->htmlPurifier->purify($body); //先过滤标签
         $parsedBody = $this->mentionParser->parse($body)->getParsedBody();
         return Emojione::getClient()->shortnameToUnicode($parsedBody);
     }

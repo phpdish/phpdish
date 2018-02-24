@@ -49,7 +49,7 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
      * @ORM\Column(type="integer")
      * @var int
      */
-    protected $charge;
+    protected $charge = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="category", cascade={"persist"})

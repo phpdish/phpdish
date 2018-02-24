@@ -13,6 +13,7 @@ services:
         arguments:
             - "@markdown.parser"
             - "@phpdish.mention.parser"
+            - "@exercise_html_purifier.default"
 
     phpdish.http_client:
         class: GuzzleHttp\Client
