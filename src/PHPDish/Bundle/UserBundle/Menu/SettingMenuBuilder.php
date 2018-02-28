@@ -41,10 +41,10 @@ final class SettingMenuBuilder
             ->setAttribute('class', 'list-group-item if i-password');
 
         $menu->addChild('Social Binding', [
-                'label' => '社交账号',
+                'label' => '账户关联',
                 'route' => 'setting_social_binding',
             ])
-            ->setAttribute('class', 'list-group-item if i-weibo');
+            ->setAttribute('class', 'list-group-item if i-sync');
 
         return $menu;
     }

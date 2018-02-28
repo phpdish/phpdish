@@ -13,7 +13,7 @@
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//at.alicdn.com/t/font_382846_8rct3xbtzfh1714i.css"  rel="stylesheet">
+        <link href="//at.alicdn.com/t/font_382846_ipi5w85cbl4eipb9.css"  rel="stylesheet">
         <link href="{{ asset('build/vendor.css') }}" rel="stylesheet">
         <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
@@ -71,7 +71,7 @@
                                         <li role="separator" class="arrow"></li>
                                         <li><a href="{{ path('user_view', {username: app.user.username}) }}"><i class="if i-user"></i> 我的主页</a></li>
                                         <li><a href="{{ path('user_posts', {username: app.user.username}) }}"><i class="if i-post-o"></i> 我的专栏</a></li>
-                                        <li><a href="{{ path('user_wallet') }}"><i class="fa fa-credit-card"></i> 我的钱包</a></li>
+                                        <li><a href="{{ path('user_wallet') }}"><i class="if i-wallet"></i> 我的钱包</a></li>
                                         <li><a href="{{ path('setting_profile') }}"><i class="if i-setting-o"></i> 设置</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('logout') }}"><i class="if i-logout"></i> 退出</a></li>

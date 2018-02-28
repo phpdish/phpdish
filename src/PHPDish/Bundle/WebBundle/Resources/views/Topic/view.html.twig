@@ -18,7 +18,9 @@
                         <div class="author">
                             <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" class="avatar"/></a>
                         </div>
-                        <h3 class="title">{{ topic.title }} {% if topic.recommended %}<i class="if i-badge" title="精品话题"></i>{% endif %}</h3>
+                        <h3 class="title">
+                            {{ topic.title }} {% if topic.recommended %}<i class="if i-badge" title="精品话题"></i>{% endif %}
+                        </h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
                                 <li><i class="if i-calendar"></i> {{ topic.createdAt|time_diff }}</li>
