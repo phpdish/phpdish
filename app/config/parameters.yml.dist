@@ -18,6 +18,9 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: 009893b87f398e9c106b11d975db58505d826261
 
+    # 密码加密强度，simple 或者 strong
+    security.password_encoder_strength: simple
+
     oauth.weibo.client_id: phpdish
     oauth.weibo.client_secret: phpdish
 

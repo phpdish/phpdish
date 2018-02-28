@@ -1,5 +1,9 @@
 # PHPDish Mention Adapter
 services:
+    phpdish.security.password_encoder.generic:
+        class: PHPDish\Bundle\CoreBundle\Security\Core\Encoder\GenericPasswordEncoder
+        arguments: ['%security.password_encoder_strength%']
+
     phpdish.mention.adapter:
         class: PHPDish\Bundle\UserBundle\Mention\Adapter
         arguments: ['@phpdish.manager.user', '@router']
