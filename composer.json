@@ -20,7 +20,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.2.0",
         "algolia/algolia-search-bundle": "^2.2",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^2.4",
