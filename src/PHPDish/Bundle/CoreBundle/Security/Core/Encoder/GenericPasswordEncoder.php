@@ -63,7 +63,7 @@ class GenericPasswordEncoder implements PasswordEncoderInterface
         if ($difficulty === static::DIFFICULTY_SIMPLE) {
             $encoder = new MessageDigestPasswordEncoder('md5', false, 0);
         } else {
-            $encoder = new MessageDigestPasswordEncoder('sha512', true, 5000);
+            $encoder = new MessageDigestPasswordEncoder('sha512', true, 2);
         }
         return $encoder;
     }
