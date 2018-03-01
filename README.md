@@ -12,8 +12,8 @@ QQ群号：138307655，欢迎进群讨论。
 
 ## Requirements:
 
-- PHP 5.5.9+
-- MYSQL 7.2.0+
+- PHP 7.2.0+
+- MYSQL 5.6.0+
 
 ## Features
 
