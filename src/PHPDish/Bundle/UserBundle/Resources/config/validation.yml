@@ -1,10 +1,16 @@
 PHPDish\Bundle\UserBundle\Entity\User:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-             fields: [email]
-             message: '该邮箱已经被占用'
 
-    properties:
-       email:
-           - Email:
-               message: 请输入合法邮箱
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#             fields: [email]
+#             message: '该邮箱已经被占用'
+#
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#             fields: [username]
+#             message: '用户名已存在'
+
+#    properties:
+#       email:
+#           - Email:
+#               message: 请输入合法邮箱
+#               groups: ['Profile']

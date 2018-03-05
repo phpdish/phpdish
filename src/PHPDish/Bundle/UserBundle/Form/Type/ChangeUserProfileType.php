@@ -19,6 +19,9 @@ class ChangeUserProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('username', TextType::class, [
+                'label' => '用户名',
+            ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                      '男' => User::GENDER_MEN,
@@ -46,6 +49,7 @@ class ChangeUserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'validation_groups' => ['Profile']
         ]);
     }
 }
