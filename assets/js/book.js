@@ -10,6 +10,7 @@ import lockButton from '../modules/button-lock.js';
 import InlineAttachment from "../modules/inline-attachment";
 import SimpleMDE from "simplemde";
 import QRCodePayment from "../modules/qrcode-payment";
+import md5 from 'blueimp-md5';
 
 //书籍详情页面
 const $bookDetails = $('#book-details');
@@ -135,7 +136,7 @@ $chapterBody.length > 0 && (function($){
         tabSize: 4,
         autosave: {
             enabled: true,
-            uniqueId: 'chapter_draft',
+            uniqueId: 'chapter_' + md5(location.pathname),
             delay: 1000,
         },
         toolbar: [

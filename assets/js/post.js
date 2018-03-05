@@ -10,6 +10,7 @@ import InlineAttachment from '../modules/inline-attachment.js';
 import hljs from 'highlight.js';
 require('jquery-validation');
 import QRCodePayment from '../modules/qrcode-payment.js';
+import md5 from 'blueimp-md5';
 
 /**
  * Post Details
@@ -167,7 +168,7 @@ $postBody.length > 0 && (function($){
             tabSize: 4,
             autosave: {
                 enabled: true,
-                uniqueId: 'post_draft',
+                uniqueId: 'post_' + md5(location.pathname),
                 delay: 1000,
             },
             toolbar: [

@@ -5,6 +5,7 @@ import CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import draft from './draft-plugin.js';
 import inlineAttachment from './inline-attachment-plugin.js';
+import md5 from 'blueimp-md5';
 
 class CodeMirrorEditor extends BaseEditor {
     constructor($textarea, $preview, $previewContainer) {
@@ -41,7 +42,7 @@ class CodeMirrorEditor extends BaseEditor {
             },
             () => {
                 draft.call(this, {
-                    key: 'topic_draft'
+                    key: 'topic_' + md5(location.pathname)
                 });
             }
         ];
