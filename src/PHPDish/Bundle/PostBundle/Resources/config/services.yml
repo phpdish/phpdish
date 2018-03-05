@@ -4,6 +4,7 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
     phpdish.manager.post:
         class: PHPDish\Bundle\PostBundle\Service\PostManager
+        public: true
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
@@ -11,6 +12,7 @@ services:
 
     phpdish.manager.category:
         class: PHPDish\Bundle\PostBundle\Service\CategoryManager
+        public: true
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
@@ -19,12 +21,14 @@ services:
 
     phpdish.manager.book:
         class: PHPDish\Bundle\PostBundle\Service\BookManager
+        public: true
         arguments:
             - '@phpdish.manager.post'
             - '@phpdish.manager.category'
 
     phpdish.manager.post.comment:
         class: PHPDish\Bundle\PostBundle\Service\CommentManager
+        public: true
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'

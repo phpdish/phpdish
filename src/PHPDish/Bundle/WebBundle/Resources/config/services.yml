@@ -1,4 +1,5 @@
 services:
     phpdish.manager.song:
         class: PHPDish\Bundle\WebBundle\Service\SongManager
+        public: true
         arguments: ["@doctrine.orm.entity_manager"]

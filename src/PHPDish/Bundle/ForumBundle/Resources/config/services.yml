@@ -5,10 +5,12 @@ services:
 
     phpdish.manager.thread:
        class: PHPDish\Bundle\ForumBundle\Service\ThreadManager
+       public: true
        arguments: ["@doctrine.orm.entity_manager", "@phpdish.pinyin_translator"]
 
     phpdish.manager.topic:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager
+        public: true
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@phpdish.body_processor"
@@ -16,6 +18,7 @@ services:
 
     phpdish.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
+        public: true
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@event_dispatcher'

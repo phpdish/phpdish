@@ -5,11 +5,13 @@ services:
 
     phpdish.manager.notification:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
+        public: true
         arguments:
             - "@doctrine.orm.entity_manager"
 
     phpdish.manager.timeline:
         class: PHPDish\Bundle\NotificationBundle\Service\TimelineManager
+        public: true
         arguments:
             - "@doctrine.orm.entity_manager"
 # Listeners
