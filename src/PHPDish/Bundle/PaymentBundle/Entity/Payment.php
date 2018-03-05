@@ -13,8 +13,8 @@ use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Rhumsaa\Uuid\Exception\UnsatisfiedDependencyException;
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Entity

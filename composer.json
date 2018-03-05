@@ -33,7 +33,7 @@
         "friendsofsymfony/user-bundle": "^2.0",
         "hwi/oauth-bundle": "^0.5.3",
         "incenteev/composer-parameter-handler": "^2.0",
-        "javiereguiluz/easyadmin-bundle": "^1.17",
+        "easycorp/easyadmin-bundle": "^1.17",
         "knplabs/knp-gaufrette-bundle": "^0.4.0",
         "knplabs/knp-markdown-bundle": "^1.5",
         "knplabs/knp-menu-bundle": "^2.0",
@@ -45,7 +45,7 @@
         "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.7",
-        "rhumsaa/uuid": "^2.8",
+        "ramsey/uuid": "^3.7",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "slince/youzan-pay": "*@dev",
@@ -56,16 +56,17 @@
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/symfony": "3.3.*",
+        "symfony/symfony": "^3.4",
         "tencentyun-api/qcloudapi-sdk-php": "^2.0",
         "twig/extensions": "^1.5",
-        "twig/twig": "^1.0||^2.0",
+        "twig/twig": "^2.0",
         "white-october/pagerfanta-bundle": "^1.0",
         "willdurand/hateoas-bundle": "^1.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "symfony/web-profiler-bundle": "3.4.4"
     },
     "scripts": {
         "symfony-scripts": [
