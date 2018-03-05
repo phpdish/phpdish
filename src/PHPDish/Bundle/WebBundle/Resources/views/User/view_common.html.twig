@@ -39,20 +39,26 @@
                                 </p>
                             </div>
                             <div class="media-right actions">
-                                <a href="{{ path('chat_add', {'mail_to': user.username}) }}" class="btn btn-sm u-btn-outline-primary send-message">
-                                    <i class="if i-envelope-o"></i> 发信息
-                                </a>
-                                <div data-role="follow" class="follow">
-                                    {% if app.user and user.isFollowedBy(app.user) %}
-                                        <button type="button" class="btn btn-sm btn-default" data-action="unfollow">
-                                            <i class="if i-check"></i> 已关注
-                                        </button>
-                                    {%else %}
-                                        <button type="button" class="btn btn-sm u-btn-primary" data-action="follow">
-                                            <i class="if i-plus"></i> 关注{{ appellation }}
-                                        </button>
-                                    {% endif %}
-                                </div>
+                                {% if isMe %}
+                                    <a href="{{ path('setting_profile') }}" class="btn btn-block u-btn-outline-primary">
+                                        <i class="fa fa-pencil"></i> 编辑我的资料
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('chat_add', {'mail_to': user.username}) }}" class="btn btn-sm u-btn-outline-primary send-message">
+                                        <i class="if i-envelope-o"></i> 发信息
+                                    </a>
+                                    <div data-role="follow" class="follow">
+                                        {% if app.user and user.isFollowedBy(app.user) %}
+                                            <button type="button" class="btn btn-sm btn-default" data-action="unfollow">
+                                                <i class="if i-check"></i> 已关注
+                                            </button>
+                                        {%else %}
+                                            <button type="button" class="btn btn-sm u-btn-primary" data-action="follow">
+                                                <i class="if i-plus"></i> 关注{{ appellation }}
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
