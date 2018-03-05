@@ -113,3 +113,5 @@ new Actions.FollowThreadIntialization($document);
 
 //Emoji 渲染
 twemoji.parse(document.body);
+//工具提示
+$('[data-toggle="tooltip"]').tooltip()

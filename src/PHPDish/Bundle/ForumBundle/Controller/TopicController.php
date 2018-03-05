@@ -36,7 +36,7 @@ class TopicController extends RestController
     {
         $manager = $this->getTopicManager();
         $criteria = Criteria::create();
-        $criteria->orderBy(['repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
+        $criteria->orderBy(['isTop' => 'desc',  'repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');
         if ($tab === 'following') {
@@ -250,6 +250,32 @@ class TopicController extends RestController
 
         return $this->handleView($this->view([
             'is_recommended' => $topic->isRecommended(),
+        ]));
+    }
+
+    /**
+     * 切换置顶状态
+     *
+     * @Route("/topics/{id}/toggle_top", name="topic_toggle_top", requirements={"id": "\d+"})
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function toggleTopAction($id)
+    {
+        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic || !$topic->isEnabled()) {
+            throw $this->createNotFoundException();
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', $topic);
+        $topic->setTop(!$topic->isTop());
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($topic);
+        $manager->flush();
+
+        return $this->handleView($this->view([
+            'is_top' => $topic->isTop(),
         ]));
     }
 

@@ -40,6 +40,7 @@
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN', topic) %}
                                 <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="取消加精" data-recommend="true" class="cancel-recommend" {% else %}title="加精"{% endif %} data-action="recommend"><i class="if i-good"></i></a></li>
+                                <li><a href="javascript:void(0)" {% if (topic.isTop) %}title="取消置顶" data-is-top="true" class="cancel-top" {% else %}title="置顶"{% endif %} data-action="stick-top"><i class="if i-stick-top"></i></a></li>
                             {% endif %}
                         </ul>
                         <div class="social-share-container"></div>

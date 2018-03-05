@@ -118,20 +118,13 @@ interface TopicInterface extends IdentifiableInterface, DateTimeInterface, UserA
     public function recommend();
 
     /**
-     * 是否置顶.
-     *
-     * @return bool
-     */
-    public function isStickTop();
-
-    /**
      * 设置置顶.
      *
-     * @param bool $stickTop
+     * @param bool $isTop
      *
      * @return $this
      */
-    public function setStickTop($stickTop);
+    public function setTop($isTop);
 
     /**
      * 置顶话题.
@@ -139,6 +132,13 @@ interface TopicInterface extends IdentifiableInterface, DateTimeInterface, UserA
      * @return $this
      */
     public function stickTop();
+
+    /**
+     * 是否是置顶话题
+     *
+     * @return boolean
+     */
+    public function isTop();
 
     /**
      * 获取概述.

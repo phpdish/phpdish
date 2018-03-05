@@ -43,6 +43,7 @@ new AjaxTab($('[data-pjax-container]'), {
         const $topicAction =  $('[data-role="topic-action"]');
         const $removeAction = $topicAction.find('[data-action="remove"]');
         const $recommendAction = $topicAction.find('[data-action="recommend"]');
+        const $topAction = $topicAction.find('[data-action="stick-top"]');
         const buttonLock = lockButton($removeAction);
         $removeAction.on('click', function(){
             if (buttonLock.isDisabled()) {
@@ -86,6 +87,31 @@ new AjaxTab($('[data-pjax-container]'), {
                 });
             }, () => {
                 recommendButtonLock.release();
+            });
+        });
+        //置顶位
+        const topButtonLock = lockButton($topAction);
+        $topAction.on('click', function(){
+            if (topButtonLock.isDisabled()) {
+                return false;
+            }
+            topButtonLock.lock();
+            const isTop = $topAction.data('is-top');
+            let message =  isTop ? '确认取消置顶吗？' : '确认置顶这个话题吗?';
+
+            Util.dialog.confirm(message).then(() => {
+                Util.request('topic.toggleTop', window.topicId).done((response) => {
+                    let message = response.is_top ? '话题已经已经置顶' : '话题已经被取消置顶';
+                    Util.dialog.message(message).flash(2, () => {
+                        location.reload();
+                    });
+                }).fail((response) => {
+                    Util.dialog.message(response.responseObj.error).flash(3);
+                }).always(()  => {
+                    topButtonLock.release();
+                });
+            }, () => {
+                topButtonLock.release();
             });
         });
     })($);

@@ -60,12 +60,12 @@ class Topic implements TopicInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $recommended = 0;
+    protected $recommended = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $stickTop = 0;
+    protected $isTop = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
@@ -203,17 +203,27 @@ class Topic implements TopicInterface
     /**
      * {@inheritdoc}
      */
-    public function isStickTop()
+    public function isTop()
     {
-        return $this->stickTop;
+        return $this->isTop;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setStickTop($stickTop)
+    public function setTop($isTop)
     {
-        $this->stickTop = $stickTop;
+        $this->isTop = $isTop;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function stickTop()
+    {
+        $this->isTop = true;
+        return $this;
     }
 
     /**
@@ -225,14 +235,6 @@ class Topic implements TopicInterface
     public function getSummary()
     {
         return strip_tags(mb_substr($this->body, 0, 250));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function stickTop()
-    {
-        $this->stickTop = true;
     }
 
     /**

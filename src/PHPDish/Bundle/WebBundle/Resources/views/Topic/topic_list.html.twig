@@ -8,8 +8,11 @@
         <div class="media-body">
             <div class="media-heading title">
                 <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
+                {% if topic.top %}
+                    <i class="if i-stick-top" data-toggle="tooltip" title="置顶"></i>
+                {% endif %}
                 {% if topic.recommended %}
-                    <i class="if i-badge"></i>
+                    <i class="if i-good" data-toggle="tooltip" title="精品"></i>
                 {% endif %}
             </div>
             <ul class="list-unstyled list-inline meta">

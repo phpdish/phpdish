@@ -29,6 +29,7 @@ const routes = {
     'topic.addReply': {path: '/topics/{id}/replies', method: 'POST'},
     'topic.delete': {path: '/topics/{id}', method: 'DELETE'},
     'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
+    'topic.toggleTop': {path: '/topics/{id}/toggle_top', method: 'POST'},
     'topicReply.delete': {path: '/replies/{id}', method: 'DELETE'},
     //threads
     'thread.autocomplete': '/threads/autocomplete',

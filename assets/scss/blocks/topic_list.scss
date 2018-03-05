@@ -48,9 +48,14 @@
     .title{
       font-size:14px;
       line-height:1.5em;
-
-      .i-badge{
-        color: #ffa500
+      .if{
+        font-size: 20px;
+      }
+      .i-jing, .i-good{
+        color: #f66
+      }
+      .i-stick-top{
+        color: $contrastColor
       }
     }
   }
