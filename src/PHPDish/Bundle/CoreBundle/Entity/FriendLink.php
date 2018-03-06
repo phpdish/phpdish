@@ -28,12 +28,12 @@ class FriendLink
     protected $url;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $logo = '';
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"default": 0})
      */
     protected $priority = 0;
 

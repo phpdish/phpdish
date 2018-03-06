@@ -59,10 +59,21 @@ services:
          tags:
             - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException', priority: 1}
 
-
    # Main Menu
     phpdish.menu_builder.main_menu:
         class: PHPDish\Bundle\CoreBundle\Menu\MainMenuBuilder
         arguments: ['@knp_menu.factory']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: main_menu}
+
+    phpdish.manager.friend_link:
+        class: PHPDish\Bundle\CoreBundle\Service\FriendLinkManager
+        arguments: ['@doctrine.orm.entity_manager']
+        public: true
+
+    phpdish.twig_extension.friend_link:
+         class: PHPDish\Bundle\CoreBundle\Twig\FriendLinkExtension
+         arguments: ['@phpdish.manager.friend_link']
+         public: false
+         tags:
+            - { name: twig.extension}

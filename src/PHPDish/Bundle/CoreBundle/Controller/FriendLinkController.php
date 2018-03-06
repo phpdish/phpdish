@@ -11,9 +11,8 @@ class FriendLinkController extends Controller
     {
         $cachePool = $this->get('cache.app');
         $cacheItem = $cachePool->getItem("friends_link_{$limit}");
-        if (!$cacheItem->isHit()) {
-            $em = $this->getDoctrine()->getManager();
-            $friendLinks = $em->getRepository('PHPDishCoreBundle:FriendLink')->findBy([], [], $limit);
+        if (true|| !$cacheItem->isHit()) {
+            $friendLinks = $this->get('phpdish.manager.friend_link')->findAllEnabledFriendLinks();
             $cacheItem->set($friendLinks)->expiresAt(Carbon::now()->addDay(2));
             $cachePool->save($cacheItem);
         }
