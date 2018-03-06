@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Algolia\AlgoliaSearchBundle\AlgoliaAlgoliaSearchBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
 
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),

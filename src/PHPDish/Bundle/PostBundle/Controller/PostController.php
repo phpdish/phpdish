@@ -99,7 +99,7 @@ class PostController extends RestController
         if (!$post->isEnabled()) {
             throw $this->createNotFoundException();
         }
-        //如果是书籍则跳转到阅读页面
+        //如果是电子书则跳转到阅读页面
         if ($post->getCategory()->isBook()) {
             return $this->redirectToRoute('book_read', [
                 'slug' => $post->getCategory()->getSlug(),

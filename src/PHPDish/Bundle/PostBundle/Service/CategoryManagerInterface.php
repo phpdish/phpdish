@@ -107,7 +107,7 @@ interface CategoryManagerInterface
     public function createGetUserCategoriesQueryBuilder(UserInterface $user);
 
     /**
-     * 为专栏/书籍付费
+     * 为专栏/电子书付费
      * @param CategoryInterface $category
      * @param UserInterface $user
      * @return QRCode

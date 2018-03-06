@@ -27,7 +27,7 @@ class WalletExtension extends \Twig_Extension
     {
         switch ($history->getType()) {
             case PaymentInterface::TYPE_BUY_BOOK:
-                $text = '购买书籍';
+                $text = '购买电子书';
                 break;
             case PaymentInterface::TYPE_FOLLOW_CATEGORY:
                 $text = '订阅专栏';
@@ -36,7 +36,7 @@ class WalletExtension extends \Twig_Extension
                 $text = '专栏收入';
                 break;
             case PaymentInterface::TYPE_BOOK_INCOME:
-                $text = '书籍收入';
+                $text = '电子书收入';
                 break;
             case PaymentInterface::TYPE_WITHDRAW:
                 $text = '提现';

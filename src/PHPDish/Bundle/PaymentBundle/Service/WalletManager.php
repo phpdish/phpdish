@@ -130,7 +130,7 @@ class WalletManager implements WalletManagerInterface
         $history = $this->createHistory();
 
         if ($category->isBook()) {
-            $description = sprintf("<a href=\"%s\">%s</a> 购买了你的书籍 <a href=\"%s\">《%s》</a>",
+            $description = sprintf("<a href=\"%s\">%s</a> 购买了你的电子书 <a href=\"%s\">《%s》</a>",
                     $this->router->generate('user_view', ['username' => $follower->getUsername()]),
                     $follower->getUsername(),
                     $this->router->generate('book_view', ['slug' => $category->getSlug()]),

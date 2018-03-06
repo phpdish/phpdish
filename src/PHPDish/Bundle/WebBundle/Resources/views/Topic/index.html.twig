@@ -25,7 +25,7 @@
                     </ul>
                     <div id="list-container">
                         <div class="panel-body topic-list">
-                            {% include 'PHPDishWebBundle:Topic:topic_list.html.twig' %}
+                            {% include 'PHPDishWebBundle:Topic:_topic_list.html.twig' %}
                         </div>
                         {% if topics.haveToPaginate %}
                             <div class="panel-footer">
@@ -37,12 +37,12 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {% include 'PHPDishWebBundle:User:user_plate.html.twig' %}
+                {% include 'PHPDishWebBundle:User:_user_plate.html.twig' %}
                 {{ render(controller('PHPDishWebBundle:Song:getSong')) }}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics', {'limit': 8})) }}
                 {{ render(controller('PHPDishForumBundle:Thread:hotThreads')) }}
                 {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 6})) }}
-                {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
+                {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
             </div>
         </div>
     </div>

@@ -21,6 +21,9 @@ parameters:
     # 密码加密强度，simple 或者 strong
     security.password_encoder_strength: simple
 
+    # 主题选择,默认不用
+    theme.current_theme:
+
     oauth.weibo.client_id: phpdish
     oauth.weibo.client_secret: phpdish
 

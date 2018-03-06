@@ -21,14 +21,14 @@
                     <div id="list-container">
                         {% if tab == 'topic' %}
                             <div class="panel-body topic-list">
-                                {% include 'PHPDishWebBundle:Topic:topic_list.html.twig' with {'topics': searchResult} %}
+                                {% include 'PHPDishWebBundle:Topic:_topic_list.html.twig' with {'topics': searchResult} %}
                             </div>
                         {% elseif tab == 'user' %}
                             <div class="panel-body user-list">
-                                {% include 'PHPDishWebBundle:User:user_list.html.twig' with {'users': searchResult} %}
+                                {% include 'PHPDishWebBundle:User:_user_list.html.twig' with {'users': searchResult} %}
                             </div>
                         {% else %}
-                            {% include 'PHPDishWebBundle:Post:post_list.html.twig' with {'posts': searchResult} %}
+                            {% include 'PHPDishWebBundle:Post:_post_list.html.twig' with {'posts': searchResult} %}
                         {% endif %}
                         {% if searchResult.haveToPaginate %}
                             <footer class="panel-footer">

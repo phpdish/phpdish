@@ -71,7 +71,7 @@
                         <a href="{{ path('user_posts', {'username': user.username}) }}"><i class="fa fa-file-text-o"></i> 专栏</a>
                     </li>
                     <li {% if tab == 'book' %}class="active"{% endif %}>
-                        <a href="{{ path('user_books', {'username': user.username}) }}"><i class="fa fa-book"></i> 书籍</a>
+                        <a href="{{ path('user_books', {'username': user.username}) }}"><i class="fa fa-book"></i> 电子书</a>
                     </li>
                     <li {% if tab == 'reply' %}class="active"{% endif %}>
                         <a href="{{ path('user_replies', {'username': user.username}) }}"><i class="fa fa-commenting-o"></i> 回复</a>

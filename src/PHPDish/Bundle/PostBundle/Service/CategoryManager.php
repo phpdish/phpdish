@@ -140,7 +140,7 @@ class CategoryManager implements CategoryManagerInterface
     {
         if ($category->isCharging()) {
             //发起付费
-            $message = $category->isBook() ? sprintf('购买书籍: <a href="%s">%s</a>',
+            $message = $category->isBook() ? sprintf('购买电子书: <a href="%s">%s</a>',
                 $this->router->generate('book_view', ['slug' => $category->getSlug()]),
                 $category->getName()
             ) : sprintf('订阅专栏: <a href="%s">%s</a>',

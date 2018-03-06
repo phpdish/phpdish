@@ -4,6 +4,10 @@ services:
         class: PHPDish\Bundle\CoreBundle\Security\Core\Encoder\GenericPasswordEncoder
         arguments: ['%security.password_encoder_strength%']
 
+    phpdish.theme.context.generic:
+        class: PHPDish\Bundle\CoreBundle\Theme\Context\GenericThemeContext
+        arguments: ['@sylius.repository.theme', '%theme.current_theme%']
+
     phpdish.mention.adapter:
         class: PHPDish\Bundle\UserBundle\Mention\Adapter
         arguments: ['@phpdish.manager.user', '@router']

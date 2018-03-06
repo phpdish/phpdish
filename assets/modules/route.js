@@ -15,7 +15,7 @@ const routes = {
     'category.follow': {path: '/categories/{slug}/followers', method: 'POST'},
     'category.unfollow': {path: '/categories/{slug}/followers', method: 'DELETE'},
 
-    //书籍
+    //电子书
     'book.add_summary': {path: '/books/{slug}/summary', method: 'POST'},
     'book.edit_summary': {path: '/books/{slug}/summary/{id}/edit', method: 'POST'},
 

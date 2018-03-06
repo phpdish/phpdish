@@ -8,7 +8,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface BookInterface extends CategoryInterface
 {
     /**
-     * 获取书籍的目录
+     * 获取电子书的目录
      * @return Collection|ChapterInterface[]
      */
     public function getSummary();

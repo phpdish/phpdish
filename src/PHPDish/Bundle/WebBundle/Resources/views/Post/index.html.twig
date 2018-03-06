@@ -8,7 +8,7 @@
         <div class="col-lg-9 col-md-9">
             <div class="panel panel-u">
                 <div class="panel-heading"><i class="fa fa-file-text-o"></i> 最新文章</div>
-                {% include 'PHPDishWebBundle:Post:post_list.html.twig' %}
+                {% include 'PHPDishWebBundle:Post:_post_list.html.twig' %}
                 {% if posts.haveToPaginate %}
                 <footer class="panel-footer">
                     {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-3 col-md-3">
             {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
-            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
+            {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
         </div>
     </div>
 </div>

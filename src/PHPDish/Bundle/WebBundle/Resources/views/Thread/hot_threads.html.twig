@@ -1,7 +1,7 @@
 <div class="panel panel-widget hot-threads-widget">
     <div class="panel-heading">推荐节点</div>
     <div class="panel-body">
-        {% include 'PHPDishWebBundle:Thread:thread_tagify.html.twig' with {'threads': threads} %}
+        {% include 'PHPDishWebBundle:Thread:_thread_tagify.html.twig' with {'threads': threads} %}
         <a class="meta" href="{{ path('threads') }}">全部>></a>
     </div>
 </div>

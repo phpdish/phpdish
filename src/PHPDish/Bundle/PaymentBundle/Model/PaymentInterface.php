@@ -34,7 +34,7 @@ interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, Ide
     const TYPE_FOLLOW_CATEGORY = 'follow_category';
 
     /**
-     * 购买书籍
+     * 购买电子书
      * @var string
      */
     const TYPE_BUY_BOOK = 'buy_book';
@@ -46,13 +46,13 @@ interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, Ide
     const TYPE_CATEGORY_INCOME = 'category_income';
 
     /**
-     * 书籍收入
+     * 电子书收入
      * @var string
      */
     const TYPE_BOOK_INCOME = 'book_income';
 
     /**
-     * 书籍收入
+     * 电子书收入
      * @var string
      */
     const TYPE_WITHDRAW = 'withdraw';

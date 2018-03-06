@@ -75,7 +75,7 @@ class ChatsController extends Controller
             )));
         }
 
-        return $this->container->get('templating')->renderResponse('PHPDishWebBundle:Chat:newChat.html.twig', array(
+        return $this->container->get('templating')->renderResponse('PHPDishWebBundle:Chat:new_chat.html.twig', array(
             'form' => $form->createView(),
             'recipient' => $user,
             'data' => $form->getData(),

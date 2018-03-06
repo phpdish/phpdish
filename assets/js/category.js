@@ -56,10 +56,10 @@ $addCategoryForm.length > 0 && (function(){
                 required: '请输入个性域名'
             },
             'book[name]': {
-                required: '请输入书籍名称'
+                required: '请输入电子书名称'
             },
             'book[description]': {
-                required: '请输入书籍介绍'
+                required: '请输入电子书介绍'
             },
             'book[slug]': {
                 required: '请输入个性域名'

@@ -12,7 +12,7 @@ import SimpleMDE from "simplemde";
 import QRCodePayment from "../modules/qrcode-payment";
 import md5 from 'blueimp-md5';
 
-//书籍详情页面
+//电子书详情页面
 const $bookDetails = $('#book-details');
 $bookDetails.length > 0 && (function($){
     new AjaxTab($('[data-pjax-container]'), {
@@ -187,7 +187,7 @@ $chapterBody.length > 0 && (function($){
 
 
 
-//书籍阅读页面
+//电子书阅读页面
 const $bookView = $('[data-role="book-view"]');
 $bookView.length > 0 && (function($){
     const $bookSummary = $bookView.find('[data-role="summary"]');

@@ -20,7 +20,7 @@ class BookController extends RestController
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
 
     /**
-     * 创建书籍
+     * 创建电子书
      *
      * @Route("/books/new", name="book_add")
      *
@@ -43,7 +43,7 @@ class BookController extends RestController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveBook($book);
-            $this->addFlash('success', '书籍创建成功');
+            $this->addFlash('success', '电子书创建成功');
 
             return $this->redirectToRoute('book_view', [
                 'slug' => $book->getSlug(),
@@ -58,7 +58,7 @@ class BookController extends RestController
     }
 
     /**
-     * 查看书籍
+     * 查看电子书
      *
      * @Route("/books/{slug}", name="book_view", requirements={"slug": "[\w-]+"})
      * @param string $slug
@@ -74,7 +74,7 @@ class BookController extends RestController
     }
 
     /**
-     * 编辑书籍信息.
+     * 编辑电子书信息.
      *
      * @Route("/books/{slug}/edit", name="book_edit")
      *
@@ -95,7 +95,7 @@ class BookController extends RestController
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
             $manager->saveBook($book);
-            $this->addFlash('success', '书籍修改成功');
+            $this->addFlash('success', '电子书修改成功');
 
             return $this->redirectToRoute('book_view', [
                 'slug' => $book->getSlug(),
@@ -111,7 +111,7 @@ class BookController extends RestController
     }
 
     /**
-     * 查看书籍目录
+     * 查看电子书目录
      *
      * @Route("/books/{slug}/summary", name="book_summary")
      * @Method("GET")
@@ -149,7 +149,7 @@ class BookController extends RestController
     }
 
     /**
-     * 查看书籍具体章节
+     * 查看电子书具体章节
      *
      * @Route("/books/{slug}/chapter/{chapterId}", name="book_read", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
      * @param string $slug
@@ -181,7 +181,7 @@ class BookController extends RestController
     }
 
     /**
-     * 查看用户的书籍
+     * 查看用户的电子书
      *
      * @Route("/users/{username}/books", name="user_books")
      *

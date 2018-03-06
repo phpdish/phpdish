@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} {{ category is defined ? '修改' : '创建'}}{{ isBook ? '书籍' : '专栏'}} {% endblock %}
+{% block title %} {{ category is defined ? '修改' : '创建'}}{{ isBook ? '电子书' : '专栏'}} {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/category.js') }}"></script>
 {% endblock %}
@@ -10,7 +10,7 @@
         <div class="row">
             <article class="col-md-12">
                 <div class="panel panel-u add-category">
-                    <div class="panel-heading">{{ category is defined ? '修改' : '创建'}}{{ isBook ? '书籍' : '专栏'}}</div>
+                    <div class="panel-heading">{{ category is defined ? '修改' : '创建'}}{{ isBook ? '电子书' : '专栏'}}</div>
                     {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
                     <div class="panel-body">
                         {{ flashes() }}

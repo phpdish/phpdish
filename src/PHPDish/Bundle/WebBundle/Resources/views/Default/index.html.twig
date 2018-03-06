@@ -9,14 +9,14 @@
             <div class="panel panel-u">
                 <div class="panel-heading">热门话题</div>
                 <div class="panel-body topic-list">
-                    {% include 'PHPDishWebBundle:Topic:topic_list.html.twig' %}
+                    {% include 'PHPDishWebBundle:Topic:_topic_list.html.twig' %}
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3">
             {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
             {{ render(controller('PHPDishPostBundle:Post:recommendPosts', {'limit': 10})) }}
-            {% include 'PHPDishWebBundle:Common:friend_community.html.twig' %}
+            {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
         </div>
     </div>
 </div>

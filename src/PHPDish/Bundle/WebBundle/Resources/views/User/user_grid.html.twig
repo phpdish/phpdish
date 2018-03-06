@@ -1,9 +1,0 @@
-<ul>
-    {% for user in users %}
-    <li>
-        <a href="{{ path('user_view', {'username': user.username}) }}" target="_blank" title="{{ user.username }}">
-            <img src="{{ user.avatar }}" class="avatar avatar-50 photo" height="50" width="50"/>
-        </a>
-    </li>
-    {% endfor %}
-</ul>

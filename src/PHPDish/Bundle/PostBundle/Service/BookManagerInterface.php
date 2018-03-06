@@ -18,7 +18,7 @@ interface BookManagerInterface
     public function findBook($slug);
 
     /**
-     * 查询用户书籍
+     * 查询用户电子书
      *
      * @param UserInterface $user
      * @return BookInterface[]|Collection
@@ -33,7 +33,7 @@ interface BookManagerInterface
     public function findChapter($id);
 
     /**
-     * 创建书籍
+     * 创建电子书
      *
      * @param UserInterface $user 作者
      * @return BookInterface
@@ -41,14 +41,14 @@ interface BookManagerInterface
     public function createBook(UserInterface $user);
 
     /**
-     * 保存书籍
+     * 保存电子书
      *
      * @param BookInterface $book
      */
     public function saveBook(BookInterface $book);
 
     /**
-     * 给书籍添加章节
+     * 给电子书添加章节
      *
      * @param BookInterface $book
      * @param ChapterInterface|string $chapter
@@ -57,7 +57,7 @@ interface BookManagerInterface
     public function addBookChapter(BookInterface $book, $chapter);
 
     /**
-     * 获取用户的书籍数量
+     * 获取用户的电子书数量
      *
      * @param UserInterface $user
      * @return int

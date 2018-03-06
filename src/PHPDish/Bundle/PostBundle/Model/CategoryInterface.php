@@ -157,14 +157,14 @@ interface CategoryInterface extends TaxonomyInterface, EnabledInterface
     public function isBelongsTo(UserInterface $user);
 
     /**
-     * 作为书籍
+     * 作为电子书
      *
      * @return CategoryInterface
      */
     public function asBook();
 
     /**
-     * 是否是书籍
+     * 是否是电子书
      *
      * @return boolean
      */
