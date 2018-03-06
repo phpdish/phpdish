@@ -59,7 +59,7 @@ class TopicReplyController extends RestController
         $replies = $this->getReplyManager()
             ->findUserReplies($user, $request->query->getInt('page', 1), null, $criteria);
 
-        return $this->render('PHPDishWebBundle:TopicReply:user_replies.html.twig', [
+        return $this->render('PHPDishWebBundle:Topic:user_replies.html.twig', [
             'user' => $user,
             'replies' => $replies,
         ]);

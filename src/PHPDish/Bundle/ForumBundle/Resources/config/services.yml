@@ -1,8 +1,4 @@
 services:
-#    php_dish_forum.example:
-#        class: PHPDish\Bundle\ForumBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
     phpdish.manager.thread:
        class: PHPDish\Bundle\ForumBundle\Service\ThreadManager
        public: true
@@ -57,3 +53,13 @@ services:
         tags:
             - {name: "security.voter"}
         public: false
+
+    phpdish.twig_extension.topic:
+        class: PHPDish\Bundle\ForumBundle\Twig\TopicExtension
+        public: false
+        arguments:
+            - "@phpdish.manager.thread"
+            - "@phpdish.manager.topic"
+            - "@phpdish.manager.reply"
+        tags:
+            - {name: twig.extension}

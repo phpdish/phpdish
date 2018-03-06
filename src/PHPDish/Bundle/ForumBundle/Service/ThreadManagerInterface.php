@@ -2,13 +2,44 @@
 
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface ThreadManagerInterface
 {
+    /**
+     * 获取节点
+     *
+     * @param Criteria $criteria
+     * @return ThreadInterface[]|Collection
+     */
+    public function findThreads(Criteria $criteria);
+
+    /**
+     * 获取节点
+     *
+     * @param Criteria|null $criteria
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findThreadsPager(Criteria $criteria, $page, $limit = null);
+
+    /**
+     * 获取用户关注的节点
+     *
+     * @param UserInterface $user
+     * @param int $page
+     * @param int|null $limit
+     * @param Criteria|null $criteria
+     * @return Pagerfanta
+     */
+    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null);
+
     /**
      * 查找所有启用的thread.
      *
@@ -18,7 +49,16 @@ interface ThreadManagerInterface
     public function findEnabledThreads($limit = null);
 
     /**
-     * 根据slug查找thredd.
+     * 根据id查找thread
+     *
+     * @param int $id
+     *
+     * @return ThreadInterface
+     */
+    public function findThreadById($id);
+
+    /**
+     * 根据slug查找thread.
      *
      * @param string $slug
      *
@@ -80,23 +120,9 @@ interface ThreadManagerInterface
     public function unFollowThread(ThreadInterface $thread, UserInterface $user);
 
     /**
-     * 获取节点
+     * 获取节点repository
      *
-     * @param int $page
-     * @param int|null $limit
-     * @param Criteria|null $criteria
-     * @return Pagerfanta
+     * @return EntityRepository
      */
-    public function findThreads($page, $limit = null, Criteria $criteria = null);
-
-    /**
-     * 获取用户关注的节点
-     *
-     * @param UserInterface $user
-     * @param int $page
-     * @param int|null $limit
-     * @param Criteria|null $criteria
-     * @return Pagerfanta
-     */
-    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null);
+    public function getThreadRepository();
 }

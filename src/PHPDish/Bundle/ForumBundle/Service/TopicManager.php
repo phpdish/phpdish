@@ -119,13 +119,13 @@ class TopicManager implements TopicManagerInterface
                 'createdAt' => 'DESC',
             ]);
 
-        return $this->findTopics($criteria, $page, $limit);
+        return $this->findTopicsPager($criteria, $page, $limit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findTopics(Criteria $criteria, $page, $limit = null)
+    public function findTopicsPager(Criteria $criteria, $page, $limit = null)
     {
         $query = $this->getTopicRepository()->createQueryBuilder('t')
             ->addCriteria($criteria)
@@ -137,16 +137,25 @@ class TopicManager implements TopicManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findHotTopics(\DateTime $date, $limit)
+    public function findTopics(Criteria $criteria)
     {
         return $this->getTopicRepository()->createQueryBuilder('t')
-            ->where('t.createdAt > :beginDate')->setParameter('beginDate', $date)
-            ->andWhere('t.enabled = :enabled')->setParameter('enabled', true)
-            ->orderBy('t.replyCount', 'desc')
-            ->addOrderBy('t.createdAt', 'desc')
-            ->setMaxResults($limit)
+            ->addCriteria($criteria)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findHotTopics(\DateTime $date, $limit)
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->gt('createdAt', $date))
+            ->andWhere(Criteria::expr()->eq('enabled', true))
+            ->orderBy(['replyCount' => 'desc', 'createdAt' => 'desc'])
+            ->setMaxResults($limit);
+
+        return $this->findTopics($criteria);
     }
 
     /**
@@ -193,9 +202,9 @@ class TopicManager implements TopicManagerInterface
     }
 
     /**
-     * @return EntityRepository
+     * {@inheritdoc}
      */
-    protected function getTopicRepository()
+    public function getTopicRepository()
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Topic');
     }

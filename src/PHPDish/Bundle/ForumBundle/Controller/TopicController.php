@@ -46,7 +46,7 @@ class TopicController extends RestController
             if ($tab === 'recommend') {
                 $criteria->andWhere(Criteria::expr()->eq('recommended', true));
             }
-            $topics = $manager->findTopics($criteria, $request->query->getInt('page', 1));
+            $topics = $manager->findTopicsPager($criteria, $request->query->getInt('page', 1));
         }
         return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
             'topics' => $topics,

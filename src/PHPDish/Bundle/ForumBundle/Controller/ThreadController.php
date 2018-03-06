@@ -58,11 +58,22 @@ class ThreadController extends Controller
      */
     public function indexAction(Request $request)
     {
-
+        $criteria =  Criteria::create()->where(Criteria::expr()->eq('enabled', true))
+            ->orderBy([
+                'followerCount' => 'desc',
+                'createdAt' => 'desc',
+            ]);
         if ($request->query->get('tab') === 'following') {
-            $threads = $this->getThreadManager()->findUserFollowingThreads($this->getUser(), $request->query->getInt('page', 1));
+            $threads = $this->getThreadManager()->findUserFollowingThreads(
+                $this->getUser(),
+                $request->query->getInt('page', 1),
+                null,
+                $criteria
+            );
         } else {
-            $threads = $this->getThreadManager()->findThreads($request->query->getInt('page', 1));
+            $threads = $this->getThreadManager()->findThreadsPager($criteria,
+                $request->query->getInt('page', 1)
+            );
         }
 
         $seoPage = $this->get('sonata.seo.page');

@@ -2,7 +2,9 @@
 
 namespace PHPDish\Bundle\ForumBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
@@ -70,12 +72,21 @@ interface TopicManagerInterface
      * 查找指定条件的话题.
      *
      * @param Criteria $criteria
+     *
+     * @return Collection|TopicInterface[]
+     */
+    public function findTopics(Criteria $criteria);
+
+    /**
+     * 查找指定条件的话题翻页.
+     *
+     * @param Criteria $criteria
      * @param int      $page
      * @param int      $limit
      *
      * @return Pagerfanta
      */
-    public function findTopics(Criteria $criteria, $page, $limit = null);
+    public function findTopicsPager(Criteria $criteria, $page, $limit = null);
 
     /**
      * 获取指定时间内的热帖.
@@ -89,6 +100,7 @@ interface TopicManagerInterface
 
     /**
      * 回复主题
+     *
      * @param UserInterface $user
      * @param TopicInterface $topic
      * @param string $body
@@ -98,10 +110,18 @@ interface TopicManagerInterface
 
     /**
      * 获取订阅的节点下的话题
+     *
      * @param UserInterface $user
      * @param int $page
      * @param int|null $limit
      * @return Pagerfanta
      */
     public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null);
+
+    /**
+     * 获取话题的repository
+     *
+     * @return EntityRepository
+     */
+    public function getTopicRepository();
 }

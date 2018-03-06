@@ -14,6 +14,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class ThreadManager implements ThreadManagerInterface
 {
+
     use PaginatorTrait;
 
     /**
@@ -35,11 +36,54 @@ class ThreadManager implements ThreadManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findThreads(Criteria $criteria)
+    {
+        return $this->getThreadRepository()->createQueryBuilder('t')
+            ->addCriteria($criteria)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findThreadsPager(Criteria $criteria, $page, $limit = null)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t')
+            ->addCriteria($criteria);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
+    {
+        $qb = $this->getThreadRepository()->createQueryBuilder('t')
+            ->leftJoin('t.followers', 'f')
+            ->where('f.id = :userId')
+            ->setParameter('userId', $user);
+        $criteria && $qb->addCriteria($criteria);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findEnabledThreads($limit = null)
     {
         return $this->getThreadRepository()->findBy(['enabled' => true], [
             'followerCount' => 'desc'
         ], $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findThreadById($id)
+    {
+        return $this->getThreadRepository()->find($id);
     }
 
     /**
@@ -133,34 +177,7 @@ class ThreadManager implements ThreadManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findThreads($page, $limit = null, Criteria $criteria = null)
-    {
-        $qb = $this->getThreadRepository()->createQueryBuilder('t')
-            ->orderBy('t.followerCount', 'desc')
-            ->addOrderBy('t.createdAt', 'desc');
-        $criteria && $qb->addCriteria($criteria);
-        return $this->createPaginator($qb->getQuery(), $page, $limit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findUserFollowingThreads(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
-    {
-        $qb = $this->getThreadRepository()->createQueryBuilder('t')
-            ->leftJoin('t.followers', 'f')
-            ->where('f.id = :userId')
-            ->setParameter('userId', $user)
-            ->orderBy('t.followerCount', 'desc')
-            ->addOrderBy('t.createdAt', 'desc');
-        $criteria && $qb->addCriteria($criteria);
-        return $this->createPaginator($qb->getQuery(), $page, $limit);
-    }
-
-    /**
-     * @return EntityRepository
-     */
-    protected function getThreadRepository()
+    public function getThreadRepository()
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Thread');
     }

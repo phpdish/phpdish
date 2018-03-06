@@ -95,6 +95,27 @@ class ReplyManager implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findReplies(Criteria $criteria)
+    {
+        return $this->replyRepository->createQueryBuilder('r')
+            ->addCriteria($criteria)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findRepliesPager(Criteria $criteria, $page, $limit = null)
+    {
+        $qb = $this->replyRepository->createQueryBuilder('r')
+            ->addCriteria($criteria);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null)
     {
         $qb = $this->replyRepository->createQueryBuilder('r')
@@ -140,5 +161,13 @@ class ReplyManager implements ReplyManagerInterface
         $this->entityManager->flush();
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReplyRepository(): EntityRepository
+    {
+        return $this->replyRepository;
     }
 }

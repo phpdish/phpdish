@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Twig;
 
+use Doctrine\Common\Collections\Criteria;
 use Emojione\Emojione;
 use PHPDish\Component\Util\HtmlChunker;
 
@@ -36,6 +37,10 @@ class CoreExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('html_safe_chunk', [$this, 'safeChunk']),
             new \Twig_SimpleFilter('emoji_short_to_unicode', [$this, 'emojiShortNameToUnicode']),
+
+            //Criteria
+            new \Twig_SimpleFilter('criteria_create', ['Criteria', 'create']),
+            new \Twig_SimpleFilter('criteria_expr', ['Criteria', 'expr']),
         ];
     }
 
