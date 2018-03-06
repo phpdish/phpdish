@@ -64,6 +64,30 @@ class CommentManager implements CommentManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function findCommentsPager(Criteria $criteria, $page = 1, $limit = null)
+    {
+        $query = $this->commentRepository->createQueryBuilder('c')
+            ->addCriteria($criteria)
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findComments(Criteria $criteria)
+    {
+        return $this->commentRepository->createQueryBuilder('c')
+            ->addCriteria($criteria)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function createComment(PostInterface $post, UserInterface $user)
     {
         $comment = new Comment();
@@ -111,12 +135,8 @@ class CommentManager implements CommentManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findComments(Criteria $criteria, $page = 1, $limit = null)
+    public function getCommentRepository()
     {
-        $query = $this->commentRepository->createQueryBuilder('c')
-            ->addCriteria($criteria)
-            ->getQuery();
-
-        return $this->createPaginator($query, $page, $limit);
+        return $this->commentRepository;
     }
 }

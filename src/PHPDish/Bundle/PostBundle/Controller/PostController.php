@@ -108,7 +108,7 @@ class PostController extends RestController
         }
         $form = $this->createForm(CommentType::class);
         $criteria = Criteria::create()->where(Criteria::expr()->eq('post', $post->getId()));
-        $comments = $this->getPostCommentManager()->findComments($criteria, $request->query->getInt('page', 1));
+        $comments = $this->getPostCommentManager()->findCommentsPager($criteria, $request->query->getInt('page', 1));
 
         $this->getPostManager()->increasePostViews($post);
 

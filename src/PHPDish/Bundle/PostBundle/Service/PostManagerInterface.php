@@ -2,7 +2,9 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -38,6 +40,24 @@ interface PostManagerInterface
     public function findPostById($id);
 
     /**
+     * 查找post
+     * @param Criteria $criteria
+     * @return PostInterface[]|Collection
+     */
+    public function findPosts(Criteria $criteria);
+
+    /**
+     * 查找指定条件的文章.
+     *
+     * @param Criteria $criteria
+     * @param int      $page
+     * @param null|int $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findPostsPager(Criteria $criteria, $page = 1, $limit = null);
+
+    /**
      * 获取用户的文章.
      *
      * @param UserInterface $user
@@ -58,17 +78,6 @@ interface PostManagerInterface
      * @return Pagerfanta
      */
     public function findCategoryPosts(CategoryInterface $category, $page = 1, $limit = null);
-
-    /**
-     * 查找指定条件的文章.
-     *
-     * @param Criteria $criteria
-     * @param int      $page
-     * @param null|int $limit
-     *
-     * @return Pagerfanta
-     */
-    public function findPosts(Criteria $criteria, $page = 1, $limit = null);
 
     /**
      * 获取最新文章.
@@ -102,4 +111,11 @@ interface PostManagerInterface
      * @param int $views
      */
     public function increasePostViews(PostInterface $post, $views = 1);
+
+    /**
+     * 获取post repository
+     *
+     * @return EntityRepository
+     */
+    public function getPostRepository();
 }

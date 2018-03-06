@@ -88,7 +88,7 @@ class CategoryController extends RestController
                 'createdAt' => 'desc',
             ]);
         }
-        $posts = $this->getPostManager()->findPosts($criteria, $request->query->getInt('page', 1));
+        $posts = $this->getPostManager()->findPostsPager($criteria, $request->query->getInt('page', 1));
 
         return $this->render('PHPDishWebBundle:Category:view.html.twig', [
             'category' => $category,

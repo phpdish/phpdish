@@ -2,6 +2,9 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
@@ -10,6 +13,25 @@ use Slince\YouzanPay\Api\QRCode;
 
 interface CategoryManagerInterface
 {
+
+    /**
+     * 获取专栏
+     *
+     * @param Criteria $criteria
+     * @return CategoryInterface[]|Collection
+     */
+    public function findCategories(Criteria $criteria);
+
+    /**
+     * 获取专栏分页
+     *
+     * @param Criteria $criteria
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findCategoriesPager(Criteria $criteria, $page, $limit = null);
+
     /**
      * 获取所有开启的专栏.
      *
@@ -113,4 +135,11 @@ interface CategoryManagerInterface
      * @return QRCode
      */
     public function payForCategory(CategoryInterface $category, UserInterface $user);
+
+    /**
+     * 获取专栏repository
+     *
+     * @return EntityRepository
+     */
+    public function getCategoryRepository();
 }

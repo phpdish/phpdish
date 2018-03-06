@@ -86,16 +86,27 @@ class PostManager implements PostManagerInterface
      */
     public function findPostById($id)
     {
-        return $this->getRepository()
+        return $this->getPostRepository()
             ->find($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findPosts(Criteria $criteria, $page = 1, $limit = null)
+    public function findPosts(Criteria $criteria)
     {
-        $query = $this->getRepository()->createQueryBuilder('p')
+        return $this->getPostRepository()->createQueryBuilder('p')
+            ->addCriteria($criteria)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findPostsPager(Criteria $criteria, $page = 1, $limit = null)
+    {
+        $query = $this->getPostRepository()->createQueryBuilder('p')
             ->addCriteria($criteria)
             ->getQuery();
 
@@ -112,7 +123,7 @@ class PostManager implements PostManagerInterface
             ->andWhere(Criteria::expr()->eq('enabled', true))
             ->orderBy(['createdAt' => 'desc']);
 
-        return $this->findPosts($criteria, $page, $limit);
+        return $this->findPostsPager($criteria, $page, $limit);
     }
 
     /**
@@ -122,7 +133,7 @@ class PostManager implements PostManagerInterface
     {
         $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
 
-        return $this->findPosts($criteria, $page, $limit);
+        return $this->findPostsPager($criteria, $page, $limit);
     }
 
     /**
@@ -135,7 +146,7 @@ class PostManager implements PostManagerInterface
             ->andWhere(Criteria::expr()->neq('body', ''))
             ->orderBy(['createdAt' => 'desc']);
 
-        return $this->findPosts($criteria, $page, $limit);
+        return $this->findPostsPager($criteria, $page, $limit);
     }
 
     /**
@@ -143,7 +154,7 @@ class PostManager implements PostManagerInterface
      */
     public function findPostsByCriteria(Criteria $criteria)
     {
-        return $this->getRepository()->createQueryBuilder('p')
+        return $this->getPostRepository()->createQueryBuilder('p')
             ->addCriteria($criteria)
             ->getQuery()->getResult();
     }
@@ -169,9 +180,9 @@ class PostManager implements PostManagerInterface
     }
 
     /**
-     * @return PostRepository
+     * {@inheritdoc}
      */
-    protected function getRepository()
+    public function getPostRepository()
     {
         return $this->entityManager->getRepository('PHPDishPostBundle:Post');
     }

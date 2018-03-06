@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -18,6 +19,25 @@ interface CommentManagerInterface
      * @return CommentInterface
      */
     public function findCommentById($id);
+
+    /**
+     * 获取评论翻页.
+     *
+     * @param Criteria $criteria
+     * @param int      $page
+     * @param null     $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findCommentsPager(Criteria $criteria, $page = 1, $limit = null);
+
+    /**
+     * 获取评论
+     *
+     * @param Criteria $criteria
+     * @return CommentInterface[]
+     */
+    public function findComments(Criteria $criteria);
 
     /**
      * 创建评论.
@@ -46,13 +66,9 @@ interface CommentManagerInterface
     public function blockComment(CommentInterface $comment);
 
     /**
-     * 获取评论.
+     * 获取评论 repository
      *
-     * @param Criteria $criteria
-     * @param int      $page
-     * @param null     $limit
-     *
-     * @return Pagerfanta
+     * @return EntityRepository
      */
-    public function findComments(Criteria $criteria, $page = 1, $limit = null);
+    public function getCommentRepository();
 }

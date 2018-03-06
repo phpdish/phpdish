@@ -44,11 +44,8 @@ class TopicExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('get_thread', [$this->threadManager, 'findThreadById']),
             new \Twig_SimpleFunction('get_thread_by_slug', [$this->threadManager, 'findThreadBySlug']),
-            new \Twig_SimpleFunction('get_threads', [$this->threadManager, 'findThreads']),
+            new \Twig_SimpleFunction('get_threads', [$this, 'getThreads']),
             new \Twig_SimpleFunction('get_threads_pager', [$this->threadManager, 'findThreadsPager']),
-
-            new \Twig_SimpleFunction('get_replies', [$this, 'getReplies']),
-            new \Twig_SimpleFunction('get_replies_pager', [$this->replyManager, 'findRepliesPager']),
 
             new \Twig_SimpleFunction('get_topic', [$this->topicManager, 'findTopicById']),
             new \Twig_SimpleFunction('get_topics', [$this, 'getTopics']),

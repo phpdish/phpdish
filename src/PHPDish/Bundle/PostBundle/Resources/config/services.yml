@@ -79,3 +79,13 @@ services:
         tags:
              - { name: kernel.event_listener, event: payment.paid, method: onPaymentPaid}
         public: false
+
+    phpdish.twig_extension.post:
+        class: PHPDish\Bundle\PostBundle\Twig\PostExtension
+        public: false
+        arguments:
+            - "@phpdish.manager.category"
+            - "@phpdish.manager.post"
+            - "@phpdish.manager.post.comment"
+        tags:
+            - {name: twig.extension}

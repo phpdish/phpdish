@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -59,12 +60,32 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findAllEnabledCategories()
+    public function findCategories(Criteria $criteria)
     {
-        return $this->getRepository()->createQueryBuilder('c')
-            ->where('c.enabled = 1')
+        return $this->getCategoryRepository()->createQueryBuilder('c')
+            ->addCriteria($criteria)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCategoriesPager(Criteria $criteria, $page, $limit = null)
+    {
+        $query = $this->getCategoryRepository()->createQueryBuilder('c')
+            ->addCriteria($criteria)
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllEnabledCategories()
+    {
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('enabled', true));
+        return $this->findCategories($criteria);
     }
 
     /**
@@ -100,7 +121,7 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function createGetUserCategoriesQueryBuilder(UserInterface $user)
     {
-        return $this->getRepository()->createQueryBuilder('c')
+        return $this->getCategoryRepository()->createQueryBuilder('c')
             ->where('c.creator = :userId')->setParameter('userId', $user->getId())
             ->orderBy('c.createdAt', 'desc');
     }
@@ -110,7 +131,7 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function findCategoryBySlug($slug)
     {
-        return $this->getRepository()->findOneBy([
+        return $this->getCategoryRepository()->findOneBy([
             'slug' => $slug,
         ]);
     }
@@ -120,7 +141,7 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function findCategoryById($id)
     {
-        return $this->getRepository()->find($id);
+        return $this->getCategoryRepository()->find($id);
     }
 
     /**
@@ -219,9 +240,9 @@ class CategoryManager implements CategoryManagerInterface
     }
 
     /**
-     * @return PostRepository
+     * {@inheritdoc}
      */
-    protected function getRepository()
+    public function getCategoryRepository()
     {
         return $this->entityManager->getRepository('PHPDishPostBundle:Category');
     }
