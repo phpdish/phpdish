@@ -2,6 +2,9 @@
 
 namespace PHPDish\Bundle\UserBundle\Service;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -35,13 +38,30 @@ interface UserManagerInterface extends BaseUserManagerInterface
     public function findUserByName($username);
 
     /**
-     * 根据邮箱获取用户.
+     * 根据id获取用户.
      *
-     * @param string $email
+     * @param int $id
      *
      * @return UserInterface
      */
-    public function findUserByEmail($email);
+    public function findUserById($id);
+
+    /**
+     * 根据条件查找
+     *
+     * @param Criteria $criteria
+     * @return UserInterface[]|Collection
+     */
+    public function findUsersByCriteria(Criteria $criteria);
+
+    /**
+     * 查找用户翻页
+     * @param Criteria $criteria
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findUsersPager(Criteria $criteria, $page, $limit = null);
 
     /**
      * 获取最近注册的用户query.
@@ -140,4 +160,11 @@ interface UserManagerInterface extends BaseUserManagerInterface
      * @return bool
      */
     public function checkEmailExist($email);
+
+    /**
+     * 获取用户repository
+     *
+     * @return EntityRepository
+     */
+    public function getUserRepository();
 }

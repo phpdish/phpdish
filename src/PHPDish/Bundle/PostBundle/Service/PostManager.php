@@ -152,16 +152,6 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findPostsByCriteria(Criteria $criteria)
-    {
-        return $this->getPostRepository()->createQueryBuilder('p')
-            ->addCriteria($criteria)
-            ->getQuery()->getResult();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function blockPost(PostInterface $post)
     {
         $post->disable();

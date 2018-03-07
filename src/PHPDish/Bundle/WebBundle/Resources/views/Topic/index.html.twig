@@ -41,7 +41,7 @@
                 {{ render(controller('PHPDishWebBundle:Song:getSong')) }}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics', {'limit': 8})) }}
                 {{ render(controller('PHPDishForumBundle:Thread:hotThreads')) }}
-                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 6})) }}
+                {% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {'limit': 6} %}
                 {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
             </div>
         </div>

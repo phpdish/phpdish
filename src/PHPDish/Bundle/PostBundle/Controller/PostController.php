@@ -224,7 +224,7 @@ class PostController extends RestController
         $criteria = Criteria::create()->orderBy(['isRecommended' => 'desc', 'createdAt' => 'desc'])
             ->andWhere(Criteria::expr()->gte('createdAt', Carbon::parse('-100 days')))
             ->setMaxResults($limit);
-        $posts = $this->getPostManager()->findPostsByCriteria($criteria);
+        $posts = $this->getPostManager()->findPosts($criteria);
 
         return $this->render('PHPDishWebBundle:Post:recommend_posts.html.twig', [
             'posts' => $posts,

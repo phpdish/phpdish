@@ -45,3 +45,11 @@ services:
         arguments: ['@knp_menu.factory']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: setting_menu}
+
+    # 核心twig扩展
+    phpdish.twig_extension.user:
+         class: PHPDish\Bundle\UserBundle\Twig\UserExtension
+         arguments: ['@phpdish.manager.user']
+         public: false
+         tags:
+            - { name: twig.extension}

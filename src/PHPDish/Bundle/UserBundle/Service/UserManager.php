@@ -3,6 +3,7 @@
 namespace PHPDish\Bundle\UserBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -58,17 +59,15 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      */
     public function findUserByName($username)
     {
-        return $this->objectManager->getRepository('PHPDishUserBundle:User')
-            ->findOneBy(['username' => $username]);
+        return $this->findUserByUsername($username);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findUserByEmail($email)
+    public function findUserById($id)
     {
-        return $this->getRepository()
-            ->findOneBy(['email' => $email]);
+        return $this->findUserBy(['id' => $id]);
     }
 
     /**
@@ -185,9 +184,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      */
     public function checkEmailExist($email)
     {
-        return (bool) $this->getRepository()->findOneBy([
-            'email' => $email,
-        ]);
+        return (bool) $this->findUserByEmail($email);
     }
 
     /**
@@ -195,16 +192,36 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      */
     public function checkUsernameExist($username)
     {
-        return (bool) $this->getRepository()->findOneBy([
-            'username' => $username,
-        ]);
+        return (bool) $this->findUserByUsername($username);
     }
 
     /**
-     * @return EntityRepository
+     * {@inheritdoc}
      */
-    protected function getRepository()
+    public function getUserRepository()
     {
-        return $this->objectManager->getRepository('PHPDishUserBundle:User');
+        return $this->getRepository();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUsersByCriteria(Criteria $criteria)
+    {
+        return $this->getRepository()->createQueryBuilder('u')
+            ->addCriteria($criteria)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findUsersPager(Criteria $criteria, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->addCriteria($criteria)
+            ->getQuery();
+        return $this->createPaginator($query, $page, $limit);
     }
 }

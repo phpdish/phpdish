@@ -67,7 +67,7 @@
             <div class="col-md-3">
                 {% include 'PHPDishWebBundle:User:_user_plate.html.twig' %}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics')) }}
-                {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
+                {% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {'limit': 10} %}
                 {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
             </div>
         </div>

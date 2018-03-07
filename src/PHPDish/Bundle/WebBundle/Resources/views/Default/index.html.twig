@@ -14,8 +14,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-3">
-            {{ render(controller('PHPDishUserBundle:User:latestUsers', {'limit': 10})) }}
-            {{ render(controller('PHPDishPostBundle:Post:recommendPosts', {'limit': 10})) }}
+            {% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {'limit': 10} %}
             {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
         </div>
     </div>

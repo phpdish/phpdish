@@ -37,10 +37,18 @@ class CoreExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('html_safe_chunk', [$this, 'safeChunk']),
             new \Twig_SimpleFilter('emoji_short_to_unicode', [$this, 'emojiShortNameToUnicode']),
+        ];
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
             //Criteria
-            new \Twig_SimpleFilter('criteria_create', ['Criteria', 'create']),
-            new \Twig_SimpleFilter('criteria_expr', ['Criteria', 'expr']),
+            new \Twig_SimpleFunction('criteria_create', [Criteria::class, 'create']),
+            new \Twig_SimpleFunction('criteria_expr', [Criteria::class, 'expr'])
         ];
     }
 

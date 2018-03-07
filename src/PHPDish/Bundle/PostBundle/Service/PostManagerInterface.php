@@ -90,15 +90,6 @@ interface PostManagerInterface
     public function findLatestEnabledPosts($page, $limit = null);
 
     /**
-     * 根据criteria获取一组文章，不支持翻页.
-     *
-     * @param Criteria $criteria
-     *
-     * @return PostInterface[]
-     */
-    public function findPostsByCriteria(Criteria $criteria);
-
-    /**
      * 封禁文章.
      *
      * @param PostInterface $post
