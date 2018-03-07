@@ -16,7 +16,7 @@ class FriendLinkController extends Controller
             $cacheItem->set($friendLinks)->expiresAt(Carbon::now()->addDay(2));
             $cachePool->save($cacheItem);
         }
-        return $this->render('PHPDishWebBundle:FriendLink:list.html.twig', [
+        return $this->render('PHPDishWebBundle:Common:_friend_link_list.html.twig', [
             'friendLinks' => $cacheItem->get(),
         ]);
     }

@@ -312,7 +312,7 @@ class TopicController extends RestController
         $date = Carbon::today()->modify('-100 days');
         $topics = $this->getTopicManager()->findHotTopics($date, $limit ?: 10);
 
-        return $this->render('PHPDishWebBundle:Topic:today_hot.html.twig', [
+        return $this->render('PHPDishWebBundle:Topic:_today_hot.html.twig', [
             'topics' => $topics,
         ]);
     }

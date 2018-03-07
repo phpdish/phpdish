@@ -45,7 +45,7 @@ class ThreadController extends Controller
                 ->expiresAt(Carbon::parse('1 day'));
             $cachePool->save($cacheItem);
         }
-        return $this->render('PHPDishWebBundle:Thread:hot_threads.html.twig', [
+        return $this->render('PHPDishWebBundle:Thread:_hot_threads.html.twig', [
             'threads' => $cacheItem->get()
         ]);
     }

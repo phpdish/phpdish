@@ -14,7 +14,7 @@ class SongController extends Controller
         $manager = $this->get('phpdish.manager.song');
         try {
             $song = $manager->getLatestSong();
-            return $this->render('PHPDishWebBundle:Song:partial.html.twig', [
+            return $this->render('PHPDishWebBundle:Common:_song_partial.html.twig', [
                 'song' => $song
             ]);
         } catch (NoResultException $exception) {
