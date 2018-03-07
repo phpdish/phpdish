@@ -11,7 +11,7 @@
                         <span class="name">
                             {% if _chapter.children|length > 0 %}
                                 <i class="fa fa-caret-down"></i>
-                                {{ loop.index }}. {{ chapter.title }}
+                                {{ loop.index }}. {{ _chapter.title }}
                             {% else %}
                                 <i class="fa fa-file-text"></i>
                                 {{ loop.index }}. <a href="{{ path('book_read', {slug: book.slug, chapterId: _chapter.id}) }}">{{ _chapter.title }}</a>
