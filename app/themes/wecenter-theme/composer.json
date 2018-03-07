@@ -1,0 +1,12 @@
+{
+    "name": "phpdish/wecenter-theme",
+    "title": "仿 Wecenter 官网论坛",
+    "description": "仿 Wecenter 官网论坛",
+    "authors": [
+        {
+          "name": "Slince",
+          "email": "taosikai@yeah.net",
+          "homepage": "https://www.phpdish.com"
+        }
+    ]
+}
