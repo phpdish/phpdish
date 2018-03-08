@@ -3,10 +3,11 @@
 namespace PHPDish\Bundle\PostBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\CommentInterface as BaseCommentInterface;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface CommentInterface extends BaseCommentInterface, VotableInterface
+interface CommentInterface extends IdentifiableInterface, BaseCommentInterface, VotableInterface
 {
     /**
      * 设置post.

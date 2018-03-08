@@ -4,14 +4,13 @@ namespace PHPDish\Bundle\ForumBundle\Entity;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use PHPDish\Bundle\CoreBundle\Entity\Taxonomy;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\AbstractTaxonomy;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-class Thread extends AbstractTaxonomy implements ThreadInterface
+class Thread extends Taxonomy implements ThreadInterface
 {
     use IdentifiableTrait, EnabledTrait;
 

@@ -5,20 +5,17 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinColumns;
 use Money\Money;
+use PHPDish\Bundle\CoreBundle\Entity\Taxonomy;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\AbstractTaxonomy;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+
 use JMS\Serializer\Annotation as JMS;
 
-class Category extends AbstractTaxonomy implements BookInterface
+class Category extends Taxonomy implements BookInterface
 {
     use IdentifiableTrait, EnabledTrait;
 

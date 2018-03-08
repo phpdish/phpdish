@@ -2,16 +2,17 @@
 
 namespace PHPDish\Bundle\ForumBundle\Entity;
 
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
-use PHPDish\Bundle\CoreBundle\Model\AbstractComment as BaseComment;
+use PHPDish\Bundle\CoreBundle\Entity\Comment as BaseComment;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use JMS\Serializer\Annotation as JMS;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class Reply extends BaseComment implements ReplyInterface
 {
-    use VotableTrait;
+    use IdentifiableTrait, VotableTrait;
 
     /**
      * @JMS\MaxDepth(1)

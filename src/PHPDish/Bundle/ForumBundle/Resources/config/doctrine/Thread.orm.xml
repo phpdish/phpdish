@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="PHPDish\Bundle\ForumBundle\Entity\Thread" table="threads">
+
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
+
     <field name="cover" type="string" column="cover" precision="0" scale="0" nullable="true"/>
     <field name="topicCount" type="integer" column="topic_count" length="10" precision="0" scale="0" nullable="false"/>
     <field name="followerCount" type="integer" column="follower_count" length="10" precision="0" scale="0" nullable="false"/>
-    <field name="name" type="string" column="name" length="100" precision="0" scale="0" nullable="false"/>
-    <field name="slug" type="string" column="slug" length="200" precision="0" scale="0" nullable="false"/>
-    <field name="description" type="text" column="description" precision="0" scale="0" nullable="false"/>
-    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
-    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false"/>
     <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
+
     <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="followingThreads" fetch="LAZY">
       <join-table name="threads_followers">
         <join-columns>

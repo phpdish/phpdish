@@ -1,22 +1,18 @@
 <?php
-/**
- * PHPDish comment component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace  PHPDish\Bundle\PostBundle\Entity;
 
-use PHPDish\Bundle\CoreBundle\Model\AbstractComment;
+use PHPDish\Bundle\CoreBundle\Entity\Comment as BaseComment;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use JMS\Serializer\Annotation as JMS;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-class Comment extends AbstractComment implements CommentInterface
+class Comment extends BaseComment implements CommentInterface
 {
-    use VotableTrait;
+    use IdentifiableTrait, VotableTrait;
 
     /**
      * @JMS\MaxDepth(1)
