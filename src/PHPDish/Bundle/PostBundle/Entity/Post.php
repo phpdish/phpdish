@@ -22,22 +22,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
- * @ORM\Table(name="posts")
- * @ORM\HasLifecycleCallbacks
- * @ORM\AttributeOverrides({
- *     @ORM\AttributeOverride(name="body",
- *         column=@ORM\Column(
- *             type="text",
- *             nullable=true
- *         )
- *     ),
- *     @ORM\AttributeOverride(name="originalBody",
- *         column=@ORM\Column(
- *             type="text",
- *             nullable=true
- *         )
- *     )
- * })
  */
 class Post implements ChapterInterface
 {
@@ -50,60 +34,33 @@ class Post implements ChapterInterface
         EnabledTrait;
 
     /**
-     * @ORM\Column(type="string", length=150)
      * @Algolia\Attribute
      */
     protected $title;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
     protected $cover;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
     protected $recommended = false;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
-     */
     protected $commentCount = 0;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true, options={"default": 0})
-     */
     protected $viewCount = 0;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     */
-    protected $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     */
     protected $category;
 
     /**
      * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Post")
-     * @ORM\JoinColumn(name="root_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $root;
 
     /**
      * 子章节
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="parent")
      */
     protected $children;
 
     /**
      * 父章节
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
 

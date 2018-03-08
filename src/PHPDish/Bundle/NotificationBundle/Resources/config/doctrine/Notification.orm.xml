@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="PHPDish\Bundle\NotificationBundle\Entity\Notification" table="notifications">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="subject" type="string" column="subject" precision="0" scale="0" nullable="false"/>
+    <field name="message" type="text" column="message" precision="0" scale="0" nullable="true"/>
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
+    <field name="seen" type="boolean" column="seen" precision="0" scale="0" nullable="false"/>
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="fromUser" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="from_user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="topic" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" fetch="LAZY">
+      <join-columns>
+        <join-column name="topic_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reply" target-entity="PHPDish\Bundle\ForumBundle\Entity\Reply" fetch="LAZY">
+      <join-columns>
+        <join-column name="reply_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="post" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" fetch="LAZY">
+      <join-columns>
+        <join-column name="post_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="comment" target-entity="PHPDish\Bundle\PostBundle\Entity\Comment" fetch="LAZY">
+      <join-columns>
+        <join-column name="comment_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="category" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" fetch="LAZY">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="payment" target-entity="PHPDish\Bundle\PaymentBundle\Entity\Payment" fetch="LAZY">
+      <join-columns>
+        <join-column name="payment_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

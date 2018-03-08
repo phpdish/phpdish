@@ -5,6 +5,11 @@ namespace PHPDish\Bundle\UserBundle\Model;
 trait UserAwareTrait
 {
     /**
+     * @var UserInterface
+     */
+    protected $user;
+
+    /**
      * 设置作者.
      *
      * @param UserInterface $user

@@ -6,31 +6,23 @@ use Carbon\Carbon;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\WebBundle\Model\SongInterface;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="songs")
- */
 class Song implements SongInterface
 {
     use IdentifiableTrait;
     use DateTimeTrait;
 
     /**
-     * @ORM\Column(type="string")
      * @var string
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
      * @var string
      */
     protected $srcId;
 
     /**
-     * @ORM\Column(type="string")
      * @var string
      */
     protected $src;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="PHPDish\Bundle\PostBundle\Repository\PostRepository" name="PHPDish\Bundle\PostBundle\Entity\Post" table="posts">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="string" column="title" length="150" precision="0" scale="0" nullable="false"/>
+    <field name="cover" type="string" column="cover" precision="0" scale="0" nullable="true"/>
+    <field name="recommended" type="boolean" column="recommended" precision="0" scale="0" nullable="false"/>
+    <field name="commentCount" type="integer" column="comment_count" precision="0" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="viewCount" type="integer" column="view_count" precision="0" scale="0" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false"/>
+    <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
+    <field name="left" type="integer" column="lft" precision="0" scale="0" nullable="false"/>
+    <field name="level" type="integer" column="lvl" precision="0" scale="0" nullable="false"/>
+    <field name="right" type="integer" column="rgt" precision="0" scale="0" nullable="false"/>
+    <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
+    <field name="body" type="text" column="body" precision="0" scale="0" nullable="true"/>
+    <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="true"/>
+    <one-to-many field="children" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="parent" fetch="LAZY"/>
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="category" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" inversed-by="posts" fetch="LAZY">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="root" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" fetch="LAZY">
+      <join-columns>
+        <join-column name="root_id" referenced-column-name="id" on-delete="CASCADE" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parent" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" inversed-by="children" fetch="LAZY">
+      <join-columns>
+        <join-column name="parent_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

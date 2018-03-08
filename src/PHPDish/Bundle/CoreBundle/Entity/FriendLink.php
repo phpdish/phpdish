@@ -4,36 +4,30 @@ namespace PHPDish\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="PHPDish\Bundle\CoreBundle\Repository\FriendLinkRepository")
- * @ORM\Table(name="friend_links")
- */
 class FriendLink
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @var string
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
      */
     protected $url;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     protected $logo = '';
 
     /**
-     * @ORM\Column(type="integer", options={"default": 0})
+     * @var int
      */
     protected $priority = 0;
 

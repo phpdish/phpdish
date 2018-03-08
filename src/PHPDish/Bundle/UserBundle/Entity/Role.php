@@ -2,29 +2,24 @@
 
 namespace PHPDish\Bundle\UserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="roles")
- */
 class Role extends BaseRole
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
      */
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
+     * @var UserInterface[]|Collection
      */
     protected $users;
 
@@ -65,11 +60,11 @@ class Role extends BaseRole
     /**
      * Add user.
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $user
+     * @param UserInterface $user
      *
      * @return Role
      */
-    public function addUser(\PHPDish\Bundle\UserBundle\Entity\User $user)
+    public function addUser(UserInterface $user)
     {
         $this->users[] = $user;
 
@@ -79,9 +74,9 @@ class Role extends BaseRole
     /**
      * Remove user.
      *
-     * @param \PHPDish\Bundle\UserBundle\Entity\User $user
+     * @param UserInterface $user
      */
-    public function removeUser(\PHPDish\Bundle\UserBundle\Entity\User $user)
+    public function removeUser(UserInterface $user)
     {
         $this->users->removeElement($user);
     }
@@ -89,7 +84,7 @@ class Role extends BaseRole
     /**
      * Get users.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return UserInterface[]|Collection
      */
     public function getUsers()
     {
