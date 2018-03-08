@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="PHPDish\Bundle\CoreBundle\Entity\Taxonomy">
 
         <field name="name" type="string" column="name" length="100" precision="0" scale="0" nullable="false"/>
         <field name="slug" type="string" column="slug" length="200" precision="0" scale="0" nullable="false"/>
         <field name="description" type="text" column="description" precision="0" scale="0" nullable="false"/>
-        <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
-        <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false"/>
+        <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+            <gedmo:timestampable on="update"/>
+        </field>
 
     </mapped-superclass>
 

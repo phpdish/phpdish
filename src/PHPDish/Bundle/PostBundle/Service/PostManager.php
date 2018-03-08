@@ -51,7 +51,7 @@ class PostManager implements PostManagerInterface
     public function createPost(UserInterface $user)
     {
         $post = new Post();
-        $post->setUser($user)->setCreatedAt(Carbon::now());
+        $post->setUser($user);
 
         return $post;
     }
@@ -61,7 +61,6 @@ class PostManager implements PostManagerInterface
      */
     public function savePost(PostInterface $post)
     {
-        $post->setUpdatedAt(Carbon::now());
         if (!$post->getId()) {
             $post->getCategory()->setPostCount($post->getCategory()->getPostCount() + 1);
         }

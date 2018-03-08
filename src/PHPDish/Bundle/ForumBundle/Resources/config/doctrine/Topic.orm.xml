@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
   <entity name="PHPDish\Bundle\ForumBundle\Entity\Topic" table="topics">
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
+
     <field name="title" type="string" column="title" precision="0" scale="0" nullable="false"/>
     <field name="repliedAt" type="datetime" column="replied_at" precision="0" scale="0" nullable="false"/>
     <field name="replyCount" type="integer" column="reply_count" precision="0" scale="0" nullable="false"/>
@@ -12,10 +14,15 @@
     <field name="body" type="text" column="body" precision="0" scale="0" nullable="false"/>
     <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="false"/>
     <field name="commentCount" type="integer" column="comment_count" precision="0" scale="0" nullable="false"/>
-    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
-    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false"/>
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="create"/>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="update"/>
+    </field>
     <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
     <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
+
     <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id" nullable="1"/>
@@ -39,5 +46,7 @@
         </inverse-join-columns>
       </join-table>
     </many-to-many>
+
   </entity>
+
 </doctrine-mapping>

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
   <entity name="PHPDish\Bundle\PaymentBundle\Entity\Wallet" table="wallets">
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
     <field name="amount" type="integer" column="amount" precision="0" scale="0" nullable="false"/>
     <field name="freezeAmount" type="integer" column="freeze_amount" precision="0" scale="0" nullable="false"/>
-    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false"/>
-    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false"/>
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="create"/>
+    </field>
+
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="update"/>
+    </field>
+
     <one-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>
@@ -19,4 +26,5 @@
       </cascade>
     </one-to-many>
   </entity>
+
 </doctrine-mapping>

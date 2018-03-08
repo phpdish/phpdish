@@ -38,31 +38,30 @@ class Post implements ChapterInterface
      */
     protected $title;
 
+    /**
+     * @var string
+     */
     protected $cover;
 
+    /**
+     * @var bool
+     */
     protected $recommended = false;
 
+    /**
+     * @var int
+     */
     protected $commentCount = 0;
 
+    /**
+     * @var int
+     */
     protected $viewCount = 0;
 
+    /**
+     * @var CategoryInterface
+     */
     protected $category;
-
-    /**
-     * @Gedmo\TreeRoot
-     */
-    private $root;
-
-    /**
-     * 子章节
-     */
-    protected $children;
-
-    /**
-     * 父章节
-     * @Gedmo\TreeParent
-     */
-    protected $parent;
 
     /**
      * 文章插图.
@@ -231,31 +230,6 @@ class Post implements ChapterInterface
     public function getChildren()
     {
         return $this->children->matching(Criteria::create()->where(Criteria::expr()->eq('enabled', true)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setParent($chapter)
-    {
-        $this->parent = $chapter;
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoot()
-    {
-        return $this->root;
     }
 
     /**

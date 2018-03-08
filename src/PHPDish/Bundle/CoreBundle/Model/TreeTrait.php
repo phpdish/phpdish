@@ -2,25 +2,27 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
 
 trait TreeTrait
 {
-    /**
-     * @Gedmo\TreeLeft
-     */
     private $left;
 
-    /**
-     * @Gedmo\TreeLevel
-     */
     private $level;
 
-    /**
-     * @Gedmo\TreeRight
-     */
     private $right;
 
+    private $root;
+
+    /**
+     * 子章节
+     */
+    protected $children;
+
+    /**
+     * 父章节
+     */
+    protected $parent;
 
     /**
      * 获取当前节点层级
@@ -48,5 +50,42 @@ trait TreeTrait
     public function getRight()
     {
         return $this->right;
+    }
+
+    /**
+     *  获取父节点
+     *
+     * @return TreeInterface
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     *  设置父节点
+     */
+    public function setParent($chapter)
+    {
+        $this->parent = $chapter;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * 获取子节点
+     *
+     * @return TreeInterface[]|Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 }
