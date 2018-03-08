@@ -6,7 +6,7 @@
       <index name="1" columns="qr_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator strategy="AUTO"/>
     </id>
     <field name="payableId" type="integer" column="payable_id" precision="0" scale="0" nullable="true"/>
     <field name="serialNo" type="string" column="serial_no" precision="0" scale="0" nullable="true"/>

@@ -3,7 +3,7 @@
   <entity name="PHPDish\Bundle\PostBundle\Entity\Category" table="categories">
 
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator strategy="AUTO"/>
     </id>
 
     <field name="cover" type="string" column="cover" precision="0" scale="0" nullable="true"/>

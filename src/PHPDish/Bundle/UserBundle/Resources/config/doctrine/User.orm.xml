@@ -7,7 +7,7 @@
     </indexes>
 
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator strategy="AUTO"/>
     </id>
 
     <field name="gender" type="smallint" column="gender" length="1" precision="0" scale="0" nullable="false"/>

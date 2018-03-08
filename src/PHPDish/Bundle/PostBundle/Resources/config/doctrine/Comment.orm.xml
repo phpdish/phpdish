@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity repository-class="PHPDish\Bundle\PostBundle\Repository\CommentRepository" name="PHPDish\Bundle\PostBundle\Entity\Comment" table="comments">
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator strategy="AUTO"/>
     </id>
 
     <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
