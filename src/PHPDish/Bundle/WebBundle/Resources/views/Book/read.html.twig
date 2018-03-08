@@ -6,7 +6,7 @@
             <div class="book-name"><a href="{{ path('book_view', {'slug': book.slug}) }}" class="custom-link">{{ book.name }}</a></div>
             <nav role="navigation">
                 <ul class="summary">
-                    {% for _chapter in book.summary %}
+                    {% for _chapter in chaptersTree %}
                     <li class="chapter {% if chapter.id == _chapter.id %}active{% endif %}">
                         <span class="name">
                             {% if _chapter.children|length > 0 %}

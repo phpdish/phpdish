@@ -2,7 +2,7 @@
   "build/css/resume.css": "/build/css/resume.fa29bae52a9ea37c83a5295d2a47c682.css",
   "build/css/style.css": "/build/css/style.750e41a3388933cb70f6881cf47975a4.css",
   "build/images/algolia-logo-light.svg": "/build/images/algolia-logo-light.88450dd56ea1a00ba772424b30b7d34d.svg",
-  "build/js/book.js": "/build/js/book.2920ab589fa66ad9ddb3.js",
+  "build/js/book.js": "/build/js/book.60d11f05bd64fe2bffce.js",
   "build/js/category.js": "/build/js/category.f3ead003f08499f7f516.js",
   "build/js/default.js": "/build/js/default.11d17e8e42398cfef05c.js",
   "build/js/gift.js": "/build/js/gift.c69e58b1f623607ab056.js",
@@ -17,5 +17,5 @@
   "build/js/wallet.js": "/build/js/wallet.c5ab465820b1405bb44a.js",
   "build/manifest.js": "/build/manifest.d41d8cd98f00b204e980.js",
   "build/vendor.css": "/build/vendor.a7d50c55836cba63b5d0baaa58b961ce.css",
-  "build/vendor.js": "/build/vendor.c8de94e1c7b93df880a3.js"
+  "build/vendor.js": "/build/vendor.5aff8143dbd1ed787381.js"
 }

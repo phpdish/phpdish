@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
+use FOS\RestBundle\Context\Context;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\PostBundle\Form\Type\BookType;
 use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
@@ -121,8 +122,11 @@ class BookController extends RestController
     public function getSummaryAction($slug)
     {
         $book = $this->getBookManager()->findBook($slug);
+        $chaptersTree = $this->getBookManager()->findBookChaptersTree($book);
+
         return $this->render('PHPDishWebBundle:Book:summary.html.twig', [
             'book' => $book,
+            'chaptersTree' => $chaptersTree
         ]);
     }
 
@@ -151,7 +155,7 @@ class BookController extends RestController
     /**
      * 查看电子书具体章节
      *
-     * @Route("/books/{slug}/chapter/{chapterId}", name="book_read", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
+     * @Route("/books/{slug}/chapters/{chapterId}", name="book_read", requirements={"slug": "[\w-]+", "chapterId": "\d+"})
      * @param string $slug
      * @param int $chapterId
      * @param Request $request
@@ -161,7 +165,7 @@ class BookController extends RestController
     {
         $book = $this->getBookManager()->findBook($slug);
         $chapter = $this->getBookManager()->findChapter($chapterId);
-
+        $chaptersTree = $this->getBookManager()->findBookChaptersTree($book);
         //SEO
         $seoPage = $this->get('sonata.seo.page');
         $summary = StringManipulator::stripLineBreak($chapter->getSummary());
@@ -176,7 +180,8 @@ class BookController extends RestController
 
         return $this->render('PHPDishWebBundle:Book:read.html.twig', [
             'book' => $book,
-            'chapter' => $chapter
+            'chapter' => $chapter,
+            'chaptersTree' => $chaptersTree
         ]);
     }
 
@@ -201,7 +206,7 @@ class BookController extends RestController
     }
 
     /**
-     * 添加章节
+     * 添加目录
      *
      * @Route("/books/{slug}/summary", name="book_add_summary")
      * @Method("POST")
@@ -221,7 +226,7 @@ class BookController extends RestController
     }
 
     /**
-     * 添加章节
+     * 修改目录
      *
      * @Route("/books/{slug}/summary/{id}/edit", name="book_edit_summary")
      * @Method("POST")
@@ -240,7 +245,7 @@ class BookController extends RestController
         $this->getPostManager()->savePost($chapter);
         return $this->handleView($this->view([
             'chapter' => $chapter
-        ]));
+        ])->setContext((new Context())->setGroups(['Default'])));
     }
 
     /**
@@ -285,7 +290,7 @@ class BookController extends RestController
     }
 
     /**
-     * 添加章节
+     * 修改章节
      *
      * @Route("/books/{slug}/chapters/{id}/edit", name="book_edit_chapter")
      * @param string  $slug
@@ -319,5 +324,28 @@ class BookController extends RestController
             'form' => $form->createView(),
             'chapter' => $chapter
         ]);
+    }
+
+    /**
+     * 移动章节
+     *
+     * @Route("/books/{slug}/chapters/{id}/move", name="book_move_chapter")
+     * @param string $slug
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
+    public function moveChapterAction($slug, $id, Request $request)
+    {
+        $book = $this->getBookManager()->findBook($slug);
+        $this->denyAccessUnlessGranted('edit', $book);
+        $chapter = $this->getBookManager()->findChapter($id);
+        $this->getBookManager()->moveBookChapter($book, $chapter,
+            $request->request->get('direction'),
+            $request->request->get('step')
+        );
+        return $this->handleView($this->view([
+            'chapter' => $chapter
+        ])->setContext((new Context())->setGroups(['Default'])));
     }
 }

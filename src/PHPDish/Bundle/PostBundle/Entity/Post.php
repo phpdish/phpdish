@@ -17,12 +17,7 @@ use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
-use Gedmo\Mapping\Annotation as Gedmo;
 
-/**
- * @Gedmo\Tree(type="nested")
- * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
- */
 class Post implements ChapterInterface
 {
     use IdentifiableTrait,

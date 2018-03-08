@@ -6,7 +6,7 @@
 {% block book_content %}
     {#<div class="book-box">#}
         <ul class="list-group book-summary" data-role="summary">
-            {% for chapter in book.summary %}
+            {% for chapter in chaptersTree %}
             <li class="chapter list-group-item" data-role="chapter" data-id="{{ chapter.id }}" data-title="{{ chapter.title }}">
                 <div class="clearfix">
                     <span class="name">
@@ -21,14 +21,20 @@
                     {% if isGranted %}
                     <span class="action" data-role="action">
                         {% if chapter.children|length > 0 %}
-                            <a title="修改本章" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
+                            <a title="修改本章" data-toggle="tooltip" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
                         {% else %}
-                            <a title="修改本章" href="{{ path('book_edit_chapter', {slug: book.slug, id: chapter.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                            <a title="修改本章" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: chapter.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                         {% endif %}
-                        <a title="添加子章节" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
+                        <a title="添加子章节" data-toggle="tooltip" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
                         {% if chapter.children|length == 0 %}
-                        <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                        <a title="删除本章" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
                         {% endif %}
+                        <a title="向上移动" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
+                            <i class="fa fa-arrow-circle-up"></i>
+                        </a>
+                        <a title="向下移动" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
+                            <i class="fa fa-arrow-circle-down"></i>
+                        </a>
                     </span>
                     {% endif %}
                 </div>
@@ -42,8 +48,14 @@
                             </a>
                             {% if isGranted %}
                             <span class="action" data-role="action">
-                                <a title="修改本章" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                <a title="删除本章"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                                <a title="修改本章" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                <a title="删除本章" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                                <a title="向上移动" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
+                                    <i class="fa fa-arrow-circle-up"></i>
+                                </a>
+                                <a title="向下移动" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
+                                    <i class="fa fa-arrow-circle-down"></i>
+                                </a>
                             </span>
                             {% endif %}
                         </li>
