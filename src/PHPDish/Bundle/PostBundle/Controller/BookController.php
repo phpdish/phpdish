@@ -277,7 +277,7 @@ class BookController extends RestController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->getPostManager()->savePost($chapter)) {
                 $this->addFlash('success', '章节创建成功');
-                return $this->redirectToRoute('book_view', [
+                return $this->redirectToRoute('book_read', [
                     'slug' => $slug
                 ]);
             } else {

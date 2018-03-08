@@ -117,14 +117,15 @@ $bookDetails.length > 0 && (function($){
             });
             const moveLock = lockButton($move);
             $move.on('click', function(){
+                const $this = $(this);
                 "use strict";
                 if (moveLock.isDisabled()) {
                     return false;
                 }
                 moveLock.lock();
-                let $chapter =  $delete.closest('[data-role="sub-chapter"]');
+                let $chapter = $this.closest('[data-role="sub-chapter"]');
                 if ($chapter.length === 0) {
-                    $chapter = $delete.closest('[data-role="chapter"]');
+                    $chapter = $this.closest('[data-role="chapter"]');
                 }
                 const chapterId =  $chapter.data('id');
                 Util.request('book.move_chapter', {slug: window.book.slug, id: chapterId}, {

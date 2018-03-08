@@ -57,9 +57,11 @@ class BookManager implements BookManagerInterface
     public function findBookChaptersTree(BookInterface $book)
     {
         $repo = $this->postManager->getPostRepository();
+
         return $repo->createQueryBuilder('p')->where('p.category = :book')
             ->andWhere('p.enabled = :enabled')->setParameter('enabled', true)
             ->setParameter('book', $book)
+            ->orderBy('p.level, p.left', 'ASC')
             ->getQuery()
             ->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)
             ->getResult('tree');
@@ -143,6 +145,6 @@ class BookManager implements BookManagerInterface
 
         $this->postManager->getPostRepository()->$func($chapter, $step);
 
-        $this->entityManager->clear();
+//        $this->entityManager->clear();
     }
 }
