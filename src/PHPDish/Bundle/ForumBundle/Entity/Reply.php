@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\ForumBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
-use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
+use PHPDish\Bundle\CoreBundle\Model\AbstractComment as BaseComment;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use JMS\Serializer\Annotation as JMS;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;

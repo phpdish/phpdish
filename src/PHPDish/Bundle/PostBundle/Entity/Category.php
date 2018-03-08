@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
+use PHPDish\Bundle\CoreBundle\Model\AbstractTaxonomy;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -21,9 +22,9 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Entity
  * @ORM\Table(name="categories")
  */
-class Category extends Taxonomy implements CategoryInterface, BookInterface
+class Category extends AbstractTaxonomy implements BookInterface
 {
-    use EnabledTrait;
+    use IdentifiableTrait, EnabledTrait;
 
     /**
      * @ORM\Column(type="string", nullable=true)

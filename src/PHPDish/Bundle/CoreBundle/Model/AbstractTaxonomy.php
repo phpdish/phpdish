@@ -4,9 +4,9 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class Taxonomy implements TaxonomyInterface
+abstract class AbstractTaxonomy implements TaxonomyInterface
 {
-    use DateTimeTrait, IdentifiableTrait;
+    use DateTimeTrait;
 
     /**
      * @ORM\Column(type="string", length=100)

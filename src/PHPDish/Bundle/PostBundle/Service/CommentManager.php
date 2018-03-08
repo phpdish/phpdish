@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\PostBundle\Entity\Comment;
+use PHPDish\Bundle\PostBundle\Entity\AbstractComment;
 use PHPDish\Bundle\PostBundle\Event\CommentMentionUserEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
@@ -90,7 +90,7 @@ class CommentManager implements CommentManagerInterface
      */
     public function createComment(PostInterface $post, UserInterface $user)
     {
-        $comment = new Comment();
+        $comment = new AbstractComment();
         $comment->setPost($post)->setUser($user)
             ->setCreatedAt(Carbon::now());
         $post->increaseCommentCount();

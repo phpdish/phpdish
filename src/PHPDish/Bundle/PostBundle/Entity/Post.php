@@ -8,17 +8,19 @@ use PHPDish\Bundle\CoreBundle\Model\ContentTrait;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
+use PHPDish\Bundle\CoreBundle\Model\TreeTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\CoreBundle\Utility;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\ChapterInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\PostRepository")
  * @ORM\Table(name="posts")
  * @ORM\HasLifecycleCallbacks
@@ -37,13 +39,14 @@ use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
  *     )
  * })
  */
-class Post implements PostInterface, ChapterInterface
+class Post implements ChapterInterface
 {
     use IdentifiableTrait,
         ContentTrait,
         UserAwareTrait,
         DateTimeTrait,
         VotableTrait,
+        TreeTrait,
         EnabledTrait;
 
     /**
@@ -84,6 +87,13 @@ class Post implements PostInterface, ChapterInterface
     protected $category;
 
     /**
+     * @Gedmo\TreeRoot
+     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\JoinColumn(name="root_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
+
+    /**
      * 子章节
      * @ORM\OneToMany(targetEntity="Post", mappedBy="parent")
      */
@@ -91,6 +101,7 @@ class Post implements PostInterface, ChapterInterface
 
     /**
      * 父章节
+     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
@@ -234,14 +245,6 @@ class Post implements PostInterface, ChapterInterface
     /**
      * {@inheritdoc}
      */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getWordCount()
     {
         return mb_strlen($this->getBody(), 'UTF-8');
@@ -265,24 +268,37 @@ class Post implements PostInterface, ChapterInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getChildren()
     {
         return $this->children->matching(Criteria::create()->where(Criteria::expr()->eq('enabled', true)));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
-    public function setParent(ChapterInterface $chapter)
+    /**
+     * {@inheritdoc}
+     */
+    public function setParent($chapter)
     {
         $this->parent = $chapter;
         return $this;
     }
 
-    public function getNext()
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoot()
     {
+        return $this->root;
     }
 
     /**

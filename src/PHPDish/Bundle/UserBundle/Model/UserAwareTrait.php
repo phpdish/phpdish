@@ -23,5 +23,8 @@ trait UserAwareTrait
      *
      * @return UserInterface
      */
-    abstract public function getUser();
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
