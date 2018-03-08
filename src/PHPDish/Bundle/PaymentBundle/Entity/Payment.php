@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Entity;
 
-use JMS\Serializer\Annotation as Serializer;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
@@ -10,7 +9,6 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
 
@@ -29,14 +27,7 @@ class Payment implements PaymentInterface
     protected $serialNo;
 
     /**
-     * @var UserInterface
-     * @Serializer\Groups({"Details"})
-     */
-    protected $user;
-
-    /**
      * @var WalletInterface
-     * @Serializer\Groups({"Details"})
      */
     protected $wallet;
 
@@ -112,25 +103,6 @@ class Payment implements PaymentInterface
     public function setSerialNo($serialNo)
     {
         $this->serialNo = $serialNo;
-
-        return $this;
-    }
-
-    /**
-     * @return UserInterface
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param UserInterface $user
-     * @return Payment
-     */
-    public function setUser(UserInterface $user)
-    {
-        $this->user = $user;
 
         return $this;
     }

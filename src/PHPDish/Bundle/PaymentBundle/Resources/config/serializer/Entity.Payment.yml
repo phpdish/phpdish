@@ -1,0 +1,57 @@
+PHPDish\Bundle\PaymentBundle\Entity\Payment:
+    exclusion_policy: ALL
+    xml_root_name: payment
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        payableId:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        serialNo:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        type:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        status:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        amount:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        description:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        qrId:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        enabled:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        user:
+            expose: true
+            type: PHPDish\Bundle\UserBundle\Entity\User
+            groups: [Detailed]
+        wallet:
+            expose: true
+            type: PHPDish\Bundle\PaymentBundle\Entity\Wallet
+            groups: [Detailed]

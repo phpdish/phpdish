@@ -15,24 +15,9 @@ class Reply extends BaseComment implements ReplyInterface
     use IdentifiableTrait, VotableTrait;
 
     /**
-     * @JMS\MaxDepth(1)
-     * @JMS\Groups({"details"})
-     */
-    protected $user;
-
-    /**
-     * @JMS\MaxDepth(1)
-     * @JMS\Groups({"details"})
+     * @var TopicInterface
      */
     protected $topic;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 
     /**
      * {@inheritdoc}
