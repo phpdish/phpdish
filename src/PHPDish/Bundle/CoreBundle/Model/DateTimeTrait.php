@@ -2,19 +2,12 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 trait DateTimeTrait
 {
-    /**
-     * @ORM\Column(type="datetime")
-     */
     protected $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
     protected $updatedAt;
 
     /**

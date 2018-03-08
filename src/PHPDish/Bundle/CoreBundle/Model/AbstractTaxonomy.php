@@ -2,25 +2,14 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-
 abstract class AbstractTaxonomy implements TaxonomyInterface
 {
     use DateTimeTrait;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
     protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=200)
-     */
     protected $slug;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     protected $description;
 
     /**

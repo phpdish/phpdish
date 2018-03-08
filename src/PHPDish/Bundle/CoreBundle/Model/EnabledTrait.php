@@ -2,13 +2,8 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-
 trait EnabledTrait
 {
-    /**
-     * @ORM\Column(type="boolean")
-     */
     protected $enabled = true;
 
     /**

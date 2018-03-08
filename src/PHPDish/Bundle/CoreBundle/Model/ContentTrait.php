@@ -2,19 +2,10 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 trait ContentTrait
 {
-    /**
-     * @ORM\Column(type="text")
-     */
     protected $body;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     protected $originalBody;
 
     /**

@@ -1,9 +1,4 @@
 <?php
-/**
- * PHPDish comment component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
@@ -11,9 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait VotableTrait
 {
-    /**
-     * @ORM\Column(type="integer")
-     */
     protected $voteCount = 0;
 
     /**

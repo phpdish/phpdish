@@ -8,19 +8,16 @@ trait TreeTrait
 {
     /**
      * @Gedmo\TreeLeft
-     * @ORM\Column(name="lft", type="integer")
      */
     private $left;
 
     /**
      * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer")
      */
     private $level;
 
     /**
      * @Gedmo\TreeRight
-     * @ORM\Column(name="rgt", type="integer")
      */
     private $right;
 
