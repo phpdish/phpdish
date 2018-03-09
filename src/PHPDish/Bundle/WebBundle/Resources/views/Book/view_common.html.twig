@@ -29,7 +29,7 @@
                                 {% if app.user and book.isFollowedBy(app.user) %}
                                     <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> 已购买</button>
                                 {% else %}
-                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ book.charging ? "#{book.chargePrice|money} " : '' }}购买</button>
+                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ book.charging ? "#{book.chargePrice|money} " : '免费' }}购买</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">

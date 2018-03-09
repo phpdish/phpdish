@@ -12,7 +12,7 @@ class FollowCategoryIntialization{
             const price = $follow.data('price');
             const callText = $follow.data('book') ? '购买' : '订阅';
             const priceAmount = price ? parseFloat(price.replace(/[^\d]/, '')) : 0;
-            const btnText = priceAmount > 0 ? `${price} ${callText}` : callText;
+            const btnText = priceAmount > 0 ? `${price} ${callText}` : `免费${callText}`;
 
             //关注专栏
             $follow.on('click', '[data-action="follow"]', function(){
