@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6b626cd1d0443793873e9ef09f1eb02",
+    "content-hash": "944b7f5fdf7bcf1a1b02e6d06b960b22",
     "packages": [
         {
             "name": "algolia/algolia-search-bundle",
@@ -5323,7 +5323,7 @@
         },
         {
             "name": "slince/youzan-pay",
-            "version": "dev-master",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slince/youzan-pay.git",
@@ -7745,7 +7745,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "slince/youzan-pay": 20
+        "slince/youzan-pay": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
