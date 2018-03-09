@@ -7,18 +7,12 @@ use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="profiles")
- */
 class Profile implements ProfileInterface
 {
     use IdentifiableTrait;
 
     /**
      * 个人主页.
-     *
-     * @ORM\Column(type="string", nullable=true)
      *
      * @var string
      */
@@ -27,8 +21,6 @@ class Profile implements ProfileInterface
     /**
      * 公司.
      *
-     * @ORM\Column(type="string", nullable=true)
-     *
      * @var string
      */
     protected $company;
@@ -36,16 +28,12 @@ class Profile implements ProfileInterface
     /**
      * 所在位置.
      *
-     * @ORM\Column(type="string", nullable=true)
-     *
      * @var string
      */
     protected $location;
 
     /**
      * 用户.
-     *
-     * @ORM\OneToOne(targetEntity="User", inversedBy="profile")
      *
      * @var UserInterface
      */

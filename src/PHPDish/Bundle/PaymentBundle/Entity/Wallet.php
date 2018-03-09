@@ -3,42 +3,33 @@
 namespace PHPDish\Bundle\PaymentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="wallets")
- */
 class Wallet implements WalletInterface
 {
-    use IdentifiableTrait, DateTimeTrait;
+    use IdentifiableTrait, UserAwareTrait, DateTimeTrait;
 
     /**
      * 余额，单位分
-     * @ORM\Column(type="integer")
      * @var int
      */
     protected $amount = 0;
 
     /**
      * 冻结余额，单位分
-     * @ORM\Column(type="integer")
      * @var int
      */
     protected $freezeAmount = 0;
 
     /**
-     * @ORM\OneToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     */
-    protected $user;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Payment", mappedBy="wallet", cascade={"persist"})
+     * @var WalletHistoryInterface[]|Collection
      */
     protected $histories;
 
@@ -81,24 +72,6 @@ class Wallet implements WalletInterface
     public function setFreezeAmount($freezeAmount)
     {
         $this->freezeAmount = $freezeAmount;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
 
         return $this;
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+  <entity name="PHPDish\Bundle\PaymentBundle\Entity\Payment" table="payments">
+    <indexes>
+      <index name="0" columns="serial_no"/>
+      <index name="1" columns="qr_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+
+    <field name="payableId" type="integer" column="payable_id" precision="0" scale="0" nullable="true"/>
+    <field name="serialNo" type="string" column="serial_no" precision="0" scale="0" nullable="true"/>
+    <field name="type" type="string" column="type" length="50" precision="0" scale="0" nullable="false"/>
+    <field name="status" type="string" column="status" length="50" precision="0" scale="0" nullable="false"/>
+    <field name="amount" type="integer" column="amount" precision="0" scale="0" nullable="false"/>
+    <field name="description" type="text" column="description" precision="0" scale="0" nullable="true"/>
+    <field name="parameters" type="json_array" column="parameters" precision="0" scale="0" nullable="true"/>
+    <field name="qrId" type="string" column="qr_id" precision="0" scale="0" nullable="true"/>
+
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="create"/>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="update"/>
+    </field>
+    <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
+
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="wallet" target-entity="PHPDish\Bundle\PaymentBundle\Entity\Wallet" inversed-by="histories" fetch="LAZY">
+      <cascade>
+        <cascade-persist/>
+      </cascade>
+      <join-columns>
+        <join-column name="wallet_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

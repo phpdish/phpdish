@@ -2,89 +2,61 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Entity;
 
-use JMS\Serializer\Annotation as Serializer;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
-use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
-use Doctrine\ORM\Mapping as ORM;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="payments", indexes={
- *     @ORM\Index(columns="serial_no"),
- *     @ORM\Index(columns="qr_id")
- * })
- */
 class Payment implements PaymentInterface
 {
     use IdentifiableTrait, DateTimeTrait, EnabledTrait, UserAwareTrait;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $payableId;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $serialNo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @var UserInterface
-     * @Serializer\Groups({"Details"})
-     */
-    protected $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallet", inversedBy="histories", cascade={"persist"})
      * @var WalletInterface
-     * @Serializer\Groups({"Details"})
      */
     protected $wallet;
 
     /**
-     * @ORM\Column(type="string", length=50)
      * @var string
      */
     protected $type;
 
     /**
-     * @ORM\Column(type="string", length=50)
      * @var string
      */
     protected $status;
 
     /**
-     * @ORM\Column(type="integer")
      * @var int
      */
     protected $amount;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     protected $description;
 
     /**
-     * @ORM\Column(type="json_array", nullable=true)
      * @var array
      */
     protected $parameters;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $qrId;
@@ -131,25 +103,6 @@ class Payment implements PaymentInterface
     public function setSerialNo($serialNo)
     {
         $this->serialNo = $serialNo;
-
-        return $this;
-    }
-
-    /**
-     * @return UserInterface
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param UserInterface $user
-     * @return Payment
-     */
-    public function setUser(UserInterface $user)
-    {
-        $this->user = $user;
 
         return $this;
     }

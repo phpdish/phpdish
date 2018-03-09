@@ -5,9 +5,10 @@ namespace PHPDish\Bundle\PaymentBundle\Model;
 use Money\Money;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface WalletInterface extends IdentifiableInterface, DateTimeInterface
+interface WalletInterface extends IdentifiableInterface, UserAwareInterface, DateTimeInterface
 {
     /**
      * 获取余额

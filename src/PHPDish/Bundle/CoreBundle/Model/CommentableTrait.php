@@ -2,13 +2,8 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-
 trait CommentableTrait
 {
-    /**
-     * @ORM\Column(type="integer")
-     */
     protected $commentCount = 0;
 
     /**

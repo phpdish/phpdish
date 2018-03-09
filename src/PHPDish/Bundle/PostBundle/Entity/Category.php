@@ -5,54 +5,34 @@ namespace PHPDish\Bundle\PostBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinColumns;
 use Money\Money;
+use PHPDish\Bundle\CoreBundle\Entity\Taxonomy;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\Taxonomy;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="categories")
- */
-class Category extends Taxonomy implements CategoryInterface, BookInterface
+class Category extends Taxonomy implements BookInterface
 {
-    use EnabledTrait;
+    use IdentifiableTrait, EnabledTrait;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
     protected $cover;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
     protected $recommended = false;
 
-    /**
-     * @ORM\Column(type="integer", length=10)
-     */
     protected $postCount = 0;
 
-    /**
-     * @ORM\Column(type="integer", length=10)
-     */
     protected $followerCount = 0;
 
     /**
-     * @ORM\Column(type="integer")
      * @var int
      */
     protected $charge = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="category", cascade={"persist"})
      * @var PostInterface[]|Collection
      * @JMS\Groups({"details"})
      */
@@ -61,11 +41,6 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     /**
      * 订阅者.
      *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="followingCategories")
-     * @ORM\JoinTable(name="categories_followers",
-     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
-     * )
      * @JMS\Groups({"details"})
      */
     protected $followers;
@@ -73,8 +48,6 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     /**
      * 创建人.
      *
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @JMS\Groups({"details"})
      */
     protected $creator;
@@ -82,17 +55,11 @@ class Category extends Taxonomy implements CategoryInterface, BookInterface
     /**
      * 管理员.
      *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinTable(name="categories_managers",
-     *     joinColumns={@JoinColumn(name="category_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
-     * )
      * @JMS\Groups({"details"})
      */
     protected $managers;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": false})
      * @var boolean
      */
     protected $isBook = false;

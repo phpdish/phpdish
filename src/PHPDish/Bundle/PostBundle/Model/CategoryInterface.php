@@ -9,10 +9,11 @@ namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\CoreBundle\Model\TaxonomyInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface CategoryInterface extends TaxonomyInterface, EnabledInterface
+interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface, EnabledInterface
 {
     /**
      * 获取封面.

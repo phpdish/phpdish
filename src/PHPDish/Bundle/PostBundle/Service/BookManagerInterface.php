@@ -11,6 +11,19 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface BookManagerInterface
 {
     /**
+     * 同级移动方向上
+     *
+     * @var string
+     */
+    const MOVE_DIRECTION_UP = 'up';
+
+    /**
+     * 同级移动方向，下
+     * @var string
+     */
+    const MOVE_DIRECTION_DOWN = 'down';
+
+    /**
      * 获取图书
      * @param string $slug
      * @return BookInterface
@@ -28,9 +41,17 @@ interface BookManagerInterface
     /**
      * 获取章节
      * @param int $id
-     * @return PostInterface
+     * @return ChapterInterface
      */
     public function findChapter($id);
+
+    /**
+     * 获取电子书的章节树形结构
+     *
+     * @param BookInterface $book
+     * @return array|ChapterInterface[]
+     */
+    public function findBookChaptersTree(BookInterface $book);
 
     /**
      * 创建电子书
@@ -63,4 +84,14 @@ interface BookManagerInterface
      * @return int
      */
     public function getUserBookNumber(UserInterface $user);
+
+    /**
+     * 同级移动电子书章节
+     *
+     * @param BookInterface $book
+     * @param ChapterInterface $chapter
+     * @param string $direction
+     * @param int|true $step
+     */
+    public function moveBookChapter(BookInterface $book, ChapterInterface $chapter, $direction, $step);
 }

@@ -63,6 +63,8 @@ $bookDetails.length > 0 && (function($){
             const $edit = $this.find('[data-role="edit"]');
             const $addSub = $this.find('[data-role="add-sub"]');
             const $delete = $this.find('[data-role="delete"]');
+            const $move = $this.find('[data-role="move"]');
+
             $edit.on('click', function(){
                 Util.dialog.inputs('章节名称', [{
                     name: 'title',
@@ -111,6 +113,30 @@ $bookDetails.length > 0 && (function($){
                     });
                 }, ()=>{
                     deleteLock.release();
+                });
+            });
+            const moveLock = lockButton($move);
+            $move.on('click', function(){
+                const $this = $(this);
+                "use strict";
+                if (moveLock.isDisabled()) {
+                    return false;
+                }
+                moveLock.lock();
+                let $chapter = $this.closest('[data-role="sub-chapter"]');
+                if ($chapter.length === 0) {
+                    $chapter = $this.closest('[data-role="chapter"]');
+                }
+                const chapterId =  $chapter.data('id');
+                Util.request('book.move_chapter', {slug: window.book.slug, id: chapterId}, {
+                    'direction': $(this).data('direction') || 'up',
+                    'step': 1
+                }).done(()=>{
+                    location.reload();
+                }).fail(()=>{
+                    Util.dialog.message('移动失败请重试！').flash();
+                }).always(()=>{
+                    moveLock.release();
                 });
             });
         });

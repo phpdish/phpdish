@@ -9,6 +9,6 @@ namespace  PHPDish\Bundle\CoreBundle\Model;
 
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 
-interface CommentInterface extends IdentifiableInterface, ContentInterface, DateTimeInterface, UserAwareInterface, EnabledInterface
+interface CommentInterface extends ContentInterface, DateTimeInterface, UserAwareInterface, EnabledInterface
 {
 }

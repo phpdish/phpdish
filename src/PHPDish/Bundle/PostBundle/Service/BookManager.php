@@ -3,11 +3,19 @@
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\PostBundle\Model\BookInterface;
+use PHPDish\Bundle\PostBundle\Model\ChapterInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class BookManager implements BookManagerInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
     /**
      * @var PostManagerInterface
      */
@@ -18,10 +26,17 @@ class BookManager implements BookManagerInterface
      */
     protected $categoryManager;
 
-    public function __construct(PostManagerInterface $postManager, CategoryManagerInterface $categoryManager)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        PostManagerInterface $postManager,
+        CategoryManagerInterface $categoryManager
+    ) {
+        $this->entityManager = $entityManager;
         $this->postManager = $postManager;
         $this->categoryManager = $categoryManager;
+        //增加树形处理能力
+        $entityManager->getConfiguration()
+            ->addCustomHydrationMode('tree', 'Gedmo\Tree\Hydrator\ORM\TreeObjectHydrator');
     }
 
     /**
@@ -34,6 +49,22 @@ class BookManager implements BookManagerInterface
             throw new \InvalidArgumentException('The book is not exists');
         }
         return $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findBookChaptersTree(BookInterface $book)
+    {
+        $repo = $this->postManager->getPostRepository();
+
+        return $repo->createQueryBuilder('p')->where('p.category = :book')
+            ->andWhere('p.enabled = :enabled')->setParameter('enabled', true)
+            ->setParameter('book', $book)
+            ->orderBy('p.level, p.left', 'ASC')
+            ->getQuery()
+            ->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)
+            ->getResult('tree');
     }
 
     /**
@@ -103,5 +134,17 @@ class BookManager implements BookManagerInterface
             ->setCategory($book);
         $this->postManager->savePost($chapter);
         return $chapter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function moveBookChapter(BookInterface $book, ChapterInterface $chapter, $direction, $step)
+    {
+        $func = $direction === static::MOVE_DIRECTION_UP ? 'moveUp' : 'moveDown';
+
+        $this->postManager->getPostRepository()->$func($chapter, $step);
+
+//        $this->entityManager->clear();
     }
 }

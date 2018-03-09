@@ -18,6 +18,7 @@ const routes = {
     //电子书
     'book.add_summary': {path: '/books/{slug}/summary', method: 'POST'},
     'book.edit_summary': {path: '/books/{slug}/summary/{id}/edit', method: 'POST'},
+    'book.move_chapter': {path: '/books/{slug}/chapters/{id}/move', method: 'POST'},
 
     //用户相关
     'user.follow': {path:'/users/{username}/followers', method: 'POST'},

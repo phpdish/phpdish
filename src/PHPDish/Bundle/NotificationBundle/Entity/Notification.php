@@ -14,10 +14,6 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="notifications")
- */
 class Notification implements NotificationInterface, ActionInterface
 {
     use IdentifiableTrait;
@@ -42,73 +38,61 @@ class Notification implements NotificationInterface, ActionInterface
 
     /**
      * @var string
-     * @ORM\Column(name="subject", type="string", nullable=false)
      */
     protected $subject;
 
     /**
      * @var string
-     * @ORM\Column(name="message", type="text", nullable=true)
      */
     protected $message;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
      */
     protected $createdAt;
 
     /**
      * @var bool
-     * @ORM\Column(name="seen", type="boolean")
      */
     protected $seen = false;
 
     /**
      * @var UserInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      */
     protected $user;
 
     /**
      * @var UserInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
      */
     protected $fromUser;
 
     /**
      * @var TopicInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\ForumBundle\Entity\Topic")
      */
     protected $topic;
 
     /**
      * @var ReplyInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\ForumBundle\Entity\Reply")
      */
     protected $reply;
 
     /**
      * @var PostInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Post")
      */
     protected $post;
 
     /**
      * @var CommentInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Comment")
      */
     protected $comment;
 
     /**
      * @var CategoryInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category")
      */
     protected $category;
 
     /**
      * @var PaymentInterface
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\PaymentBundle\Entity\Payment")
      */
     protected $payment;
 

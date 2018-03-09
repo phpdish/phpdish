@@ -6,12 +6,12 @@
             <div class="book-name"><a href="{{ path('book_view', {'slug': book.slug}) }}" class="custom-link">{{ book.name }}</a></div>
             <nav role="navigation">
                 <ul class="summary">
-                    {% for _chapter in book.summary %}
+                    {% for _chapter in chaptersTree %}
                     <li class="chapter {% if chapter.id == _chapter.id %}active{% endif %}">
                         <span class="name">
                             {% if _chapter.children|length > 0 %}
                                 <i class="fa fa-caret-down"></i>
-                                {{ loop.index }}. {{ chapter.title }}
+                                {{ loop.index }}. {{ _chapter.title }}
                             {% else %}
                                 <i class="fa fa-file-text"></i>
                                 {{ loop.index }}. <a href="{{ path('book_read', {slug: book.slug, chapterId: _chapter.id}) }}">{{ _chapter.title }}</a>

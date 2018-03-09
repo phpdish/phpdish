@@ -3,10 +3,11 @@
 namespace PHPDish\Bundle\ForumBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface ReplyInterface extends CommentInterface, VotableInterface
+interface ReplyInterface extends IdentifiableInterface, CommentInterface, VotableInterface
 {
     /**
      * 设置话题.

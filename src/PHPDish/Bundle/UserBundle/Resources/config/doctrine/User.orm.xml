@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+  <entity name="PHPDish\Bundle\UserBundle\Entity\User" table="users">
+    <indexes>
+      <index name="0" columns="email"/>
+      <index name="1" columns="email_canonical"/>
+    </indexes>
+
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+
+    <field name="gender" type="smallint" column="gender" length="1" precision="0" scale="0" nullable="false"/>
+    <field name="description" type="string" column="description" precision="0" scale="0" nullable="true"/>
+    <field name="avatar" type="string" column="avatar" precision="0" scale="0" nullable="true"/>
+    <field name="followingCount" type="integer" column="following_count" precision="0" scale="0" nullable="false"/>
+    <field name="followerCount" type="integer" column="follower_count" precision="0" scale="0" nullable="false"/>
+    <field name="postCount" type="integer" column="post_count" precision="0" scale="0" nullable="false"/>
+    <field name="topicCount" type="integer" column="topic_count" precision="0" scale="0" nullable="false"/>
+    <field name="qqId" type="string" column="qq_id" precision="0" scale="0" nullable="true"/>
+    <field name="qqAccessToken" type="string" column="qq_access_token" length="500" precision="0" scale="0" nullable="true"/>
+    <field name="weiboId" type="string" column="weibo_id" precision="0" scale="0" nullable="true"/>
+    <field name="weiboAccessToken" type="string" column="weibo_access_token" length="500" precision="0" scale="0" nullable="true"/>
+    <field name="githubId" type="string" column="github_id" precision="0" scale="0" nullable="true"/>
+    <field name="githubAccessToken" type="string" column="github_access_token" length="500" precision="0" scale="0" nullable="true"/>
+    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="create"/>
+    </field>
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="update"/>
+    </field>
+
+    <one-to-one field="profile" target-entity="PHPDish\Bundle\UserBundle\Entity\Profile" mapped-by="user" fetch="LAZY">
+      <cascade>
+        <cascade-persist/>
+      </cascade>
+    </one-to-one>
+
+    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="following" fetch="LAZY">
+      <join-table name="users_followers">
+        <join-columns>
+          <join-column name="user_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="follower_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+
+    <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="followers" fetch="LAZY"/>
+    <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="followers" fetch="LAZY"/>
+    <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Entity\Thread" mapped-by="followers" fetch="LAZY"/>
+
+    <attribute-overrides>
+      <attribute-override name="email">
+        <field nullable="true" unique="false"/>
+      </attribute-override>
+      <attribute-override name="emailCanonical">
+        <field nullable="true" unique="false"/>
+      </attribute-override>
+    </attribute-overrides>
+
+  </entity>
+
+</doctrine-mapping>

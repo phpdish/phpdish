@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface PostManagerInterface
@@ -106,7 +107,7 @@ interface PostManagerInterface
     /**
      * 获取post repository
      *
-     * @return EntityRepository
+     * @return PostRepository
      */
     public function getPostRepository();
 }

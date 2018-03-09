@@ -1,42 +1,22 @@
 <?php
-/**
- * PHPDish comment component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace  PHPDish\Bundle\PostBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use PHPDish\Bundle\CoreBundle\Model\Comment as BaseComment;
+use PHPDish\Bundle\CoreBundle\Entity\Comment as BaseComment;
+use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use JMS\Serializer\Annotation as JMS;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass="PHPDish\Bundle\PostBundle\Repository\CommentRepository")
- * @ORM\Table(name="comments")
- */
 class Comment extends BaseComment implements CommentInterface
 {
-    use VotableTrait;
+    use IdentifiableTrait, VotableTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Post")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-     * @JMS\MaxDepth(1)
-     * @JMS\Groups({"details"})
+     * @var PostInterface
      */
     protected $post;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @JMS\MaxDepth(1)
-     * @JMS\Groups({"details"})
-     */
-    protected $user;
 
     /**
      * {@inheritdoc}
@@ -54,14 +34,6 @@ class Comment extends BaseComment implements CommentInterface
     public function getPost()
     {
         return $this->post;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**

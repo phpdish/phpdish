@@ -1,9 +1,4 @@
 <?php
-/**
- * PHPDish Core Component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 

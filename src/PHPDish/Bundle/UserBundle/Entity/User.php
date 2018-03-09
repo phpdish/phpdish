@@ -1,16 +1,9 @@
 <?php
-/**
- * PHPDish comment component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
@@ -18,69 +11,37 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="users", indexes={
- *      @ORM\Index(columns="email"),
- *      @ORM\Index(columns="email_canonical"),
- * })
- * @ORM\HasLifecycleCallbacks
- * @ORM\AttributeOverrides({
- *     @ORM\AttributeOverride(name="email",
- *         column=@ORM\Column(
- *             nullable=true,
- *             unique=false
- *         )
- *     ),
- *     @ORM\AttributeOverride(name="emailCanonical",
- *         column=@ORM\Column(
- *             nullable=true,
- *             unique=false
- *         )
- *     )
- * })
- */
 class User extends BaseUser implements UserInterface, ParticipantInterface
 {
     use DateTimeTrait;
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
-     * @ORM\Column(type="smallint", length=1);
+     * @var int
      */
     protected $gender = 0;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     protected $description;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     protected $avatar;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var string
      */
     protected $followingCount = 0;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
      */
     protected $followerCount = 0;
 
     /**
      * 个人资料.
-     *
-     * @ORM\OneToOne(targetEntity="Profile", mappedBy="user", cascade={"persist"})
      *
      * @var ProfileInterface
      */
@@ -89,12 +50,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * 关注我的用户.
      *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", inversedBy="following")
-     * @ORM\JoinTable(name="users_followers",
-     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@JoinColumn(name="follower_id", referencedColumnName="id")}
-     * )
-     *
      * @var ArrayCollection|UserInterface[]
      */
     protected $followers;
@@ -102,77 +57,57 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * 我关注的用户.
      *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\UserBundle\Entity\User", mappedBy="followers")
-     *
      * @var ArrayCollection|UserInterface[]
      */
     protected $following;
 
     /**
      * 订阅者的专栏
-     *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\PostBundle\Entity\Category", mappedBy="followers")
-     * )
      */
     protected $followingCategories;
 
     /**
      * 订阅的节点
-     *
-     * @ORM\ManyToMany(targetEntity="PHPDish\Bundle\ForumBundle\Entity\Thread", mappedBy="followers")
      */
     protected $followingThreads;
 
-//    /**
-//     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
-//     * @ORM\JoinTable(name="users_roles",
-//     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-//     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
-//     * )
-//     */
-//    protected $roles;
-
     /**
      * 文章数量.
-     *
-     * @ORM\Column(type="integer")
      */
     protected $postCount = 0;
 
     /**
      * 话题数量.
-     *
-     * @ORM\Column(type="integer")
      */
     protected $topicCount = 0;
 
     /**
-     * @ORM\Column(type="string", nullable=true))
+     * @var string
      */
     protected $qqId;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true))
+     * @var string
      */
     protected $qqAccessToken;
 
     /**
-     * @ORM\Column(type="string", nullable=true))
+     * @var string
      */
     protected $weiboId;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true))
+     * @var string
      */
     protected $weiboAccessToken;
 
     /**
-     * @ORM\Column(type="string", nullable=true))
+     * @var string
      */
     protected $githubId;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true))
+     * @var string
      */
     protected $githubAccessToken;
 

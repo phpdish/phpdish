@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\CoreBundle\Utility;
@@ -16,60 +17,43 @@ use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="topics")
- */
 class Topic implements TopicInterface
 {
     use IdentifiableTrait, UserAwareTrait, ContentTrait, CommentableTrait, DateTimeTrait, EnabledTrait, VotableTrait;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
      * @Algolia\Attribute
      */
     protected $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Thread", cascade={"persist"})
-     * @ORM\JoinTable(name="topics_threads",
-     *      joinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="thread_id", referencedColumnName="id")}
-     * )
+     * @var ThreadInterface[]|Collection
      */
     protected $threads;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTimeInterface
      */
     protected $repliedAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
      */
     protected $replyCount = 0;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @var boolean
      */
     protected $recommended = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @var boolean
      */
     protected $isTop = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PHPDish\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="last_reply_user_id", referencedColumnName="id")
+     * @var UserInterface
      */
     protected $lastReplyUser;
 

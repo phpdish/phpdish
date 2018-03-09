@@ -47,7 +47,6 @@ final class KernelExceptionListener
         if (!$event->isMasterRequest()) {
             return;
         }
-
         //当前请求
         $request = $event->getRequest();
         $isRequestApi = $request->getRequestFormat() === 'json' || $request->isXmlHttpRequest();
