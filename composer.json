@@ -45,6 +45,7 @@
         "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.7",
+        "phpdish/theme-installer": "^0.0",
         "ramsey/uuid": "^3.7",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
@@ -87,7 +88,8 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "ignore-theme-vendor": false
     },
     "extra": {
         "symfony-app-dir": "app",
