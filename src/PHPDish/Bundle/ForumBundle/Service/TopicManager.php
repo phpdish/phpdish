@@ -204,6 +204,18 @@ class TopicManager implements TopicManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function getUserTopicCount(UserInterface $user)
+    {
+        $qb = $this->getTopicRepository()->createQueryBuilder('p');
+        $qb->select($qb->expr()->count('p'))
+            ->where('p.enabled = :enabled')->setParameter('enabled', true)
+            ->andWhere('p.user = :user')->setParameter('user', $user);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTopicRepository()
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Topic');

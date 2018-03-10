@@ -105,6 +105,15 @@ interface PostManagerInterface
     public function increasePostViews(PostInterface $post, $views = 1);
 
     /**
+     * 获取用户的post数量
+     *
+     * @param UserInterface $user
+     * @param boolean $ignoreEmptyPost
+     * @return int
+     */
+    public function getUserPostCount(UserInterface $user, $ignoreEmptyPost = true);
+
+    /**
      * 获取post repository
      *
      * @return PostRepository

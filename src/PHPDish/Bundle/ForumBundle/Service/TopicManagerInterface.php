@@ -119,6 +119,14 @@ interface TopicManagerInterface
     public function findFollowingThreadsTopics(UserInterface $user, $page, $limit = null);
 
     /**
+     * 获取用户的话题数量
+     *
+     * @param UserInterface $user
+     * @return int
+     */
+    public function getUserTopicCount(UserInterface $user);
+
+    /**
      * 获取话题的repository
      *
      * @return EntityRepository

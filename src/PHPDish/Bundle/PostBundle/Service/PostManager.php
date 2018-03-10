@@ -171,6 +171,21 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function getUserPostCount(UserInterface $user, $ignoreEmptyPost = true)
+    {
+        $qb = $this->getPostRepository()->createQueryBuilder('p');
+        $qb->select($qb->expr()->count('p'))
+            ->where('p.enabled = :enabled')->setParameter('enabled', true)
+            ->andWhere('p.user = :user')->setParameter('user', $user);
+        if ($ignoreEmptyPost) {
+            $qb->andWhere('p.originalBody is not null');
+        }
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPostRepository()
     {
         return $this->entityManager->getRepository('PHPDishPostBundle:Post');
