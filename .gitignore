@@ -26,3 +26,4 @@
 !web/media/cache
 yarn.lock
 yarn-error.log
+/plugins/*
