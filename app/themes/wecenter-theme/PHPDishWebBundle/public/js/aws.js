@@ -1915,22 +1915,13 @@ AWS.User =
 			}
 			else
 			{
-				var agree_num = parseInt(selector.html().replace(/[^0-9]/ig,""));
-
 				if (rating == 0)
 				{
-					
-					var selectorhtml = selector.html().replace(_t('我已赞'), _t('赞'));
-					
-					selector.html(selectorhtml.replace(agree_num, (agree_num-1))).removeClass('active');
-					
+					selector.html(selector.html().replace(_t('我已赞'), _t('赞'))).removeClass('active');
 				}
 				else
 				{
-					var selectorhtml = selector.html().replace(_t('赞'), _t('我已赞'));
-					
-					selector.html(selectorhtml.replace(agree_num, (agree_num+1))).addClass('active');
-					
+					selector.html(selector.html().replace(_t('赞'), _t('我已赞'))).addClass('active');
 				}
 			}
 		}, 'json');
@@ -1968,7 +1959,7 @@ AWS.Dropdown =
 				$(selector).parent().find('.aw-dropdown').show();
 			});
 		}
-		$(selector).bind('input propertychange',function(e)
+		$(selector).keyup(function(e)
 		{
 			if (type == 'search')
 			{
