@@ -4,9 +4,17 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
+
     <field name="name" type="string" column="name" precision="0" scale="0" nullable="false"/>
     <field name="srcId" type="string" column="src_id" precision="0" scale="0" nullable="false"/>
     <field name="src" type="string" column="src" precision="0" scale="0" nullable="false"/>
+
+    <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+
     <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
       <gedmo:timestampable on="create"/>
     </field>

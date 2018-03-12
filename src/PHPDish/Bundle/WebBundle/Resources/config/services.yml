@@ -3,3 +3,11 @@ services:
         class: PHPDish\Bundle\WebBundle\Service\SongManager
         public: true
         arguments: ["@doctrine.orm.entity_manager"]
+
+    phpdish.twig_extension.song:
+        class: PHPDish\Bundle\WebBundle\Twig\SongExtension
+        public: false
+        arguments:
+            - "@phpdish.manager.song"
+        tags:
+            - {name: twig.extension}

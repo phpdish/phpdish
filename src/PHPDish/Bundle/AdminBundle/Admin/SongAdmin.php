@@ -23,7 +23,8 @@ class SongAdmin extends AbstractAdmin
         $list
             ->addIdentifier('name', null, ['label'=>'标题'])
             ->add('src', null, ['label'=>'URL'])
-            ->add('srcId', null, ['label'=>'歌曲ID']);
+            ->add('srcId', null, ['label'=>'歌曲ID'])
+            ->add('enabled', null, ['editable'=>true, 'label' => '状态']);
     }
 
     protected function configureFormFields(FormMapper $form)
@@ -31,6 +32,7 @@ class SongAdmin extends AbstractAdmin
         $form
             ->add('name', null, ['label'=>'标题'])
             ->add('src', null, ['label'=>'URL'])
-            ->add('srcId', null, ['label'=>'歌曲ID']);
+            ->add('srcId', null, ['label'=>'歌曲ID'])
+            ->add('enabled', null, ['label' => '状态']);
     }
 }

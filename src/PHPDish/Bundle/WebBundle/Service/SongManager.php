@@ -28,10 +28,8 @@ class SongManager  implements SongManagerInterface
      */
     public function getLatestSong()
     {
-        return $this->songRepository->createQueryBuilder('s')
-            ->orderBy('s.createdAt', 'desc')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleResult();
+        return $this->songRepository->findOneBy(['enabled' => true], [
+            'createdAt' => 'desc'
+        ]);
     }
 }
