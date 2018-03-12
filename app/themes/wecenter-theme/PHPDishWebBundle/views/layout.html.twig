@@ -88,24 +88,26 @@
                         <a href="{{ path('threads') }}" {% if is_route_matched('threads') %}class="active"{% endif %}>
                             <i class="icon icon-topic"></i> 节点</a>
                     </li>
-                    <li>
-                        <a href="{{ path('notifications') }}" {% if is_route_matched('notifications') %}class="active"{% endif %}>
-                            <i class="icon icon-bell"></i> 通知
-                        </a>
-                        {% set unreadMessageNum = fos_message_nb_unread() %}
-                        {% set unreadNotificationNumber = unreadMessageNum + notification_unseen_number() %}
-                        <span class="badge badge-important" {% if unreadNotificationNumber == 0 %}style="display:none"{% endif %} id="notifications_unread">
-                            {{ unreadNotificationNumber }}
-                        </span>
-                        <div class="aw-dropdown pull-right hidden-xs">
-                            <div class="mod-body">
-                                <ul id="header_notification_list"></ul>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li>
+                            <a href="{{ path('notifications') }}" {% if is_route_matched('notifications') %}class="active"{% endif %}>
+                                <i class="icon icon-bell"></i> 通知
+                            </a>
+                            {% set unreadMessageNum = fos_message_nb_unread() %}
+                            {% set unreadNotificationNumber = unreadMessageNum + notification_unseen_number() %}
+                            <span class="badge badge-important" {% if unreadNotificationNumber == 0 %}style="display:none"{% endif %} id="notifications_unread">
+                                {{ unreadNotificationNumber }}
+                            </span>
+                            <div class="aw-dropdown pull-right hidden-xs">
+                                <div class="mod-body">
+                                    <ul id="header_notification_list"></ul>
+                                </div>
+                                <div class="mod-footer">
+                                    <a href="{{ path('notifications') }}">查看全部</a>
+                                </div>
                             </div>
-                            <div class="mod-footer">
-                                <a href="{{ path('notifications') }}">查看全部</a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    {% endif %}
                     <li>
                         <a style="font-weight:bold;">· · ·</a>
                         <div class="dropdown-list pull-right">
@@ -123,29 +125,36 @@
         <!-- 用户栏 -->
         <div class="aw-user-nav">
             <!-- 登陆&注册栏 -->
-            <a href="http://wenda.wecenter.com/people/slicne" class="aw-user-nav-dropdown">
-                <img alt="slicne" src="http://wenda.wecenter.com/static/common/avatar-mid-img.png" /></a>
-            <div class="aw-dropdown dropdown-list pull-right">
-                <ul class="aw-dropdown-list">
-                    <li>
-                        <a href="{{ path('chat_inbox') }}">
-                            <i class="icon icon-inbox"></i>私信
-                            <span class="badge badge-important collapse" id="inbox_unread">{{ unreadMessageNum }}</span>
-                        </a>
-                    </li>
-                    <li class="hidden-xs">
-                        <a href="{{ path('setting_profile') }}">
-                            <i class="icon icon-setting"></i>设置</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('logout') }}">
-                            <i class="icon icon-logout"></i>退出</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- end 登陆&注册栏 --></div>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="http://wenda.wecenter.com/people/slicne" class="aw-user-nav-dropdown">
+                    <img alt="slicne" src="http://wenda.wecenter.com/static/common/avatar-mid-img.png" /></a>
+                <div class="aw-dropdown dropdown-list pull-right">
+                    <ul class="aw-dropdown-list">
+                        <li>
+                            <a href="{{ path('chat_inbox') }}">
+                                <i class="icon icon-inbox"></i>私信
+                                <span class="badge badge-important collapse" id="inbox_unread">{{ unreadMessageNum }}</span>
+                            </a>
+                        </li>
+                        <li class="hidden-xs">
+                            <a href="{{ path('setting_profile') }}">
+                                <i class="icon icon-setting"></i>设置</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('logout') }}">
+                                <i class="icon icon-logout"></i>退出</a>
+                        </li>
+                    </ul>
+                </div>
+            {% else %}
+                <a class="login btn btn-normal btn-primary" href="{{ path('login') }}">登录</a>
+                <a class="register btn btn-normal btn-success" href="{{ path('register') }}">注册</a>
+            {% endif %}
+            <!-- end 登陆&注册栏 -->
+        </div>
         <!-- end 用户栏 -->
         <!-- 发起 -->
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <div class="aw-publish-btn">
             <a id="header_publish" class="btn-primary" href="javascript:void(0);"><i class="icon icon-ask"></i>发起</a>
             <div class="dropdown-list pull-right">
@@ -155,6 +164,7 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
         <!-- end 发起 -->
     </div>
 </div>
