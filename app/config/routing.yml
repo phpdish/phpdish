@@ -4,55 +4,55 @@ _liip_imagine:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-php_dish_core:
+phpdish_core:
     resource: "@PHPDishCoreBundle/Controller"
     prefix:   /
     type: annotation
 
-php_dish_media:
+phpdish_media:
     resource: "@PHPDishMediaBundle/Controller"
     prefix:   /
     type: annotation
 
-php_dish_web:
+phpdish_web:
     resource: "@PHPDishWebBundle/Controller/"
     prefix: /
     type: annotation
 
-php_dish_post:
+phpdish_post:
     resource: "@PHPDishPostBundle/Controller/"
     prefix: /
     type: annotation
 
-php_dish_user:
+phpdish_user:
     resource: "@PHPDishUserBundle/Controller/"
     prefix: /
     type: annotation
 
-php_dish_user_ex:
+phpdish_user_ex:
     resource: "@PHPDishUserBundle/Resources/config/routing.yml"
 
-php_dish_forum:
+phpdish_forum:
     resource: "@PHPDishForumBundle/Controller/"
     prefix: /
     type: annotation
 
-php_dish_notification:
+phpdish_notification:
     resource: "@PHPDishNotificationBundle/Controller/"
     prefix: /
     type: annotation
 
-php_dish_chat:
+phpdish_chat:
     resource: "@PHPDishChatBundle/Controller"
     prefix:   /
     type: annotation
 
-php_dish_resume:
+phpdish_resume:
     resource: "@PHPDishResumeBundle/Controller"
     prefix:   /
     type: annotation
 
-php_dish_payment:
+phpdish_payment:
     resource: "@PHPDishPaymentBundle/Controller"
     prefix:   /
     type: annotation
@@ -61,7 +61,7 @@ fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /chats
 
-#php_dish_admin:
+#phpdish_admin:
 #    resource: "@PHPDishAdminBundle/Controller/"
 #    prefix: /admin
 #    type: annotation

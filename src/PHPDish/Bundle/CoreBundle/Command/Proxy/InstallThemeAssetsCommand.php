@@ -22,7 +22,7 @@ class InstallThemeAssetsCommand extends Command
      */
     public function configure()
     {
-        $this->setName('theme:assets:install')
+        $this->setName('phpdish:theme:assets:install')
             ->setDefinition([
                 new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
             ])

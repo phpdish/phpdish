@@ -129,7 +129,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     public function getSalt()
     {
-        return null;
+        return $this->salt;
     }
 
     /**

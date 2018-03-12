@@ -15,7 +15,10 @@ final class MentionUserListener extends EventListener
     public function onUserMentionedInComment(CommentMentionUserEvent $event)
     {
         foreach ($event->getMentionedUsers() as $user) {
-            if ($event->getComment()->getUser() === $user) {
+            if (
+                $event->getComment()->getUser() === $user
+                || $event->getComment()->getPost()->getUser() === $user
+            ) {
                 continue;
             }
             $this->notificationManager->createMentionUserInPostNotification($user, $event->getComment());
@@ -30,7 +33,10 @@ final class MentionUserListener extends EventListener
     public function onUserMentionedInReply(ReplyMentionUserEvent $event)
     {
         foreach ($event->getMentionedUsers() as $user) {
-            if ($event->getReply()->getUser() === $user) {
+            if (
+                $event->getReply()->getUser() === $user //不能艾特自己
+                || $event->getReply()->getTopic()->getUser() === $user //不能艾特楼主，楼主本身就会收到消息
+            ) {
                 continue;
             }
             $this->notificationManager->createAtUserInTopicNotification($user, $event->getReply());

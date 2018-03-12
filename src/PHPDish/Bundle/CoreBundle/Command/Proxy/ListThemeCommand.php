@@ -20,7 +20,7 @@ class ListThemeCommand extends Command
      */
     public function configure()
     {
-        $this->setName('theme:list')
+        $this->setName('phpdish:theme:list')
             ->setDescription('Shows list of detected themes.');
     }
 

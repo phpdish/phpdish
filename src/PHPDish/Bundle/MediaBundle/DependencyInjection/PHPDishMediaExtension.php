@@ -62,4 +62,12 @@ class PHPDishMediaExtension extends Extension
             }
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'phpdish_media';
+    }
 }

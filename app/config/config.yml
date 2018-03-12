@@ -281,14 +281,14 @@ exercise_html_purifier:
         AutoFormat.RemoveEmpty: true
 
 # Media
-php_dish_media:
+phpdish_media:
     maps:
         avatar:
             filesystem_service: phpdish.filesystem.avatar
             path: '%app.path.avatar%'
 
 # 支付
-php_dish_payment:
+phpdish_payment:
     youzan:
       client_id: '%youzan.client_id%'
       client_secret: '%youzan.client_secret%'

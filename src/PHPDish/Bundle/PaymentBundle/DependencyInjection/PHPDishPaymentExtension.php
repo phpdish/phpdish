@@ -41,4 +41,12 @@ class PHPDishPaymentExtension extends Extension
             }
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'phpdish_payment';
+    }
 }

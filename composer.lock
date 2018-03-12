@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8da83ad74f0c188235f7091ac5ad8a4a",
+    "content-hash": "944b7f5fdf7bcf1a1b02e6d06b960b22",
     "packages": [
         {
             "name": "algolia/algolia-search-bundle",
@@ -1806,16 +1806,16 @@
         },
         {
             "name": "friendsofsymfony/user-bundle",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "32c2eed036dd85620cc5229fa482a7ae9455ded9"
+                "reference": "1049935edd24ec305cc6cfde1875372fa9600446"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/FriendsOfSymfony/FOSUserBundle/32c2eed036dd85620cc5229fa482a7ae9455ded9.zip",
-                "reference": "32c2eed036dd85620cc5229fa482a7ae9455ded9",
+                "url": "https://files.phpcomposer.com/files/FriendsOfSymfony/FOSUserBundle/1049935edd24ec305cc6cfde1875372fa9600446.zip",
+                "reference": "1049935edd24ec305cc6cfde1875372fa9600446",
                 "shasum": ""
             },
             "require": {
@@ -1878,7 +1878,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2018-02-20T09:19:29+00:00"
+            "time": "2018-03-08T08:59:27+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -4265,16 +4265,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "583dbc5e3ff68a71fee528597549d6cd075ecf3b"
+                "reference": "75c85e19e50b320d81d6e1ef6af53927934fa99f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-http/HttplugBundle/583dbc5e3ff68a71fee528597549d6cd075ecf3b.zip",
-                "reference": "583dbc5e3ff68a71fee528597549d6cd075ecf3b",
+                "url": "https://files.phpcomposer.com/files/php-http/HttplugBundle/75c85e19e50b320d81d6e1ef6af53927934fa99f.zip",
+                "reference": "75c85e19e50b320d81d6e1ef6af53927934fa99f",
                 "shasum": ""
             },
             "require": {
@@ -4289,7 +4289,6 @@
                 "php-http/message-factory": "^1.0.2",
                 "php-http/stopwatch-plugin": "^1.0",
                 "psr/http-message": "^1.0",
-                "symfony/asset": "^2.8 || ^3.0 || ^4.0",
                 "symfony/config": "^2.8 || ^3.0 || ^4.0",
                 "symfony/dependency-injection": "^2.8.3 || ^3.0.3 || ^4.0",
                 "symfony/event-dispatcher": "^2.8 || ^3.0 || ^4.0",
@@ -4322,10 +4321,13 @@
                 "symfony/twig-bundle": "^2.8 || ^3.0 || ^4.0",
                 "symfony/web-profiler-bundle": "^2.8 || ^3.0 || ^4.0"
             },
+            "suggest": {
+                "php-http/mock-client": "Add this to your require-dev section to mock HTTP responses easily"
+            },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -4359,7 +4361,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2017-12-06T16:26:37+00:00"
+            "time": "2018-03-06T08:57:33+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -4690,6 +4692,50 @@
             "time": "2015-05-17T12:39:23+00:00"
         },
         {
+            "name": "phpdish/theme-installer",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpdish/theme-installer.git",
+                "reference": "79d2bad3f68b6ecdfc5a22bfee70e3781a1f0162"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/phpdish/theme-installer/79d2bad3f68b6ecdfc5a22bfee70e3781a1f0162.zip",
+                "reference": "79d2bad3f68b6ecdfc5a22bfee70e3781a1f0162",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "PHPDish\\ThemeInstaller\\ThemeInstallerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPDish\\ThemeInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Slince",
+                    "email": "taosikai@yeah.net"
+                }
+            ],
+            "description": "A composer installer for installing PHPDish themes.",
+            "homepage": "https://www.phpdish.com",
+            "time": "2018-03-09T05:16:34+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.5.0",
             "source": {
@@ -4982,16 +5028,16 @@
         },
         {
             "name": "psr/simple-cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-fig/simple-cache/753fa598e8f3b9966c886fe13f370baa45ef0e24.zip",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "url": "https://files.phpcomposer.com/files/php-fig/simple-cache/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b.zip",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
                 "shasum": ""
             },
             "require": {
@@ -5026,7 +5072,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02T13:31:39+00:00"
+            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -5277,7 +5323,7 @@
         },
         {
             "name": "slince/youzan-pay",
-            "version": "dev-master",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slince/youzan-pay.git",
@@ -6197,16 +6243,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v3.1.2",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "2b41b8b6d2c6edb1a5494f02f8e4129be2a44784"
+                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/monolog-bundle/2b41b8b6d2c6edb1a5494f02f8e4129be2a44784.zip",
-                "reference": "2b41b8b6d2c6edb1a5494f02f8e4129be2a44784",
+                "url": "https://files.phpcomposer.com/files/symfony/monolog-bundle/8781649349fe418d51d194f8c9d212c0b97c40dd.zip",
+                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd",
                 "shasum": ""
             },
             "require": {
@@ -6256,7 +6302,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-11-06T16:02:17+00:00"
+            "time": "2018-03-05T14:51:36+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -6720,16 +6766,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8a023e125a68c0bce08d2a8c72d67e07f0d74cab"
+                "reference": "874d4d659774d7bab90538072c83ed532dd17dc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/symfony/8a023e125a68c0bce08d2a8c72d67e07f0d74cab.zip",
-                "reference": "8a023e125a68c0bce08d2a8c72d67e07f0d74cab",
+                "url": "https://files.phpcomposer.com/files/symfony/symfony/874d4d659774d7bab90538072c83ed532dd17dc5.zip",
+                "reference": "874d4d659774d7bab90538072c83ed532dd17dc5",
                 "shasum": ""
             },
             "require": {
@@ -6870,7 +6916,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-03-01T19:24:09+00:00"
+            "time": "2018-03-05T20:02:01+00:00"
         },
         {
             "name": "tencentyun-api/qcloudapi-sdk-php",
@@ -7564,7 +7610,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
@@ -7699,7 +7745,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "slince/youzan-pay": 20
+        "slince/youzan-pay": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
