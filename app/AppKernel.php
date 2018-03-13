@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new Algolia\AlgoliaSearchBundle\AlgoliaAlgoliaSearchBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
 
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),

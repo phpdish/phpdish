@@ -299,3 +299,9 @@ sylius_theme:
     context: phpdish.theme.context.generic
     sources:
         filesystem: ~
+
+## 验证码
+gregwar_captcha:
+   as_url: true
+   quality: 70
+   length: 5
