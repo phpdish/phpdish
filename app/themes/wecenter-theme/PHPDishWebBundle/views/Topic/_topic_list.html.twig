@@ -1,17 +1,17 @@
 {% for topic in topics %}
-<div class="aw-item" data-topic-id="2078,82,">
-    <a class="aw-user-name hidden-xs" href="{{ path('user_view', {'username': topic.user.username}) }}" rel="nofollow">
-        <img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" alt="" />
-    </a>
-    <div class="aw-question-content">
-        <h4><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></h4>
-        <p>
-            {% for thread in topic.threads %}
-            <a class="aw-question-tags" href="{{ path('thread_view', {'slug': thread.slug}) }}">{{ thread.name }}</a>
-            {% endfor %}
-            •
-            <span class="text-color-999">{{ topic.replyCount }} 人回复 • {{ topic.createdAt|time_diff }}</span>
-        </p>
+    <div class="aw-item">
+        <a class="aw-user-name hidden-xs" href="{{ path('user_view', {'username': topic.user.username}) }}" rel="nofollow">
+            <img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" alt="" />
+        </a>
+        <div class="aw-question-content">
+            <h4><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></h4>
+            <p>
+                {% for thread in topic.threads %}
+                    <a class="aw-question-tags" href="{{ path('thread_view', {'slug': thread.slug}) }}">{{ thread.name }}</a>
+                {% endfor %}
+                •
+                <span class="text-color-999">{{ topic.replyCount }} 人回复 • {{ topic.createdAt|time_diff }}</span>
+            </p>
+        </div>
     </div>
-</div>
 {% endfor %}

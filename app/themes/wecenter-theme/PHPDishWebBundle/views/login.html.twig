@@ -1,0 +1,60 @@
+{% extends 'PHPDishWebBundle::login_layout.html.twig' %}
+
+{% block style %}
+    <link href="{{ asset('bundles/phpdishweb/css/login.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+        <div class="aw-login-box">
+            <div class="mod-body clearfix">
+                <div class="content pull-left">
+                    <h1 class="logo"><a href="/"></a></h1>
+                    <h2>WeCenter 社交化问答社区程序</h2>
+
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <form id="login_form" method="post" action="{{ path('fos_user_security_check') }}">
+
+                        <ul>
+                            <li>
+                                <input type="text" id="aw-login-user-name" class="form-control" placeholder="邮箱 / 用户名" name="_username">
+                            </li>
+                            <li>
+                                <input type="password" id="aw-login-user-password" class="form-control" placeholder="密码" name="_password">
+                            </li>
+                            <li class="alert alert-danger collapse error_message">
+                                <i class="icon icon-delete"></i> <em></em>
+                            </li>
+                            <li class="last">
+                                <button id="login_submit" class="pull-right btn btn-large btn-primary">登录</button>
+                                <label>
+                                    <input type="checkbox" value="1" checked="checked" name="_remember_me">
+                                    记住我
+                                </label>
+                            </li>
+                        </ul>
+
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="side-bar pull-left">
+
+                    <h3>第三方账号登录</h3>
+                    <a href="{{ hwi_oauth_login_url('weibo') }}" class="btn btn-block btn-weibo"><i class="icon icon-weibo"></i> 微博登录</a>
+
+                    <a href="{{ hwi_oauth_login_url('qq') }}" class="btn btn-block btn-qq"><i class="icon icon-qq"></i> QQ 登录</a>
+
+                </div>
+            </div>
+            <div class="mod-footer">
+                <span>还没有账号?</span>&nbsp;&nbsp;
+                <a href="{{ path('register') }}">立即注册</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

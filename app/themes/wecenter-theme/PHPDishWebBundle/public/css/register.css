@@ -7,7 +7,7 @@ body{background:url('img/login_bg.jpg') no-repeat #e9f0f4;}
 .aw-register-box h1{margin:45px 0 0;font-size: 20px;color: #666;}
 .aw-register-box .mod-body{width: 390px;margin:0 auto;padding: 40px;}
 .aw-register-box ul li{position:relative;line-height:30px;margin-bottom: 20px;}
-.aw-register-box ul li input[type="text"], .aw-register-box ul li input[type="password"]{width:100%;height: 40px;line-height: 28px\0;padding-left:15px !important;box-shadow: none;border-color: #e6e6e6;}
+.aw-register-box ul li input[type="text"], .aw-register-box ul li input[type="email"], .aw-register-box ul li input[type="password"]{width:100%;height: 40px;line-height: 28px\0;padding-left:15px !important;box-shadow: none;border-color: #e6e6e6;}
 .aw-register-box ul li.last{text-align: left;color:#666;}
 .aw-register-box ul li.last input{vertical-align: -2px\0;}
 .aw-register-box ul li.alert-danger i{margin-right: 5px;}

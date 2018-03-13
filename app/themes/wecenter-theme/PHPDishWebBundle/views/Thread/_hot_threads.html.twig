@@ -1,0 +1,29 @@
+<div class="aw-mod aw-text-align-justify">
+    <div class="mod-head">
+        <a href="{{ path('threads') }}" class="pull-right">更多 &gt;</a>
+        <h3>热门节点</h3>
+    </div>
+    <div class="mod-body">
+        {% for thread in get_threads({'enabled': true}, {'topicCount': 'desc'}, 8) %}
+            {% set threadUrl = path('thread_view', {'slug': thread.slug}) %}
+            <dl>
+                <dt class="pull-left aw-border-radius-5">
+                    <a href="{{ threadUrl }}">
+                        <img alt="" src="{{ thread.cover|default('user.jpg')|imagine_filter('middle_square') }}" />
+                    </a>
+                </dt>
+                <dd class="pull-left">
+                    <p class="clearfix">
+                        <span class="topic-tag">
+                            <a href="{{ threadUrl }}" class="text">{{ thread.name }}</a>
+                        </span>
+                    </p>
+                    <p>
+                        <b>{{ thread.topicCount }}</b>个话题,
+                        <b>{{ thread.followerCount }}</b>人关注
+                    </p>
+                </dd>
+            </dl>
+        {% endfor %}
+    </div>
+</div>

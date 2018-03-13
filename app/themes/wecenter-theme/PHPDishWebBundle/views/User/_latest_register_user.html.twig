@@ -1,8 +1,25 @@
-{% set users = get_users({'enabled': true}, {'createdAt': 'desc'}, limit) %}
-
-<aside class="panel panel-default panel-widget">
-    <div class="panel-heading">活跃用户</div>
-    <div class="panel-body user-list user-list-v1">
-        {% include 'PHPDishWebBundle:User:_user_list_v1.html.twig' %}
+<div class="aw-mod aw-text-align-justify">
+    <div class="mod-head">
+        <h3>最近注册用户</h3>
     </div>
-</aside>
+    <div class="mod-body">
+        {% for user in get_users({'enabled': true}, {'createdAt': 'desc'}, limit) %}
+            {% set userHomeUrl = path('user_view', {'username': user.username}) %}
+            <dl>
+                <dt class="pull-left aw-border-radius-5">
+                    <a href="{{ userHomeUrl }}">
+                        <img src="{{ asset(user.avatar)|default('user.jpg')|imagine_filter('middle_square') }}" alt="" />
+                    </a>
+                </dt>
+                <dd class="pull-left">
+                    <a href="{{ userHomeUrl }}" class="aw-user-name">{{ user.username }}</a>
+                    <p class="signature"></p>
+                    <p>
+                        <b>{{ user.topicCount }}</b>个问题,
+                        <b>{{ user.followerCount }}</b>个粉丝
+                    </p>
+                </dd>
+            </dl>
+        {% endfor %}
+    </div>
+</div>

@@ -1,157 +1,49 @@
 {% extends "PHPDishWebBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="aw-content-wrap clearfix">
-            <div class="col-sm-12 col-md-9 aw-main-content">
-                <!-- tab切换 -->
-                <ul class="nav nav-tabs aw-nav-tabs active hidden-xs">
-                    {% set tab = app.request.query.get('tab') %}
-                    <li {% if not tab%}class="active"{% endif %}>
-                        <a href="{{ path('homepage') }}" id="sort_control_hot">全部</a>
-                    </li>
-                    <li {% if tab == 'following' %}class="active"{% endif %}>
-                        <a href="{{ path('homepage', {'tab': 'following'}) }}">关注</a>
-                    </li>
-                    <li {% if tab == 'recommend' %}class="active"{% endif %}>
-                        <a href="{{ path('homepage', {'tab': 'recommend'}) }}">推荐</a>
-                    </li>
-                    <h2 class="hidden-xs"><i class="icon icon-list"></i>发现</h2>
-                </ul>
-                <!-- end tab切换 -->
-                <div class="aw-mod aw-explore-list">
-                    <div class="mod-body">
-                        <div class="aw-common-list">
-                            {% include 'PHPDishWebBundle:Topic:_topic_list.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <!-- tab切换 -->
+                    <ul class="nav nav-tabs aw-nav-tabs active hidden-xs">
+                        {% set tab = app.request.query.get('tab') %}
+                        <li {% if not tab%}class="active"{% endif %}>
+                            <a href="{{ path('homepage') }}" id="sort_control_hot">全部</a>
+                        </li>
+                        <li {% if tab == 'following' %}class="active"{% endif %}>
+                            <a href="{{ path('homepage', {'tab': 'following'}) }}">关注</a>
+                        </li>
+                        <li {% if tab == 'recommend' %}class="active"{% endif %}>
+                            <a href="{{ path('homepage', {'tab': 'recommend'}) }}">推荐</a>
+                        </li>
+                        <h2 class="hidden-xs"><i class="icon icon-list"></i>发现</h2>
+                    </ul>
+                    <!-- end tab切换 -->
+                    <div class="aw-mod aw-explore-list">
+                        <div class="mod-body">
+                            <div class="aw-common-list">
+                                {% include 'PHPDishWebBundle:Topic:_topic_list.html.twig' %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="mod-footer">
-                        <div class="page-control">
-                            {% if topics.haveToPaginate %}
-                                {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
-                                {{ paginator(topics) }}
-                            {% endif %}
+                        <div class="mod-footer">
+                            <div class="page-control">
+                                {% if topics.haveToPaginate %}
+                                    {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                                    {{ paginator(topics) }}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 侧边栏 -->
-            <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs hidden-sm">
-                <div class="aw-mod aw-text-align-justify">
-                    <div class="mod-head">
-                        <a href="http://wenda.wecenter.com/topic/channel-hot" class="pull-right">更多 &gt;</a>
-                        <h3>热门话题</h3></div>
-                    <div class="mod-body">
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/topic/模板">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/topic/20120613/133955764091_50_50.png" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <p class="clearfix">
-                                                <span class="topic-tag">
-                                                    <a href="http://wenda.wecenter.com/topic/模板" class="text" data-id="82">模板</a></span>
-                                </p>
-                                <p>
-                                    <b>460</b>个问题,
-                                    <b>169</b>人关注</p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/topic/wecenter">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/topic/20130426/8af6e6165dbba47be9a1f4374f9e0c92_50_50.png" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <p class="clearfix">
-                                                <span class="topic-tag">
-                                                    <a href="http://wenda.wecenter.com/topic/wecenter" class="text" data-id="2078">wecenter</a></span>
-                                </p>
-                                <p>
-                                    <b>1008</b>个问题,
-                                    <b>445</b>人关注</p>
-                            </dd>
-                        </dl>
-                    </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs hidden-sm">
+                    {% include 'PHPDishWebBundle:Thread:_hot_threads.html.twig' %}
+                    {% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {limit: 10} %}
                 </div>
-                <div class="aw-mod aw-text-align-justify">
-                    <div class="mod-head">
-                        <a href="http://wenda.wecenter.com/people/" class="pull-right">更多 &gt;</a>
-                        <h3>热门用户</h3></div>
-                    <div class="mod-body">
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/people/fawu">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/avatar/000/00/63/82_avatar_mid.jpg" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <a href="http://wenda.wecenter.com/people/fawu" data-id="6382" class="aw-user-name">trumanwang</a>
-                                <p class="signature"></p>
-                                <p>
-                                    <b>1603</b>个问题,
-                                    <b>717</b>次赞同</p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/people/jat">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/avatar/000/00/99/91_avatar_mid.jpg" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <a href="http://wenda.wecenter.com/people/jat" data-id="9991" class="aw-user-name">jat
-                                    <i class="icon-v i-ve" title="企业认证"></i></a>
-                                <p class="signature"></p>
-                                <p>
-                                    <b>322</b>个问题,
-                                    <b>255</b>次赞同</p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/people/no_reg">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/avatar/000/01/16/93_avatar_mid.jpg" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <a href="http://wenda.wecenter.com/people/no_reg" data-id="11693" class="aw-user-name">no_reg
-                                    <i class="icon-v" title="个人认证"></i></a>
-                                <p class="signature"></p>
-                                <p>
-                                    <b>99</b>个问题,
-                                    <b>55</b>次赞同</p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/people/%E9%BE%99%E5%A4%A9">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/avatar/000/00/31/93_avatar_mid.jpg" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <a href="http://wenda.wecenter.com/people/%E9%BE%99%E5%A4%A9" data-id="3193" class="aw-user-name">龙天</a>
-                                <p class="signature"></p>
-                                <p>
-                                    <b>183</b>个问题,
-                                    <b>65</b>次赞同</p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt class="pull-left aw-border-radius-5">
-                                <a href="http://wenda.wecenter.com/people/tvbian">
-                                    <img alt="" src="http://wenda.wecenter.com/uploads/avatar/000/01/18/56_avatar_mid.jpg" /></a>
-                            </dt>
-                            <dd class="pull-left">
-                                <a href="http://wenda.wecenter.com/people/tvbian" data-id="11856" class="aw-user-name">微新闻导航</a>
-                                <p class="signature"></p>
-                                <p>
-                                    <b>13</b>个问题,
-                                    <b>3</b>次赞同</p>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
+                <!-- end 侧边栏 -->
             </div>
-            <!-- end 侧边栏 --></div>
+        </div>
     </div>
-</div>
 {% endblock %}

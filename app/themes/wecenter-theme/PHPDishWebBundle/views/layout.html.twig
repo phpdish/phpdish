@@ -18,8 +18,17 @@
     <link href="{{ asset('bundles/phpdishweb/css/icon.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('bundles/phpdishweb/css/common.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('bundles/phpdishweb/css/link.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('bundles/phpdishweb/css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/phpdishweb/js/plug_module/style.css') }}" rel="stylesheet" type="text/css" />
 
+    <script type="text/javascript">
+        var G_INDEX_SCRIPT = "";
+        var G_SITE_NAME = "{{ read_config_parameter('phpdish.site.title') }}";
+        var G_BASE_URL = "{{ app.request.host }}";
+        var G_POST_HASH = '';
+        var G_STATIC_URL = "/build";
+        var G_UPLOAD_URL = "/uploads";
+        var FILE_TYPES = "jpg,jpeg,png,zip,rar,7z";
+    </script>
 
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="{{ asset('bundles/phpdishweb/js/jquery.form.js') }}" type="text/javascript"></script>
@@ -177,12 +186,13 @@
 
 <div class="aw-footer-wrap">
     <div class="aw-footer">Copyright © 2018
-        <span class="hidden-xs">- 粤ICP备14054802 官方QQ群：493577498 432421687, All Rights Reserved</span>
+        <span class="hidden-xs">- 皖ICP备14022941号 官方QQ群：138307655, All Rights Reserved</span>
         <span class="hidden-xs">Powered By
-            <a href="http://www.wecenter.com/?copyright" target="blank">WeCenter 3.1.9</a>
+            <a href="https://www.phpdish.com/" target="blank">PHPDish 1.3.0-beta1</a>
         </span>
     </div>
 </div>
+
 <a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});">
     <i class="icon icon-up"></i>
 </a>
