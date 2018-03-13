@@ -1,3 +1,15 @@
+login:
+    path:     /login
+    defaults: { _controller: fos_user.security.controller:loginAction }
+
+register:
+    path:     /login
+    defaults: { _controller: fos_user.security.controller:loginAction }
+
+logout:
+    path:     /logout
+    defaults: { _controller: fos_user.security.controller:loginAction }
+
 setting_change_password:
     path:     /settings/change-password
     defaults: { _controller: fos_user.change_password.controller:changePasswordAction }
