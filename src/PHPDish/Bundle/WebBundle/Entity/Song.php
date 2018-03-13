@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\WebBundle\Entity;
 
 use Carbon\Carbon;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\WebBundle\Model\SongInterface;
 
@@ -11,6 +12,7 @@ class Song implements SongInterface
 {
     use IdentifiableTrait;
     use DateTimeTrait;
+    use EnabledTrait;
 
     /**
      * @var string

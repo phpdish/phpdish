@@ -2,9 +2,10 @@
 namespace PHPDish\Bundle\WebBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
 
-interface SongInterface extends IdentifiableInterface, DateTimeInterface
+interface SongInterface extends IdentifiableInterface, DateTimeInterface, EnabledInterface
 {
     /**
      * 设置歌曲名

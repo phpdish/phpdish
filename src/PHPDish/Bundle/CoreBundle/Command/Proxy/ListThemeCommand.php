@@ -36,4 +36,12 @@ class ListThemeCommand extends Command
         $greetInput = new ArrayInput($arguments);
         $this->rawCommand->run($greetInput, $output);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAliases()
+    {
+        return ['theme:list'];
+    }
 }
