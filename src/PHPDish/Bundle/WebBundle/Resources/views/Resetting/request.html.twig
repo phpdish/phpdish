@@ -6,12 +6,26 @@
     <script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
 {% endblock %}
 
+{# 验证码字段模板 #}
+{% block captcha_widget %}
+    <div class="group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="if i-captcha"></i></span>
+            {{ form_widget(form, {'attr': {'placeholder': '验证码'}}) }}
+        </div>
+    </div>
+    <div class="group">
+        <img src="{{ captcha_code }}" onclick="this.src='{{ captcha_code }}?'+Math.random()"  title="captcha" width="{{ captcha_width }}" height="{{ captcha_height }}" />
+    </div>
+{% endblock %}
+
+{% form_theme form _self %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
-                <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="reg-page">
+                {{ form_start(form, {'attr': {'class': 'reg-page'}}) }}
                     <div class="reg-header">
                         <h2>找回密码</h2>
                     </div>
@@ -22,22 +36,14 @@
                     <div class="group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="if i-user"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="用户名或者邮箱"/>
+                            {{ form_widget(form.username, {'attr': {'placeholder': '用户名或者邮箱', 'value': lastUsername}}) }}
                         </div>
-                    </div>
-                    <div class="group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="if i-captcha"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="验证码"/>
-                        </div>
-                    </div>
-                    <div class="group">
-                        {% set captchaUrl = path('gregwar_captcha.generate_captcha', {'key': 'resetting'})  %}
-                        <img src="{{ captchaUrl }}" onclick="this.src='{{ captchaUrl }}?'+Math.random()"/>
                     </div>
 
+                    {{ form_widget(form.captcha) }}
+
                     <button class="btn btn-md u-btn-primary btn-block" type="submit">提交</button>
-                </form>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
