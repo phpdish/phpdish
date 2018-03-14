@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
+use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserFollowedEvent;
@@ -137,6 +140,45 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $query = $this->getRepository()->createQueryBuilder('u')
             ->innerJoin('u.followingCategories', 'f')
             ->where('f.id = :categoryId')->setParameter('categoryId', $category->getId())
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findTopicVoters(TopicInterface $topic, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.votedTopics', 'vt')
+            ->where('vt.id = :topicId')->setParameter('topicId', $topic->getId())
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findTopicReplyVoters(ReplyInterface $reply, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.votedReplies', 'vr')
+            ->where('vr.id = :replyId')->setParameter('replyId', $reply->getId())
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findPostVoters(PostInterface $post, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.votedPosts', 'vp')
+            ->where('vp.id = :postId')->setParameter('postId', $post->getId())
             ->getQuery();
 
         return $this->createPaginator($query, $page, $limit);

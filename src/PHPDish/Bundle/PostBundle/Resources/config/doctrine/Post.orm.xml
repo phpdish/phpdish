@@ -75,7 +75,7 @@
 
     <gedmo:tree type="nested"/>
 
-    <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+    <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="votedPosts" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>

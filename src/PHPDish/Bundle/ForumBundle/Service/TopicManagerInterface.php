@@ -127,6 +127,22 @@ interface TopicManagerInterface
     public function getUserTopicCount(UserInterface $user);
 
     /**
+     * 添加投票
+     *
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     */
+    public function addVoter(TopicInterface $topic, UserInterface $user);
+
+    /**
+     * 取消投票
+     *
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     */
+    public function removeVoter(TopicInterface $topic, UserInterface $user);
+
+    /**
      * 获取话题的repository
      *
      * @return EntityRepository

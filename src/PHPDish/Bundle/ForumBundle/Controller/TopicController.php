@@ -11,7 +11,6 @@ use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use PHPDish\Component\Util\StringManipulator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -86,8 +85,7 @@ class TopicController extends RestController
     /**
      * 查看话题.
      *
-     * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"})
-     * @Method("GET")
+     * @Route("/topics/{id}", name="topic_view", requirements={"id": "\d+"}, methods={"GET"})
      *
      * @param int     $id
      * @param Request $request
@@ -168,8 +166,7 @@ class TopicController extends RestController
     /**
      * 删除话题.
      *
-     * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"})
-     * @Method("DELETE")
+     * @Route("/topics/{id}", name="topic_delete", requirements={"id": "\d+"}, methods={"DELETE"})
      *
      * @param int $id
      *
@@ -192,8 +189,8 @@ class TopicController extends RestController
 
     /**
      * 回复话题
-     * @Route("/topics/{id}/replies", name="topic_add_reply")
-     * @Method("POST")
+     * 
+     * @Route("/topics/{id}/replies", name="topic_add_reply", methods={"POST"})
      *
      * @param int     $id
      * @param Request $request
@@ -280,6 +277,56 @@ class TopicController extends RestController
     }
 
     /**
+     * 取消赞
+     *
+     * @Route("/topics/{id}/voters", name="topic_remove_voter", methods={"DELETE"})
+     */
+    public function removeVoterAction($id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic) {
+            throw new \InvalidArgumentException('话题不存在');
+        }
+
+        $this->getTopicManager()->removeVoter($topic, $this->getUser());
+        return $this->json([
+            'vote_count' => $topic->getVoteCount()
+        ]);
+    }
+
+    /**
+     * 增加赞
+     *
+     * @Route("/topics/{id}/voters", name="topic_add_voter", methods={"POST"})
+     */
+    public function addVoterAction($id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $topic = $this->getTopicManager()->findTopicById($id);
+        if (!$topic) {
+            throw new \InvalidArgumentException('话题不存在');
+        }
+
+        $this->getTopicManager()->addVoter($topic, $this->getUser());
+        return $this->json([
+            'vote_count' => $topic->getVoteCount()
+        ]);
+    }
+
+    /**
+     * 获取赞的人
+     *
+     * @Route("/topics/{id}/voters", name="topic_voters", methods={"GET"})
+     */
+    public function getVotersAction()
+    {
+
+    }
+
+    /**
      * 用户的帖子.
      *
      * @Route("/users/{username}/topics", name="user_topics")
@@ -302,7 +349,6 @@ class TopicController extends RestController
 
     /**
      * 今日热帖.
-     *
      * @param int|null $limit
      *
      * @return Response

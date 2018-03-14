@@ -6,7 +6,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
+use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
+use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface as BaseUserManagerInterface;
 
@@ -120,6 +123,39 @@ interface UserManagerInterface extends BaseUserManagerInterface
      * @return Pagerfanta
      */
     public function findCategoryFollowers(CategoryInterface $category, $page, $limit = null);
+
+    /**
+     * 查找话题的点赞人.
+     *
+     * @param TopicInterface $topic
+     * @param int               $page
+     * @param int|null          $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findTopicVoters(TopicInterface $topic, $page, $limit = null);
+
+    /**
+     * 查找话题回复的点赞人.
+     *
+     * @param ReplyInterface $reply
+     * @param int               $page
+     * @param int|null          $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findTopicReplyVoters(ReplyInterface $reply, $page, $limit = null);
+
+    /**
+     * 查找文章的点赞人.
+     *
+     * @param PostInterface $post
+     * @param int               $page
+     * @param int|null          $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findPostVoters(PostInterface $post, $page, $limit = null);
 
     /**
      * 关注用户.

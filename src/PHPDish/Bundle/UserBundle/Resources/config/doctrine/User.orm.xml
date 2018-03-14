@@ -51,6 +51,9 @@
     <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Entity\Thread" mapped-by="followers" fetch="LAZY"/>
+    <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" mapped-by="votes" fetch="LAZY"/>
+    <many-to-many field="votedReplies" target-entity="PHPDish\Bundle\ForumBundle\Entity\Reply" mapped-by="votes" fetch="LAZY"/>
+    <many-to-many field="votedPosts" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="votes" fetch="LAZY"/>
 
     <attribute-overrides>
       <attribute-override name="email">

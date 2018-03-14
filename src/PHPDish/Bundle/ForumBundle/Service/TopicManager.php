@@ -216,6 +216,26 @@ class TopicManager implements TopicManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function addVoter(TopicInterface $topic, UserInterface $user)
+    {
+       $topic->addVoter($user)
+           ->addVoteCount();
+       $this->saveTopic($topic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVoter(TopicInterface $topic, UserInterface $user)
+    {
+        $topic->removeVoter($user)
+            ->addVoteCount(-1);
+        $this->saveTopic($topic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTopicRepository()
     {
         return $this->entityManager->getRepository('PHPDishForumBundle:Topic');
