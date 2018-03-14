@@ -93,3 +93,18 @@
 .reg-page label {
   color: #777;
 }
+/* 重置密码 */
+.resetting{
+  .captcha{
+    cursor: pointer;
+  }
+
+  .send-result{
+    text-align: center;
+    .if{
+      display: block;
+      font-size:40px;
+      color: #0ec469;
+    }
+  }
+}

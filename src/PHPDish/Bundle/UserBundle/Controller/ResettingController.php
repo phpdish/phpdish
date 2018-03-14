@@ -68,9 +68,13 @@ class ResettingController extends FOSResettingController
      */
     public function onSendEmailInitialize(GetResponseNullableUserEvent $event)
     {
+        $response = $this->redirectToRoute('fos_user_resetting_request');
         if ($event->getUser() === null) {
             $this->addFlash('danger', '用户名或者邮箱不存在');
+            $event->setResponse($response);
+        } elseif (!$event->getUser()->getEmail()) {
+            $this->addFlash('warning', '该用户没有绑定邮箱，可能是社交账户，请尝试使用社交网站登录。');
+            $event->setResponse($response);
         }
-        $event->setResponse($this->redirectToRoute('fos_user_resetting_request'));
     }
 }

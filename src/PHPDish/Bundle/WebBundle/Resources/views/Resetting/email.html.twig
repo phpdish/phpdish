@@ -1,0 +1,17 @@
+{% block subject %}
+    重置密码
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+        <p>{{ user.username }} 你好</p>
+        <p>你正在尝试重置密码，请访问 <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a> 以重置密码</p>
+        <p>
+            祝好
+            <br/>
+            <a href="https://www.phpdish.com">PHPDish</a> 运营团队
+        </p>
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}{% endblock %}

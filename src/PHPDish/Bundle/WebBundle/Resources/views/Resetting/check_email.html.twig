@@ -1,0 +1,18 @@
+{% extends 'PHPDishWebBundle::layout.html.twig' %}
+
+{% block title %}重置密码{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
+                <div class="reg-page resetting">
+                    <div class="send-result">
+                        <i class="if i-success"></i>
+                        <p>重置链接已经发送到了你的邮箱，链接{{ tokenLifetime }} 小时内有效。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

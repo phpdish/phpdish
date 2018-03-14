@@ -35,7 +35,7 @@
                         {#<label><input name="_remember_me" id="remember_me" type="checkbox" value="on">记住我</label>#}
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="#" class="forgot-password">找回密码</a>
+                        <a href="{{ path('fos_user_resetting_request') }}" class="forgot-password">找回密码</a>
                     </div>
                 </div>
                 {% if csrf_token %}

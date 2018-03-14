@@ -29,7 +29,7 @@ import Util from '../modules/util.js';
     });
 
     //找回密码
-    $loginForm.find('.forgot-password').on('click', () => {
+    false && $loginForm.find('.forgot-password').on('click', () => {
         Util.dialog.create('提示', '请使用社交账户登录，如果社交账户绑定的邮箱与旧账号邮箱一致则可直接登录到旧账户。', {
             width: 300
         });
