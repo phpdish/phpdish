@@ -1,9 +1,4 @@
 <?php
-/**
- * PHPDish post component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace  PHPDish\Bundle\PostBundle\Model;
 
@@ -15,7 +10,8 @@ use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface PostInterface extends IdentifiableInterface, ContentInterface, DateTimeInterface, UserAwareInterface, VotableInterface, EnabledInterface
+interface PostInterface extends IdentifiableInterface,
+    ContentInterface, DateTimeInterface, UserAwareInterface, VotableInterface, EnabledInterface
 {
     /**
      * 获取标题.

@@ -4,6 +4,9 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 trait CommentableTrait
 {
+    /**
+     * @var int
+     */
     protected $commentCount = 0;
 
     /**

@@ -1,16 +1,13 @@
 <?php
-/**
- * PHPDish vote component.
- *
- * @author Tao <taosikai@yeah.net>
- */
 
 namespace  PHPDish\Bundle\CoreBundle\Model;
+
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface VotableInterface
 {
     /**
-     * 设置投票数量.
+     * 设置赞次数.
      *
      * @param int $voteCount
      *
@@ -24,4 +21,34 @@ interface VotableInterface
      * @return int
      */
     public function getVoteCount();
+
+    /**
+     * 增加赞次数
+     * @param int $count
+     * @return self
+     */
+    public function addVoteCount($count = 1);
+
+    /**
+     * 获取投票的人
+     *
+     * @return UserInterface[]
+     */
+    public function getVoters();
+
+    /**
+     * 添加一个投票者
+     *
+     * @param UserInterface $user
+     * @return self
+     */
+    public function addVoter(UserInterface $user);
+
+    /**
+     * 移除一个投票者
+     *
+     * @param UserInterface $user
+     * @return self
+     */
+    public function removeVoter(UserInterface $user);
 }

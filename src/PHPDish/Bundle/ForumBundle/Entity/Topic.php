@@ -19,7 +19,8 @@ use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 class Topic implements TopicInterface
 {
-    use IdentifiableTrait, UserAwareTrait, ContentTrait, CommentableTrait, DateTimeTrait, EnabledTrait, VotableTrait;
+    use IdentifiableTrait, UserAwareTrait, ContentTrait,
+        CommentableTrait, DateTimeTrait, EnabledTrait, VotableTrait;
 
     /**
      * @var string
