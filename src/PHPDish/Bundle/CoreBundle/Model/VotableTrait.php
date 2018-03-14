@@ -51,6 +51,7 @@ trait VotableTrait
     public function addVoteCount($count = 1)
     {
         $this->voteCount += $count;
+        $this->voteCount < 0 && $this->voteCount = 0;
     }
 
     /**
@@ -86,4 +87,16 @@ trait VotableTrait
         $this->voters->removeElement($user);
         return $this;
     }
+
+    /**
+     * 是否被某个用户投票
+     *
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isVotedBy(UserInterface $user)
+    {
+        return $this->voters->contains($user);
+    }
+
 }

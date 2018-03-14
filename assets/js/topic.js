@@ -44,6 +44,8 @@ new AjaxTab($('[data-pjax-container]'), {
         const $removeAction = $topicAction.find('[data-action="remove"]');
         const $recommendAction = $topicAction.find('[data-action="recommend"]');
         const $topAction = $topicAction.find('[data-action="stick-top"]');
+        const $voteAction = $topicAction.find('[data-action="vote"]');
+
         const buttonLock = lockButton($removeAction);
         $removeAction.on('click', function(){
             if (buttonLock.isDisabled()) {
@@ -112,6 +114,44 @@ new AjaxTab($('[data-pjax-container]'), {
                 });
             }, () => {
                 topButtonLock.release();
+            });
+        });
+
+        //投票
+        const voteButtonLock = lockButton($voteAction);
+        $voteAction.on('click', function(){
+            if (voteButtonLock.isDisabled()) {
+                return false;
+            }
+            voteButtonLock.lock();
+            const isVoted = $voteAction.data('voted');
+            const routeName = isVoted ? 'topic.cancelVote'
+                : 'topic.vote';
+
+            Util.request(routeName, window.topicId).done((response) => {
+                const $number = $voteAction.find('.number');
+                $number.html(response.vote_count);
+                if (response.vote_count > 0) {
+                    $number.removeClass('hidden');
+                } else {
+                    $number.addClass('hidden');
+                }
+                //已经投票的，变成可投票状态
+                if (isVoted) {
+                    $voteAction.find('.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
+                    $voteAction.data('voted', false);
+                } else {
+                    $voteAction.find('.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
+                    $voteAction.data('voted', true);
+                    //加一特效
+                    const $increase = $('<div class="one-increase">+1</div>');
+                    $increase.insertBefore($voteAction);
+                    $increase.addClass('fadeOutUp animated');
+                }
+            }).fail((response) => {
+                Util.dialog.message(response.responseObj.error).flash(3);
+            }).always(()  => {
+                voteButtonLock.release();
             });
         });
     })($);

@@ -53,6 +53,20 @@
           text-decoration: line-through;
         }
       }
+      //投票
+      .vote{
+        position: relative;
+        a[data-voted]{
+          color:$contrastColor;
+        }
+        .number{
+          font-size:16px;
+        }
+        .one-increase{
+          color: red;
+          position: absolute;
+        }
+      }
     }
   }
 }

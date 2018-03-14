@@ -51,4 +51,12 @@ interface VotableInterface
      * @return self
      */
     public function removeVoter(UserInterface $user);
+
+    /**
+     * 是否被某个用户投票
+     *
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isVotedBy(UserInterface $user);
 }

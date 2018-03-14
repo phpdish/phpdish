@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
@@ -64,6 +65,12 @@ class Topic implements TopicInterface
      * @var array
      */
     protected $images;
+
+    public function __construct()
+    {
+        $this->threads = new ArrayCollection();
+        $this->voters = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}
