@@ -1,101 +1,16 @@
-phpdish_core:
-    resource: "@PHPDishCoreBundle/Controller"
-    prefix:   /
-    type: annotation
+phpdish_main:
+    resource: '@PHPDishCoreBundle/Resources/config/routing.yml'
 
-phpdish_media:
-    resource: "@PHPDishMediaBundle/Controller"
-    prefix:   /
-    type: annotation
-
-phpdish_web:
-    resource: "@PHPDishWebBundle/Controller/"
-    prefix: /
-    type: annotation
-
-phpdish_post:
-    resource: "@PHPDishPostBundle/Controller/"
-    prefix: /
-    type: annotation
-
-phpdish_user:
-    resource: "@PHPDishUserBundle/Controller/"
-    prefix: /
-    type: annotation
-
-phpdish_user_ex:
-    resource: "@PHPDishUserBundle/Resources/config/routing.yml"
-
-phpdish_forum:
-    resource: "@PHPDishForumBundle/Controller/"
-    prefix: /
-    type: annotation
-
-phpdish_notification:
-    resource: "@PHPDishNotificationBundle/Controller/"
-    prefix: /
-    type: annotation
-
-phpdish_chat:
-    resource: "@PHPDishChatBundle/Controller"
-    prefix:   /
-    type: annotation
-
-phpdish_resume:
-    resource: "@PHPDishResumeBundle/Controller"
-    prefix:   /
-    type: annotation
-
-phpdish_payment:
-    resource: "@PHPDishPaymentBundle/Controller"
-    prefix:   /
-    type: annotation
-
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-fos_message:
-    resource: "@FOSMessageBundle/Resources/config/routing.xml"
-    prefix: /chats
-
-#phpdish_admin:
-#    resource: "@PHPDishAdminBundle/Controller/"
-#    prefix: /admin
-#    type: annotation
-
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /connect
-
-hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix:   /connect
-
-weibo_login:
-    path: "/login/check-weibo"
-
-github_login:
-    path: "/login/check-github"
-
-qq_login:
-    path: "/login/check-qq"
-
-easy_admin_bundle:
+easy_admin:
     resource: "@EasyAdminBundle/Controller/"
     type: annotation
     prefix: /manager
 
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
-
-_sonata_admin:
+sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
 
-gregwar_captcha_routing:
-    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin

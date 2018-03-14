@@ -1,92 +1,57 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
+use PHPDish\Bundle\CoreBundle\Application\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * {@inheritdoc}
+     */
     public function registerBundles()
     {
         $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new FOS\MessageBundle\FOSMessageBundle(),
-
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle(),
-            new Http\HttplugBundle\HttplugBundle(),
-            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
-            new Algolia\AlgoliaSearchBundle\AlgoliaAlgoliaSearchBundle(),
-            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
-            new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
-            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-
-            new Sonata\SeoBundle\SonataSeoBundle(),
-            new Sonata\CoreBundle\SonataCoreBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
+            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(), //正式版将会废弃
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-
-            new PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
-            new PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
-            new PHPDish\Bundle\PostBundle\PHPDishPostBundle(),
-            new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
-            new PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
-            new PHPDish\Bundle\MediaBundle\PHPDishMediaBundle(),
-            new PHPDish\Bundle\NotificationBundle\PHPDishNotificationBundle(),
-            new PHPDish\Bundle\ChatBundle\PHPDishChatBundle(),
-            new PHPDish\Bundle\ResumeBundle\PHPDishResumeBundle(),
-            new PHPDish\Bundle\PaymentBundle\PHPDishPaymentBundle(),
         ];
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+        // 注册插件
+        $plugins = [
 
-            if ('dev' === $this->getEnvironment()) {
-                $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-                $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
-            }
-        }
+        ];
 
-        return $bundles;
+        return array_merge(parent::registerBundles(), $bundles, $plugins);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRootDir()
     {
         return __DIR__;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCacheDir()
     {
         return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLogDir()
     {
         return dirname(__DIR__).'/var/logs';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');

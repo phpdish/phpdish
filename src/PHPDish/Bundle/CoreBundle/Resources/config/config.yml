@@ -1,0 +1,217 @@
+doctrine:
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                   gedmo_tree:
+                      type: annotation
+                      prefix: Gedmo\Tree\Entity
+                      dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                      alias: GedmoTree
+                      is_bundle: false
+
+
+## doctrine 扩展
+stof_doctrine_extensions:
+    default_locale: "%locale%"
+    orm:
+        default:
+            tree: true
+            timestampable: true
+
+# KNP Gaufrette:
+knp_gaufrette:
+    adapters:
+        uploads:
+            local:
+                directory: '%app.dir.uploads%'
+                create: true
+        avatar:
+            local:
+                directory: '%app.dir.avatar%'
+                create: true
+
+    filesystems:
+        local:
+          adapter: uploads
+          alias: phpdish.filesystem.uploads
+        avatar:
+          adapter: avatar
+          alias: phpdish.filesystem.avatar
+
+knp_menu:
+    twig:
+        template: KnpMenuBundle::menu.html.twig
+    templating: false
+    default_renderer: twig
+
+
+# Liip Imagine
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root:
+                  - '%app.dir.uploads%'
+                  - '%app.dir.avatar%'
+
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        cache: ~
+        # the name of the "filter set"
+        middle_square:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+                background: { size: [120, 120], position: center, color: '#ffffff' }
+
+        middle_rectangle:
+            quality: 75
+            filters:
+                thumbnail: { size: [220, 300], mode: outbound }
+                background: { size: [220, 300], position: center, color: '#ffffff' }
+
+## FOSUser
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: PHPDish\Bundle\UserBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    resetting:
+          email:
+              template: 'PHPDishWebBundle:Resetting:email.html.twig'
+
+# FOSRest
+fos_rest:
+    routing_loader:
+        default_format: json
+    view:
+#        mime_types:
+#            json: ['application/json', 'application/json;version=1.0', 'application/json;version=1.1', 'application/json;version=1.2']
+        view_response_listener: false
+        formats:
+            json: true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [ html, json ], fallback_format: ~, prefer_extension: true }
+
+# FOSMessage
+fos_message:
+    db_driver: orm
+    thread_class: PHPDish\Bundle\ChatBundle\Entity\Thread
+    message_class: PHPDish\Bundle\ChatBundle\Entity\Message
+
+# 社交网站登录
+hwi_oauth:
+    http_client:
+          timeout: 10
+          verify_peer: false
+          ignore_errors: false
+
+    firewall_names:
+        - 'main'
+
+    resource_owners:
+        weibo:
+            type: sina_weibo
+            client_id: '%oauth.weibo.client_id%'
+            client_secret: '%oauth.weibo.client_secret%'
+            scope: 'all'
+
+        github:
+            type: github
+            client_id: '%oauth.github.client_id%'
+            client_secret: '%oauth.github.client_secret%'
+            scope: 'user:email,public_repo'
+
+        qq:
+            type: qq
+            client_id: '%oauth.qq.client_id%'
+            client_secret: '%oauth.qq.client_secret%'
+            scope: 'get_user_info'
+
+httplug:
+    plugins:
+        logger: ~
+    clients:
+        default:
+            factory: 'httplug.factory.guzzle6'
+            plugins: ['httplug.plugin.logger']
+            config:
+                verify: false
+                timeout: 20
+
+
+algolia:
+    application_id: '%algolia.application_id%'
+    api_key: '%algolia.api_key%'
+    catch_log_exceptions: true
+    index_name_prefix: staging
+
+
+sonata_seo:
+    page:
+        title:            '%phpdish.site.title%'
+        metas:
+            name:
+                keywords:             '%phpdish.site.keywords%'
+                description:          '%phpdish.site.description%'
+                apple-mobile-web-app-title: '%phpdish.site.title%'
+
+            property:
+                'og:site_name':      '%phpdish.site.title%'
+                'og:description':    '%phpdish.site.description%'
+
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+                #'X-Ua-Compatible':      IE=EmulateIE7
+
+exercise_html_purifier:
+    default:
+        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
+        HTML.Allowed: 'p[style],div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,br,span[style],img[width|height|alt|src],*[style|class],pre,hr,code,h1,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td'
+        AutoFormat.AutoParagraph: true
+        AutoFormat.RemoveEmpty: true
+
+# Media
+phpdish_media:
+    maps:
+        avatar:
+            filesystem_service: phpdish.filesystem.avatar
+            path: '%app.path.avatar%'
+
+# 支付
+phpdish_payment:
+    youzan:
+      client_id: '%youzan.client_id%'
+      client_secret: '%youzan.client_secret%'
+      kdt_id: '%youzan.kdt_id%'
+
+## 多主题
+sylius_theme:
+    context: phpdish.theme.context.generic
+    sources:
+        filesystem: ~
+
+## 验证码
+gregwar_captcha:
+   as_url: true
+   quality: 70
+   length: 5

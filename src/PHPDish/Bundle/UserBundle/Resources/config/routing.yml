@@ -13,3 +13,23 @@ logout:
 setting_change_password:
     path:     /settings/change-password
     defaults: { _controller: fos_user.change_password.controller:changePasswordAction }
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+weibo_login:
+    path: "/login/check-weibo"
+
+github_login:
+    path: "/login/check-github"
+
+qq_login:
+    path: "/login/check-qq"
