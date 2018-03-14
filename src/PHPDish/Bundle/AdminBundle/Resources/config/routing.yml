@@ -1,0 +1,13 @@
+easy_admin:
+    resource: "@EasyAdminBundle/Controller/"
+    type: annotation
+    prefix: /manager
+
+sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin

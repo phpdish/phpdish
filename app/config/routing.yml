@@ -1,16 +1,8 @@
+# 前台路由
 phpdish_main:
     resource: '@PHPDishCoreBundle/Resources/config/routing.yml'
 
-easy_admin:
-    resource: "@EasyAdminBundle/Controller/"
-    type: annotation
-    prefix: /manager
+# 后台路由
+phpdish_admin:
+    resource: '@PHPDishAdminBundle/Resources/config/routing.yml'
 
-sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
-
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
