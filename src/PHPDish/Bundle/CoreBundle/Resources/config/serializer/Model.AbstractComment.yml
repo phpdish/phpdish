@@ -1,0 +1,26 @@
+PHPDish\Bundle\CoreBundle\Model\AbstractComment:
+    properties:
+        body:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        originalBody:
+            exclude: true
+            type: string
+            groups: [Default, Detailed]
+        enabled:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Default, Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Default, Detailed]
+        user:
+            exclude: true
+            type: PHPDish\Bundle\UserBundle\Entity\User
+            groups: [Detailed]

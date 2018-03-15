@@ -213,7 +213,7 @@ class TopicController extends RestController
 
             $view->setData(['reply' => $reply])
                 ->getContext()
-                ->addGroups(['Default']);
+                ->setGroups(['Default']);
         } else {
             $view->setStatusCode(400)
                 ->setData(array(

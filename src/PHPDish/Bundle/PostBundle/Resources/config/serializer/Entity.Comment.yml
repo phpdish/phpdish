@@ -7,34 +7,10 @@ PHPDish\Bundle\PostBundle\Entity\Comment:
             type: integer
             xml_attribute: true
             groups: [Default, Detailed]
-        body:
-            expose: true
-            type: string
-            groups: [Default, Detailed]
-        originalBody:
-            expose: true
-            type: string
-            groups: [Default, Detailed]
         voteCount:
             expose: true
             type: integer
             groups: [Default, Detailed]
-        enabled:
-            expose: true
-            type: boolean
-            groups: [Default, Detailed]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Detailed]
-        user:
-            expose: true
-            type: PHPDish\Bundle\UserBundle\Entity\User
-            groups: [Detailed]
         post:
             expose: true
             type: PHPDish\Bundle\PostBundle\Entity\Post
