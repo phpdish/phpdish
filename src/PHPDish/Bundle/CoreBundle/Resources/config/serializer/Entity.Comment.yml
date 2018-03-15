@@ -1,11 +1,12 @@
-PHPDish\Bundle\CoreBundle\Model\AbstractComment:
+PHPDish\Bundle\CoreBundle\Entity\Comment:
+    exclusion_policy: ALL
     properties:
         body:
             expose: true
             type: string
             groups: [Default, Detailed]
         originalBody:
-            exclude: true
+            expose: true
             type: string
             groups: [Default, Detailed]
         enabled:
@@ -21,6 +22,6 @@ PHPDish\Bundle\CoreBundle\Model\AbstractComment:
             type: DateTime
             groups: [Default, Detailed]
         user:
-            exclude: true
+            expose: true
             type: PHPDish\Bundle\UserBundle\Entity\User
             groups: [Detailed]

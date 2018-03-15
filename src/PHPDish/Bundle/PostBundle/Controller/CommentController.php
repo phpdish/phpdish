@@ -9,7 +9,6 @@ use PHPDish\Bundle\PostBundle\Event\PostCommentedEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use PHPDish\Bundle\PostBundle\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
