@@ -26,11 +26,16 @@
     }
     .meta{
       float:right;
+      a{
+        font-size:12px;
+        text-decoration: none;
+        outline: none;
+        .if, .fa{
+          font-size:14px;
+        }
+      }
       .reply-user{
         cursor: pointer;
-      }
-      .if{
-        font-size:12px;
       }
     }
     .body{

@@ -87,6 +87,22 @@ interface ReplyManagerInterface
     public function saveReply(ReplyInterface $reply);
 
     /**
+     * 添加投票
+     *
+     * @param ReplyInterface $reply
+     * @param UserInterface $user
+     */
+    public function addVoter(ReplyInterface $reply, UserInterface $user);
+
+    /**
+     * 取消投票
+     *
+     * @param ReplyInterface $reply
+     * @param UserInterface $user
+     */
+    public function removeVoter(ReplyInterface $reply, UserInterface $user);
+
+    /**
      * 获取 reply repository
      * @return EntityRepository
      */

@@ -32,9 +32,10 @@ const routes = {
     'topic.toggleRecommend': {path: '/topics/{id}/toggle_recommend', method: 'POST'},
     'topic.toggleTop': {path: '/topics/{id}/toggle_top', method: 'POST'},
     'topic.vote': {path: '/topics/{id}/voters', method: 'POST'},
-    'topic.cancelVote': {path: '/topics/{id}/voters', method: 'DELETE'},
 
     'topicReply.delete': {path: '/replies/{id}', method: 'DELETE'},
+    'topicReply.vote': {path: '/replies/{id}/voters', method: 'POST'},
+
     //threads
     'thread.autocomplete': '/threads/autocomplete',
     'thread.follow': {path: '/threads/{slug}/followers', method: 'POST'},

@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
@@ -17,6 +18,11 @@ class Reply extends BaseComment implements ReplyInterface
      * @var TopicInterface
      */
     protected $topic;
+
+    public function __construct()
+    {
+        $this->voters = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}

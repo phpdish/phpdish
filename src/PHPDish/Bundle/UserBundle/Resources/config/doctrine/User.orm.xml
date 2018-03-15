@@ -37,7 +37,7 @@
       </cascade>
     </one-to-one>
 
-    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="following" fetch="LAZY">
+    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="following" fetch="EXTRA_LAZY">
       <join-table name="users_followers">
         <join-columns>
           <join-column name="user_id" referenced-column-name="id"/>
@@ -48,7 +48,8 @@
       </join-table>
     </many-to-many>
 
-    <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="followers" fetch="LAZY"/>
+    <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="followers" fetch="EXTRA_LAZY"/>
+
     <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Entity\Thread" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" mapped-by="voters" fetch="LAZY"/>

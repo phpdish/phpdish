@@ -43,6 +43,8 @@ class TopicReplyController extends RestController
     }
 
     /**
+     * 获取用户的回复
+     *
      * @Route("/users/{username}/replies", name="user_replies")
      *
      * @param string  $username
@@ -62,6 +64,31 @@ class TopicReplyController extends RestController
         return $this->render('PHPDishWebBundle:Topic:user_replies.html.twig', [
             'user' => $user,
             'replies' => $replies,
+        ]);
+    }
+
+    /**
+     * 切换点赞状态
+     *
+     * @Route("/replies/{id}/voters", name="topic_reply_toggle_voter", methods={"POST"})
+     */
+    public function toggleVoterAction($id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $reply = $this->getReplyManager()->findReplyById($id);
+        if (!$reply) {
+            throw new \InvalidArgumentException('回复不存在');
+        }
+
+        if ($isVoted = $reply->isVotedBy($this->getUser())) {
+            $this->getReplyManager()->removeVoter($reply, $this->getUser());
+        } else {
+            $this->getReplyManager()->addVoter($reply, $this->getUser());
+        }
+        return $this->json([
+            'vote_count' => $reply->getVoteCount(),
+            'is_voted' => !$isVoted
         ]);
     }
 }

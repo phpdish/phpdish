@@ -120,7 +120,6 @@ class TopicController extends RestController
             ->addMeta('property', 'og:url',  $this->generateUrl('topic_view', ['id' => $topic->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $summary);
 
-
         return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
             'topic' => $topic,
             'replies' => $replies,
@@ -277,11 +276,11 @@ class TopicController extends RestController
     }
 
     /**
-     * 取消赞
+     * 切换点赞状态
      *
-     * @Route("/topics/{id}/voters", name="topic_remove_voter", methods={"DELETE"})
+     * @Route("/topics/{id}/voters", name="topic_toggle_voter", methods={"POST"})
      */
-    public function removeVoterAction($id)
+    public function toggleVoterAction($id)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
@@ -289,30 +288,14 @@ class TopicController extends RestController
         if (!$topic) {
             throw new \InvalidArgumentException('话题不存在');
         }
-
-        $this->getTopicManager()->removeVoter($topic, $this->getUser());
-        return $this->json([
-            'vote_count' => $topic->getVoteCount()
-        ]);
-    }
-
-    /**
-     * 增加赞
-     *
-     * @Route("/topics/{id}/voters", name="topic_add_voter", methods={"POST"})
-     */
-    public function addVoterAction($id)
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-
-        $topic = $this->getTopicManager()->findTopicById($id);
-        if (!$topic) {
-            throw new \InvalidArgumentException('话题不存在');
+        if ($isVoted = $topic->isVotedBy($this->getUser())) {
+            $this->getTopicManager()->removeVoter($topic, $this->getUser());
+        } else {
+            $this->getTopicManager()->addVoter($topic, $this->getUser());
         }
-
-        $this->getTopicManager()->addVoter($topic, $this->getUser());
         return $this->json([
-            'vote_count' => $topic->getVoteCount()
+            'vote_count' => $topic->getVoteCount(),
+            'is_voted' => !$isVoted
         ]);
     }
 

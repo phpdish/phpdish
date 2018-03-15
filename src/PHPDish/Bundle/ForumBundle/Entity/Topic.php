@@ -72,6 +72,11 @@ class Topic implements TopicInterface
         $this->voters = new ArrayCollection();
     }
 
+//    public function __toString()
+//    {
+//        return $this->title;
+//    }
+
     /**
      * {@inheritdoc}
      */

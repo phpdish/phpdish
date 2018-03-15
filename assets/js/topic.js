@@ -124,11 +124,7 @@ new AjaxTab($('[data-pjax-container]'), {
                 return false;
             }
             voteButtonLock.lock();
-            const isVoted = $voteAction.data('voted');
-            const routeName = isVoted ? 'topic.cancelVote'
-                : 'topic.vote';
-
-            Util.request(routeName, window.topicId).done((response) => {
+            Util.request('topic.vote', window.topicId).done((response) => {
                 const $number = $voteAction.find('.number');
                 $number.html(response.vote_count);
                 if (response.vote_count > 0) {
@@ -137,16 +133,16 @@ new AjaxTab($('[data-pjax-container]'), {
                     $number.addClass('hidden');
                 }
                 //已经投票的，变成可投票状态
-                if (isVoted) {
-                    $voteAction.find('.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
-                    $voteAction.data('voted', false);
-                } else {
+                if (response.is_voted) {
                     $voteAction.find('.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
                     $voteAction.data('voted', true);
                     //加一特效
                     const $increase = $('<div class="one-increase">+1</div>');
                     $increase.insertBefore($voteAction);
                     $increase.addClass('fadeOutUp animated');
+                } else {
+                    $voteAction.find('.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
+                    $voteAction.data('voted', false);
                 }
             }).fail((response) => {
                 Util.dialog.message(response.responseObj.error).flash(3);
@@ -227,6 +223,43 @@ new AjaxTab($('[data-pjax-container]'), {
                     buttonLock.release();
                 });
             });
+            //点赞
+            const $voteAction = $this.find('[data-action="vote"]');
+            const voteLock = lockButton($voteAction);
+            $voteAction.on('click', function(){
+                if (voteLock.isDisabled()) {
+                    return false;
+                }
+                voteLock.lock();
+                Util.request('topicReply.vote', replyId).done((response) => {
+                    const $number = $voteAction.find('.number');
+                    $number.html(response.vote_count);
+                    if (response.vote_count > 0) {
+                        $number.removeClass('hidden');
+                    } else {
+                        $number.addClass('hidden');
+                    }
+                    //已经投票的，变成可投票状态
+                    if (response.is_voted) {
+                        $voteAction.find('.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
+                        $voteAction.data('voted', true);
+                        //加一特效
+                        const $increase = $('<div class="one-increase">+1</div>');
+                        $increase.insertBefore($voteAction);
+                        $increase.addClass('fadeOutUp animated');
+                    } else {
+                        $voteAction.find('.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
+                        $voteAction.data('voted', false);
+                    }
+
+                }).fail((response) => {
+                    Util.dialog.message(response.responseObj.error).flash(3);
+                }).always(()  => {
+                    buttonLock.release();
+                });
+            });
+
+
         });
 
     })();

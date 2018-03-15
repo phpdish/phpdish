@@ -166,6 +166,29 @@ class ReplyManager implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function addVoter(ReplyInterface $reply, UserInterface $user)
+    {
+//        $reply->addVoter($user)
+//            ->addVoteCount();
+//        $this->saveReply($reply);
+        $reply = $this->replyRepository->find(1);
+        $this->entityManager->persist($reply);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVoter(ReplyInterface $reply, UserInterface $user)
+    {
+        $reply->removeVoter($user)
+            ->addVoteCount(-1);
+        $this->saveReply($reply);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getReplyRepository(): EntityRepository
     {
         return $this->replyRepository;
