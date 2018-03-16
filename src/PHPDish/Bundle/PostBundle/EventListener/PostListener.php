@@ -41,17 +41,6 @@ final class PostListener
     }
 
     /**
-     * 刷新实体
-     * @param PostInterface $post
-     * @param LifecycleEventArgs $event
-     */
-    public function postUpdate(PostInterface $post, LifecycleEventArgs $event)
-    {
-        $user = $post->getUser();
-        $this->handleUserPostCount($user);
-    }
-
-    /**
      * 处理用户的文章数量
      * @param UserInterface $user
      */

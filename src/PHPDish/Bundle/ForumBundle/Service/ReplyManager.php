@@ -26,11 +26,6 @@ class ReplyManager implements ReplyManagerInterface
     protected $entityManager;
 
     /**
-     * @var EntityRepository
-     */
-    protected $replyRepository;
-
-    /**
      * @var BodyProcessorInterface
      */
     protected $bodyProcessor;
@@ -47,7 +42,6 @@ class ReplyManager implements ReplyManagerInterface
     ) {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->replyRepository = $entityManager->getRepository('PHPDishForumBundle:Reply');
         $this->bodyProcessor = $bodyProcessor;
     }
 
@@ -97,7 +91,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findReplies(Criteria $criteria)
     {
-        return $this->replyRepository->createQueryBuilder('r')
+        return $this->getReplyRepository()->createQueryBuilder('r')
             ->addCriteria($criteria)
             ->getQuery()
             ->getResult();
@@ -108,7 +102,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findRepliesPager(Criteria $criteria, $page, $limit = null)
     {
-        $qb = $this->replyRepository->createQueryBuilder('r')
+        $qb = $this->getReplyRepository()->createQueryBuilder('r')
             ->addCriteria($criteria);
         return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
@@ -118,7 +112,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null)
     {
-        $qb = $this->replyRepository->createQueryBuilder('r')
+        $qb = $this->getReplyRepository()->createQueryBuilder('r')
             ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId());
         if ($criteria) {
             $qb->addCriteria($criteria);
@@ -132,7 +126,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findUserReplies(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
     {
-        $qb = $this->replyRepository->createQueryBuilder('r')
+        $qb = $this->getReplyRepository()->createQueryBuilder('r')
             ->where('r.user = :userId')->setParameter('userId', $user->getId());
         if ($criteria) {
             $qb->addCriteria($criteria);
@@ -146,7 +140,7 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function findReplyById($id)
     {
-        return $this->replyRepository->find($id);
+        return $this->getReplyRepository()->find($id);
     }
 
     /**
@@ -166,12 +160,22 @@ class ReplyManager implements ReplyManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function replyTopic(UserInterface $user, TopicInterface $topic, $body)
+    {
+        $reply = $this->createReply($topic, $user);
+        $reply->setOriginalBody($body);
+        $this->saveReply($reply);
+        return $reply;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addVoter(ReplyInterface $reply, UserInterface $user)
     {
-//        $reply->addVoter($user)
-//            ->addVoteCount();
-//        $this->saveReply($reply);
-        $reply = $this->replyRepository->find(1);
+        $reply->addVoter($user)
+            ->addVoteCount();
+        $this->saveReply($reply);
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
     }
@@ -191,6 +195,6 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function getReplyRepository(): EntityRepository
     {
-        return $this->replyRepository;
+        return $this->entityManager->getRepository('PHPDishForumBundle:Reply');;
     }
 }

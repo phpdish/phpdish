@@ -43,18 +43,6 @@ final class TopicListener
     }
 
     /**
-     * 刷新实体
-     * @param TopicInterface $topic
-     * @param LifecycleEventArgs $event
-     * @PostUpdate
-     */
-    public function postUpdate(TopicInterface $topic, LifecycleEventArgs $event)
-    {
-        $user = $topic->getUser();
-        $this->handleUserTopicCount($user);
-    }
-
-    /**
      * 处理用户的话题数量
      * @param UserInterface $user
      */

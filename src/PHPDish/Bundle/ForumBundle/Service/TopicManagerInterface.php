@@ -99,16 +99,6 @@ interface TopicManagerInterface
     public function findHotTopics(\DateTime $date, $limit);
 
     /**
-     * 回复主题
-     *
-     * @param UserInterface $user
-     * @param TopicInterface $topic
-     * @param string $body
-     * @return ReplyInterface
-     */
-    public function replyTopic(UserInterface $user, TopicInterface $topic, $body);
-
-    /**
      * 获取订阅的节点下的话题
      *
      * @param UserInterface $user

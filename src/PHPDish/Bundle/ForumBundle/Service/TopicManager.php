@@ -27,11 +27,6 @@ class TopicManager implements TopicManagerInterface
      */
     protected $bodyProcessor;
 
-    /**
-     * @var ReplyManagerInterface
-     */
-    protected $replyManager;
-
     public function __construct(
         EntityManagerInterface $entityManager,
         BodyProcessorInterface $bodyProcessor,
@@ -39,7 +34,6 @@ class TopicManager implements TopicManagerInterface
     ) {
         $this->entityManager = $entityManager;
         $this->bodyProcessor = $bodyProcessor;
-        $this->replyManager = $replyManager;
     }
 
     /**
@@ -188,17 +182,6 @@ class TopicManager implements TopicManagerInterface
             ->where(Criteria::expr()->eq('enabled', true))
         );
         return $this->createPaginator($query, $page, $limit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replyTopic(UserInterface $user, TopicInterface $topic, $body)
-    {
-        $reply = $this->replyManager->createReply($topic, $user);
-        $reply->setOriginalBody($body);
-        $this->replyManager->saveReply($reply);
-        return $reply;
     }
 
     /**

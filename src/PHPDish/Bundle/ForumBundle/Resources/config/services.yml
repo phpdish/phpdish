@@ -10,7 +10,6 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@phpdish.body_processor"
-            - "@phpdish.manager.reply"
 
     phpdish.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
@@ -69,5 +68,4 @@ services:
         public: false
         arguments: ['@phpdish.manager.topic', '@phpdish.manager.user']
         tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\ForumBundle\Entity\Topic, event: postUpdate, method: postUpdate}
             - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\ForumBundle\Entity\Topic, event: postPersist, method: postPersist}
