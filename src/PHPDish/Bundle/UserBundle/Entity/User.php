@@ -87,6 +87,11 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     protected $votedPosts;
 
     /**
+     * 点赞的文章
+     */
+    protected $votedComments;
+
+    /**
      * 文章数量.
      */
     protected $postCount = 0;

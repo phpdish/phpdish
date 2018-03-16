@@ -211,9 +211,7 @@ new AjaxTab($('[data-pjax-container]'), {
                 buttonLock.lock();
                 Util.dialog.confirm('确认删除这个回复吗？').then(() => {
                     Util.request('topicReply.delete', replyId).done(() => {
-                        Util.dialog.message('回复已经被删除').flash(2, () => {
-                            $this.fadeOut();
-                        });
+                        $this.fadeOut();
                     }).fail((response) => {
                         Util.dialog.message(response.responseObj.error).flash(3);
                     }).always(()  => {
@@ -226,13 +224,16 @@ new AjaxTab($('[data-pjax-container]'), {
             //点赞
             const $voteAction = $this.find('[data-action="vote"]');
             const voteLock = lockButton($voteAction);
+            const $icon = $voteAction.find('.fa');
             $voteAction.on('click', function(){
                 if (voteLock.isDisabled()) {
                     return false;
                 }
                 voteLock.lock();
+                $icon.removeClass('wobble animated')
                 Util.request('topicReply.vote', replyId).done((response) => {
                     const $number = $voteAction.find('.number');
+
                     $number.html(response.vote_count);
                     if (response.vote_count > 0) {
                         $number.removeClass('hidden');
@@ -241,21 +242,22 @@ new AjaxTab($('[data-pjax-container]'), {
                     }
                     //已经投票的，变成可投票状态
                     if (response.is_voted) {
-                        $voteAction.find('.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
+                        $icon.removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
                         $voteAction.data('voted', true);
                         //加一特效
-                        const $increase = $('<div class="one-increase">+1</div>');
-                        $increase.insertBefore($voteAction);
-                        $increase.addClass('fadeOutUp animated');
+                        // const $increase = $('<div class="one-increase">+1</div>');
+                        // $increase.insertBefore($voteAction);
+                        // $increase.addClass('fadeOutUp animated');
+
                     } else {
-                        $voteAction.find('.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
+                        $icon.removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
                         $voteAction.data('voted', false);
                     }
-
+                    $icon.addClass('wobble animated');
                 }).fail((response) => {
                     Util.dialog.message(response.responseObj.error).flash(3);
                 }).always(()  => {
-                    buttonLock.release();
+                    voteLock.release();
                 });
             });
 

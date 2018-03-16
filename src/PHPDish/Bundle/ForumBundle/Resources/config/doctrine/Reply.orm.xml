@@ -15,10 +15,6 @@
 
     <many-to-one field="topic" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" fetch="LAZY">
 
-      <cascade>
-        <cascade-persist/>
-      </cascade>
-
       <join-columns>
         <join-column name="topic_id" referenced-column-name="id"/>
       </join-columns>

@@ -29,8 +29,7 @@ class TopicManager implements TopicManagerInterface
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        BodyProcessorInterface $bodyProcessor,
-        ReplyManagerInterface $replyManager
+        BodyProcessorInterface $bodyProcessor
     ) {
         $this->entityManager = $entityManager;
         $this->bodyProcessor = $bodyProcessor;

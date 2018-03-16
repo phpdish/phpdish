@@ -55,6 +55,7 @@
     <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" mapped-by="voters" fetch="LAZY"/>
     <many-to-many field="votedReplies" target-entity="PHPDish\Bundle\ForumBundle\Entity\Reply" mapped-by="voters" fetch="LAZY"/>
     <many-to-many field="votedPosts" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="voters" fetch="LAZY"/>
+    <many-to-many field="votedComments" target-entity="PHPDish\Bundle\PostBundle\Entity\Comment" mapped-by="voters" fetch="LAZY"/>
 
     <attribute-overrides>
       <attribute-override name="email">

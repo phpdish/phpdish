@@ -9,6 +9,7 @@ use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface as BaseUserManagerInterface;
@@ -157,6 +158,16 @@ interface UserManagerInterface extends BaseUserManagerInterface
      */
     public function findPostVoters(PostInterface $post, $page, $limit = null);
 
+    /**
+     * 查找评论的点赞人.
+     *
+     * @param CommentInterface $comment
+     * @param int               $page
+     * @param int|null          $limit
+     *
+     * @return Pagerfanta
+     */
+    public function findCommentVoters(CommentInterface $comment, $page, $limit = null);
     /**
      * 关注用户.
      *

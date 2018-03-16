@@ -66,6 +66,22 @@ interface CommentManagerInterface
     public function blockComment(CommentInterface $comment);
 
     /**
+     * 添加投票
+     *
+     * @param CommentInterface $comment
+     * @param UserInterface $user
+     */
+    public function addVoter(CommentInterface $comment, UserInterface $user);
+
+    /**
+     * 取消投票
+     *
+     * @param CommentInterface $comment
+     * @param UserInterface $user
+     */
+    public function removeVoter(CommentInterface $comment, UserInterface $user);
+
+    /**
      * 获取评论 repository
      *
      * @return EntityRepository

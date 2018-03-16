@@ -79,4 +79,28 @@ class CommentController extends RestController
             'result' => true,
         ]));
     }
+
+    /**
+     * 切换点赞状态
+     *
+     * @Route("/comments/{id}/voters", name="comment_toggle_voter", methods={"POST"})
+     */
+    public function toggleVoterAction($id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $comment = $this->getPostCommentManager()->findCommentById($id);
+        if (!$comment) {
+            throw new \InvalidArgumentException('评论不存在');
+        }
+        if ($isVoted = $comment->isVotedBy($this->getUser())) {
+            $this->getPostCommentManager()->removeVoter($comment, $this->getUser());
+        } else {
+            $this->getPostCommentManager()->addVoter($comment, $this->getUser());
+        }
+        return $this->json([
+            'vote_count' => $comment->getVoteCount(),
+            'is_voted' => !$isVoted
+        ]);
+    }
 }

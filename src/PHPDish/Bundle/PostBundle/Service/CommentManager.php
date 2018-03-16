@@ -133,6 +133,28 @@ class CommentManager implements CommentManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function addVoter(CommentInterface $comment, UserInterface $user)
+    {
+        $comment->addVoter($user)
+            ->addVoteCount();
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVoter(CommentInterface $comment, UserInterface $user)
+    {
+        $comment->removeVoter($user)
+            ->addVoteCount(-1);
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCommentRepository()
     {
         return $this->commentRepository;

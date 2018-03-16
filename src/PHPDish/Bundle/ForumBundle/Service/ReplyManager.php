@@ -175,7 +175,6 @@ class ReplyManager implements ReplyManagerInterface
     {
         $reply->addVoter($user)
             ->addVoteCount();
-        $this->saveReply($reply);
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
     }
@@ -187,7 +186,8 @@ class ReplyManager implements ReplyManagerInterface
     {
         $reply->removeVoter($user)
             ->addVoteCount(-1);
-        $this->saveReply($reply);
+        $this->entityManager->persist($reply);
+        $this->entityManager->flush();
     }
 
     /**

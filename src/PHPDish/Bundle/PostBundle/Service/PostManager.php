@@ -186,6 +186,28 @@ class PostManager implements PostManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function addVoter(PostInterface $post, UserInterface $user)
+    {
+        $post->addVoter($user)
+            ->addVoteCount();
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVoter(PostInterface $post, UserInterface $user)
+    {
+        $post->removeVoter($user)
+            ->addVoteCount(-1);
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPostRepository()
     {
         return $this->entityManager->getRepository('PHPDishPostBundle:Post');

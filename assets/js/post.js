@@ -96,6 +96,42 @@ $addComment.length > 0 && (function($){
                 buttonLock.release();
             });
         });
+
+        //点赞
+        const $voteAction = $this.find('[data-action="vote"]');
+        const voteLock = lockButton($voteAction);
+        const $icon = $voteAction.find('.fa');
+        $voteAction.on('click', function(){
+            if (voteLock.isDisabled()) {
+                return false;
+            }
+            voteLock.lock();
+            $icon.removeClass('wobble animated')
+            Util.request('comment.vote', replyId).done((response) => {
+                const $number = $voteAction.find('.number');
+
+                $number.html(response.vote_count);
+                if (response.vote_count > 0) {
+                    $number.removeClass('hidden');
+                } else {
+                    $number.addClass('hidden');
+                }
+                //已经投票的，变成可投票状态
+                if (response.is_voted) {
+                    $icon.removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up');
+                    $voteAction.data('voted', true);
+                } else {
+                    $icon.removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up');
+                    $voteAction.data('voted', false);
+                }
+                $icon.addClass('wobble animated');
+            }).fail((response) => {
+                Util.dialog.message(response.responseObj.error).flash(3);
+            }).always(()  => {
+                voteLock.release();
+            });
+        });
+
     });
 
     //Post Action

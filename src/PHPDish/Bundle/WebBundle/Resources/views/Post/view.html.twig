@@ -121,7 +121,8 @@
                 </ul>
                 {% if comments.haveToPaginate %}
                     <footer class="panel-footer">
-                        {{ pagerfanta(comments, 'twitter_bootstrap3') }}
+                        {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                        {{ paginator(comments) }}
                     </footer>
                 {% endif %}
             </div>

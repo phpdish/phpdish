@@ -37,6 +37,14 @@
       .reply-user{
         cursor: pointer;
       }
+      .vote{
+        position: relative;
+        .one-increase{
+          position: absolute;
+          color:#FF293C;
+          font-weight: 600;
+        }
+      }
     }
     .body{
       line-height: 1.6em;

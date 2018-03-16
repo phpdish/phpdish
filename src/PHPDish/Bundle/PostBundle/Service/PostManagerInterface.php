@@ -114,6 +114,22 @@ interface PostManagerInterface
     public function getUserPostCount(UserInterface $user, $ignoreEmptyPost = true);
 
     /**
+     * 添加投票
+     *
+     * @param PostInterface $post
+     * @param UserInterface $user
+     */
+    public function addVoter(PostInterface $post, UserInterface $user);
+
+    /**
+     * 取消投票
+     *
+     * @param PostInterface $post
+     * @param UserInterface $user
+     */
+    public function removeVoter(PostInterface $post, UserInterface $user);
+
+    /**
      * 获取post repository
      *
      * @return PostRepository

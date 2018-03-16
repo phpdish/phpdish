@@ -4,12 +4,12 @@ namespace PHPDish\Bundle\UserBundle\Service;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\EntityRepository;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use PHPDish\Bundle\UserBundle\Event\Events;
@@ -179,6 +179,19 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $query = $this->getRepository()->createQueryBuilder('u')
             ->innerJoin('u.votedPosts', 'vp')
             ->where('vp.id = :postId')->setParameter('postId', $post->getId())
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCommentVoters(CommentInterface $comment, $page, $limit = null)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u')
+            ->innerJoin('u.votedComments', 'vc')
+            ->where('vc.id = :commentId')->setParameter('commentId', $comment->getId())
             ->getQuery();
 
         return $this->createPaginator($query, $page, $limit);
