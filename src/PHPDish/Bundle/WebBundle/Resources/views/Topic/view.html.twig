@@ -16,10 +16,11 @@
                 <div class="panel panel-u topic-view">
                     <div class="panel-heading clearfix">
                         <div class="author">
-                            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ asset(topic.user.avatar)|imagine_filter('middle_square') }}" class="avatar"/></a>
+                            <a href="{{ path('user_view', {'username': topic.user.username}) }}"><img src="{{ asset(topic.user.avatar)|default('user.jpg')|imagine_filter('middle_square') }}" class="avatar"/></a>
                         </div>
                         <h3 class="title">
-                            {{ topic.title }} {% if topic.recommended %}<i class="if i-badge" title="精品话题"></i>{% endif %}
+                            {{ topic.title }}
+                            {% if topic.recommended or topic.isTop %}<i class="if i-badge" title="精品话题"></i>{% endif %}
                         </h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
@@ -33,7 +34,8 @@
                         <article class="markdown-body body">{{ topic.body|raw }}</article>
                     </div>
                     <div class="panel-footer clearfix">
-                        <ul class="list-inline list-unstyled action" data-role="topic-action">
+                        <div class="clearfix">
+                            <ul class="list-inline list-unstyled action" data-role="topic-action">
 
                             <li class="vote">
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and topic.isVotedBy(app.user)  %}
@@ -58,7 +60,16 @@
                             {% endif %}
 
                         </ul>
-                        <div class="social-share-container"></div>
+
+                            <div class="social-share-container"></div>
+                        </div>
+                        <div class="voters">
+                            {% for user in topic.voters %}
+                                <a href="{{ path('user_view', {'username': user.username}) }}">
+                                    <img alt="{{ user.username }}" class="img-circle img-thumbnail" src="{{ asset(user.avatar)|default('user.jpg')|imagine_filter('middle_square') }}"/>
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-u">

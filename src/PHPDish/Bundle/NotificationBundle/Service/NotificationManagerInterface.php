@@ -97,6 +97,25 @@ interface NotificationManagerInterface
     public function createWithdrawNotification(PaymentInterface $payment);
 
     /**
+     * 创建点赞通知
+     *
+     * @param TopicInterface $topic
+     * @param UserInterface $user
+     * @return NotificationInterface
+     */
+    public function createVoteTopicNotification(TopicInterface $topic, UserInterface $user);
+
+    /**
+     * 创建点赞通知
+     *
+     * @param TopicInterface $topic
+     * @param ReplyInterface $reply
+     * @param UserInterface $user
+     * @return NotificationInterface
+     */
+    public function createVoteReplyNotification(TopicInterface $topic, ReplyInterface $reply, UserInterface $user);
+
+    /**
      * 获取用户未读通知的数量.
      *
      * @param UserInterface $user

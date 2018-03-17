@@ -4,11 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
-use PHPDish\Bundle\ForumBundle\Event\Events;
-use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
-use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,7 +17,7 @@ class TopicReplyController extends RestController
     /**
      * 删除回复.
      *
-     * @Route("/replies/{id}", name="topic_reply_delete", requirements={"id": "\d+"})
+     * @Route("/replies/{id}", name="topic_reply_delete", requirements={"id": "\d+"}, methods={"DELETE"})
      *
      * @param int $id
      *

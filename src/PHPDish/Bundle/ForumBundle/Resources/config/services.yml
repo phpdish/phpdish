@@ -9,6 +9,7 @@ services:
         public: true
         arguments:
             - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
             - "@phpdish.body_processor"
 
     phpdish.manager.reply:

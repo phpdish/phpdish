@@ -6,7 +6,7 @@ use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class TopicRepliedEvent extends Event
+class ReplyTopicEvent extends Event
 {
     /**
      * @var TopicInterface
@@ -35,7 +35,7 @@ class TopicRepliedEvent extends Event
     /**
      * @param TopicInterface $topic
      *
-     * @return TopicRepliedEvent
+     * @return ReplyTopicEvent
      */
     public function setTopic($topic)
     {
@@ -55,7 +55,7 @@ class TopicRepliedEvent extends Event
     /**
      * @param ReplyInterface $reply
      *
-     * @return TopicRepliedEvent
+     * @return ReplyTopicEvent
      */
     public function setReply($reply)
     {

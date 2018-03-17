@@ -5,13 +5,16 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Topic;
+use PHPDish\Bundle\ForumBundle\Event\Events;
+use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class TopicManager implements TopicManagerInterface
 {
@@ -27,11 +30,18 @@ class TopicManager implements TopicManagerInterface
      */
     protected $bodyProcessor;
 
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
     public function __construct(
         EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
         BodyProcessorInterface $bodyProcessor
     ) {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
         $this->bodyProcessor = $bodyProcessor;
     }
 
@@ -200,9 +210,13 @@ class TopicManager implements TopicManagerInterface
      */
     public function addVoter(TopicInterface $topic, UserInterface $user)
     {
-       $topic->addVoter($user)
-           ->addVoteCount();
-       $this->saveTopic($topic);
+        $topic->addVoter($user)
+            ->addVoteCount();
+        $this->saveTopic($topic);
+
+        $event = new VoteTopicEvent($topic, $user);
+        $this->eventDispatcher->dispatch(Events::TOPIC_VOTED, $event);
+
     }
 
     /**

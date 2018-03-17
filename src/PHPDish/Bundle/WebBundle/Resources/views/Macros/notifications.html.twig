@@ -4,6 +4,10 @@
         {{ render.render_follow_user(notification) }}
     {% elseif notification.subject ==  'reply_topic' %}
         {{ render.render_reply_topic(notification) }}
+    {% elseif notification.subject ==  'vote_topic' %}
+        {{ render.render_vote_topic(notification) }}
+    {% elseif notification.subject ==  'vote_reply' %}
+        {{ render.render_vote_reply(notification) }}
     {% elseif notification.subject ==  'comment_post' %}
         {{ render.render_comment_post(notification) }}
     {% elseif notification.subject ==  'mention_user_in_topic' %}
@@ -33,6 +37,30 @@
         <div class="heading">
             <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 回复了你的话题
             <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染点赞话题 #}
+{% macro render_vote_topic(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你的话题
+            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染点赞话题回复 #}
+{% macro render_vote_reply(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你在话题里
+            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a> 的回复
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
         <div class="body markdown-body">{{ notification.message|raw }}</div>

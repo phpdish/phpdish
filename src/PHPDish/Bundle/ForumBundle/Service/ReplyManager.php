@@ -10,6 +10,7 @@ use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Entity\Reply;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
+use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -177,6 +178,10 @@ class ReplyManager implements ReplyManagerInterface
             ->addVoteCount();
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
+
+        //触发事件
+        $event = new VoteReplyEvent($reply->getTopic(), $reply, $user);
+        $this->eventDispatcher->dispatch(Events::REPLY_VOTED, $event);
     }
 
     /**

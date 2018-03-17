@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Event\Events;
-use PHPDish\Bundle\ForumBundle\Event\TopicRepliedEvent;
+use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use PHPDish\Component\Util\StringManipulator;
@@ -209,7 +209,7 @@ class TopicController extends RestController
             $this->getReplyManager()->saveReply($reply);
 
             //触发事件
-            $this->get('event_dispatcher')->dispatch(Events::TOPIC_REPLIED, new TopicRepliedEvent($topic, $reply));
+            $this->get('event_dispatcher')->dispatch(Events::TOPIC_REPLIED, new ReplyTopicEvent($topic, $reply));
 
             $view->setData(['reply' => $reply])
                 ->getContext()

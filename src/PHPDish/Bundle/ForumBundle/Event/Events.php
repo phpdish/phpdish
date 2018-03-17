@@ -17,4 +17,16 @@ final class Events
      * @var string
      */
     const USER_MENTIONED_REPLY = 'user.mentioned.reply';
+
+    /**
+     * 话题被点赞触发
+     * @var string
+     */
+    const TOPIC_VOTED = 'topic.voted';
+
+    /**
+     * 回复被点赞触发
+     * @var string
+     */
+    const REPLY_VOTED = 'reply.voted';
 }

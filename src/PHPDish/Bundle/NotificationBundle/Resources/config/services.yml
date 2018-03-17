@@ -14,7 +14,7 @@ services:
         public: true
         arguments:
             - "@doctrine.orm.entity_manager"
-# Listeners
+    ## Listeners
 
     phpdish.event_listener.notification.follow_user:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
@@ -24,11 +24,12 @@ services:
         public: false
 
 
-    phpdish.event_listener.notification.reply_topic:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\ReplyTopicListener
+    # 话题相关监听
+    phpdish.event_listener.notification.topic:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\TopicListener
         arguments: ['@phpdish.manager.notification']
         tags:
-            - {name: kernel.event_listener, event: topic.replied, method: onTopicReplied}
+            - {name: kernel.event_subscriber}
         public: false
 
 

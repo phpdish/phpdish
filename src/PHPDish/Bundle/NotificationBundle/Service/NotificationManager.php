@@ -153,6 +153,39 @@ class NotificationManager implements NotificationManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function createVoteTopicNotification(TopicInterface $topic, UserInterface $user)
+    {
+        $notification = $this->createNotification();
+        $notification->setUser($topic->getUser())
+            ->setTopic($topic)
+            ->setFromUser($user)
+            ->setMessage($topic->getBody())
+            ->setSubject(Notification::SUBJECT_VOTE_TOPIC);
+        $this->saveNotification($notification);
+
+        return $notification;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createVoteReplyNotification(TopicInterface $topic, ReplyInterface $reply, UserInterface $user)
+    {
+        $notification = $this->createNotification();
+        $notification->setUser($topic->getUser())
+            ->setTopic($topic)
+            ->setReply($reply)
+            ->setFromUser($user)
+            ->setMessage($reply->getBody())
+            ->setSubject(Notification::SUBJECT_VOTE_REPLY);
+        $this->saveNotification($notification);
+
+        return $notification;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createNotification()
     {
         $notification = new Notification();
