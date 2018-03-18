@@ -70,15 +70,6 @@ PHPDish功能仍在继续实现中，陆续会有新的功能发布出来，欢�
 | [codemirror](https://github.com/codemirror/CodeMirror) | 前端编辑器 |
 | [simplemde](https://github.com/sparksuite/simplemde-markdown-editor) | Markdown编辑器 |
 
-## CHANGELOG
-
-更新日志 [CHANGELOG](./CHANGELOG.md)
-
-## License
-
-PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
-开发而不必支付费用。
-
 ## 赞助 Donate
 
 开源项目的发展离不开大家的支持，如果项目对你有所帮助你可以赞助我帮助我把 PHPDish 做的更好。
@@ -98,6 +89,9 @@ PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你�
 | 赞助者 | 赞助金额 (￥)|
 | --- | --- |
 | [Intern](https://www.xde.io) | 50 |
+| 阳阳 | 10 |
+| [アクア様が見てる@沟槽](https://www.phpdish.com/users/gouchaoer) | 200 + 200 |
+
 
 ## 联系我
 
@@ -107,3 +101,13 @@ PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你�
 - 微信：
 
 <img src="https://raw.githubusercontent.com/slince/phpdish/master/app/Resources/assets/wechat.jpg" width="200"/>
+
+
+## CHANGELOG
+
+更新日志 [CHANGELOG](./CHANGELOG.md)
+
+## License
+
+PHPDish 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证，你可以在商业项目中免费使用 PHPDish 或者基于 PHPDish 二次
+开发而不必支付费用。
