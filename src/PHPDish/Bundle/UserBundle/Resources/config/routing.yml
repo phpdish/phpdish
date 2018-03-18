@@ -8,7 +8,7 @@ register:
 
 logout:
     path:     /logout
-    defaults: { _controller: fos_user.security.controller:loginAction }
+    defaults: { _controller: fos_user.security.controller:logoutAction }
 
 setting_change_password:
     path:     /settings/change-password
