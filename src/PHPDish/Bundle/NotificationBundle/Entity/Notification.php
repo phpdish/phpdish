@@ -34,9 +34,9 @@ class Notification implements NotificationInterface, ActionInterface
 
     const SUBJECT_MENTION_USER_IN_POST = 'mention_user_in_post';
 
-    const SUBJECT_VOTE_UP_TOPIC = 'vote_up_topic';
+    const SUBJECT_VOTE_POST = 'vote_post';
 
-    const SUBJECT_VOTE_UP_POST = 'vote_up_post';
+    const SUBJECT_VOTE_COMMENT = 'vote_comment';
 
     const SUBJECT_HANDLE_WITHDRAW = 'handle_withdraw';
 

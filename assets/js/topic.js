@@ -58,7 +58,7 @@ new AjaxTab($('[data-pjax-container]'), {
                         location.href = '/';
                     });
                 }).fail((response) => {
-                    Util.dialog.message(response.responseObj.error).flash(3);
+                    Util.dialog.message(response.responseJSON.error).flash(3);
                 }).always(()  => {
                     buttonLock.release();
                 });
@@ -83,7 +83,7 @@ new AjaxTab($('[data-pjax-container]'), {
                         location.reload();
                     });
                 }).fail((response) => {
-                    Util.dialog.message(response.responseObj.error).flash(3);
+                    Util.dialog.message(response.responseJSON.error).flash(3);
                 }).always(()  => {
                     recommendButtonLock.release();
                 });
@@ -108,7 +108,7 @@ new AjaxTab($('[data-pjax-container]'), {
                         location.reload();
                     });
                 }).fail((response) => {
-                    Util.dialog.message(response.responseObj.error).flash(3);
+                    Util.dialog.message(response.responseJSON.error).flash(3);
                 }).always(()  => {
                     topButtonLock.release();
                 });
@@ -145,7 +145,7 @@ new AjaxTab($('[data-pjax-container]'), {
                     $voteAction.data('voted', false);
                 }
             }).fail((response) => {
-                Util.dialog.message(response.responseObj.error).flash(3);
+                Util.dialog.message(response.responseJSON.error).flash(3);
             }).always(()  => {
                 voteButtonLock.release();
             });
@@ -213,7 +213,7 @@ new AjaxTab($('[data-pjax-container]'), {
                     Util.request('topicReply.delete', replyId).done(() => {
                         $this.fadeOut();
                     }).fail((response) => {
-                        Util.dialog.message(response.responseObj.error).flash(3);
+                        Util.dialog.message(response.responseJSON.error).flash(3);
                     }).always(()  => {
                         buttonLock.release();
                     });
@@ -255,7 +255,7 @@ new AjaxTab($('[data-pjax-container]'), {
                     }
                     $icon.addClass('wobble animated');
                 }).fail((response) => {
-                    Util.dialog.message(response.responseObj.error).flash(3);
+                    Util.dialog.message(response.responseJSON.error).flash(3);
                 }).always(()  => {
                     voteLock.release();
                 });

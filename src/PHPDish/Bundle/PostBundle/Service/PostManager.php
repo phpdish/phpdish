@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
+use PHPDish\Bundle\PostBundle\Event\VotePostEvent;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -192,6 +193,11 @@ class PostManager implements PostManagerInterface
             ->addVoteCount();
         $this->entityManager->persist($post);
         $this->entityManager->flush();
+
+        //触发事件
+        $this->eventDispatcher->dispatch(Events::POST_VOTED,
+            new VotePostEvent($post, $user)
+        );
     }
 
     /**

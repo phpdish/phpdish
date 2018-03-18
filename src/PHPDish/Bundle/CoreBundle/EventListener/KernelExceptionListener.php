@@ -43,7 +43,7 @@ final class KernelExceptionListener
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        return;
+//        return;
         //忽略子请求
         if (!$event->isMasterRequest()) {
             return;

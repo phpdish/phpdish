@@ -40,11 +40,11 @@ services:
             - {name: kernel.event_listener, event: category.followed, method: onCategoryFollowed}
         public: false
 
-    phpdish.event_listener.notification.comment_post:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\CommentPostListener
+    phpdish.event_listener.notification.post:
+        class:  PHPDish\Bundle\NotificationBundle\EventListener\PostListener
         arguments: ['@phpdish.manager.notification']
         tags:
-            - {name: kernel.event_listener, event: post.commented, method: onPostCommented}
+            - {name: kernel.event_subscriber}
         public: false
 
     phpdish.event_listener.notification.mention_user:

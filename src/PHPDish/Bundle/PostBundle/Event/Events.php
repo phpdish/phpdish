@@ -43,4 +43,16 @@ final class Events
      * @var string
      */
     const CATEGORY_PRE_PERSIST = 'category.pre_persist';
+
+    /**
+     * 文章被点赞时触发
+     * @var string
+     */
+    const POST_VOTED = 'post.voted';
+
+    /**
+     * 评论被点赞时触发
+     * @var string
+     */
+    const COMMENT_VOTED = 'comment.voted';
 }

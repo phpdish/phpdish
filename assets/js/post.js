@@ -53,7 +53,7 @@ $addComment.length > 0 && (function($){
                 editor.setContent('');
                 Util.dialog.message('回复成功').flash(() => location.reload());
             }).fail(function(response){
-                Util.dialog.message(response.responseObj.error);
+                Util.dialog.message(response.responseJSON.error);
             }).always(() => {
                 buttonLock.release();
             });
@@ -88,7 +88,7 @@ $addComment.length > 0 && (function($){
                         $this.fadeOut();
                     });
                 }).fail((response) => {
-                    Util.dialog.message(response.responseObj.error).flash(3);
+                    Util.dialog.message(response.responseJSON.error).flash(3);
                 }).always(()  => {
                     buttonLock.release();
                 });
@@ -126,7 +126,7 @@ $addComment.length > 0 && (function($){
                 }
                 $icon.addClass('wobble animated');
             }).fail((response) => {
-                Util.dialog.message(response.responseObj.error).flash(3);
+                Util.dialog.message(response.responseJSON.error).flash(3);
             }).always(()  => {
                 voteLock.release();
             });
@@ -149,12 +149,43 @@ $addComment.length > 0 && (function($){
                     location.href = Util.route.getRoutePath('posts');
                 });
             }).fail((response) => {
-                Util.dialog.message(response.responseObj.error).flash(3);
+                Util.dialog.message(response.responseJSON.error).flash(3);
             }).always(()  => {
                 buttonLock.release();
             });
         }, () => {
             buttonLock.release();
+        });
+    });
+
+    //投票
+    const $voteAction = $('[data-role="vote-post"]');
+    const voteButtonLock = lockButton($voteAction);
+    $voteAction.on('click', function(){
+        if (voteButtonLock.isDisabled()) {
+            return false;
+        }
+        voteButtonLock.lock();
+        Util.request('post.vote', window.postId).done((response) => {
+            const $number = $voteAction.find('.number');
+            $number.html(response.vote_count);
+            if (response.vote_count > 0) {
+                $number.removeClass('hidden');
+            } else {
+                $number.addClass('hidden');
+            }
+            //已经投票的，变成可投票状态
+            if (response.is_voted) {
+                $voteAction.removeClass('u-btn-outline-primary').addClass('u-btn-primary');
+                $voteAction.data('voted', true);
+            } else {
+                $voteAction.removeClass('u-btn-primary').addClass('u-btn-outline-primary');
+                $voteAction.data('voted', false);
+            }
+        }).fail((response) => {
+            Util.dialog.message(response.responseJSON.error).flash(3);
+        }).always(()  => {
+            voteButtonLock.release();
         });
     });
 
@@ -180,6 +211,7 @@ $addComment.length > 0 && (function($){
             });
         });
     })($);
+
 })($);
 
 

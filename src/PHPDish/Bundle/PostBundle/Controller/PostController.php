@@ -230,4 +230,28 @@ class PostController extends RestController
             'posts' => $posts,
         ]);
     }
+
+    /**
+     * 切换点赞状态
+     *
+     * @Route("/posts/{id}/voters", name="post_toggle_voter", methods={"POST"})
+     */
+    public function toggleVoterAction($id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $post = $this->getPostManager()->findPostById($id);
+        if (!$post) {
+            throw new \InvalidArgumentException('文章不存在');
+        }
+        if ($isVoted = $post->isVotedBy($this->getUser())) {
+            $this->getPostManager()->removeVoter($post, $this->getUser());
+        } else {
+            $this->getPostManager()->addVoter($post, $this->getUser());
+        }
+        return $this->json([
+            'vote_count' => $post->getVoteCount(),
+            'is_voted' => !$isVoted
+        ]);
+    }
 }

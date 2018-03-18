@@ -39,8 +39,7 @@
                     </div>
                 </header>
                 <div class="panel-body">
-                    {%
-                        set isCanView = not post.category.isCharging
+                    {% set isCanView = not post.category.isCharging
                             or (is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted('edit', post) or post.category.isFollowedBy(app.user)))
                     %}
                     <article class="markdown-body body">
@@ -55,7 +54,13 @@
                             </div>
                         </div>
                     {% endif %}
-                    <hr/>
+                    <div class="action">
+                        <a data-role="vote-post" class="btn btn-sm u-btn-outline-primary" href="javascript:void(0);">
+                            <i class="fa fa-thumbs-o-up"> 赞</i> <span class="number">{{ post.voteCount }}</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-footer">
                     <div class="category media">
                         <div class="media-left media-middle">
                             {% set categoryUrl = path('category_view', {'slug': post.category.slug}) %}

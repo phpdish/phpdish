@@ -10,6 +10,7 @@ use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PostBundle\Entity\Comment;
 use PHPDish\Bundle\PostBundle\Event\CommentMentionUserEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
+use PHPDish\Bundle\PostBundle\Event\VoteCommentEvent;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -139,6 +140,11 @@ class CommentManager implements CommentManagerInterface
             ->addVoteCount();
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
+
+        //触发事件
+        $this->eventDispatcher->dispatch(Events::COMMENT_VOTED,
+            new VoteCommentEvent($comment->getPost(), $comment, $user)
+        );
     }
 
     /**

@@ -8,6 +8,7 @@ const routes = {
     'posts': '/posts',
     'post.show': '/posts/{id}', //post展示页
     'post.delete': {path: '/posts/{id}', method: 'DELETE'},
+    'post.vote': {path: '/posts/{id}/voters', method: 'POST'},
     'comment.add': {path: '/posts/{id}/comments', 'method': 'POST'},
     'comment.delete': {path: '/comments/{id}', 'method': 'DELETE'},
     'comment.vote': {path: '/comments/{id}/voters', method: 'POST'},

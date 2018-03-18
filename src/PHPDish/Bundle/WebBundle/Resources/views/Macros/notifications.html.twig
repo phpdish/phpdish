@@ -10,6 +10,10 @@
         {{ render.render_vote_reply(notification) }}
     {% elseif notification.subject ==  'comment_post' %}
         {{ render.render_comment_post(notification) }}
+    {% elseif notification.subject ==  'vote_post' %}
+        {{ render.render_vote_post(notification) }}
+    {% elseif notification.subject ==  'vote_comment' %}
+        {{ render.render_vote_comment(notification) }}
     {% elseif notification.subject ==  'mention_user_in_topic' %}
         {{ render.render_at_user_in_topic(notification) }}
     {% elseif notification.subject ==  'mention_user_in_post' %}
@@ -51,7 +55,7 @@
             <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a>
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
-        <div class="body markdown-body">{{ notification.message|raw }}</div>
+        <div class="body markdown-body">{{ notification.message|html_safe_chunk(0.5)|raw }}</div>
     </div>
 {% endmacro %}
 
@@ -59,8 +63,8 @@
 {% macro render_vote_reply(notification) %}
     <div class="media-body">
         <div class="heading">
-            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你在话题里
-            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a> 的回复
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你在话题
+            <a href="{{ path('topic_view', {id: notification.topic.id}) }}">{{ notification.topic.title }}</a> 里的回复
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
         <div class="body markdown-body">{{ notification.message|raw }}</div>
@@ -97,6 +101,30 @@
         <div class="heading">
             <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 评论了你的文章
             <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染点赞话题 #}
+{% macro render_vote_post(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你的文章
+            <a href="{{ path('post_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
+        <div class="body markdown-body">{{ notification.message|html_safe_chunk(0.5)|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染点赞话题回复 #}
+{% macro render_vote_comment(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <a class="username" href="{{ path('user_view', {username: notification.fromUser.username}) }}">{{ notification.fromUser.username }}</a> 点赞了你在文章
+            <a href="{{ path('topic_view', {id: notification.post.id}) }}">{{ notification.post.title }}</a> 里的评论
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
         <div class="body markdown-body">{{ notification.message|raw }}</div>

@@ -36,39 +36,30 @@
                     <div class="panel-footer clearfix">
                         <div class="clearfix">
                             <ul class="list-inline list-unstyled action" data-role="topic-action">
+                                <li class="vote">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and topic.isVotedBy(app.user)  %}
+                                        <a href="javascript:void(0)" data-action="vote" title="取消赞" data-voted="true">
+                                            <i class="fa fa-thumbs-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="javascript:void(0)" data-action="vote" title="赞">
+                                            <i class="fa fa-thumbs-o-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
+                                        </a>
+                                    {% endif %}
+                                </li>
 
-                            <li class="vote">
-                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and topic.isVotedBy(app.user)  %}
-                                    <a href="javascript:void(0)" data-action="vote" title="取消赞" data-voted="true">
-                                        <i class="fa fa-thumbs-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
-                                    </a>
-                                {% else %}
-                                    <a href="javascript:void(0)" data-action="vote" title="赞">
-                                        <i class="fa fa-thumbs-o-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
-                                    </a>
+                                {% if is_granted('edit', topic) %}
+                                <li><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i></a></li>
+                                <li><a href="{{ path('topic_edit', {id: topic.id}) }}" title="编辑"><i class="if i-edit"></i></a></li>
                                 {% endif %}
-                            </li>
 
-                            {% if is_granted('edit', topic) %}
-                            <li><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i></a></li>
-                            <li><a href="{{ path('topic_edit', {id: topic.id}) }}" title="编辑"><i class="if i-edit"></i></a></li>
-                            {% endif %}
-                            
-                            {% if is_granted('ROLE_ADMIN', topic) %}
-                                <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="取消加精" data-recommend="true" class="cancel-recommend" {% else %}title="加精"{% endif %} data-action="recommend"><i class="if i-good"></i></a></li>
-                                <li><a href="javascript:void(0)" {% if (topic.isTop) %}title="取消置顶" data-is-top="true" class="cancel-top" {% else %}title="置顶"{% endif %} data-action="stick-top"><i class="if i-stick-top"></i></a></li>
-                            {% endif %}
+                                {% if is_granted('ROLE_ADMIN', topic) %}
+                                    <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="取消加精" data-recommend="true" class="cancel-recommend" {% else %}title="加精"{% endif %} data-action="recommend"><i class="if i-good"></i></a></li>
+                                    <li><a href="javascript:void(0)" {% if (topic.isTop) %}title="取消置顶" data-is-top="true" class="cancel-top" {% else %}title="置顶"{% endif %} data-action="stick-top"><i class="if i-stick-top"></i></a></li>
+                                {% endif %}
 
-                        </ul>
-
+                            </ul>
                             <div class="social-share-container"></div>
-                        </div>
-                        <div class="voters">
-                            {% for user in topic.voters %}
-                                <a href="{{ path('user_view', {'username': user.username}) }}">
-                                    <img alt="{{ user.username }}" class="img-circle img-thumbnail" src="{{ asset(user.avatar)|default('user.jpg')|imagine_filter('middle_square') }}"/>
-                                </a>
-                            {% endfor %}
                         </div>
                     </div>
                 </div>
