@@ -133,6 +133,16 @@ class Post implements ChapterInterface
     /**
      * {@inheritdoc}
      */
+    public function addViewCount($viewCount)
+    {
+        $this->viewCount += $viewCount;
+        $this->viewCount < 0 && $this->viewCount = 0;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getViewCount()
     {
         return $this->viewCount;

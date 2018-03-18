@@ -69,6 +69,14 @@ interface PostInterface extends IdentifiableInterface,
     public function getCommentCount();
 
     /**
+     * 添加阅读数
+     *
+     * @param int $viewCount
+     * @return $this
+     */
+    public function addViewCount($viewCount);
+
+    /**
      * 设置评论数量.
      *
      * @param int $commentCount

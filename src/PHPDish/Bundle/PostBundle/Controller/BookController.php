@@ -166,6 +166,10 @@ class BookController extends RestController
         $book = $this->getBookManager()->findBook($slug);
         $chapter = $this->getBookManager()->findChapter($chapterId);
         $chaptersTree = $this->getBookManager()->findBookChaptersTree($book);
+
+        //更新阅读数
+        $this->getPostManager()->increasePostViews($chapter);
+
         //SEO
         $seoPage = $this->get('sonata.seo.page');
         $summary = StringManipulator::stripLineBreak($chapter->getSummary());

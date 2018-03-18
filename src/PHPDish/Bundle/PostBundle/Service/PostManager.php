@@ -164,7 +164,7 @@ class PostManager implements PostManagerInterface
      */
     public function increasePostViews(PostInterface $post, $views = 1)
     {
-        $post->setViewCount($post->getViewCount() + $views);
+        $post->addViewCount($views);
         $this->entityManager->persist($post);
         $this->entityManager->flush();
     }

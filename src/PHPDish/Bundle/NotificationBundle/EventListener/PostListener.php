@@ -47,7 +47,7 @@ class PostListener extends EventListener implements EventSubscriberInterface
     public function onPostVoted(VotePostEvent $event)
     {
         if ($event->getPost()->getUser() === $event->getVoter()) {
-//            return;
+            return;
         }
 
         $this->notificationManager
@@ -63,7 +63,7 @@ class PostListener extends EventListener implements EventSubscriberInterface
     {
         //自己点赞自己不用通知
         if ($event->getComment()->getUser() === $event->getVoter()) {
-//            return;
+            return;
         }
         $this->notificationManager->createVoteCommentNotification(
             $event->getPost(),
