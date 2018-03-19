@@ -4,7 +4,7 @@ login:
 
 register:
     path:     /register
-    defaults: { _controller: fos_user.security.controller:loginAction }
+    defaults: { _controller: fos_user.registration.controller:registerAction }
 
 logout:
     path:     /logout

@@ -6,6 +6,7 @@ use FOS\MessageBundle\Composer\ComposerInterface;
 use FOS\MessageBundle\Sender\SenderInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 final class UserRegisterListener
 {
@@ -25,43 +26,56 @@ final class UserRegisterListener
      */
     protected $sender;
 
+    /**
+     * 发信人
+     * @var string
+     */
+    protected $userName;
+
+    /**
+     * 发信模板
+     * @var string
+     */
+    protected $messageTemplate;
+
     public function __construct(
         UserManagerInterface $userManager,
         ComposerInterface $composer,
-        SenderInterface $sender
+        SenderInterface $sender,
+        $userName,
+        $messageTemplate
     ){
         $this->userManager = $userManager;
         $this->composer = $composer;
         $this->sender = $sender;
+
+        $this->userName = $userName;
+        $this->messageTemplate = $messageTemplate;
     }
 
     public function onRegistrationCompleted(UserEvent $event)
     {
-        if (!$sender = $this->getAdminAccount()) {
+        if (!($sender = $this->getAdminAccount()) || !$this->messageTemplate) {
             return;
         }
-        $message = <<<EOT
-%s 您好，<br/>
-欢迎注册 PHPDish 社区，我是 PHPDish的发起人和维护人，PHPDish 致力于为广大phper以及文字爱好者<br/>
-提供一个知识分享的平台，如果你有任何问题或者建议请私信我。<br/>
-EOT;
         $user = $event->getUser();
         $threadBuilder = $this->composer->newThread();
         $threadBuilder
             ->addRecipient($user)
             ->setSender($sender)
             ->setSubject('欢迎注册 PHPDish 社区!')
-            ->setBody(sprintf($message, $user->getUsername()));
+            ->setBody(sprintf($this->messageTemplate, $user->getUsername()));
 
         $this->sender->send($threadBuilder->getMessage());
     }
 
     /**
-     * 获取用户
-     * @return \FOS\UserBundle\Model\UserInterface
+     * 获取发信用户
+     *
+     * @return \FOS\UserBundle\Model\UserInterface|false
      */
     protected function getAdminAccount()
     {
-        return $this->userManager->findUserByUsername('slince');
+        return $this->userName ? $this->userManager->findUserByUsername($this->userName) : false;
     }
 }

@@ -43,7 +43,13 @@ parameters:
     phpdish.site.keywords: 'php,symfony,laravel,cakephp,thinkphp,php论坛,php社区,php教程,laravel教程,laravel视频,php开源'
     phpdish.site.description: 'PHPDish是一个以PHP内容为主的IT技术社区，致力于为文字爱好者、技术爱好者提供知识分享以及互动交流的平台。'
 
+    # chat
+    chat.sender: slince
+    chat.register_message: '%s 您好，<br/> 欢迎注册 PHPDish 社区，我是 PHPDish的发起人和维护人，PHPDish 致力于为广大phper以及文字爱好者<br/> 提供一个知识分享的平台，如果你有任何问题或者建议请私信我。<br/>'
+
     #有赞支付参数
     youzan.client_id: phpdish
     youzan.client_secret: phpdish
     youzan.kdt_id: phpdish
+
+

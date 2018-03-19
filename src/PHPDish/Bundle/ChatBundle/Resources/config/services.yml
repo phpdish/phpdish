@@ -16,6 +16,6 @@ services:
 
     phpdish.event_listener.chat.user_register:
         class: PHPDish\Bundle\ChatBundle\EventListener\UserRegisterListener
-        arguments: ['@fos_user.user_manager', '@fos_message.composer', '@fos_message.sender']
+        arguments: ['@fos_user.user_manager', '@fos_message.composer', '@fos_message.sender', '%chat.sender%', '%chat.register_message%']
         tags:
           - { name: kernel.event_listener, event: user.created, method: onRegistrationCompleted}
