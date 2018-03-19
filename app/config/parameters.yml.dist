@@ -36,9 +36,6 @@ parameters:
     algolia.application_id: phpdish
     algolia.api_key: phpdish
 
-    qcloud.secret_id: phpdish
-    qcloud.secret_key: phpdish
-
     phpdish.site.title: 'PHPDish 社区'
     phpdish.site.keywords: 'php,symfony,laravel,cakephp,thinkphp,php论坛,php社区,php教程,laravel教程,laravel视频,php开源'
     phpdish.site.description: 'PHPDish是一个以PHP内容为主的IT技术社区，致力于为文字爱好者、技术爱好者提供知识分享以及互动交流的平台。'
