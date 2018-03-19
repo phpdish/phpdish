@@ -15,7 +15,6 @@ easy_admin:
             - {entity: 'Topic', label: '话题', icon: 'comment'}
             - {entity: 'Thread', label: '节点', icon: 'flag'}
             - {entity: 'FriendLink', label: '友情链接', icon: 'link'}
-            - {entity: 'Song', label: '每日一曲', icon: 'play-circle'}
             - {entity: 'Wallet', label: '钱包', icon: 'credit-card'}
             - {entity: 'Payment', label: '交易', icon: 'credit-card'}
 
@@ -149,25 +148,6 @@ easy_admin:
                       - { property: 'url', label: '链接', type: 'url'}
                       - { property: 'logo', label: 'Logo', type: 'url' }
                       - { property: 'priority', label: '优先级', type: 'number'}
-
-        # 每日一曲
-        Song:
-            class: PHPDish\Bundle\WebBundle\Entity\Song
-            label: '每日一曲'
-            list:
-                title: "%%entity_label%%列表"
-                fields:
-                      - { property: 'name', label: '名称' }
-                      - { property: 'src', label: '链接', type: 'url'}
-                      - { property: 'srcId', label: '原始id' }
-
-            new:
-                title: "新增%%entity_label%%"
-            form:
-                fields:
-                    - { property: 'name', label: '名称' }
-                    - { property: 'src', label: '链接', type: 'url'}
-                    - { property: 'srcId', label: '原始id' }
 
         # 钱包
         Wallet:
