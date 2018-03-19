@@ -38,7 +38,6 @@
             </div>
             <div class="col-md-3">
                 {% include 'PHPDishWebBundle:User:_user_plate.html.twig' %}
-                {{ render(controller('PHPDishWebBundle:Song:getSong')) }}
                 {{ render(controller('PHPDishForumBundle:Topic:todayHotTopics', {'limit': 8})) }}
                 {{ render(controller('PHPDishForumBundle:Thread:hotThreads')) }}
                 {% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {'limit': 6} %}
