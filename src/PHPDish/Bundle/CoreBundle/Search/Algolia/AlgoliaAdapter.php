@@ -46,13 +46,13 @@ class AlgoliaAdapter implements AdapterInterface
      */
     public function getSlice($offset, $length)
     {
-        return $this->indexManager->search(
+        return array_filter($this->indexManager->search(
             $this->query,
             $this->entityClass,
             $this->entityManager,
             $offset / $length + 1,
             $length,
             $this->options
-        );
+        ));
     }
 }
