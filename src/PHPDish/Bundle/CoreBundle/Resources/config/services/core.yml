@@ -38,8 +38,8 @@ services:
 
     ## 搜索服务，如果需要其它服务可以自行替换
     phpdish.searcher:
-        class: PHPDish\Bundle\CoreBundle\Search\AlgoliaSearch
+        class: PHPDish\Bundle\CoreBundle\Search\Algolia\AlgoliaSearch
         public: true
         arguments:
-            - "@algolia.indexer"
+            - "@search.index_manager"
             - "@doctrine.orm.entity_manager"

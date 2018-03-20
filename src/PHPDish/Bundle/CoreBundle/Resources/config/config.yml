@@ -158,12 +158,21 @@ httplug:
                 verify: false
                 timeout: 20
 
+# Algolia 搜索
+algolia_search:
+    prefix: staging
+    indices:
+        - name: posts
+          class: PHPDish\Bundle\PostBundle\Entity\Post
+          enable_serializer_groups: true
 
-algolia:
-    application_id: '%algolia.application_id%'
-    api_key: '%algolia.api_key%'
-    catch_log_exceptions: true
-    index_name_prefix: staging
+        - name: topics
+          class: PHPDish\Bundle\ForumBundle\Entity\Topic
+          enable_serializer_groups: true
+
+        - name: users
+          class: PHPDish\Bundle\UserBundle\Entity\User
+          enable_serializer_groups: true
 
 
 sonata_seo:

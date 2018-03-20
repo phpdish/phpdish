@@ -21,7 +21,7 @@
     },
     "require": {
         "php": ">=7.2.0",
-        "algolia/algolia-search-bundle": "^2.2",
+        "algolia/search-bundle": "^3.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^1.2",

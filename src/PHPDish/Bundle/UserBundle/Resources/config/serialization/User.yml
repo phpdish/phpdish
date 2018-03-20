@@ -1,0 +1,10 @@
+PHPDish\Bundle\UserBundle\Entity\User:
+    attributes:
+        id:
+            groups: [Default, Detailed, searchable]
+        username:
+            groups: [Default, Detailed, searchable]
+        description:
+            groups: [Default, Detailed, searchable]
+        email:
+            groups: [Default, Detailed, searchable]

@@ -4,57 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "673417c602b5fbf431b2274a8aa74e8c",
+    "content-hash": "1bf39ab7765393efbdf38aaa36449dca",
     "packages": [
-        {
-            "name": "algolia/algolia-search-bundle",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/algolia/search-bundle.git",
-                "reference": "c7aa15ec633b7033f0330409c3da6ec7fb8b9b4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/algolia/search-bundle/c7aa15ec633b7033f0330409c3da6ec7fb8b9b4e.zip",
-                "reference": "c7aa15ec633b7033f0330409c3da6ec7fb8b9b4e",
-                "shasum": ""
-            },
-            "require": {
-                "algolia/algoliasearch-client-php": "~1.6",
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.2,>=2.2.3",
-                "php": "^5.6 || ^7.0",
-                "symfony/finder": "~2.5|~3.0",
-                "symfony/framework-bundle": "~2.5|~3.0",
-                "symfony/property-access": "~2.5|~3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Algolia\\AlgoliaSearchBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François-Marie de Jouvencel",
-                    "email": "fm.de.jouvencel@gmail.com"
-                },
-                {
-                    "name": "Algolia Team",
-                    "email": "support@algolia.com"
-                }
-            ],
-            "description": "Seamless integration of Algolia Search into your Symfony project.",
-            "time": "2017-03-27T16:32:15+00:00"
-        },
         {
             "name": "algolia/algoliasearch-client-php",
             "version": "1.25.1",
@@ -104,6 +55,62 @@
             "description": "Algolia Search API Client for PHP",
             "homepage": "https://github.com/algolia/algoliasearch-client-php",
             "time": "2018-03-02T13:24:10+00:00"
+        },
+        {
+            "name": "algolia/search-bundle",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/search-bundle.git",
+                "reference": "c9e0d95387607347e83963748ddb74fabc3b691c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/algolia/search-bundle/c9e0d95387607347e83963748ddb74fabc3b691c.zip",
+                "reference": "c9e0d95387607347e83963748ddb74fabc3b691c",
+                "shasum": ""
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": "^1.23",
+                "doctrine/common": "^2.5",
+                "symfony/filesystem": "^3.4.0 || ^4.0.0",
+                "symfony/property-access": "^3.4.0 || ^4.0.0",
+                "symfony/serializer": "^3.4.0 || ^4.0.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.8",
+                "doctrine/orm": "^2.5",
+                "phpunit/phpunit": "^5.7 || ^6.5",
+                "symfony/doctrine-bridge": "^3.4.0 || ^4.0.0",
+                "symfony/framework-bundle": "^3.4.0 || ^4.0.0",
+                "symfony/yaml": "^3.4.0 || ^4.0.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Algolia\\SearchBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                },
+                {
+                    "name": "Julien Bourdeau",
+                    "email": "julien@sigerr.org"
+                }
+            ],
+            "time": "2018-03-15T15:45:56+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3347,16 +3354,16 @@
         },
         {
             "name": "kriswallsmith/buzz",
-            "version": "v0.16.0",
+            "version": "v0.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "bd3299b7b6be3eeeb7a2842e677685031b93aa26"
+                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/kriswallsmith/Buzz/bd3299b7b6be3eeeb7a2842e677685031b93aa26.zip",
-                "reference": "bd3299b7b6be3eeeb7a2842e677685031b93aa26",
+                "url": "https://files.phpcomposer.com/files/kriswallsmith/Buzz/4977b7d44dbef49cdc641f14be6512fdcfe32f12.zip",
+                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12",
                 "shasum": ""
             },
             "require": {
@@ -3393,7 +3400,7 @@
                 "curl",
                 "http client"
             ],
-            "time": "2018-02-03T19:40:45+00:00"
+            "time": "2018-03-19T10:34:40+00:00"
         },
         {
             "name": "liip/imagine-bundle",

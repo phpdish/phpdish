@@ -28,8 +28,8 @@ class SearchController extends Controller
         $keyword = $request->query->get('q');
         $type = $request->query->get('type', static::TYPE_TOPIC);
         $searchResult = $this->searcFrom($keyword, $type, [
-            'hitsPerPage' => 10,
-            'page' => $request->query->getInt('page', 1) - 1
+            'length' => 10,
+            'page' => $request->query->getInt('page', 1)
         ]);
         return $this->render('PHPDishWebBundle:Search:result.html.twig', [
             'searchResult' => $searchResult,

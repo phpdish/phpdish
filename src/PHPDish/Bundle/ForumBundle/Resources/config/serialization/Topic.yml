@@ -1,0 +1,10 @@
+PHPDish\Bundle\ForumBundle\Entity\Topic:
+    attributes:
+        id:
+            groups: [Default, Detailed, searchable]
+        title:
+            groups: [Default, Detailed, searchable]
+        body:
+            groups: [Default, Detailed, searchable]
+        summary:
+            groups: [Default, Detailed, searchable]

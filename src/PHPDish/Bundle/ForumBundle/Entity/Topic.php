@@ -4,7 +4,6 @@ namespace PHPDish\Bundle\ForumBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\VotableTrait;
 use PHPDish\Bundle\CoreBundle\Utility;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
@@ -16,7 +15,6 @@ use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 class Topic implements TopicInterface
 {
@@ -25,7 +23,6 @@ class Topic implements TopicInterface
 
     /**
      * @var string
-     * @Algolia\Attribute
      */
     protected $title;
 
@@ -71,11 +68,6 @@ class Topic implements TopicInterface
         $this->threads = new ArrayCollection();
         $this->voters = new ArrayCollection();
     }
-
-//    public function __toString()
-//    {
-//        return $this->title;
-//    }
 
     /**
      * {@inheritdoc}
@@ -227,7 +219,6 @@ class Topic implements TopicInterface
      * Gets the summary of the topic.
      *
      * @return string
-     * @Algolia\Attribute
      */
     public function getSummary()
     {

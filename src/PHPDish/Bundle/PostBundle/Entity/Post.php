@@ -15,7 +15,6 @@ use PHPDish\Bundle\PostBundle\Model\ChapterInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 class Post implements ChapterInterface
 {
@@ -28,7 +27,7 @@ class Post implements ChapterInterface
         EnabledTrait;
 
     /**
-     * @Algolia\Attribute
+     * @var string
      */
     protected $title;
 
@@ -178,8 +177,6 @@ class Post implements ChapterInterface
      * Gets the summary of the post.
      *
      * @return string
-     *
-     * @Algolia\Attribute
      */
     public function getSummary()
     {

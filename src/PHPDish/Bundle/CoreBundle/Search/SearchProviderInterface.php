@@ -6,7 +6,7 @@ use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface SearchServiceInterface
+interface SearchProviderInterface
 {
     /**
      * 查询用户

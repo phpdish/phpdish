@@ -6,15 +6,16 @@ PHPDish\Bundle\PostBundle\Entity\Post:
             expose: true
             type: integer
             xml_attribute: true
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, searchable]
         title:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, searchable]
         body:
             expose: true
             type: string
-            groups: [Default, Detailed]
+            groups: [Default, Detailed, searchable]
+
         originalBody:
             expose: true
             type: string

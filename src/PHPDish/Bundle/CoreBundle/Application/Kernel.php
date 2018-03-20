@@ -37,7 +37,7 @@ abstract class Kernel extends HttpKernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Http\HttplugBundle\HttplugBundle(),
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new \Algolia\AlgoliaSearchBundle\AlgoliaAlgoliaSearchBundle(),
+            new \Algolia\SearchBundle\AlgoliaSearchBundle(),
             new \Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
             new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
