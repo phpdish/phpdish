@@ -50,10 +50,20 @@ $ npm run build:dev // 构建开发环境
 
 ### 运行程序
 
-开发环境执行下面命令即可启动
+### 开发环境
+
+执行下面命令即可启动服务
 
 ```bash
 $ php bin/console server:run
 ```
+在浏览器中输入控制台输出的结果即可
 
-生产环境请自行配置 Apache 或者 Nginx
+### 生产环境
+
+如果你是 Apache 用户，直接添加一个 vhost 配置即可；
+
+> 注意web根目录是 `phpdish` 下的 `web` 目录
+
+如果你是 Nginx 用户，拷贝本文件夹下的 `nginx/phpdish.conf`，按照提示修改你的配置
+然后复制内容到你的 `nginx.conf` 文件里的 `http` 模块内即可。
