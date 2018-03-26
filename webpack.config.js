@@ -3,27 +3,6 @@ const path = require('path');
 const glob = require('glob');
 const buildPath = 'web/build';
 
-Encore
-    .setOutputPath(buildPath)
-    .setPublicPath('/build')
-    .cleanupOutputBeforeBuild()
-    .autoProvidejQuery()
-    .enableSassLoader()
-    .autoProvideVariables({
-        '$': 'jquery',
-        'jQuery': 'jquery',
-        "window.jQuery": "jquery",
-        '_': 'lodash',
-        "window.lodash": "lodash"
-    })
-    .enableVersioning(true)
-    .enableSourceMaps(!Encore.isProduction());
-
-if (!Encore.isProduction()) {
-    Encore.enableVersioning(false);
-    Encore.setPublicPath('http://127.0.0.1:8089')
-        .setManifestKeyPrefix('build/');
-}
 const config = {
     buildPath: path.resolve(buildPath),
     assetsPath: path.resolve("./assets"),
@@ -34,6 +13,46 @@ const config = {
     pluginsPath: path.resolve("./assets/plugins"),
     mapPath: path.resolve(buildPath + '/manifest.json')
 };
+
+Encore
+    .setOutputPath(buildPath)
+    .setPublicPath('/build')
+    .cleanupOutputBeforeBuild()
+    .autoProvidejQuery()
+    .enableSassLoader()
+    .enableVersioning(true)
+    .enableSourceMaps(!Encore.isProduction())
+    .configureUglifyJsPlugin(function(options){
+        "use strict";
+        options.comments = false;
+    })
+    .addAliases({
+        css: config.cssPath,
+        js: config.jsPath,
+        module: config.modulesPath,
+        plugin: config.pluginsPath
+    })
+    .autoProvideVariables({
+        '$': 'jquery',
+        'jQuery': 'jquery',
+        "window.jQuery": "jquery",
+        '_': 'lodash',
+        "window.lodash": "lodash"
+    })
+    .addExternals({
+        'jquery': 'window.$',
+        'lodash': 'window._'
+    })
+    .addRule({
+        test: /\.njk$/,
+        loader: 'nunjucks-loader'
+    });
+
+if (!Encore.isProduction()) {
+    Encore.enableVersioning(false);
+    Encore.setPublicPath('http://127.0.0.1:8089')
+        .setManifestKeyPrefix('build/');
+}
 
 //add js entries
 function findEntries(entryPath){
@@ -73,21 +92,4 @@ Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
 Encore.addStyleEntry('css/resume', config.scssPath + '/resume.scss');
 
 //final webpack config
-const webpackConfig = Encore.getWebpackConfig();
-webpackConfig.resolve.alias = {
-    css: config.cssPath,
-    js: config.jsPath,
-    module: config.modulesPath,
-    plugin: config.pluginsPath
-};
-webpackConfig.externals = {
-    'jquery': 'window.$',
-    'lodash': 'window._',
-};
-//add nunjunks loader
-webpackConfig.module.rules.push({
-    test: /\.njk$/,
-    loader: 'nunjucks-loader'
-});
-
-module.exports = webpackConfig;
+module.exports = Encore.getWebpackConfig();
