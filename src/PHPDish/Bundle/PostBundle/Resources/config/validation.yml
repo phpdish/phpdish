@@ -17,6 +17,9 @@ PHPDish\Bundle\PostBundle\Entity\Category:
        slug:
            - NotBlank:
                message: 专栏的Uri不得为空
+           - Regex:
+               pattern: /^[0-9A-z\-]+$/
+               message: 只能包含字母数字或者横线
 
        description:
            - Length:
