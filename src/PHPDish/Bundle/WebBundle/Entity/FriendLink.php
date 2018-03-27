@@ -1,8 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
+namespace PHPDish\Bundle\WebBundle\Entity;
 
 class FriendLink
 {

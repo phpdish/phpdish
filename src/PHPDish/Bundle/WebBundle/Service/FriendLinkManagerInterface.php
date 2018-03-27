@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Service;
+namespace PHPDish\Bundle\WebBundle\Service;
 
-use PHPDish\Bundle\CoreBundle\Entity\FriendLink;
+use PHPDish\Bundle\WebBundle\Entity\FriendLink;
 
 interface FriendLinkManagerInterface
 {

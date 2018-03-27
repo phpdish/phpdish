@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Twig;
+namespace PHPDish\Bundle\WebBundle\Twig;
 
-use PHPDish\Bundle\CoreBundle\Service\FriendLinkManagerInterface;
+use PHPDish\Bundle\WebBundle\Service\FriendLinkManagerInterface;
 
 class FriendLinkExtension extends \Twig_Extension
 {
@@ -33,7 +33,7 @@ class FriendLinkExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('get_all_friend_links', [$this->friendLinkManager, 'findAllEnabledFriendLinks']),
+            new \Twig_SimpleFilter('get_friend_links', [$this->friendLinkManager, 'findAllEnabledFriendLinks']),
         ];
     }
 }

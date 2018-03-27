@@ -1,9 +1,9 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Repository;
+namespace PHPDish\Bundle\WebBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\CoreBundle\Entity\FriendLink;
+use PHPDish\Bundle\WebBundle\Entity\FriendLink;
 
 class FriendLinkRepository extends EntityRepository
 {

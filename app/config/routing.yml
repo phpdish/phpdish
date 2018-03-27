@@ -1,8 +1,7 @@
 # 前台路由
 phpdish_main:
-    resource: '@PHPDishCoreBundle/Resources/config/routing.yml'
+    resource: '@PHPDishWebBundle/Resources/config/routing.yml'
 
 # 后台路由
 phpdish_admin:
     resource: '@PHPDishAdminBundle/Resources/config/routing.yml'
-

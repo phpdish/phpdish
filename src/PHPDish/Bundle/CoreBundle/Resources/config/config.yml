@@ -13,7 +13,6 @@ doctrine:
                       alias: GedmoTree
                       is_bundle: false
 
-
 ## doctrine 扩展
 stof_doctrine_extensions:
     default_locale: "%locale%"
@@ -41,7 +40,7 @@ knp_gaufrette:
         avatar:
           adapter: avatar
           alias: phpdish.filesystem.avatar
-
+# KNP Menu
 knp_menu:
     twig:
         template: KnpMenuBundle::menu.html.twig
@@ -118,35 +117,6 @@ fos_message:
     thread_class: PHPDish\Bundle\ChatBundle\Entity\Thread
     message_class: PHPDish\Bundle\ChatBundle\Entity\Message
 
-# 社交网站登录
-hwi_oauth:
-    http_client:
-          timeout: 10
-          verify_peer: false
-          ignore_errors: false
-
-    firewall_names:
-        - 'main'
-
-    resource_owners:
-        weibo:
-            type: sina_weibo
-            client_id: '%oauth.weibo.client_id%'
-            client_secret: '%oauth.weibo.client_secret%'
-            scope: 'all'
-
-        github:
-            type: github
-            client_id: '%oauth.github.client_id%'
-            client_secret: '%oauth.github.client_secret%'
-            scope: 'user:email,public_repo'
-
-        qq:
-            type: qq
-            client_id: '%oauth.qq.client_id%'
-            client_secret: '%oauth.qq.client_secret%'
-            scope: 'get_user_info'
-
 httplug:
     plugins:
         logger: ~
@@ -174,30 +144,19 @@ algolia_search:
           class: PHPDish\Bundle\UserBundle\Entity\User
           enable_serializer_groups: true
 
-
-sonata_seo:
-    page:
-        title:            '%phpdish.site.title%'
-        metas:
-            name:
-                keywords:             '%phpdish.site.keywords%'
-                description:          '%phpdish.site.description%'
-                apple-mobile-web-app-title: '%phpdish.site.title%'
-
-            property:
-                'og:site_name':      '%phpdish.site.title%'
-                'og:description':    '%phpdish.site.description%'
-
-            http-equiv:
-                'Content-Type':         text/html; charset=utf-8
-                #'X-Ua-Compatible':      IE=EmulateIE7
-
+## Html 清理
 exercise_html_purifier:
     default:
         Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
         HTML.Allowed: 'p[style],div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,br,span[style],img[width|height|alt|src],*[style|class],pre,hr,code,h1,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td'
         AutoFormat.AutoParagraph: true
         AutoFormat.RemoveEmpty: true
+
+## 验证码
+gregwar_captcha:
+   as_url: true
+   quality: 70
+   length: 5
 
 # Media
 phpdish_media:
@@ -212,15 +171,3 @@ phpdish_payment:
       client_id: '%youzan.client_id%'
       client_secret: '%youzan.client_secret%'
       kdt_id: '%youzan.kdt_id%'
-
-## 多主题
-sylius_theme:
-    context: phpdish.theme.context.generic
-    sources:
-        filesystem: ~
-
-## 验证码
-gregwar_captcha:
-   as_url: true
-   quality: 70
-   length: 5

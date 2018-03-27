@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Service;
+namespace PHPDish\Bundle\WebBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;

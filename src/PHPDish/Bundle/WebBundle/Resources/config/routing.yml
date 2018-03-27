@@ -1,3 +1,55 @@
-php_dish_web_homepage:
-    path:     /
-    defaults: { _controller: PHPDishWebBundle:Default:index }
+phpdish_web:
+    resource: "@PHPDishWebBundle/Controller/"
+    prefix: /
+    type: annotation
+
+phpdish_media:
+    resource: "@PHPDishMediaBundle/Controller"
+    prefix:   /
+    type: annotation
+
+phpdish_post:
+    resource: "@PHPDishPostBundle/Controller/"
+    prefix: /
+    type: annotation
+
+phpdish_user:
+    resource: "@PHPDishUserBundle/Controller/"
+    prefix: /
+    type: annotation
+
+## 用户部分扩展路由
+phpdish_user_ex:
+    resource: "@PHPDishUserBundle/Resources/config/routing.yml"
+
+phpdish_forum:
+    resource: "@PHPDishForumBundle/Controller/"
+    prefix: /
+    type: annotation
+
+phpdish_notification:
+    resource: "@PHPDishNotificationBundle/Controller/"
+    prefix: /
+    type: annotation
+
+phpdish_chat:
+    resource: "@PHPDishChatBundle/Controller"
+    prefix:   /
+    type: annotation
+
+phpdish_resume:
+    resource: "@PHPDishResumeBundle/Controller"
+    prefix:   /
+    type: annotation
+
+phpdish_payment:
+    resource: "@PHPDishPaymentBundle/Controller"
+    prefix:   /
+    type: annotation
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /chats
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

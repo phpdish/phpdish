@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Controller;
+namespace PHPDish\Bundle\WebBundle\Controller;
 
 use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
