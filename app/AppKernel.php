@@ -15,6 +15,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new PHPDish\Bundle\AdminBundle\PHPDishAdminBundle(),
+            new PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
         ];
 
         // 注册插件

@@ -49,7 +49,6 @@ abstract class Kernel extends HttpKernel
             new \PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
             new \PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
             new \PHPDish\Bundle\PostBundle\PHPDishPostBundle(),
-            new \PHPDish\Bundle\WebBundle\PHPDishWebBundle(),
             new \PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
             new \PHPDish\Bundle\MediaBundle\PHPDishMediaBundle(),
             new \PHPDish\Bundle\NotificationBundle\PHPDishNotificationBundle(),
