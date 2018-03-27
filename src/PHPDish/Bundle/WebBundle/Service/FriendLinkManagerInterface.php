@@ -15,4 +15,11 @@ interface FriendLinkManagerInterface
      * @return FriendLink[]
      */
     public function findEnabledFriendLinks($limit);
+
+    /**
+     * 保存友链
+     *
+     * @param FriendLink $friendLink
+     */
+    public function saveFriendLink(FriendLink $friendLink);
 }

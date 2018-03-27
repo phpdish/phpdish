@@ -6,6 +6,7 @@ namespace PHPDish\Bundle\WebBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use PHPDish\Bundle\WebBundle\Entity\FriendLink;
 
 class FriendLinkManager implements FriendLinkManagerInterface
 {
@@ -32,5 +33,14 @@ class FriendLinkManager implements FriendLinkManagerInterface
     public function findEnabledFriendLinks($limit)
     {
         return $this->friendLinkRepository->findBy([], ['priority' => 'asc'], $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveFriendLink(FriendLink $friendLink)
+    {
+        $this->entityManager->persist($friendLink);
+        $this->entityManager->flush();
     }
 }
