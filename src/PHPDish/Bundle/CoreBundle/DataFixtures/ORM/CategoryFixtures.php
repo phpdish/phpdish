@@ -3,9 +3,10 @@
 namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
 
-class CategoryFixtures extends AbstractFixtures
+class CategoryFixtures extends Fixture
 {
     /**
      * {@inheritdoc}

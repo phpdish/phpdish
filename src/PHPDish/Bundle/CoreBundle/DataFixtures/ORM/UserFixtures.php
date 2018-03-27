@@ -3,11 +3,12 @@
 namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\UserManipulator;
 use PHPDish\Component\Core\AvatarGenerator\AvatarGeneratorInterface;
 
-class UserFixtures extends AbstractFixtures
+class UserFixtures extends Fixture
 {
     /**
      * {@inheritdoc}

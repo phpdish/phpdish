@@ -30,10 +30,10 @@ class FriendLinkExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters(): array
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFilter('get_friend_links', [$this->friendLinkManager, 'findAllEnabledFriendLinks']),
+            new \Twig_SimpleFunction('get_friend_links', [$this->friendLinkManager, 'findEnabledFriendLinks']),
         ];
     }
 }

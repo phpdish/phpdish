@@ -4,9 +4,10 @@ namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Carbon\Carbon;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use PHPDish\Bundle\ForumBundle\Entity\Thread;
 
-class ThreadFixtures extends AbstractFixtures
+class ThreadFixtures extends Fixture
 {
     /**
      * {@inheritdoc}

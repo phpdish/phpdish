@@ -1,10 +1,11 @@
+
 <ul id="link_menu" class="breadcrumb">
     <li class="active">
         <span class="glyphicon glyphicon-list-alt"></span> 链接
     </li>
-    {% for link in friendLinks %}
-    <li class="menu-item">
-        <a target="_blank" href="{{ link.url }}">{{ link.name }}</a>
-    </li>
+    {% for link in get_friend_links(limit) %}
+        <li class="menu-item">
+            <a target="_blank" href="{{ link.url }}">{{ link.name }}</a>
+        </li>
     {% endfor %}
 </ul>

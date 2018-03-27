@@ -11,7 +11,8 @@ interface FriendLinkManagerInterface
     /**
      * 获取所有启用的友情链接
      *
+     * @param int $limit
      * @return FriendLink[]
      */
-    public function findAllEnabledFriendLinks();
+    public function findEnabledFriendLinks($limit);
 }

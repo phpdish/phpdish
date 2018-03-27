@@ -98,7 +98,7 @@
             <footer class="footer">
                 <div class="container">
                     <div class="panel panel-default">
-                        <div class="panel-body">{{ render(controller('PHPDishCoreBundle:FriendLink:list', {'limit': 5})) }}</div>
+                        <div class="panel-body">{% include 'PHPDishWebBundle:Common:_friend_link_list.html.twig' with {'limit': 5} %}</div>
                         <div class="panel-footer clearfix">
                             <ul class="targets list-inline list-unstyled">
                                 <li>2017 &copy; PHPDish. All Rights Reserved.</li>

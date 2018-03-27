@@ -23,14 +23,14 @@ class FriendLinkManager implements FriendLinkManagerInterface
     {
         $this->entityManager = $entityManager;
         $this->friendLinkRepository = $this->entityManager
-            ->getRepository('PHPDishCoreBundle:FriendLink');
+            ->getRepository('PHPDishWebBundle:FriendLink');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAllEnabledFriendLinks()
+    public function findEnabledFriendLinks($limit)
     {
-        return $this->friendLinkRepository->findBy([], ['priority' => 'asc']);
+        return $this->friendLinkRepository->findBy([], ['priority' => 'asc'], $limit);
     }
 }

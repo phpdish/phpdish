@@ -4,9 +4,10 @@ namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Carbon\Carbon;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
 
-class TopicFixtures extends AbstractFixtures
+class TopicFixtures extends Fixture
 {
     /**
      * {@inheritdoc}
