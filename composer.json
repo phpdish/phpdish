@@ -46,6 +46,7 @@
         "overtrue/pinyin": "^3.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.7",
+        "phpdish/plugin-installer": "^0.0",
         "phpdish/theme-installer": "^0.0",
         "ramsey/uuid": "^3.7",
         "sensio/distribution-bundle": "^5.0.19",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bf39ab7765393efbdf38aaa36449dca",
+    "content-hash": "eea07ee4025eb0c8e12098c4c170476d",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "algolia/search-bundle",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/search-bundle.git",
-                "reference": "c9e0d95387607347e83963748ddb74fabc3b691c"
+                "reference": "8327cdd27c692b7d9a2aff873d80a547824ad435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/algolia/search-bundle/c9e0d95387607347e83963748ddb74fabc3b691c.zip",
-                "reference": "c9e0d95387607347e83963748ddb74fabc3b691c",
+                "url": "https://files.phpcomposer.com/files/algolia/search-bundle/8327cdd27c692b7d9a2aff873d80a547824ad435.zip",
+                "reference": "8327cdd27c692b7d9a2aff873d80a547824ad435",
                 "shasum": ""
             },
             "require": {
@@ -110,7 +110,7 @@
                     "email": "julien@sigerr.org"
                 }
             ],
-            "time": "2018-03-15T15:45:56+00:00"
+            "time": "2018-03-22T10:48:07+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -828,39 +828,39 @@
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "9baecbd6bfdd1123b0cf8c1b88fee0170a84ddd1"
+                "reference": "4c8e363f96427924e7e519c5b5119b4f54512697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/doctrine/DoctrineCacheBundle/9baecbd6bfdd1123b0cf8c1b88fee0170a84ddd1.zip",
-                "reference": "9baecbd6bfdd1123b0cf8c1b88fee0170a84ddd1",
+                "url": "https://files.phpcomposer.com/files/doctrine/DoctrineCacheBundle/4c8e363f96427924e7e519c5b5119b4f54512697.zip",
+                "reference": "4c8e363f96427924e7e519c5b5119b4f54512697",
                 "shasum": ""
             },
             "require": {
                 "doctrine/cache": "^1.4.2",
                 "doctrine/inflector": "~1.0",
                 "php": ">=5.3.2",
-                "symfony/doctrine-bridge": "~2.2|~3.0|~4.0"
+                "symfony/doctrine-bridge": "~2.7|~3.3|~4.0"
             },
             "require-dev": {
                 "instaclick/coding-standard": "~1.1",
                 "instaclick/object-calisthenics-sniffs": "dev-master",
                 "instaclick/symfony2-coding-standard": "dev-remaster",
-                "phpunit/phpunit": "~4",
+                "phpunit/phpunit": "~4|~5",
                 "predis/predis": "~0.8",
                 "satooshi/php-coveralls": "^1.0",
                 "squizlabs/php_codesniffer": "~1.5",
-                "symfony/console": "~2.2|~3.0|~4.0",
-                "symfony/finder": "~2.2|~3.0|~4.0",
-                "symfony/framework-bundle": "~2.2|~3.0|~4.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0|~4.0",
-                "symfony/security-acl": "~2.3|~3.0",
-                "symfony/validator": "~2.2|~3.0|~4.0",
-                "symfony/yaml": "~2.2|~3.0|~4.0"
+                "symfony/console": "~2.7|~3.3|~4.0",
+                "symfony/finder": "~2.7|~3.3|~4.0",
+                "symfony/framework-bundle": "~2.7|~3.3|~4.0",
+                "symfony/phpunit-bridge": "~2.7|~3.3|~4.0",
+                "symfony/security-acl": "~2.7|~3.3",
+                "symfony/validator": "~2.7|~3.3|~4.0",
+                "symfony/yaml": "~2.7|~3.3|~4.0"
             },
             "suggest": {
                 "symfony/security-acl": "For using this bundle to cache ACLs"
@@ -912,7 +912,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-10-12T17:23:29+00:00"
+            "time": "2018-03-27T09:22:12+00:00"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -2074,16 +2074,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.3.0",
+            "version": "6.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
+                "reference": "68d0ea14d5a3f42a20e87632a5f84931e2709c90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/guzzle/guzzle/f4db5a78a5ea468d4831de7f0bf9d9415e348699.zip",
-                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "url": "https://files.phpcomposer.com/files/guzzle/guzzle/68d0ea14d5a3f42a20e87632a5f84931e2709c90.zip",
+                "reference": "68d0ea14d5a3f42a20e87632a5f84931e2709c90",
                 "shasum": ""
             },
             "require": {
@@ -2093,7 +2093,7 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4",
                 "psr/log": "^1.0"
             },
             "suggest": {
@@ -2102,7 +2102,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.2-dev"
+                    "dev-master": "6.3-dev"
                 }
             },
             "autoload": {
@@ -2135,7 +2135,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-06-22T18:50:49+00:00"
+            "time": "2018-03-26T16:33:04+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -2252,6 +2252,58 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "http-interop/http-factory",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/http-interop/http-factory.git",
+                "reference": "c2587cc0a6f74987fefb5b8074acfd32c69a4b0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/http-interop/http-factory/c2587cc0a6f74987fefb5b8074acfd32c69a4b0f.zip",
+                "reference": "c2587cc0a6f74987fefb5b8074acfd32c69a4b0f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Http\\Factory\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP message factories",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "psr",
+                "psr-17",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2017-03-24T14:48:51+00:00"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -2808,16 +2860,16 @@
         },
         {
             "name": "knplabs/gaufrette",
-            "version": "v0.5.0",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "2f228650fd4cc50c3d3c1d6541546ffc169b2240"
+                "reference": "a7c71edef4528d9881f534515f9061660255afe3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/KnpLabs/Gaufrette/2f228650fd4cc50c3d3c1d6541546ffc169b2240.zip",
-                "reference": "2f228650fd4cc50c3d3c1d6541546ffc169b2240",
+                "url": "https://files.phpcomposer.com/files/KnpLabs/Gaufrette/a7c71edef4528d9881f534515f9061660255afe3.zip",
+                "reference": "a7c71edef4528d9881f534515f9061660255afe3",
                 "shasum": ""
             },
             "require": {
@@ -2834,8 +2886,7 @@
                 "dropbox-php/dropbox-php": "*",
                 "google/apiclient": "~1.1.3",
                 "league/flysystem": "~1.0",
-                "microsoft/azure-storage": "~0.15.0",
-                "microsoft/windowsazure": "~0.4",
+                "microsoft/azure-storage-blob": "^1.0",
                 "mikey179/vfsstream": "~1.2.0",
                 "mongodb/mongodb": "^1.1",
                 "phpseclib/phpseclib": "^2.0",
@@ -2864,7 +2915,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.5.x-dev"
+                    "dev-master": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -2894,20 +2945,20 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2018-01-04T19:50:08+00:00"
+            "time": "2018-03-26T12:19:49+00:00"
         },
         {
             "name": "knplabs/knp-components",
-            "version": "1.3.5",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/knp-components.git",
-                "reference": "a03bbd87ecf9e56db6f7533db2c63d6da6cd5f33"
+                "reference": "464e1ee889fe01144127b3811d1fa102519de682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/KnpLabs/knp-components/a03bbd87ecf9e56db6f7533db2c63d6da6cd5f33.zip",
-                "reference": "a03bbd87ecf9e56db6f7533db2c63d6da6cd5f33",
+                "url": "https://files.phpcomposer.com/files/KnpLabs/knp-components/464e1ee889fe01144127b3811d1fa102519de682.zip",
+                "reference": "464e1ee889fe01144127b3811d1fa102519de682",
                 "shasum": ""
             },
             "require": {
@@ -2967,7 +3018,7 @@
                 "pager",
                 "paginator"
             ],
-            "time": "2017-09-15T12:50:01+00:00"
+            "time": "2018-03-22T14:54:27+00:00"
         },
         {
             "name": "knplabs/knp-gaufrette-bundle",
@@ -3354,25 +3405,32 @@
         },
         {
             "name": "kriswallsmith/buzz",
-            "version": "v0.16.1",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12"
+                "reference": "0d9ae422aaceca78b832a2bbc6152a004f356702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/kriswallsmith/Buzz/4977b7d44dbef49cdc641f14be6512fdcfe32f12.zip",
-                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12",
+                "url": "https://files.phpcomposer.com/files/kriswallsmith/Buzz/0d9ae422aaceca78b832a2bbc6152a004f356702.zip",
+                "reference": "0d9ae422aaceca78b832a2bbc6152a004f356702",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/psr7": "^1.4",
-                "php": "^5.4 || ^7.0"
+                "nyholm/psr7": "^0.3",
+                "php": "^7.1",
+                "php-http/httplug": "^1.1",
+                "psr/http-client": "^0.1",
+                "psr/http-message": "^1.0",
+                "symfony/options-resolver": "^3.4 || ^4.0"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.11",
                 "php-http/client-integration-tests": "^0.6.2",
-                "symfony/phpunit-bridge": "^3.4 || ^4.0"
+                "phpunit/phpunit": "^6.5.7",
+                "psr/log": "^1.0",
+                "symfony/phpunit-bridge": "^4.0"
             },
             "suggest": {
                 "ext-curl": "*"
@@ -3380,7 +3438,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Buzz\\": "lib/Buzz"
+                    "Buzz\\": "lib"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3392,6 +3450,11 @@
                     "name": "Kris Wallsmith",
                     "email": "kris.wallsmith@gmail.com",
                     "homepage": "http://kriswallsmith.net/"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "http://tnyholm.se/"
                 }
             ],
             "description": "Lightweight HTTP client",
@@ -3400,7 +3463,7 @@
                 "curl",
                 "http client"
             ],
-            "time": "2018-03-19T10:34:40+00:00"
+            "time": "2018-03-25T20:37:00+00:00"
         },
         {
             "name": "liip/imagine-bundle",
@@ -3750,16 +3813,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.24.2",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/bba6c6e410c6b4317e37a9474aeaa753808c3875.zip",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
+                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/cbcf13da0b531767e39eb86e9687f5deba9857b4.zip",
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4",
                 "shasum": ""
             },
             "require": {
@@ -3799,7 +3862,60 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-10T10:10:14+00:00"
+            "time": "2018-03-19T15:50:49+00:00"
+        },
+        {
+            "name": "nyholm/psr7",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nyholm/psr7.git",
+                "reference": "ec2c453decfc5f8ee5a8cf43694b8ca392503d32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Nyholm/psr7/ec2c453decfc5f8ee5a8cf43694b8ca392503d32.zip",
+                "reference": "ec2c453decfc5f8ee5a8cf43694b8ca392503d32",
+                "shasum": ""
+            },
+            "require": {
+                "http-interop/http-factory": "^0.3",
+                "php": "^7.1",
+                "php-http/message-factory": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "provide": {
+                "psr/http-factory-implementation": "1.0",
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "http-interop/http-factory-tests": "dev-master",
+                "php-http/psr7-integration-tests": "dev-master",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nyholm\\Psr7\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com"
+                }
+            ],
+            "description": "A fast PHP7 implementation of PSR-7",
+            "homepage": "http://tnyholm.se",
+            "keywords": [
+                "psr-17",
+                "psr-7"
+            ],
+            "time": "2018-02-06T12:01:53+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -4379,16 +4495,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "75c85e19e50b320d81d6e1ef6af53927934fa99f"
+                "reference": "c91eef51db2c2b778946c1dd931e9aa87ac6b1e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-http/HttplugBundle/75c85e19e50b320d81d6e1ef6af53927934fa99f.zip",
-                "reference": "75c85e19e50b320d81d6e1ef6af53927934fa99f",
+                "url": "https://files.phpcomposer.com/files/php-http/HttplugBundle/c91eef51db2c2b778946c1dd931e9aa87ac6b1e4.zip",
+                "reference": "c91eef51db2c2b778946c1dd931e9aa87ac6b1e4",
                 "shasum": ""
             },
             "require": {
@@ -4441,7 +4557,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9-dev"
+                    "dev-master": "1.10-dev"
                 }
             },
             "autoload": {
@@ -4475,7 +4591,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2018-03-06T08:57:33+00:00"
+            "time": "2018-03-27T07:08:16+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -4806,6 +4922,51 @@
             "time": "2015-05-17T12:39:23+00:00"
         },
         {
+            "name": "phpdish/plugin-installer",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpdish/plugin-installer.git",
+                "reference": "3a5a3cde82a8e890781ea38829e10776b91b5ffc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/phpdish/plugin-installer/3a5a3cde82a8e890781ea38829e10776b91b5ffc.zip",
+                "reference": "3a5a3cde82a8e890781ea38829e10776b91b5ffc",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.6.0",
+                "symfony/finder": "^2.0|^3.0|^4.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "PHPDish\\PluginInstaller\\PluginInstaller"
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPDish\\PluginInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Slince",
+                    "email": "taosikai@yeah.net"
+                }
+            ],
+            "description": "A composer installer for installing PHPDish plugin.",
+            "homepage": "https://www.phpdish.com",
+            "time": "2018-03-28T12:17:35+00:00"
+        },
+        {
             "name": "phpdish/theme-installer",
             "version": "0.0.1",
             "source": {
@@ -4993,6 +5154,55 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "psr/http-client",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-client.git",
+                "reference": "d4d3ec04b034120b0591ad9722a4c2be33a7dfec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/php-fig/http-client/d4d3ec04b034120b0591ad9722a4c2be33a7dfec.zip",
+                "reference": "d4d3ec04b034120b0591ad9722a4c2be33a7dfec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP clients",
+            "homepage": "https://github.com/php-fig/http-client",
+            "keywords": [
+                "http",
+                "http-client",
+                "psr",
+                "psr-18"
+            ],
+            "time": "2018-02-03T12:55:20+00:00"
         },
         {
             "name": "psr/http-message",
@@ -7104,16 +7314,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.6",
+            "version": "v2.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f"
+                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/twigphp/Twig/d2117ec118c1ff3d28ccddca8212d82787a4809f.zip",
-                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig/69aacd44dbbaa3199d5afb68605c996d577896fc.zip",
+                "reference": "69aacd44dbbaa3199d5afb68605c996d577896fc",
                 "shasum": ""
             },
             "require": {
@@ -7122,8 +7332,8 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "library",
             "extra": {
@@ -7166,7 +7376,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-03-03T16:23:01+00:00"
+            "time": "2018-03-20T04:31:17+00:00"
         },
         {
             "name": "white-october/pagerfanta-bundle",
