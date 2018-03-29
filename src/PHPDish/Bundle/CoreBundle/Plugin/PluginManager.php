@@ -28,8 +28,10 @@ class PluginManager
      */
     protected $installedJson;
 
-    public function __construct()
+    public function __construct($projectDir)
     {
+        $this->installedJson = $projectDir . '/vendor/composer/installed.json';
+
         $this->plugins = new ArrayCollection();
     }
 

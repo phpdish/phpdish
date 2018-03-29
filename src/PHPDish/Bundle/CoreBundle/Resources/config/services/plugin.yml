@@ -1,0 +1,15 @@
+services:
+    phpdish.plugin.plugin_manager:
+         class: PHPDish\Bundle\CoreBundle\Plugin\PluginManager
+         arguments: ['%kernel.project_dir%']
+
+    phpdish.plugin.cache.warmer.plugin_paths:
+        class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheWarmer
+        arguments: ['@phpdish.plugin.plugin_manager']
+        tags:
+           - {name: kernel.cache_warmer}
+
+    phpdish.plugin.cache.clearer.plugin_paths:
+        class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheClearer
+        tags:
+           - {name: kernel.cache_clearer}

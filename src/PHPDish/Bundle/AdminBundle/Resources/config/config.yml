@@ -131,7 +131,7 @@ easy_admin:
 
         # 友情链接
         FriendLink:
-            class: PHPDish\Bundle\CoreBundle\Entity\FriendLink
+            class: PHPDish\Bundle\WebBundle\Entity\FriendLink
             label: '友情链接'
             list:
                 title: "%%entity_label%%列表"

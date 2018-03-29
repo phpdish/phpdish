@@ -45,7 +45,7 @@ abstract class SimplePlugin
         return [];
     }
 
-    protected function getRootDir()
+    public function getRootDir()
     {
         if ($this->rootDir === null) {
             $reflection = new \ReflectionObject($this);
