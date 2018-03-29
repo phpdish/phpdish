@@ -15,6 +15,7 @@ namespace PHPDish\Bundle\CoreBundle\Plugin;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class PluginManager
 {
@@ -27,6 +28,11 @@ class PluginManager
      * @var string
      */
     protected $installedJson;
+
+    /**
+     * @var ContainerBuilder
+     */
+    protected $container;
 
     public function __construct($projectDir)
     {
@@ -62,11 +68,19 @@ class PluginManager
 
     /**
      * Gets all plugins
+     *
      * @return Collection|SimplePlugin[]
      */
     public function getPlugins()
     {
         return $this->plugins;
+    }
+
+    public function install(SimplePlugin $plugin)
+    {
+        foreach ($plugin->registerServiceFiles() as $file) {
+            $this->container->
+        }
     }
 
     protected function initializePlugin($pluginClass)
