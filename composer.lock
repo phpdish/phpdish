@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "be44301d1371295ed6cd710b4392554c",
+    "content-hash": "f746e15f23562c169d16b01feee884da",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -4806,6 +4806,33 @@
             "description": "A composer installer for installing PHPDish plugin.",
             "homepage": "https://www.phpdish.com",
             "time": "2018-03-28T12:17:35+00:00"
+        },
+        {
+            "name": "phpdish/qiniu-plugin",
+            "version": "0.0.1",
+            "dist": {
+                "type": "path",
+                "url": "plugins/phpdish-qiniu-plugin",
+                "reference": "307126912d004ad1321734e99697d60f5a26698b",
+                "shasum": null
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "phpdish-plugin",
+            "extra": {
+                "phpdish": {
+                    "class": "PHPDish\\QiNiuPlugin\\QiNiuPlugin"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPDish\\QiNiuPlugin\\": "./src"
+                }
+            },
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "phpdish/theme-installer",

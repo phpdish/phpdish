@@ -12,4 +12,4 @@ services:
     phpdish.plugin.cache.clearer.plugin_paths:
         class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheClearer
         tags:
-           - {name: kernel.cache_clearer}
+           - {name: kernel.cache_clearer, priority: 999}

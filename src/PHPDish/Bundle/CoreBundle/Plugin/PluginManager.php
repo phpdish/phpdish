@@ -42,14 +42,14 @@ class PluginManager
      */
     public function scanPlugins()
     {
-        if ($this->plugins || !file_exists($this->installedJson)) {
+        if ($this->plugins->count() > 0 || !file_exists($this->installedJson)) {
             return $this;
         }
         $installed = \GuzzleHttp\json_decode(file_get_contents($this->installedJson), true);
         foreach ($installed as $package) {
             if (
                 !isset($package['type'])
-                || $package['type'] === 'phpdish-plugin'
+                || $package['type'] !== 'phpdish-plugin'
                 || !isset($package['extra']['phpdish']['class'])
             ) {
                 continue;

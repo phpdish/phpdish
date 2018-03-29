@@ -1,0 +1,19 @@
+{
+    "name": "phpdish/qiniu-plugin",
+    "license": "MIT",
+    "type": "phpdish-plugin",
+    "require": {
+        "php": ">=7.2.0"
+    },
+    "version": "0.0.1",
+    "autoload": {
+        "psr-4": {
+             "PHPDish\\QiNiuPlugin\\": "./src"
+        }
+    },
+    "extra": {
+        "phpdish": {
+             "class": "PHPDish\\QiNiuPlugin\\QiNiuPlugin"
+        }
+    }
+}
