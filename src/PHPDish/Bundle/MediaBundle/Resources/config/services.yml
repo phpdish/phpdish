@@ -15,7 +15,7 @@ services:
 
     phpdish.media.file_factory:
         class: PHPDish\Component\Media\Manager\FileFactory
-        arguments: ['@phpdish.media.url_builder', '@phpdish.media.file_namer']
+        arguments: ['@phpdish.media.file_namer']
 
     phpdish.media.file_uploader:
        class: PHPDish\Component\Media\Uploader\FileUploader

@@ -1,10 +1,18 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+declare(strict_types=1);
+
 namespace PHPDish\Component\Media\Model;
 
-/**
- * Class Image.
- */
 class Image extends File implements ImageInterface
 {
     /**
@@ -20,8 +28,6 @@ class Image extends File implements ImageInterface
      * Height
      */
     protected $height;
-
-    protected $resizeUrl;
 
     /**
      * Set image width in pixels.
@@ -69,15 +75,5 @@ class Image extends File implements ImageInterface
     public function getHeight()
     {
         return $this->height;
-    }
-
-    public function setResizeUrl($url)
-    {
-        $this->resizeUrl = $url;
-    }
-
-    public function getResizeUrl($width, $height)
-    {
-        return $this->resizeUrl;
     }
 }

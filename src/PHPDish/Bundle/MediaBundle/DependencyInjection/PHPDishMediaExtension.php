@@ -46,8 +46,7 @@ class PHPDishMediaExtension extends Extension
                 $container->setDefinition('phpdish.media.url_builder.' .  $alias, $urlBuilderDefinition);
 
                 $fileFactoryDefinition = new ChildDefinition('phpdish.media.file_factory');
-                $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish.media.url_builder.' .  $alias));
-                $fileFactoryDefinition->replaceArgument(1, new Reference('phpdish.media.file_namer.' .  $alias));
+                $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish.media.file_namer.' .  $alias));
                 $container->setDefinition('phpdish.media.file_factory.' .  $alias, $fileFactoryDefinition);
 
                 $fileUploaderDefinition = new ChildDefinition('phpdish.media.file_uploader');

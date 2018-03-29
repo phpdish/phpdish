@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+declare(strict_types=1);
+
 namespace PHPDish\Component\Media\Manager;
 
 use PHPDish\Component\Media\Model\File;
@@ -11,18 +22,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileFactory implements FileFactoryInterface
 {
     /**
-     * @var UrlBuilderInterface
-     */
-    protected $urlBuilder;
-
-    /**
      * @var NamerInterface
      */
     protected $namer;
 
-    public function __construct(UrlBuilderInterface $urlBuilder, NamerInterface $namer)
+    public function __construct(NamerInterface $namer)
     {
-        $this->urlBuilder = $urlBuilder;
         $this->namer = $namer;
     }
 
@@ -37,8 +42,7 @@ class FileFactory implements FileFactoryInterface
             ->setSize($uploadedFile->getSize())
             ->setContentType($uploadedFile->getMimeType())
             ->setContent(file_get_contents($uploadedFile->getRealPath()))
-            ->setKey($this->namer->transform($uploadedFile))
-            ->setUrl($this->urlBuilder->build($file));
+            ->setKey($this->namer->transform($uploadedFile));
 
         return $file;
     }
@@ -63,8 +67,6 @@ class FileFactory implements FileFactoryInterface
     public function createFileByKey($key)
     {
         $file = new File($key);
-        $file->setUrl($this->urlBuilder->build($file));
-
         return $file;
     }
 }

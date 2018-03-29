@@ -33,7 +33,7 @@
         "friendsofsymfony/rest-bundle": "^2.2",
         "friendsofsymfony/user-bundle": "^2.0",
         "gregwar/captcha-bundle": "^2.0",
-        "hwi/oauth-bundle": "^0.5.3",
+        "hwi/oauth-bundle": "^0.6.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-gaufrette-bundle": "^0.4.0",
         "knplabs/knp-markdown-bundle": "^1.5",

@@ -1,9 +1,7 @@
 # 社交网站登录
 hwi_oauth:
-    http_client:
-          timeout: 10
-          verify_peer: false
-          ignore_errors: false
+    http:
+        client: httplug.client.default
 
     firewall_names:
         - 'main'

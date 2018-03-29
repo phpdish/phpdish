@@ -1,28 +1,34 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+declare(strict_types=1);
+
 namespace PHPDish\Component\Media\Model;
 
-/**
- * Class Media.
- */
-abstract class Media implements MediaInterface
+class Media implements MediaInterface
 {
     /**
      * @var string
-     *
-     * Name
      */
     protected $key;
 
     /**
      * @var string
      *
-     * Name
+     * Path
      */
-    protected $url;
+    protected $path;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getKey()
     {
@@ -30,9 +36,7 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * @param string $key
-     *
-     * @return Media
+     * {@inheritdoc}
      */
     public function setKey($key)
     {
@@ -42,22 +46,20 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getUrl()
+    public function setPath($path)
     {
-        return $this->url;
+        $this->path = $path;
+
+        return $this;
     }
 
     /**
-     * @param string $url
-     *
-     * @return Media
+     * {@inheritdoc}
      */
-    public function setUrl($url)
+    public function getPath()
     {
-        $this->url = $url;
-
-        return $this;
+        return $this->path;
     }
 }

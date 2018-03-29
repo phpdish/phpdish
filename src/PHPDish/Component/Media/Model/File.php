@@ -1,19 +1,20 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+declare(strict_types=1);
+
 namespace PHPDish\Component\Media\Model;
 
-/**
- * Class File.
- */
 class File extends Media implements FileInterface
 {
-    /**
-     * @var string
-     *
-     * Path
-     */
-    protected $path;
-
     /**
      * @var string
      *
@@ -48,29 +49,6 @@ class File extends Media implements FileInterface
         $this->content = $content;
     }
 
-    /**
-     * Set path.
-     *
-     * @param string $path Path to file
-     *
-     * @return $this Self object
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path.
-     *
-     * @return string Path
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
 
     /**
      * Set the mime type of this media element.

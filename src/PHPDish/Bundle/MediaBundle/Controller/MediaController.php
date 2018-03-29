@@ -33,7 +33,7 @@ class MediaController extends Controller
         $file = $uploader->upload($uploadedFile);
         $response = [
             'key' => $file->getKey(),
-            'path' => $file->getUrl()
+            'path' => $urlBuilder->build($file)
         ];
         if ($file instanceof Image) {
             $response['thumb'] = $urlBuilder->buildImageResizeUrl($file, 'middle_square');
