@@ -35,6 +35,19 @@ abstract class SimplePlugin
     }
 
     /**
+     * 获取路由资源
+     *
+     * @return string|false
+     */
+    public function getRouterResource()
+    {
+        if (file_exists($this->getRootDir() . '/routing.yml')) {
+            return $this->getRootDir() . '/routing.yml';
+        }
+        return false;
+    }
+
+    /**
      * 获取插件目录
      *
      * @return string

@@ -34,9 +34,15 @@ class PluginManager
      */
     protected $plugins;
 
+    /**
+     * @var \Symfony\Component\DependencyInjection\Definition
+     */
+    protected $routingLoader;
+
     public function __construct(ContainerBuilder $container)
     {
         $this->container = $container;
+        $this->routingLoader = $container->findDefinition('phpdish.plugin.route_loader');
     }
 
     /**
@@ -73,7 +79,14 @@ class PluginManager
         $loader = $this->createContainerLoader($this->container,
             new FileLocator($plugin->getRootDir())
         );
-        $plugin->registerServices($loader);
+        dump($plugin->getRouterResource());
+        $plugin->registerServices($loader); //注册插件服务
+        dump($plugin->getRouterResource());
+        if ($plugin->getRouterResource() !== false) {
+            $this->routingLoader->addMethodCall('addResource', [
+                $plugin->getRouterResource()
+            ]);
+        }
         $this->plugins[] = $plugin;
     }
 

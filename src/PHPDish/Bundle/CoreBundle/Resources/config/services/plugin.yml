@@ -11,6 +11,11 @@ services:
         class: PHPDish\Bundle\CoreBundle\Plugin\Finder\CachedPluginFinder
         arguments: ['%kernel.cache_dir%/phpdish_plugins.php', '@phpdish.plugin.finder']
 
+    phpdish.plugin.route_loader:
+        class: PHPDish\Bundle\CoreBundle\Plugin\Routing\RoutingLoader
+        tags:
+            - {name: routing.loader}
+
     phpdish.plugin.cache.warmer.plugin_paths:
         class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheWarmer
         arguments: ['@phpdish.plugin.finder']

@@ -1,3 +1,7 @@
+# 核心路由
+phpdish_core:
+    resource: '@PHPDishCoreBundle/Resources/config/routing.yml'
+
 # 前台路由
 phpdish_main:
     resource: '@PHPDishWebBundle/Resources/config/routing.yml'

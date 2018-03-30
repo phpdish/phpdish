@@ -2,6 +2,8 @@
 
 namespace PHPDish\Bundle\CoreBundle\DependencyInjection;
 
+use PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinder;
+use PHPDish\Bundle\CoreBundle\Plugin\PluginManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,5 +26,10 @@ class PHPDishCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        //注册轻便版插件
+        $pluginFinder = new PluginFinder($container->getParameter('kernel.project_dir'));
+        $pluginManager = new PluginManager($container);
+        $pluginManager->installAll($pluginFinder->findAll());
     }
 }
