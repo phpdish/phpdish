@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Plugin\Cache;
 
-use PHPDish\Bundle\CoreBundle\Plugin\PluginManager;
+use PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
 
 class PluginPathsCacheWarmer extends CacheWarmer
 {
     /**
-     * @var PluginManager
+     * @var PluginFinderInterface
      */
-    protected $pluginManager;
+    protected $pluginFinder;
 
-    public function __construct(PluginManager $pluginManager)
+    public function __construct(PluginFinderInterface $pluginFinder)
     {
-        $this->pluginManager = $pluginManager;
+        $this->pluginFinder = $pluginFinder;
     }
 
     /**
@@ -33,7 +33,7 @@ class PluginPathsCacheWarmer extends CacheWarmer
      */
     public function warmUp($cacheDir)
     {
-        $plugins = $this->pluginManager->scanPlugins()->getPlugins();
+        $plugins = $this->pluginFinder->findAll();
         $processed = [];
         foreach ($plugins as $plugin) {
             $processed[] = [

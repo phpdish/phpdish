@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Plugin;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 abstract class SimplePlugin
@@ -24,33 +24,35 @@ abstract class SimplePlugin
     protected $rootDir;
 
     /**
-     * Register Events
-     * @param EventDispatcherInterface $eventDispatcher
+     * 注册服务
+     *
+     * @param LoaderInterface $loader
+     * @throws \Exception
      */
-    public function registerEvents(EventDispatcherInterface $eventDispatcher)
+    public function registerServices(LoaderInterface $loader)
     {
-
+        $loader->load('services.yml');
     }
 
-    public function registerServices(ContainerBuilder $container)
-    {
-    }
-
-    public function registerServiceFiles()
-    {
-        $defaultServiceFile = $this->getRootDir() . '/services.yml';
-        if (file_exists($defaultServiceFile)) {
-            return [$defaultServiceFile];
-        }
-        return [];
-    }
-
+    /**
+     * 获取插件目录
+     *
+     * @return string
+     */
     public function getRootDir()
     {
-        if ($this->rootDir === null) {
-            $reflection = new \ReflectionObject($this);
-            $this->rootDir = dirname($reflection->getFileName());
+        if (null === $this->rootDir) {
+            $r = new \ReflectionObject($this);
+            $dir = $rootDir = dirname($r->getFileName());
+            while (!file_exists($dir.'/composer.json')) {
+                if ($dir === dirname($dir)) {
+                    return $this->rootDir = $rootDir;
+                }
+                $dir = dirname($dir);
+            }
+            $this->rootDir = $dir;
         }
+
         return $this->rootDir;
     }
 }

@@ -1,11 +1,19 @@
 services:
-    phpdish.plugin.plugin_manager:
-         class: PHPDish\Bundle\CoreBundle\Plugin\PluginManager
-         arguments: ['%kernel.project_dir%']
+#    phpdish.plugin.plugin_manager:
+#         class: PHPDish\Bundle\CoreBundle\Plugin\PluginManager
+#         arguments: ['@service_container', '%kernel.project_dir%']
+
+    phpdish.plugin.finder:
+        class: PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinder
+        arguments: ['%kernel.project_dir%']
+
+    phpdish.plugin.finder.cached:
+        class: PHPDish\Bundle\CoreBundle\Plugin\Finder\CachedPluginFinder
+        arguments: ['%kernel.cache_dir%/phpdish_plugins.php', '@phpdish.plugin.finder']
 
     phpdish.plugin.cache.warmer.plugin_paths:
         class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheWarmer
-        arguments: ['@phpdish.plugin.plugin_manager']
+        arguments: ['@phpdish.plugin.finder']
         tags:
            - {name: kernel.cache_warmer}
 

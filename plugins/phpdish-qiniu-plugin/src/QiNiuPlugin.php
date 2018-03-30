@@ -15,10 +15,12 @@ namespace PHPDish\QiNiuPlugin;
 
 use PHPDish\Bundle\CoreBundle\Plugin\SimplePlugin;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class QiNiuPlugin extends SimplePlugin
 {
-    public function registerServices(ContainerBuilder $container)
+    public function registerEvents(EventDispatcher $eventDispatcher)
     {
+        $eventDispatcher->addListener();
     }
 }

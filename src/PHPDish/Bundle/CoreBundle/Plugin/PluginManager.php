@@ -15,55 +15,28 @@ namespace PHPDish\Bundle\CoreBundle\Plugin;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class PluginManager
 {
-    /**
-     * @var SimplePlugin[]|Collection
-     */
-    protected $plugins;
-
-    /**
-     * @var string
-     */
-    protected $installedJson;
-
     /**
      * @var ContainerBuilder
      */
     protected $container;
 
-    public function __construct($projectDir)
-    {
-        $this->installedJson = $projectDir . '/vendor/composer/installed.json';
-
-        $this->plugins = new ArrayCollection();
-    }
-
     /**
-     * Scan all simple plugins
-     *
-     * @return $this
+     * @var SimplePlugin[]
      */
-    public function scanPlugins()
+    protected $plugins;
+
+    public function __construct(ContainerBuilder $container)
     {
-        if ($this->plugins->count() > 0 || !file_exists($this->installedJson)) {
-            return $this;
-        }
-        $installed = \GuzzleHttp\json_decode(file_get_contents($this->installedJson), true);
-        foreach ($installed as $package) {
-            if (
-                !isset($package['type'])
-                || $package['type'] !== 'phpdish-plugin'
-                || !isset($package['extra']['phpdish']['class'])
-            ) {
-                continue;
-            }
-            $pluginClass = $package['extra']['phpdish']['class'];
-            $this->plugins[] = $this->initializePlugin($pluginClass);
-        }
-        return $this;
+        $this->container = $container;
     }
 
     /**
@@ -76,15 +49,41 @@ class PluginManager
         return $this->plugins;
     }
 
-    public function install(SimplePlugin $plugin)
+    /**
+     * 安装所有插件
+     *
+     * @var SimplePlugin[] $plugins
+     * @throws \Exception
+     */
+    public function installAll($plugins)
     {
-        foreach ($plugin->registerServiceFiles() as $file) {
-            $this->container->
+        foreach ($plugins as $plugin) {
+            $this->install($plugin);
         }
     }
 
-    protected function initializePlugin($pluginClass)
+    /**
+     * 注册插件
+     *
+     * @param SimplePlugin $plugin
+     * @throws \Exception
+     */
+    public function install(SimplePlugin $plugin)
     {
-        return new $pluginClass;
+        $loader = $this->createContainerLoader($this->container,
+            new FileLocator($plugin->getRootDir())
+        );
+        $plugin->registerServices($loader);
+        $this->plugins[] = $plugin;
+    }
+
+
+    protected function createContainerLoader(ContainerBuilder $container, FileLocator $fileLocator)
+    {
+        $resolver = new LoaderResolver([
+            new Loader\YamlFileLoader($container, $fileLocator),
+            new Loader\XmlFileLoader($container, $fileLocator),
+        ]);
+        return new DelegatingLoader($resolver);
     }
 }
