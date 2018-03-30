@@ -13,10 +13,17 @@ declare(strict_types=1);
 
 namespace PHPDish\QiNiuPlugin;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+
 class UploadListener
 {
-    public function onUpload()
+    public function onUpload(FilterResponseEvent $event)
     {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
 
+        $event->setResponse(new Response('hello world'));
     }
 }

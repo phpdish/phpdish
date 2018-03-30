@@ -39,10 +39,17 @@ class PluginManager
      */
     protected $routingLoader;
 
+    /**
+     * @var ListenerRegistry
+     */
+    protected $listenerRegistry;
+
     public function __construct(ContainerBuilder $container)
     {
         $this->container = $container;
         $this->routingLoader = $container->findDefinition('phpdish.plugin.route_loader');
+        $this->listenerRegistry = new ListenerRegistry();
+        $container->setParameter('phpdish.plugin.listener_registry', $this->listenerRegistry);
     }
 
     /**
@@ -79,14 +86,15 @@ class PluginManager
         $loader = $this->createContainerLoader($this->container,
             new FileLocator($plugin->getRootDir())
         );
-        dump($plugin->getRouterResource());
         $plugin->registerServices($loader); //注册插件服务
-        dump($plugin->getRouterResource());
+        //注册路由
         if ($plugin->getRouterResource() !== false) {
             $this->routingLoader->addMethodCall('addResource', [
                 $plugin->getRouterResource()
             ]);
         }
+
+        $plugin->registerListeners($this->listenerRegistry);
         $this->plugins[] = $plugin;
     }
 

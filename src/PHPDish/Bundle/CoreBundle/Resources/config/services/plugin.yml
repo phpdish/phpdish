@@ -16,6 +16,9 @@ services:
         tags:
             - {name: routing.loader}
 
+    phpdish.plugin.listener_registry:
+        class: PHPDish\Bundle\CoreBundle\Plugin\ListenerRegistry
+
     phpdish.plugin.cache.warmer.plugin_paths:
         class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheWarmer
         arguments: ['@phpdish.plugin.finder']

@@ -23,6 +23,10 @@ abstract class SimplePlugin
      */
     protected $rootDir;
 
+    public function registerListeners(ListenerRegistry $registry)
+    {
+    }
+
     /**
      * 注册服务
      *
