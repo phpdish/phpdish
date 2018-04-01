@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace PHPDish\Bundle\CoreBundle\Plugin;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 abstract class SimplePlugin
 {
@@ -22,10 +21,6 @@ abstract class SimplePlugin
      * @var string
      */
     protected $rootDir;
-
-    public function registerListeners(ListenerRegistry $registry)
-    {
-    }
 
     /**
      * 注册服务
@@ -47,6 +42,20 @@ abstract class SimplePlugin
     {
         if (file_exists($this->getRootDir() . '/routing.yml')) {
             return $this->getRootDir() . '/routing.yml';
+        }
+        return false;
+    }
+
+    /**
+     * 返回翻译文件路径
+     *
+     * @return string|false
+     */
+    public function getTranslationDir()
+    {
+        $translationsDir = $this->getRootDir() . '/translations';
+        if (file_exists($translationsDir) && is_dir($translationsDir)) {
+            return $translationsDir;
         }
         return false;
     }

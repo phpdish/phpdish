@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Plugin\Routing;
 
-use PHPDish\Bundle\CoreBundle\Plugin\PluginManager;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
 

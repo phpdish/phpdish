@@ -26,10 +26,5 @@ class PHPDishCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
-        //注册轻便版插件
-        $pluginFinder = new PluginFinder($container->getParameter('kernel.project_dir'));
-        $pluginManager = new PluginManager($container);
-        $pluginManager->installAll($pluginFinder->findAll());
     }
 }
