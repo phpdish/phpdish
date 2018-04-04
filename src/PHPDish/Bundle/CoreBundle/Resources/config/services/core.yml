@@ -43,3 +43,7 @@ services:
         arguments:
             - "@search.index_manager"
             - "@doctrine.orm.entity_manager"
+
+    ## 默认null engine
+    search.engine.null:
+        class: Algolia\SearchBundle\Engine\NullEngine

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0-beta2 - 2018-04-02
+
+Fixed:
+
+- 修复 algolia 没有配置无法安装的问题
+
 ## 1.3.0-beta1 - 2018-03-20
 
 Fixed:

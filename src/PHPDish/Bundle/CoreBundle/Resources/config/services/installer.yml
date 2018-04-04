@@ -1,6 +1,7 @@
 services:
   phpdish.installer.directory_checker:
       class: PHPDish\Bundle\CoreBundle\Installer\Checker\DirectoryChecker
+      public: true
       arguments:
           - '@filesystem'
 
@@ -9,5 +10,6 @@ services:
 
   phpdish.installer.requirements_checker:
       class: PHPDish\Bundle\CoreBundle\Installer\Checker\RequirementsChecker
+      public: true
       arguments:
           - '@phpdish.installer.requirements'
