@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace PHPDish\Bundle\CoreBundle\Application\Plugin;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
-interface SimplePluginInterface
+interface SimplePluginInterface extends BundleInterface
 {
     /**
      * 注册服务
      *
-     * @param LoaderInterface $loader
      * @throws \Exception
      */
-    public function registerServices(LoaderInterface $loader);
+    public function getServicesSource();
 
     /**
      * 获取路由资源

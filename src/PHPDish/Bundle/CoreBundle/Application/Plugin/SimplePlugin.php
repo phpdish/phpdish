@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Application\Plugin;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-abstract class SimplePlugin implements SimplePluginInterface
+abstract class SimplePlugin extends Bundle implements SimplePluginInterface
 {
+    use PHPDishPluginTrait;
+
     /**
      * @var string
      */
@@ -25,9 +27,12 @@ abstract class SimplePlugin implements SimplePluginInterface
     /**
      * {@inheritdoc}
      */
-    public function registerServices(LoaderInterface $loader)
+    public function getServicesSource()
     {
-        $loader->load('services.yml');
+        if (file_exists($this->getRootDir() . '/services.yml')) {
+            return $this->getRootDir() . '/services.yml';
+        }
+        return false;
     }
 
     /**

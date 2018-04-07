@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Cache;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Cache;
 
-use PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinderInterface;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\PluginFinderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
 
 class PluginPathsCacheWarmer extends CacheWarmer

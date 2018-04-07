@@ -53,7 +53,7 @@ class RegisterPluginPass implements CompilerPassInterface
         $this->translatorDefinition = $container->findDefinition('translator');
 
         //注册插件
-        foreach ($container->getParameter('kernel.simple_plugins') as $plugin) {
+        foreach ($container->getParameter('kernel.simple_plugins_metadata') as $plugin) {
             $this->install($plugin);
         }
 
@@ -68,30 +68,34 @@ class RegisterPluginPass implements CompilerPassInterface
     /**
      * 注册插件
      *
-     * @param SimplePluginInterface $plugin
+     * @param array $pluginMetadata
      * @throws \Exception
      */
-    public function install(SimplePluginInterface $plugin)
+    public function install($pluginMetadata)
     {
-        $loader = $this->createContainerLoader($this->container,
-            new FileLocator($plugin->getRootDir())
-        );
-        $plugin->registerServices($loader); //注册插件服务
+        ////注册插件服务
+        if ($pluginMetadata['servicesSource'] !== false) {
+            $loader = $this->createContainerLoader($this->container,
+                new FileLocator($pluginMetadata['path'])
+            );
+            $loader->load($pluginMetadata['servicesSource']);
+        }
+
         //注册路由
-        if ($plugin->getRouterResource() !== false) {
+        if ($pluginMetadata['routerSource'] !== false) {
             $this->routingLoaderDefinition->addMethodCall('addResource', [
-                $plugin->getRouterResource()
+                $pluginMetadata['routerSource']
             ]);
         }
         //注册翻译资源
-        if ($plugin->getTranslationDir()) {
+        if ($pluginMetadata['translationDir'] !== false) {
             $finder = Finder::create()
                 ->followLinks()
                 ->files()
                 ->filter(function (\SplFileInfo $file) {
                     return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
                 })
-                ->in($plugin->getTranslationDir())
+                ->in($pluginMetadata['translationDir'])
                 ->sortByName();
 
             foreach ($finder as $file) {

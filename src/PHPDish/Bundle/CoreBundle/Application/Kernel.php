@@ -75,6 +75,9 @@ abstract class Kernel extends HttpKernel
             }
         }
 
+        //动态查找
+        $this->simplePlugins = $this->findSimplePlugins();
+        $bundles = array_merge($bundles, $this->simplePlugins->toArray());
         return $bundles;
     }
 
@@ -83,9 +86,6 @@ abstract class Kernel extends HttpKernel
      */
     public function boot()
     {
-        if (!$this->booted) {
-            $this->initializeSimplePlugins();
-        }
         parent::boot();
     }
 
@@ -94,8 +94,20 @@ abstract class Kernel extends HttpKernel
      */
     public function getKernelParameters()
     {
+        $simplePlugins = [];
+        $simplePluginMetas = [];
+        foreach ($this->simplePlugins as $simplePlugin) {
+            $simplePlugins[$simplePlugin->getName()] = get_class($simplePlugin);
+            $simplePluginMetas[$simplePlugin->getName()] = [
+                'path' => $simplePlugin->getPath(),
+                'translationDir' => $simplePlugin->getTranslationDir(),
+                'routerSource' => $simplePlugin->getRouterResource(),
+                'servicesSource' => $simplePlugin->getServicesSource(),
+            ];
+        }
         return array_merge(parent::getKernelParameters(), [
-            'kernel.simple_plugins' => $this->simplePlugins
+            'kernel.simple_plugins' => $simplePlugins,
+            'kernel.simple_plugins_metadata' => $simplePluginMetas
         ]);
     }
 
@@ -112,9 +124,9 @@ abstract class Kernel extends HttpKernel
     /**
      * 初始化插件
      */
-    protected function initializeSimplePlugins()
+    protected function findSimplePlugins()
     {
         $finder = new PluginFinder($this->getProjectDir());
-        $this->simplePlugins = $finder->findAll();
+        return $finder->findAll();
     }
 }

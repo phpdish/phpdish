@@ -4,25 +4,25 @@ services:
 #         arguments: ['@service_container', '%kernel.project_dir%']
 
     phpdish.plugin.finder:
-        class: PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinder
+        class: PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\PluginFinder
         arguments: ['%kernel.project_dir%']
 
     phpdish.plugin.finder.cached:
-        class: PHPDish\Bundle\CoreBundle\Plugin\Finder\CachedPluginFinder
+        class: PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\CachedPluginFinder
         arguments: ['%kernel.cache_dir%/phpdish_plugins.php', '@phpdish.plugin.finder']
 
     phpdish.plugin.route_loader:
-        class: PHPDish\Bundle\CoreBundle\Plugin\Routing\RoutingLoader
+        class: PHPDish\Bundle\CoreBundle\Application\Plugin\Routing\RoutingLoader
         tags:
             - {name: routing.loader}
 
     phpdish.plugin.cache.warmer.plugin_paths:
-        class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheWarmer
+        class: PHPDish\Bundle\CoreBundle\Application\Plugin\Cache\PluginPathsCacheWarmer
         arguments: ['@phpdish.plugin.finder']
         tags:
            - {name: kernel.cache_warmer}
 
     phpdish.plugin.cache.clearer.plugin_paths:
-        class: PHPDish\Bundle\CoreBundle\Plugin\Cache\PluginPathsCacheClearer
+        class: PHPDish\Bundle\CoreBundle\Application\Plugin\Cache\PluginPathsCacheClearer
         tags:
            - {name: kernel.cache_clearer, priority: 999}

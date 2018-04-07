@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Cache;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Cache;
 
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 

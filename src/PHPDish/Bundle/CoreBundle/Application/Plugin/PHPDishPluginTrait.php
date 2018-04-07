@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Plugin;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
