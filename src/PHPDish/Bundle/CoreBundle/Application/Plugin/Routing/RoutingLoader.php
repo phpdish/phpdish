@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Routing;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Routing;
 
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
