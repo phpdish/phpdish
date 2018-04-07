@@ -13,13 +13,8 @@ declare(strict_types=1);
 
 namespace PHPDish\QiNiuPlugin;
 
-use PHPDish\Bundle\CoreBundle\Plugin\ListenerRegistry;
-use PHPDish\Bundle\CoreBundle\Plugin\SimplePlugin;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePlugin;
 
 class QiNiuPlugin extends SimplePlugin
 {
-    public function registerListeners(ListenerRegistry $registry)
-    {
-        $registry->addListener('kernel.response2', [UploadListener::class, 'onUpload']);
-    }
 }

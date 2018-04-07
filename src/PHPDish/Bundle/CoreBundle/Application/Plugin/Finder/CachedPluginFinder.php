@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Finder;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Finder;
 
 class CachedPluginFinder implements PluginFinderInterface
 {

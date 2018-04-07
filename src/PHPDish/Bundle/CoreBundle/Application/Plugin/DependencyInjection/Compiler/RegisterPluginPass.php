@@ -11,10 +11,9 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\DependencyInjection\Compiler;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\DependencyInjection\Compiler;
 
-use PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinder;
-use PHPDish\Bundle\CoreBundle\Plugin\SimplePlugin;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -41,30 +40,40 @@ class RegisterPluginPass implements CompilerPassInterface
      */
     protected $translatorDefinition;
 
+    protected $translationsFiles = [];
+
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
         $this->container = $container;
-        $pluginFinders = new PluginFinder($container->getParameter('kernel.project_dir'));
-        $plugins = $pluginFinders->findAll();
+
         $this->routingLoaderDefinition = $container->findDefinition('phpdish.plugin.route_loader');
-        $this->translatorDefinition = $container->findDefinition('translator.default');
+        $this->translatorDefinition = $container->findDefinition('translator');
+
+        $kernel = $container->get('database');
 
         //注册插件
-        foreach ($plugins as $plugin) {
+        foreach ($kernel->getSimplePlugins() as $plugin) {
             $this->install($plugin);
         }
+
+        //注册所有的翻译文件
+        $options = $this->translatorDefinition->getArgument(4);
+        if (isset($options['resource_files'])) {
+            $options['resource_files'] = array_merge_recursive($options['resource_files'], $this->translationsFiles);
+        }
+        $this->translatorDefinition->replaceArgument(4, $options);
     }
 
     /**
      * 注册插件
      *
-     * @param SimplePlugin $plugin
+     * @param SimplePluginInterface $plugin
      * @throws \Exception
      */
-    public function install(SimplePlugin $plugin)
+    public function install(SimplePluginInterface $plugin)
     {
         $loader = $this->createContainerLoader($this->container,
             new FileLocator($plugin->getRootDir())
@@ -88,13 +97,11 @@ class RegisterPluginPass implements CompilerPassInterface
                 ->sortByName();
 
             foreach ($finder as $file) {
-                list($domain, $locale, $format) = explode('.', $file->getBasename(), 3);
-                $this->translatorDefinition->addMethodCall('addResource', [
-                    $format,
-                    (string)$file,
-                    $locale,
-                    $domain
-                ]);
+                list(, $locale) = explode('.', $file->getBasename(), 3);
+                if (!isset($this->translationsFiles[$locale])) {
+                    $this->translationsFiles[$locale] = [];
+                }
+                $this->translationsFiles[$locale][] = (string) $file;
             }
         }
     }

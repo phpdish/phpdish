@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-abstract class SimplePlugin
+abstract class SimplePlugin implements SimplePluginInterface
 {
     /**
      * @var string
@@ -23,10 +23,7 @@ abstract class SimplePlugin
     protected $rootDir;
 
     /**
-     * 注册服务
-     *
-     * @param LoaderInterface $loader
-     * @throws \Exception
+     * {@inheritdoc}
      */
     public function registerServices(LoaderInterface $loader)
     {
@@ -34,9 +31,7 @@ abstract class SimplePlugin
     }
 
     /**
-     * 获取路由资源
-     *
-     * @return string|false
+     * {@inheritdoc}
      */
     public function getRouterResource()
     {
@@ -47,9 +42,7 @@ abstract class SimplePlugin
     }
 
     /**
-     * 返回翻译文件路径
-     *
-     * @return string|false
+     * {@inheritdoc}
      */
     public function getTranslationDir()
     {
@@ -61,9 +54,7 @@ abstract class SimplePlugin
     }
 
     /**
-     * 获取插件目录
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getRootDir()
     {

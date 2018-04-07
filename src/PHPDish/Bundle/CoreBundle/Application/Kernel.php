@@ -2,10 +2,17 @@
 
 namespace PHPDish\Bundle\CoreBundle\Application;
 
+use PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\PluginFinder;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 
 abstract class Kernel extends HttpKernel
 {
+    /**
+     * @var SimplePluginInterface[]
+     */
+    protected $simplePlugins = [];
+
     /**
      * {@inheritdoc}
      */
@@ -69,5 +76,27 @@ abstract class Kernel extends HttpKernel
         }
 
         return $bundles;
+    }
+
+    public function buildContainer()
+    {
+        $this->simplePlugins = $this->findEnabledPlugins();
+        return parent::buildContainer();
+    }
+
+    /**
+     * 获取全部的插件
+     *
+     * @return SimplePluginInterface[]
+     */
+    public function getSimplePlugins()
+    {
+        return $this->simplePlugins;
+    }
+
+    protected function findEnabledPlugins()
+    {
+        $finder = new PluginFinder($this->getProjectDir());
+        $plugins = $finder->findAll();
     }
 }

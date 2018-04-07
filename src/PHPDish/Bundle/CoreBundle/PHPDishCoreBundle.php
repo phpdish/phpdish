@@ -2,9 +2,8 @@
 
 namespace PHPDish\Bundle\CoreBundle;
 
+use PHPDish\Bundle\CoreBundle\Application\Plugin\DependencyInjection\Compiler\RegisterPluginPass;
 use PHPDish\Bundle\CoreBundle\DependencyInjection\Compiler\AlgoliaPass;
-use PHPDish\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterPluginListenerPass;
-use PHPDish\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterPluginPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

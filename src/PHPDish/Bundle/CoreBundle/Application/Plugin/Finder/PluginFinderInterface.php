@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Finder;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Finder;
 
-use PHPDish\Bundle\CoreBundle\Plugin\SimplePlugin;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 
 interface PluginFinderInterface
 {
     /**
      * 获取所有插件
      *
-     * @return SimplePlugin[]
+     * @return SimplePluginInterface[]
      */
     public function findAll();
 }

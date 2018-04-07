@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Plugin\Finder;
+namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Finder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Bundle\CoreBundle\Plugin\SimplePlugin;
+use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 
 class PluginFinder implements PluginFinderInterface
 {
     /**
-     * @var SimplePlugin[]|Collection
+     * @var SimplePluginInterface[]|Collection
      */
     protected $plugins;
 
