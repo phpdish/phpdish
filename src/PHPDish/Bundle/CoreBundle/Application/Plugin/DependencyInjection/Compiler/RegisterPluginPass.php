@@ -52,10 +52,8 @@ class RegisterPluginPass implements CompilerPassInterface
         $this->routingLoaderDefinition = $container->findDefinition('phpdish.plugin.route_loader');
         $this->translatorDefinition = $container->findDefinition('translator');
 
-        $kernel = $container->get('database');
-
         //注册插件
-        foreach ($kernel->getSimplePlugins() as $plugin) {
+        foreach ($container->getParameter('kernel.simple_plugins') as $plugin) {
             $this->install($plugin);
         }
 

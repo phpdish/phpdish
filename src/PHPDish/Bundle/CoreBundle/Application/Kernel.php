@@ -78,10 +78,25 @@ abstract class Kernel extends HttpKernel
         return $bundles;
     }
 
-    public function buildContainer()
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
     {
-        $this->simplePlugins = $this->findEnabledPlugins();
-        return parent::buildContainer();
+        if (!$this->booted) {
+            $this->initializeSimplePlugins();
+        }
+        parent::boot();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getKernelParameters()
+    {
+        return array_merge(parent::getKernelParameters(), [
+            'kernel.simple_plugins' => $this->simplePlugins
+        ]);
     }
 
     /**
@@ -94,9 +109,12 @@ abstract class Kernel extends HttpKernel
         return $this->simplePlugins;
     }
 
-    protected function findEnabledPlugins()
+    /**
+     * 初始化插件
+     */
+    protected function initializeSimplePlugins()
     {
         $finder = new PluginFinder($this->getProjectDir());
-        $plugins = $finder->findAll();
+        $this->simplePlugins = $finder->findAll();
     }
 }
