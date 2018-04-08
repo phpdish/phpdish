@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class SettingController extends Controller
 {
@@ -29,7 +30,9 @@ class SettingController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getUserManager()->saveUser($user);
-            $this->addFlash('success', '资料修改成功');
+            /** @var TranslatorInterface */
+            $translator = $this->get('translator');
+            $this->addFlash('success', $translator->trans('profile.edit.success'));
 
             return $this->redirectToRoute('setting_profile');
         }

@@ -8,6 +8,7 @@ use FOS\UserBundle\FOSUserEvents;
 use PHPDish\Bundle\UserBundle\Form\Type\ResettingRequestType;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ResettingController extends FOSResettingController
 {
@@ -69,11 +70,13 @@ class ResettingController extends FOSResettingController
     public function onSendEmailInitialize(GetResponseNullableUserEvent $event)
     {
         $response = $this->redirectToRoute('fos_user_resetting_request');
+        /** @var TranslatorInterface */
+        $translator = $this->get('translator');
         if ($event->getUser() === null) {
-            $this->addFlash('danger', '用户名或者邮箱不存在');
+            $this->addFlash('danger', $translator->trans('resetting.username_or_email_not_exists'));
             $event->setResponse($response);
         } elseif (!$event->getUser()->getEmail()) {
-            $this->addFlash('warning', '该用户没有绑定邮箱，可能是社交账户，请尝试使用社交网站登录。');
+            $this->addFlash('warning', $translator->trans('resetting.user_missing_email'));
             $event->setResponse($response);
         }
     }

@@ -50,6 +50,3 @@ phpdish_payment:
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /chats
-
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"
