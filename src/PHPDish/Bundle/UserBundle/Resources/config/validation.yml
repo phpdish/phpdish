@@ -14,3 +14,9 @@ PHPDish\Bundle\UserBundle\Entity\User:
 #           - Email:
 #               message: 请输入合法邮箱
 #               groups: ['Profile']
+
+    properties:
+        username:
+            - Regex:
+                 pattern: /^\w+$/
+                 message: 只能包含数字字母和下划线
