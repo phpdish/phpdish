@@ -1,0 +1,16 @@
+form:
+    user:
+        username: 用户名
+        gender:
+            gender: 性别
+            placeholder: 请选择
+            male: 男
+            female: 女
+        email: 邮箱
+        description: 签名
+        avatar: 头像
+
+    profile:
+       url: 个人主页
+       location: 城市
+       company: 公司

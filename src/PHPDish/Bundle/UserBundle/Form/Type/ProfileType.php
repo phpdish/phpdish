@@ -17,13 +17,13 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('url', UrlType::class, [
-                'label' => '个人主页',
+                'label' => 'form.profile.url',
             ])
             ->add('location', TextType::class, [
-                'label' => '城市',
+                'label' => 'form.profile.location',
             ])
             ->add('company', TextType::class, [
-                'label' => '公司',
+                'label' => 'form.profile.company',
             ]);
     }
 
@@ -41,7 +41,7 @@ class ProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Profile::class,
+            'data_class' => Profile::class
         ));
     }
 }

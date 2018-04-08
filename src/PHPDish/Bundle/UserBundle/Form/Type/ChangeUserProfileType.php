@@ -20,25 +20,25 @@ class ChangeUserProfileType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => '用户名',
+                'label' => 'form.user.username',
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
-                     '男' => User::GENDER_MEN,
-                     '女' => User::GENDER_WOMEN,
+                     'form.user.gender.male' => User::GENDER_MEN,
+                     'form.user.gender.female' => User::GENDER_WOMEN,
                 ],
-                'placeholder' => '未选择',
-                'label' => '性别',
+                'placeholder' => 'form.user.gender.placeholder',
+                'label' => 'form.user.gender.gender',
             ])
             ->add('email', TextType::class, [
-                'label' => '邮箱',
+                'label' => 'form.user.email',
             ])
             ->add('description', TextareaType::class, [
-                'label' => '签名',
+                'label' => 'form.user.description',
             ])
             ->add('profile', ProfileType::class)
             ->add('avatar', HiddenType::class, [
-                'label' => '头像',
+                'label' => 'form.user.avatar',
             ]);
     }
 
