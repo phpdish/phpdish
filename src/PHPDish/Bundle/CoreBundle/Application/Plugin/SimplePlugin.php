@@ -49,18 +49,6 @@ abstract class SimplePlugin extends Bundle implements SimplePluginInterface
     /**
      * {@inheritdoc}
      */
-    public function getTranslationDir()
-    {
-        $translationsDir = $this->getRootDir() . '/translations';
-        if (file_exists($translationsDir) && is_dir($translationsDir)) {
-            return $translationsDir;
-        }
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getRootDir()
     {
         if (null === $this->rootDir) {

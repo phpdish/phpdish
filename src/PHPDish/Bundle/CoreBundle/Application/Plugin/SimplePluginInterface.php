@@ -33,13 +33,6 @@ interface SimplePluginInterface extends BundleInterface
     public function getRouterResource();
 
     /**
-     * 返回翻译文件路径
-     *
-     * @return string|false
-     */
-    public function getTranslationDir();
-
-    /**
      * 获取插件目录
      *
      * @return string

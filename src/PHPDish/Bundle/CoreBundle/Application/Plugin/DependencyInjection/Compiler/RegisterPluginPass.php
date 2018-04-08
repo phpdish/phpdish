@@ -36,13 +36,6 @@ class RegisterPluginPass implements CompilerPassInterface
     protected $routingLoaderDefinition;
 
     /**
-     * @var Definition
-     */
-    protected $translatorDefinition;
-
-    protected $translationsFiles = [];
-
-    /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
@@ -56,13 +49,6 @@ class RegisterPluginPass implements CompilerPassInterface
         foreach ($container->getParameter('kernel.simple_plugins_metadata') as $plugin) {
             $this->install($plugin);
         }
-
-        //注册所有的翻译文件
-        $options = $this->translatorDefinition->getArgument(4);
-        if (isset($options['resource_files'])) {
-            $options['resource_files'] = array_merge_recursive($options['resource_files'], $this->translationsFiles);
-        }
-        $this->translatorDefinition->replaceArgument(4, $options);
     }
 
     /**
@@ -86,25 +72,6 @@ class RegisterPluginPass implements CompilerPassInterface
             $this->routingLoaderDefinition->addMethodCall('addResource', [
                 $pluginMetadata['routerSource']
             ]);
-        }
-        //注册翻译资源
-        if ($pluginMetadata['translationDir'] !== false) {
-            $finder = Finder::create()
-                ->followLinks()
-                ->files()
-                ->filter(function (\SplFileInfo $file) {
-                    return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
-                })
-                ->in($pluginMetadata['translationDir'])
-                ->sortByName();
-
-            foreach ($finder as $file) {
-                list(, $locale) = explode('.', $file->getBasename(), 3);
-                if (!isset($this->translationsFiles[$locale])) {
-                    $this->translationsFiles[$locale] = [];
-                }
-                $this->translationsFiles[$locale][] = (string) $file;
-            }
         }
     }
 
