@@ -16,6 +16,7 @@ use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserFollowedEvent;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class UserManager extends BaseUserManager implements UserManagerInterface
 {
@@ -27,11 +28,24 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     protected $eventDispatcher;
 
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function setEventDispatcher($eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function setTranslator(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
     }
 
     /**
@@ -203,7 +217,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     public function followUser(UserInterface $user, UserInterface $follower)
     {
         if ($user->getId() == $follower->getId()) {
-            throw new \LogicException('你不能关注你自己');
+            throw new \LogicException($this->translator->trans('follow.cannot_follow_yourself'));
         }
         $user->addFollower($follower);
         $user->setFollowerCount($user->getFollowerCount() + 1);

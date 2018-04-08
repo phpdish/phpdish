@@ -4,6 +4,7 @@ services:
         parent: fos_user.user_manager
         calls:
              - [setEventDispatcher, [ '@event_dispatcher']]
+             - [setTranslator, [ '@translator']]
         public: true
 
     phpdish.avatar_generator.user:

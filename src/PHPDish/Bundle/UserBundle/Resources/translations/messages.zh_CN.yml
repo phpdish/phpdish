@@ -6,6 +6,9 @@ resetting:
     username_or_email_not_exists: 用户名或者邮箱不存在
     user_missing_email: 该用户没有绑定邮箱，可能是社交账户，请尝试使用社交网站登录。
 
+follow:
+    cannot_follow_yourself: 你不能关注你自己
+
 form:
     user:
         username: 用户名
