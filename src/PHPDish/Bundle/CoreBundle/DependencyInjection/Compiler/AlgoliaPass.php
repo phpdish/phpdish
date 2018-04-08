@@ -25,9 +25,8 @@ class AlgoliaPass implements CompilerPassInterface
         ) {
             $container->setAlias('search.engine', 'search.engine.null');
             $container->findDefinition('search.search_indexer_subscriber')
-                ->clearTag('doctrine.event_subscriber')
-                ->clearTag('doctrine_mongodb.odm.event_subscriber');
-            $container->setParameter('algolia_search.doctrineSubscribedEvents', []);
+                ->replaceArgument(1, [])
+                ->clearTags();
         }
     }
 }
