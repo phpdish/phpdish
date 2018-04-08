@@ -1,0 +1,1 @@
+webpackJsonp([13],{MSCA:function(n,e,t){"use strict";(function(n){t("6vhR");var e=t("Jov0"),a=function(n){return n&&n.__esModule?n:{default:n}}(e);!function(){var e=n("#message_body");n("#reply-chat-form").on("submit",function(){if(0===e.val().length)return a.default.dialog.message("回复内容不得为空").flash(),!1})}()}).call(e,t("0iPh"))}},["MSCA"]);

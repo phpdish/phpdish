@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\CoreBundle\Application;
 
 use PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\PluginFinder;
 use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 
 abstract class Kernel extends HttpKernel
@@ -84,15 +85,7 @@ abstract class Kernel extends HttpKernel
     /**
      * {@inheritdoc}
      */
-    public function boot()
-    {
-        parent::boot();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getKernelParameters()
+    protected function getKernelParameters()
     {
         $simplePlugins = [];
         $simplePluginMetas = [];
@@ -100,7 +93,6 @@ abstract class Kernel extends HttpKernel
             $simplePlugins[$simplePlugin->getName()] = get_class($simplePlugin);
             $simplePluginMetas[$simplePlugin->getName()] = [
                 'path' => $simplePlugin->getPath(),
-                'translationDir' => $simplePlugin->getTranslationDir(),
                 'routerSource' => $simplePlugin->getRouterResource(),
                 'servicesSource' => $simplePlugin->getServicesSource(),
             ];
