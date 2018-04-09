@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} {{ thread ? '修改节点' : '创建节点'}} {% endblock %}
+{% block title %} {{ thread ? 'thread.edit_thread'|trans : 'thread.add_thread'|trans}} {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/thread.js') }}"></script>
 {% endblock %}
@@ -10,7 +10,7 @@
         <div class="row">
             <article class="col-md-12">
                 <div class="panel panel-u add-thread">
-                    <div class="panel-heading">{{ thread ? '修改节点' : '创建节点'}}</div>
+                    <div class="panel-heading">{{ thread ? 'thread.edit_thread'|trans : 'thread.add_thread'|trans}}</div>
                     {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
                     <div class="panel-body">
                         {{ flashes() }}
@@ -18,17 +18,17 @@
                         {{ form_errors(form) }}
                             <div class="form-group">
                                 {{ form_label(form.name) }}
-                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: '请填写节点名称'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: 'thread.form.name'|trans}}) }}
                                 {{ form_errors(form.name) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.description) }}
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '节点介绍'}}) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: 'thread.form.description'|trans}}) }}
                                 {{ form_errors(form.description) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.slug) }} {{ url('thread_view', {'slug': 'domain'})|raw }}
-                                {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder: '访问域名'}}) }}
+                                {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder: 'thread.form.slug'|trans}}) }}
                                 {{ form_errors(form.slug) }}
                             </div>
                             <div class="form-group upload-cover clearfix {% if thread.cover %}uploaded{% endif %}" id="upload-cover">
@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn u-btn-primary">
-                                    {% if thread is defined %}修改{% else %}<i class="if i-plus-bold"></i> 创建{% endif %}
+                                    {% if thread is defined %}{{ 'ui.edit'|trans }}{% else %}<i class="if i-plus-bold"></i> {{ 'ui.create'|trans }}{% endif %}
                                 </button>
                             </div>
                         {{ form_end(form) }}

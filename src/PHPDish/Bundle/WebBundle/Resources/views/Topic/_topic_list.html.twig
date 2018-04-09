@@ -9,15 +9,15 @@
             <div class="media-heading title">
                 <a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a>
                 {% if topic.top %}
-                    <i class="if i-stick-top" data-toggle="tooltip" title="置顶"></i>
+                    <i class="if i-stick-top" data-toggle="tooltip" title="{{ 'topic.set_top'|trans }}"></i>
                 {% endif %}
                 {% if topic.recommended %}
-                    <i class="if i-good" data-toggle="tooltip" title="精品"></i>
+                    <i class="if i-good" data-toggle="tooltip" title="{{ 'topic.set_good'|trans }}"></i>
                 {% endif %}
             </div>
             <ul class="list-unstyled list-inline meta">
-                <li>{{ topic.user.username }} 发起于 {{ topic.createdAt|time_diff }}</li>
-                <li>最后回复：{{ topic.repliedAt|time_diff }}</li>
+                <li>{{ topic.user.username }} {{ 'topic.create_at'|trans }} {{ topic.createdAt|time_diff }}</li>
+                <li>{{ 'topic.last_reply'|trans }}：{{ topic.repliedAt|time_diff }}</li>
                 <li>
                     {% include 'PHPDishWebBundle:Thread:_thread_tagify.html.twig' with {'threads': topic.threads} %}
                 </li>
@@ -29,6 +29,6 @@
     {% endif %}
 {% else %}
     <div class="empty-data">
-        <i class="if i-comment"></i> 没有话题
+        <i class="if i-comment"></i> {{ 'topic.no_topic_yet'|trans }}
     </div>
 {% endfor %}

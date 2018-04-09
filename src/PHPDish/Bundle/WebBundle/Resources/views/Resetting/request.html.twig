@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %}找回密码{% endblock %}
+{% block title %}{{ 'resetting.password'|trans }}{% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
@@ -11,11 +11,11 @@
     <div class="group">
         <div class="input-group">
             <span class="input-group-addon"><i class="if i-captcha"></i></span>
-            {{ form_widget(form, {'attr': {'placeholder': '验证码'}}) }}
+            {{ form_widget(form, {'attr': {'placeholder': 'resetting.captcha'|trans}}) }}
         </div>
     </div>
     <div class="group">
-        <img src="{{ captcha_code }}" onclick="this.src='{{ captcha_code }}?'+Math.random()" class="captcha" title="验证码" width="{{ captcha_width }}" height="{{ captcha_height }}" />
+        <img src="{{ captcha_code }}" onclick="this.src='{{ captcha_code }}?'+Math.random()" class="captcha" title="{{ 'resetting.captcha'|trans }}" width="{{ captcha_width }}" height="{{ captcha_height }}" />
     </div>
 {% endblock %}
 
@@ -27,7 +27,7 @@
             <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
                 {{ form_start(form, {'attr': {'class': 'reg-page resetting'}}) }}
                     <div class="reg-header">
-                        <h2>找回密码</h2>
+                        <h2>{{ 'resetting.password'|trans }}</h2>
                     </div>
 
                     {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
@@ -36,13 +36,13 @@
                     <div class="group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="if i-user"></i></span>
-                            {{ form_widget(form.username, {'attr': {'placeholder': '用户名或者邮箱', 'value': lastUsername}}) }}
+                            {{ form_widget(form.username, {'attr': {'placeholder': 'resetting.username_or_email'|trans, 'value': lastUsername}}) }}
                         </div>
                     </div>
 
                     {{ form_widget(form.captcha) }}
 
-                    <button class="btn btn-md u-btn-primary btn-block" type="submit">提交</button>
+                    <button class="btn btn-md u-btn-primary btn-block" type="submit">{{ 'resetting.submit'|trans }}</button>
                 {{ form_end(form) }}
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 {% if replies.count %}
     {% block entry_meta %}
-        <span>共发表了{{ replies.count }}个回复</span>
+        <span>{{ 'reply.total_publish_reply'|trans({'%count%': replies.count}) }}</span>
     {% endblock %}
 {% endif %}
 
@@ -16,7 +16,7 @@
                 <li class="list-group-item">
                     <div class="text markdown-body">{{ reply.body|raw }}</div>
                     <span class="meta">
-                    {{ reply.createdAt|time_diff }} 发表在 <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
+                    {{ reply.createdAt|time_diff }} {{ 'reply.created_at'|trans }} <a href="{{ path('topic_view', {'id':  reply.topic.id}) }}">{{ reply.topic.title }}</a>
                     </span>
                     <blockquote>{{ reply.topic.summary|raw }}</blockquote>
                 </li>
@@ -29,7 +29,7 @@
         {% endif %}
     {% else %}
         <div class="empty-data">
-            <p><i class="if i-comment"></i> 还没有发表过回复</p>
+            <p><i class="if i-comment"></i> {{ 'reply.no_reply_yet'|trans }}</p>
         </div>
     {% endif %}
 

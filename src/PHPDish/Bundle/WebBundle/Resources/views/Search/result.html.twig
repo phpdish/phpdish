@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} 搜索 {{ keyword }} {% endblock %}
+{% block title %} {{ 'search.search_term'|trans({'%keywords%': keyword}) }} {% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/search.js') }}"></script>
@@ -38,9 +38,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="powered-by">
-                    搜索由<a href="https://www.algolia.com/"><span class="logo">Algolia</span></a>提供
-                </div>
+                <div class="powered-by">{{ 'search.service_powered_by'|trans }} </div>
             </div>
         </div>
     </div>

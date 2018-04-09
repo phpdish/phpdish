@@ -13,6 +13,11 @@ ui:
     book: 电子书
     category: 专栏
     publish: 发布
+    recommend: 推荐
+    remove: 删除
+    all: 全部
+    follow: 关注
+    have_follow: 已关注
 
 navigation:
     add_topic: 发起话题
@@ -46,6 +51,18 @@ setting:
     profile:
         edit_profile: 修改资料
     setting: 个人设置
+    social_account: 社交账户
+    social_account:
+         have_been_bound: 已绑定
+         bind_qq: 绑定QQ
+         bind_weibo: 绑定微博
+         bind_github: 绑定GitHub
+    change_password: 修改密码
+         form:
+              current_password: 当前密码
+              new_password: 新密码
+              repeat_password: 重复密码
+              edit: 修改
 
 book:
     edit_chapter: 编辑章节
@@ -128,3 +145,63 @@ error:
     unknow_error: 未知的错误
     the_page_you_are_looking_for_does_not_exist: OOPS! 您请求的资源不存在
     server_error: OOPS! 服务器内部错误
+
+resetting:
+    password: 重置密码
+    resetting_url_have_sent_to_your_email: 重置链接已经发送到了你的邮箱，链接 %tokenLifetime% 小时内有效。
+    email:
+        hello: %username% 你好
+        your_are_try_reset_password: 你正在尝试重置密码，请访问 <a href="%confirmationUrl%">%confirmationUrl%</a> 以重置密码
+        wish: 祝好 <br/><a href="https://www.phpdish.com">PHPDish</a> 运营团队
+    captcha: 验证码
+    username_or_email: 用户名或者邮箱
+    submit: 提交
+
+search:
+    search_term: 搜索 %keywords%
+    service_powered_by: 搜索由<a href="https://www.algolia.com/"><span class="logo">Algolia</span></a>提供
+
+thread:
+    recommend_threads: 推荐节点
+    all_threads: 全部>>
+    no_threads_yet: 还没有节点
+    follow: 关注
+    have_follow: 已关注
+    topic_count: 话题数
+    follower_count: 订阅数
+    add_thread: 添加节点
+    edit_thread: 修改节点
+    form:
+        name: 请填写节点名称
+        description: 节点介绍
+        slug: 访问域名
+    threads: 全部节点
+    all: 全部
+    see_topic: 看帖
+
+topic:
+    reply_ta: 回复TA
+    hot_topics: 热门话题
+    set_top: 置顶
+    set_good: 加精
+    create_at: 发起于
+    last_reply: 最后回复
+    no_topic_yet: 还没有话题
+    add_topic: 创建新话题
+    edit_topic: 编辑话题
+    form:
+        title: 请填写标题
+        body: 请填写正文，支持Markdown，注意排版与代码高亮
+        thread: 添加节点
+        publish: 发布
+        preview: 预览
+    preview_area: 预览区域
+    topic: 话题
+    no_topic_yet: 还没有发表过话题
+    created_at: 发表在
+    total_publish_topics: 共发表了 %count% 个话题
+
+reply:
+    total_publish_reply: 共发表了 %count% 个回复
+    created_at: 发表在
+    no_reply_yet: 还没有发表过回复

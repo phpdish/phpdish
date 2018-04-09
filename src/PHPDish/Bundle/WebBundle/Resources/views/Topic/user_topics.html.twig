@@ -4,7 +4,7 @@
 
 {% if topics.count %}
     {% block entry_meta %}
-        <span>共发表了{{ topics.count }}个话题</span>
+        <span>{{ 'topic.total_publish_topics'|trans({'%count%': topics.count}) }}</span>
     {% endblock %}
 {% endif %}
 
@@ -15,7 +15,7 @@
             <li class="list-group-item">
                 <div class="title"><a href="{{ path('topic_view', {'id': topic.id}) }}">{{ topic.title }}</a></div>
                 <span class="meta">
-                    {{ topic.createdAt|time_diff }} 发表在
+                    {{ topic.createdAt|time_diff }} {{ 'topic.created_at'|trans }}
                     {% for thread in topic.threads %}
                         <a class="tag" href="{{ path('thread_view', {'slug': thread.slug}) }}">{{ thread.name }}</a>
                     {% endfor %}
@@ -30,7 +30,7 @@
         {% endif %}
     {% else %}
         <div class="empty-data">
-            <p><i class="if i-comment"></i> 还没有发表过话题</p>
+            <p><i class="if i-comment"></i> {{ 'topic.no_topic_yet'|trans }}</p>
         </div>
     {% endif %}
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle:Common:setting_layout.html.twig' %}
 
-{% block title %} 社交账户 {% endblock %}
+{% block title %} {{ 'setting.social_account'|trans }} {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/setting.js') }}"></script>
 {% endblock %}
@@ -8,33 +8,33 @@
 {% block setting_content %}
 
     <div class="panel panel-u">
-        <div class="panel-heading">社交账户 </div>
+        <div class="panel-heading"> {{ 'setting.social_account'|trans }} </div>
         <ul class="list-group social-connection">
             <li class="list-group-item">
                 <span class="if i-qq"></span>
 
                 {% if app.user.qqId %}
-                    已绑定 <i class="if i-check"></i>
+                    {{ 'setting.social_account.have_been_bound'|trans }} <i class="if i-check"></i>
                 {% else %}
-                    <a href="{{ hwi_oauth_login_url('qq') }}">绑定QQ</a>
+                    <a href="{{ hwi_oauth_login_url('qq') }}">{{ 'setting.social_account.bind_qq'|trans }}</a>
                 {% endif %}
             </li>
             <li class="list-group-item">
                 <span class="if i-weibo"></span>
 
                 {% if app.user.weiboId %}
-                     已绑定 <i class="if i-check"></i>
+                    {{ 'setting.social_account.have_been_bound'|trans }} <i class="if i-check"></i>
                 {% else %}
-                    <a href="{{ hwi_oauth_login_url('weibo') }}">绑定微博</a>
+                    <a href="{{ hwi_oauth_login_url('weibo') }}">{{ 'setting.social_account.bind_weibo'|trans }}</a>
                 {% endif %}
             </li>
             <li class="list-group-item">
                 <span class="if i-github"></span>
 
                 {% if app.user.githubId %}
-                     已绑定 <i  class="if i-check"></i>
+                    {{ 'setting.social_account.have_been_bound'|trans }} <i  class="if i-check"></i>
                 {% else %}
-                    <a href="{{ hwi_oauth_login_url('github') }}">绑定GitHub</a>
+                    <a href="{{ hwi_oauth_login_url('github') }}">{{ 'setting.social_account.bind_github'|trans }}</a>
                 {% endif %}
             </li>
         </ul>

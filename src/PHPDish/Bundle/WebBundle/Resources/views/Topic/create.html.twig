@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% set title = topic is defined ? '编辑话题' : '创建新话题' %}
+{% set title = topic is defined ? 'topic.edit_topic'|trans : 'topic.add_topic'|trans %}
 
 {% block title %}
     {{ title }}
@@ -22,15 +22,15 @@
                         {{ form_start(form, {'attr': {'id': 'add-topic-form', 'class': 'topic'}}) }}
                         {{ form_errors(form) }}
                         <div class="form-group">
-                            {{ form_widget(form.title, {'attr': {'class': 'form-control title', placeholder: '请填写标题'}}) }}
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control title', placeholder: 'topic.form.title'|trans}}) }}
                             {{ form_errors(form.title) }}
                         </div>
                         <div class="form-group editor">
-                            {{ form_widget(form.originalBody, {'required': false, 'attr': {'class': 'form-control body', placeholder: '请填写正文，支持Markdown，注意排版与代码高亮'}}) }}
+                            {{ form_widget(form.originalBody, {'required': false, 'attr': {'class': 'form-control body', placeholder: 'topic.form.body'|trans}}) }}
                             {{ form_errors(form.originalBody) }}
                         </div>
                         <div class="form-group">
-                            {{ form_widget(form.threads, {'attr': {'class': 'thread', placeholder: '添加节点'}}) }}
+                            {{ form_widget(form.threads, {'attr': {'class': 'thread', placeholder: 'topic.form.thread'|trans}}) }}
                             {{ form_errors(form.threads) }}
                             <div class="recommend-threads tags" data-role="recommend-threads">
                                 {% for thread in threads %}
@@ -44,12 +44,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 发布</button>
-                            <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                            <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> {{ 'topic.form.publish'|trans }}</button>
+                            <span class="preview-action" data-action="preview"><i class="if i-view"></i> {{ 'topic.form.preview'|trans }}</span>
                         </div>
                         {{ form_end(form) }}
                         <div class="preview-panel markdown-body hidden" data-role="preview-panel">
-                            预览区域
+                            {{ 'topic.preview_area'|trans }}
                         </div>
                     </div>
                 </div>

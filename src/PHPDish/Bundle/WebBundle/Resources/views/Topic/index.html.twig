@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} PHPDish 社区{% endblock %}
+{% block title %} {{ 'topic.topic'|trans }} {% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/topic.js') }}"></script>
@@ -14,13 +14,13 @@
                     <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                         {% set tab = app.request.query.get('tab') %}
                         <li {% if not tab%}class="active"{% endif %}>
-                            <a href="{{ path('homepage') }}"><i class="fa fa-comments-o"></i> 全部</a>
+                            <a href="{{ path('homepage') }}"><i class="fa fa-comments-o"></i> {{ 'ui.all'|trans }}</a>
                         </li>
                         <li {% if tab == 'following' %}class="active"{% endif %}>
-                            <a href="{{ path('homepage', {'tab': 'following'}) }}"><i class="fa fa-rss"></i> 关注</a>
+                            <a href="{{ path('homepage', {'tab': 'following'}) }}"><i class="fa fa-rss"></i> {{ 'ui.follow'|trans }}</a>
                         </li>
                         <li {% if tab == 'recommend' %}class="active"{% endif %}>
-                            <a href="{{ path('homepage', {'tab': 'recommend'}) }}"><i class="fa fa-star-o"></i> 推荐</a>
+                            <a href="{{ path('homepage', {'tab': 'recommend'}) }}"><i class="fa fa-star-o"></i> {{ 'ui.recommend'|trans }}</a>
                         </li>
                     </ul>
                     <div id="list-container">

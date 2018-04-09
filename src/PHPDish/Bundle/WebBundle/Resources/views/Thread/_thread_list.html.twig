@@ -12,22 +12,22 @@
             </div>
             <p>{{ thread.description }}</p>
             <ul class="list-unstyled list-inline meta">
-                <li>话题数 {{ thread.topicCount|default(0) }}</li>
-                <li>订阅数{{ thread.followerCount|default(0) }}</li>
+                <li>{{ 'thread.topic_count'|trans }} {{ thread.topicCount|default(0) }}</li>
+                <li>{{ 'thread.follower_count'|trans }}{{ thread.followerCount|default(0) }}</li>
             </ul>
         </div>
         <div class="media-right">
             <div data-role="follow-thread" data-slug="{{ thread.slug }}">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and thread.isFollowedBy(app.user) %}
-                    <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
+                    <button class="btn btn-default" data-action="unfollow"><i class="if i-plus"></i> {{ 'thread.have_follow'|trans }}</button>
                 {% else %}
-                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 关注</button>
+                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ 'thread.follow'|trans }}</button>
                 {% endif %}
             </div>
         </div>
     </div>
 {% else %}
     <div class="empty-data">
-        <i class="if i-comment"></i> 还没有节点
+        <i class="if i-comment"></i> {{ 'thread.no_threads_yet'|trans }}
     </div>
 {% endfor %}

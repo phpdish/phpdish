@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %}重置密码{% endblock %}
+{% block title %}{{ 'resetting.password'|trans }}{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -9,7 +9,7 @@
                 <div class="reg-page resetting">
                     <div class="send-result">
                         <i class="if i-success"></i>
-                        <p>重置链接已经发送到了你的邮箱，链接{{ tokenLifetime }} 小时内有效。</p>
+                        <p>{{ 'resetting.resetting_url_have_sent_to_your_email'|trans({'%tokenLifetime%': tokenLifetime}) }}</p>
                     </div>
                 </div>
             </div>
