@@ -1,0 +1,13 @@
+payment:
+   buy_your_book: %username% 购买了你的电子书 %book%
+   subscribe_your_category:  %username% 订阅了你的专栏 %category%
+
+withdraw:
+   amount_should_greater_than: 提现金额必须大于%amount%
+   not_encough_balance: 余额不足
+   need_provide_alipay: 需要提供支付宝账户
+   to: 提现到： %alipay%
+   decline_reason: 拒绝原因：%reason%
+   no_reason: 暂无原因
+   approve_reason: 已确认：%reason%
+

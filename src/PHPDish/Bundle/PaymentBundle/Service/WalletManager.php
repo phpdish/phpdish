@@ -19,6 +19,7 @@ use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class WalletManager implements WalletManagerInterface
 {
@@ -44,17 +45,24 @@ class WalletManager implements WalletManagerInterface
      */
     protected $router;
 
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
-        UserManagerInterface $userManager
+        UserManagerInterface $userManager,
+        TranslatorInterface $translator
     )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->router = $router;
         $this->userManager = $userManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -130,19 +138,28 @@ class WalletManager implements WalletManagerInterface
         $history = $this->createHistory();
 
         if ($category->isBook()) {
-            $description = sprintf("<a href=\"%s\">%s</a> 购买了你的电子书 <a href=\"%s\">《%s》</a>",
+            $description = $this->translator->trans('payment.buy_your_book', [
+                '%username%' => sprintf('<a href="%s">%s</a>',
                     $this->router->generate('user_view', ['username' => $follower->getUsername()]),
-                    $follower->getUsername(),
+                    $follower->getUsername()
+                ),
+                '%book%' => sprintf('<a href="%s">《%s》</a>',
                     $this->router->generate('book_view', ['slug' => $category->getSlug()]),
                     $category->getName()
-            );
+                ),
+            ]);
+
         } else {
-            $description = sprintf("<a href=\"%s\">%s</a> 订阅了你的专栏 <a href=\"%s\">《%s》</a>",
-                $this->router->generate('user_view', ['username' => $follower->getUsername()]),
-                $follower->getUsername(),
-                $this->router->generate('category_view', ['slug' => $category->getSlug()]),
-                $category->getName()
-            );
+            $description = $this->translator->trans('payment.subscribe_your_category', [
+                '%username%' => sprintf('<a href="%s">%s</a>',
+                    $this->router->generate('user_view', ['username' => $follower->getUsername()]),
+                    $follower->getUsername()
+                ),
+                '%category%' => sprintf('<a href="%s">《%s》</a>',
+                    $this->router->generate('category_view', ['slug' => $category->getSlug()]),
+                    $category->getName()
+                ),
+            ]);
         }
 
         $history->setAmount($amount ?: $category->getCharge())
@@ -172,13 +189,15 @@ class WalletManager implements WalletManagerInterface
     {
         $amount = intval($amount);
         if ($amount < PaymentInterface::WITHDRAW_MAX_AMOUNT) {
-            throw new \LogicException(sprintf('提现金额必须大于 %d', PaymentInterface::WITHDRAW_MAX_AMOUNT));
+            throw new \LogicException($this->translator->trans('withdraw.amount_should_greater_than',
+                PaymentInterface::WITHDRAW_MAX_AMOUNT)
+            );
         }
         if ($wallet->getAmount() < $amount) {
-            throw new \LogicException('余额不足');
+            throw new \LogicException($this->translator->trans('withdraw.not_encough_balance'));
         }
         if (!$alipay) {
-            throw new \LogicException('需要提供支付宝账户');
+            throw new \LogicException($this->translator->trans('withdraw.need_provide_alipay'));
         }
 
         $history = $this->createHistory();
@@ -186,7 +205,7 @@ class WalletManager implements WalletManagerInterface
             ->setAmount($amount)
             ->setDescription('')
             ->setStatus(PaymentInterface::STATUS_WAITING)
-            ->setDescription(sprintf('提现到: %s', $alipay))
+            ->setDescription($this->translator->trans('withdraw.to', ['%alipay%' => $alipay]))
             ->setUser($wallet->getUser());
         //钱包余额冻结
         $wallet->freeze($amount);
@@ -202,7 +221,9 @@ class WalletManager implements WalletManagerInterface
     {
         $history->getWallet()->release($history->getAmount()); //钱包释放资本
         $history->setDescription(
-            $history->getDescription() . "; 拒绝原因：" . ($reason ?: '暂无原因')
+            $history->getDescription() . "; " . $this->translator->trans('withdraw.decline_reason', [
+                '%reason%' => $reason ?: $this->translator->trans('withdraw.no_reason')
+            ])
         );
         $history->setStatus(PaymentInterface::STATUS_CLOSED);
         $this->entityManager->persist($history);
@@ -221,7 +242,9 @@ class WalletManager implements WalletManagerInterface
             $wallet->getFreezeAmount() - $history->getAmount()
         ); //减去冻结的金额
         $history->setDescription(
-            $history->getDescription() . "; 已确认：" . ($reason ?: '暂无原因')
+            $history->getDescription() . "; " . $this->translator->trans('withdraw.approve_reason', [
+                '%reason%' => $reason ?: $this->translator->trans('withdraw.no_reason')
+            ])
         );
         $history->setStatus(PaymentInterface::STATUS_OK);
         $this->entityManager->persist($history);

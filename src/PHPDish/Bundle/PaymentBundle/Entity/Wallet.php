@@ -125,7 +125,7 @@ class Wallet implements WalletInterface
     public function freeze($amount)
     {
         if ($this->amount < $amount) {
-            throw new \LogicException('没有足够的余额');
+            throw new \LogicException('Not enough balance');
         }
         $this->amount -= $amount;
         $this->freezeAmount += $amount;
@@ -138,7 +138,7 @@ class Wallet implements WalletInterface
     public function release($amount)
     {
         if ($this->freezeAmount < $amount) {
-            throw new \LogicException('没有足够的冻结余额');
+            throw new \LogicException('Not enough frozen balance');
         }
         $this->amount += $amount;
         $this->freezeAmount -= $amount;
