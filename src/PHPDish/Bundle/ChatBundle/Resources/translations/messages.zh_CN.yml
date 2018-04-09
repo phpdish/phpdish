@@ -1,0 +1,13 @@
+form:
+    chat:
+       body: 消息
+
+chat: 短消息
+menu:
+    notification: 提醒
+    inbox: 收件箱
+    sent: 已发送
+
+
+register:
+    welcome_subject: 欢迎注册本社区！

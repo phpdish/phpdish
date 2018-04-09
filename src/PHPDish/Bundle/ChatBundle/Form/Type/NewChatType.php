@@ -16,7 +16,7 @@ class NewChatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('body', TextareaType::class, [
-            'label' => '消息'
+            'label' => 'form.chat.body'
         ]);
     }
 

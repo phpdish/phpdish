@@ -6,7 +6,7 @@ use FOS\MessageBundle\Composer\ComposerInterface;
 use FOS\MessageBundle\Sender\SenderInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 final class UserRegisterListener
 {
@@ -38,17 +38,23 @@ final class UserRegisterListener
      */
     protected $messageTemplate;
 
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
     public function __construct(
         UserManagerInterface $userManager,
         ComposerInterface $composer,
         SenderInterface $sender,
+        TranslatorInterface $translator,
         $userName,
         $messageTemplate
     ){
         $this->userManager = $userManager;
         $this->composer = $composer;
         $this->sender = $sender;
-
+        $this->translator = $translator;
         $this->userName = $userName;
         $this->messageTemplate = $messageTemplate;
     }
@@ -63,7 +69,7 @@ final class UserRegisterListener
         $threadBuilder
             ->addRecipient($user)
             ->setSender($sender)
-            ->setSubject('欢迎注册 PHPDish 社区!')
+            ->setSubject($this->translator->trans('register.welcome_subject'))
             ->setBody(sprintf($this->messageTemplate, $user->getUsername()));
 
         $this->sender->send($threadBuilder->getMessage());

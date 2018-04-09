@@ -20,21 +20,14 @@ class NotificationMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->setChildrenAttribute('class', 'list-group vertical-menu');
-
-        $chat = $menu->addChild('提醒')
-            ->setAttribute('class', 'list-group-item if i-envelope-o')
-            ->setAttribute('data-action', 'collapse')
-            ->setChildrenAttribute('class', 'sub-menu');
-
-        $chat->addChild('收件箱', [
+        $menu->addChild('menu.inbox', [
             'route' => 'chat_inbox',
         ]);
-        $chat->addChild('已发送', [
+        $menu->addChild('menu.sent', [
             'route' => 'chat_sent',
         ]);
 
-        $menu->addChild('通知', ['route' => 'notifications'])
+        $menu->addChild('menu.notification', ['route' => 'notifications'])
             ->setAttribute('class', 'list-group-item if i-bell-o');
 
         return $menu;

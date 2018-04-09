@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ChatsController extends Controller
 {
@@ -84,9 +85,12 @@ class ChatsController extends Controller
 
     protected function createBlankThreadMessage($user)
     {
+        /**@var TranslatorInterface*/
+        $translator = $this->get('translator');
+
         $threadMessage = new NewThreadMessage();
         $threadMessage->setRecipient($user);
-        $threadMessage->setSubject('短消息');
+        $threadMessage->setSubject($translator->trans('chat'));
         return $threadMessage;
     }
 
