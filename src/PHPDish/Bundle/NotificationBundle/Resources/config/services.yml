@@ -1,21 +1,18 @@
 services:
-#    php_dish_notification.example:
-#        class: PHPDish\Bundle\NotificationBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
     phpdish.manager.notification:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
         public: true
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - '@doctrine.orm.entity_manager'
+            - '@translator'
 
     phpdish.manager.timeline:
         class: PHPDish\Bundle\NotificationBundle\Service\TimelineManager
         public: true
         arguments:
             - "@doctrine.orm.entity_manager"
-    ## Listeners
 
+    ## Listeners
     phpdish.event_listener.notification.follow_user:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
         arguments: ['@phpdish.manager.notification']

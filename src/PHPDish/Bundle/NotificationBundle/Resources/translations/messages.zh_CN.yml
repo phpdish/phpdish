@@ -1,0 +1,3 @@
+withdraw:
+   your_withdraw_was_approved: 您的提现已通过; %payment%
+   your_withdraw_was_declined: 您的提现已经被拒绝; %payment%

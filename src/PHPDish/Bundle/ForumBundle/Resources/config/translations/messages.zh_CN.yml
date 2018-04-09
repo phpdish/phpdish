@@ -1,0 +1,23 @@
+form:
+    thread:
+         name: 标题
+         description: 描述
+         slug: 访问域名
+         cover: 封面
+
+    reply:
+         body: 内容
+    topic:
+         title: 标题
+         threads: 所属节点
+         body: 内容
+
+topic:
+    not_exists: 话题不存在
+
+thread:
+    explore: 发现节点
+    edit_success: 节点修改成功
+
+reply:
+    not_exists: 回复不存在

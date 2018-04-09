@@ -13,16 +13,16 @@ class ThreadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-                'label' => '标题'
+                'label' => 'form.thread.name'
             ])
             ->add('description', TextareaType::class, [
-                'label' => '描述',
+                'label' => 'form.thread.description',
             ])
             ->add('slug', TextType::class, [
-                'label' => '访问域名',
+                'label' => 'form.thread.slug',
             ])
             ->add('cover', HiddenType::class, [
-                'label' => '封面',
+                'label' => 'form.thread.cover',
             ]);
     }
 }

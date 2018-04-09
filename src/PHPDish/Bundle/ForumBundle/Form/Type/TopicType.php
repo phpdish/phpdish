@@ -25,13 +25,13 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class, [
-                'label' => '标题',
+                'label' => 'form.topic.title',
             ])
             ->add('threads', TextType::class, [
-                'label' => '所属节点'
+                'label' => 'form.topic.threads'
             ])
             ->add('originalBody', TextareaType::class, [
-                'label' => '内容',
+                'label' => 'form.topic.body',
             ]);
 
         $builder->get('threads')->addModelTransformer($this->stringToThreadTransformer);

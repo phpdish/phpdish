@@ -15,6 +15,7 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class NotificationManager implements NotificationManagerInterface
 {
@@ -30,9 +31,17 @@ class NotificationManager implements NotificationManagerInterface
      */
     protected $notificationRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        TranslatorInterface $translator
+    ) {
         $this->entityManager = $entityManager;
+        $this->translator = $translator;
         $this->notificationRepository = $entityManager->getRepository('PHPDishNotificationBundle:Notification');
     }
 
@@ -137,8 +146,8 @@ class NotificationManager implements NotificationManagerInterface
     public function createWithdrawNotification(PaymentInterface $payment)
     {
         $message = $payment->getStatus() === PaymentInterface::STATUS_OK
-            ? sprintf('您的提现已通过；“%s”', $payment->getDescription())
-            : sprintf('您的提现已经被拒绝；“%s”', $payment->getDescription());
+            ? $this->translator->trans('withdraw.your_withdraw_was_approved', ['%payment%' => $payment->getDescription()])
+            : $this->translator->trans('withdraw.your_withdraw_was_declined', ['%payment%' => $payment->getDescription()]);
 
         $notification = $this->createNotification();
         $notification->setUser($payment->getUser())

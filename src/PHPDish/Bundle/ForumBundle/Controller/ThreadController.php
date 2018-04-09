@@ -76,14 +76,15 @@ class ThreadController extends Controller
             );
         }
 
+        $translator = $this->get('translator');
         $seoPage = $this->get('sonata.seo.page');
         $seoPage
-            ->setTitle('发现节点')
+            ->setTitle($translator->trans('thread.explore'))
             ->removeMeta('name', 'keywords')
-            ->addMeta('name', 'description', '发现节点')
-            ->addMeta('property', 'og:title', '发现节点')
+            ->addMeta('name', 'description', $translator->trans('thread.explore'))
+            ->addMeta('property', 'og:title', $translator->trans('thread.explore'))
             ->addMeta('property', 'og:url',  $this->generateUrl('threads', [],UrlGeneratorInterface::ABSOLUTE_URL))
-            ->addMeta('property', 'og:description', '发现节点');
+            ->addMeta('property', 'og:description', $translator->trans('thread.explore'));
 
         return $this->render('PHPDishWebBundle:Thread:index.html.twig', [
             'threads' => $threads
@@ -154,7 +155,7 @@ class ThreadController extends Controller
         if ($form->isValid() && $form->isSubmitted()) {
 
             $this->getThreadManager()->saveThread($thread);
-            $this->addFlash('success', '专栏修改成功');
+            $this->addFlash('success', $this->get('translator')->trans('thread.edit_success'));
 
             return $this->redirectToRoute('thread_view', [
                 'slug' => $thread->getSlug(),

@@ -286,7 +286,7 @@ class TopicController extends RestController
 
         $topic = $this->getTopicManager()->findTopicById($id);
         if (!$topic) {
-            throw new \InvalidArgumentException('话题不存在');
+            throw new \InvalidArgumentException($this->get('translator')->trans('topic.not_exists'));
         }
         if ($isVoted = $topic->isVotedBy($this->getUser())) {
             $this->getTopicManager()->removeVoter($topic, $this->getUser());
@@ -297,16 +297,6 @@ class TopicController extends RestController
             'vote_count' => $topic->getVoteCount(),
             'is_voted' => !$isVoted
         ]);
-    }
-
-    /**
-     * 获取赞的人
-     *
-     * @Route("/topics/{id}/voters", name="topic_voters", methods={"GET"})
-     */
-    public function getVotersAction()
-    {
-
     }
 
     /**

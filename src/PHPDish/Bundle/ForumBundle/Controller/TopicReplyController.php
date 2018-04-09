@@ -74,7 +74,7 @@ class TopicReplyController extends RestController
 
         $reply = $this->getReplyManager()->findReplyById($id);
         if (!$reply) {
-            throw new \InvalidArgumentException('回复不存在');
+            throw new \InvalidArgumentException($this->get('translator')->trans('reply.not_exists'));
         }
 
         if ($isVoted = $reply->isVotedBy($this->getUser())) {
