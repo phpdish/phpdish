@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} 我的提醒{% endblock %}
+{% block title %} {{ 'notification.my_notification'|trans }}{% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/notification.js') }}"></script>
@@ -13,18 +13,18 @@
                 <ul class="list-group vertical-menu notification-nav">
                     <li class="list-group-item {% if is_route_matched('chat_inbox') %}active{% endif %}">
                         <a href="{{ path('chat_inbox') }}">
-                            <i class="if i-envelope-o"></i> 收件箱
+                            <i class="if i-envelope-o"></i> {{ 'chat.inbox'|trans }}
                             {% if fos_message_nb_unread() > 0 %}
                                 <span class="badge badge-warning">{{ fos_message_nb_unread() }}</span>
                             {% endif %}
                         </a>
                     </li>
                     <li class="list-group-item {% if is_route_matched('chat_sent') %}active{% endif %}">
-                        <a href="{{ path('chat_sent') }}"> <i class="if i-sent"></i> 已发送</a>
+                        <a href="{{ path('chat_sent') }}"> <i class="if i-sent"></i> {{ 'chat.sent'|trans }}</a>
                     </li>
                     <li class="list-group-item {% if is_route_matched('notifications') %}active{% endif %}">
                         <a href="{{ path('notifications') }}">
-                            <i class="if i-bell-o"></i> 通知
+                            <i class="if i-bell-o"></i> {{ 'notification.notification'|trans }}
                             {% if notification_unseen_number() > 0 %}
                                 <span class="badge badge-warning">{{ notification_unseen_number() }}</span>
                             {% endif %}

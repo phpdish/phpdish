@@ -1,13 +1,13 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} OOPS! 您请求的资源不存在 {% endblock %}
+{% block title %} {{ 'error.the_page_you_are_looking_for_does_not_exist'|trans }} {% endblock %}
 
 {% block content %}
 <div class="container" role="main">
     <div class="row">
         <div class="col-md-12 error-page">
             <h2 class="text-center">
-                <i class="if i-404"></i> 您请求的资源不存在
+                <i class="if i-404"></i> {{ 'error.the_page_you_are_looking_for_does_not_exist'|trans }}
             </h2>
         </div>
     </div>

@@ -21,18 +21,18 @@
                     {% if isGranted %}
                     <span class="action" data-role="action">
                         {% if chapter.children|length > 0 %}
-                            <a title="修改本章" data-toggle="tooltip" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
+                            <a title="{{ 'book.edit_this_chapter'|trans }}" data-toggle="tooltip" data-role="edit" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a>
                         {% else %}
-                            <a title="修改本章" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: chapter.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                            <a title="{{ 'book.edit_this_chapter'|trans }}" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: chapter.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                         {% endif %}
-                        <a title="添加子章节" data-toggle="tooltip" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
+                        <a title="{{ 'book.add_sub_chapter'|trans }}" data-toggle="tooltip" data-role="add-sub" href="{{ path('book_add_chapter', {slug: book.slug, summary: chapter.id}) }}"><i class="fa fa-plus-square-o"></i></a>
                         {% if chapter.children|length == 0 %}
-                        <a title="删除本章" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                        <a title="{{ 'book.delete_this_chapter'|trans }}" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
                         {% endif %}
-                        <a title="向上移动" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
+                        <a title="{{ 'book.move_up'|trans }}" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
                             <i class="fa fa-arrow-circle-up"></i>
                         </a>
-                        <a title="向下移动" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
+                        <a title="{{ 'book.move_down'|trans }}" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
                             <i class="fa fa-arrow-circle-down"></i>
                         </a>
                     </span>
@@ -48,12 +48,12 @@
                             </a>
                             {% if isGranted %}
                             <span class="action" data-role="action">
-                                <a title="修改本章" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                <a title="删除本章" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
-                                <a title="向上移动" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
+                                <a title="{{ 'book.edit_this_chapter'|trans }}" data-toggle="tooltip" href="{{ path('book_edit_chapter', {slug: book.slug, id: children.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                <a title="{{ 'book.delete_this_chapter'|trans }}" data-toggle="tooltip"  data-role="delete" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+                                <a title="{{ 'book.move_up'|trans }}" data-toggle="tooltip" data-role="move" data-direction="up" href="javascript:void(0);">
                                     <i class="fa fa-arrow-circle-up"></i>
                                 </a>
-                                <a title="向下移动" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
+                                <a title="{{ 'book.move_down'|trans }}" data-toggle="tooltip" data-role="move" data-direction="down" href="javascript:void(0);">
                                     <i class="fa fa-arrow-circle-down"></i>
                                 </a>
                             </span>
@@ -66,7 +66,7 @@
             {% endfor %}
             {% if isGranted %}
                 <li class="list-group-item">
-                    <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> 添加章节</button>
+                    <button class="btn u-btn-primary" data-role="add-chapter"><i class="fa fa-plus-square-o"></i> {{ 'book.add_chapter'|trans }}</button>
                 </li>
             {% endif %}
         </ul>

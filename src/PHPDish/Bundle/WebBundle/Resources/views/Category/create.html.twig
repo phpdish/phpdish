@@ -1,6 +1,13 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} {{ category is defined ? '修改' : '创建'}}{{ isBook ? '电子书' : '专栏'}} {% endblock %}
+{% if category is defined %}
+    {% set pageTitleI18nKey = isBook ? 'category.edit.book': 'category.edit.category' %}
+{% else %}
+    {% set pageTitleI18nKey = isBook ? 'category.create.book': 'category.create.category' %}
+{% endif %}
+
+
+{% block title %} {{ pageTitleI18nKey|trans}} {% endblock %}
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/category.js') }}"></script>
 {% endblock %}
@@ -10,7 +17,7 @@
         <div class="row">
             <article class="col-md-12">
                 <div class="panel panel-u add-category">
-                    <div class="panel-heading">{{ category is defined ? '修改' : '创建'}}{{ isBook ? '电子书' : '专栏'}}</div>
+                    <div class="panel-heading">{{ pageTitleI18nKey|trans}}</div>
                     {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
                     <div class="panel-body">
                         {{ flashes() }}
@@ -18,23 +25,23 @@
                         {{ form_errors(form) }}
                             <div class="form-group">
                                 {{ form_label(form.name) }}
-                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: '请填写名称'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control name', placeholder: 'category.form.name'|trans}}) }}
                                 {{ form_errors(form.name) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.description) }}
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: '介绍'}}) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control description', placeholder: 'category.form.description'|trans}}) }}
                                 {{ form_errors(form.description) }}
                             </div>
                             <div class="form-group">
                                 {{ form_label(form.charge) }}
                                 <div class="prices-tags" data-role="choose-charge">
-                                    <span class="btn btn-default u-btn-primary" data-num="0">免费</span>
+                                    <span class="btn btn-default u-btn-primary" data-num="0">{{ 'category.form.charge.free'|trans }}</span>
                                     <span class="btn btn-default" data-num="590">￥5.9</span>
                                     <span class="btn btn-default" data-num="990">￥9.9</span>
                                     <span class="btn btn-default" data-num="2000">￥20</span>
                                     <span class="btn btn-default" data-num="5000">￥50</span>
-                                    <span class="custom-charge"> ￥<input type="number" class="charge" data-role="custom-charge" placeholder="自定义金额"></span>
+                                    <span class="custom-charge"> ￥<input type="number" class="charge" data-role="custom-charge" placeholder="{{ 'category.form.charge.custom_amount'|trans }}"></span>
                                 </div>
                                 {{ form_errors(form.charge) }}
                             </div>
@@ -45,7 +52,7 @@
                                 {% else %}
                                     {{ url('category_view', {'slug': 'slug'})|raw }}
                                 {% endif %}
-                                {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder: '访问域名'}}) }}
+                                {{ form_widget(form.slug, {'attr': {'class': 'form-control slug', placeholder:  'category.form.slug'|trans }}) }}
                                 {{ form_errors(form.slug) }}
                             </div>
                             <div class="form-group upload-cover clearfix {% if category is defined and category.cover %}uploaded{% endif %}" id="upload-cover">
@@ -56,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" {% if hasManyCategories %}disabled="disabled"{% endif %} class="btn u-btn-primary">
-                                    {% if category is defined %}修改{% else %}<i class="if i-plus-bold"></i> 创建{% endif %}
+                                    {% if category is defined %}{{ 'ui.edit'|trans }}{% else %}<i class="if i-plus-bold"></i> {{ 'ui.create'|trans }}{% endif %}
                                 </button>
                             </div>
                         {{ form_widget(form.charge, {attr: {'data-role': 'charge'}}) }}

@@ -59,8 +59,8 @@
                             <div class="payfor">
                                 <div class="mask"></div>
                                 <div class="action">
-                                    <p class="meta"><i class="if i-tips"></i> 购买本书之后即可阅读全文</p>
-                                    <button class="btn u-btn-primary" data-slug="{{ book.slug }}" data-role="buy">{{ book.chargePrice|money }} 购买</button>
+                                    <p class="meta"><i class="if i-tips"></i> {{ 'book.after_buy_read_full'|trans }}</p>
+                                    <button class="btn u-btn-primary" data-slug="{{ book.slug }}" data-role="buy">{{ book.chargePrice|money }} {{ 'ui.buy'|trans }}</button>
                                 </div>
                             </div>
                         {% endif %}

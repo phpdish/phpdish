@@ -26,11 +26,11 @@
         <div class="panel-body reply-chat">
             {{ form_start(form, {'action': url('fos_message_thread_view', {'threadId': thread.id}) , 'attr': {'id': 'reply-chat-form'}}) }}
                 <div class="form-group">
-                    {{ form_widget(form.body, {'attr': {'class': 'form-control body', 'placeholder': '回复内容'}}) }}
+                    {{ form_widget(form.body, {'attr': {'class': 'form-control body', 'placeholder': 'chat.reply.content'|trans}}) }}
                     {{ form_errors(form.body) }}
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 回复</button>
+                    <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> {{ 'chat.reply.reply'|trans }}</button>
                 </div>
             {{ form_end(form) }}
         </div>

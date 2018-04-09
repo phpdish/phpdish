@@ -1,13 +1,13 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} 专栏 {% endblock %}
+{% block title %} {{ 'ui.category'|trans }} {% endblock %}
 
 {% block content %}
 <div class="container" role="main">
     <div class="row">
         <div class="col-lg-9 col-md-9">
             <div class="panel panel-u">
-                <div class="panel-heading"><i class="fa fa-file-text-o"></i> 最新文章</div>
+                <div class="panel-heading"><i class="fa fa-file-text-o"></i> {{ 'post.latest_post'|trans }}</div>
                 {% include 'PHPDishWebBundle:Post:_post_list.html.twig' %}
                 {% if posts.haveToPaginate %}
                 <footer class="panel-footer">

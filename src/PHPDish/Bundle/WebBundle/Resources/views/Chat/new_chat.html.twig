@@ -1,10 +1,10 @@
 {% extends 'PHPDishWebBundle:Common:notification_layout.html.twig' %}
 
-{% block title %} 发消息 {% endblock %}
+{% block title %} {{ 'chat.send_message'|trans }} {% endblock %}
 
 {% block notification_content %}
     <div class="panel panel-u">
-        <div class="panel-heading">发消息</div>
+        <div class="panel-heading">{{ 'chat.send_message'|trans }}</div>
         <div class="panel-body new-chat">
             {{ form_start(form) }}
                 {{ form_errors(form) }}
@@ -12,11 +12,11 @@
                     <img src="{{ asset(recipient.avatar)|imagine_filter('middle_square') }}">
                 </div>
                 <div class="form-group">
-                    {{ form_widget(form.body, {'attr': {'class': 'form-control', 'placeholder': '消息内容'}}) }}
+                    {{ form_widget(form.body, {'attr': {'class': 'form-control', 'placeholder': 'chat.form.body'|trans}}) }}
                     {{ form_errors(form.body) }}
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> 发布</button>
+                    <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> {{ 'chat.form.publish'|trans }}</button>
                 </div>
             {{ form_end(form) }}
         </div>

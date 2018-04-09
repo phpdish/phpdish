@@ -24,7 +24,7 @@
                         <div class="media-body">
                             <div class="pull-right follow-panel" data-role="follow-category" data-slug="{{ category.slug }}" data-price="{{ category.chargePrice|money }}">
                                 {% if app.user and category.isFollowedBy(app.user) %}
-                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> 已订阅</button>
+                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> {{ 'category.have_follow'|trans }}</button>
                                 {% else %}
                                     <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ category.charging ? "#{category.chargePrice|money} " : '' }}订阅</button>
                                 {% endif %}
@@ -32,12 +32,14 @@
                             <h4 class="media-heading">
                                 <a class="name" href="{{ categoryUrl }}">{{ category.name }}</a>
                                 {% if is_granted('edit', category) %}
-                                    <a class="meta" href="{{ path('category_edit', {'slug': category.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑专栏</a>
+                                    <a class="meta" href="{{ path('category_edit', {'slug': category.slug}) }}" title="{{ 'ui.edit'|trans }}">
+                                        <i class="if i-edit"></i> {{ 'category.edit.category'|trans }}
+                                    </a>
                                 {% endif %}
                             </h4>
                             <ul class="list-unstyled list-inline meta">
-                                <li>文章 {{ category.postCount }}</li>
-                                <li>订阅 {{ category.followerCount }}</li>
+                                <li>{{ 'ui.article'|trans }} {{ category.postCount }}</li>
+                                <li>{{ 'ui.follower'|trans }} {{ category.followerCount }}</li>
                             </ul>
                             <div>{{ category.description }}</div>
                         </div>
@@ -45,16 +47,16 @@
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'new' %} class="active" {% endif %}>
-                        <a href="{{ path('category_view', {'slug': category.slug}) }}"><i class="fa fa-file-text-o"></i>  新发布</a>
+                        <a href="{{ path('category_view', {'slug': category.slug}) }}"><i class="fa fa-file-text-o"></i> {{ 'category.new_publish'|trans }}</a>
                     </li>
                     <li {% if tab == 'hot' %} class="active" {% endif %}>
-                        <a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}"><i class="fa fa-fire"></i> 热门</a>
+                        <a href="{{ path('category_view', {'slug': category.slug, 'orderby': 'hot'}) }}"><i class="fa fa-fire"></i> {{ 'category.hot'|trans }}</a>
                     </li>
                     <li {% if tab == 'follower' %} class="active" {% endif %}><a href="{{ path('category_followers', {'slug': category.slug}) }}"><i class="fa fa-rss"></i> 订阅</a></li>
                 </ul>
                 <div id="list-container">
                     {% block category_content %}
-                        <div class="empty-data">没有任何数据</div>
+                        <div class="empty-data">{{ 'ui.empty_data'|trans }}</div>
                     {% endblock %}
                 </div>
             </div>

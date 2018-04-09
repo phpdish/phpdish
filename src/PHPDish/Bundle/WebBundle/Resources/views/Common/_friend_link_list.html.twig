@@ -1,7 +1,7 @@
 
 <ul id="link_menu" class="breadcrumb">
     <li class="active">
-        <span class="glyphicon glyphicon-list-alt"></span> 链接
+        <span class="glyphicon glyphicon-list-alt"></span> {{ 'friend_link'|trans }}
     </li>
     {% for link in get_friend_links(limit) %}
         <li class="menu-item">

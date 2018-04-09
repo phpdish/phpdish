@@ -1,10 +1,10 @@
 {% extends 'PHPDishWebBundle:Common:notification_layout.html.twig' %}
 
-{% block title %} 收件箱 {% endblock %}
+{% block title %} {{ 'chat.inbox'|trans }} {% endblock %}
 
 {% block notification_content %}
     <div class="panel panel-u">
-        <div class="panel-heading">收件箱</div>
+        <div class="panel-heading">{{ 'chat.inbox'|trans }}</div>
         {% include 'PHPDishWebBundle:Chat:_thread_list.html.twig' with {'threads': threads} %}
         {% if threads.haveToPaginate %}
             <footer class="panel-footer">

@@ -9,7 +9,7 @@
                     <div class="author">
                         <a class="avatar" href="{{ authorUrl }}"><img src="{{ asset(post.user.avatar)|imagine_filter('middle_square') }}" class="img-circle img-responsive"></a>
                         <span class="username"><a href="{{ authorUrl }}">{{ post.user.username }}</a></span>
-                        <span class="meta">发表于</span>
+                        <span class="meta">{{ 'post.publish_at'|trans }}</span>
                         {% if post.category.isBook %}
                             <a class="category" href="{{ path('book_view', {'slug': post.category.slug}) }}">
                                 <i class="fa fa-book meta"></i> {{ post.category.name }}
@@ -21,7 +21,7 @@
                     </div>
                     <h3 class="title">
                         {% if post.isRecommended %}
-                            <span class="sticky-tag">推荐</span>
+                            <span class="sticky-tag">{{ 'post.recommend'|trans }}</span>
                         {% endif %}
                         <a href="{{ postUrl }}">
                             <span>{{ post.title }}</span>
@@ -32,7 +32,7 @@
                         <li><a href="{{ postUrl }}#comments"><i class="if i-comment"></i> {{ post.commentCount }}</a></li>
                         <li><i class="if i-view"></i> {{ post.viewCount }}</li>
                         {% if is_granted('edit', post) %}
-                            <li><a href="{{ path('post_edit', {id: post.id}) }}" title="编辑"><i class="if i-edit"></i> 编辑</a></li>
+                            <li><a href="{{ path('post_edit', {id: post.id}) }}" title="{{ 'ui.edit'|trans }}"><i class="if i-edit"></i> {{ 'ui.edit'|trans }}</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -47,7 +47,7 @@
         </li>
     {% else %}
         <li class="list-group-item empty-data">
-            <p><i class="if i-post-o"></i> 没有文章</p>
+            <p><i class="if i-post-o"></i> {{ 'post.empty'|trans }}</p>
         </li>
     {% endfor %}
 </ul>

@@ -1,6 +1,130 @@
 ui:
-    edit: 修改
+    create: 创建
+    edit: 编辑
+    toggle_navigation: 切换菜单
+    search: 搜索
+    login: 登录
+    register: 注册
+    buy: 购买
+    free: 免费
+    article: 文章
+    follower: 订阅
+    empty_data: 没有任何数据
+    book: 电子书
+    category: 专栏
+    publish: 发布
+
+navigation:
+    add_topic: 发起话题
+    add_post: 发布文章
+    user:
+        homepage: 我的主页
+        category: 我的专栏
+        wallet: 我的钱包
+        setting: 设置
+        logout: 退出
+
+login:
+     signin_your_account: 登录你的账号
+     click_and_register: 还没有账户?点此<a href="%link%">注册</a>
+     form:
+         username: 用户名或者邮箱
+         password: 密码
+         forgot_password: 找回密码
+     signin_with: 或者使用
+
+register:
+    new: 注册一个新账户
+    click_and_login: 已经有账户?点此<a href="%link%">登录</a>你的账户
+    form:
+       username: 你的用户名
+       email: 你的邮箱
+       password: 设置密码
+       repeat_password: 重复上面的密码
 
 setting:
     profile:
         edit_profile: 修改资料
+    setting: 个人设置
+
+book:
+    edit_chapter: 编辑章节
+    add_chapter: 添加章节
+    form:
+       title: 请输入标题
+       body: 请使用 Markdown 格式书写,注意代码高亮
+       publish: 发布
+    have_no_subscribers: 还没有订阅者
+    after_buy_read_full: 购买本书之后即可阅读全文
+    edit_this_chapter: 修改本章
+    add_sub_chapter: 添加子章节
+    delete_this_chapter: 删除本章
+    move_up: 向上移动
+    move_down: 向下移动
+    total_publish_books: 共发表了 %count% 本书
+    write_book: 写书
+    go_write_book: 现在去 <a href="%link%">创建电子书</a>
+    no_books_yet: 还没有电子书
+    have_buy: 已购买
+    description: 前言
+    read: 阅读
+    follower: 订阅
+
+
+category:
+    create:
+         book: 创建电子书
+         category: 创建专栏
+    edit:
+        book: 编辑电子书
+        category: 编辑专栏
+    no_posts_yet: 还没有文章
+    new_publish: 新发布
+    hot: 热门
+    have_follow: 已订阅
+    form:
+        name: 请填写名称
+        description: 介绍
+        charge:
+             free: 免费
+             custom_amount: 自定义金额
+        slug: 访问域名
+
+chat:
+   no_chat_yet: 还没有私信哟
+   inbox: 收件箱
+   sent: 已发送
+   send_message: 发送消息
+   form:
+       body: 消息内容
+       publish: 发布
+       recipient: 收信人
+       subject: 主题
+   reply:
+      content: 回复内容
+      reply: 回复
+
+post:
+    publish_at: 发表于
+    recommend: 推荐
+    empty: 没有文章
+    add: 创作文章
+    edit: 编辑文章
+    form:
+       title: 请输入文章标题
+       body: 请使用 Markdown 格式书写,注意代码高亮
+    latest_post: 最新文章
+    total_publish_posts: 共发表了 %count% 篇文章
+    no_posts_yet: 还没有发表过文章
+
+friend_link: 友情链接
+
+notification:
+   notification: 通知
+   my_notification: 我的提醒
+   empty: 没有提醒
+
+error:
+    unknow_error: 未知的错误
+    the_page_you_are_looking_for_does_not_exist: OOPS! 您请求的资源不存在
+    server_error: OOPS! 服务器内部错误

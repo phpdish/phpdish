@@ -27,20 +27,22 @@
                         <div class="media-body">
                             <div class="pull-right follow-panel" data-role="follow-category" data-book="true" data-slug="{{ book.slug }}"  data-price="{{ book.chargePrice|money }}">
                                 {% if app.user and book.isFollowedBy(app.user) %}
-                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> 已购买</button>
+                                    <button class="btn btn-default" data-action="unfollow"><i class="if i-check"></i> {{ 'book.have_buy'|trans }}</button>
                                 {% else %}
-                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ book.charging ? "#{book.chargePrice|money} " : '免费' }}购买</button>
+                                    <button class="btn u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ book.charging ? "#{book.chargePrice|money} " : 'ui.free'|trans }}{{ 'ui.buy'|trans }}</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">
                                 <a class="name" href="{{ bookUrl }}">{{ book.name }}</a>
                                 {% if is_granted('edit', book) %}
-                                    <a class="meta" href="{{ path('category_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i> 编辑</a>
+                                    <a class="meta" href="{{ path('book_edit', {'slug': book.slug}) }}" title="{{ 'ui.edit'|trans }}">
+                                        <i class="if i-edit"></i> {{ 'ui.edit'|trans }}
+                                    </a>
                                 {% endif %}
                             </h4>
                             <ul class="list-unstyled list-inline meta">
-                                <li>文章 {{ book.postCount }}</li>
-                                <li>订阅 {{ book.followerCount }}</li>
+                                <li>{{ 'ui.article'|trans }} {{ book.postCount }}</li>
+                                <li>{{ 'ui.follower'|trans }} {{ book.followerCount }}</li>
                             </ul>
                             <div>{{ book.description }}</div>
                         </div>
@@ -48,18 +50,18 @@
                 </div>
                 <ul class="list-unstyled list-inline tab-nav" data-pjax-container="list-container">
                     <li {% if tab == 'about' %} class="active" {% endif %}>
-                        <a href="{{ path('book_view', {'slug': book.slug}) }}"><i class="fa fa-file-text-o"></i> 前言</a>
+                        <a href="{{ path('book_view', {'slug': book.slug}) }}"><i class="fa fa-file-text-o"></i> {{ 'book.description'|trans }}</a>
                     </li>
                     <li {% if tab == 'summary' %} class="active" {% endif %}>
-                        <a href="{{ path('book_summary', {'slug': book.slug}) }}"><i class="fa fa-bars"></i> 阅读</a>
+                        <a href="{{ path('book_summary', {'slug': book.slug}) }}"><i class="fa fa-bars"></i> {{ 'book.read'|trans }}</a>
                     </li>
                     <li {% if tab == 'follower' %} class="active" {% endif %}>
-                        <a href="{{ path('book_followers', {'slug': book.slug}) }}"><i class="fa fa-rss"></i> 订阅</a>
+                        <a href="{{ path('book_followers', {'slug': book.slug}) }}"><i class="fa fa-rss"></i> {{ 'book.follower'|trans }}</a>
                     </li>
                 </ul>
                 <div id="book-details">
                     {% block book_content %}
-                        <div class="empty-data">没有任何数据</div>
+                        <div class="empty-data">{{ 'ui.empty_data'|trans }}</div>
                     {% endblock %}
                 </div>
             </div>

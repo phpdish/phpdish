@@ -4,7 +4,7 @@
 
 {% if posts.count %}
     {% block entry_meta %}
-        <span>共发表了{{ posts.count }}篇文章</span>
+        <span>{{ 'post.total_publish_posts'|trans({'%count%': posts.count}) }}</span>
     {% endblock %}
 {% endif %}
 
@@ -18,7 +18,7 @@
         {% endif %}
     {% else %}
         <div class="empty-data">
-            <p><i class="if i-post-o"></i> 还没有发表过文章</p>
+            <p><i class="if i-post-o"></i> {{  'post.no_posts_yet'|trans }}</p>
         </div>
     {% endif %}
 {% endblock %}

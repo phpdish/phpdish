@@ -5,7 +5,7 @@
 
 {% if books|length %}
     {% block entry_meta %}
-        <span>共发表了{{ books|length }}本书</span>
+        <span>{{ 'book.total_publish_books'|trans({'%count%': books|length }) }}</span>
     {% endblock %}
 {% endif %}
 
@@ -28,7 +28,7 @@
                             </h4>
                         </a>
                         {% if is_granted('edit', book) %}
-                            <div class="edit"><a href="{{ path('book_edit', {'slug': book.slug}) }}" title="编辑"><i class="if i-edit"></i></a></div>
+                            <div class="edit"><a href="{{ path('book_edit', {'slug': book.slug}) }}" title="{{ 'ui.edit'|trans }}"><i class="if i-edit"></i></a></div>
                         {% endif %}
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         {% if isMe and books|length < 5 %}
             <li>
                 <div class="add-book">
-                    <a title="写书" href="{{ path('book_add') }}"><i class="if i-plus-bold"></i></a>
+                    <a title="{{ 'book.write_book'|trans }}" href="{{ path('book_add') }}"><i class="if i-plus-bold"></i></a>
                 </div>
             </li>
         {% endif %}
@@ -46,10 +46,10 @@
             <div class="empty-data">
                 <p>
                     {% if isMe %}
-                    <i class="if i-post-o"></i> 还没有电子书
-                    现在去 <a href="{{ path('book_add') }}">创建电子书</a>
+                    <i class="if i-post-o"></i> {{ 'book.no_books_yet'|trans }}
+                   {{ 'book.go_write_book'|trans({'%link%': path('book_add')})|raw }}
                     {% else %}
-                        <i class="if i-post-o"></i> 还没有电子书
+                        <i class="if i-post-o"></i> {{ 'book.no_books_yet'|trans }}
                     {% endif %}
                 </p>
             </div>
