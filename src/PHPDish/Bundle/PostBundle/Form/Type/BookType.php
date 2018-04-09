@@ -13,19 +13,19 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-                'label' => '电子书名称',
+                'label' => 'form.book.name',
             ])
             ->add('description', TextareaType::class, [
-                'label' => '电子书描述',
+                'label' => 'form.book.description',
             ])
             ->add('charge', HiddenType::class, [
-                'label' => '电子书售价',
+                'label' => 'form.book.charge',
             ])
             ->add('slug', TextType::class, [
-                'label' => '访问域名',
+                'label' => 'form.book.slug',
             ])
             ->add('cover', HiddenType::class, [
-                'label' => '封面',
+                'label' => 'form.book.cover',
             ]);
     }
 }

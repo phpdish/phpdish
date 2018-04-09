@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CategoryController extends RestController
 {
@@ -35,8 +36,12 @@ class CategoryController extends RestController
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
+        /**@var TranslatorInterface*/
+        $translator = $this->get('translator');
         if (($number = $manager->getUserCategoriesNumber($this->getUser())) >= 2) {
-            $this->addFlash('danger', sprintf('最多只能创建两个专栏，你现在已经拥有%d个', $number));
+            $this->addFlash('danger', $translator->trans('category.more_than_2_categories', [
+                '%count%' => $number
+            ]));
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,10 +51,10 @@ class CategoryController extends RestController
             $this->get('event_dispatcher')->dispatch(Events::CATEGORY_PRE_CREATED, $event);
 
             if ($event->isCreationAborted()) {
-                $this->addFlash('success', '专栏创建失败');
+                $this->addFlash('success', $translator->trans('category.add_error'));
             } else {
                 $manager->saveCategory($category);
-                $this->addFlash('success', '专栏创建成功');
+                $this->addFlash('success', $translator->trans('category.add_success'));
 
                 return $this->redirectToRoute('category_view', [
                     'slug' => $category->getSlug(),
@@ -118,7 +123,7 @@ class CategoryController extends RestController
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
             $manager->saveCategory($category);
-            $this->addFlash('success', '专栏修改成功');
+            $this->addFlash('success', $this->get('translator')->trans('category.edit_success'));
 
             return $this->redirectToRoute('category_view', [
                 'slug' => $category->getSlug(),
@@ -174,7 +179,7 @@ class CategoryController extends RestController
             $qrCode = $this->getCategoryManager()->payForCategory($category, $this->getUser());
             $view = $this->view([
                 'require_payment' => true,
-                'message' => '需要先付费',
+                'message' => $this->get('translator')->trans('category.need_payment'),
                 'qrcode' => $qrCode
             ]);
         } else {

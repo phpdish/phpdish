@@ -13,7 +13,7 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('original_body', TextareaType::class, [
-            'label' => '内容',
+            'label' => 'form.comment.body',
         ]);
     }
 

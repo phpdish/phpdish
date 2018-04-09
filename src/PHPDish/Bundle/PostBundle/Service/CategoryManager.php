@@ -19,6 +19,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Slince\YouzanPay\Api\QRCode;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CategoryManager implements CategoryManagerInterface
 {
@@ -44,17 +45,24 @@ class CategoryManager implements CategoryManagerInterface
      */
     protected $router;
 
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         PaymentManagerInterface $paymentManager,
-        Router $router
+        Router $router,
+        TranslatorInterface $translator
     )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->paymentManager = $paymentManager;
         $this->router = $router;
+        $this->translator = $translator;
     }
 
     /**
@@ -161,13 +169,20 @@ class CategoryManager implements CategoryManagerInterface
     {
         if ($category->isCharging()) {
             //发起付费
-            $message = $category->isBook() ? sprintf('购买电子书: <a href="%s">%s</a>',
-                $this->router->generate('book_view', ['slug' => $category->getSlug()]),
-                $category->getName()
-            ) : sprintf('订阅专栏: <a href="%s">%s</a>',
-                $this->router->generate('category_view', ['slug' => $category->getSlug()]),
-                $category->getName()
-            );
+            $message = $category->isBook() ?
+                $this->translator->trans('book.buy_book', [
+                    '%book%' => sprintf('<a href="%s">%s</a>',
+                        $this->router->generate('book_view', ['slug' => $category->getSlug()]),
+                        $category->getName()
+                    )
+                ]):
+                $this->translator->trans('category.subscribe_category', [
+                    '%category%' => sprintf('<a href="%s">%s</a>',
+                        $this->router->generate('category_view', ['slug' => $category->getSlug()]),
+                        $category->getName()
+                    )
+                ]);
+
             //创建交易
             $payment = $this->paymentManager->createPayment($user)
                 ->setAmount($category->getCharge())
@@ -179,7 +194,7 @@ class CategoryManager implements CategoryManagerInterface
 
             $qrCode = $this->paymentManager->charge($payment);
         } else {
-            throw new \LogicException('The category is free');
+            throw new \LogicException($this->translator->trans('category.is_free'));
         }
         return $qrCode;
     }

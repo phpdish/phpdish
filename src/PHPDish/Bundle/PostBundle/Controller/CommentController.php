@@ -91,7 +91,7 @@ class CommentController extends RestController
 
         $comment = $this->getPostCommentManager()->findCommentById($id);
         if (!$comment) {
-            throw new \InvalidArgumentException('评论不存在');
+            throw new \InvalidArgumentException($this->get('translator')->trans('comment.not_exists'));
         }
         if ($isVoted = $comment->isVotedBy($this->getUser())) {
             $this->getPostCommentManager()->removeVoter($comment, $this->getUser());

@@ -37,7 +37,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => '标题',
+                'label' => 'form.post.title',
             ])
             ->add('category', EntityType::class, [
                 'class' => 'PHPDishPostBundle:Category',
@@ -45,7 +45,7 @@ class PostType extends AbstractType
                 'choices' => $this->getCurrentUserCategories($options),
             ])
             ->add('originalBody', TextareaType::class, [
-                'label' => '内容',
+                'label' => 'form.post.body',
             ]);
     }
 

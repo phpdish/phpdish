@@ -14,19 +14,19 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-                'label' => '名称',
+                'label' => 'form.category.name',
             ])
             ->add('description', TextareaType::class, [
-                'label' => '描述',
+                'label' => 'form.category.description',
             ])
             ->add('charge', HiddenType::class, [
-                'label' => '订阅价格',
+                'label' => 'form.category.charge',
             ])
             ->add('slug', TextType::class, [
-                'label' => '访问域名',
+                'label' => 'form.category.slug',
             ])
             ->add('cover', HiddenType::class, [
-                'label' => '封面',
+                'label' => 'form.category.cover',
             ]);
     }
 }

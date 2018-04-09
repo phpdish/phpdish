@@ -26,8 +26,8 @@ class ChapterType extends AbstractType
             'class' => 'PHPDishPostBundle:Post',
             'choice_label' => 'title',
             'choices' => $options['book']->getSummary(),
-            'label' => '所属章节',
-            'placeholder' => '顶级章节',
+            'label' => 'form.chapter.own_chapter',
+            'placeholder' => 'form.chapter.top_chapter',
             'required' => false
         ];
         if ($options['default_character']) {
@@ -35,11 +35,11 @@ class ChapterType extends AbstractType
         }
         $builder
             ->add('title', TextType::class, [
-                'label' => '标题',
+                'label' => 'form.chapter.title',
             ])
             ->add('parent', EntityType::class, $parentOptions)
             ->add('originalBody', TextareaType::class, [
-                'label' => '内容',
+                'label' => 'form.chapter.body',
             ]);
     }
 }

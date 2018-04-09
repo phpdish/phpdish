@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
 use PHPDish\Component\Util\StringManipulator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PostController extends RestController
 {
@@ -56,9 +57,11 @@ class PostController extends RestController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
+        /**@var TranslatorInterface*/
+        $translator = $this->get('translator');
         //如果用户没有专栏，则跳转专栏创建页面
         if ($this->getCategoryManager()->getUserCategoriesNumber($this->getUser()) === 0) {
-            $this->addFlash('warning', '请先创建专栏');
+            $this->addFlash('warning', $translator->trans('post.add_category_first'));
             return $this->redirectToRoute('category_add');
         }
 
@@ -74,7 +77,7 @@ class PostController extends RestController
                     'id' => $post->getId(),
                 ]);
             } else {
-                $this->addFlash('error', '文章无法创建');
+                $this->addFlash('error', $translator->trans('post.cannot_add'));
             }
         }
 
@@ -242,7 +245,7 @@ class PostController extends RestController
 
         $post = $this->getPostManager()->findPostById($id);
         if (!$post) {
-            throw new \InvalidArgumentException('文章不存在');
+            throw new \InvalidArgumentException($this->get('translator')->trans('post.not_exists'));
         }
         if ($isVoted = $post->isVotedBy($this->getUser())) {
             $this->getPostManager()->removeVoter($post, $this->getUser());

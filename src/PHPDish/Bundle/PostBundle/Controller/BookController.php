@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class BookController extends RestController
 {
@@ -38,13 +39,15 @@ class BookController extends RestController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
+        /**@var TranslatorInterface*/
+        $translator = $this->get('translator');
         if (($number = $manager->getUserBookNumber($this->getUser())) >= 5) {
-            $this->addFlash('danger', sprintf('最多只能创建五本书，你现在已经拥有%d个', $number));
+            $this->addFlash('danger', $translator->trans('book.more_than_5_books', ['%count%' => $number]));
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->saveBook($book);
-            $this->addFlash('success', '电子书创建成功');
+            $this->addFlash('success', $translator->trans('book.add_success'));
 
             return $this->redirectToRoute('book_view', [
                 'slug' => $book->getSlug(),
@@ -96,7 +99,7 @@ class BookController extends RestController
         $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
             $manager->saveBook($book);
-            $this->addFlash('success', '电子书修改成功');
+            $this->addFlash('success', $this->get('translator')->trans('book.edit_success'));
 
             return $this->redirectToRoute('book_view', [
                 'slug' => $book->getSlug(),
@@ -279,13 +282,16 @@ class BookController extends RestController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /**@var TranslatorInterface*/
+            $translator = $this->get('translator');
+
             if ($this->getPostManager()->savePost($chapter)) {
-                $this->addFlash('success', '章节创建成功');
+                $this->addFlash('success', $translator->trans('book.add_chapter_success'));
                 return $this->redirectToRoute('book_summary', [
                     'slug' => $slug
                 ]);
             } else {
-                $this->addFlash('error', '章节创建失败');
+                $this->addFlash('error', $translator->trans('book.add_chapter_error'));
             }
         }
         return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [
@@ -315,13 +321,16 @@ class BookController extends RestController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /**@var TranslatorInterface*/
+            $translator = $this->get('translator');
+
             if ($this->getPostManager()->savePost($chapter)) {
-                $this->addFlash('success', '章节修改成功');
+                $this->addFlash('success', $translator->trans('book.edit_chapter_success'));
                 return $this->redirectToRoute('book_summary', [
                     'slug' => $slug
                 ]);
             } else {
-                $this->addFlash('error', '章节修改失败');
+                $this->addFlash('error', $translator->trans('book.edit_chapter_error'));
             }
         }
         return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [

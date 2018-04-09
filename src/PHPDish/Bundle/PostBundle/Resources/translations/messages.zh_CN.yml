@@ -1,0 +1,54 @@
+form:
+    book:
+        name: 电子书名称
+        description: 电子书描述
+        charge: 电子书售价
+        slug: 访问域名
+        cover: 封面
+
+    category:
+        name: 名称
+        description: 描述
+        charge: 订阅价格
+        slug: 访问域名
+        cover: 封面
+
+    chapter:
+        own_chapter: 所属章节
+        top_chapter: 顶级章节
+        title: 标题
+        body: 内容
+
+    comment:
+        body: 内容
+
+    post:
+        title: 标题
+        body: 内容
+
+book:
+    more_than_5_books: 最多只能创建五本电子书，你现在已经拥有 %count% 个
+    add_success: 电子书创建成功
+    edit_success: 电子书修改成功
+    add_chapter_success: 章节创建成功
+    add_chapter_error: 章节创建失败
+    edit_chapter_success: 章节修改成功
+    edit_chapter_error: 章节修改失败
+    buy_book: 购买电子书：%book%
+
+category:
+    more_than_2_categories: 最多只能创建两个专栏，你现在已经拥有 %count% 个
+    add_success: 专栏创建成功
+    add_error: 专栏创建失败
+    edit_success: 专栏修改成功
+    need_payment: 需要先付费
+    subscribe_category: 订阅专栏：%category%
+    is_free: 该专栏免费
+
+comment:
+   not_exists: 评论不存在
+
+post:
+    add_category_first: 请先创建专栏
+    cannot_add: 文章无法创建
+    not_exists: 文章不存在
