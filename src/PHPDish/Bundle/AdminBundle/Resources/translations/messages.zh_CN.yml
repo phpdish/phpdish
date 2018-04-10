@@ -1,0 +1,10 @@
+menu:
+    user: 用户
+    wallet: 钱包
+    transaction: 流水
+    category: 专栏
+    post: 文章
+    thread: 节点
+    topic: 话题
+    friend_link: 友情链接
+

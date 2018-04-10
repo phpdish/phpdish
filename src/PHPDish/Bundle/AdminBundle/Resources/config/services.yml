@@ -3,7 +3,7 @@ services:
         class: PHPDish\Bundle\AdminBundle\Admin\UserAdmin
         arguments: [~, PHPDish\Bundle\UserBundle\Entity\User, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 用户, group: 'phpdish.admin.group.user' }
+            - { name: sonata.admin, manager_type: orm, label: menu.user, group: 'phpdish.admin.group.user' }
         public: true
 
   phpdish.admin.wallet:
@@ -12,14 +12,14 @@ services:
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.payment']}
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 钱包, group: 'phpdish.admin.group.wallet' }
+            - { name: sonata.admin, manager_type: orm, label: menu.wallet, group: 'phpdish.admin.group.wallet' }
         public: true
 
   phpdish.admin.payment:
         class: PHPDish\Bundle\AdminBundle\Admin\PaymentAdmin
         arguments: [~, PHPDish\Bundle\PaymentBundle\Entity\Payment, PHPDishAdminBundle:Payment]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 流水, group: 'phpdish.admin.group.wallet' }
+            - { name: sonata.admin, manager_type: orm, label: menu.transaction, group: 'phpdish.admin.group.wallet' }
         public: true
         calls:
             - {method: 'setTemplates', arguments: [{inner_list_row2: 'PHPDishAdminBundle:Admin:inner_row_comment.html.twig',base_list_field: 'SonataAdminBundle:CRUD:base_list_field.html.twig'}]}
@@ -31,14 +31,14 @@ services:
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.post']}
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 专栏, group: 'phpdish.admin.group.post' }
+            - { name: sonata.admin, manager_type: orm, label: menu.category, group: 'phpdish.admin.group.post' }
         public: true
 
   phpdish.admin.post:
         class: PHPDish\Bundle\AdminBundle\Admin\PostAdmin
         arguments: [~, PHPDish\Bundle\PostBundle\Entity\Post, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 文章, group: 'phpdish.admin.group.post' }
+            - { name: sonata.admin, manager_type: orm, label: menu.post, group: 'phpdish.admin.group.post' }
         public: true
 
   phpdish.admin.thread:
@@ -47,19 +47,19 @@ services:
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.topic']}
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 节点, group: 'phpdish.admin.group.forum' }
+            - { name: sonata.admin, manager_type: orm, label: menu.thread, group: 'phpdish.admin.group.forum' }
         public: true
 
   phpdish.admin.topic:
         class: PHPDish\Bundle\AdminBundle\Admin\TopicAdmin
         arguments: [~, PHPDish\Bundle\ForumBundle\Entity\Topic, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 话题, group: 'phpdish.admin.group.forum' }
+            - { name: sonata.admin, manager_type: orm, label: menu.topic, group: 'phpdish.admin.group.forum' }
         public: true
 
   phpdish.admin.friend_link:
         class: PHPDish\Bundle\AdminBundle\Admin\FriendLinkAdmin
-        arguments: [~, PHPDish\Bundle\CoreBundle\Entity\FriendLink, ~]
+        arguments: [~, PHPDish\Bundle\WebBundle\Entity\FriendLink, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: 友情链接, group: 'phpdish.admin.group.site' }
+            - { name: sonata.admin, manager_type: orm, label: menu.friend_link, group: 'phpdish.admin.group.site' }
         public: true

@@ -129,7 +129,7 @@ topic:
     topic_has_been_cancel_recommend: 话题已经被取消推荐
     confirm_set_top_the_topic: 确认置顶这个话题吗？
     confirm_cancel_set_top_the_topic: 确认取消置顶吗？
-    topic_has_been_set_top: 话题已经已经置顶
+    topic_has_been_set_top: 话题已经置顶
     topic_has_been_cancel_set_top: 话题已经被取消置顶
 
     confirm_remove_the_comment: 确认删除这个回复吗？
