@@ -13,7 +13,7 @@
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr':{'class': 'reg-page', 'id': 'register-form'}}) }}
                 <div class="reg-header">
                     <h2>{{ 'register.new'|trans }}</h2>
-                    <p>{{ 'register.click_and_login'|trans({'%link%': path('login')})|trans }}</p>
+                    <p>{{ 'register.click_and_login'|trans({'%link%': path('login')})|raw }}</p>
                 </div>
                 {% for flashMessage in app.session.flashbag.get('notice') %}
                     <span class="black-text">{ flashMessage }}</span>
