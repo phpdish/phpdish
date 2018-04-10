@@ -13,26 +13,26 @@ class PostAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email',null, ['label'=>'邮箱'])
-            ->add('user.username', null, ['label'=>'用户名'])
-            ->add('title', null, ['label'=>'标题']);
+        $filter->add('user.email', null,  ['label'=>'filter.user_email'])
+            ->add('user.username', null,  ['label'=>'filter.user_username'])
+            ->add('title', null, ['label'=>'post.filter.title']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
             ->add('title', 'url', [
-                'label' => '标题',
+                'label' => 'post.title',
                 'attributes' => ['target' => '_blank'],
                 'route'=> ['name' => 'post_view', 'identifier_parameter_name' => 'id']
             ])
-            ->add('category', null, ['label'=>'专栏'])
-            ->add('user', null, ['label'=>'作者'])
-            ->add('recommended', null, ['editable'=>true])
-            ->add('commentCount', null, ['label'=>'评论数量'])
-            ->add('viewCount', null, ['label'=>'查看次数'])
-            ->add('createdAt', null, ['label'=>'创建时间'])
-            ->add('enabled', null, ['editable'=>true, 'label'=>'是否删除']);
+            ->add('category', null, ['label'=>'post.category'])
+            ->add('user', null, ['label'=>'post.user'])
+            ->add('recommended', null, ['label'=>'post.recommended', 'editable'=>true])
+            ->add('commentCount', null, ['label'=>'post.comment_count'])
+            ->add('viewCount', null, ['label'=>'post.view_count'])
+            ->add('createdAt', null, ['label'=>'post.created_at'])
+            ->add('enabled', null, ['editable'=>true, 'label'=>'post.enabled']);
     }
 
     public function getParentAssociationMapping()

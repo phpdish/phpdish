@@ -99,7 +99,7 @@ new AjaxTab($('[data-pjax-container]'), {
             }
             topButtonLock.lock();
             const isTop = $topAction.data('is-top');
-            let message =  Translator.trans(isTop ? 'topic.confirm_cancel_set_top_the_topic' : 'topic.confirm_set_top_the_topic.');
+            let message =  Translator.trans(isTop ? 'topic.confirm_cancel_set_top_the_topic' : 'topic.confirm_set_top_the_topic');
 
             Util.dialog.confirm(message).then(() => {
                 Util.request('topic.toggleTop', window.topicId).done((response) => {

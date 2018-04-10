@@ -16,15 +16,15 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
-            ->add('creator.username', null, ['label'=>'用户名'])
-            ->add('name', null, ['label'=>'标题']);
+            ->add('creator.username', null, ['label'=>'category.filter.username'])
+            ->add('name', null, ['label'=>'category.filter.name']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
             ->addIdentifier('name', null, [
-                'label' => '名称',
+                'label' => 'category.name',
                 /* 暂时没实现
                 'attributes' => ['target' => '_blank'],
                 'route'=> [
@@ -37,30 +37,30 @@ class CategoryAdmin extends AbstractAdmin
                     'identifier_parameter_name' => 'slug'
                 ]*/
             ])
-            ->add('slug', null, ['label' => 'slug'])
-            ->add('creator', null, ['label' => '创建人'])
-            ->add('cover', null, ['label' => '封面'])
-            ->add('recommended', null, ['label' => '是否推荐', 'editable'=>true])
-            ->add('enabled', null, ['label' => '是否删除', 'editable'=>true])
-            ->add('description', null, ['label' => '专栏描述'])
-            ->add('postCount', null, ['label' => '文章数量'])
-            ->add('followerCount', null, ['label' => '订阅数量'])
+            ->add('slug', null, ['label' => 'category.slug'])
+            ->add('creator', null, ['label' => 'category.creator'])
+            ->add('cover', null, ['label' => 'category.cover'])
+            ->add('recommended', null, ['label' => 'category.recommended', 'editable'=>true])
+            ->add('enabled', null, ['label' => 'category.enabled', 'editable'=>true])
+            ->add('description', null, ['label' => 'category.description'])
+            ->add('postCount', null, ['label' => 'category.post_count'])
+            ->add('followerCount', null, ['label' => 'category.follower_count'])
             ->add('createdAt', null, [
-                'label' => '创建时间'
+                'label' => 'category.created_at'
             ]);
     }
 
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('name', null, ['label' => '名称'])
-            ->add('slug', null, ['label' => 'slug'])
-            ->add('creator', null, ['label' => '创建人'])
-            ->add('managers', null, ['label' => '管理员'])
-            ->add('cover', null, ['label' => '封面'])
-            ->add('recommended', null, ['label' => '是否推荐'])
-            ->add('enabled', null, ['label' => '是否删除'])
-            ->add('description', null, ['label' => '专栏描述']);
+            ->add('name', null, ['label' => 'category.name'])
+            ->add('slug', null, ['label' => 'category.slug'])
+            ->add('creator', null, ['label' => 'category.creator'])
+            ->add('managers', null, ['label' => 'category.managers'])
+            ->add('cover', null, ['label' => 'category.cover'])
+            ->add('recommended', null, ['label' => 'category.recommended'])
+            ->add('enabled', null, ['label' => 'category.enabled'])
+            ->add('description', null, ['label' => 'category.description']);
     }
 
 
@@ -75,7 +75,7 @@ class CategoryAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         if ($this->isGranted('LIST')) {
-            $menu->addChild('管理文章', [
+            $menu->addChild('category.manage_posts', [
                 'uri' => $admin->generateUrl('phpdish.admin.post.list', ['id' => $id])
             ]);
         }

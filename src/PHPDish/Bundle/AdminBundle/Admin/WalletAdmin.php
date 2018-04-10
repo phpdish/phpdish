@@ -18,7 +18,7 @@ class WalletAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email', null, [], 'email', ['label'=>'邮箱'])
+        $filter->add('user.email', null, [], 'email', ['label'=>'filter.user_email'])
             ->add('user.username')
             ->add('amount')
             ->add('freezeAmount');
@@ -28,19 +28,19 @@ class WalletAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('id')
-            ->add('user', null, ['label'=>'用户名'])
-            ->add('amount', null, ['label'=>'余额'])
-            ->add('freezeAmount', null, ['label'=>'冻结余额'])
-            ->add('createdAt', null, ['label'=>'创建时间']);
+            ->add('user', null, ['label'=>'wallet.user'])
+            ->add('amount', null, ['label'=>'wallet.amount'])
+            ->add('freezeAmount', null, ['label'=>'wallet.freeze_amount'])
+            ->add('createdAt', null, ['label'=>'wallet.created_at']);
     }
 
     protected function configureShowFields(ShowMapper $show)
     {
         $show
-            ->add('user', null, ['label'=>'用户名'])
-            ->add('amount', null, ['label'=>'余额'])
-            ->add('freezeAmount', null, ['label'=>'冻结余额'])
-            ->add('createdAt', null, ['label'=>'创建时间']);
+            ->add('user', null, ['label'=>'wallet.user'])
+            ->add('amount', null, ['label'=>'wallet.amount'])
+            ->add('freezeAmount', null, ['label'=>'wallet.freeze_amount'])
+            ->add('createdAt', null, ['label'=>'wallet.created_at']);
     }
 
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
@@ -53,12 +53,12 @@ class WalletAdmin extends AbstractAdmin
 
         $id = $admin->getRequest()->get('id');
 
-        $menu->addChild('查看钱包', [
+        $menu->addChild('wallet.view_wallet', [
             'uri' => $admin->generateUrl('show', ['id' => $id])
         ]);
 
         if ($this->isGranted('LIST')) {
-            $menu->addChild('管理流水', [
+            $menu->addChild('wallet.manage_payments', [
                 'uri' => $admin->generateUrl('phpdish.admin.payment.list', ['id' => $id])
             ]);
         }

@@ -13,26 +13,26 @@ class TopicAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email',null, ['label'=>'邮箱'])
-            ->add('user.username', null, ['label'=>'用户名'])
-            ->add('title', null, ['label'=>'标题']);
+        $filter->add('user.email',null, ['label'=>'filter.user_email'])
+            ->add('user.username', null, ['label'=>'filter.user_username'])
+            ->add('title', null, ['label'=>'topic.filter.title']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
             ->add('title', 'url', [
-                'label' => '标题',
+                'label' => 'topic.title',
                 'attributes' => ['target' => '_blank'],
                 'route'=> ['name' => 'topic_view', 'identifier_parameter_name' => 'id']
             ])
-            ->add('threads', null, ['label'=>'节点'])
-            ->add('user', null, ['label'=>'创建人'])
-            ->add('recommended', null, ['editable'=>true, 'label' => '是否推荐'])
-            ->add('replyCount', null, ['label'=>'回复数量'])
-            ->add('viewCount', null, ['label'=>'查看数量'])
-            ->add('createdAt', null, ['label'=>'创建日期'])
-            ->add('enabled', null, ['editable'=>true, 'label' => '是否删除']);
+            ->add('threads', null, ['label'=>'topic.threads'])
+            ->add('user', null, ['label'=>'topic.user'])
+            ->add('recommended', null, ['label' => 'topic.recommended', 'editable'=>true])
+            ->add('replyCount', null, ['label'=>'topic.reply_count'])
+            ->add('viewCount', null, ['label'=>'topic.view_count'])
+            ->add('createdAt', null, ['label'=>'topic.created_at'])
+            ->add('enabled', null, ['label' => 'topic.enabled', 'editable'=>true]);
     }
 
     public function getParentAssociationMapping()
@@ -42,7 +42,7 @@ class TopicAdmin extends AbstractAdmin
 
     public function toString($object)
     {
-        return '话题';
+        return 'topic.topic';
     }
 
     protected function configureRoutes(RouteCollection $collection)

@@ -22,15 +22,16 @@ class PaymentController extends Controller
         $request = $this->getRequest();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $translator = $this->get('translator');
             $walletManager = $this->getWalletManager();
             $action = $form->getData()['action'];
             $note = $form->getData()['note'];
             if ($action === 'approve') {
                 $walletManager->approveWithdraw($history, $note);
-                $this->addFlash('sonata_flash_success', '提现已经被确认');
+                $this->addFlash('sonata_flash_success', $translator->trans('payment.withdraw_approve'));
             } else {
                 $walletManager->refuseWithdraw($history, $note);
-                $this->addFlash('sonata_flash_success', '提现已经拒绝');
+                $this->addFlash('sonata_flash_success', $translator->trans('payment.withdraw_declined'));
             }
             return $this->redirect($this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()]));
         }

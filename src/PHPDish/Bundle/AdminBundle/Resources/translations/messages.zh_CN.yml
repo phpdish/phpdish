@@ -8,3 +8,113 @@ menu:
     topic: 话题
     friend_link: 友情链接
 
+category:
+    filter:
+        username: 用户名
+        name: 标题
+    name: 名称
+    slug: Slug
+    creator: 创建人
+    cover: 封面
+    recommended: 是否推荐
+    enabled: 是否删除
+    description: 专栏描述
+    post_count: 文章数量
+    follower_count: 订阅数量
+    created_at: 创建时间
+    managers: 管理员
+    manage_posts: 管理文章
+
+friend_link:
+    filter:
+        name: 标题
+    name: 标题
+    logo: LOGO
+    url: URL
+    priority: 优先级
+
+payment:
+    filter:
+        type: 类型
+        status: 状态
+    serial_no: 流水号
+    user: 用户
+    price: 交易金额
+    type: 类型
+    status: 状态
+    description: 描述
+    created_at: 创建时间
+    enabled: 是否有效
+    _action: 操作
+    withdraw_approve: 提现已经被确认
+    withdraw_declined: 提现已经拒绝
+    form:
+        action:
+           action: 操作
+           approve: 同意
+           decline: 拒绝
+        note: 备注
+
+filter:
+    user_email: 邮箱
+    user_username: 用户名
+
+post:
+    filter:
+        title: 标题
+    title: 标题
+    category: 专栏
+    user: 作者
+    recommended: 是否推荐
+    comment_count: 评论数量
+    view_count: 查看次数
+    created_at: 创建时间
+    enabled: 是否删除
+
+thread:
+    filter:
+        name: 名称
+    name: 名称
+    slug: Slug
+    creator: 创建人
+    cover: 封面
+    recommended: 是否推荐
+    enabled: 是否删除
+    description: 描述
+    topic_count: 话题数量
+    follower_count: 订阅数量
+    created_at: 创建时间
+    manage_topics: 管理话题
+    view_thread: 查看节点
+
+topic:
+    topic: 话题
+    filter:
+        title: 标题
+    title: 标题
+    threads: 节点
+    user: 创建人
+    recommended: 是否推荐
+    reply_count: 回复数量
+    view_count: 查看次数
+    created_at: 创建时间
+    enabled: 是否删除
+
+user:
+    user: 用户
+    filter:
+        enabled: 是否启用
+    email: 邮箱
+    username: 用户名
+    avatar: 头像
+    last_login: 上次登录
+    enabled: 是否启用
+    _action: 操作
+
+wallet:
+    user: 用户名
+    amount: 余额
+    freeze_amount: 冻结余额
+    created_at: 创建时间
+    manage_payments: 管理流水
+    view_wallet: 查看钱包

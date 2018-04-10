@@ -14,34 +14,34 @@ class PaymentAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user.email', null,  ['label'=>'邮箱'])
-            ->add('user.username', null,  ['label'=>'用户名'])
-            ->add('type', null,  ['label'=>'类型'])
-            ->add('status', null,  ['label'=>'状态']);
+        $filter->add('user.email', null,  ['label'=>'filter.user_email'])
+            ->add('user.username', null,  ['label'=>'filter.user_username'])
+            ->add('type', null,  ['label'=>'payment.filter.type'])
+            ->add('status', null,  ['label'=>'payment.filter.status']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('serialNo', null, ['label' => '流水号'])
-            ->addIdentifier('user', null, ['label' => '用户'])
+            ->addIdentifier('serialNo', null, ['label' => 'payment.serial_no'])
+            ->addIdentifier('user', null, ['label' => 'payment.user'])
             ->add('price', 'currency', [
-                'label' => '交易金额',
+                'label' => 'payment.price',
                 'template' => 'PHPDishAdminBundle:Common:list_field_money.html.twig'
             ])
             ->add('type', null, [
-                'label' => '类型',
+                'label' => 'payment.type',
                 'template' => 'PHPDishAdminBundle:Payment:list_field_history_type.html.twig'
             ])
             ->add('status', null, [
-                'label' => '状态',
+                'label' => 'payment.status',
                 'template' => 'PHPDishAdminBundle:Payment:list_field_history_status.html.twig'
             ])
-            ->add('description', 'html', ['label' => '描述'])
-            ->add('createdAt', null, ['label' => '创建时间'])
-            ->add('enabled', null, ['label' => '是否有效'])
+            ->add('description', 'html', ['label' => 'payment.description'])
+            ->add('createdAt', null, ['label' => 'payment.created_at'])
+            ->add('enabled', null, ['label' => 'payment.enabled'])
             ->add('_action', null, [
-                'label' => '操作',
+                'label' => 'payment._action',
                 'actions' => [
                     'withdraw' => [
                         'template' => 'PHPDishAdminBundle:Payment:list__action_withdraw.html.twig'
@@ -53,17 +53,17 @@ class PaymentAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $show)
     {
         $show
-            ->add('serialNo', null, ['label' => '流水号'])
-            ->add('user', null, ['label' => '用户'])
+            ->add('serialNo', null, ['label' => 'payment.serial_no'])
+            ->add('user', null, ['label' => 'payment.user'])
             ->add('amount', 'currency', [
-                'label' => '交易金额',
+                'label' => 'payment.amount',
                 'currency' => 'CNY'
             ])
-            ->add('type', null, ['label' => '类型'])
-            ->add('status', null, ['label' => '状态'])
-            ->add('description', 'html', ['label' => '描述'])
-            ->add('createdAt', null, ['label' => '创建时间'])
-            ->add('enabled', null, ['label' => '是否有效']);
+            ->add('type', null, ['label' => 'payment.type'])
+            ->add('status', null, ['label' => 'payment.status'])
+            ->add('description', 'html', ['label' => 'payment.description'])
+            ->add('createdAt', null, ['label' => 'payment.created_at'])
+            ->add('enabled', null, ['label' => 'payment.enabled']);
     }
 
     public function getParentAssociationMapping()

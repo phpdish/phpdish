@@ -11,27 +11,20 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class UserAdmin extends AbstractAdmin
 {
-    public function configureFormFields(FormMapper $form)
-    {
-        $form->add('email', 'email', ['label'=>'邮箱'])
-            ->add('username', 'text', ['label'=>'用户名'])
-            ->add('enabled', null, ['label'=>'是否启用']);
-    }
-
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('email',null, ['label'=>'邮箱'])
-            ->add('username', null, ['label'=>'用户名']);
+        $filter->add('email',null, ['label'=>'user.email'])
+            ->add('username', null, ['label'=>'user.username']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('username', 'text', ['label'=>'用户名'])
-            ->add('email', 'email', ['label'=>'邮箱'])
-            ->add('avatar', 'image', ['label'=>'头像'])
-            ->add('lastLogin', 'datetime', ['label'=>'上次登录'])
-            ->add('enabled', 'boolean', ['label'=>'是否启用', 'editable' => true])
+            ->addIdentifier('username', 'text', ['label'=>'user.username'])
+            ->add('email', 'email', ['label'=>'user.email'])
+            ->add('avatar', 'image', ['label'=>'user.avatar'])
+            ->add('lastLogin', 'datetime', ['label'=>'user.last_login'])
+            ->add('enabled', 'boolean', ['label'=>'user.enabled', 'editable' => true])
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -39,12 +32,19 @@ class UserAdmin extends AbstractAdmin
             ]);
     }
 
+    public function configureFormFields(FormMapper $form)
+    {
+        $form->add('email', 'email', ['label'=>'user.email'])
+            ->add('username', 'text', ['label'=>'user.username'])
+            ->add('enabled', null, ['label'=>'user.filter.enabled']);
+    }
+
     protected function configureShowFields(ShowMapper $show)
     {
-        $show->add('email', 'email', ['label'=>'邮箱'])
-            ->add('username', 'text', ['label'=>'用户名'])
-            ->add('avatar', 'text', ['label'=>'头像'])
-            ->add('enabled', null, ['label'=>'是否启用']);
+        $show->add('email', 'email', ['label'=>'user.email'])
+            ->add('username', 'text', ['label'=>'user.username'])
+            ->add('avatar', 'text', ['label'=>'user.avatar'])
+            ->add('enabled', null, ['label'=>'user.enabled']);
     }
 
 
@@ -57,6 +57,6 @@ class UserAdmin extends AbstractAdmin
 
     public function toString($object)
     {
-        return '用户';
+        return 'user.user';
     }
 }

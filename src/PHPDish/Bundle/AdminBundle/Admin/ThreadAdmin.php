@@ -16,40 +16,40 @@ class ThreadAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
-            ->add('name');
+            ->add('name', null, ['label'=>'thread.filter.name']);
     }
 
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('name', null, ['label' => '名称'])
-            ->add('slug', null, ['label' => 'slug'])
-            ->add('cover', null, ['label' => '封面'])
-            ->add('enabled', null, ['label' => '是否删除', 'editable'=>true])
-            ->add('description', null, ['label' => '专栏描述'])
-            ->add('topicCount', null, ['label' => '文章数量'])
-            ->add('followerCount', null, ['label' => '订阅数量'])
-            ->add('createdAt', null, ['label' => '创建时间']);
+            ->addIdentifier('name', null, ['label' => 'thread.name'])
+            ->add('slug', null, ['label' => 'thread.slug'])
+            ->add('cover', null, ['label' => 'thread.cover'])
+            ->add('enabled', null, ['label' => 'thread.enabled', 'editable'=>true])
+            ->add('description', null, ['label' => 'thread.description'])
+            ->add('topicCount', null, ['label' => 'thread.topic_count'])
+            ->add('followerCount', null, ['label' => 'thread.follower_count'])
+            ->add('createdAt', null, ['label' => 'thread.created_at']);
     }
 
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('name', null, ['label' => '名称'])
-            ->add('slug', null, ['label' => 'slug'])
-            ->add('cover', null, ['label' => '封面'])
-            ->add('enabled', null, ['label' => '是否删除'])
-            ->add('description', null, ['label' => '专栏描述']);
+            ->add('name', null, ['label' => 'thread.name'])
+            ->add('slug', null, ['label' => 'thread.slug'])
+            ->add('cover', null, ['label' => 'thread.cover'])
+            ->add('enabled', null, ['label' => 'thread.enabled'])
+            ->add('description', null, ['label' => 'thread.description']);
     }
 
     protected function configureShowFields(ShowMapper $show)
     {
         $show
-            ->add('name', null, ['label' => '名称'])
-            ->add('slug', null, ['label' => 'slug'])
-            ->add('cover', null, ['label' => '封面'])
-            ->add('enabled', null, ['label' => '是否删除'])
-            ->add('description', null, ['label' => '专栏描述']);
+            ->add('name', null, ['label' => 'thread.name'])
+            ->add('slug', null, ['label' => 'thread.slug'])
+            ->add('cover', null, ['label' => 'thread.cover'])
+            ->add('enabled', null, ['label' => 'thread.enabled'])
+            ->add('description', null, ['label' => 'thread.description']);
     }
 
 
@@ -63,12 +63,12 @@ class ThreadAdmin extends AbstractAdmin
 
         $id = $admin->getRequest()->get('id');
 
-        $menu->addChild('查看话题', [
+        $menu->addChild('thread.view_thread', [
             'uri' => $admin->generateUrl('show', ['id' => $id])
         ]);
 
         if ($this->isGranted('LIST')) {
-            $menu->addChild('管理话题', [
+            $menu->addChild('thread.manage_topics', [
                 'uri' => $admin->generateUrl('phpdish.admin.topic.list', ['id' => $id])
             ]);
         }

@@ -15,13 +15,13 @@ class WithdrawType extends AbstractType
     {
         $builder->add('action', ChoiceType::class, [
                 'choices' => [
-                    '同意' => 'approve',
-                    '拒绝' => 'decline',
+                    'payment.form.action.approve' => 'approve',
+                    'payment.form.action.decline' => 'decline',
                 ],
-                'label' => '操作',
+                'label' => 'payment.form.action.action',
             ])
             ->add('note', TextareaType::class, [
-                'label' => '备注'
+                'label' => 'payment.form.note'
             ]);
     }
 }
