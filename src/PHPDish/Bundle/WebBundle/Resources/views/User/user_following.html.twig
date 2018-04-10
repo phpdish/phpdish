@@ -6,7 +6,7 @@
 
 {% if users.count %}
     {% block entry_meta %}
-        <span>共关注{{ users.count }}个用户</span>
+        <span>{{ 'user.total_following'|trans({'%count%': users.count}) }}</span>
     {% endblock %}
 {% endif %}
 
@@ -17,7 +17,7 @@
     </div>
     {% else %}
         <div class="empty-data">
-            <p><i class="if i-fan"></i> 还没有{{ tab == 'following' ? '关注' : '粉丝' }}</p>
+            <p><i class="if i-fan"></i> {{ tab == 'following' ? 'user.no_following_yet'|trans : 'user.no_followers_yet'|trans }}</p>
         </div>
     {% endif %}
 {% endblock %}

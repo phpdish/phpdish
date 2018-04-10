@@ -6,6 +6,6 @@
 
 {% if followers.count %}
     {% block entry_meta %}
-        <span>共{{ followers.count }}个粉丝</span>
+        <span>{{ 'user.total_follwers'|trans({'%count%': followers.count}) }}</span>
     {% endblock %}
 {% endif %}

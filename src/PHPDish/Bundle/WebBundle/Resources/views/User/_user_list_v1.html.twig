@@ -10,8 +10,8 @@
             <div class="title"><a href="{{ userHomeUrl }}">{{ user.username }}</a></div>
             <div class="meta">
                 <ul class="list-unstyled list-inline">
-                    <li>{{ user.followingCount }}关注</li>
-                    <li>{{ user.followerCount }}粉丝</li>
+                    <li>{{ user.followingCount }}{{ 'user.following'|trans }}</li>
+                    <li>{{ user.followerCount }}{{ 'user.follower'|trans }}</li>
                 </ul>
             </div>
         </div>

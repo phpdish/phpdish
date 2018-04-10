@@ -1,6 +1,6 @@
 {% extends 'PHPDishWebBundle::layout.html.twig' %}
 
-{% block title %} 我的钱包 {% endblock %}
+{% block title %} {{ 'wallet.my_wallet'|trans }} {% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{ asset('build/js/wallet.js') }}"></script>
@@ -17,31 +17,31 @@
                     <div class="row">
                         <div class="col-md-6 wallet-info" data-role="wallet-info">
                             <div class="balance">
-                                账户余额: <span class="amount" data-amount="{{ wallet.amount }}">{{ wallet.price|money }}</span>
+                                {{ 'wallet.account_balance'|trans }}: <span class="amount" data-amount="{{ wallet.amount }}">{{ wallet.price|money }}</span>
                                 {% if wallet.freezeAmount %}
                                 <div class="freeze-balance">
-                                    (冻结余额: <span class="amount">{{ wallet.freezePrice|money }}</span>)
+                                    ({{ 'wallet.frozen_balance'|trans }}: <span class="amount">{{ wallet.freezePrice|money }}</span>)
                                 </div>
                                 {% endif %}
                             </div>
-                            <button class="btn btn-md u-btn-outline-primary withdraw" data-role="withdraw">提现</button>
+                            <button class="btn btn-md u-btn-outline-primary withdraw" data-role="withdraw">{{ 'wallet.withdraw'|trans }}</button>
                         </div>
                         <div class="col-md-6 help">
-                            <div>每次提现的最小额度为￥100.00</div>
-                            <div>提现金额必须是整数</div>
-                            <div>每次提现收取 10% 手续费</div>
-                            <div>提现会在 3-5 个工作日内到账</div>
-                            <div>提现期间提现金额会被暂时冻结</div>
+                            <div>{{ 'wallet.the_minimum_amount_for_each_withdrawal_is_100'|trans }}</div>
+                            <div>{{ 'wallet.the_withdrawal_amount_must_be_an_integer'|trans }}</div>
+                            <div>{{ 'wallet.10_percent_service_charge_is_charged_for_each_withdrawal'|trans }}</div>
+                            <div>{{ 'wallet.withdrawal_will_arrive_within_3_5_working_days'|trans }}</div>
+                            <div>{{ 'wallet.withdrawal_amount_will_be_temporarily_frozen_during_withdrawal'|trans }}</div>
                         </div>
                     </div>
 
                     <table class="table table-responsive wallet-histories">
                         <tr>
-                            <th>时间</th>
-                            <th>类型</th>
-                            <th>详情</th>
-                            <th>金额</th>
-                            <th>状态</th>
+                            <th>{{ 'wallet.table.time'|trans }}</th>
+                            <th>{{ 'wallet.table.type'|trans }}</th>
+                            <th>{{ 'wallet.table.details'|trans }}</th>
+                            <th>{{ 'wallet.table.amount'|trans }}</th>
+                            <th>{{ 'wallet.table.status'|trans }}</th>
                         </tr>
                         {% for history in histories %}
                             <tr>
@@ -56,7 +56,7 @@
                         {% else %}
                             <tr>
                                 <td class="empty-data" colspan="5">
-                                    <i class="fa fa-credit-card"></i> 还没有记录
+                                    <i class="fa fa-credit-card"></i> {{ 'ui.no_record.time'|trans }}
                                 </td>
                             </tr>
                         {% endfor %}

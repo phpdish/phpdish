@@ -8,17 +8,17 @@
             <div class="media-body user-title">
                 <div class="media-heading username"><a href="{{ path('user_view', {'username': app.user.username}) }}">{{ app.user.username }}</a></div>
                 <ul class="list-inline badge-icons">
-                    <li><a href="{{ path('user_topics',  {'username': app.user.username}) }}"><i class="if i-comment-square"></i> 话题</a></li>
-                    <li><a href="{{ path('user_posts',  {'username': app.user.username}) }}"><i class="if i-post-o"></i> 文章</a></li>
+                    <li><a href="{{ path('user_topics',  {'username': app.user.username}) }}"><i class="if i-comment-square"></i> {{ 'ui.topic'|trans }}</a></li>
+                    <li><a href="{{ path('user_posts',  {'username': app.user.username}) }}"><i class="if i-post-o"></i> {{ 'ui.article'|trans }}</a></li>
                 </ul>
             </div>
         </div>
-        <a class="btn btn-block u-btn-outline-primary" href="{{ path('topic_add') }}">发布新话题</a>
+        <a class="btn btn-block u-btn-outline-primary" href="{{ path('topic_add') }}">{{ 'user.create_new_topic'|trans }}</a>
         {% else %}
         <div class="community-description">
             <p class="description">{{ read_config_parameter('phpdish.site.description') }}</p>
-            <a class="btn btn-block btn-default register-action" href="{{ path('register') }}">现在注册</a>
-            <p class="text-center login-action">已注册用户请<a href="{{ path('login') }}">登录</a></p>
+            <a class="btn btn-block btn-default register-action" href="{{ path('register') }}">{{ 'user.now_register'|trans }}</a>
+            <p class="text-center login-action">{{ 'user.registered_users_please_go_signin'|trans({'%url%':  path('login')}) }}</p>
         </div>
     {% endif %}
     </div>

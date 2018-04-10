@@ -18,6 +18,23 @@ ui:
     all: 全部
     follow: 关注
     have_follow: 已关注
+    reply: 回复
+    vote: 赞
+    following: 关注
+    follower: 粉丝
+    cancel_vote: 取消赞
+    preview: 预览
+    preview_zone: 预览区域
+    please_login_first_and_reply: 请先登录后再回复
+    replying: 正在回复
+    please_use_markdown_synax_write: 请使用 Markdown 语法书写
+    write_your_comment: 写下你的评论
+    support_markdown_synax_reference: 支持 Markdown 格式，常用的Markdown语法 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md" target="_blank">参考这里</a>
+    support_emoji_emoji_reference: 支持Emoji表情，使用方法参考 <a href="https://www.phpdish.com/topics/6" target="_blank">Emoji 使用教学</a>, Emoji 快速查询看<a href="http://emoji.muan.co/" target="_blank">这里</a>
+    drag_and_paste_upload_image: 支持拖拽和剪切板黏贴上传图片, 格式的格式：jpg，png, gif
+    support_at_others: 支持“@”其他用户
+    no_content_yet: 还没有发表过内容
+    no_record: 没有记录
 
 navigation:
     add_topic: 发起话题
@@ -184,6 +201,8 @@ topic:
     hot_topics: 热门话题
     set_top: 置顶
     set_good: 加精
+    cancel_top: 取消置顶
+    cancel_good: 取消加精
     create_at: 发起于
     last_reply: 最后回复
     no_topic_yet: 还没有话题
@@ -200,8 +219,51 @@ topic:
     no_topic_yet: 还没有发表过话题
     created_at: 发表在
     total_publish_topics: 共发表了 %count% 个话题
+    good_topic: 精品话题
 
 reply:
     total_publish_reply: 共发表了 %count% 个回复
     created_at: 发表在
     no_reply_yet: 还没有发表过回复
+
+user:
+    latest_join_users: 最近加入
+    following: 关注
+    follower: 粉丝
+    no_users: 没有用户
+    create_new_topic: 发布新话题
+    now_register: 现在注册
+    registered_users_please_go_signin: 已注册用户请<a href="%ur%">登录</a>
+    total_follwers: 共 %count% 粉丝
+    total_following: 共关注 %count% 个用户
+    no_followers_yet: 还没有粉丝
+    no_following_yet: 还没有关注
+    what_to_say: 要说点什么呢？
+    register_at: 在 %timeago% 注册
+    edit_my_profile: 编辑我的资料
+    send_message: 发信息
+    follow_him: 关注他
+    follow_she: 关注她
+    her_categories: 她的专栏
+    his_categories: 他的专栏
+
+
+wallet:
+    my_wallet: 我的钱包
+    account_balance: 账户余额
+    frozen_balance: 冻结余额
+    withraw: 提现
+    the_minimum_amount_for_each_withdrawal_is_100: 每次提现的最小额度为￥100.00
+    the_withdrawal_amount_must_be_an_integer: 提现金额必须是整数
+    10_percent_service_charge_is_charged_for_each_withdrawal: 每次提现收取 10% 手续费
+    withdrawal_will_arrive_within_3_5_working_days: 提现会在 3-5 个工作日内到账
+    withdrawal_amount_will_be_temporarily_frozen_during_withdrawal: 提现期间提现金额会被暂时冻结
+    table:
+        time: 时间
+        type: 类型
+        details: 详情
+        amount: 金额
+        status: 状态
+
+
+

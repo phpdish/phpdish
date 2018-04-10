@@ -20,13 +20,13 @@
                         </div>
                         <h3 class="title">
                             {{ topic.title }}
-                            {% if topic.recommended or topic.isTop %}<i class="if i-badge" title="精品话题"></i>{% endif %}
+                            {% if topic.recommended or topic.isTop %}<i class="if i-badge" title="{{ 'ui.good_topic'|trans }}"></i>{% endif %}
                         </h3>
                         <div class="meta">
                             <ul class="list-unstyled list-inline">
                                 <li><i class="if i-calendar"></i> {{ topic.createdAt|time_diff }}</li>
                                 <li><i class="if i-user"></i> {{ topic.user.username }}</li>
-                                <li><i class="if i-comment"></i> <a href="#reply-list"  data-action="go-reply">{{ replies|length }} 回复</a></li>
+                                <li><i class="if i-comment"></i> <a href="#reply-list"  data-action="go-reply">{{ replies|length }} {{ 'ui.reply'|trans }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -38,24 +38,24 @@
                             <ul class="list-inline list-unstyled action" data-role="topic-action">
                                 <li class="vote">
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and topic.isVotedBy(app.user)  %}
-                                        <a href="javascript:void(0)" data-action="vote" title="取消赞" data-voted="true">
+                                        <a href="javascript:void(0)" data-action="vote" title="{{ 'ui.cancel_vote'|trans }}" data-voted="true">
                                             <i class="fa fa-thumbs-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
                                         </a>
                                     {% else %}
-                                        <a href="javascript:void(0)" data-action="vote" title="赞">
+                                        <a href="javascript:void(0)" data-action="vote" title="{{ 'ui.vote'|trans }}">
                                             <i class="fa fa-thumbs-o-up"></i> <span class="number {% if topic.voteCount == 0 %}hidden{% endif %}">{{ topic.voteCount }}</span>
                                         </a>
                                     {% endif %}
                                 </li>
 
                                 {% if is_granted('edit', topic) %}
-                                <li><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i></a></li>
-                                <li><a href="{{ path('topic_edit', {id: topic.id}) }}" title="编辑"><i class="if i-edit"></i></a></li>
+                                <li><a href="javascript:void(0)" data-action="remove" title="{{ 'ui.remove'|trans }}"><i class="if i-trash"></i></a></li>
+                                <li><a href="{{ path('topic_edit', {id: topic.id}) }}" title="{{ 'ui.edit'|trans }}"><i class="if i-edit"></i></a></li>
                                 {% endif %}
 
                                 {% if is_granted('ROLE_ADMIN', topic) %}
-                                    <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="取消加精" data-recommend="true" class="cancel-recommend" {% else %}title="加精"{% endif %} data-action="recommend"><i class="if i-good"></i></a></li>
-                                    <li><a href="javascript:void(0)" {% if (topic.isTop) %}title="取消置顶" data-is-top="true" class="cancel-top" {% else %}title="置顶"{% endif %} data-action="stick-top"><i class="if i-stick-top"></i></a></li>
+                                    <li><a href="javascript:void(0)" {% if (topic.isRecommended) %}title="{{ 'topic.cancel_good'|trans }}" data-recommend="true" class="cancel-recommend" {% else %}title="{{ 'topic.set_good'|trans }}"{% endif %} data-action="recommend"><i class="if i-good"></i></a></li>
+                                    <li><a href="javascript:void(0)" {% if (topic.isTop) %}title="{{ 'topic.cancel_top'|trans }}" data-is-top="true" class="cancel-top" {% else %}title="{{ 'topic.set_top'|trans }}"{% endif %} data-action="stick-top"><i class="if i-stick-top"></i></a></li>
                                 {% endif %}
 
                             </ul>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="panel panel-u">
-                    <div class="panel-heading"><h5>{{ replies|length }} 回复</h5></div>
+                    <div class="panel-heading"><h5>{{ replies|length }} {{ 'ui.reply'|trans }}</h5></div>
                     <ul class="list-group reply-list" id="reply-list">
                         {% include 'PHPDishWebBundle:Topic:_reply_list.html.twig'%}
                     </ul>
@@ -76,33 +76,33 @@
                     {% endif %}
                 </div>
                 <div class="panel panel-u reply-topic" id="reply-topic">
-                    <div class="panel-heading"><h4>回复</h4></div>
+                    <div class="panel-heading"><h4>{{ 'ui.reply'|trans }}</h4></div>
                     <div class="panel-body comment-panel">
                         <div class="notice alert alert-light-blue alert-dismissible fade in" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <ul class="helpblock list-unstyled">
-                                <li>支持 Markdown 格式，常用的Markdown语法 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md" target="_blank">参考这里</a></li>
-                                <li>支持Emoji表情，使用方法参考 <a href="https://www.phpdish.com/topics/6" target="_blank">Emoji 使用教学</a>, Emoji 快速查询看<a href="http://emoji.muan.co/" target="_blank">这里</a></li>
-                                <li>上传图片, 支持拖拽和剪切板黏贴上传, 格式的格式：jpg，png, gif</li>
-                                <li>支持“@”其他用户</li>
+                                <li>{{ 'ui.support_markdown_synax_reference'|trans }}</li>
+                                <li>{{ 'ui.support_emoji_emoji_reference'|trans }}</li>
+                                <li>{{ 'ui.drag_and_paste_upload_image'|trans }}</li>
+                                <li>{{ 'ui.support_at_others'|trans }}</li>
                             </ul>
                         </div>
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             {{ form_start(form, {'attr': {'id': 'add-reply-form'}}) }}
-                                {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': '写下你的评论...'}}) }}
-                                <div class="tips"><i class="if i-markdown"></i> 请使用 Markdown 语法书写</div>
+                                {{ form_widget(form.original_body, {'attr': {'data-role': 'comment-body', 'class': 'form-control body', 'placeholder': 'ui.write_your_comment'|trans}}) }}
+                                <div class="tips"><i class="if i-markdown"></i> {{ 'ui.please_use_markdown_synax_write'|trans }}</div>
                                 <div class="actions">
-                                    <button type="submit" data-role="submit-form" class="btn u-btn-primary" data-loading="回复中">回复</button>
-                                    <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                                    <button type="submit" data-role="submit-form" class="btn u-btn-primary" data-loading="{{ 'ui.replying'|trans }}">{{ 'ui.reply'|trans }}</button>
+                                    <span class="preview-action" data-action="preview"><i class="if i-view"></i> {{ 'ui.preview'|trans }}</span>
                                 </div>
                             {{ form_end(form) }}
                             <div class="preview-panel markdown-body hidden" data-role="preview-panel">
-                                预览区域
+                                {{ 'ui.preview_zone'|trans }}
                             </div>
                         {% else %}
-                            <textarea class="form-control" placeholder="请先登录后再回复" disabled="disabled"></textarea>
+                            <textarea class="form-control" placeholder="{{ 'ui.please_login_first_and_reply'|trans }}" disabled="disabled"></textarea>
                         {% endif %}
                     </div>
                 </div>
