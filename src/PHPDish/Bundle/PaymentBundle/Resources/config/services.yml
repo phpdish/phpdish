@@ -28,6 +28,7 @@ services:
 
     phpdish.twig.extension.wallet:
         class: PHPDish\Bundle\PaymentBundle\Twig\WalletExtension
+        arguments: ["@translator"]
         public: false
         tags:
             - { name: twig.extension}

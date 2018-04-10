@@ -4,9 +4,20 @@ namespace PHPDish\Bundle\PaymentBundle\Twig;
 
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Model\WalletHistoryInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class WalletExtension extends \Twig_Extension
 {
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -27,22 +38,22 @@ class WalletExtension extends \Twig_Extension
     {
         switch ($history->getType()) {
             case PaymentInterface::TYPE_BUY_BOOK:
-                $text = '购买电子书';
+                $text = $this->translator->trans('payment.type.buy_book');
                 break;
             case PaymentInterface::TYPE_FOLLOW_CATEGORY:
-                $text = '订阅专栏';
+                $text = $this->translator->trans('payment.type.subscribe_category');
                 break;
             case PaymentInterface::TYPE_CATEGORY_INCOME:
-                $text = '专栏收入';
+                $text = $this->translator->trans('payment.type.category_income');
                 break;
             case PaymentInterface::TYPE_BOOK_INCOME:
-                $text = '电子书收入';
+                $text = $this->translator->trans('payment.type.book_income');
                 break;
             case PaymentInterface::TYPE_WITHDRAW:
-                $text = '提现';
+                $text = $this->translator->trans('payment.type.withdraw');
                 break;
             default:
-                $text = '未知';
+                $text =$this->translator->trans('payment.type.unknown');
         }
         return $text;
     }
@@ -57,25 +68,25 @@ class WalletExtension extends \Twig_Extension
         switch ($history->getStatus()) {
             case PaymentInterface::STATUS_OK:
                 if ($history->isIncome()) {
-                    $text = '已到账';
+                    $text = $this->translator->trans('payment.status.have_received');
                 } elseif ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
-                    $text = '已打款';
+                    $text = $this->translator->trans('payment.status.have_transfer');
                 } else {
-                    $text = '已支付';
+                    $text = $this->translator->trans('payment.status.paid');
                 }
                 break;
             case PaymentInterface::STATUS_WAITING:
                 if ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
-                    $text = '处理中';
+                    $text = $this->translator->trans('payment.status.processing');
                 } else {
-                    $text = '未支付';
+                    $text = $this->translator->trans('payment.status.unpaid');
                 }
                 break;
             case PaymentInterface::STATUS_CLOSED:
-                $text = '已关闭';
+                $text = $this->translator->trans('payment.status.closed');
                 break;
             default:
-                $text = '未知';
+                $text = $this->translator->trans('payment.status.unknown');
         }
         return $text;
     }

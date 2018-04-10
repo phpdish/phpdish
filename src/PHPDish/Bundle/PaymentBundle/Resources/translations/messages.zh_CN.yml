@@ -1,6 +1,21 @@
 payment:
    buy_your_book: %username% 购买了你的电子书 %book%
    subscribe_your_category:  %username% 订阅了你的专栏 %category%
+   status:
+       unknown: 未知
+       closed: 已关闭
+       processing: 处理中
+       unpaid: 未支付
+       paid: 已支付
+       have_tansfer: 已转账
+       have_received: 已到账
+   type:
+       buy_book: 购买电子书
+       subscribe_category: 订阅专栏
+       category_income: 专栏收入
+       book_income: 电子书收入
+       withdraw: 提现
+       unknown: 未知
 
 withdraw:
    amount_should_greater_than: 提现金额必须大于%amount%

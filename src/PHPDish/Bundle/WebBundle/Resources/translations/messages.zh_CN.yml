@@ -47,13 +47,13 @@ navigation:
         logout: 退出
 
 login:
-     signin_your_account: 登录你的账号
-     click_and_register: 还没有账户?点此<a href="%link%">注册</a>
-     form:
-         username: 用户名或者邮箱
-         password: 密码
-         forgot_password: 找回密码
-     signin_with: 或者使用
+    signin_your_account: 登录你的账号
+    click_and_register: 还没有账户?点此<a href="%link%">注册</a>
+    form:
+        username: 用户名或者邮箱
+        password: 密码
+        forgot_password: 找回密码
+    signin_with: 或者使用
 
 register:
     new: 注册一个新账户
@@ -154,9 +154,9 @@ post:
 friend_link: 友情链接
 
 notification:
-   notification: 通知
-   my_notification: 我的提醒
-   empty: 没有提醒
+    notification: 通知
+    my_notification: 我的提醒
+    empty: 没有提醒
 
 error:
     unknow_error: 未知的错误
