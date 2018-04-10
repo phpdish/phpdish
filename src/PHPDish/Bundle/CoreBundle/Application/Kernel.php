@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Application;
 
+use PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\CachedPluginFinder;
 use PHPDish\Bundle\CoreBundle\Application\Plugin\Finder\PluginFinder;
 use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -78,7 +79,7 @@ abstract class Kernel extends HttpKernel
 
         //动态查找
         $this->simplePlugins = $this->findSimplePlugins();
-        $bundles = array_merge($bundles, $this->simplePlugins->toArray());
+        $bundles = array_merge($bundles, $this->simplePlugins);
         return $bundles;
     }
 
@@ -118,7 +119,9 @@ abstract class Kernel extends HttpKernel
      */
     protected function findSimplePlugins()
     {
-        $finder = new PluginFinder($this->getProjectDir());
+        $finder = new CachedPluginFinder($this->getCacheDir() . '/phpdish_plugins.php',
+            new PluginFinder($this->getProjectDir())
+        );
         return $finder->findAll();
     }
 }

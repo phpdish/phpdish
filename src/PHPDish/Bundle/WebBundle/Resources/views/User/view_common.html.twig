@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% set isMe = app.user is same as (user) %}
-{% set appellation = isMe ? '我' : (user.isWomen ? '她' : '他')%}
 
 {% block content %}
     <div class="container">

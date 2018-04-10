@@ -9,6 +9,6 @@
     </li>
     {% endfor %}
     {% if categories|length < 2 and app.user is same as (user) %}
-    <li class="add-new-category"><a href="{{ path('category_add') }}"><i class="if i-plus"></i> {{ 'book.create.category'|trans }}</a></li>
+    <li class="add-new-category"><a href="{{ path('category_add') }}"><i class="if i-plus"></i> {{ 'category.create.category'|trans }}</a></li>
     {% endif %}
 </ul>

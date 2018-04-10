@@ -21,7 +21,7 @@ class RoutingLoader extends Loader
     /**
      * @var array
      */
-    protected $routerResources;
+    protected $routerResources = [];
 
     /**
      * {@inheritdoc}

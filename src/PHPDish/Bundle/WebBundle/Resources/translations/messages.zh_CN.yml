@@ -11,6 +11,7 @@ ui:
     follower: 订阅
     empty_data: 没有任何数据
     book: 电子书
+    topic: 话题
     category: 专栏
     publish: 发布
     recommend: 推荐
@@ -68,18 +69,19 @@ setting:
     profile:
         edit_profile: 修改资料
     setting: 个人设置
-    social_account: 社交账户
     social_account:
+         social_account: 社交账户
          have_been_bound: 已绑定
          bind_qq: 绑定QQ
          bind_weibo: 绑定微博
          bind_github: 绑定GitHub
-    change_password: 修改密码
+    change_password:
+         change_password: 修改密码
          form:
-              current_password: 当前密码
-              new_password: 新密码
-              repeat_password: 重复密码
-              edit: 修改
+             current_password: 当前密码
+             new_password: 新密码
+             repeat_password: 重复密码
+             edit: 修改
 
 book:
     edit_chapter: 编辑章节
@@ -252,7 +254,7 @@ wallet:
     my_wallet: 我的钱包
     account_balance: 账户余额
     frozen_balance: 冻结余额
-    withraw: 提现
+    withdraw: 提现
     the_minimum_amount_for_each_withdrawal_is_100: 每次提现的最小额度为￥100.00
     the_withdrawal_amount_must_be_an_integer: 提现金额必须是整数
     10_percent_service_charge_is_charged_for_each_withdrawal: 每次提现收取 10% 手续费

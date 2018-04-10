@@ -1,3 +1,0 @@
-services:
-    qiniu.storage:
-        class: PHPDish\Bundle\PostBundle\Entity\Category

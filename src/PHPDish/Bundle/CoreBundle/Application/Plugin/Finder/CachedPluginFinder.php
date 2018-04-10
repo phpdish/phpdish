@@ -33,7 +33,7 @@ class CachedPluginFinder implements PluginFinderInterface
     /**
      * @var array
      */
-    protected $plugins;
+    protected $plugins = [];
 
     public function __construct($cacheFile, PluginFinderInterface $finder)
     {
@@ -57,7 +57,9 @@ class CachedPluginFinder implements PluginFinderInterface
 
         if ($this->cached) {
             foreach ($this->cache as $pluginItem) {
-                $this->plugins[] = new $pluginItem['class'];
+                if (class_exists($pluginItem['class'])) {
+                    $this->plugins[] = new $pluginItem['class'];
+                }
             }
         } else {
             $this->plugins = $this->decoratedFinder->findAll();

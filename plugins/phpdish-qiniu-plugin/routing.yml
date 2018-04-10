@@ -1,3 +1,0 @@
-qiniu_home:
-    path: /qiniu/storage
-    defaults: {_controller: QiNiuPlugin:Hello:index}

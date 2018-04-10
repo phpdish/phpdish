@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace PHPDish\Bundle\CoreBundle\Application\Plugin\Finder;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\CoreBundle\Application\Plugin\SimplePluginInterface;
 
 class PluginFinder implements PluginFinderInterface
 {
     /**
-     * @var SimplePluginInterface[]|Collection
+     * @var SimplePluginInterface[]
      */
-    protected $plugins;
+    protected $plugins = [];
 
     /**
      * @var string
@@ -32,8 +30,6 @@ class PluginFinder implements PluginFinderInterface
     public function __construct($projectDir)
     {
         $this->installedJson = $projectDir . '/vendor/composer/installed.json';
-
-        $this->plugins = new ArrayCollection();
     }
 
     /**
@@ -50,6 +46,7 @@ class PluginFinder implements PluginFinderInterface
                 !isset($package['type'])
                 || $package['type'] !== 'phpdish-plugin'
                 || !isset($package['extra']['phpdish']['class'])
+                || !class_exists($package['extra']['phpdish']['class'])
             ) {
                 continue;
             }
