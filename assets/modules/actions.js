@@ -13,9 +13,9 @@ class FollowCategoryIntialization{
 
             const priceAmount = price ? parseFloat(price.replace(/[^\d]/, '')) : 0;
             if ($follow.data('book')) {
-                const btnText = priceAmount > 0 ? Translator.trans('category.paid_buy', {'%amount%': price}) : Translator.trans('category.free_buy');
+                const btnText = priceAmount > 0 ? Translator.trans('category.paid_buy', {'amount': price}) : Translator.trans('category.free_buy');
             } else {
-                const btnText = priceAmount > 0 ? Translator.trans('category.paid_follow', {'%amount%': price}) : Translator.trans('category.free_follow');
+                const btnText = priceAmount > 0 ? Translator.trans('category.paid_follow', {'amount': price}) : Translator.trans('category.free_follow');
             }
 
             //关注专栏

@@ -85,7 +85,7 @@ if (window.Notification) {
                             // result可能是是granted, denied, 或default.
                             if (result === 'granted') {
                                 const notification = new Notification(Translator.trans('notification.community_notifications'), {
-                                    body: Translator.trans('notification.you_have_unread_notifications', {'%count%': response.count}),
+                                    body: Translator.trans('notification.you_have_unread_notifications', {'count': response.count}),
                                     icon: '/img/logo64.png',
                                     renotify: true,
                                     tag: 'phpdish'

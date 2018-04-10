@@ -247,7 +247,7 @@ $postBody.length > 0 && (function($){
                     name: 'guide',
                     action: 'https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md',
                     className: 'fa fa-info-circle',
-                    title: Translator.trans('ui.markdown_synax'),
+                    title: Translator.trans('editor.markdown_synax'),
                 }
             ],
         });
