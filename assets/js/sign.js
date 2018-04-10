@@ -20,17 +20,17 @@ import Util from '../modules/util.js';
         },
         messages: {
             _username: {
-                required: "请输入用户名或者邮箱"
+                required: Translator.trans('sign.validation.username')
             },
             _password: {
-                required: '请输入密码!',
+                required: Translator.trans('sign.validation.password'),
             }
         }
     });
 
     //找回密码
     false && $loginForm.find('.forgot-password').on('click', () => {
-        Util.dialog.create('提示', '请使用社交账户登录，如果社交账户绑定的邮箱与旧账号邮箱一致则可直接登录到旧账户。', {
+        Util.dialog.create(Translator.trans('ui.tips'), Translator.trans('sign.validation.forgot_password'), {
             width: 300
         });
         return false;
@@ -70,23 +70,23 @@ import Util from '../modules/util.js';
         },
         messages: {
             'fos_user_registration_form[username]': {
-                required: "请输入用户名",
-                rangelength: "用户名在2到15位之间"
+                required: Translator.trans('register.validation.username.required'),
+                rangelength: Translator.trans('register.validation.username.required')
             },
             'fos_user_registration_form[email]': {
-                required: "请输入邮箱",
-                email: "邮箱格式错误"
+                required: Translator.trans('register.validation.email.required'),
+                email: Translator.trans('register.validation.email.email')
             },
             'fos_user_registration_form[plainPassword][first]': {
-                required: '请输入密码!',
-                rangelength: "密码在6到15位之间"
+                required: Translator.trans('register.validation.password.required'),
+                rangelength:Translator.trans('register.validation.password.length')
             },
             'fos_user_registration_form[plainPassword][second]': {
-                required: '请再次输入密码!',
-                equalTo: '密码不一致'
+                required: Translator.trans('register.validation.second_password.required'),
+                equalTo: Translator.trans('register.validation.second_password.equal_to')
             },
             agree_policy: {
-                required: '请先同意条款!',
+                required: Translator.trans('register.validation.agree_policy.required')
             }
         }
     });

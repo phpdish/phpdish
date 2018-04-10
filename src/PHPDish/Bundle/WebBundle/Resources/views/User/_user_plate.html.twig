@@ -18,7 +18,7 @@
         <div class="community-description">
             <p class="description">{{ read_config_parameter('phpdish.site.description') }}</p>
             <a class="btn btn-block btn-default register-action" href="{{ path('register') }}">{{ 'user.now_register'|trans }}</a>
-            <p class="text-center login-action">{{ 'user.registered_users_please_go_signin'|trans({'%url%':  path('login')}) }}</p>
+            <p class="text-center login-action">{{ 'user.registered_users_please_go_signin'|trans({'%url%':  path('login')})|raw }}</p>
         </div>
     {% endif %}
     </div>

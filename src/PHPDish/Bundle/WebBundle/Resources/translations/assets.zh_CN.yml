@@ -1,0 +1,151 @@
+dialog:
+    confirm:
+        title: 确认？
+        ok: 是
+        cancel: 否
+
+ui:
+    confirm: 确认
+    cancel: 取消
+    follow: 关注
+    have_follow: 已关注
+    create: 创建
+    server_error: 服务器错误，请刷新后重试!
+    please_fill_in_content: 请填写内容
+    tips: 提示
+
+payment:
+    pay_success: 支付成功
+
+upload:
+   try_again_after_refresh: 请刷新后重试
+   file_image: 图片文件
+
+notification:
+    community_notifications: 社区消息
+    you_have_unread_notifications: 你有 %count% 条未读提醒
+    reply_content_cannot_be_empty: 回复内容不得为空
+
+category:
+    this_is_a_paid_category_you_sure_cancel_follow: 这是个付费专栏/电子书，取消之后再次订阅需要再次付费，确认继续吗？
+    buy: 购买
+    follow: 订阅
+    free_buy: 免费购买
+    free_follow: 免费订阅
+    paid_buy: %amount%购买
+    paid_follow: %amount%订阅
+    have_buy: 已购买
+    have_follow: 已订阅
+    upload_cover: 请上传封面
+    please_choose_price: 请选择订阅价格
+    validation:
+        name: 请输入专栏标题
+        description: 请输入专栏介绍
+        slug: 请输入个性域名
+
+
+editor:
+    no_preview: 没有预览
+    markdown_synax: Markdown 语法
+
+
+book:
+    chapter_name: 章节名称
+    required_chapter_name: 请输入章节标题
+    create_chapter_error: 创建章节失败
+    edit_chapter_error: 修改章节失败
+    confirm_remove_chapter: 确认删除本章节？
+    remove_success: 删除成功
+    remove_error: 删除失败请重试！
+    move_error: 移动失败请重试！
+    chapter:
+        validation:
+            title:
+                 required: 标题不能为空
+                 length_between: 标题长度在2到50位之间
+    validation:
+        name: 请输入电子书名称
+        description: 请输入电子书介绍
+        slug: 请输入个性域名
+    confirm_publish: 确认发布？
+
+post:
+   reply_success: 回复成功
+   confirm_remove_the_comment: 确认删除这个评论吗？
+   comment_have_been_remove: 评论已经被删除
+   confirm_remove_the_post: 确认删除这篇文章吗？
+   post_have_been_remove: 文章已经被删除
+   title_content_cannot_be_empty: 文章标题和内容不能为空
+   confirm_publish_the_post: 确认发布这篇文章？
+   validation:
+       title:
+           required: 请填写标题
+           length: 文章标题长度在10到150位之间
+
+
+setting:
+    validation:
+        avatar: 请设置你的头像
+        email: 请填写邮箱
+        gender: 请选择您的性别
+        decription: 请填写您的签名
+
+sign:
+    validation:
+        username: 请输入用户名或者邮箱
+        password: 请输入密码
+    forgot_password: 请使用社交账户登录，如果社交账户绑定的邮箱与旧账号邮箱一致则可直接登录到旧账户。
+
+register:
+    validation:
+        username:
+            required: 请输入用户名
+            length: 用户名在2到15位之间
+        email:
+            required: 请输入邮箱
+            email: 邮箱格式错误
+        password:
+            required: 请输入密码
+            length: 密码在6到15位之间
+        second_password:
+            required: 请再次输入密码
+            equal_to: 密码不一致
+        agree_policy:
+            required: 请先同意条款
+
+thread:
+    validation:
+        cover: 请上传封面
+        name: 请输入节点标题
+        description: 请输入节点介绍
+        slug: 请输入个性域名
+
+topic:
+    confirm_remove_the_topic: 确认删除这个话题吗？
+    topic_have_been_remove: 话题已经被删除
+    confirm_recommend_the_topic: 确认推荐这个话题吗？
+    confirm_cancel_recommend_the_topic: 确认取消推荐吗？
+    topic_has_been_recommend: 话题已经被推荐
+    topic_has_been_cancel_recommend: 话题已经被取消推荐
+    confirm_set_top_the_topic: 确认置顶这个话题吗？
+    confirm_cancel_set_top_the_topic: 确认取消置顶吗？
+    topic_has_been_set_top: 话题已经已经置顶
+    topic_has_been_cancel_set_top: 话题已经被取消置顶
+
+    confirm_remove_the_comment: 确认删除这个回复吗？
+    please_fill_in_blank: 请填写空缺的内容
+    add_topic: 添加话题
+
+wallet:
+    withdraw: 提现
+    withdraw_amount: 提现金额
+    alipay_account: 支付宝账号
+    validation:
+       amount:
+           required: 请输入提现金额
+           digits: 提现金额只能是整数
+           min: 提现金额不得少于{0}元
+           max: 提现超出当前余额
+       alipay_account:
+           required: 请输入支付宝账号
+    withdraw_apply_success: 申请提现成功，请等待处理

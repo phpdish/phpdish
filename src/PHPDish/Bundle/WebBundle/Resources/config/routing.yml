@@ -50,3 +50,7 @@ phpdish_payment:
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /chats
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+    prefix: /_i18n

@@ -158,6 +158,10 @@ gregwar_captcha:
    quality: 70
    length: 5
 
+## Js Translator
+bazinga_js_translation:
+    default_domain: assets
+
 # Media
 phpdish_media:
     maps:

@@ -235,7 +235,7 @@ user:
     no_users: 没有用户
     create_new_topic: 发布新话题
     now_register: 现在注册
-    registered_users_please_go_signin: 已注册用户请<a href="%ur%">登录</a>
+    registered_users_please_go_signin: 已注册用户请<a href="%url%">登录</a>
     total_follwers: 共 %count% 粉丝
     total_following: 共关注 %count% 个用户
     no_followers_yet: 还没有粉丝

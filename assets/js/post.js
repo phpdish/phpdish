@@ -39,7 +39,7 @@ $addComment.length > 0 && (function($){
             }
             const body = editor.getContent();
             if (body.length === 0) {
-                Util.dialog.message('请填写内容').flash();
+                Util.dialog.message(Translator.trans('ui.please_fill_in_content')).flash();
                 return false;
             }
             buttonLock.lock();
@@ -51,7 +51,7 @@ $addComment.length > 0 && (function($){
                 }
             }).done(function(response){
                 editor.setContent('');
-                Util.dialog.message('回复成功').flash(() => location.reload());
+                Util.dialog.message(Translator.trans('post.reply_success')).flash(() => location.reload());
             }).fail(function(response){
                 Util.dialog.message(response.responseJSON.error);
             }).always(() => {
@@ -82,9 +82,9 @@ $addComment.length > 0 && (function($){
                 return false;
             }
             buttonLock.lock();
-            Util.dialog.confirm('确认删除这个评论吗？').then(() => {
+            Util.dialog.confirm(Translator.trans('post.confirm_remove_the_comment')).then(() => {
                 Util.request('comment.delete', replyId).done(() => {
-                    Util.dialog.message('评论已经被删除').flash(2, () => {
+                    Util.dialog.message(Translator.trans('post.comment_have_been_remove')).flash(2, () => {
                         $this.fadeOut();
                     });
                 }).fail((response) => {
@@ -143,9 +143,9 @@ $addComment.length > 0 && (function($){
             return false;
         }
         buttonLock.lock();
-        Util.dialog.confirm('确认删除这篇文章吗？').then(() => {
+        Util.dialog.confirm(Translator.trans('post.confirm_remove_the_post')).then(() => {
             Util.request('post.delete', window.postId).done(() => {
-                Util.dialog.message('文章已经被删除').flash(2, () => {
+                Util.dialog.message(Translator.trans('post.post_have_been_remove')).flash(2, () => {
                     location.href = Util.route.getRoutePath('posts');
                 });
             }).fail((response) => {
@@ -247,7 +247,7 @@ $postBody.length > 0 && (function($){
                     name: 'guide',
                     action: 'https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md',
                     className: 'fa fa-info-circle',
-                    title: 'Markdown 语法',
+                    title: Translator.trans('ui.markdown_synax'),
                 }
             ],
         });
@@ -255,11 +255,11 @@ $postBody.length > 0 && (function($){
 
         $addPostBtn.on('click', () => {
             if ($postTitle.val().length === 0 || simplemde.value().length === 0) {
-                Util.dialog.message('文章标题和内容不能为空').flash();
+                Util.dialog.message(Translator.trans('post.title_content_cannot_be_empty')).flash();
                 return false;
             }
             const buttonLock = lockButton($addPostBtn).lock();
-            Util.dialog.confirm('确认发布这篇文章？').then(()=> {
+            Util.dialog.confirm(Translator.trans('post.confirm_publish_the_post')).then(()=> {
                 $addPostForm.submit();
                 return true;
             }, () => {
@@ -280,8 +280,8 @@ $postBody.length > 0 && (function($){
         },
         messages: {
             'post[title]': {
-                required: "请输入用户名",
-                rangelength: "文章标题长度在10到150位之间"
+                required: Translator.trans('post.validation.title.required'),
+                rangelength: Translator.trans('post.validation.title.length')
             },
         }
     });

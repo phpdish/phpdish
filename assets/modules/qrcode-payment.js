@@ -42,13 +42,13 @@ class QRPayment
                     clearInterval(this.timer);
                 }
                 this.paymentDialog && this.paymentDialog.close();
-                Util.dialog.create(false, '<div class="payment-result"><i class="if i-success"></i> <p>支付成功</p></div>', {
+                Util.dialog.create(false, '<div class="payment-result"><i class="if i-success"></i> <p>'+Translator.trans('payment.pay_success')+'</p></div>', {
                     width: 180,
-                    okValue: '确定',
+                    okValue: Translator.trans('ui.confirm'),
                     ok: ()=>{
                         location.reload();
                     },
-                    cancelValue: '取消',
+                    cancelValue: Translator.trans('ui.cancel'),
                     cancel: ()=>{
                         location.reload();
                     },

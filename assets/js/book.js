@@ -34,22 +34,22 @@ $bookDetails.length > 0 && (function($){
                 return false;
             }
             btnLock.lock();
-            Util.dialog.inputs('章节名称', [{name: 'title', required: true}], {
+            Util.dialog.inputs(Translator.trans('book.chapter_name'), [{name: 'title', required: true}], {
                 messages: {
                     title: {
-                        "required": "请输入章节标题"
+                        "required": Translator.trans('book.required_chapter_name')
                     }
                 }
             }, {
-                'okValue': '创建',
-                'cancelValue': '取消',
+                'okValue': Translator.trans('ui.create'),
+                'cancelValue': Translator.trans('ui.cancel'),
                 width: 350
             }).then((data)=>{
                 console.log(data);
                 Util.request('book.add_summary', {slug: window.book.slug}, data).done(()=>{
                     location.reload();
                 }).fail(()=>{
-                    Util.dialog.message('创建章节失败').flash();
+                    Util.dialog.message(Translator.trans('book.create_chapter_error')).flash();
                 });
                 btnLock.release();
             }, ()=>{
@@ -66,25 +66,25 @@ $bookDetails.length > 0 && (function($){
             const $move = $this.find('[data-role="move"]');
 
             $edit.on('click', function(){
-                Util.dialog.inputs('章节名称', [{
+                Util.dialog.inputs(Translator.trans('book.chapter_name'), [{
                     name: 'title',
                     default: $this.data('title'),
                     required: true
                 }], {
                     messages: {
                         title: {
-                            "required": "请输入章节标题"
+                            "required": Translator.trans('book.required_chapter_name')
                         }
                     }
                 }, {
-                    'okValue': '修改',
-                    'cancelValue': '取消',
+                    'okValue': Translator.trans('ui.create'),
+                    'cancelValue': Translator.trans('ui.cancel'),
                     width: 350
                 }).then((data)=>{
                     Util.request('book.edit_summary', {slug: window.book.slug, id: $this.data('id')}, data).done(()=>{
                         location.reload();
                     }).fail(()=>{
-                        Util.dialog.message('修改章节失败').flash();
+                        Util.dialog.message(Translator.trans('book.edit_chapter_error')).flash();
                     });
                 }, ()=>{
                 });
@@ -96,18 +96,18 @@ $bookDetails.length > 0 && (function($){
                     return false;
                 }
                 deleteLock.lock();
-                Util.dialog.confirm('确认删除本章节？').then(()=>{
+                Util.dialog.confirm(Translator.trans('book.confirm_remove_chapter')).then(()=>{
                     let $chapter =  $delete.closest('[data-role="sub-chapter"]');
                     if ($chapter.length === 0) {
                         $chapter = $delete.closest('[data-role="chapter"]');
                     }
                     const chapterId =  $chapter.data('id');
                     Util.request('post.delete', chapterId).done(()=>{
-                        Util.dialog.message('删除成功').flash(()=>{
+                        Util.dialog.message(Translator.trans('book.remove_success')).flash(()=>{
                             location.reload();
                         });
                     }).fail(()=>{
-                        Util.dialog.message('删除失败请重试！').flash();
+                        Util.dialog.message(Translator.trans('book.remove_error')).flash();
                     }).always(()=>{
                         deleteLock.release();
                     });
@@ -134,7 +134,7 @@ $bookDetails.length > 0 && (function($){
                 }).done(()=>{
                     location.reload();
                 }).fail(()=>{
-                    Util.dialog.message('移动失败请重试！').flash();
+                    Util.dialog.message(Translator.trans('book.move_error')).flash();
                 }).always(()=>{
                     moveLock.release();
                 });
@@ -173,18 +173,18 @@ $chapterBody.length > 0 && (function($){
                 name: 'guide',
                 action: 'https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md',
                 className: 'fa fa-info-circle',
-                title: 'Markdown 语法',
+                title: Translator.trans('editor.markdown_synax'),
             }
         ],
     });
     new InlineAttachment(simplemde.codemirror); //处理附件上传的功能
     $addChapterBtn.on('click', () => {
         if ($postTitle.val().length === 0) {
-            Util.dialog.message('标题不能为空').flash();
+            Util.dialog.message(Translator.trans('book.validation.name')).flash();
             return false;
         }
         const buttonLock = lockButton($addChapterBtn).lock();
-        Util.dialog.confirm('确认发布？').then(()=> {
+        Util.dialog.confirm(Translator.trans('book.confirm_publish')).then(()=> {
             $addChapterForm.submit();
             return true;
         }, () => {
@@ -204,8 +204,8 @@ $chapterBody.length > 0 && (function($){
         },
         messages: {
             'chapter[title]': {
-                required: "请输入章节标题",
-                rangelength: "标题长度在2到50位之间"
+                required: Translator.trans('book.chapter.validation.title.required'),
+                rangelength: Translator.trans('book.chapter.validation.title.length_between')
             },
         }
     });

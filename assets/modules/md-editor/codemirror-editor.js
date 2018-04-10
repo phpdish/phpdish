@@ -31,7 +31,7 @@ class CodeMirrorEditor extends BaseEditor {
     handleContentChange() {
         this.codeMirrorEditor.on('change', () => {
             let html = this.getHtml();
-            this.previewContainer.html(html || '没有预览');
+            this.previewContainer.html(html || Translator.trans('editor.no_preview'));
         });
     }
 

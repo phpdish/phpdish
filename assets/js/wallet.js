@@ -13,9 +13,9 @@ $walletInfo.length > 0 && (function($){
         }
         btnLock.lock();
         const balance = $balance.data('amount');
-        Util.dialog.inputs('提现', [
-            {name: 'amount', required: true, placeholder: '提现金额'},
-            {name: 'alipay_account', required: true, placeholder: '支付宝账号'},
+        Util.dialog.inputs(Translator.trans('wallet.withdraw'), [
+            {name: 'amount', required: true, placeholder: Translator.trans('wallet.withdraw_amount')},
+            {name: 'alipay_account', required: true, placeholder: Translator.trans('wallet.alipay_account')},
         ], {
             rules: {
                 amount: {
@@ -27,13 +27,13 @@ $walletInfo.length > 0 && (function($){
             },
             messages: {
                 amount: {
-                    required: '请输入提现金额',
-                    digits: '提现金额只能是整数',
-                    min: '提现金额不得少于{0}元',
-                    max: '提现超出当前余额'
+                    required: Translator.trans('wallet.validation.amount.required'),
+                    digits: Translator.trans('wallet.validation.amount.digits'),
+                    min: Translator.trans('wallet.validation.amount.min'),
+                    max: Translator.trans('wallet.validation.amount.max')
                 },
                 alipay_account: {
-                    required: '请输入支付宝账号'
+                    required: Translator.trans('wallet.validation.alipay_account.required')
                 },
             }
         }, {
@@ -41,7 +41,7 @@ $walletInfo.length > 0 && (function($){
         }).then((data)=>{
             data.amount = data.amount * 100;
             Util.request('wallet.withdraw', {}, data).done((response)=>{
-                Util.dialog.message('提现成功，请等待处理').flash(()=>{
+                Util.dialog.message(Translator.trans('wallet.withdraw_apply_success')).flash(()=>{
                     location.reload();
                 })
             }).fail((response)=>{

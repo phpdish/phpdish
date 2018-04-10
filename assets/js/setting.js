@@ -23,7 +23,7 @@ import Util from '../modules/util.js';
                         $avatar.val(response.key);
                         $previewImage.attr('src', response.thumb);
                     } else {
-                        Util.dialog.message(result.response.message || '服务器错误，请刷新后重试');
+                        Util.dialog.message(result.response.message || Translator.trans('ui.server_error'));
                     }
                 },
                 headers: {
@@ -34,20 +34,20 @@ import Util from '../modules/util.js';
         $changeProfileForm.validate({
             submitHandler: () => {
                 if ($avatar.val().length === 0) {
-                    Util.dialog.message('请设置你的头像').flash();
+                    Util.dialog.message(Translator.trans('setting.validation.avatar')).flash();
                     return false;
                 }
                 return true;
             },
             messages: {
                 'change_user_profile[email]': {
-                    required: '请填写邮箱'
+                    required: Translator.trans('setting.validation.email')
                 },
                 'change_user_profile[gender]': {
-                    required: '请选择您的性别'
+                    required: Translator.trans('setting.validation.gender')
                 },
                 'change_user_profile[description]': {
-                    required: '请填写您的签名'
+                    required:Translator.trans('setting.validation.description')
                 }
             }
         });

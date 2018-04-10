@@ -15,7 +15,7 @@ class UploadFile{
             onUploaded: (response, file) => {
             },
             onError: (error) => {
-                Util.dialog.message(error.code + ": " + error.message + '; 请刷新后重试')
+                Util.dialog.message(error.code + ": " + error.message + '; ' + Translator.trans('upload.try_again_after_refresh'))
             }
         }, options);
 
@@ -27,7 +27,7 @@ class UploadFile{
             filters : {
                 max_file_size : '2mb',
                 mime_types: [
-                    {title : "图片文件", extensions : "jpg,gif,png"}
+                    {title : Translator.trans('upload.try_again_after_refresh'), extensions : "jpg,gif,png"}
                 ]
             },
             headers: this.options.headers,

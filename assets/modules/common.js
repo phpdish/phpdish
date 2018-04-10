@@ -84,8 +84,8 @@ if (window.Notification) {
                         Notification.requestPermission().then(function(result) {
                             // result可能是是granted, denied, 或default.
                             if (result === 'granted') {
-                                const notification = new Notification('社区消息', {
-                                    body: `你有${response.count}未读提醒`,
+                                const notification = new Notification(Translator.trans('notification.community_notifications'), {
+                                    body: Translator.trans('notification.you_have_unread_notifications', {'%count%': response.count}),
                                     icon: '/img/logo64.png',
                                     renotify: true,
                                     tag: 'phpdish'

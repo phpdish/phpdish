@@ -33,7 +33,7 @@ class BaseEditor
     }
 
     rePreview(){
-        this.previewContainer.html(this.getHtml() || '没有预览');
+        this.previewContainer.html(this.getHtml() || Translator.trans('editor.no_preview'));
     }
 
     /**

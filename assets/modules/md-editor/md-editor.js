@@ -26,7 +26,7 @@ class MDEditor
     prepareUi() {
         this.tabs.preview.on('click', () => {
             let html = this.getHtml();
-            this.previewElement.html  (html || '没有预览');
+            this.previewElement.html  (html || Translator.trans('editor.no_preview'));
         });
     }
 

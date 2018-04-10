@@ -27,7 +27,7 @@ $addCategoryForm.length > 0 && (function(){
                     $categoryCover.val(response.key);
                     $previewImage.attr('src', response.path);
                 } else {
-                    Util.dialog.message(result.response.message || '服务器错误，请刷新后重试');
+                    Util.dialog.message(result.response.message || Translator.trans('ui.server_error'));
                 }
             }
         });
@@ -36,33 +36,33 @@ $addCategoryForm.length > 0 && (function(){
     $addCategoryForm.validate({
         submitHandler: () => {
             if ($categoryCover.val().length === 0) {
-                Util.dialog.message('请上传封面').flash();
+                Util.dialog.message(Translator.trans('category.upload_cover')).flash();
                 return false;
             }
             if ($charge.val().length === 0) {
-                Util.dialog.message('请选择订阅价格').flash();
+                Util.dialog.message(Translator.trans('category.please_choose_price')).flash();
                 return false;
             }
             return true;
         },
         messages: {
             'category[name]': {
-                required: '请输入专栏标题'
+                required: Translator.trans('category.validation.name')
             },
             'category[description]': {
-                required: '请输入专栏介绍'
+                required: Translator.trans('category.validation.description')
             },
             'category[slug]': {
-                required: '请输入个性域名'
+                required: Translator.trans('category.validation.slug')
             },
             'book[name]': {
-                required: '请输入电子书名称'
+                required: Translator.trans('book.validation.name')
             },
             'book[description]': {
-                required: '请输入电子书介绍'
+                required: Translator.trans('book.validation.description')
             },
             'book[slug]': {
-                required: '请输入个性域名'
+                required: Translator.trans('book.validation.slug')
             }
         }
     });

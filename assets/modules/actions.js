@@ -10,9 +10,13 @@ class FollowCategoryIntialization{
         $container.find('[data-role="follow-category"]').each(function(){
             const $follow = $(this);
             const price = $follow.data('price');
-            const callText = $follow.data('book') ? '购买' : '订阅';
+
             const priceAmount = price ? parseFloat(price.replace(/[^\d]/, '')) : 0;
-            const btnText = priceAmount > 0 ? `${price} ${callText}` : `免费${callText}`;
+            if ($follow.data('book')) {
+                const btnText = priceAmount > 0 ? Translator.trans('category.paid_buy', {'%amount%': price}) : Translator.trans('category.free_buy');
+            } else {
+                const btnText = priceAmount > 0 ? Translator.trans('category.paid_follow', {'%amount%': price}) : Translator.trans('category.free_follow');
+            }
 
             //关注专栏
             $follow.on('click', '[data-action="follow"]', function(){
@@ -26,7 +30,7 @@ class FollowCategoryIntialization{
                         return;
                     }
                     $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
-                        .html(`<i class="if i-check"></i> 已${callText}`);
+                        .html(`<i class="if i-check"></i> ` + ($follow.data('book') ? Translator.trans('category.have_buy') : Translator.trans('category.have_follow')));
 
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
@@ -41,7 +45,7 @@ class FollowCategoryIntialization{
                     const buttonLock = lockButton($this);
                     Util.request('category.unfollow', {'slug': slug}).done(function(response){
                         $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
-                            .html(`<i class="if i-plus"></i> ${btnText}`);
+                            .html(`<i class="if i-plus"></i> ` + ($follow.data('book') ? Translator.trans('category.buy') : Translator.trans('category.follow')));
                     }).fail(function(response){
                         Util.dialog.message(response.responseJSON.error).flash();
                     }).always(() => {
@@ -49,7 +53,7 @@ class FollowCategoryIntialization{
                     });
                 };
                 if (priceAmount > 0) {
-                    Util.dialog.confirm('这是个付费专栏/电子书，取消之后再次订阅需要再次付费，确认继续吗？', {width: 200}).then(()=>{
+                    Util.dialog.confirm(Translator.trans('category.this_is_a_paid_category_you_sure_cancel_follow'), {width: 200}).then(()=>{
                         unFollow();
                     }, ()=>{
 
@@ -74,7 +78,7 @@ class FollowThreadIntialization{
 
                 Util.request('thread.follow', {'slug': slug}).done(function(response){
                     $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
-                        .html('<i class="if i-check"></i> 已关注');
+                        .html('<i class="if i-check"></i> '+Translator.trans('ui.have_follow'));
 
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
@@ -87,7 +91,7 @@ class FollowThreadIntialization{
                 const buttonLock = lockButton($this);
                 Util.request('thread.unfollow', {'slug': slug}).done(function(response){
                     $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
-                        .html('<i class="if i-plus"></i> 关注');
+                        .html('<i class="if i-plus"></i> '+Translator.trans('ui.follow'));
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
                 }).always(() => {
@@ -112,7 +116,7 @@ class FollowUserIntialization {
                 const buttonLock = lockButton($this);
                 Util.request('user.follow', {'username': username}).done(function(response){
                     $this.attr('data-action', 'unfollow').removeClass('u-btn-outline-primary').addClass('btn-default')
-                        .html('<i class="if i-check"></i> 已关注');
+                        .html('<i class="if i-check"></i> ' + Translator.trans('ui.have_follow'));
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
                 }).always(() => {
@@ -124,7 +128,7 @@ class FollowUserIntialization {
                 const buttonLock = lockButton($this);
                 Util.request('user.unfollow', {'username': username}).done(function(response){
                     $this.attr('data-action', 'follow').removeClass('btn-default').addClass('u-btn-outline-primary')
-                        .html('<i class="if i-plus"></i> 关注');
+                        .html('<i class="if i-plus"></i> ' + Translator.trans('ui.follow'));
                 }).fail(function(response){
                     Util.dialog.message(response.responseJSON.error).flash();
                 }).always(() => {

@@ -70,7 +70,7 @@ class WalletExtension extends \Twig_Extension
                 if ($history->isIncome()) {
                     $text = $this->translator->trans('payment.status.have_received');
                 } elseif ($history->getType() === PaymentInterface::TYPE_WITHDRAW) {
-                    $text = $this->translator->trans('payment.status.have_transfer');
+                    $text = $this->translator->trans('payment.status.have_tansfer');
                 } else {
                     $text = $this->translator->trans('payment.status.paid');
                 }

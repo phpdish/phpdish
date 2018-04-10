@@ -21,7 +21,7 @@ import {FollowUserIntialization} from '../modules/actions.js';
                     $threadCover.val(response.key);
                     $previewImage.attr('src', response.path);
                 } else {
-                    Util.dialog.message(result.response.message || '服务器错误，请刷新后重试');
+                    Util.dialog.message(result.response.message || Translator.trans('ui.server_error'));
                 }
             }
         });
@@ -29,20 +29,20 @@ import {FollowUserIntialization} from '../modules/actions.js';
     $('#add-thread-form').validate({
         submitHandler: () => {
             if ($threadCover.val().length === 0) {
-                Util.dialog.message('为节点上传封面').flash();
+                Util.dialog.message(Translator.trans('thread.validation.cover')).flash();
                 return false;
             }
             return true;
         },
         messages: {
             'thread[name]': {
-                required: '请输入节点标题'
+                required: Translator.trans('thread.validation.name')
             },
             'thread[description]': {
-                required: '请输入节点介绍'
+                required: Translator.trans('thread.validation.description')
             },
             'thread[slug]': {
-                required: '请输入个性域名'
+                required: Translator.trans('thread.validation.slug')
             }
         }
     });

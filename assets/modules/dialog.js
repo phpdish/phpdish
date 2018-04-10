@@ -97,11 +97,11 @@ export const confirm = (message, options) => {
     options = options || {};
     return new Promise((resolve, reject) => {
         new Dialog($.extend({
-            title: '确认？',
+            title: Translator.trans('dialog.confirm.title'),
             ok: resolve,
             cancel: reject,
-            okValue: '是',
-            cancelValue: '否'
+            okValue: Translator.trans('dialog.confirm.ok'),
+            cancelValue: Translator.trans('dialog.confirm.cancel')
         }, options, {
             content: message,
         }));
@@ -144,8 +144,8 @@ export const inputs = (title, inputs, validateOptions, options) => {
             content: html,
             ok: yes,
             cancel: reject,
-            okValue: '是',
-            cancelValue: '否'
+            okValue: Translator.trans('dialog.confirm.ok'),
+            cancelValue: Translator.trans('dialog.confirm.cancel')
         }, options));
     });
 

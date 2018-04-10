@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,6 +118,8 @@
         <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="//cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ url('bazinga_jstranslation_js', {'domain': 'assets'}) }}"></script>
         <script type="text/javascript" src="{{ asset('build/manifest.js') }}"></script>
         <script type="text/javascript" src="{{ asset('build/vendor.js') }}"></script>
         {% block script %}{% endblock %}

@@ -52,9 +52,9 @@ new AjaxTab($('[data-pjax-container]'), {
                 return false;
             }
             buttonLock.lock();
-            Util.dialog.confirm('确认删除这个话题吗？').then(() => {
+            Util.dialog.confirm(Translator.trans('topic.confirm_remove_the_topic')).then(() => {
                 Util.request('topic.delete', window.topicId).done(() => {
-                    Util.dialog.message('话题已经被删除').flash(2, () => {
+                    Util.dialog.message(Translator.trans('topic.topic_have_been_remove')).flash(2, () => {
                         location.href = '/';
                     });
                 }).fail((response) => {
@@ -74,11 +74,11 @@ new AjaxTab($('[data-pjax-container]'), {
             }
             recommendButtonLock.lock();
             const isRecommended = $recommendAction.data('recommend');
-            let message =  isRecommended ? '确认取消推荐吗？' : '确认推荐这个话题吗?';
+            let message =  Translator.trans(isRecommended ? 'topic.confirm_cancel_recommend_the_topic' : 'topic.confirm_recommend_the_topic');
 
             Util.dialog.confirm(message).then(() => {
                 Util.request('topic.toggleRecommend', window.topicId).done((response) => {
-                    let message = response.is_recommended ? '话题已经被推荐' : '话题已经被取消推荐';
+                    let message = Translator.trans(response.is_recommended ? 'topic.topic_has_been_recommend' : 'topic.topic_has_been_cancel_recommend');
                     Util.dialog.message(message).flash(2, () => {
                         location.reload();
                     });
@@ -99,11 +99,11 @@ new AjaxTab($('[data-pjax-container]'), {
             }
             topButtonLock.lock();
             const isTop = $topAction.data('is-top');
-            let message =  isTop ? '确认取消置顶吗？' : '确认置顶这个话题吗?';
+            let message =  Translator.trans(isTop ? 'topic.confirm_cancel_set_top_the_topic' : 'topic.confirm_set_top_the_topic.');
 
             Util.dialog.confirm(message).then(() => {
                 Util.request('topic.toggleTop', window.topicId).done((response) => {
-                    let message = response.is_top ? '话题已经已经置顶' : '话题已经被取消置顶';
+                    let message = Translator.trans(response.is_top ? 'topic.topic_has_been_set_top' : 'topic.topic_has_been_cancel_set_top');
                     Util.dialog.message(message).flash(2, () => {
                         location.reload();
                     });
@@ -175,13 +175,13 @@ new AjaxTab($('[data-pjax-container]'), {
                 }
                 let body = editor.getContent();
                 if(body.length === 0){
-                    Util.dialog.message('请填写内容').flash();
+                    Util.dialog.message(Translator.trans('ui.please_fill_in_content')).flash();
                     return false;
                 }
                 replyTopicLock.lock();
                 Util.request('topic.addReply', window.topicId, $addReplyForm).success(function(response){
                     $replyBody.val('');
-                    Util.dialog.message('回复成功').flash(() => location.reload());
+                    Util.dialog.message(Translator.trans('post.reply_success')).flash(() => location.reload());
                 }).complete(function(){
                     replyTopicLock.release();
                 });
@@ -209,7 +209,7 @@ new AjaxTab($('[data-pjax-container]'), {
                     return false;
                 }
                 buttonLock.lock();
-                Util.dialog.confirm('确认删除这个回复吗？').then(() => {
+                Util.dialog.confirm(Translator.trans('topic.confirm_remove_the_comment')).then(() => {
                     Util.request('topicReply.delete', replyId).done(() => {
                         $this.fadeOut();
                     }).fail((response) => {
@@ -283,7 +283,7 @@ new AjaxTab($('[data-pjax-container]'), {
         //提交表单
         $('#add-topic-form').on('submit', function(){
             if ($topicTitle.val().length === 0 || editor.getContent().length === 0) {
-                Util.dialog.message('请填写空缺的内容').flash();
+                Util.dialog.message(Translator.trans('topic.please_fill_in_blank')).flash();
                 return false;
             }
             $topicBody.val(editor.getContent());
@@ -299,7 +299,7 @@ new AjaxTab($('[data-pjax-container]'), {
             searchField: 'name',
             create: true,
             createOnBlur: true,
-            placeholder: '添加话题',
+            placeholder: Translator.trans('topic.add_topic'),
             maxItems: 5,
             load: function(query, callback){
                 if (!query.length) return callback();
