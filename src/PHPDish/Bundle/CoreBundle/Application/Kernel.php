@@ -50,6 +50,7 @@ abstract class Kernel extends HttpKernel
             new \Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
             new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
 
             new \Sonata\SeoBundle\SonataSeoBundle(),
             new \Sonata\CoreBundle\SonataCoreBundle(),

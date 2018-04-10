@@ -2,46 +2,49 @@ PHPDish\Bundle\ForumBundle\Entity\Thread:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
              fields: [slug]
-             message: '该slug已经被占用'
+             message: thread.slug.unique
 
     properties:
        name:
            - NotBlank:
-               message: 名称不得为空
+               message: thread.name.not_blank
            - Length:
                min: 2
                max: 50
-               minMessage: '名称至少{{ limit }}字符长度'
-               maxMessage: '名称最多{{ limit }}字符长度'
+               minMessage: thread.name.min_length
+               maxMessage: thread.name.max_length
 
        slug:
            - NotBlank:
-               message: Slug不得为空
+               message: thread.slug.not_blank
+           - Regex:
+               pattern: /^[0-9A-z\-]+$/
+               message: thread.slug.regex
 
        description:
            - Length:
                  max: 500
-                 maxMessage: '描述最多{{ limit }}字符长度'
+                 maxMessage: thread.description.max_length
 
 
 PHPDish\Bundle\ForumBundle\Entity\Topic:
     properties:
         title:
             - NotBlank:
-                message: '标题不得为空'
+                message: topic.title.not_blank
             - Length:
                  min: 10
                  max: 150
-                 minMessage: '标题至少{{ limit }}字符长度'
-                 maxMessage: '标题最多{{ limit }}字符长度'
+                 minMessage: topic.title.min_length
+                 maxMessage: topic.title.max_length
 
         originalBody:
             - NotBlank:
-                 message: '内容不得为空'
+                 message: topic.original_body.not_blank
             - Length:
                  min: 10
-                 minMessage: '内容至少{{ limit }}字符长度'
+                 minMessage: topic.original_body.min_length
 
         threads:
             - NotBlank:
-                message: '节点不得为空'
+                message: topic.threads.not_blank

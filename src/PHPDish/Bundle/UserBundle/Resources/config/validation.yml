@@ -19,4 +19,4 @@ PHPDish\Bundle\UserBundle\Entity\User:
         username:
             - Regex:
                  pattern: /^\w+$/
-                 message: 只能包含数字字母和下划线
+                 message: user.username.regex

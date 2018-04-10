@@ -1,0 +1,3 @@
+user:
+    username:
+        regex: 只能包含数字字母和下划线

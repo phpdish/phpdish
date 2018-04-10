@@ -1,0 +1,21 @@
+category:
+    slug:
+        unique: 该slug已经被占用
+        not_blank: 专栏的 Slug 不得为空
+        regex: 只能包含字母数字或者横线
+    name:
+        not_blank: 名称不得为空
+        min_length: 名称至少{{ limit }}字符长度
+        max_length: 名称最多{{ limit }}字符长度
+    description:
+        min_length: 描述最少{{ limit }}字符长度
+        max_length: 描述最多{{ limit }}字符长度
+
+post:
+    title:
+        not_blank: 标题不得为空
+        min_length: 标题至少{{ limit }}字符长度
+        max_length: 标题最多{{ limit }}字符长度
+    original_body:
+        not_blank: 内容不得为空
+        min_length: 内容至少{{ limit }}字符长度

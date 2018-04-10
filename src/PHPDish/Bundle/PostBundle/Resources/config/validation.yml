@@ -2,56 +2,56 @@ PHPDish\Bundle\PostBundle\Entity\Category:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
              fields: [slug]
-             message: '该slug已经被占用'
+             message: category.slug.unique
 
     properties:
        name:
            - NotBlank:
-               message: 名称不得为空
+               message: category.name.not_blank
            - Length:
                min: 2
                max: 50
-               minMessage: '名称至少{{ limit }}字符长度'
-               maxMessage: '名称最多{{ limit }}字符长度'
+               minMessage: category.name.min_length
+               maxMessage: category.name.max_length
 
        slug:
            - NotBlank:
-               message: 专栏的Uri不得为空
+               message: category.slug.not_blank
            - Regex:
                pattern: /^[0-9A-z\-]+$/
-               message: 只能包含字母数字或者横线
+               message: category.slug.regex
 
        description:
            - Length:
                  min: 5
                  max: 500
-                 minMessage: '描述最少{{ limit }}字符长度'
-                 maxMessage: '描述最多{{ limit }}字符长度'
+                 minMessage: category.description.min_length
+                 maxMessage: category.description.max_length
 
 
 PHPDish\Bundle\PostBundle\Entity\Post:
     properties:
         title:
             - NotBlank:
-                message: '标题不得为空'
+                message: post.title.not_blank
             - Length:
                  min: 10
                  max: 150
-                 minMessage: '标题至少{{ limit }}字符长度'
-                 maxMessage: '标题最多{{ limit }}字符长度'
+                 minMessage: post.title.min_length
+                 maxMessage: post.title.max_length
                  groups: ['post']
             - Length:
                  min: 2
                  max: 50
-                 minMessage: '标题至少{{ limit }}字符长度'
-                 maxMessage: '标题最多{{ limit }}字符长度'
+                 minMessage: post.title.min_length
+                 maxMessage: post.title.max_length
                  groups: ['chapter']
 
         originalBody:
             - NotBlank:
-                 message: '内容不得为空'
+                 message:  post.original_body.not_blank
                  groups: ['post']
             - Length:
                  min: 150
-                 minMessage: '内容至少{{ limit }}字符长度'
+                 minMessage: post.original_body.min_length
                  groups: ['post']
