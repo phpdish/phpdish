@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e9a62640f28320a63fdc1b5e26f1eb4",
+    "content-hash": "d7713804d25d1fab2a10b351699a766e",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -5260,33 +5260,6 @@
             "time": "2018-03-28T12:17:35+00:00"
         },
         {
-            "name": "phpdish/qiniu-plugin",
-            "version": "0.0.1",
-            "dist": {
-                "type": "path",
-                "url": "plugins/phpdish-qiniu-plugin",
-                "reference": "307126912d004ad1321734e99697d60f5a26698b",
-                "shasum": null
-            },
-            "require": {
-                "php": ">=7.2.0"
-            },
-            "type": "phpdish-plugin",
-            "extra": {
-                "phpdish": {
-                    "class": "PHPDish\\QiNiuPlugin\\QiNiuPlugin"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPDish\\QiNiuPlugin\\": "./src"
-                }
-            },
-            "license": [
-                "MIT"
-            ]
-        },
-        {
             "name": "phpdish/theme-installer",
             "version": "0.0.1",
             "source": {
@@ -6046,16 +6019,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.33.0",
+            "version": "3.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "907fad7382eee6fa518bc4210550ef42f4125e00"
+                "reference": "ed390372f816519904d5074f0dbb163b0a76b7aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/907fad7382eee6fa518bc4210550ef42f4125e00",
-                "reference": "907fad7382eee6fa518bc4210550ef42f4125e00",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ed390372f816519904d5074f0dbb163b0a76b7aa",
+                "reference": "ed390372f816519904d5074f0dbb163b0a76b7aa",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6153,7 +6126,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2018-03-12T10:09:45+00:00"
+            "time": "2018-04-09T12:30:38+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -6470,16 +6443,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "f81775f5f42ff8015012eb52684ccf16e4e7a6ee"
+                "reference": "2f09845dfdb8edf60399ec3fd998a914a1a47438"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/f81775f5f42ff8015012eb52684ccf16e4e7a6ee",
-                "reference": "f81775f5f42ff8015012eb52684ccf16e4e7a6ee",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/2f09845dfdb8edf60399ec3fd998a914a1a47438",
+                "reference": "2f09845dfdb8edf60399ec3fd998a914a1a47438",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6489,16 +6462,21 @@
                 ]
             },
             "require": {
+                "doctrine/doctrine-bundle": "^1.8",
                 "doctrine/orm": "^2.4.5",
                 "php": "^5.6 || ^7.0",
                 "sonata-project/admin-bundle": "^3.29",
                 "sonata-project/core-bundle": "^3.8",
                 "sonata-project/exporter": "^1.3.1",
+                "symfony/config": "^2.8 || ^3.2 || ^4.0",
                 "symfony/console": "^2.8 || ^3.2 || ^4.0",
+                "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
                 "symfony/doctrine-bridge": "^2.8 || ^3.2 || ^4.0",
                 "symfony/form": "^2.8 || ^3.2 || ^4.0",
                 "symfony/framework-bundle": "^2.8 || ^3.2 || ^4.0",
-                "symfony/security": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
+                "symfony/options-resolver": "^2.8 || ^3.2 || ^4.0",
                 "symfony/security-acl": "^2.8 || ^3.0"
             },
             "conflict": {
@@ -6509,10 +6487,9 @@
                 "sonata-project/admin-bundle-persistency-layer": "1.0.0"
             },
             "require-dev": {
-                "knplabs/knp-menu-bundle": "^2.1.1",
-                "simplethings/entity-audit-bundle": "0.1 - 0.9 || ^1.0",
+                "simplethings/entity-audit-bundle": "^0.9 || ^1.0",
                 "sonata-project/block-bundle": "^3.11",
-                "symfony/phpunit-bridge": "^3.3 || ^4.0"
+                "symfony/phpunit-bridge": "^4.0"
             },
             "suggest": {
                 "simplethings/entity-audit-bundle": "If you want to support for versioning of entities and their associations."
@@ -6552,7 +6529,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2018-02-08T10:12:06+00:00"
+            "time": "2018-04-09T12:40:19+00:00"
         },
         {
             "name": "sonata-project/exporter",
@@ -8413,9 +8390,15 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sensiolabs/SensioGeneratorBundle/28cbaa244bd0816fd8908b93f90380bcd7b67a65.zip",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/28cbaa244bd0816fd8908b93f90380bcd7b67a65",
                 "reference": "28cbaa244bd0816fd8908b93f90380bcd7b67a65",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "symfony/console": "~2.7|~3.0",
