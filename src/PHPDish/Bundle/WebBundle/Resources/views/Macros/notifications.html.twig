@@ -122,8 +122,8 @@
             {% trans with {
                     '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                     '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                    '%postUrl%':  path('post_view', {id: notification.post.id}),
+                    '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_at_your_in_post
@@ -141,8 +141,8 @@
             {% trans with {
                     '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                     '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                    '%postUrl%':  path('post_view', {id: notification.post.id}),
+                    '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_comment_your_post
@@ -160,8 +160,8 @@
             {% trans with {
                     '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                     '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                    '%postUrl%':  path('post_view', {id: notification.post.id}),
+                    '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_vote_your_post
@@ -179,8 +179,8 @@
             {% trans with {
                     '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                     '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                    '%postUrl%':  path('post_view', {id: notification.post.id}),
+                    '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_vote_your_comment
