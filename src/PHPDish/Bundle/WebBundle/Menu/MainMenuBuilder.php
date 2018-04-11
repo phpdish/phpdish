@@ -30,17 +30,17 @@ final class MainMenuBuilder
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
         $menu->addChild('homepage', [
-            'label' => '首页',
+            'label' => 'menu.homepage',
             'route' => 'homepage',
         ]);
 
         $menu->addChild('Category', [
-            'label' => '专栏',
+            'label' => 'menu.category',
             'route' => 'post',
         ]);
 
         $menu->addChild('Topic', [
-            'label' => '问答',
+            'label' => 'menu.ask_question',
             'route' => 'thread_view',
             'routeParameters' => [
                 'slug' => 'question',
@@ -48,7 +48,7 @@ final class MainMenuBuilder
         ]);
 
         $menu->addChild('job', [
-            'label' => '招聘',
+            'label' => 'menu.job',
             'route' => 'thread_view',
             'routeParameters' => [
                 'slug' => 'job',

@@ -14,7 +14,7 @@ services:
 
    # Main Menu
     phpdish.menu_builder.main_menu:
-        class: PHPDish\Bundle\WebBundleBundle\Menu\MainMenuBuilder
+        class: PHPDish\Bundle\WebBundle\Menu\MainMenuBuilder
         arguments: ['@knp_menu.factory']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: main_menu}

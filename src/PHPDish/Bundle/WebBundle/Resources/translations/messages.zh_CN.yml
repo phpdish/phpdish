@@ -282,5 +282,9 @@ wallet:
         amount: 金额
         status: 状态
 
-
+menu:
+    homepage: 首页
+    category: 专栏
+    ask_question: 问答
+    job: 招聘
 

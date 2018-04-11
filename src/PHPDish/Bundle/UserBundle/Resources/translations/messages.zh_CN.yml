@@ -25,3 +25,8 @@ form:
        url: 个人主页
        location: 城市
        company: 公司
+
+menu:
+    profile: 基本资料
+    change_password: 修改密码
+    social_binding: 账户关联

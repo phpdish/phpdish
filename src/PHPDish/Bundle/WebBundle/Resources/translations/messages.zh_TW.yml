@@ -259,5 +259,11 @@ wallet:
     amount: 金額
     status: 狀態
 
+menu:
+    homepage: 首頁
+    category: 專欄
+    ask_question: 問答
+    job: 招聘
+
 
 

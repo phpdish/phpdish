@@ -10,7 +10,6 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: zh_CN
-
     app.dir.media: '%kernel.project_dir%/web/media'
     app.dir.uploads: '%kernel.project_dir%/web/media/uploads'
     app.dir.avatar: '%kernel.project_dir%/web/media/uploads/avatar'
@@ -20,6 +19,7 @@ parameters:
 
 framework:
     #esi: ~
+    default_locale: '%locale%'
     translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
@@ -35,7 +35,6 @@ framework:
 
     templating:
         engines: ['twig']
-    default_locale: '%locale%'
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id

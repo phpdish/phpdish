@@ -22,3 +22,8 @@ form:
     url: 個人主頁
     location: 城市
     company: 公司
+
+menu:
+    profile: 基本資料
+    change_password: 修改密碼
+    social_binding: 賬戶關聯

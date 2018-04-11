@@ -1,0 +1,69 @@
+---
+group:
+  edit:
+    submit: 更新小組
+  show:
+    name: 小組名稱
+  new:
+    submit: 創建小組
+  flash:
+    updated: 小組已被更新
+    created: 小組已創建
+    deleted: 小組已被刪除
+security:
+  login:
+    username: 使用者名
+    password: 密碼
+    remember_me: 自動登入
+    submit: 登錄
+profile:
+  show:
+    username: 使用者名
+    email: 電子郵箱
+  edit:
+    submit: 更新
+  flash:
+    updated: 使用者資訊已更新
+change_password:
+  submit: 修改密碼
+  flash:
+    success: 密碼已成功修改
+registration:
+  check_email: 系統向%email%發送了一封包含啟動連結的郵件，請訪問該連結以啟用你的帳戶。
+  confirmed: '%username%，恭喜你，你的帳戶已啟用！'
+  back: 返回前一頁面
+  submit: 註冊
+  flash:
+    user_created: 使用者已創建
+  email:
+    subject: '%username%，歡迎你'
+    message: |
+      %username%，你好！  要啟用你的使用者帳號，請訪問：%confirmationUrl%
+      
+      祝好 網站團隊
+resetting:
+  request:
+    username: 使用者名或郵箱
+    submit: 重置密碼
+  reset:
+    submit: 修改密碼
+  flash:
+    success: 密碼已重置。
+  email:
+    subject: 重置密碼
+    message: |
+      %username%，你好！ 請訪問 %confirmationUrl% 以重置你的帳戶密碼。 祝好 網站團隊
+layout:
+  logout: 退出
+  login: 登錄
+  register: 註冊
+  logged_in_as: 已登錄為：%username%
+form:
+  group_name: 小組名稱
+  username: 使用者名
+  email: 電子郵箱
+  current_password: 當前密碼
+  password: 密碼
+  password_confirmation: 確認密碼
+  new_password: 新密碼
+  new_password_confirmation: 確認新密碼
