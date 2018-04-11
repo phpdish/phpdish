@@ -199,7 +199,7 @@
                 {% trans with {
                         '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                         '%username%': notification.fromUser.username,
-                        '%bookUrl%':  path('book_view', {id: notification.category.slug}),
+                        '%bookUrl%':  path('book_view', {slug: notification.category.slug}),
                         '%bookTitle%': notification.category.name
                     }
                 %}
@@ -209,7 +209,7 @@
                 {% trans with {
                         '%userUrl%': path('user_view', {username: notification.fromUser.username}),
                         '%username%': notification.fromUser.username,
-                        '%categoryUrl%':  path('book_view', {id: notification.category.slug}),
+                        '%categoryUrl%':  path('category_view', {slug: notification.category.slug}),
                         '%categoryTitle%': notification.category.name
                     }
                 %}
