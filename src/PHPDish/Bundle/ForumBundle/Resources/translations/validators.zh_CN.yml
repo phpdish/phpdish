@@ -6,7 +6,7 @@ thread:
     name:
         not_blank: 名称不得为空
         min_length: 名称至少{{ limit }}字符长度
-          : 名称最多{{ limit }}字符长度
+        max_length: 名称最多{{ limit }}字符长度
     description:
         max_length: 描述最多{{ limit }}字符长度
 
