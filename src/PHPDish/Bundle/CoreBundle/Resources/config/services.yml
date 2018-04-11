@@ -59,10 +59,3 @@ services:
          public: false
          tags:
             - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException', priority: 1}
-
-   # Main Menu
-    phpdish.menu_builder.main_menu:
-        class: PHPDish\Bundle\CoreBundle\Menu\MainMenuBuilder
-        arguments: ['@knp_menu.factory']
-        tags:
-           - { name: knp_menu.menu_builder, method: createMenu, alias: main_menu}

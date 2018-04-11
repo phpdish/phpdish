@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Menu;
+namespace PHPDish\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 

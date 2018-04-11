@@ -5,8 +5,8 @@
 {% block body_html %}
     {% autoescape false %}
         <p>{{ 'resetting.email.hello'|trans({'%username%': user.username}) }}</p>
-        <p>{{ 'resetting.email.your_are_try_reset_password'|trans({'%confirmationUrl%': confirmationUrl}) }}</p>
-        <p>{{ 'resetting.email.wish'|trans }}</p>
+        <p>{{ 'resetting.email.your_are_try_reset_password'|trans({'%confirmationUrl%': confirmationUrl})|raw }}</p>
+        <p>{{ 'resetting.email.wish'|trans|raw }}</p>
     {% endautoescape %}
 {% endblock %}
 
