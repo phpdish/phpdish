@@ -15,8 +15,8 @@ class UserController extends RestController
     use ManagerTrait;
 
     /**
-     * @Route("/users/{username}", name="user_view")
-     *
+     * 用户首页
+     * 
      * @param string $username
      *
      * @return Response

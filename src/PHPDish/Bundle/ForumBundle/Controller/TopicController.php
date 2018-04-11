@@ -301,7 +301,7 @@ class TopicController extends RestController
 
     /**
      * 用户的帖子.
-     *
+     * @Route("/users/{username}", name="user_view")
      * @Route("/users/{username}/topics", name="user_topics")
      *
      * @param string  $username
