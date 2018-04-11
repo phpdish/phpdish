@@ -41,7 +41,8 @@ Encore
     })
     .addExternals({
         'jquery': 'window.$',
-        'lodash': 'window._'
+        'jQuery': 'window.$',
+        'lodash': 'window._',
     })
     .addRule({
         test: /\.njk$/,
@@ -73,6 +74,10 @@ for (const entryName in foundEntries) {
 Encore.createSharedEntry('vendor', [
     path.resolve(config.modulesPath, 'common.js'),
     path.resolve(config.modulesPath, 'dialog.js'),
+    'codemirror',
+    'codemirror/mode/markdown/markdown.js',
+    'highlight.js',
+
     'github-markdown-css',
     'bootstrap-select/dist/css/bootstrap-select.min.css',
     'codemirror/lib/codemirror.css',
