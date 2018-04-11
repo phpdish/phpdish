@@ -1,0 +1,134 @@
+---
+dialog:
+  confirm:
+    title: 確認？
+    ok: 是
+    cancel: 否
+ui:
+  confirm: 確認
+  cancel: 取消
+  follow: 關注
+  have_follow: 已關注
+  create: 創建
+  server_error: 伺服器錯誤，請刷新後重試!
+  please_fill_in_content: 請填寫內容
+  tips: 提示
+payment:
+  pay_success: 支付成功
+upload:
+  try_again_after_refresh: 請刷新後重試
+  file_image: 圖片檔
+notification:
+  community_notifications: 社區消息
+  you_have_unread_notifications: 你有 %count% 條未讀提醒
+  reply_content_cannot_be_empty: 回復內容不得為空
+category:
+  this_is_a_paid_category_you_sure_cancel_follow: 這是個付費專欄/電子書，取消之後再次訂閱需要再次付費，確認繼續嗎？
+  buy: 購買
+  follow: 訂閱
+  free_buy: 免費購買
+  free_follow: 免費訂閱
+  paid_buy: '%amount%購買'
+  paid_follow: '%amount%訂閱'
+  have_buy: 已購買
+  have_follow: 已訂閱
+  upload_cover: 請上傳封面
+  please_choose_price: 請選擇訂閱價格
+  validation:
+    name: 請輸入專欄標題
+    description: 請輸入專欄介紹
+    slug: 請輸入個性功能變數名稱
+editor:
+  no_preview: 沒有預覽
+  markdown_synax: Markdown 語法
+book:
+  chapter_name: 章節名稱
+  required_chapter_name: 請輸入章節標題
+  create_chapter_error: 創建章節失敗
+  edit_chapter_error: 修改章節失敗
+  confirm_remove_chapter: 確認刪除本章節？
+  remove_success: 刪除成功
+  remove_error: 刪除失敗請重試！
+  move_error: 移動失敗請重試！
+  chapter:
+    validation:
+      title:
+        required: 標題不能為空
+        length_between: 標題長度在2到50位之間
+  validation:
+    name: 請輸入電子書名稱
+    description: 請輸入電子書介紹
+    slug: 請輸入個性功能變數名稱
+  confirm_publish: 確認發佈？
+post:
+  reply_success: 回復成功
+  confirm_remove_the_comment: 確認刪除這個評論嗎？
+  comment_have_been_remove: 評論已經被刪除
+  confirm_remove_the_post: 確認刪除這篇文章嗎？
+  post_have_been_remove: 文章已經被刪除
+  title_content_cannot_be_empty: 文章標題和內容不能為空
+  confirm_publish_the_post: 確認發佈這篇文章？
+  validation:
+    title:
+      required: 請填寫標題
+      length: 文章標題長度在10到150位之間
+setting:
+  validation:
+    avatar: 請設置你的頭像
+    email: 請填寫郵箱
+    gender: 請選擇您的性別
+    decription: 請填寫您的簽名
+sign:
+  validation:
+    username: 請輸入使用者名或者郵箱
+    password: 請輸入密碼
+  forgot_password: 請使用社交帳戶登錄，如果社交帳戶綁定的郵箱與舊帳號郵箱一致則可直接登錄到舊帳戶。
+register:
+  validation:
+    username:
+      required: 請輸入使用者名
+      length: 使用者名在2到15位之間
+    email:
+      required: 請輸入郵箱
+      email: 郵箱格式錯誤
+    password:
+      required: 請輸入密碼
+      length: 密碼在6到15位之間
+    second_password:
+      required: 請再次輸入密碼
+      equal_to: 密碼不一致
+    agree_policy:
+      required: 請先同意條款
+thread:
+  validation:
+    cover: 請上傳封面
+    name: 請輸入節點標題
+    description: 請輸入節點介紹
+    slug: 請輸入個性功能變數名稱
+topic:
+  confirm_remove_the_topic: 確認刪除這個話題嗎？
+  topic_have_been_remove: 話題已經被刪除
+  confirm_recommend_the_topic: 確認推薦這個話題嗎？
+  confirm_cancel_recommend_the_topic: 確認取消推薦嗎？
+  topic_has_been_recommend: 話題已經被推薦
+  topic_has_been_cancel_recommend: 話題已經被取消推薦
+  confirm_set_top_the_topic: 確認置頂這個話題嗎？
+  confirm_cancel_set_top_the_topic: 確認取消置頂嗎？
+  topic_has_been_set_top: 話題已經置頂
+  topic_has_been_cancel_set_top: 話題已經被取消置頂
+  confirm_remove_the_comment: 確認刪除這個回復嗎？
+  please_fill_in_blank: 請填寫空缺的內容
+  add_topic: 添加話題
+wallet:
+  withdraw: 提現
+  withdraw_amount: 提現金額
+  alipay_account: 支付寶帳號
+  validation:
+    amount:
+      required: 請輸入提現金額
+      digits: 提現金額只能是整數
+      min: 提現金額不得少於{0} 元
+      max: 提現超出當前餘額
+    alipay_account:
+      required: 請輸入支付寶帳號
+  withdraw_apply_success: 申請提現成功，請等待處理

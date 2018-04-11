@@ -1,0 +1,47 @@
+---
+form:
+  book:
+    name: 電子書名稱
+    description: 電子書描述
+    charge: 電子書售價
+    slug: 訪問功能變數名稱
+    cover: 封面
+  category:
+    name: 名稱
+    description: 描述
+    charge: 訂閱價格
+    slug: 訪問功能變數名稱
+    cover: 封面
+  chapter:
+    own_chapter: 所屬章節
+    top_chapter: 頂級章節
+    title: 標題
+    body: 內容
+  comment:
+    body: 內容
+  post:
+    title: 標題
+    body: 內容
+book:
+  more_than_5_books: 最多隻能創建五本電子書，你現在已經擁有 %count% 個
+  add_success: 電子書創建成功
+  edit_success: 電子書修改成功
+  add_chapter_success: 章節創建成功
+  add_chapter_error: 章節創建失敗
+  edit_chapter_success: 章節修改成功
+  edit_chapter_error: 章節修改失敗
+  buy_book: 購買電子書：%book%
+category:
+  more_than_2_categories: 最多隻能創建兩個專欄，你現在已經擁有 %count% 個
+  add_success: 專欄創建成功
+  add_error: 專欄創建失敗
+  edit_success: 專欄修改成功
+  need_payment: 需要先付費
+  subscribe_category: 訂閱專欄：%category%
+  is_free: 該專欄免費
+comment:
+  not_exists: 評論不存在
+post:
+  add_category_first: 請先創建專欄
+  cannot_add: 文章無法創建
+  not_exists: 文章不存在

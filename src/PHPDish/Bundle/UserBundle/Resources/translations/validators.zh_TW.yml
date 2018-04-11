@@ -1,0 +1,4 @@
+---
+user:
+  username:
+    regex: 只能包含數位字母和底線

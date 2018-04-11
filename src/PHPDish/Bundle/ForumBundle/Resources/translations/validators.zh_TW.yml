@@ -1,0 +1,22 @@
+---
+thread:
+  slug:
+    unique: 該slug已經被佔用
+    not_blank: Slug不得為空
+    regex: 只能包含字母數位或者橫線
+  name:
+    not_blank: 名稱不得為空
+    min_length: 名稱至少{{ limit }}字元長度
+    max_length: 名稱最多{{ limit }}字元長度
+  description:
+    max_length: 描述最多{{ limit }}字元長度
+topic:
+  title:
+    not_blank: 標題不得為空
+    min_length: 標題至少{{ limit }}字元長度
+    max_length: 標題最多{{ limit }}字元長度
+  original_body:
+    not_blank: 內容不得為空
+    min_length: 內容至少{{ limit }}字元長度
+  threads:
+    not_blank: 節點不得為空

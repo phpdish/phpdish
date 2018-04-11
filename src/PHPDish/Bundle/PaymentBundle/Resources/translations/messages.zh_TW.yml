@@ -1,0 +1,28 @@
+---
+payment:
+  buy_your_book: '%username% 購買了你的電子書 %book%'
+  subscribe_your_category: '%username% 訂閱了你的專欄 %category%'
+  status:
+    unknown: 未知
+    closed: 已關閉
+    processing: 處理中
+    unpaid: 未支付
+    paid: 已支付
+    have_tansfer: 已轉帳
+    have_received: 已到賬
+  type:
+    buy_book: 購買電子書
+    subscribe_category: 訂閱專欄
+    category_income: 專欄收入
+    book_income: 電子書收入
+    withdraw: 提現
+    unknown: 未知
+withdraw:
+  amount_should_greater_than: 提現金額必須大於%amount%
+  not_encough_balance: 餘額不足
+  need_provide_alipay: 需要提供支付寶帳戶
+  to: 提現到： %alipay%
+  decline_reason: 拒絕原因：%reason%
+  no_reason: 暫無原因
+  approve_reason: 已確認：%reason%
+

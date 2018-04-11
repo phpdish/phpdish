@@ -1,0 +1,263 @@
+---
+ui:
+  create: 創建
+  edit: 編輯
+  toggle_navigation: 切換功能表
+  search: 搜索
+  login: 登錄
+  register: 註冊
+  buy: 購買
+  free: 免費
+  article: 文章
+  follower: 粉絲
+  empty_data: 沒有任何資料
+  book: 電子書
+  topic: 話題
+  category: 專欄
+  publish: 發佈
+  recommend: 推薦
+  remove: 刪除
+  all: 全部
+  follow: 關注
+  have_follow: 已關注
+  reply: 回復
+  vote: 贊
+  following: 關注
+  cancel_vote: 取消贊
+  preview: 預覽
+  preview_zone: 預覽區域
+  please_login_first_and_reply: 請先登錄後再回復
+  replying: 正在回復
+  please_use_markdown_synax_write: 請使用 Markdown 語法書寫
+  write_your_comment: 寫下你的評論
+  support_markdown_synax_reference: 支援 Markdown 格式，常用的Markdown語法 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md" target="_blank">參考這裡</a>
+  support_emoji_emoji_reference: 支援Emoji表情，使用方法參考 <a href="https://www.phpdish.com/topics/6" target="_blank">Emoji 使用教學</a>, Emoji 快速查詢看<a href="http://emoji.muan.co/" target="_blank">這裡</a>
+  drag_and_paste_upload_image: 支援拖拽和剪切板黏貼上傳圖片, 格式的格式：jpg，png, gif
+  support_at_others: 支援「@」其他使用者
+  no_content_yet: 還沒有發表過內容
+  no_record: 沒有記錄
+navigation:
+  add_topic: 發起話題
+  add_post: 發佈文章
+  user:
+    homepage: 我的首頁
+    category: 我的專欄
+    wallet: 我的錢包
+    setting: 設置
+    logout: 退出
+login:
+  signin_your_account: 登錄你的帳號
+  click_and_register: 還沒有帳戶?點此<a href="%link%">註冊</a>
+  form:
+    username: 使用者名或者郵箱
+    password: 密碼
+    forgot_password: 找回密碼
+  signin_with: 或者使用
+register:
+  new: 註冊一個新帳戶
+  click_and_login: 已經有帳戶?點此<a href="%link%">登錄</a>你的帳戶
+  form:
+    username: 你的使用者名
+    email: 你的郵箱
+    password: 設置密碼
+    repeat_password: 重複上面的密碼
+setting:
+  profile:
+    edit_profile: 修改資料
+  setting: 個人設定
+  social_account:
+    social_account: 社交帳戶
+    have_been_bound: 已綁定
+    bind_qq: 綁定QQ
+    bind_weibo: 綁定微博
+    bind_github: 綁定GitHub
+  change_password:
+    change_password: 修改密碼
+    form:
+      current_password: 當前密碼
+      new_password: 新密碼
+      repeat_password: 重複密碼
+      edit: 修改
+book:
+  edit_chapter: 編輯章節
+  add_chapter: 添加章節
+  form:
+    title: 請輸入標題
+    body: 請使用 Markdown 格式書寫,注意代碼高亮
+    publish: 發佈
+  have_no_subscribers: 還沒有訂閱者
+  after_buy_read_full: 購買本書之後即可閱讀全文
+  edit_this_chapter: 修改本章
+  add_sub_chapter: 添加子章節
+  delete_this_chapter: 刪除本章
+  move_up: 向上移動
+  move_down: 向下移動
+  total_publish_books: 共發表了 %count% 本書
+  write_book: 寫書
+  go_write_book: 現在去 <a href="%link%">創建電子書</a>
+  no_books_yet: 還沒有電子書
+  have_buy: 已購買
+  description: 前言
+  read: 閱讀
+  follower: 訂閱
+category:
+  create:
+    book: 創建電子書
+    category: 創建專欄
+  edit:
+    book: 編輯電子書
+    category: 編輯專欄
+  no_posts_yet: 還沒有文章
+  new_publish: 新發佈
+  hot: 熱門
+  have_follow: 已訂閱
+  form:
+    name: 請填寫名稱
+    description: 介紹
+    charge:
+      free: 免費
+      custom_amount: 自訂金額
+    slug: 訪問功能變數名稱
+chat:
+  no_chat_yet: 還沒有私信喲
+  inbox: 收件匣
+  sent: 已發送
+  send_message: 發送消息
+  form:
+    body: 消息內容
+    publish: 發佈
+    recipient: 收信人
+    subject: 主題
+  reply:
+    content: 回復內容
+    reply: 回復
+post:
+  publish_at: 發表于
+  recommend: 推薦
+  empty: 沒有文章
+  add: 創作文章
+  edit: 編輯文章
+  form:
+    title: 請輸入文章標題
+    body: 請使用 Markdown 格式書寫,注意代碼高亮
+  latest_post: 最新文章
+  total_publish_posts: 共發表了 %count% 篇文章
+  no_posts_yet: 還沒有發表過文章
+friend_link: 友情連結
+notification:
+  notification: 通知
+  my_notification: 我的提醒
+  empty: 沒有提醒
+  user_follow_you: <a class="username" href="%url%">%username%</a>  關注了你
+  user_reply_your_topic: <a class="username" href="%userUrl%">%username%</a>  回復了你的話題 <a href="%topicUrl%">%topicTitle%</a>
+  user_vote_your_topic: <a class="username" href="%userUrl%">%username%</a>  贊了你的話題 <a href="%topicUrl%">%topicTitle%</a>
+  user_vote_your_reply: <a class="username" href="%userUrl%">%username%</a>  贊了你在話題 <a href="%topicUrl%">%topicTitle%</a> 裡的回復
+  user_at_your_in_topic: <a class="username" href="%userUrl%">%username%</a>  在話題 <a href="%topicUrl%">%topicTitle%</a> 提到了你
+  user_comment_your_post: <a class="username" href="%userUrl%">%username%</a>  評論了你的文章 <a href="%postUrl%">%postTitle%</a>
+  user_vote_your_post: <a class="username" href="%userUrl%">%username%</a>  贊了你的文章 <a href="%postUrl%">%postTitle%</a>
+  user_vote_your_comment: <a class="username" href="%userUrl%">%username%</a>  贊了你在文章 <a href="%postUrl%">%postTitle%</a> 裡的評論
+  user_at_your_in_post: <a class="username" href="%userUrl%">%username%</a>  在文章 <a href="%topicUrl%">%postTitle%</a> 提到了你
+  user_buy_your_book: <a class="username" href="%userUrl%">%username%</a> 購買了你的 <a href="%bookUrl%">%bookTitle%</a> 電子書
+  user_follow_your_category: <a class="username" href="%userUrl%">%username%</a> 訂閱了你的 <a href="%categoryUrl%">%categoryTitle%</a> 專欄
+  withdraw_notification: 提現通知
+error:
+  unknow_error: 未知的錯誤
+  the_page_you_are_looking_for_does_not_exist: OOPS! 您請求的資源不存在
+  server_error: OOPS! 伺服器內部錯誤
+resetting:
+  password: 重置密碼
+  resetting_url_have_sent_to_your_email: 重置連結已經發送到了你的郵箱，連結 %tokenLifetime% 小時內有效。
+  email:
+    hello: '%username% 你好'
+    your_are_try_reset_password: 你正在嘗試重置密碼，請訪問 <a href="%confirmationUrl%">%confirmationUrl%</a> 以重置密碼
+    wish: 祝好 <br/><a href="https://www.phpdish.com">PHPDish</a> 運營團隊
+  captcha: 驗證碼
+  username_or_email: 使用者名或者郵箱
+  submit: 提交
+search:
+  search_term: 搜索 %keywords%
+  service_powered_by: 搜索由<a href="https://www.algolia.com/"><span class="logo">Algolia</span></a> 提供
+thread:
+  recommend_threads: 推薦節點
+  all_threads: >
+    
+  no_threads_yet: 還沒有節點
+  follow: 關注
+  have_follow: 已關注
+  topic_count: 話題數
+  follower_count: 訂閱數
+  add_thread: 添加節點
+  edit_thread: 修改節點
+  form:
+    name: 請填寫節點名稱
+    description: 節點介紹
+    slug: 訪問功能變數名稱
+  threads: 全部節點
+  all: 全部
+  see_topic: 看帖
+topic:
+  reply_ta: 回復TA
+  hot_topics: 熱門話題
+  set_top: 置頂
+  set_good: 加精
+  cancel_top: 取消置頂
+  cancel_good: 取消加精
+  create_at: 發起于
+  last_reply: 最後回復
+  no_topic_yet: 還沒有發表過話題
+  add_topic: 創建新話題
+  edit_topic: 編輯話題
+  form:
+    title: 請填寫標題
+    body: 請填寫正文，支援Markdown，注意排版與代碼高亮
+    thread: 添加節點
+    publish: 發佈
+    preview: 預覽
+  preview_area: 預覽區域
+  topic: 話題
+  created_at: 發表在
+  total_publish_topics: 共發表了 %count% 個話題
+  good_topic: 精品話題
+reply:
+  total_publish_reply: 共發表了 %count% 個回復
+  created_at: 發表在
+  no_reply_yet: 還沒有發表過回復
+user:
+  latest_join_users: 最近加入
+  following: 關注
+  follower: 粉絲
+  no_users: 沒有使用者
+  create_new_topic: 發佈新話題
+  now_register: 現在註冊
+  registered_users_please_go_signin: 已註冊使用者請<a href="%url%">登錄</a>
+  total_follwers: 共 %count% 粉絲
+  total_following: 共關注 %count% 個使用者
+  no_followers_yet: 還沒有粉絲
+  no_following_yet: 還沒有關注
+  what_to_say: 要說點什麼呢？
+  register_at: 在 %timeago% 註冊
+  edit_my_profile: 編輯我的資料
+  send_message: 發信息
+  follow_him: 關注他
+  follow_she: 關注她
+  her_categories: 她的專欄
+  his_categories: 他的專欄
+wallet:
+  my_wallet: 我的錢包
+  account_balance: 帳戶餘額
+  frozen_balance: 凍結餘額
+  withdraw: 提現
+  the_minimum_amount_for_each_withdrawal_is_100: 每次提現的最小額度為￥100.00
+  the_withdrawal_amount_must_be_an_integer: 提現金額必須是整數
+  10_percent_service_charge_is_charged_for_each_withdrawal: 每次提現收取 10% 手續費
+  withdrawal_will_arrive_within_3_5_working_days: 提現會在 3-5 個工作日內到賬
+  withdrawal_amount_will_be_temporarily_frozen_during_withdrawal: 提現期間提現金額會被暫時凍結
+  table:
+    time: 時間
+    type: 類型
+    details: 詳情
+    amount: 金額
+    status: 狀態
+
+
+

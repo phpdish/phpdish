@@ -1,0 +1,112 @@
+---
+menu:
+  user: 使用者
+  wallet: 錢包
+  transaction: 流水
+  category: 專欄
+  post: 文章
+  thread: 節點
+  topic: 話題
+  friend_link: 友情連結
+category:
+  filter:
+    username: 使用者名
+    name: 標題
+  name: 名稱
+  slug: Slug
+  creator: 創建人
+  cover: 封面
+  recommended: 是否推薦
+  enabled: 是否刪除
+  description: 專欄描述
+  post_count: 文章數量
+  follower_count: 訂閱數量
+  created_at: 創建時間
+  managers: 管理員
+  manage_posts: 管理文章
+friend_link:
+  filter:
+    name: 標題
+  name: 標題
+  logo: LOGO
+  url: URL
+  priority: 優先順序
+payment:
+  filter:
+    type: 類型
+    status: 狀態
+  serial_no: 流水號
+  user: 使用者
+  price: 交易金額
+  type: 類型
+  status: 狀態
+  description: 描述
+  created_at: 創建時間
+  enabled: 是否有效
+  _action: 操作
+  withdraw_approve: 提現已經被確認
+  withdraw_declined: 提現已經拒絕
+  form:
+    action:
+      action: 操作
+      approve: 同意
+      decline: 拒絕
+    note: 備註
+filter:
+  user_email: 郵箱
+  user_username: 使用者名
+post:
+  filter:
+    title: 標題
+  title: 標題
+  category: 專欄
+  user: 作者
+  recommended: 是否推薦
+  comment_count: 評論數量
+  view_count: 查看次數
+  created_at: 創建時間
+  enabled: 是否刪除
+thread:
+  filter:
+    name: 名稱
+  name: 名稱
+  slug: Slug
+  creator: 創建人
+  cover: 封面
+  recommended: 是否推薦
+  enabled: 是否刪除
+  description: 描述
+  topic_count: 話題數量
+  follower_count: 訂閱數量
+  created_at: 創建時間
+  manage_topics: 管理話題
+  view_thread: 查看節點
+topic:
+  topic: 話題
+  filter:
+    title: 標題
+  title: 標題
+  threads: 節點
+  user: 創建人
+  recommended: 是否推薦
+  reply_count: 回復數量
+  view_count: 查看次數
+  created_at: 創建時間
+  enabled: 是否刪除
+user:
+  user: 使用者
+  filter:
+    enabled: 是否啟用
+  email: 郵箱
+  username: 使用者名
+  avatar: 頭像
+  last_login: 上次登錄
+  enabled: 是否啟用
+  _action: 操作
+wallet:
+  user: 使用者名
+  amount: 餘額
+  freeze_amount: 凍結餘額
+  created_at: 創建時間
+  manage_payments: 管理流水
+  view_wallet: 查看錢包

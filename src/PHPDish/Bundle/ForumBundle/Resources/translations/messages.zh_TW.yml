@@ -1,0 +1,20 @@
+---
+form:
+  thread:
+    name: 標題
+    description: 描述
+    slug: 訪問功能變數名稱
+    cover: 封面
+  reply:
+    body: 內容
+  topic:
+    title: 標題
+    threads: 所屬節點
+    body: 內容
+topic:
+  not_exists: 話題不存在
+thread:
+  explore: 發現節點
+  edit_success: 節點修改成功
+reply:
+  not_exists: 回復不存在

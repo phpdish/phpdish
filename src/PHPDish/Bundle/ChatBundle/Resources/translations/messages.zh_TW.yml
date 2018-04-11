@@ -1,0 +1,11 @@
+---
+form:
+  chat:
+    body: 消息
+chat: 短消息
+menu:
+  notification: 提醒
+  inbox: 收件匣
+  sent: 已發送
+register:
+  welcome_subject: 歡迎註冊本社區！

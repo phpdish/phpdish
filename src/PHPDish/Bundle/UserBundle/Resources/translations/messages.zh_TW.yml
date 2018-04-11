@@ -1,0 +1,24 @@
+---
+profile:
+  edit:
+    success: 資料修改成功
+resetting:
+  username_or_email_not_exists: 使用者名或者郵箱不存在
+  user_missing_email: 該使用者沒有綁定郵箱，可能是社交帳戶，請嘗試使用社交網站登錄。
+follow:
+  cannot_follow_yourself: 你不能關注你自己
+form:
+  user:
+    username: 使用者名
+    gender:
+      gender: 性別
+      placeholder: 請選擇
+      male: 男
+      female: 女
+    email: 郵箱
+    description: 簽名
+    avatar: 頭像
+  profile:
+    url: 個人主頁
+    location: 城市
+    company: 公司
