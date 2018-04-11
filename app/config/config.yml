@@ -9,7 +9,8 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: zh_CN
+    locale: zh_CN # 默认语言
+    locales: [zh_CN, zh_TW] # 支持的语言
     app.dir.media: '%kernel.project_dir%/web/media'
     app.dir.uploads: '%kernel.project_dir%/web/media/uploads'
     app.dir.avatar: '%kernel.project_dir%/web/media/uploads/avatar'

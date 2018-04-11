@@ -160,6 +160,7 @@ gregwar_captcha:
 
 ## Js Translator
 bazinga_js_translation:
+    locale_fallback: '%locale%'
     default_domain: assets
 
 # Media

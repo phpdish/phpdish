@@ -33,9 +33,6 @@ class TopicController extends RestController
      */
     public function indexAction(Request $request)
     {
-        dump($request->getLocale());
-        dump($request->getLanguages());
-        dump($request->getDefaultLocale());
         $manager = $this->getTopicManager();
         $criteria = Criteria::create();
         $criteria->orderBy(['isTop' => 'desc',  'repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));

@@ -6443,16 +6443,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "2f09845dfdb8edf60399ec3fd998a914a1a47438"
+                "reference": "f98eb6c3c7c0e1573a3216579e99e77961ed7996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/2f09845dfdb8edf60399ec3fd998a914a1a47438",
-                "reference": "2f09845dfdb8edf60399ec3fd998a914a1a47438",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/f98eb6c3c7c0e1573a3216579e99e77961ed7996",
+                "reference": "f98eb6c3c7c0e1573a3216579e99e77961ed7996",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6529,7 +6529,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2018-04-09T12:40:19+00:00"
+            "time": "2018-04-10T08:11:48+00:00"
         },
         {
             "name": "sonata-project/exporter",

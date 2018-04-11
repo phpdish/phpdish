@@ -47,3 +47,14 @@ services:
     ## 默认null engine
     search.engine.null:
         class: Algolia\SearchBundle\Engine\NullEngine
+
+    ## locale manager
+    phpdish.locale_manager:
+        class: PHPDish\Bundle\CoreBundle\Locale\LocaleManager
+        arguments: ['%locales%']
+
+    phpdish.locale.listener:
+        class: PHPDish\Bundle\CoreBundle\EventListener\LocaleListener
+        arguments: ['@phpdish.locale_manager']
+        tags:
+            - {name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 999}
