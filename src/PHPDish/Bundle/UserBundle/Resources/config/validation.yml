@@ -18,5 +18,5 @@ PHPDish\Bundle\UserBundle\Entity\User:
     properties:
         username:
             - Regex:
-                 pattern: /^\w+$/
+                 pattern: /^[\w\x{4e00}-\x{9fa5}]+$/u
                  message: user.username.regex
