@@ -181,7 +181,7 @@ new AjaxTab($('[data-pjax-container]'), {
                 replyTopicLock.lock();
                 Util.request('topic.addReply', window.topicId, $addReplyForm).success(function(response){
                     $replyBody.val('');
-                    Util.dialog.message(Translator.trans('post.reply_success')).flash(() => location.reload());
+                    Util.dialog.message(Translator.trans('post.reply_success')).flash(0.5, () => location.reload());
                 }).complete(function(){
                     replyTopicLock.release();
                 });
@@ -230,7 +230,7 @@ new AjaxTab($('[data-pjax-container]'), {
                     return false;
                 }
                 voteLock.lock();
-                $icon.removeClass('wobble animated')
+                $icon.removeClass('wobble animated');
                 Util.request('topicReply.vote', replyId).done((response) => {
                     const $number = $voteAction.find('.number');
 

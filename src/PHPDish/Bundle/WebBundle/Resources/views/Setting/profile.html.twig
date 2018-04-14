@@ -55,6 +55,11 @@
                 {{ form_errors(form.profile.location) }}
             </div>
             <div class="form-group">
+                {{ form_label(form.locale) }}
+                {{ form_widget(form.locale, {'attr': {'class': 'form-control', 'placeholder': 'form.profile.locale.locale'|trans}, 'required': false}) }}
+                {{ form_errors(form.locale) }}
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn u-btn-primary submit-btn"><i class="if i-publish"></i> {{ 'ui.edit'|trans }}</button>
             </div>
             {{ form_end(form) }}

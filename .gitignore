@@ -24,5 +24,6 @@
 *~
 /web/media/cache/*
 !web/media/cache
+/plugins/*
 yarn.lock
 yarn-error.log

@@ -1,0 +1,273 @@
+---
+ui:
+  create: Create
+  edit: Edit
+  toggle_navigation: Switch Menu
+  search: Search
+  login: Sign in
+  register: Sign up
+  buy: Buy
+  free: Free
+  article: Article
+  follower: Follower
+  empty_data: No data
+  book: Ebook
+  topic: Topic
+  category: Column
+  publish: Release
+  recommend: Recommend
+  remove: Delete
+  all: All
+  follow: Follow
+  have_follow: Followed
+  reply: Reply
+  vote: like
+  following: Follow
+  cancel_vote: Cancel like
+  preview: Preview
+  preview_zone: Preview area
+  please_login_first_and_reply: Please log in before replying
+  replying: Replying
+  please_use_markdown_synax_write: Please write with markdown syntax
+  write_your_comment: Write down your comments
+  support_markdown_synax_reference: Support markdown format, commonly used markdown syntax <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md" target="_blank">reference here</a>
+  support_emoji_emoji_reference: Support emoji expression, use the method reference <a href="https://www.phpdish.com/topics/6" target="_blank">emoji use teaching</a>, emoji quick query see<a href="http://emoji.muan.co/" target="_blank">here</a>
+  drag_and_paste_upload_image: 'Support drag-and-drop clipboard paste upload picture, format: jpg,png, GIF'
+  support_at_others: Support for other users @
+  no_content_yet: I haven't published anything yet.
+  no_record: No record
+navigation:
+  add_topic: Create a topic
+  add_post: Create a post
+  user:
+    homepage: My homepage
+    category: My Posts
+    wallet: My wallet
+    setting: Setting
+    logout: Sign out
+login:
+  signin_your_account: Log in
+  click_and_register: No account yet? Click this<a href="%link%">register</a>
+  form:
+    username: Username or mailbox
+    password: Password
+    forgot_password: Retrieve password
+  signin_with: or use
+register:
+  new: Sign up
+  click_and_login: You already have an account? Click here<a href="%link%">login</a>your account
+  form:
+    username: Your username
+    email: Your email
+    password: Set Password
+    repeat_password: Repeat the password above
+setting:
+  profile:
+    edit_profile: Modify the information
+  setting: Personal settings
+  social_account:
+    social_account: Social accounts
+    have_been_bound: bonded
+    bind_qq: Bond with QQ
+    bind_weibo: Bond Weibo
+    bind_github: Bond Github
+  change_password:
+    change_password: Modify password
+    form:
+      current_password: Current password
+      new_password: New password
+      repeat_password: Repeat password
+      edit: Edit
+book:
+  edit_chapter: Edit Chapter
+  add_chapter: Add Chapter
+  form:
+    title: Please enter a title
+    body: Please write with markdown format, note that the code is highlighted
+    publish: Release
+  have_no_subscribers: No subscribers yet
+  after_buy_read_full: Read the full text after purchasing this book
+  edit_this_chapter: Modify this chapter
+  add_sub_chapter: Add sub-chapters
+  delete_this_chapter: Delete this chapter
+  move_up: Move Up
+  move_down: Move Down
+  total_publish_books: Published a total of %count% book
+  write_book: Write a book
+  go_write_book: Now go to <a href="%link%">to create an ebook</a>
+  no_books_yet: There's no ebook.
+  have_buy: Paied
+  description: Preface
+  read: Read
+  follower: Subscription
+category:
+  create:
+    book: Create an ebook
+    category: Create a column
+  edit:
+    book: Edit ebook
+    category: Edit Column
+  no_posts_yet: No articles.
+  new_publish: New Release
+  hot: Hot
+  have_follow: Subscribed
+  form:
+    name: Please fill in the name
+    description: Description
+    charge:
+      free: Free
+      custom_amount: Custom Amount
+    slug: Slug
+chat:
+  no_chat_yet: Haven't chat yet
+  inbox: Inbox
+  sent: Sent
+  send_message: Send a message
+  form:
+    body: Message content
+    publish: Release
+    recipient: Recipient
+    subject: Subject
+  reply:
+    content: Reply content
+    reply: Reply
+post:
+  publish_at: in
+  recommend: Recommend
+  empty: No articles
+  add: Add articles
+  edit: Edit
+  form:
+    title: Please enter the title of the article
+    body: Please write with markdown format, note that the code is highlighted
+  latest_post: Latest Articles
+  total_publish_posts: Published a total of %count% articles
+  no_posts_yet: No articles have been published.
+  words_count: Words:
+  comments_count: Comments:
+  views_count: Views:
+  after_buy_read_full: Read more after buy
+
+friend_link: Links
+notification:
+  notification: Notification
+  my_notification: Notification
+  empty: No reminders
+  user_follow_you: <a class="username" href="%url%">%username%</a>  followed you.
+  user_reply_your_topic: <a class="username" href="%userUrl%">%username%</a>  replied to your topic <a href="%topicUrl%">%topicTitle%</a>
+  user_vote_your_topic: <a class="username" href="%userUrl%">%username%</a>  liked to your topic <a href="%topicUrl%">%topicTitle%</a>
+  user_vote_your_reply: <a class="username" href="%userUrl%">%username%</a>  liked your reply at the topic <a href="%topicUrl%">%topicTitle%</a>
+  user_at_your_in_topic: <a class="username" href="%userUrl%">%username%</a>  referred to you at the topic <a href="%topicUrl%">%topicTitle%</a>
+  user_comment_your_post: <a class="username" href="%userUrl%">%username%</a>  replied your article <a href="%postUrl%">%postTitle%</a>
+  user_vote_your_post: <a class="username" href="%userUrl%">%username%</a>  liked your article <a href="%postUrl%">%postTitle%</a>
+  user_vote_your_comment: <a class="username" href="%userUrl%">%username%</a>  liked your reply at the article <a href="%postUrl%">%postTitle%</a>
+  user_at_your_in_post: <a class="username" href="%userUrl%">%username%</a>  referred to you at the article <a href="%topicUrl%">%postTitle%</a>
+  user_buy_your_book: <a class="username" href="%userUrl%">%username%</a> paid your ebook<a href="%bookUrl%">%bookTitle%</a>
+  user_follow_your_category: <a class="username" href="%userUrl%">%username%</a> subscribed your column<a href="%categoryUrl%">%categoryTitle%</a>
+  withdraw_notification: Notice of the withdraw
+error:
+  unknow_error: Unknown error
+  the_page_you_are_looking_for_does_not_exist: oops! The resource you requested does not exist
+  server_error: Oops! Server Internal Error
+resetting:
+  password: Reset Password
+  resetting_url_have_sent_to_your_email: The reset link has been sent to your mailbox and the link is valid within %tokenLifetime% hours.
+  email:
+    hello: '%username% , hello.'
+    your_are_try_reset_password: You are trying to reset the password, please visit <a href="%confirmationUrl%">%confirmationUrl%</a> to reset the password
+    wish: Good luck <br/><a href="https://www.phpdish.com">phpdish</a> Operations Team
+  captcha: Verification Code
+  username_or_email: Username or mailbox
+  submit: Submit
+search:
+  search_term: Search %keywords%
+  service_powered_by: Search is provided by<a href="https://www.algolia.com/"><span class="logo">Algolia</span></a>
+thread:
+  recommend_threads: Recommended groups
+  all_threads: >
+    
+  no_threads_yet: No group yet
+  follow: Follow
+  have_follow: Followed
+  topic_count: Topic number
+  follower_count: Number of subscriptions
+  add_thread: Add group
+  edit_thread: Edit
+  form:
+    name: Please enter name
+    description: Introduction to the group
+    slug: Slug
+  threads: All topic groups
+  all: All
+  see_topic: All
+topic:
+  reply_ta: Reply it
+  hot_topics: Hot Topics
+  set_top: Top
+  set_good: Set good
+  cancel_top: Cancel Top
+  cancel_good: Cancel Good
+  create_at: Create at
+  last_reply: Last reply
+  no_topic_yet: No topic yet
+  add_topic: Add a topic
+  edit_topic: Edit Topic
+  form:
+    title: Please fill in the title
+    body: Please fill in the body, support markdown, attention to typesetting and code highlighting
+    thread: Add topics group
+    publish: Submit
+    preview: Preview
+  preview_area: Preview area
+  topic: Topic
+  created_at: Published in
+  total_publish_topics: Published a total of %count% topics
+  good_topic: Good topics
+reply:
+  total_publish_reply: A total of %count% replies
+  created_at: Published in
+  no_reply_yet: No reply yet
+user:
+  latest_join_users: Latest joined
+  following: Follow
+  follower: Follower
+  no_users: No users
+  create_new_topic: Post a new topic
+  now_register: Register Now
+  registered_users_please_go_signin: Registered users please<a href="%url%">login</a>
+  total_follwers: Total %count% Followers
+  total_following: Total Followed %count% Users
+  no_followers_yet: No followers
+  no_following_yet: Not follow yet
+  what_to_say: What do you say?
+  register_at: Register in %timeago%
+  edit_my_profile: Edit My Profile
+  send_message: Send message
+  follow_him: Follow him
+  follow_she: Follower her
+  her_categories: Her column
+  his_categories: His column
+wallet:
+  my_wallet: My wallet
+  account_balance: Account fund
+  frozen_balance: Frozen remaining
+  withdraw: withdraw cash
+  the_minimum_amount_for_each_withdrawal_is_100: The minimum amount for each withdraw is ￥100.00
+  the_withdrawal_amount_must_be_an_integer: The withdraw amount must be an integer
+  10_percent_service_charge_is_charged_for_each_withdrawal: 10% commission charge for each withdraw
+  withdrawal_will_arrive_within_3_5_working_days: the withdraw amount will arrive at your account within 3 to 5 working days
+  withdrawal_amount_will_be_temporarily_frozen_during_withdrawal: The amount of cash will be temporarily frozen druing withdrawal
+  table:
+    time: Time
+    type: Type
+    details: Details
+    amount: Amount
+    status: Status
+
+menu:
+    homepage: Homepage
+    category: Column
+    ask_question: Question
+    job: Job
+
+

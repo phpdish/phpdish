@@ -1,0 +1,112 @@
+---
+menu:
+  user: User
+  wallet: Wallet
+  transaction: transaction
+  category: Column
+  post: Article
+  thread: Topic groups
+  topic: Topic
+  friend_link: Links
+category:
+  filter:
+    username: Username
+    name: Title
+  name: Name
+  slug: Slug
+  creator: Creator
+  cover: Cover
+  recommended: Recommend or not
+  enabled: Delete or not
+  description: Column description
+  post_count: Number of articles
+  follower_count: Number of subscriptions
+  created_at: Creation time
+  managers: Administrator
+  manage_posts: Manage Articles
+friend_link:
+  filter:
+    name: Title
+  name: Title
+  logo: LOGO
+  url: Url
+  priority: Priority
+payment:
+  filter:
+    type: Type
+    status: Status
+  serial_no: Serial number
+  user: User
+  price: Transaction amount
+  type: Type
+  status: Status
+  description: Description
+  created_at: Creation time
+  enabled: valid or not
+  _action: Action
+  withdraw_approve: The withdrawal is confirmed.
+  withdraw_declined: The withdrawal has refused
+  form:
+    action:
+      action: Action
+      approve: Agree
+      decline: Refused
+    note: Note
+filter:
+  user_email: Email
+  user_username: Username
+post:
+  filter:
+    title: Title
+  title: Title
+  category: Column
+  user: Author
+  recommended: Recommend or not
+  comment_count: Number of comments
+  view_count: Number of views
+  created_at: Creation time
+  enabled: Delete or not
+thread:
+  filter:
+    name: Name
+  name: Name
+  slug: Slug
+  creator: Creator
+  cover: Cover
+  recommended: Recommend or not
+  enabled: Delete or not
+  description: Description
+  topic_count: Number of topics
+  follower_count: Number of subscriptions
+  created_at: Creation time
+  manage_topics: Manage topics
+  view_thread: View topic groups
+topic:
+  topic: Topic
+  filter:
+    title: Title
+  title: Title
+  threads: Topic groups
+  user: Creator
+  recommended: Recommend or not
+  reply_count: Number of replies
+  view_count: Number of views
+  created_at: Creation time
+  enabled: Delete or not
+user:
+  user: User
+  filter:
+    enabled: enabled or not
+  email: Email
+  username: Username
+  avatar: Avatar
+  last_login: Last Login
+  enabled: enabled or not
+  _action: Action
+wallet:
+  user: Username
+  amount: amount
+  freeze_amount: frozen amount
+  created_at: Creation time
+  manage_payments: Manage payment record
+  view_wallet: View Wallet

@@ -162,4 +162,11 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      * @return UserInterface[]
      */
     public function getFollowing();
+
+    /**
+     * 获取用户的语言
+     *
+     * @return string
+     */
+    public function getLocale();
 }

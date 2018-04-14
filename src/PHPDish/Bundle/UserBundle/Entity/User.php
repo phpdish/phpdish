@@ -130,6 +130,11 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $githubAccessToken;
 
+    /**
+     * @var string
+     */
+    protected $locale;
+
     public function __construct()
     {
         parent::__construct();
@@ -491,6 +496,23 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     {
         $this->githubAccessToken = $githubAccessToken;
 
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
         return $this;
     }
 }

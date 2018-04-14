@@ -1,0 +1,29 @@
+---
+profile:
+  edit:
+    success: Profile modification Successful
+resetting:
+  username_or_email_not_exists: Username or mailbox does not exist
+  user_missing_email: The user does not registered mailbox, maybe used a social account before, please try to log on using social account.
+follow:
+  cannot_follow_yourself: You can't follow yourself
+form:
+  user:
+    username: Username
+    gender:
+      gender: Gender
+      placeholder: Please select
+      male: Male
+      female: Female
+    email: Email
+    description: Bio
+    avatar: Avatar
+    locale:
+        locale: Language
+        zh_CN: Simplified Chinese
+        zh_TW: Traditional Chinese
+        en: English
+  profile:
+    url: Homepage
+    location: City
+    company: Company

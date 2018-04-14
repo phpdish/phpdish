@@ -1,0 +1,11 @@
+---
+form:
+  chat:
+    body: Message
+chat: Short Message
+menu:
+  notification: Remind
+  inbox: Inbox
+  sent: Sent
+register:
+  welcome_subject: Welcome to register Our community!

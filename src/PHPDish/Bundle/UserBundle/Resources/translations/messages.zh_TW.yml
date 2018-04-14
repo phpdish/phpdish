@@ -18,6 +18,11 @@ form:
     email: 郵箱
     description: 簽名
     avatar: 頭像
+    locale:
+        locale: 語言
+        zh_CN: 簡體中文
+        zh_TW: 繁體中文
+        en: 英文
   profile:
     url: 個人主頁
     location: 城市

@@ -17,22 +17,22 @@
                                 <span class="username"><a href="{{ userHome }}">{{ post.user.username }}</a></span>
                                 <span data-role="follow" data-username="{{ post.user.username }}">
                                     {% if (is_granted('IS_AUTHENTICATED_REMEMBERED') and post.user.isFollowedBy(app.user)) %}
-                                        <button class="btn btn-sm btn-default" data-action="unfollow"><i class="if i-check"></i> 已关注</button>
+                                        <button class="btn btn-sm btn-default" data-action="unfollow"><i class="if i-check"></i> {{ 'ui.have_follow'|trans }}</button>
                                     {% else %}
-                                        <button class="btn btn-sm btn-success" data-action="follow"><i class="if i-plus"></i> 关注</button>
+                                        <button class="btn btn-sm btn-success" data-action="follow"><i class="if i-plus"></i> {{ 'ui.follow'|trans }}</button>
                                     {% endif %}
                                 </span>
                             </div>
                             <div class="meta">
                                 <span class="publish-date">{{ post.createdAt|time_diff }}</span>
-                                <span class="word-num">字数 {{ post.wordCount }}</span>
-                                <span class="comment-num">评论 {{ post.commentCount }}</span>
-                                <span class="view-num">浏览 {{ post.viewCount }}</span>
+                                <span class="word-num">{{ 'post.words_count'|trans }} {{ post.wordCount }}</span>
+                                <span class="comment-num">{{ 'post.comments_count'|trans }}  {{ post.commentCount }}</span>
+                                <span class="view-num">{{ 'post.views_count'|trans }}  {{ post.viewCount }}</span>
                             </div>
                             <div class="meta action" data-role="post-action">
                                 {% if is_granted('edit', post) %}
-                                    <span><a href="javascript:void(0)" data-action="remove" title="删除"><i class="if i-trash"></i> 删除</a></span>
-                                    <span><a href="{{ path('post_edit', {'id': post.id}) }}" title="修改"><i class="if i-edit"></i> 修改</a></span>
+                                    <span><a href="javascript:void(0)" data-action="remove" title="{{ 'ui.remove'|trans }}"><i class="if i-trash"></i> {{ 'ui.remove'|trans }}</a></span>
+                                    <span><a href="{{ path('post_edit', {'id': post.id}) }}" title="{{ 'ui.edit'|trans }}"><i class="if i-edit"></i> {{ 'ui.edit'|trans }}</a></span>
                                 {% endif %}
                             </div>
                         </div>
@@ -49,14 +49,14 @@
                         <div class="payfor">
                             <div class="mask"></div>
                             <div class="action">
-                                <p class="meta"><i class="if i-tips"></i> 购买本专栏之后即可阅读全文</p>
-                                <button class="btn u-btn-primary" data-slug="{{ post.category.slug }}" data-role="buy">{{ post.category.chargePrice|money }} 购买</button>
+                                <p class="meta"><i class="if i-tips"></i> {{ 'post.after_buy_read_full'|trans }}</p>
+                                <button class="btn u-btn-primary" data-slug="{{ post.category.slug }}" data-role="buy">{{ post.category.chargePrice|money }} {{ 'ui.buy'|trans }}</button>
                             </div>
                         </div>
                     {% endif %}
                     <div class="action">
                         <a data-role="vote-post" class="btn btn-sm u-btn-outline-primary" href="javascript:void(0);">
-                            <i class="fa fa-thumbs-o-up"> 赞</i> <span class="number">{{ post.voteCount }}</span>
+                            <i class="fa fa-thumbs-o-up"> {{ 'ui.vote'|trans }}</i> <span class="number">{{ post.voteCount }}</span>
                         </a>
                     </div>
                 </div>
@@ -71,17 +71,17 @@
                         <div class="media-body">
                             <div class="pull-right" data-role="follow-category" data-price="{{ post.category.chargePrice|money }}"  data-slug="{{ post.category.slug }}">
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and post.category.isFollowedBy(app.user) %}
-                                    <button class="btn  btn-sm btn-default" data-action="unfollow"><i class="if i-plus"></i> 已关注</button>
+                                    <button class="btn  btn-sm btn-default" data-action="unfollow"><i class="if i-plus"></i> {{ 'ui.have_follow'|trans }}</button>
                                 {% else %}
-                                    <button class="btn btn-sm u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> 关注本专栏</button>
+                                    <button class="btn btn-sm u-btn-outline-primary" data-action="follow"><i class="if i-plus"></i> {{ 'ui.follow'|trans }}</button>
                                 {% endif %}
                             </div>
                             <h4 class="media-heading">
                                 <a href="{{ categoryUrl }}">{{ post.category.name }}</a>
                             </h4>
                             <ul class="list-unstyled list-inline meta">
-                                <li>文章 {{ post.category.postCount }}</li>
-                                <li>订阅 {{ post.category.followerCount }}</li>
+                                <li>{{ 'ui.article'|trans }} {{ post.category.postCount }}</li>
+                                <li>{{ 'ui.follower'|trans }} {{ post.category.followerCount }}</li>
                             </ul>
                             <div>{{ post.category.description }}</div>
                         </div>
@@ -103,22 +103,22 @@
                                         <a class="avatar">
                                             <img src="{{ app.user.avatar|imagine_filter('middle_square')}}" class="img-responsive img-circle"/>
                                         </a>
-                                        {{ form_widget(form.original_body, {'attr': {'class': 'form-control', 'placeholder': '写下你的评论...'}}) }}
+                                        {{ form_widget(form.original_body, {'attr': {'class': 'form-control', 'placeholder': 'ui.write_your_comment'|trans}}) }}
                                     </div>
-                                    <div class="tips"><i class="if i-markdown"></i> 请使用Markdown语法书写</div>
+                                    <div class="tips"><i class="if i-markdown"></i> {{ 'ui.please_use_markdown_synax_write'|trans }}</div>
                                     <div class="actions">
-                                        <button type="submit" data-role="submit" class="btn u-btn-primary" data-loading="回复中">回复</button>
-                                        <span class="preview-action" data-action="preview"><i class="if i-view"></i> 预览</span>
+                                        <button type="submit" data-role="submit" class="btn u-btn-primary" data-loading="{{ 'ui.replying'|trans }}">{{ 'ui.reply'|trans }}</button>
+                                        <span class="preview-action" data-action="preview"><i class="if i-view"></i> {{ 'ui.preview'|trans }}</span>
                                     </div>
                                 {{ form_end(form) }}
                                 <div class="preview-panel markdown-body hidden" data-role="preview-panel">
-                                    预览区域
+                                    {{ 'ui.preview_zone'|trans }}
                                 </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="panel-heading">{{ post.commentCount }}个评论</div>
+                <div class="panel-heading"> {{ 'post.post_comments'|trans({'%count%': post.commentCount}) }}</div>
                 <ul class="list-group reply-list" id="reply-list">
                    {% include 'PHPDishWebBundle:Topic:_reply_list.html.twig' with {
                        replies: comments

@@ -3,7 +3,10 @@
 namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use PHPDish\Bundle\CoreBundle\Locale\LocaleManager;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class LocaleListener
 {
@@ -11,6 +14,7 @@ class LocaleListener
      * @var LocaleManager
      */
     protected $localeManager;
+
 
     public function __construct(LocaleManager $localeManager)
     {
@@ -25,9 +29,20 @@ class LocaleListener
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $locale = $request->getPreferredLanguage($this->localeManager->all());
+        $locale = null;
+        if (!$request->hasPreviousSession()) {
+            $locale = $this->getClientPreferredLocale($request);
+        } elseif (!$request->attributes->get('_locale')) {
+            $locale = $request->getSession()->get('_locale', $this->getClientPreferredLocale($request));
+        }
+
         if ($locale !== null) {
             $request->setLocale($locale);
         }
+    }
+
+    protected function getClientPreferredLocale(Request $request)
+    {
+        return $request->getPreferredLanguage($this->localeManager->all());
     }
 }

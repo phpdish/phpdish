@@ -77,7 +77,7 @@ setting:
     avatar: 請設置你的頭像
     email: 請填寫郵箱
     gender: 請選擇您的性別
-    decription: 請填寫您的簽名
+    description: 請填寫您的簽名
 sign:
   validation:
     username: 請輸入使用者名或者郵箱

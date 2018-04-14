@@ -1,0 +1,20 @@
+---
+form:
+  thread:
+    name: Title
+    description: Description
+    slug: Access to the domain name
+    cover: Cover
+  reply:
+    body: Content
+  topic:
+    title: Title
+    threads: Owning topic group
+    body: Content
+topic:
+  not_exists: The topic doesn't exist.
+thread:
+  explore: Explore Topic Group
+  edit_success: Topic Group Modification succeeded
+reply:
+  not_exists: Reply does not exist

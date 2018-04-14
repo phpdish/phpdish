@@ -1,0 +1,21 @@
+---
+category:
+  slug:
+    unique: The Slug has been occupied
+    not_blank: Column Slug must not be empty
+    regex: can only contain alphanumeric or horizontal lines
+  name:
+    not_blank: Name must not be empty
+    min_length: Name at least{{ limit }}character length
+    max_length: Name max {{ limit }}character length
+  description:
+    min_length: Description the minimum{{ limit }}character length
+    max_length: Description the maximum{{ limit }}character length
+post:
+  title:
+    not_blank: Title must not be empty
+    min_length: Title at least{{ limit }}character length
+    max_length: Title max {{ limit }}character length
+  original_body:
+    not_blank: Content must not be empty
+    min_length: Content at least{{ limit }}character length

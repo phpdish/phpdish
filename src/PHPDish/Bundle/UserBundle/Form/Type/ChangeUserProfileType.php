@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\UserBundle\Form\Type;
 
+use PHPDish\Bundle\CoreBundle\Locale\LocaleManager;
 use PHPDish\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,10 +15,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ChangeUserProfileType extends AbstractType
 {
     /**
+     * @var LocaleManager
+     */
+    protected $localeManager;
+
+    public function __construct(LocaleManager $localeManager)
+    {
+        $this->localeManager = $localeManager;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $supportLocales = $this->localeManager->all();
         $builder
             ->add('username', TextType::class, [
                 'label' => 'form.user.username',
@@ -39,7 +51,23 @@ class ChangeUserProfileType extends AbstractType
             ->add('profile', ProfileType::class)
             ->add('avatar', HiddenType::class, [
                 'label' => 'form.user.avatar',
+            ])
+            ->add('locale', ChoiceType::class, [
+                'choices' => $this->wrapLocaleChoices(),
+                'label' => 'form.user.locale.locale',
             ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function wrapLocaleChoices()
+    {
+        $choices = [];
+        foreach ($this->localeManager->all() as $locale) {
+            $choices['form.user.locale.' . $locale] = $locale;
+        }
+        return $choices;
     }
 
     /**

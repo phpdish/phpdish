@@ -152,6 +152,11 @@ post:
     latest_post: 最新文章
     total_publish_posts: 共发表了 %count% 篇文章
     no_posts_yet: 还没有发表过文章
+    words_count: 字数
+    comments_count: 评论
+    views_count: 浏览次数
+    post_comments: %count%个评论
+    after_buy_read_full: 购买本专栏之后即可阅读全文
 
 friend_link: 友情链接
 

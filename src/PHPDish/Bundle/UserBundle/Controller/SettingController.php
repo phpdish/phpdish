@@ -24,6 +24,7 @@ class SettingController extends Controller
      */
     public function editProfileAction(Request $request)
     {
+        dump($request->getSession()->all());
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         $user = $this->getUser();
         $form = $this->createForm(ChangeUserProfileType::class, $user);

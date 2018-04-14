@@ -1,0 +1,4 @@
+---
+withdraw:
+  your_withdraw_was_approved: Your withdraw has been passed; %payment%
+  your_withdraw_was_declined: Your withdraw has been rejected; %payment%

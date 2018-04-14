@@ -1,0 +1,4 @@
+---
+user:
+  username:
+    regex: Can only contain numeric letters and underscores

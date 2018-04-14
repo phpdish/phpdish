@@ -1,0 +1,28 @@
+---
+payment:
+  buy_your_book: '%username% bought your ebook %book%'
+  subscribe_your_category: '%username% subscribed to your column %category%'
+  status:
+    unknown: Unknown
+    closed: Closed
+    processing: Processing
+    unpaid: Not paid
+    paid: Paid
+    have_tansfer: Transferred
+    have_received: Received
+  type:
+    buy_book: Buy an ebook
+    subscribe_category: Subscribe the column
+    category_income: Column revenue
+    book_income: E-book Revenue
+    withdraw: withdraw cash
+    unknown: Unknown
+withdraw:
+  amount_should_greater_than: The amount of withdraw cash must be greater than%amount%
+  not_encough_balance: Insufficient remaining
+  need_provide_alipay: Need to provide Alipay account
+  to: 'Withdraw to: %alipay%'
+  decline_reason: Reason for rejection:%reason%
+  no_reason: No reason
+  approve_reason: Confirmed:%reason%
+

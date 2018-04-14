@@ -1,0 +1,47 @@
+---
+form:
+  book:
+    name: e-book Name
+    description: Ebook description
+    charge: Ebook Price
+    slug: Access to the domain name
+    cover: Cover
+  category:
+    name: Name
+    description: Description
+    charge: Subscription price
+    slug: Access to the domain name
+    cover: Cover
+  chapter:
+    own_chapter: Belong to Chapter
+    top_chapter: Top Chapters
+    title: Title
+    body: Content
+  comment:
+    body: Content
+  post:
+    title: Title
+    body: Content
+book:
+  more_than_5_books: Can only create five e-books, you now have %count%
+  add_success: ebook Creation Success
+  edit_success: e-Book Modification successful
+  add_chapter_success: Chapter Creation Successful
+  add_chapter_error: Chapter creation failed
+  edit_chapter_success: Chapter Modification Successful
+  edit_chapter_error: Chapter Modification failed
+  buy_book: Buy an ebook:%book%
+category:
+  more_than_2_categories: You can only create two columns, you now have %count%
+  add_success: Column Creation Successful
+  add_error: Column creation failed
+  edit_success: Column modification Successful
+  need_payment: Need to pay first
+  subscribe_category: Subscription column:%category%
+  is_free: This column is free
+comment:
+  not_exists: Comment does not exist
+post:
+  add_category_first: Please create a column first
+  cannot_add: Article could not be created
+  not_exists: Article does not exist

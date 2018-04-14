@@ -143,6 +143,12 @@ post:
   latest_post: 最新文章
   total_publish_posts: 共發表了 %count% 篇文章
   no_posts_yet: 還沒有發表過文章
+  words_count: 字數
+  comments_count: 評論
+  views_count: 瀏覽次數
+  post_comments: %count%個評論
+  after_buy_read_full: 購買本專欄之後即可閱讀全文
+
 friend_link: 友情連結
 notification:
   notification: 通知

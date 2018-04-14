@@ -1,0 +1,134 @@
+---
+dialog:
+  confirm:
+    title: Confirm？
+    ok: OK
+    cancel: "NO"
+ui:
+  confirm: Confirm
+  cancel: Cancel
+  follow: Follow
+  have_follow: Followed
+  create: Create
+  server_error: Server error, please refresh and try again!
+  please_fill_in_content: Please fill in
+  tips: Tips
+payment:
+  pay_success: Pay success
+upload:
+  try_again_after_refresh: Please refresh and try again
+  file_image: Picture file
+notification:
+  community_notifications: Community News
+  you_have_unread_notifications: You have a %count% Unread reminder
+  reply_content_cannot_be_empty: Reply content must not be empty
+category:
+  this_is_a_paid_category_you_sure_cancel_follow: This is a paid column/ebook, it need to pay again if you subscribe it again after cancellation, confirm continue?
+  buy: Buy
+  follow: Subscription
+  free_buy: Free buy
+  free_follow: Free Subscription
+  paid_buy: '%amount% Buy'
+  paid_follow: '%amount% Subscriptions'
+  have_buy: Paied
+  have_follow: Subscribed
+  upload_cover: Please upload the cover.
+  please_choose_price: Please select subscription price
+  validation:
+    name: Please enter a column title
+    description: Please enter a column introduction
+    slug: Please enter the personal domain name
+editor:
+  no_preview: No preview
+  markdown_synax: Markdown syntax
+book:
+  chapter_name: Chapter Name
+  required_chapter_name: Please enter chapter title
+  create_chapter_error: Failed to create chapter
+  edit_chapter_error: Failed to modify chapter
+  confirm_remove_chapter: Confirm to delete this section?
+  remove_success: Delete Succeessful
+  remove_error: Delete failed please try again!
+  move_error: Move failed please try again!
+  chapter:
+    validation:
+      title:
+        required: Title cannot be empty
+        length_between: Title length between 2 and 50 digits
+  validation:
+    name: Please enter your ebook name
+    description: Please input the ebook introduction
+    slug: Please enter the personal domain name
+  confirm_publish: Confirm publication?
+post:
+  reply_success: Reply successful
+  confirm_remove_the_comment: Confirm to delete this comment?
+  comment_have_been_remove: The comment has been removed
+  confirm_remove_the_post: Confirm to delete this article?
+  post_have_been_remove: Article deleted
+  title_content_cannot_be_empty: Article title and content cannot be empty
+  confirm_publish_the_post: Confirm to release this article?
+  validation:
+    title:
+      required: Please fill in the title
+      length: Article title length between 10 and 150 digits
+setting:
+  validation:
+    avatar: Please set your avatar
+    email: Please fill in the mailbox
+    gender: Please select your gender
+    description: Please enter your bio
+sign:
+  validation:
+    username: Please enter a username or mailbox
+    password: Please enter a password
+  forgot_password: Please log in using a social account, and if the social account is bound to the same mailbox as the old account, you can log in to the old account directly.
+register:
+  validation:
+    username:
+      required: Please enter a username
+      length: User name between 2 and 15 digits
+    email:
+      required: Please enter the mailbox
+      email: Mailbox Format error
+    password:
+      required: Please enter a password
+      length: The password is between 6 and 15 digits.
+    second_password:
+      required: Please enter your password again
+      equal_to: Password inconsistent
+    agree_policy:
+      required: Please agree to the terms first
+thread:
+  validation:
+    cover: Please upload the cover.
+    name: Please enter the title of topics group
+    description: Please enter a description of the topics group
+    slug: Please enter the personal domain name
+topic:
+  confirm_remove_the_topic: Confirm to delete this topic?
+  topic_have_been_remove: The topic deleted.
+  confirm_recommend_the_topic: Do you recommend this topic?
+  confirm_cancel_recommend_the_topic: Confirm to cancel the recommendation?
+  topic_has_been_recommend: The topic has been recommended
+  topic_has_been_cancel_recommend: The topic recommendation has been canceled.
+  confirm_set_top_the_topic: Confirm set the issue top?
+  confirm_cancel_set_top_the_topic: Confirm to cancel the top?
+  topic_has_been_set_top: The topic already set top
+  topic_has_been_cancel_set_top: The topic canceled to set top
+  confirm_remove_the_comment: Confirm to delete this reply?
+  please_fill_in_blank: Please fill in the vacant content
+  add_topic: Add Topic
+wallet:
+  withdraw: withdraw cash
+  withdraw_amount: Amount of cash withdraw
+  alipay_account: Alipay Account
+  validation:
+    amount:
+      required: Please enter the required amount
+      digits: The withdraw amount can only be an integer
+      min: The withdraw amount shall not be less than{0} yuan
+      max: withdraw amount excess the remaining sum
+    alipay_account:
+      required: Please enter Alipay account
+  withdraw_apply_success: The application is successful, please wait for the processing

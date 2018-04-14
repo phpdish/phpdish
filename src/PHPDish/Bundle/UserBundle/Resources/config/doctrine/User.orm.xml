@@ -24,6 +24,7 @@
     <field name="weiboAccessToken" type="string" column="weibo_access_token" length="500" precision="0" scale="0" nullable="true"/>
     <field name="githubId" type="string" column="github_id" precision="0" scale="0" nullable="true"/>
     <field name="githubAccessToken" type="string" column="github_access_token" length="500" precision="0" scale="0" nullable="true"/>
+    <field name="locale" type="string" column="locale" precision="0" scale="0" nullable="true"/>
     <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
       <gedmo:timestampable on="create"/>
     </field>

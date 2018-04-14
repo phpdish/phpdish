@@ -36,6 +36,12 @@ services:
         tags:
             - {name: kernel.event_listener, event: fos_user.change_password.edit.success,  method: onChangePassword}
 
+    phpdish.event_listener.user_locale:
+        class: PHPDish\Bundle\UserBundle\EventListener\UserLocaleSubscriber
+        arguments: ['@session']
+        tags:
+            - {name: kernel.event_subscriber}
+
     phpdish.oauth_aware.user_provider:
 #        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
         class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
@@ -45,8 +51,14 @@ services:
           - '@phpdish.media.file_downloader.avatar'
           - {weibo: weiboId, github: githubId, qq: qqId}
 
+    # Form Type
+    phpdish.form_type.user_profile:
+        class: PHPDish\Bundle\UserBundle\Form\Type\ChangeUserProfileType
+        arguments: ['@phpdish.locale_manager']
+        autowire: true
+        tags: [form.type]
 
-   # Setting Menu
+    # Setting Menu
     phpdish.menu_builder.setting_menu:
         class: PHPDish\Bundle\UserBundle\Menu\SettingMenuBuilder
         arguments: ['@knp_menu.factory']

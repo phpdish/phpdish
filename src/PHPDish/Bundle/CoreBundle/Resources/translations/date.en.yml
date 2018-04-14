@@ -1,0 +1,15 @@
+diff:
+    ago:
+        second: '{1} just| ]1,Inf[ %count% seconds ago'
+        minute: '{1} 1 min ago |]1,Inf[ %count% minutes ago'
+        hour: '{1} 1 hour ago |]1,Inf[ %count% hours ago'
+        day: '{1} 1 day ago |]1,Inf[ %count% days ago'
+        month: '{1} 1 month ago |]1,Inf[ %count% months ago'
+        year: '{1} 1 year ago |]1,Inf[%count% years ago'
+    in:
+        second: '{1} in 1s |]1,Inf[ in %count% seconds'
+        minute: '{1} in 1 minute |]1,Inf[ in %count% minutes'
+        hour: '{1} in 1 hour |]1,Inf[ in %count% hours'
+        day: '{1} in 1 day |]1,Inf[ in %count% of the day'
+        month: '{1} in 1 month |]1,Inf[ in %count% month'
+        year: '{1} in 1 year |]1,Inf[ in %count% for the year'
