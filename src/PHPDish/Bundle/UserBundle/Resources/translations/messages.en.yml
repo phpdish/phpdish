@@ -27,3 +27,8 @@ form:
     url: Homepage
     location: City
     company: Company
+
+menu:
+    profile: Profile
+    change_password: Change password
+    social_binding: Social account
