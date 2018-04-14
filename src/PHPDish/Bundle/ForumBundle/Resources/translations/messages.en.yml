@@ -3,7 +3,7 @@ form:
   thread:
     name: Title
     description: Description
-    slug: Access to the domain name
+    slug: Slug
     cover: Cover
   reply:
     body: Content

@@ -4,13 +4,13 @@ form:
     name: e-book Name
     description: Ebook description
     charge: Ebook Price
-    slug: Access to the domain name
+    slug: Slug
     cover: Cover
   category:
     name: Name
     description: Description
     charge: Subscription price
-    slug: Access to the domain name
+    slug: Slug
     cover: Cover
   chapter:
     own_chapter: Belong to Chapter
