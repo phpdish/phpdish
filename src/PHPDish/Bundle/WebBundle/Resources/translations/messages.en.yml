@@ -251,7 +251,7 @@ wallet:
   my_wallet: My wallet
   account_balance: Account fund
   frozen_balance: Frozen remaining
-  withdraw: withdraw cash
+  withdraw: Withdraw
   the_minimum_amount_for_each_withdrawal_is_100: The minimum amount for each withdraw is ￥100.00
   the_withdrawal_amount_must_be_an_integer: The withdraw amount must be an integer
   10_percent_service_charge_is_charged_for_each_withdrawal: 10% commission charge for each withdraw

@@ -15,14 +15,14 @@ payment:
     subscribe_category: Subscribe the column
     category_income: Column revenue
     book_income: E-book Revenue
-    withdraw: withdraw cash
+    withdraw: Withdraw
     unknown: Unknown
 withdraw:
-  amount_should_greater_than: The amount of withdraw cash must be greater than%amount%
+  amount_should_greater_than: The amount of withdraw cash must be greater than %amount%
   not_encough_balance: Insufficient remaining
   need_provide_alipay: Need to provide Alipay account
   to: 'Withdraw to: %alipay%'
-  decline_reason: Reason for rejection:%reason%
+  decline_reason: Reason for rejection: %reason%
   no_reason: No reason
   approve_reason: Confirmed:%reason%
 

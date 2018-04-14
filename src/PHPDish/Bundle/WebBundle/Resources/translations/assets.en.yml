@@ -120,7 +120,7 @@ topic:
   please_fill_in_blank: Please fill in the vacant content
   add_topic: Add Topic
 wallet:
-  withdraw: withdraw cash
+  withdraw: Withdraw
   withdraw_amount: Amount of cash withdraw
   alipay_account: Alipay Account
   validation:
