@@ -3,6 +3,9 @@
 namespace PHPDish\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use PHPDish\Bundle\WebBundle\Event\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class MainMenuBuilder
 {
@@ -11,9 +14,18 @@ final class MainMenuBuilder
      */
     private $factory;
 
-    public function __construct(FactoryInterface $factory)
+    /**
+     * @var EventDispatcherInterface $eventDispatcher
+     */
+    protected $eventDispatcher;
+
+    public function __construct(
+        FactoryInterface $factory,
+        EventDispatcherInterface $eventDispatcher
+    )
     {
         $this->factory = $factory;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -60,6 +72,8 @@ final class MainMenuBuilder
             'uri' => 'https://github.com/slince/phpdish'
         ]);
         $github->setLinkAttribute('target', '_blank');
+
+        $this->eventDispatcher->dispatch(Events::NAV_MENU_BUILT, new GenericEvent($menu));
 
         return $menu;
     }
