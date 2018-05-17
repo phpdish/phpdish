@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe375e03f1fdd84a7a9f50851b958ad5",
+    "content-hash": "f812b18e209010bdaa97482e6dac0209",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -5963,16 +5963,16 @@
         },
         {
             "name": "slince/youzan-pay",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slince/youzan-pay.git",
-                "reference": "03f75d8d6bc50bad3c88d666d944a3e2c3a48121"
+                "reference": "e02390a0ae7d5e667d9b1e47f40e44dc5f4ac1ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slince/youzan-pay/zipball/03f75d8d6bc50bad3c88d666d944a3e2c3a48121",
-                "reference": "03f75d8d6bc50bad3c88d666d944a3e2c3a48121",
+                "url": "https://api.github.com/repos/slince/youzan-pay/zipball/e02390a0ae7d5e667d9b1e47f40e44dc5f4ac1ca",
+                "reference": "e02390a0ae7d5e667d9b1e47f40e44dc5f4ac1ca",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6015,7 +6015,7 @@
                 "支付宝",
                 "有赞"
             ],
-            "time": "2018-02-24T14:19:58+00:00"
+            "time": "2018-04-14T02:08:35+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -6975,6 +6975,7 @@
                 "compression",
                 "minification"
             ],
+            "abandoned": "symfony/webpack-encore-pack",
             "time": "2017-07-14T07:26:46+00:00"
         },
         {
@@ -8583,9 +8584,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "slince/youzan-pay": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
