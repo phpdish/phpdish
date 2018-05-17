@@ -151,8 +151,6 @@
 ------------------------------------*/
 .nav-profile{
   margin-right: 0;
-  height:50px;
-
   //注册登录按钮
   .btn-register{
     vertical-align: middle;
@@ -163,11 +161,14 @@
     margin-top: 10px;
   }
 
+  i.i-plus-bold, i.i-bell-o{
+    line-height: 100%;
+  }
+
   //通知数量区域
   .nav-notifications{
     .if, .fa, .fas{
       font-size:18px;
-      vertical-align: middle;
     }
     .notification-number{
       display:none;
@@ -188,8 +189,8 @@
     .avatar{
       padding: 8px 10px 8px 18px;
       img{
-        width: 35px;
-        height: 35px;
+        width: 34px;
+        height: 34px;
         display: inline-block;
       }
     }
@@ -242,7 +243,6 @@
     border: none;
     transition: font-size 0.2s;
     width: 40px;
-    height: 34px;
     padding: 5px 0 0 0;
     &:hover{
       background-color: transparent;

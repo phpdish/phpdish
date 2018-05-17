@@ -41,11 +41,11 @@ $ npm install
  - 执行构建命令
     
 ```bash
-$ npm run build  // 构建生产环境
+$ npm run prod  // 构建生产环境
 ```
   
 ```bash
-$ npm run build:dev // 构建开发环境
+$ npm run watch // 构建开发环境
 ```
 
 ### 运行程序

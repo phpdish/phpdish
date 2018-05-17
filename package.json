@@ -6,8 +6,9 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "encore production",
-    "build:dev": "encore dev-server --port 8089 --disable-host-check --hot",
+    "prod": "encore production",
+    "dev": "encore dev",
+    "watch": "encore dev-server --port 8089 --disable-host-check --hot",
     "cs-fixer": "php-cs-fixer fix ./src  --rules=@Symfony,@PSR2"
   },
   "repository": {

@@ -74,9 +74,17 @@ for (const entryName in foundEntries) {
 Encore.createSharedEntry('vendor', [
     path.resolve(config.modulesPath, 'common.js'),
     path.resolve(config.modulesPath, 'dialog.js'),
+
+    'highlight.js',
     'codemirror',
     'codemirror/mode/markdown/markdown.js',
-    'highlight.js',
+    'art-dialog',
+    'art-dialog/css/dialog.css',
+    'jquery-validation',
+    'jquery-pjax',
+    'bootstrap-select',
+    'emojione',
+    'twemoji',
 
     'github-markdown-css',
     'bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -86,8 +94,6 @@ Encore.createSharedEntry('vendor', [
     'social-share-button.js/dist/social-share.min.css',
     'highlight.js/styles/tomorrow.css',
     'selectize/dist/css/selectize.bootstrap3.css',
-    'emojione',
-    'twemoji',
     'nprogress/nprogress.css',
     'loaders.css'
 ]);
@@ -95,6 +101,10 @@ Encore.createSharedEntry('vendor', [
 //add style entries
 Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
 Encore.addStyleEntry('css/resume', config.scssPath + '/resume.scss');
+
+Encore.configureUglifyJsPlugin(function(options){
+    options.comments = true;
+});
 
 //final webpack config
 module.exports = Encore.getWebpackConfig();
