@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\CollectionType;
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
@@ -28,6 +30,7 @@ class UserAdmin extends AbstractAdmin
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
+                    'edit' => [],
                 ]
             ]);
     }
@@ -36,6 +39,16 @@ class UserAdmin extends AbstractAdmin
     {
         $form->add('email', 'email', ['label'=>'user.email'])
             ->add('username', 'text', ['label'=>'user.username'])
+            ->add('roles', 'choice', [
+                'label'=>'user.roles',
+                'multiple' => true,
+                'choices' => [
+                    'User' => 'ROLE_USER',
+                    'Admin' => 'ROLE_ADMIN',
+                    'Super Admin' => 'ROLE_SUPER_ADMIN',
+                ],
+                'placeholder' => 'user.select_roles'
+            ])
             ->add('enabled', null, ['label'=>'user.filter.enabled']);
     }
 
@@ -50,7 +63,6 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('edit');
         $collection->remove('create');
         $collection->remove('delete');
     }

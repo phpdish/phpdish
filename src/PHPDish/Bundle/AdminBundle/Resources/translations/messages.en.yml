@@ -102,6 +102,8 @@ user:
   avatar: Avatar
   last_login: Last Login
   enabled: enabled or not
+  roles: Roles
+  select_roles: Please select roles
   _action: Action
 wallet:
   user: Username

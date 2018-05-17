@@ -109,6 +109,8 @@ user:
     avatar: 头像
     last_login: 上次登录
     enabled: 是否启用
+    roles: 角色
+    select_roles: 请选择角色
     _action: 操作
 
 wallet:

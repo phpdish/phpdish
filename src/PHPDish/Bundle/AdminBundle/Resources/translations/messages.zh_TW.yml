@@ -102,6 +102,8 @@ user:
   avatar: 頭像
   last_login: 上次登錄
   enabled: 是否啟用
+  roles: 角色
+  select_roles: 請選擇角色
   _action: 操作
 wallet:
   user: 使用者名
