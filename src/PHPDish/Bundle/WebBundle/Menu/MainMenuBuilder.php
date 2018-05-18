@@ -4,6 +4,7 @@ namespace PHPDish\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use PHPDish\Bundle\WebBundle\Event\Events;
+use PHPDish\Bundle\WebBundle\Event\FilterMenuEvent;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -73,7 +74,7 @@ final class MainMenuBuilder
         ]);
         $github->setLinkAttribute('target', '_blank');
 
-        $this->eventDispatcher->dispatch(Events::NAV_MENU_BUILT, new GenericEvent($menu));
+        $this->eventDispatcher->dispatch(Events::NAV_MENU_BUILT, new FilterMenuEvent($menu));
 
         return $menu;
     }
