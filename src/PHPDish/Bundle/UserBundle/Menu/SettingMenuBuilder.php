@@ -3,6 +3,9 @@
 namespace PHPDish\Bundle\UserBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use PHPDish\Bundle\UserBundle\Event\Events;
+use PHPDish\Bundle\WebBundle\Event\FilterMenuEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class SettingMenuBuilder
 {
@@ -11,9 +14,15 @@ final class SettingMenuBuilder
      */
     private $factory;
 
-    public function __construct(FactoryInterface $factory)
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -46,6 +55,8 @@ final class SettingMenuBuilder
             ])
             ->setAttribute('class', 'list-group-item if i-sync');
 
+        //触发事件
+        $this->eventDispatcher->dispatch(Events::SETTING_MENU_BUILT, new FilterMenuEvent($menu));
         return $menu;
     }
 }

@@ -17,4 +17,11 @@ final class Events
      * @var string
      */
     const USER_FOLLOWEd = 'user.followed';
+
+    /**
+     * 设置菜单
+     *
+     * @var string
+     */
+    const SETTING_MENU_BUILT = 'setting_menu.built';
 }

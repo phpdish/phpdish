@@ -61,7 +61,7 @@ services:
     # Setting Menu
     phpdish.menu_builder.setting_menu:
         class: PHPDish\Bundle\UserBundle\Menu\SettingMenuBuilder
-        arguments: ['@knp_menu.factory']
+        arguments: ['@knp_menu.factory', '@event_dispatcher']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: setting_menu}
 
