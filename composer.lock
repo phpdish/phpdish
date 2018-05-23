@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc2453dcbfbf53e1184d5999bf2750fe",
+    "content-hash": "75c1720a0acbc1cb382aea3356963ef7",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -5399,39 +5399,6 @@
             "description": "A composer installer for installing PHPDish themes.",
             "homepage": "https://www.phpdish.com",
             "time": "2018-03-09T05:16:34+00:00"
-        },
-        {
-            "name": "phpdish/video-bundle",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "plugins/phpdish-video",
-                "reference": "e8ed0937f417893b55e2943856ef96b295b419bb",
-                "shasum": null
-            },
-            "require": {
-                "php": ">=7.2.0"
-            },
-            "type": "phpdish-plugin",
-            "extra": {
-                "phpdish": {
-                    "class": "PHPDish\\Bundle\\VideoBundle\\PHPDishVideoPlugin"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPDish\\Bundle\\VideoBundle\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "PHPDish\\Bundle\\VideoBundle\\Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPDish Video Plugin"
         },
         {
             "name": "phpoption/phpoption",

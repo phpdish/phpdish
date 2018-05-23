@@ -176,3 +176,15 @@ phpdish_payment:
       client_id: '%youzan.client_id%'
       client_secret: '%youzan.client_secret%'
       kdt_id: '%youzan.kdt_id%'
+
+# 文件上传
+oneup_uploader:
+    mappings:
+        uploads:
+            root_folder: true
+            storage:
+                type: gaufrette
+                filesystem: phpdish.filesystem.uploads
+                sync_buffer_size: 1M
+            frontend: plupload
+            use_orphanage: true
