@@ -187,4 +187,4 @@ oneup_uploader:
                 filesystem: phpdish.filesystem.uploads
                 sync_buffer_size: 1M
             frontend: plupload
-            use_orphanage: true
+            use_orphanage: false
