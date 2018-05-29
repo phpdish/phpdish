@@ -22,6 +22,8 @@
         {{ render.render_follow_category(notification) }}
     {% elseif notification.subject ==  'handle_withdraw' %}
         {{ render.render_handle_withdraw(notification) }}
+    {% else %}
+        {{ render.render_fallback(notification) }}
     {% endif %}
 {% endmacro %}
 
@@ -30,8 +32,8 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%url%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username
+                '%url%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username
                 }
             %} notification.user_follow_you {% endtrans %}
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
@@ -44,10 +46,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
+                '%topicTitle%': notification.topic.title
                 }
             %}
                 notification.user_reply_your_topic
@@ -63,10 +65,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
+                '%topicTitle%': notification.topic.title
                 }
             %}
                 notification.user_vote_your_topic
@@ -82,10 +84,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
+                '%topicTitle%': notification.topic.title
                 }
             %}
                 notification.user_vote_your_reply
@@ -101,10 +103,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
-                    '%topicTitle%': notification.topic.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%topicUrl%':  path('topic_view', {id: notification.topic.id}),
+                '%topicTitle%': notification.topic.title
                 }
             %}
                 notification.user_at_your_in_topic
@@ -120,10 +122,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%postUrl%':  path('post_view', {id: notification.post.id}),
-                    '%postTitle%': notification.post.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%postUrl%':  path('post_view', {id: notification.post.id}),
+                '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_at_your_in_post
@@ -139,10 +141,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%postUrl%':  path('post_view', {id: notification.post.id}),
-                    '%postTitle%': notification.post.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%postUrl%':  path('post_view', {id: notification.post.id}),
+                '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_comment_your_post
@@ -158,10 +160,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%postUrl%':  path('post_view', {id: notification.post.id}),
-                    '%postTitle%': notification.post.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%postUrl%':  path('post_view', {id: notification.post.id}),
+                '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_vote_your_post
@@ -177,10 +179,10 @@
     <div class="media-body">
         <div class="heading">
             {% trans with {
-                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                    '%username%': notification.fromUser.username,
-                    '%postUrl%':  path('post_view', {id: notification.post.id}),
-                    '%postTitle%': notification.post.title
+                '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                '%username%': notification.fromUser.username,
+                '%postUrl%':  path('post_view', {id: notification.post.id}),
+                '%postTitle%': notification.post.title
                 }
             %}
                 notification.user_vote_your_comment
@@ -197,20 +199,20 @@
         <div class="heading">
             {% if notification.category.isBook  %}
                 {% trans with {
-                        '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                        '%username%': notification.fromUser.username,
-                        '%bookUrl%':  path('book_view', {slug: notification.category.slug}),
-                        '%bookTitle%': notification.category.name
+                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                    '%username%': notification.fromUser.username,
+                    '%bookUrl%':  path('book_view', {slug: notification.category.slug}),
+                    '%bookTitle%': notification.category.name
                     }
                 %}
                     notification.user_buy_your_book
                 {% endtrans %}
             {% else %}
                 {% trans with {
-                        '%userUrl%': path('user_view', {username: notification.fromUser.username}),
-                        '%username%': notification.fromUser.username,
-                        '%categoryUrl%':  path('category_view', {slug: notification.category.slug}),
-                        '%categoryTitle%': notification.category.name
+                    '%userUrl%': path('user_view', {username: notification.fromUser.username}),
+                    '%username%': notification.fromUser.username,
+                    '%categoryUrl%':  path('category_view', {slug: notification.category.slug}),
+                    '%categoryTitle%': notification.category.name
                     }
                 %}
                     notification.user_follow_your_category
@@ -229,5 +231,15 @@
             <div class="time meta">{{ notification.createdAt|time_diff }}</div>
         </div>
         <div class="body markdown-body">{{ notification.message|raw }}</div>
+    </div>
+{% endmacro %}
+
+{# 渲染默认 #}
+{% macro render_fallback(notification) %}
+    <div class="media-body">
+        <div class="heading">
+            <span>{{ notification.message|raw }}</span>
+            <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+        </div>
     </div>
 {% endmacro %}
