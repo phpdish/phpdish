@@ -122,6 +122,24 @@ function Route()
         }
         return false;
     };
+
+    /**
+     * 定义新的路由
+     *
+     * @param name
+     * @param definition
+     */
+    this.addRoute = function(name, definition){
+        routes[name] = definition;
+    };
+
+    /**
+     * 合并新的路由
+     * @param newRoutes
+     */
+    this.addRoutes = function(newRoutes){
+        $.extend(routes, newRoutes);
+    };
 }
 
 export default Route;
