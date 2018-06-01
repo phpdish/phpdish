@@ -78,7 +78,7 @@ Encore.createSharedEntry('vendor', [
     'highlight.js',
     'codemirror',
     'codemirror/mode/markdown/markdown.js',
-    'art-dialog',
+    'art-dialog/dist/dialog-plus.js',
     'art-dialog/css/dialog.css',
     'jquery-validation',
     'jquery-pjax',
