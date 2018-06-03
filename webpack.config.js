@@ -78,7 +78,7 @@ Encore.createSharedEntry('vendor', [
     'highlight.js',
     'codemirror',
     'codemirror/mode/markdown/markdown.js',
-    'art-dialog',
+    'art-dialog/dist/dialog-plus.js',
     'art-dialog/css/dialog.css',
     'jquery-validation',
     'jquery-pjax',
@@ -101,7 +101,7 @@ Encore.createSharedEntry('vendor', [
 //add style entries
 Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
 Encore.addStyleEntry('css/resume', config.scssPath + '/resume.scss');
-Encore.addStyleEntry('css/video', __dirname + '/plugins/phpdish-video/assets/scss/style.scss');
+Encore.addStyleEntry('css/video', __dirname + '/plugins/phpdish-video/assets/scss/all.scss');
 Encore.addEntry('js/video', __dirname + '/plugins/phpdish-video/assets/js/video.js');
 
 Encore.configureUglifyJsPlugin(function(options){

@@ -1,6 +1,6 @@
 'use strict';
 
-import artDialog from 'art-dialog';
+import artDialog from 'art-dialog/dist/dialog-plus.js';
 import 'art-dialog/css/dialog.css';
 import _ from 'lodash';
 import 'jquery-validation';
