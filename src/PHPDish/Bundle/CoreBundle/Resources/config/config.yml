@@ -182,6 +182,7 @@ oneup_uploader:
     mappings:
         uploads:
             root_folder: true
+            namer: phpdish.media.oneup_file_namer
             storage:
                 type: gaufrette
                 filesystem: phpdish.filesystem.uploads
