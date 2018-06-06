@@ -30,3 +30,9 @@ services:
         arguments: ['@service_container']
         tags:
             - { name: twig.extension}
+
+    ## 给oneup uploader使用
+    phpdish.media.oneup_file_namer:
+       class: PHPDish\Bundle\MediaBundle\Oneup\Naming\GenericNamer
+       parent: 'phpdish.media.file_namer'
+       public: true
