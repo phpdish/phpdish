@@ -3,7 +3,7 @@
 ### 使用 Composer
 
 ```bash
-$ composer create-project phpdish/phpdish -s dev
+$ composer create-project phpdish/phpdish
 ```
 
 ### 使用 GIT 克隆
