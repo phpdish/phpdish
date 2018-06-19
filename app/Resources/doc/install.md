@@ -1,12 +1,14 @@
 ## Installation
 
-### 使用 Composer
+### 获取源代码
+
+#### 使用 Composer
 
 ```bash
-$ composer create-project phpdish/phpdish -s dev
+$ composer create-project phpdish/phpdish
 ```
 
-### 使用 GIT 克隆
+#### 使用 GIT 克隆
 
 ```bash
 $ git clone https://github.com/slince/phpdish.git

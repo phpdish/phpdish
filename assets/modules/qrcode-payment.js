@@ -35,7 +35,7 @@ class QRPayment
         if (this.loopLock) {
             return false;
         }
-
+        this.loopLock = true; //加上循环锁
         Util.request('payment.result', {}, {'qr_id': qrId}).done((response)=>{
             if (response.result) {
                 if (this.timer) {
