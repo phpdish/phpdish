@@ -1,13 +1,13 @@
 {
-  "build/css/resume.css": "/build/css/resume.8665a482.css",
-  "build/css/style.css": "/build/css/style.9c40cfb6.css",
+  "build/css/resume.css": "/build/css/resume.19dce273.css",
+  "build/css/style.css": "/build/css/style.376c4ad4.css",
   "build/images/algolia-logo-light.svg": "/build/images/algolia-logo-light.88450dd5.svg",
-  "build/js/book.js": "/build/js/book.10556df3.js",
+  "build/js/book.js": "/build/js/book.6914eb29.js",
   "build/js/category.js": "/build/js/category.0e8377e3.js",
   "build/js/default.js": "/build/js/default.11d17e8e.js",
   "build/js/gift.js": "/build/js/gift.c69e58b1.js",
   "build/js/notification.js": "/build/js/notification.54d4c1fe.js",
-  "build/js/post.js": "/build/js/post.9bb19f0d.js",
+  "build/js/post.js": "/build/js/post.d7be3bd3.js",
   "build/js/search.js": "/build/js/search.a3406c67.js",
   "build/js/setting.js": "/build/js/setting.fd66b537.js",
   "build/js/sign.js": "/build/js/sign.1eda244a.js",
@@ -16,6 +16,6 @@
   "build/js/user.js": "/build/js/user.c74cdf0f.js",
   "build/js/wallet.js": "/build/js/wallet.7669b71b.js",
   "build/manifest.js": "/build/manifest.d41d8cd9.js",
-  "build/vendor.css": "/build/vendor.a7d50c55.css",
-  "build/vendor.js": "/build/vendor.547b86ee.js"
+  "build/vendor.css": "/build/vendor.66171f77.css",
+  "build/vendor.js": "/build/vendor.f9177575.js"
 }

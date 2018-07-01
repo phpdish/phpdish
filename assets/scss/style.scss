@@ -175,6 +175,7 @@
       &.has-message{
         display: inline-block;
         background-color:#e64b3b;
+        vertical-align: top !important;
       }
     }
   }
@@ -440,6 +441,9 @@ form{
     &:hover, &.active{
       color: $contrastColor;
     }
+  }
+  .fa{
+    display: block;
   }
   .list-group-item{
     border:none;
