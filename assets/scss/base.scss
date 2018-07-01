@@ -41,6 +41,16 @@ a {
     width: 100%;
     height:130px;
   }
+  .navbar-default{
+    &:before{
+      display: block;
+      height:3px;
+      content: " ";
+      background-color: #44bffa;
+      background: -webkit-linear-gradient(left,#70df00,#44bffa);
+      background: linear-gradient(to right,#70df00,#44bffa);
+    }
+  }
 }
 
 //报头
