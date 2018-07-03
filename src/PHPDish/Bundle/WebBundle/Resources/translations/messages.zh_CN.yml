@@ -157,6 +157,7 @@ post:
     views_count: 浏览次数
     post_comments: %count%个评论
     after_buy_read_full: 购买本专栏之后即可阅读全文
+    ranking: 排行榜
 
 friend_link: 友情链接
 

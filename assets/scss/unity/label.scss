@@ -74,6 +74,14 @@
   background-color: #d74b47;
 }
 
+.u-label-dark-gray {
+  background-color: #ccd0d7;
+}
+
+.u-label-dark-gray[href]:hover, .u-label-dark-gray[href]:focus {
+  background-color: #ccd0d7;
+}
+
 .u-label.g-rounded-10 {
   padding: .35rem .7rem;
 }
