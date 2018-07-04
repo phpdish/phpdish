@@ -10,7 +10,7 @@ const config = {
     scssPath: path.resolve("./assets/scss"),
     jsPath: path.resolve("./assets/js"),
     modulesPath: path.resolve("./assets/modules"),
-    pluginsPath: path.resolve("./assets/plugins"),
+    pluginsPath: path.resolve("./plugins"),
     mapPath: path.resolve(buildPath + '/manifest.json')
 };
 
@@ -99,10 +99,13 @@ Encore.createSharedEntry('vendor', [
 ]);
 
 //add style entries
-Encore.addStyleEntry('css/style', config.scssPath + '/_all.scss');
+Encore.addStyleEntry('css/style', [
+    config.scssPath + '/_all.scss',
+    config.pluginsPath + '/phpdish-video/assets/scss/polyfill.scss'
+]);
 Encore.addStyleEntry('css/resume', config.scssPath + '/resume.scss');
-Encore.addStyleEntry('css/video', __dirname + '/plugins/phpdish-video/assets/scss/all.scss');
-Encore.addEntry('js/video', __dirname + '/plugins/phpdish-video/assets/js/video.js');
+Encore.addStyleEntry('css/video', config.pluginsPath + '/phpdish-video/assets/scss/all.scss');
+Encore.addEntry('js/video', config.pluginsPath + '/phpdish-video/assets/js/video.js');
 
 Encore.configureUglifyJsPlugin(function(options){
     options.comments = true;
