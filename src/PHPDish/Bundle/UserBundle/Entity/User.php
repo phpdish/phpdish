@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -61,7 +62,12 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     protected $following;
 
     /**
-     * 订阅者的专栏
+     * @var ArrayCollection|CategoryInterface[]
+     */
+    protected $categories;
+
+    /**
+     * 订阅的专栏
      */
     protected $followingCategories;
 
@@ -142,6 +148,8 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->followers = new ArrayCollection();
         //我关注的
         $this->following = new ArrayCollection();
+        //我的专栏
+        $this->categories = new ArrayCollection();
         //创建时间
         $this->setCreatedAt(Carbon::now());
         //更新时间
@@ -242,6 +250,14 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function isFollowedBy(UserInterface $user)
     {
         return $this->followers->contains($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 
     /**

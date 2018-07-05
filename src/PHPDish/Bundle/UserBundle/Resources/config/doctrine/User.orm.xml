@@ -58,6 +58,8 @@
     <many-to-many field="votedPosts" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="voters" fetch="LAZY"/>
     <many-to-many field="votedComments" target-entity="PHPDish\Bundle\PostBundle\Entity\Comment" mapped-by="voters" fetch="LAZY"/>
 
+    <one-to-many field="categories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="creator" fetch="LAZY"/>
+
     <attribute-overrides>
       <attribute-override name="email">
         <field nullable="true" unique="false"/>

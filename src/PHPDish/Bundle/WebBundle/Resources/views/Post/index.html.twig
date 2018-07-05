@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-3 col-md-3">
             {% include 'PHPDishWebBundle:Post:_latest_posts.html.twig' with {'limit': 10} %}
-            {#{% include 'PHPDishWebBundle:User:_latest_register_user.html.twig' with {'limit': 10} %}#}
+            {% include 'PHPDishWebBundle:Post:_latest_authors.html.twig' with {'limit': 10} %}
             {% include 'PHPDishWebBundle:Common:_friend_community.html.twig' %}
         </div>
     </div>

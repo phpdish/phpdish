@@ -7,9 +7,11 @@
 
 namespace PHPDish\Bundle\UserBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTimeInterface, EnabledInterface, SocialAwareInterface
@@ -169,4 +171,11 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      * @return string
      */
     public function getLocale();
+
+    /**
+     * 获取专栏
+     *
+     * @return CategoryInterface[]|Collection
+     */
+    public function getCategories();
 }
