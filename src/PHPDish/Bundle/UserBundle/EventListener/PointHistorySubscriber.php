@@ -4,7 +4,8 @@ namespace PHPDish\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Common\Persistence\Event\PreUpdateEventArgs;
+
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManager;
 
@@ -25,7 +26,7 @@ class PointHistorySubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return ['postPersist', 'postUpdate', 'preRemove'];
+        return ['postPersist', 'preUpdate', 'preRemove'];
     }
 
     public function postPersist(LifecycleEventArgs $event)
@@ -47,7 +48,7 @@ class PointHistorySubscriber implements EventSubscriber
         $this->userManager->saveUser($user);
     }
 
-    public function postUpdate(PreUpdateEventArgs $event)
+    public function preUpdate(PreUpdateEventArgs $event)
     {
         $history = $event->getObject();
 

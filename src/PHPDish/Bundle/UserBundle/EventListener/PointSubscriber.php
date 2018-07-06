@@ -24,8 +24,14 @@ class PointSubscriber implements EventSubscriberInterface
     const POINTS = [
         PointHistory::TYPE_SIGN_IN => 100,
         PointHistory::TYPE_CHECK_IN => 10,
+
+        //资源
         PointHistory::TYPE_POST_TOPIC => 10,
         PointHistory::TYPE_POST_ARTICLE => 10,
+        // 资源被删除
+        PointHistory::TYPE_REMOVE_TOPIC => 10,
+        PointHistory::TYPE_REMOVE_POST => 10,
+
         PointHistory::TYPE_POST_TOPIC_REPLY => 5, //回复主题
         PointHistory::TYPE_TOPIC_REPLY => 5, //主题被回复，
 
@@ -60,10 +66,12 @@ class PointSubscriber implements EventSubscriberInterface
      */
     public function onTopicReplied(ReplyTopicEvent $event)
     {
-        // 题主送积分
-        $this->sendPoints($event->getTopic()->getUser(), PointHistory::TYPE_TOPIC_REPLY);
+        if ($event->getTopic()->getUser() !== $event->getReply()->getUser()) {
+            // 题主送积分
+            $this->sendPoints($event->getTopic()->getUser(), PointHistory::TYPE_TOPIC_REPLY);
+        }
         // 答主送积分
-        $this->sendPoints($event->getReply()->getUser(), PointHistory::TYPE_POST_TOPIC_REPLY);
+//        $this->sendPoints($event->getReply()->getUser(), PointHistory::TYPE_POST_TOPIC_REPLY);
     }
 
     /**

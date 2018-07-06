@@ -18,6 +18,8 @@ class PointHistory implements PointHistoryInterface
 
     const TYPE_POST_TOPIC = 'post_topic';
 
+    const TYPE_REMOVE_TOPIC = 'remove_topic';
+    const TYPE_REMOVE_POST = 'remove_post';
     /**
      * 话题被回复
      *
@@ -43,7 +45,7 @@ class PointHistory implements PointHistoryInterface
     /**
      * @var boolean
      */
-    protected $isIncome;
+    protected $isIncome = true;
 
     /**
      * @var int

@@ -192,12 +192,4 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      * @param int $point
      */
     public function increasePoint(int $point);
-
-
-    /**
-     * 减积分
-     *
-     * @param int $point
-     */
-    public function decreasePoint(int $point);
 }
