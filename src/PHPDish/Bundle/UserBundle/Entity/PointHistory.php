@@ -10,6 +10,29 @@ use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 
 class PointHistory implements PointHistoryInterface
 {
+    const TYPE_SIGN_IN = 'sign_in';
+
+    const TYPE_CHECK_IN = 'check_in';
+
+    const TYPE_POST_ARTICLE = 'post_article';
+
+    const TYPE_POST_TOPIC = 'post_topic';
+
+    /**
+     * 话题被回复
+     *
+     * @var string
+     */
+    const TYPE_TOPIC_REPLY = 'topic_reply';
+
+    const TYPE_POST_TOPIC_REPLY = 'post_topic_reply';
+
+    const TYPE_TOPIC_VOTED = 'topic_voted';
+
+    const TYPE_REPLY_VOTED = 'reply_voted';
+
+    const TYPE_AWARD = 'award';
+
     use IdentifiableTrait, UserAwareTrait, DateTimeTrait, EnabledTrait;
 
     /**

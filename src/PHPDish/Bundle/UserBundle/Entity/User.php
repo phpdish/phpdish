@@ -558,19 +558,8 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     public function increasePoint(int $point)
     {
-        $this->point = $point;
-
-        return $this;
-    }
-
-    /**
-     * @param int $point
-     * @return User
-     */
-    public function decreasePoint(int $point)
-    {
-        $this->point = $point;
-
+        $this->point += $point;
+        $this->point = max($this->point, 0);
         return $this;
     }
 }

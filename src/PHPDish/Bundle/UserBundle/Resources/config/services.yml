@@ -72,3 +72,22 @@ services:
          public: false
          tags:
             - { name: twig.extension}
+
+   # 积分管理服务
+    phpdish.manager.point:
+        class: PHPDish\Bundle\UserBundle\Service\PointManager
+        autowire: true
+        public: true
+
+   # 积分变动
+    phpdish.event_subscriber.point_history:
+        class: PHPDish\Bundle\UserBundle\EventListener\PointHistorySubscriber
+        autowire: true
+        tags:
+            - {name: doctrine.event_subscriber}
+
+    phpdish.event_subscriber.point:
+        class: PHPDish\Bundle\UserBundle\EventListener\PointSubscriber
+        autowire: true
+        tags:
+            - {name: kernel.event_subscriber}
