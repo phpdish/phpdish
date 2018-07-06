@@ -178,4 +178,26 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      * @return CategoryInterface[]|Collection
      */
     public function getCategories();
+
+    /**
+     * 获取积分
+     *
+     * @return int
+     */
+    public function getPoint();
+
+    /**
+     * 加积分
+     *
+     * @param int $point
+     */
+    public function increasePoint(int $point);
+
+
+    /**
+     * 减积分
+     *
+     * @param int $point
+     */
+    public function decreasePoint(int $point);
 }

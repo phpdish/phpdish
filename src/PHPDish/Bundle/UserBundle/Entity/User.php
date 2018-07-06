@@ -4,9 +4,11 @@ namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -140,6 +142,16 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      * @var string
      */
     protected $locale;
+
+    /**
+     * @var int
+     */
+    protected $point;
+
+    /**
+     * @var PointHistoryInterface[]|Collection
+     */
+    protected $pointHistories;
 
     public function __construct()
     {
@@ -529,6 +541,36 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function setLocale($locale)
     {
         $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoint(): int
+    {
+        return $this->point;
+    }
+
+    /**
+     * @param int $point
+     * @return User
+     */
+    public function increasePoint(int $point)
+    {
+        $this->point = $point;
+
+        return $this;
+    }
+
+    /**
+     * @param int $point
+     * @return User
+     */
+    public function decreasePoint(int $point)
+    {
+        $this->point = $point;
+
         return $this;
     }
 }
