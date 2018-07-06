@@ -4,12 +4,15 @@ namespace PHPDish\Bundle\UserBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\UserBundle\Entity\PointHistory;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class PointManager
 {
+    use PaginatorTrait;
+
     /**
      * @var EntityManagerInterface
      */
@@ -54,5 +57,17 @@ class PointManager
     {
         $this->entityManager->persist($history);
         $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findPointHistories(UserInterface $user, $page, $limit = null)
+    {
+        $query = $this->getPointHistoryRepository()->createQueryBuilder('p')
+            ->where('p.user = :user')->setParameter('user', $user)
+            ->getQuery();
+
+        return $this->createPaginator($query, $page, $limit);
     }
 }

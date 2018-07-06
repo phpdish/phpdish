@@ -35,3 +35,24 @@ menu:
     profile: 基本资料
     change_password: 修改密码
     social_binding: 账户关联
+
+point:
+   label:
+       coin: 原力币
+       type: 类型
+       date: 时间
+
+   history:
+       type:
+          sign_in: 注册奖励
+          check_in: 签到奖励
+          post_topic: 发表话题奖励
+          post_article: 发表文章奖励
+          remove_topic: 删除话题扣除
+          remove_post: 删除文章扣除
+          post_topic_reply: 发表回复奖励
+          topic_reply: 话题被回复收益
+          topic_voted: 话题被点赞收益
+          reply_voted: 回复被点赞收益
+          unknown: 奖励
+          award: 奖励

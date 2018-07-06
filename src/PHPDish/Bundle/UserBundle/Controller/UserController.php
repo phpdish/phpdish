@@ -170,4 +170,25 @@ class UserController extends RestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * 用户积分
+     *
+     * @Route("/users/{username}/points", name="user_points")
+     *
+     * @param string $username
+     * @param Request $request
+     * @return Response
+     */
+    public function pointAction($username, Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $manager = $this->getUserManager();
+        $user = $manager->findUserByName($username);
+        $histories = $this->getPointManager()->findPointHistories($user, $request->get('page', 1));
+        return $this->render('PHPDishWebBundle:User:point_history.html.twig', [
+            'histories' => $histories,
+            'user' => $user,
+        ]);
+    }
 }

@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% set isMe = app.user is same as (user) %}
+{% if tab is not defined %}
+    {% set tab = null %}
+{% endif %}
 
 {% block content %}
     <div class="container">
