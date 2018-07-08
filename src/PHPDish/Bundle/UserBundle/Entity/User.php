@@ -4,8 +4,11 @@ namespace PHPDish\Bundle\UserBundle\Entity;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -61,7 +64,12 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     protected $following;
 
     /**
-     * 订阅者的专栏
+     * @var ArrayCollection|CategoryInterface[]
+     */
+    protected $categories;
+
+    /**
+     * 订阅的专栏
      */
     protected $followingCategories;
 
@@ -135,6 +143,16 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     protected $locale;
 
+    /**
+     * @var int
+     */
+    protected $point;
+
+    /**
+     * @var PointHistoryInterface[]|Collection
+     */
+    protected $pointHistories;
+
     public function __construct()
     {
         parent::__construct();
@@ -142,6 +160,8 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->followers = new ArrayCollection();
         //我关注的
         $this->following = new ArrayCollection();
+        //我的专栏
+        $this->categories = new ArrayCollection();
         //创建时间
         $this->setCreatedAt(Carbon::now());
         //更新时间
@@ -242,6 +262,14 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function isFollowedBy(UserInterface $user)
     {
         return $this->followers->contains($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 
     /**
@@ -513,6 +541,25 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function setLocale($locale)
     {
         $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoint(): int
+    {
+        return $this->point;
+    }
+
+    /**
+     * @param int $point
+     * @return User
+     */
+    public function increasePoint(int $point)
+    {
+        $this->point += $point;
+        $this->point = max($this->point, 0);
         return $this;
     }
 }

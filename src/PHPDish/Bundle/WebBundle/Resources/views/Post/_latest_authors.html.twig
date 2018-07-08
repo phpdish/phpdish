@@ -1,0 +1,8 @@
+{% set users = get_category_authors(limit=5) %}
+
+<aside class="panel panel-default panel-widget">
+    <div class="panel-heading">{{ 'post.category_authors'|trans }}</div>
+    <div class="panel-body user-list user-list-v1">
+        {% include 'PHPDishWebBundle:User:_user_list_v1.html.twig' %}
+    </div>
+</aside>

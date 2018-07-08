@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\PostBundle\Entity\Post;
+use PHPDish\Bundle\PostBundle\Event\Events;
+use PHPDish\Bundle\PostBundle\Event\PostEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -73,6 +75,9 @@ class PostController extends RestController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($manager->savePost($post)) {
+                //触发事件
+                $this->get('event_dispatcher')->dispatch(Events::POST_CREATED, new PostEvent($post));
+
                 return $this->redirectToRoute('post_view', [
                     'id' => $post->getId(),
                 ]);

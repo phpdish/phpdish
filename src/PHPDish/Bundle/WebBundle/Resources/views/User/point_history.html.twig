@@ -1,0 +1,40 @@
+{% extends 'PHPDishWebBundle:User:view_common.html.twig' %}
+
+{% block user_content %}
+    {% if histories.count %}
+        <div class="panel-body">
+            <table class="table table-striped point-history-table">
+               <thead>
+                   <tr>
+                       <th>{{ 'point.label.coin'|trans }}</th>
+                       <th>{{ 'point.label.type'|trans }}</th>
+                       <th>{{ 'point.label.date'|trans }}</th>
+                   </tr>
+               </thead>
+                <tbody>
+                    {% for history in histories %}
+                        <tr>
+                            <td>
+                                {% if history.isIncome %}
+                                    <span class="coin-num income">
+                                        +{{ history.amount }}
+                                    </span>
+                                {% else %}
+                                    <span class="coin-num exp">
+                                        -{{ history.amount }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>{{ history|point_history_type|trans}}</td>
+                            <td>{{ history.createdAt|time_diff }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-data">
+            <p>{{ 'point.no_points'|trans }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

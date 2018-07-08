@@ -2,7 +2,6 @@
 @import "variables.scss";
 
 html, body {
-  background-color: $bodyBackgroundColor;
   //overflow-y: scroll;
   color: $mainFontColor;
   height: 100%;
@@ -35,6 +34,7 @@ a {
   min-height:100%;
   position: relative;
   padding-bottom: 130px;
+  background-color: $bodyBackgroundColor;
   .footer{
     position: absolute;
     bottom:0;

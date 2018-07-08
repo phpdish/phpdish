@@ -63,6 +63,9 @@
   文章详情页
 ------------------------------------*/
 .post-detail{
+  .panel-body{
+    //background: url(../../img/post-grid.png) repeat center;
+  }
   .body{
     line-height: 1.8em;
     font-size: 14px;
@@ -196,4 +199,24 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+/*------------------------------------
+  专栏首页
+------------------------------------*/
+.posts-ranking{
+  a:hover{
+    text-decoration: none;
+    color: $contrastColor;
+  }
+  .list-group-item{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: .3s;
+    border:none;
+    .label{
+      margin-right: 6px;
+    }
+  }
 }

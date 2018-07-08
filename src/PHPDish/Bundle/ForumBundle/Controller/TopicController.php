@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
+use PHPDish\Bundle\ForumBundle\Event\TopicEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
 use PHPDish\Component\Util\StringManipulator;
@@ -69,7 +70,10 @@ class TopicController extends RestController
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $manager->saveTopic($topic);
+            //触发事件
+            $this->get('event_dispatcher')->dispatch(Events::TOPIC_CREATED, new TopicEvent($topic));
 
             return $this->redirectToRoute('topic_view', [
                 'id' => $topic->getId(),

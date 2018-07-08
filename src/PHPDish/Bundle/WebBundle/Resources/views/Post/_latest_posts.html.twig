@@ -1,0 +1,14 @@
+{% set posts = get_posts({'enabled': true}, {'viewCount': 'desc', 'createdAt': 'desc'}, 10) %}
+<aside class="panel panel-default panel-widget">
+    <div class="panel-heading">{{ 'post.ranking'|trans }}</div>
+    <ul class="list-group posts-ranking">
+        {% for post in posts %}
+        <li class="list-group-item">
+            <span class="label {% if loop.index <= 3 %}u-label-primary{% else %}u-label-dark-gray{% endif %}">{{ loop.index }}</span>
+            {% set postUrl = post.category.isBook ?
+            path('book_read', {'slug': post.category.slug, 'chapterId': post.id}) :  path('post_view', {'id': post.id}) %}
+            <a href="{{ postUrl }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</aside>

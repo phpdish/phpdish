@@ -12,6 +12,13 @@ final class Events
     const POST_PRE_PERSIST = 'post.pre_persist';
 
     /**
+     * 文章创建之后出发
+     *
+     * @var string
+     */
+    const POST_CREATED = 'post.created';
+
+    /**
      * 文章被评论之后触发.
      *
      * @var string

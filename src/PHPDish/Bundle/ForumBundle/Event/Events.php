@@ -12,6 +12,13 @@ final class Events
     const TOPIC_REPLIED = 'topic.replied';
 
     /**
+     * 话题创建之后触发.
+     *
+     * @var string
+     */
+    const TOPIC_CREATED = 'topic.created';
+
+    /**
      * 回复中提及用户.
      *
      * @var string
