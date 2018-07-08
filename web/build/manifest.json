@@ -1,13 +1,7 @@
 {
   "build/css/resume.css": "http://127.0.0.1:8089/css/resume.css",
   "build/css/style.css": "http://127.0.0.1:8089/css/style.css",
-  "build/css/video.css": "http://127.0.0.1:8089/css/video.css",
   "build/images/algolia-logo-light.svg": "http://127.0.0.1:8089/images/algolia-logo-light.88450dd5.svg",
-  "build/images/course-icon.png": "http://127.0.0.1:8089/images/course-icon.0d8f0a94.png",
-  "build/images/img2.jpg": "http://127.0.0.1:8089/images/img2.077e9d5a.jpg",
-  "build/images/img3.jpg": "http://127.0.0.1:8089/images/img3.e48d138a.jpg",
-  "build/images/map.png": "http://127.0.0.1:8089/images/map.cb2215b7.png",
-  "build/images/pattern5.png": "http://127.0.0.1:8089/images/pattern5.e054d1f8.png",
   "build/js/book.js": "http://127.0.0.1:8089/js/book.js",
   "build/js/category.js": "http://127.0.0.1:8089/js/category.js",
   "build/js/default.js": "http://127.0.0.1:8089/js/default.js",
@@ -20,9 +14,9 @@
   "build/js/thread.js": "http://127.0.0.1:8089/js/thread.js",
   "build/js/topic.js": "http://127.0.0.1:8089/js/topic.js",
   "build/js/user.js": "http://127.0.0.1:8089/js/user.js",
-  "build/js/video.js": "http://127.0.0.1:8089/js/video.js",
   "build/js/wallet.js": "http://127.0.0.1:8089/js/wallet.js",
   "build/manifest.js": "http://127.0.0.1:8089/manifest.js",
   "build/vendor.css": "http://127.0.0.1:8089/vendor.css",
-  "build/vendor.js": "http://127.0.0.1:8089/vendor.js"
+  "build/vendor.js": "http://127.0.0.1:8089/vendor.js",
+  "build/images/post-grid.png": "http://127.0.0.1:8089/images/post-grid.edbd85fc.png"
 }

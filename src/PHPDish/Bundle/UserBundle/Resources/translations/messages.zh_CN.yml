@@ -37,12 +37,12 @@ menu:
     social_binding: 账户关联
 
 point:
-   label:
+    label:
        coin: 原力币
        type: 类型
        date: 时间
 
-   history:
+    history:
        type:
           sign_in: 注册奖励
           check_in: 签到奖励
@@ -56,3 +56,4 @@ point:
           reply_voted: 回复被点赞收益
           unknown: 奖励
           award: 奖励
+    no_points: 还没有积分
