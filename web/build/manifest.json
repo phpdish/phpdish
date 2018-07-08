@@ -17,6 +17,10 @@
   "build/js/wallet.js": "http://127.0.0.1:8089/js/wallet.js",
   "build/manifest.js": "http://127.0.0.1:8089/manifest.js",
   "build/vendor.css": "http://127.0.0.1:8089/vendor.css",
+<<<<<<< HEAD
   "build/vendor.js": "http://127.0.0.1:8089/vendor.js",
   "build/images/post-grid.png": "http://127.0.0.1:8089/images/post-grid.edbd85fc.png"
+=======
+  "build/vendor.js": "http://127.0.0.1:8089/vendor.js"
+>>>>>>> 24326ff1e6a533a1bb5514559fd3cfa28082671a
 }
