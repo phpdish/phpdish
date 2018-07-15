@@ -146,7 +146,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * @var int
      */
-    protected $point;
+    protected $point = 0;
 
     /**
      * @var PointHistoryInterface[]|Collection
