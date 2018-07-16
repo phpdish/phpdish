@@ -43,7 +43,7 @@
                             or (is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted('edit', post) or post.category.isFollowedBy(app.user)))
                     %}
                     <article class="markdown-body body">
-                        {{ isCanView ? post.body|raw : post.body|html_safe_chunk(0.5)|raw}}
+                        {{ isCanView ? post.body|image_process|raw : post.body|image_process|html_safe_chunk(0.5)|raw}}
                     </article>
                     {% if not isCanView %}
                         <div class="payfor">

@@ -49,4 +49,7 @@ parameters:
     youzan.client_secret: phpdish
     youzan.kdt_id: phpdish
 
+    # CDN
+    cdn.host: null
+
 
