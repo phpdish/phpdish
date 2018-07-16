@@ -16,7 +16,8 @@ const config = {
 
 Encore
     .setOutputPath(buildPath)
-    .setPublicPath('/build')
+    .setPublicPath('https://cdn.phpdish.com/build')
+    .setManifestKeyPrefix('/build')
     .cleanupOutputBeforeBuild()
     .autoProvidejQuery()
     .enableSassLoader()
