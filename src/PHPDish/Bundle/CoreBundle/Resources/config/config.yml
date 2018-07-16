@@ -50,16 +50,16 @@ knp_menu:
 
 # Liip Imagine
 liip_imagine:
+    cache: phpdish.media.imagine_resolver
     loaders:
         default:
             filesystem:
                 data_root:
                   - '%app.dir.uploads%'
                   - '%app.dir.avatar%'
-
-    resolvers:
-        default:
-            web_path: ~
+#    resolvers:
+#        default:
+#            web_path: ~
 
     filter_sets:
         cache: ~
