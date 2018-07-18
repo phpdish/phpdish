@@ -6,20 +6,7 @@
     <script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
 {% endblock %}
 
-{# 验证码字段模板 #}
-{% block captcha_widget %}
-    <div class="group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="if i-captcha"></i></span>
-            {{ form_widget(form, {'attr': {'placeholder': 'resetting.captcha'|trans}}) }}
-        </div>
-    </div>
-    <div class="group">
-        <img src="{{ captcha_code }}" onclick="this.src='{{ captcha_code }}?'+Math.random()" class="captcha" title="{{ 'resetting.captcha'|trans }}" width="{{ captcha_width }}" height="{{ captcha_height }}" />
-    </div>
-{% endblock %}
-
-{% form_theme form _self %}
+{% form_theme form 'PHPDishWebBundle:Form:captcha.html.twig' %}
 
 {% block content %}
     <div class="container">

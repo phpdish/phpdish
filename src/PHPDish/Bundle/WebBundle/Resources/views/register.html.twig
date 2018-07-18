@@ -6,6 +6,8 @@
     <script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
 {% endblock %}
 
+{% form_theme form 'PHPDishWebBundle:Form:captcha.html.twig' %}
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -15,9 +17,9 @@
                     <h2>{{ 'register.new'|trans }}</h2>
                     <p>{{ 'register.click_and_login'|trans({'%link%': path('login')})|raw }}</p>
                 </div>
-                {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <span class="black-text">{ flashMessage }}</span>
-                {% endfor %}
+                {{ form_errors(form) }}
+                {% from 'PHPDishWebBundle:Macros:notification.html.twig' import flashes %}
+                {{ flashes() }}
                 <div class="group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="if i-user"></i></span>
@@ -46,6 +48,7 @@
                     </div>
                     {{ form_errors(form.plainPassword.second) }}
                 </div>
+                {{ form_widget(form.captcha) }}
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <button class="btn btn-block u-btn-primary" type="submit">{{ 'ui.register'|trans }}</button>
