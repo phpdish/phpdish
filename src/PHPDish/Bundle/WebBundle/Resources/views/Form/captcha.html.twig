@@ -1,0 +1,12 @@
+{% block captcha_widget %}
+    <div class="group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="if i-captcha"></i></span>
+            {{ form_widget(form, {'attr': {'placeholder': 'resetting.captcha'|trans}}) }}
+        </div>
+        {{ form_errors(form) }}
+    </div>
+    <div class="group">
+        <img src="{{ captcha_code }}" style="cursor: pointer" onclick="this.src='{{ captcha_code }}?'+Math.random()" class="captcha" title="{{ 'resetting.captcha'|trans }}" width="{{ captcha_width }}" height="{{ captcha_height }}" />
+    </div>
+{% endblock %}

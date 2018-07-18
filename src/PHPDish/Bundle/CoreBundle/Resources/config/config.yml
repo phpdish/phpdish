@@ -87,8 +87,11 @@ fos_user:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
     resetting:
-          email:
-              template: 'PHPDishWebBundle:Resetting:email.html.twig'
+        email:
+            template: 'PHPDishWebBundle:Resetting:email.html.twig'
+    registration:
+        form:
+            type: PHPDish\Bundle\UserBundle\Form\Type\RegistrationType
 
 # FOSRest
 fos_rest:
