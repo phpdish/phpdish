@@ -58,6 +58,12 @@ class AbstractPost implements PostInterface
      */
     protected $lastCommentUser;
 
+    /**
+     * 
+     * @var CommentInterface[]
+     */
+    protected $comments;
+
     public function __toString()
     {
         return $this->getTitle();
@@ -215,5 +221,13 @@ class AbstractPost implements PostInterface
     public function getLastCommentUser()
     {
         return $this->lastCommentUser;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

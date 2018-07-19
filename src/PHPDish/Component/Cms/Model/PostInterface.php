@@ -11,9 +11,9 @@
 
 namespace PHPDish\Component\Cms\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Component\Resource\Model\DateTimeInterface;
 use PHPDish\Component\Resource\Model\EnabledInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
 use PHPDish\Component\Resource\Model\VotableInterface;
 use PHPDish\Component\User\Model\UserAwareInterface;
 use PHPDish\Component\User\Model\UserInterface;
@@ -129,4 +129,11 @@ interface PostInterface extends
      * @return UserInterface
      */
     public function getLastCommentUser();
+
+    /**
+     * 获取评论
+     *
+     * @return CommentInterface[]|Collection
+     */
+    public function getComments();
 }

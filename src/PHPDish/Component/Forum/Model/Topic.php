@@ -27,45 +27,6 @@ class Topic extends AbstractPost implements TopicInterface
      */
     protected $threads;
 
-    /**
-     * @var \DateTimeInterface
-     */
-    protected $repliedAt;
-
-    /**
-     * @var int
-     */
-    protected $replyCount = 0;
-
-    /**
-     * @var boolean
-     */
-    protected $recommended = false;
-
-    /**
-     * @var boolean
-     */
-    protected $isTop = false;
-
-    /**
-     * @var UserInterface
-     */
-    protected $lastReplyUser;
-
-    /**
-     * 文章插图.
-     *
-     * @var array
-     */
-    protected $images;
-
-    /**
-     * 获取评论
-     *
-     * @var Reply[]|Collection
-     */
-    protected $replies;
-
     public function __construct()
     {
         $this->threads = new ArrayCollection();
