@@ -11,7 +11,7 @@
 
 namespace PHPDish\Component\Forum\Model;
 
-use PHPDish\Component\Content\Model\CommentInterface;
+use PHPDish\Component\Cms\Model\CommentInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
 use PHPDish\Component\Resource\Model\VotableInterface;
 use PHPDish\Component\User\Model\UserInterface;

@@ -12,8 +12,8 @@
 namespace PHPDish\Component\Forum\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPDish\Component\Content\Model\AbstractComment;
-use PHPDish\Component\Content\Model\VotableTrait;
+use PHPDish\Component\Cms\Model\AbstractComment;
+use PHPDish\Component\Cms\Model\VotableTrait;
 use PHPDish\Component\Resource\Model\IdentifiableTrait;
 use PHPDish\Component\User\Model\UserInterface;
 

@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Content\Model;
+namespace PHPDish\Component\Cms\Model;
 
-use PHPDish\Component\Content\Utility\MarkdownHelper;
+use PHPDish\Component\Cms\Utility\MarkdownHelper;
 use PHPDish\Component\Resource\Model\DateTimeTrait;
 use PHPDish\Component\Resource\Model\EnabledTrait;
 use PHPDish\Component\User\Model\UserAwareTrait;
@@ -26,11 +26,6 @@ class AbstractPost implements PostInterface
      * @var string
      */
     protected $title;
-
-    /**
-     * @var string
-     */
-    protected $cover;
 
     /**
      * @var bool
@@ -52,6 +47,16 @@ class AbstractPost implements PostInterface
      * @var array
      */
     protected $images;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    protected $lastCommentAt;
+
+    /**
+     * @var UserInterface
+     */
+    protected $lastCommentUser;
 
     public function __toString()
     {
@@ -82,24 +87,6 @@ class AbstractPost implements PostInterface
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCover($cover)
-    {
-        $this->cover = $cover;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCover()
-    {
-        return $this->cover;
     }
 
     /**
@@ -212,5 +199,21 @@ class AbstractPost implements PostInterface
         }
 
         return $this->images = MarkdownHelper::extractImages($this->getOriginalBody());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastCommentAt()
+    {
+        return $this->lastCommentAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastCommentUser()
+    {
+        return $this->lastCommentUser;
     }
 }

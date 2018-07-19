@@ -11,7 +11,7 @@
 
 namespace  PHPDish\Component\Post\Model;
 
-use PHPDish\Component\Content\Model\ContentInterface;
+use PHPDish\Component\Cms\Model\ContentInterface;
 use PHPDish\Component\Resource\Model\DateTimeInterface;
 use PHPDish\Component\Resource\Model\EnabledInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;

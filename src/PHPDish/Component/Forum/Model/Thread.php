@@ -13,7 +13,7 @@ namespace PHPDish\Component\Forum\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Content\Model\AbstractTaxonomy;
+use PHPDish\Component\Cms\Model\AbstractTaxonomy;
 use PHPDish\Component\Resource\Model\EnabledTrait;
 use PHPDish\Component\Resource\Model\IdentifiableTrait;
 use PHPDish\Component\User\Model\UserInterface;

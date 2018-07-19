@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Content\Utility;
+namespace PHPDish\Component\Cms\Utility;
 
 final class MarkdownHelper
 {

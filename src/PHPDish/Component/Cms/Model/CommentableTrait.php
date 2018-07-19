@@ -10,7 +10,7 @@
  */
 
 
-namespace PHPDish\Component\Content\Model;
+namespace PHPDish\Component\Cms\Model;
 
 trait CommentableTrait
 {

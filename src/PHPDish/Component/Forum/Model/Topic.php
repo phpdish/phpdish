@@ -13,25 +13,14 @@ namespace PHPDish\Component\Forum\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Content\Model\CommentableTrait;
-use PHPDish\Component\Content\Model\ContentTrait;
-use PHPDish\Component\Content\Model\VotableTrait;
-use PHPDish\Component\Content\Utility\MarkdownHelper;
-use PHPDish\Component\Resource\Model\DateTimeTrait;
-use PHPDish\Component\Resource\Model\EnabledTrait;
+use PHPDish\Component\Cms\Model\AbstractPost;
+use PHPDish\Component\Cms\Utility\MarkdownHelper;
 use PHPDish\Component\Resource\Model\IdentifiableTrait;
-use PHPDish\Component\User\Model\UserAwareTrait;
 use PHPDish\Component\User\Model\UserInterface;
 
-class Topic implements TopicInterface
+class Topic extends AbstractPost implements TopicInterface
 {
-    use IdentifiableTrait, UserAwareTrait, ContentTrait,
-        CommentableTrait, DateTimeTrait, EnabledTrait, VotableTrait;
-
-    /**
-     * @var string
-     */
-    protected $title;
+    use IdentifiableTrait;
 
     /**
      * @var ThreadInterface[]|Collection

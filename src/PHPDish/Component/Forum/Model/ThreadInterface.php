@@ -11,7 +11,7 @@
 
 namespace PHPDish\Component\Forum\Model;
 
-use PHPDish\Component\Content\Model\TaxonomyInterface;
+use PHPDish\Component\Cms\Model\TaxonomyInterface;
 use PHPDish\Component\Resource\Model\EnabledInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
 use PHPDish\Component\Resource\Model\DateTimeInterface;

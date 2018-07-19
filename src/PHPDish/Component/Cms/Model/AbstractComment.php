@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Content\Model;
+namespace PHPDish\Component\Cms\Model;
 
 use PHPDish\Component\Resource\Model\DateTimeTrait;
 use PHPDish\Component\Resource\Model\EnabledTrait;

@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Content\Model;
+namespace PHPDish\Component\Cms\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Component\User\Model\UserInterface;

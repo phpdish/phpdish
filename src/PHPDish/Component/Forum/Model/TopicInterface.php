@@ -12,8 +12,8 @@
 namespace PHPDish\Component\Forum\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Content\Model\CommentableInterface;
-use PHPDish\Component\Content\Model\ContentInterface;
+use PHPDish\Component\Cms\Model\CommentableInterface;
+use PHPDish\Component\Cms\Model\ContentInterface;
 use PHPDish\Component\Resource\Model\DateTimeInterface;
 use PHPDish\Component\Resource\Model\EnabledInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
@@ -93,7 +93,7 @@ interface TopicInterface extends
     /**
      * 获取最后回复的用户.
      *
-     * @return \PHPDish\Component\User\Model\UserInterface
+     * @return UserInterface
      */
     public function getLastReplyUser();
 

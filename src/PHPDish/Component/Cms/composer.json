@@ -1,5 +1,5 @@
 {
-    "name": "phpdish/content",
+    "name": "phpdish/cms",
     "type": "library",
     "description": "Basic content interfaces for PHP applications.",
     "homepage": "https://www.phpdish.com",

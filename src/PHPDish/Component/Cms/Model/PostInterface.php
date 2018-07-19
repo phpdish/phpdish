@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Content\Model;
+namespace PHPDish\Component\Cms\Model;
 
 use PHPDish\Component\Resource\Model\DateTimeInterface;
 use PHPDish\Component\Resource\Model\EnabledInterface;
@@ -115,4 +115,18 @@ interface PostInterface extends
      * @return bool
      */
     public function isBelongsTo(UserInterface $user);
+
+    /**
+     * 获取上次回复时间
+     *
+     * @return \DateTimeInterface
+     */
+    public function getLastCommentAt();
+
+    /**
+     * 获取上次评论的用户
+     *
+     * @return UserInterface
+     */
+    public function getLastCommentUser();
 }
