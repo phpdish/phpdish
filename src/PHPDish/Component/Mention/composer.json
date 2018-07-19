@@ -1,0 +1,16 @@
+{
+    "name": "phpdish/mention",
+    "type": "library",
+    "description": "Mention and reply to users.",
+    "keywords": ["mention", "@", "艾特"],
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Mention\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}

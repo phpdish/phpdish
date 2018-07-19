@@ -1,0 +1,15 @@
+{
+    "name": "phpdish/resource",
+    "type": "library",
+    "description": "Basic resource interfaces for PHP applications.",
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Resource\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}

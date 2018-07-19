@@ -1,0 +1,19 @@
+{
+    "name": "phpdish/user",
+    "type": "library",
+    "description": "User handling for PHP applications.",
+    "keywords": ["user", "registration", "login", "groups"],
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\User\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0",
+        "doctrine/collections": "^1.5",
+        "symfony/security": "^3.4",
+        "phpdish/resource": "^0.3"
+    }
+}

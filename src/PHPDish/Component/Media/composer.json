@@ -1,0 +1,16 @@
+{
+    "name": "phpdish/media",
+    "type": "library",
+    "description": "Media handing component for PHP.",
+    "keywords": ["media"],
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Media\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}

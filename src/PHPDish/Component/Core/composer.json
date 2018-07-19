@@ -1,0 +1,16 @@
+{
+    "name": "phpdish/core",
+    "type": "library",
+    "description": "Core component for PHPDish",
+    "keywords": ["phpdish", "core", "core component"],
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Core\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}

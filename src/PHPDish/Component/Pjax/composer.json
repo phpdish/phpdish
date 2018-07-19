@@ -1,0 +1,16 @@
+{
+    "name": "phpdish/pjax",
+    "type": "library",
+    "description": "Pjax helpers for PHP",
+    "keywords": ["pjax"],
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Pjax\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}

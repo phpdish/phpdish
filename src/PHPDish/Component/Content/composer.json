@@ -1,0 +1,15 @@
+{
+    "name": "phpdish/content",
+    "type": "library",
+    "description": "Basic content interfaces for PHP applications.",
+    "homepage": "https://www.phpdish.com",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPDish\\Component\\Content\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=7.2.0"
+    }
+}
