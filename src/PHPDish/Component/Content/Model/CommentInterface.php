@@ -1,13 +1,20 @@
 <?php
-/**
- * PHPDish comment component.
+
+/*
+ * This file is part of the phpdish/phpdish
  *
- * @author Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
-namespace  PHPDish\Component\Resource\Model;
 
-use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+namespace  PHPDish\Component\Content\Model;
+
+use PHPDish\Component\Resource\Model\DateTimeInterface;
+use PHPDish\Component\Resource\Model\EnabledInterface;
+use PHPDish\Component\User\Model\UserAwareInterface;
 
 interface CommentInterface extends ContentInterface, DateTimeInterface, UserAwareInterface, EnabledInterface
 {

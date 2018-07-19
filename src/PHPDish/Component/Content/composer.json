@@ -10,6 +10,9 @@
         }
     },
     "require": {
-        "php": ">=7.2.0"
+        "php": ">=7.2.0",
+        "doctrine/collections": "^1.5",
+        "phpdish/resource": "^0.3",
+        "phpdish/user": "^0.3"
     }
 }

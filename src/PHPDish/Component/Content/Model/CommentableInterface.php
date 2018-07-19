@@ -1,11 +1,18 @@
 <?php
-/**
- * PHPDish comment component.
+
+/*
+ * This file is part of the phpdish/phpdish
  *
- * @author Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
+
 namespace PHPDish\Component\Content\Model;
+
+use Doctrine\Common\Collections\Collection;
 
 interface CommentableInterface
 {
@@ -15,4 +22,11 @@ interface CommentableInterface
      * @return int
      */
     public function getCommentCount();
+
+    /**
+     * 获取评论
+     *
+     * @return CommentInterface[]|Collection
+     */
+    public function getComments();
 }
