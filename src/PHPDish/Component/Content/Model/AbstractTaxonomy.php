@@ -58,4 +58,21 @@ abstract class AbstractTaxonomy implements TaxonomyInterface
     {
         return $this->description;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
 }
