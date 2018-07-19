@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Component\User\Model;
 
 interface SocialAwareInterface
@@ -67,28 +76,4 @@ interface SocialAwareInterface
      * @return $this
      */
     public function setGithubAccessToken($githubAccessToken);
-
-//    /**
-//     * 获取Wechat id
-//     * @return string
-//     */
-//    public function getWechatId();
-//
-//    /**
-//     * 设置Wechat id
-//     * @param string $wechatId
-//     */
-//    public function setWechatId($wechatId);
-//
-//    /**
-//     * 获取wechat access token
-//     * @return string
-//     */
-//    public function getWechatAccessToken();
-//
-//    /**
-//     * 设置Wechat access token
-//     * @param string $wechatAccessToken
-//     */
-//    public function setWechatAccessToken($wechatAccessToken);
 }
