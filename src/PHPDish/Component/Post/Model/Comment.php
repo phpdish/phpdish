@@ -9,33 +9,28 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace  PHPDish\Component\Post\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use PHPDish\Component\Cms\Model\AbstractComment;
 use PHPDish\Component\Cms\Model\VotableTrait;
 use PHPDish\Component\Resource\Model\IdentifiableTrait;
 
-class Reply extends AbstractComment implements ReplyInterface
+class Comment extends AbstractComment implements CommentInterface
 {
     use IdentifiableTrait, VotableTrait;
 
     /**
-     * @var TopicInterface
+     * @var PostInterface
      */
-    protected $topic;
-
-    public function __construct()
-    {
-        $this->voters = new ArrayCollection();
-    }
+    protected $post;
 
     /**
      * {@inheritdoc}
      */
-    public function setTopic(TopicInterface $topic)
+    public function setPost(PostInterface $post)
     {
-        $this->topic = $topic;
+        $this->post = $post;
 
         return $this;
     }
@@ -43,8 +38,8 @@ class Reply extends AbstractComment implements ReplyInterface
     /**
      * {@inheritdoc}
      */
-    public function getTopic()
+    public function getPost()
     {
-        return $this->topic;
+        return $this->post;
     }
 }

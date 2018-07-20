@@ -11,6 +11,7 @@
 
 namespace PHPDish\Component\Cms\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Component\Resource\Model\DateTimeTrait;
 use PHPDish\Component\Resource\Model\EnabledTrait;
 
@@ -23,6 +24,19 @@ abstract class AbstractTaxonomy implements TaxonomyInterface
     protected $slug;
 
     protected $description;
+
+    protected $postCount;
+
+    /**
+     * @var PostInterface[]|Collection
+     */
+    protected $posts;
+
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * {@inheritdoc}
@@ -75,5 +89,47 @@ abstract class AbstractTaxonomy implements TaxonomyInterface
     {
         $this->slug = $slug;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostCount($count)
+    {
+        $this->postCount = $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostCount()
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPostCount($count = 1)
+    {
+        $this->postCount += $count;
+        $this->postCount = max($this->postCount, 0);
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPost(PostInterface $post)
+    {
+        $this->posts[] = $post;
     }
 }

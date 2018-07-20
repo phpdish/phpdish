@@ -14,7 +14,7 @@ namespace  PHPDish\Component\Post\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPDish\Component\Cms\Model\TaxonomyInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\User\Model\UserInterface;
 
 interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface
 {
