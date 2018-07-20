@@ -28,11 +28,6 @@ class AbstractPost implements PostInterface
     protected $title;
 
     /**
-     * @var bool
-     */
-    protected $recommended = false;
-
-    /**
      * @var int
      */
     protected $commentCount = 0;
@@ -149,22 +144,6 @@ class AbstractPost implements PostInterface
     public function getSummary()
     {
         return strip_tags(mb_substr($this->body, 0, 250));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRecommend($recommended)
-    {
-        $this->recommended = $recommended;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isRecommended()
-    {
-        return $this->recommended;
     }
 
     /**

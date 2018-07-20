@@ -12,12 +12,10 @@
 namespace PHPDish\Component\Forum\Model;
 
 use PHPDish\Component\Cms\Model\TaxonomyInterface;
-use PHPDish\Component\Resource\Model\EnabledInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Component\Resource\Model\DateTimeInterface;
 use PHPDish\Component\User\Model\UserInterface;
 
-interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, TaxonomyInterface, EnabledInterface
+interface ThreadInterface extends IdentifiableInterface, TaxonomyInterface
 {
     /**
      * 获取封面.
@@ -33,22 +31,6 @@ interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, Taxo
      * @return ThreadInterface
      */
     public function setCover($cover);
-
-    /**
-     * 设置话题数量.
-     *
-     * @param int $topicCount
-     *
-     * @return ThreadInterface
-     */
-    public function setTopicCount($topicCount);
-
-    /**
-     * 获取话题数量
-     *
-     * @return int
-     */
-    public function getTopicCount();
 
     /**
      * 获取订阅人数量.
@@ -90,15 +72,6 @@ interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, Taxo
      * @return UserInterface[]
      */
     public function getFollowers();
-
-    /**
-     * 设置订阅者.
-     *
-     * @param UserInterface[] $followers
-     *
-     * @return ThreadInterface
-     */
-    public function setFollowers(array $followers);
 
     /**
      * 检查是否被关注.

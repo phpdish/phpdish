@@ -14,23 +14,17 @@ namespace PHPDish\Component\Forum\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Component\Cms\Model\AbstractTaxonomy;
-use PHPDish\Component\Resource\Model\EnabledTrait;
 use PHPDish\Component\Resource\Model\IdentifiableTrait;
 use PHPDish\Component\User\Model\UserInterface;
 
 class Thread extends AbstractTaxonomy implements ThreadInterface
 {
-    use IdentifiableTrait, EnabledTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string
      */
     protected $cover;
-
-    /**
-     * @var int
-     */
-    protected $topicCount = 0;
 
     /**
      * @var int
@@ -48,11 +42,6 @@ class Thread extends AbstractTaxonomy implements ThreadInterface
         $this->followers = new ArrayCollection();
     }
 
-    public function __toString()
-    {
-        return (string)$this->getName();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -67,22 +56,6 @@ class Thread extends AbstractTaxonomy implements ThreadInterface
     public function setCover($cover)
     {
         $this->cover = $cover;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTopicCount()
-    {
-        return $this->topicCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTopicCount($topicCount)
-    {
-        $this->topicCount = $topicCount;
     }
 
     /**
@@ -107,14 +80,6 @@ class Thread extends AbstractTaxonomy implements ThreadInterface
     public function getFollowers()
     {
         return $this->followers;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFollowers(array $followers)
-    {
-        $this->followers = $followers;
     }
 
     /**
