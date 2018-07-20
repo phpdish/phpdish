@@ -28,6 +28,11 @@ class Post extends AbstractPost implements ChapterInterface
     protected $cover;
 
     /**
+     * @var bool
+     */
+    protected $recommended = false;
+
+    /**
      * @var CategoryInterface
      */
     protected $category;
@@ -82,5 +87,21 @@ class Post extends AbstractPost implements ChapterInterface
     public function getChildren()
     {
         return $this->children->matching(Criteria::create()->where(Criteria::expr()->eq('enabled', true)));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRecommend($recommended)
+    {
+        $this->recommended = $recommended;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
     }
 }

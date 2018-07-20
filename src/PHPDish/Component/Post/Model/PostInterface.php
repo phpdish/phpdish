@@ -47,4 +47,11 @@ interface PostInterface extends IdentifiableInterface, BasePostInterface
      * @return $this
      */
     public function setCategory(CategoryInterface $category);
+
+    /**
+     * 是否推荐.
+     *
+     * @return bool
+     */
+    public function isRecommended();
 }
