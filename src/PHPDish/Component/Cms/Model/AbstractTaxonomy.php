@@ -12,10 +12,11 @@
 namespace PHPDish\Component\Cms\Model;
 
 use PHPDish\Component\Resource\Model\DateTimeTrait;
+use PHPDish\Component\Resource\Model\EnabledTrait;
 
 abstract class AbstractTaxonomy implements TaxonomyInterface
 {
-    use DateTimeTrait;
+    use DateTimeTrait, EnabledTrait;
 
     protected $name;
 

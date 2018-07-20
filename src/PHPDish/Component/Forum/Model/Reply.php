@@ -48,12 +48,4 @@ class Reply extends AbstractComment implements ReplyInterface
     {
         return $this->topic;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBelongsTo(UserInterface $user)
-    {
-        return $this->getUser() === $user;
-    }
 }

@@ -12,9 +12,8 @@
 namespace PHPDish\Component\Forum\Model;
 
 use PHPDish\Component\Cms\Model\CommentInterface;
+use PHPDish\Component\Cms\Model\VotableInterface;
 use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Component\Resource\Model\VotableInterface;
-use PHPDish\Component\User\Model\UserInterface;
 
 interface ReplyInterface extends IdentifiableInterface, CommentInterface, VotableInterface
 {
@@ -33,13 +32,4 @@ interface ReplyInterface extends IdentifiableInterface, CommentInterface, Votabl
      * @return TopicInterface
      */
     public function getTopic();
-
-    /**
-     * 回复是否属于指定用户.
-     *
-     * @param UserInterface $user
-     *
-     * @return bool
-     */
-    public function isBelongsTo(UserInterface $user);
 }

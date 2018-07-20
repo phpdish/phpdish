@@ -59,7 +59,7 @@ class AbstractPost implements PostInterface
     protected $lastCommentUser;
 
     /**
-     * 
+     * 评论
      * @var CommentInterface[]
      */
     protected $comments;
@@ -85,14 +85,6 @@ class AbstractPost implements PostInterface
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -144,7 +136,7 @@ class AbstractPost implements PostInterface
     /**
      * {@inheritdoc}
      */
-    public function increaseCommentCount($count = 1)
+    public function addCommentCount($count = 1)
     {
         $this->commentCount += $count;
     }

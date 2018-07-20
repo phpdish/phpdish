@@ -12,10 +12,12 @@
 
 namespace PHPDish\Component\Cms\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Component\Resource\Model\DateTimeInterface;
+use PHPDish\Component\Resource\Model\EnabledInterface;
 use PHPDish\Component\Resource\Model\SlugifyInterface;
 
-interface TaxonomyInterface extends DateTimeInterface, SlugifyInterface
+interface TaxonomyInterface extends DateTimeInterface, SlugifyInterface, EnabledInterface
 {
     /**
      * 设置分类名称.
@@ -48,4 +50,42 @@ interface TaxonomyInterface extends DateTimeInterface, SlugifyInterface
      * @return string
      */
     public function getDescription();
+
+    /**
+     * 获取文档数量
+     *
+     * @return int
+     */
+    public function getPostCount();
+
+    /**
+     * 设置文档数量
+     *
+     * @param int $count
+     * @return self
+     */
+    public function setPostCount($count);
+
+    /**
+     * 增加访问次数，允许为空
+     *
+     * @param int $count
+     * @return self
+     */
+    public function addPostCount($count = 1);
+
+    /**
+     * 获取文档
+     *
+     * @return PostInterface[]|Collection
+     */
+    public function getPosts();
+
+    /**
+     * 添加文档
+     *
+     * @param PostInterface $post
+     * @return self
+     */
+    public function addPost(PostInterface $post);
 }

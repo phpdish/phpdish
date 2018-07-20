@@ -14,8 +14,17 @@ namespace PHPDish\Component\Cms\Model;
 use PHPDish\Component\Resource\Model\DateTimeTrait;
 use PHPDish\Component\Resource\Model\EnabledTrait;
 use PHPDish\Component\User\Model\UserAwareTrait;
+use PHPDish\Component\User\Model\UserInterface;
 
 abstract class AbstractComment implements CommentInterface
 {
     use ContentTrait, DateTimeTrait, UserAwareTrait, EnabledTrait;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBelongsTo(UserInterface $user)
+    {
+        return $this->getUser() === $user;
+    }
 }
