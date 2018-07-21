@@ -13,7 +13,7 @@ namespace PHPDish\Bundle\CmsBundle;
 
 use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class CmsBundle extends AbstractBundle
+class PHPDishCmsBundle extends AbstractBundle
 {
 
 }

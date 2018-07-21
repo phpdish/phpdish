@@ -4,7 +4,7 @@ namespace PHPDish\Bundle\ResourceBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ResourceBundle extends Bundle
+class PHPDishResourceBundle extends Bundle
 {
 
 }

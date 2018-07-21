@@ -53,11 +53,13 @@ abstract class Kernel extends HttpKernel
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new \Oneup\UploaderBundle\OneupUploaderBundle(), //多文件上传
 
+            //Sonata
             new \Sonata\SeoBundle\SonataSeoBundle(),
             new \Sonata\CoreBundle\SonataCoreBundle(),
             new \Sonata\BlockBundle\SonataBlockBundle(),
 
-            new \PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
+            new \PHPDish\Bundle\ResourceBundle\PHPDishResourceBundle(),
+            new \PHPDish\Bundle\CmsBundle\PHPDishCmsBundle(),
             new \PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
             new \PHPDish\Bundle\PostBundle\PHPDishPostBundle(),
             new \PHPDish\Bundle\ForumBundle\PHPDishForumBundle(),
@@ -66,6 +68,7 @@ abstract class Kernel extends HttpKernel
             new \PHPDish\Bundle\ChatBundle\PHPDishChatBundle(),
             new \PHPDish\Bundle\ResumeBundle\PHPDishResumeBundle(),
             new \PHPDish\Bundle\PaymentBundle\PHPDishPaymentBundle(),
+            new \PHPDish\Bundle\CoreBundle\PHPDishCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
