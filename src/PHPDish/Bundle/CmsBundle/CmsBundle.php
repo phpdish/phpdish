@@ -9,8 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\CmsBundle;
 
-interface PayableInterface
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
+
+class CmsBundle extends AbstractBundle
 {
+
 }

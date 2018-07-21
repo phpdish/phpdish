@@ -1,13 +1,22 @@
 <?php
 
-namespace PHPDish\Bundle\PaymentBundle\Model;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+namespace PHPDish\Component\Payment\Model;
 
-interface PaymentInterface extends WalletHistoryInterface, EnabledInterface, IdentifiableInterface, UserAwareInterface
+
+use PHPDish\Component\Resource\Model\EnabledInterface;
+use PHPDish\Component\Resource\Model\IdentifiableInterface;
+use PHPDish\Component\User\Model\UserAwareInterface;
+
+interface PaymentInterface extends IdentifiableInterface, WalletHistoryInterface, EnabledInterface, UserAwareInterface
 {
     /**
      * 已支付/已到账

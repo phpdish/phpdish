@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="PHPDish\Bundle\CmsBundle\Model\AbstractComment">
+
+        <field name="body" type="text" column="body" precision="0" scale="0" nullable="false"/>
+        <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="false"/>
+        <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
+
+    </mapped-superclass>
+
+</doctrine-mapping>

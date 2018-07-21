@@ -9,8 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
-interface PayableInterface
+use PHPDish\Bundle\PostBundle\Model\Comment as BaseComment;
+
+class Comment extends BaseComment
 {
+
 }

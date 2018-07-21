@@ -1,19 +1,21 @@
 <?php
-/**
- * PHPDish forum component.
+
+/*
+ * This file is part of the phpdish/phpdish
  *
- * @author Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\ForumBundle\Model;
+namespace PHPDish\Component\Forum\Model;
 
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\CoreBundle\Model\TaxonomyInterface;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\Cms\Model\TaxonomyInterface;
+use PHPDish\Component\Resource\Model\IdentifiableInterface;
+use PHPDish\Component\User\Model\UserInterface;
 
-interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, TaxonomyInterface, EnabledInterface
+interface ThreadInterface extends IdentifiableInterface, TaxonomyInterface
 {
     /**
      * 获取封面.
@@ -24,26 +26,11 @@ interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, Taxo
 
     /**
      * 设置封面
+     *
      * @param string $cover
      * @return ThreadInterface
      */
     public function setCover($cover);
-
-    /**
-     * 设置话题数量.
-     *
-     * @param int $topicCount
-     *
-     * @return ThreadInterface
-     */
-    public function setTopicCount($topicCount);
-
-    /**
-     * 获取话题数量
-     *
-     * @return int
-     */
-    public function getTopicCount();
 
     /**
      * 获取订阅人数量.
@@ -85,15 +72,6 @@ interface ThreadInterface extends IdentifiableInterface, DateTimeInterface, Taxo
      * @return UserInterface[]
      */
     public function getFollowers();
-
-    /**
-     * 设置订阅者.
-     *
-     * @param UserInterface[] $followers
-     *
-     * @return ThreadInterface
-     */
-    public function setFollowers(array $followers);
 
     /**
      * 检查是否被关注.

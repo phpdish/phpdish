@@ -1,11 +1,19 @@
 <?php
 
-namespace PHPDish\Bundle\ForumBundle\Model;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+namespace PHPDish\Component\Forum\Model;
+
+use PHPDish\Component\Cms\Model\CommentInterface;
+use PHPDish\Component\Cms\Model\VotableInterface;
+use PHPDish\Component\Resource\Model\IdentifiableInterface;
 
 interface ReplyInterface extends IdentifiableInterface, CommentInterface, VotableInterface
 {
@@ -24,13 +32,4 @@ interface ReplyInterface extends IdentifiableInterface, CommentInterface, Votabl
      * @return TopicInterface
      */
     public function getTopic();
-
-    /**
-     * 回复是否属于指定用户.
-     *
-     * @param UserInterface $user
-     *
-     * @return bool
-     */
-    public function isBelongsTo(UserInterface $user);
 }

@@ -1,9 +1,18 @@
 <?php
 
-namespace PHPDish\Bundle\PaymentBundle\Model;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace PHPDish\Component\Payment\Model;
 
 use Money\Money;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
+use PHPDish\Component\Resource\Model\DateTimeInterface;
 
 interface WalletHistoryInterface extends DateTimeInterface
 {
@@ -90,4 +99,12 @@ interface WalletHistoryInterface extends DateTimeInterface
      * @return boolean
      */
     public function isIncome();
+
+    /**
+     * 设置是否是收入
+     *
+     * @param boolean $income
+     * @return self
+     */
+    public function setIncome($income);
 }

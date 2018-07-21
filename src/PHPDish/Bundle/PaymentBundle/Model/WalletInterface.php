@@ -1,14 +1,23 @@
 <?php
 
-namespace PHPDish\Bundle\PaymentBundle\Model;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace PHPDish\Component\Payment\Model;
 
 use Money\Money;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Component\Resource\Model\DateTimeInterface;
+use PHPDish\Component\Resource\Model\IdentifiableInterface;
+use PHPDish\Component\User\Model\UserAwareInterface;
+use PHPDish\Component\User\Model\UserInterface;
 
-interface WalletInterface extends IdentifiableInterface, UserAwareInterface, DateTimeInterface
+interface WalletInterface extends IdentifiableInterface, DateTimeInterface, UserAwareInterface
 {
     /**
      * 获取余额
