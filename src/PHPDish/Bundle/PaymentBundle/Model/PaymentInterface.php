@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\PaymentBundle\Model;
 
 
-use PHPDish\Component\Resource\Model\EnabledInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Component\User\Model\UserAwareInterface;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
 
 interface PaymentInterface extends IdentifiableInterface, WalletHistoryInterface, EnabledInterface, UserAwareInterface
 {

@@ -12,8 +12,8 @@
 namespace PHPDish\Bundle\CmsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Resource\Model\DateTimeTrait;
-use PHPDish\Component\Resource\Model\EnabledTrait;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledTrait;
 
 abstract class AbstractTaxonomy implements TaxonomyInterface
 {

@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\CmsBundle\Model;
 
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface VotableInterface
 {

@@ -12,7 +12,7 @@
 namespace PHPDish\Bundle\CmsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 trait VotableTrait
 {

@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use PHPDish\Component\Forum\Model\Topic as BaseTopic;
+use PHPDish\Bundle\ForumBundle\Model\Topic as BaseTopic;
 
 class Topic extends BaseTopic
 {

@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
-use PHPDish\Component\Cms\Model\CommentInterface;
-use PHPDish\Component\Cms\Model\VotableInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
+use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use PHPDish\Bundle\CmsBundle\Model\VotableInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface ReplyInterface extends IdentifiableInterface, CommentInterface, VotableInterface
 {

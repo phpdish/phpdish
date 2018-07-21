@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\PaymentBundle\Model;
 
 use Money\Money;
-use PHPDish\Component\Resource\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
 
 interface WalletHistoryInterface extends DateTimeInterface
 {

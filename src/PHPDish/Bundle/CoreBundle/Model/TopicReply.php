@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use PHPDish\Component\Forum\Model\Reply;
+use PHPDish\Bundle\ForumBundle\Model\Reply;
 
 class TopicReply extends Reply
 {

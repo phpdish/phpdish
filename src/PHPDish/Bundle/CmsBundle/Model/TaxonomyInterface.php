@@ -13,9 +13,9 @@
 namespace PHPDish\Bundle\CmsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Resource\Model\DateTimeInterface;
-use PHPDish\Component\Resource\Model\EnabledInterface;
-use PHPDish\Component\Resource\Model\SlugifyInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledInterface;
+use PHPDish\Bundle\ResourceBundle\Model\SlugifyInterface;
 
 interface TaxonomyInterface extends DateTimeInterface, SlugifyInterface, EnabledInterface
 {

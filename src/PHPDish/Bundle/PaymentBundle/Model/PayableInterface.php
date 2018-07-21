@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\PaymentBundle\Model;
 
 interface PayableInterface
 {

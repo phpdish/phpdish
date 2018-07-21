@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\PaymentBundle\Model;
 
 use Money\Money;
-use PHPDish\Component\Resource\Model\DateTimeTrait;
-use PHPDish\Component\Resource\Model\EnabledTrait;
-use PHPDish\Component\Resource\Model\IdentifiableTrait;
-use PHPDish\Component\User\Model\UserAwareTrait;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledTrait;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
+use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
 

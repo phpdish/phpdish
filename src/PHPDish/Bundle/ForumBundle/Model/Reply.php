@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPDish\Component\Cms\Model\AbstractComment;
-use PHPDish\Component\Cms\Model\VotableTrait;
-use PHPDish\Component\Resource\Model\IdentifiableTrait;
+use PHPDish\Bundle\CmsBundle\Model\AbstractComment;
+use PHPDish\Bundle\CmsBundle\Model\VotableTrait;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 
 class Reply extends AbstractComment implements ReplyInterface
 {

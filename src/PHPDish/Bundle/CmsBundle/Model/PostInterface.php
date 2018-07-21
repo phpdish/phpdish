@@ -12,10 +12,10 @@
 namespace PHPDish\Bundle\CmsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Resource\Model\DateTimeInterface;
-use PHPDish\Component\Resource\Model\EnabledInterface;
-use PHPDish\Component\User\Model\UserAwareInterface;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface PostInterface extends
     ContentInterface, DateTimeInterface, UserAwareInterface, VotableInterface, EnabledInterface

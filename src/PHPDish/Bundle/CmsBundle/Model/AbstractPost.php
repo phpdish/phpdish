@@ -12,10 +12,10 @@
 namespace PHPDish\Bundle\CmsBundle\Model;
 
 use PHPDish\Bundle\CmsBundle\Utility\MarkdownHelper;
-use PHPDish\Component\Resource\Model\DateTimeTrait;
-use PHPDish\Component\Resource\Model\EnabledTrait;
-use PHPDish\Component\User\Model\UserAwareTrait;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledTrait;
+use PHPDish\Bundle\UserBundle\Model\UserAwareTrait;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class AbstractPost implements PostInterface
 {

@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use PHPDish\Component\Forum\Model\Thread;
+use PHPDish\Bundle\ForumBundle\Model\Thread;
 
 class TopicThread extends Thread
 {

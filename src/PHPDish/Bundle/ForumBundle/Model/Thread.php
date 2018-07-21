@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Cms\Model\AbstractTaxonomy;
-use PHPDish\Component\Resource\Model\IdentifiableTrait;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\CmsBundle\Model\AbstractTaxonomy;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class Thread extends AbstractTaxonomy implements ThreadInterface
 {

@@ -12,7 +12,7 @@
 namespace  PHPDish\Bundle\PostBundle\Model;
 
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
-use PHPDish\Component\Cms\Model\PostInterface as BasePostInterface;
+use PHPDish\Bundle\CmsBundle\Model\PostInterface as BasePostInterface;
 
 interface PostInterface extends IdentifiableInterface, BasePostInterface
 {

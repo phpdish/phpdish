@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
-use PHPDish\Component\Cms\Model\PostInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
+use PHPDish\Bundle\CmsBundle\Model\PostInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface TopicInterface extends
     IdentifiableInterface, PostInterface

@@ -2,8 +2,8 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
-use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;

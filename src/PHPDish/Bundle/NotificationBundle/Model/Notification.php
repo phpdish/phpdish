@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
+use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
-use PHPDish\Bundle\NotificationBundle\Model\ActionInterface;
-use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
@@ -17,28 +23,6 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 class Notification implements NotificationInterface, ActionInterface
 {
     use IdentifiableTrait;
-
-    const SUBJECT_FOLLOW_USER = 'follow_user';
-
-    const SUBJECT_FOLLOW_CATEGORY = 'follow_category';
-
-    const SUBJECT_REPLY_TOPIC = 'reply_topic';
-
-    const SUBJECT_VOTE_TOPIC = 'vote_topic';
-
-    const SUBJECT_VOTE_REPLY= 'vote_reply';
-
-    const SUBJECT_COMMENT_POST = 'comment_post';
-
-    const SUBJECT_MENTION_USER_IN_TOPIC = 'mention_user_in_topic';
-
-    const SUBJECT_MENTION_USER_IN_POST = 'mention_user_in_post';
-
-    const SUBJECT_VOTE_POST = 'vote_post';
-
-    const SUBJECT_VOTE_COMMENT = 'vote_comment';
-
-    const SUBJECT_HANDLE_WITHDRAW = 'handle_withdraw';
 
     /**
      * @var string

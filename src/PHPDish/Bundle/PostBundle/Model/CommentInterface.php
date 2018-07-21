@@ -11,8 +11,8 @@
 
 namespace  PHPDish\Bundle\PostBundle\Model;
 
-use PHPDish\Component\Cms\Model\CommentInterface as BaseCommentInterface;
-use PHPDish\Component\Cms\Model\VotableInterface;
+use PHPDish\Bundle\CmsBundle\Model\CommentInterface as BaseCommentInterface;
+use PHPDish\Bundle\CmsBundle\Model\VotableInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface CommentInterface extends IdentifiableInterface, BaseCommentInterface, VotableInterface

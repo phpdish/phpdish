@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\UserBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 

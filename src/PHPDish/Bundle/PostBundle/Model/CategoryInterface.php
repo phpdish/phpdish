@@ -12,7 +12,7 @@
 namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPDish\Component\Cms\Model\TaxonomyInterface;
+use PHPDish\Bundle\CmsBundle\Model\TaxonomyInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 

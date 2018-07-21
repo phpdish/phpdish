@@ -13,7 +13,7 @@ namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Component\Cms\Model\AbstractPost;
+use PHPDish\Bundle\CmsBundle\Model\AbstractPost;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\ResourceBundle\Model\TreeTrait;
 

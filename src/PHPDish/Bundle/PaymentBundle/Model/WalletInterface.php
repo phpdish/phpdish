@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Payment\Model;
+namespace PHPDish\Bundle\PaymentBundle\Model;
 
 use Money\Money;
-use PHPDish\Component\Resource\Model\DateTimeInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Component\User\Model\UserAwareInterface;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface WalletInterface extends IdentifiableInterface, DateTimeInterface, UserAwareInterface
 {

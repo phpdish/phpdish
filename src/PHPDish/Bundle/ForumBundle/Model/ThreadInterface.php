@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
-use PHPDish\Component\Cms\Model\TaxonomyInterface;
-use PHPDish\Component\Resource\Model\IdentifiableInterface;
-use PHPDish\Component\User\Model\UserInterface;
+use PHPDish\Bundle\CmsBundle\Model\TaxonomyInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface ThreadInterface extends IdentifiableInterface, TaxonomyInterface
 {

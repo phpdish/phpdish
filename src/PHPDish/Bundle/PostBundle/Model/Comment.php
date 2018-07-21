@@ -12,8 +12,8 @@
 namespace  PHPDish\Bundle\PostBundle\Model;
 
 
-use PHPDish\Component\Cms\Model\AbstractComment;
-use PHPDish\Component\Cms\Model\VotableTrait;
+use PHPDish\Bundle\CmsBundle\Model\AbstractComment;
+use PHPDish\Bundle\CmsBundle\Model\VotableTrait;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 
 class Comment extends AbstractComment implements CommentInterface

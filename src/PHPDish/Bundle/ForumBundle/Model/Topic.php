@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Component\Forum\Model;
+namespace PHPDish\Bundle\ForumBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Component\Cms\Model\AbstractPost;
-use PHPDish\Component\Resource\Model\IdentifiableTrait;
+use PHPDish\Bundle\CmsBundle\Model\AbstractPost;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 
 class Topic extends AbstractPost implements TopicInterface
 {
