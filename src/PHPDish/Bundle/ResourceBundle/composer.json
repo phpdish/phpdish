@@ -1,5 +1,5 @@
 {
-    "name": "phpdish/resource",
+    "name": "phpdish/resource-bundle",
     "type": "library",
     "description": "Basic resource interfaces for PHP applications.",
     "homepage": "https://www.phpdish.com",

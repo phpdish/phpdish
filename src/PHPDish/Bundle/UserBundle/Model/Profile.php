@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\UserBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;

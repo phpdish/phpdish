@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\UserBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Model;
 
 use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;

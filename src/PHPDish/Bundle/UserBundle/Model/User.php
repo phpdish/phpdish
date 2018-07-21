@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\UserBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Model;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;

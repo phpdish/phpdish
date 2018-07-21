@@ -1,9 +1,18 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\UserBundle\Model;
 
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface PointHistoryInterface extends IdentifiableInterface, DateTimeInterface, UserAwareInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\UserBundle\Entity;
+namespace PHPDish\Bundle\UserBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;

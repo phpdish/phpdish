@@ -1,17 +1,19 @@
 <?php
-/**
- * PHPDish user component.
+
+/*
+ * This file is part of the phpdish/phpdish
  *
- * @author Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace PHPDish\Bundle\UserBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
+use PHPDish\Bundle\ResourceBundle\Model\EnabledInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTimeInterface, EnabledInterface, SocialAwareInterface
@@ -87,37 +89,6 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      */
     public function getFollowingCount();
 
-    /**
-     * 获取文章数量.
-     *
-     * @return int
-     */
-    public function getPostCount();
-
-    /**
-     * 设置文章数量.
-     *
-     * @param int $postCount
-     *
-     * @return UserInterface
-     */
-    public function setPostCount($postCount);
-
-    /**
-     * 获取话题数量.
-     *
-     * @return int
-     */
-    public function getTopicCount();
-
-    /**
-     * 设置话题数量.
-     *
-     * @param int $topicCount
-     *
-     * @return UserInterface
-     */
-    public function setTopicCount($topicCount);
 
     /**
      * 获取avatar的路径.
@@ -171,13 +142,6 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      * @return string
      */
     public function getLocale();
-
-    /**
-     * 获取专栏
-     *
-     * @return CategoryInterface[]|Collection
-     */
-    public function getCategories();
 
     /**
      * 获取积分
