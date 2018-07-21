@@ -2,8 +2,15 @@
 
 namespace PHPDish\Bundle\PostBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class PHPDishPostBundle extends Bundle
+class PHPDishPostBundle extends AbstractBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'PHPDish\Bundle\PostBundle\Model';
+    }
 }

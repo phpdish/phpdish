@@ -1,34 +1,21 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace  PHPDish\Bundle\PostBundle\Model;
 
-use PHPDish\Bundle\CoreBundle\Model\ContentInterface;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeInterface;
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+use PHPDish\Component\Cms\Model\PostInterface as BasePostInterface;
 
-interface PostInterface extends IdentifiableInterface,
-    ContentInterface, DateTimeInterface, UserAwareInterface, VotableInterface, EnabledInterface
+interface PostInterface extends IdentifiableInterface, BasePostInterface
 {
-    /**
-     * 获取标题.
-     *
-     * @return string
-     */
-    public function getTitle();
-
-    /**
-     * 设置标题.
-     *
-     * @param string $title
-     *
-     * @return $this
-     */
-    public function setTitle($title);
-
     /**
      * 设置题图.
      *
@@ -44,62 +31,6 @@ interface PostInterface extends IdentifiableInterface,
      * @return string
      */
     public function getCover();
-
-    /**
-     * 获取查看次数.
-     *
-     * @return int
-     */
-    public function getViewCount();
-
-    /**
-     * 设置查看次数.
-     *
-     * @param int $viewCount
-     *
-     * @return $this
-     */
-    public function setViewCount($viewCount);
-
-    /**
-     * 获取评论数量.
-     *
-     * @return int
-     */
-    public function getCommentCount();
-
-    /**
-     * 添加阅读数
-     *
-     * @param int $viewCount
-     * @return $this
-     */
-    public function addViewCount($viewCount);
-
-    /**
-     * 设置评论数量.
-     *
-     * @param int $commentCount
-     *
-     * @return $this
-     */
-    public function setCommentCount($commentCount);
-
-    /**
-     * 自增评论数量.
-     *
-     * @param int $count
-     *
-     * @return $this
-     */
-    public function increaseCommentCount($count = 1);
-
-    /**
-     * 获取字数.
-     *
-     * @return int
-     */
-    public function getWordCount();
 
     /**
      * 获取分类.
@@ -118,25 +49,9 @@ interface PostInterface extends IdentifiableInterface,
     public function setCategory(CategoryInterface $category);
 
     /**
-     * 获取摘要
-     *
-     * @return string
-     */
-    public function getSummary();
-
-    /**
-     * 提取文章中的图片.
-     *
-     * @return array
-     */
-    public function getImages();
-
-    /**
-     * 检查文章是否是属于指定用户.
-     *
-     * @param UserInterface $user
+     * 是否推荐.
      *
      * @return bool
      */
-    public function isBelongsTo(UserInterface $user);
+    public function isRecommended();
 }

@@ -1,29 +1,31 @@
 <?php
 
-namespace PHPDish\Bundle\PostBundle\Entity;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Money\Money;
-use PHPDish\Bundle\CoreBundle\Entity\Taxonomy;
-use PHPDish\Bundle\CoreBundle\Model\EnabledTrait;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableTrait;
-use PHPDish\Bundle\PostBundle\Model\BookInterface;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Component\Cms\Model\AbstractTaxonomy;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-use JMS\Serializer\Annotation as JMS;
-
-class Category extends Taxonomy implements BookInterface
+class Category extends AbstractTaxonomy implements BookInterface
 {
-    use IdentifiableTrait, EnabledTrait;
+    use IdentifiableTrait;
 
     protected $cover;
 
     protected $recommended = false;
-
-    protected $postCount = 0;
 
     protected $followerCount = 0;
 
@@ -34,28 +36,21 @@ class Category extends Taxonomy implements BookInterface
 
     /**
      * @var PostInterface[]|Collection
-     * @JMS\Groups({"details"})
      */
     protected $posts;
 
     /**
      * 订阅者.
-     *
-     * @JMS\Groups({"details"})
      */
     protected $followers;
 
     /**
      * 创建人.
-     *
-     * @JMS\Groups({"details"})
      */
     protected $creator;
 
     /**
      * 管理员.
-     *
-     * @JMS\Groups({"details"})
      */
     protected $managers;
 
@@ -72,29 +67,6 @@ class Category extends Taxonomy implements BookInterface
         $this->posts = new ArrayCollection();
         $this->managers = new ArrayCollection();
         $this->followers = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPostCount($postCount)
-    {
-        $this->postCount = $postCount;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPostCount()
-    {
-        return $this->postCount;
     }
 
     /**
@@ -153,14 +125,6 @@ class Category extends Taxonomy implements BookInterface
         $this->creator = $creator;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPosts()
-    {
-        return $this->posts;
     }
 
     /**

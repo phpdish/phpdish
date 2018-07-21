@@ -1,19 +1,22 @@
 <?php
-/**
- * PHPDish post component.
+
+/*
+ * This file is part of the phpdish/phpdish
  *
- * @author Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace  PHPDish\Bundle\PostBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPDish\Bundle\CoreBundle\Model\EnabledInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\CoreBundle\Model\TaxonomyInterface;
+use PHPDish\Component\Cms\Model\TaxonomyInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface, EnabledInterface
+interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface
 {
     /**
      * 获取封面.
@@ -44,22 +47,6 @@ interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface, En
      * @return UserInterface
      */
     public function getCreator();
-
-    /**
-     * 设置文章数量.
-     *
-     * @param int $postCount
-     *
-     * @return CategoryInterface
-     */
-    public function setPostCount($postCount);
-
-    /**
-     * 获取文章数量.
-     *
-     * @return int
-     */
-    public function getPostCount();
 
     /**
      * 获取订阅人数量.
@@ -126,13 +113,6 @@ interface CategoryInterface extends IdentifiableInterface, TaxonomyInterface, En
      * @return UserInterface[]|ArrayCollection
      */
     public function getManagers();
-
-    /**
-     * 获取所有文档
-     *
-     * @return PostInterface[]|ArrayCollection
-     */
-    public function getPosts();
 
     /**
      * 是否推荐.

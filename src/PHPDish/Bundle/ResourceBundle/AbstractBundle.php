@@ -19,6 +19,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 abstract class AbstractBundle extends Bundle
 {
     /**
+     * @var string
+     */
+    protected $modelNamespace;
+
+    /**
      * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
@@ -33,7 +38,13 @@ abstract class AbstractBundle extends Bundle
      * 获取实体命名空间
      * @return string
      */
-    abstract protected function getModelNamespace();
+    protected function getModelNamespace()
+    {
+        if ($this->modelNamespace) {
+            return $this->modelNamespace;
+        }
+        return $this->modelNamespace = __NAMESPACE__ . '\Model';
+    }
 
     /**
      * 获取bundle前缀

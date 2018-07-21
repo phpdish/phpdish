@@ -1,11 +1,19 @@
 <?php
 
-namespace PHPDish\Bundle\PostBundle\Model;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use PHPDish\Bundle\CoreBundle\Model\CommentInterface as BaseCommentInterface;
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\CoreBundle\Model\VotableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+namespace  PHPDish\Bundle\PostBundle\Model;
+
+use PHPDish\Component\Cms\Model\CommentInterface as BaseCommentInterface;
+use PHPDish\Component\Cms\Model\VotableInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface CommentInterface extends IdentifiableInterface, BaseCommentInterface, VotableInterface
 {
@@ -24,11 +32,4 @@ interface CommentInterface extends IdentifiableInterface, BaseCommentInterface, 
      * @return PostInterface
      */
     public function getPost();
-
-    /**
-     * 是否属于某个用户.
-     *
-     * @param UserInterface $user
-     */
-    public function isBelongsTo(UserInterface $user);
 }
