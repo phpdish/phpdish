@@ -12,7 +12,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
-
     </mapped-superclass>
 
 </doctrine-mapping>

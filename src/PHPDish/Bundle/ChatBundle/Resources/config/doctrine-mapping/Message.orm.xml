@@ -4,17 +4,17 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <one-to-many field="metadata" target-entity="PHPDish\Bundle\ChatBundle\Entity\MessageMetadata" mapped-by="message" fetch="LAZY">
+    <one-to-many field="metadata" target-entity="FOS\MessageBundle\Entity\MessageMetadata" mapped-by="message" fetch="LAZY">
       <cascade>
         <cascade-all/>
       </cascade>
     </one-to-many>
-    <many-to-one field="thread" target-entity="PHPDish\Bundle\ChatBundle\Entity\Thread" inversed-by="messages" fetch="LAZY">
+    <many-to-one field="thread" target-entity="FOS\MessageBundle\Model\Thread" inversed-by="messages" fetch="LAZY">
       <join-columns>
         <join-column name="thread_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="sender" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+    <many-to-one field="sender" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
       <join-columns>
         <join-column name="sender_id" referenced-column-name="id"/>
       </join-columns>
