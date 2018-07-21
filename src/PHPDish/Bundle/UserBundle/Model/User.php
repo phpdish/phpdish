@@ -1,16 +1,22 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\UserBundle\Model;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use PHPDish\Bundle\CoreBundle\Model\DateTimeTrait;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
-use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 
 class User extends BaseUser implements UserInterface, ParticipantInterface
