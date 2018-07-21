@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\WebBundle\Repository;
+namespace PHPDish\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\WebBundle\Entity\FriendLink;
