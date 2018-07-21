@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPDish\Bundle\NotificationBundle\Entity;
+namespace PHPDish\Bundle\NotificationBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use PHPDish\Bundle\CoreBundle\Model\CommentInterface;
