@@ -6,7 +6,7 @@ use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\TopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\PostBundle\Event\PostEvent;
-use PHPDish\Bundle\UserBundle\Entity\PointHistory;
+use PHPDish\Bundle\UserBundle\Model\PointHistory;
 use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;

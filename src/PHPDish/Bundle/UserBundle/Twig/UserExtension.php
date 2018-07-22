@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\UserBundle\Twig;
 
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\UserBundle\Entity\PointHistory;
+use PHPDish\Bundle\UserBundle\Model\PointHistory;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;

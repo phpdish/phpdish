@@ -11,7 +11,7 @@ use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Model\User;
 use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserFollowedEvent;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;

@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\UserBundle\Form\Type;
 
 use PHPDish\Bundle\CoreBundle\Locale\LocaleManager;
-use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Model\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

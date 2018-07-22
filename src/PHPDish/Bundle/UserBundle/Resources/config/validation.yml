@@ -1,4 +1,4 @@
-PHPDish\Bundle\UserBundle\Entity\User:
+PHPDish\Bundle\UserBundle\Model\User:
 
 #    constraints:
 #        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:

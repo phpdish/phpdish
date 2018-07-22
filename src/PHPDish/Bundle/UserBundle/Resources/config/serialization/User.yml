@@ -1,4 +1,4 @@
-PHPDish\Bundle\UserBundle\Entity\User:
+PHPDish\Bundle\UserBundle\Model\User:
     attributes:
         id:
             groups: [Default, Detailed, searchable]

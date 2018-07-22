@@ -1,7 +1,7 @@
 services:
   phpdish.admin.user:
         class: PHPDish\Bundle\AdminBundle\Admin\UserAdmin
-        arguments: [~, PHPDish\Bundle\UserBundle\Entity\User, ~]
+        arguments: [~, PHPDish\Bundle\UserBundle\Model\User, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.user, group: 'phpdish.admin.group.user' }
         public: true

@@ -33,7 +33,7 @@ PHPDish\Bundle\ForumBundle\Entity\Reply:
             groups: [Detailed]
         user:
             expose: true
-            type: PHPDish\Bundle\UserBundle\Entity\User
+            type: PHPDish\Bundle\UserBundle\Model\User
             groups: [Detailed]
         topic:
             expose: true

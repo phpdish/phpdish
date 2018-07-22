@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\UserBundle\EventListener;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Enqueue\Client\Message;
 use Enqueue\Client\Producer;
-use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Model\User;
 use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;

@@ -8,7 +8,7 @@ use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\CoreBundle\Search\SearchProviderInterface;
 use PHPDish\Bundle\ForumBundle\Entity\Topic;
 use PHPDish\Bundle\PostBundle\Entity\Post;
-use PHPDish\Bundle\UserBundle\Entity\User;
+use PHPDish\Bundle\UserBundle\Model\User;
 
 class AlgoliaSearch implements SearchProviderInterface
 {

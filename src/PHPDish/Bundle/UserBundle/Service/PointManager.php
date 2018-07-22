@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\UserBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\UserBundle\Entity\PointHistory;
+use PHPDish\Bundle\UserBundle\Model\PointHistory;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 

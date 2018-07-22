@@ -15,13 +15,13 @@ services:
         class: PHPDish\Bundle\UserBundle\EventListener\UserListener
         arguments: ['@event_dispatcher']
         tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Entity\User, event: postPersist,  method: postPersist}
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Model\User, event: postPersist,  method: postPersist}
 
     phpdish.event_listener.user_create:
         class: PHPDish\Bundle\UserBundle\EventListener\UserCreateListener
         arguments: ['@router', '@phpdish.avatar_generator.user']
         tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Entity\User, event: prePersist,  method: prePersist}
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Model\User, event: prePersist,  method: prePersist}
             - {name: kernel.event_listener, event: fos_user.registration.success,  method: onRegisterSuccess}
 
     phpdish.event_listener.resetting:

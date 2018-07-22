@@ -20,7 +20,7 @@ easy_admin:
 
     entities:
         User:
-            class: PHPDish\Bundle\UserBundle\Entity\User
+            class: PHPDish\Bundle\UserBundle\Model\User
             label: '用户'
             disabled_actions: ['new', 'delete']
             list:

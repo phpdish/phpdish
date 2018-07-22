@@ -80,7 +80,7 @@ liip_imagine:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: PHPDish\Bundle\UserBundle\Entity\User
+    user_class: PHPDish\Bundle\UserBundle\Model\User
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
@@ -144,7 +144,7 @@ algolia_search:
           enable_serializer_groups: true
 
         - name: users
-          class: PHPDish\Bundle\UserBundle\Entity\User
+          class: PHPDish\Bundle\UserBundle\Model\User
           enable_serializer_groups: true
 
 ## Html 清理
