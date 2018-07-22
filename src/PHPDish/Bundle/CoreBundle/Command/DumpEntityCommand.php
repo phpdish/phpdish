@@ -23,7 +23,7 @@ class DumpEntityCommand extends ContainerAwareCommand
         'reply' => 'PHPDish\Bundle\ForumBundle\Model\Reply',
 
         'user' => 'PHPDish\Bundle\UserBundle\Model\User',
-        'notification' => 'PHPDish\Bundle\NotificationBundle\Model\Notification',
+        'notification' => 'PHPDish\Bundle\NotificationBundle\Entity\Notification',
 
         'wallet' => 'PHPDish\Bundle\PaymentBundle\Model\Wallet',
         'payment' => 'PHPDish\Bundle\PaymentBundle\Model\Payment',

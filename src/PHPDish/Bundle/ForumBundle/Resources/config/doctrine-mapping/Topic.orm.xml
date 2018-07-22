@@ -6,22 +6,8 @@
       <generator strategy="AUTO"/>
     </id>
 
-    <field name="title" type="string" column="title" precision="0" scale="0" nullable="false"/>
-    <field name="repliedAt" type="datetime" column="replied_at" precision="0" scale="0" nullable="false"/>
-    <field name="replyCount" type="integer" column="reply_count" precision="0" scale="0" nullable="false"/>
     <field name="recommended" type="boolean" column="recommended" precision="0" scale="0" nullable="false"/>
     <field name="isTop" type="boolean" column="is_top" precision="0" scale="0" nullable="false"/>
-    <field name="body" type="text" column="body" precision="0" scale="0" nullable="false"/>
-    <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="false"/>
-    <field name="commentCount" type="integer" column="comment_count" precision="0" scale="0" nullable="false"/>
-    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
-      <gedmo:timestampable on="create"/>
-    </field>
-    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
-      <gedmo:timestampable on="update"/>
-    </field>
-    <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
-    <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
 
   </mapped-superclass>
 

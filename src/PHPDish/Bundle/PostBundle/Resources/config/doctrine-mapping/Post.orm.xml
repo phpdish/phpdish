@@ -6,29 +6,9 @@
       <generator strategy="AUTO"/>
     </id>
 
-    <field name="title" type="string" column="title" length="150" precision="0" scale="0" nullable="false"/>
     <field name="cover" type="string" column="cover" precision="0" scale="0" nullable="true"/>
     <field name="recommended" type="boolean" column="recommended" precision="0" scale="0" nullable="false"/>
 
-    <field name="commentCount" type="integer" column="comment_count" precision="0" scale="0" nullable="true">
-      <options>
-        <option name="default">0</option>
-      </options>
-    </field>
-    <field name="viewCount" type="integer" column="view_count" precision="0" scale="0" nullable="true">
-      <options>
-        <option name="default">0</option>
-      </options>
-    </field>
-
-    <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
-      <gedmo:timestampable on="create"/>
-    </field>
-    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
-      <gedmo:timestampable on="update"/>
-    </field>
-
-    <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
 
     <field name="left" type="integer" column="lft" precision="0" scale="0" nullable="false">
       <gedmo:tree-left/>
@@ -39,12 +19,6 @@
     <field name="level" type="integer" column="lvl" precision="0" scale="0" nullable="false">
       <gedmo:tree-level/>
     </field>
-
-
-    <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
-    <field name="body" type="text" column="body" precision="0" scale="0" nullable="true"/>
-    <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="true"/>
-
 
     <many-to-one field="category" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" inversed-by="posts" fetch="LAZY">
       <join-columns>

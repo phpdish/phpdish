@@ -3,6 +3,18 @@
 
   <entity name="PHPDish\Bundle\CoreBundle\Model\Post" table="posts">
 
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+
+    <many-to-one field="lastCommentUser" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
+      <join-columns>
+        <join-column name="last_comment_user_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+
     <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="votedPosts" fetch="LAZY">
       <cascade>
         <cascade-persist/>
@@ -17,11 +29,6 @@
       </join-table>
     </many-to-many>
 
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
-      <join-columns>
-        <join-column name="user_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
   </entity>
 
 </doctrine-mapping>

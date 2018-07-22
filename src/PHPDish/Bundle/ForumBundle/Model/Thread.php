@@ -37,6 +37,11 @@ class Thread extends AbstractTaxonomy implements ThreadInterface
      */
     protected $followers;
 
+    /**
+     * @var integer
+     */
+    protected $topicCount;
+
     public function __construct()
     {
         $this->followers = new ArrayCollection();
