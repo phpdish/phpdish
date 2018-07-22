@@ -18,38 +18,11 @@
     </field>
     <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
 
-    <one-to-many field="posts" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="category" fetch="LAZY">
+    <one-to-many field="posts" target-entity="PHPDish\Bundle\PostBundle\Model\PostInterface" mapped-by="category" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>
     </one-to-many>
 
-    <many-to-one field="creator" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="categories" fetch="LAZY">
-      <join-columns>
-        <join-column name="user_id" referenced-column-name="id" nullable="true"/>
-      </join-columns>
-    </many-to-one>
-
-    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="followingCategories" fetch="EXTRA_LAZY">
-      <join-table name="categories_followers">
-        <join-columns>
-          <join-column name="category_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="user_id" referenced-column-name="id" nullable="true"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
-
-    <many-to-many field="managers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
-      <join-table name="categories_managers">
-        <join-columns>
-          <join-column name="category_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="user_id" referenced-column-name="id" nullable="true"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
   </mapped-superclass>
 </doctrine-mapping>

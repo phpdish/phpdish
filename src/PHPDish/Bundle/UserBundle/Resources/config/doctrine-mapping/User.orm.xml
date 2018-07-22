@@ -37,13 +37,13 @@
       <gedmo:timestampable on="update"/>
     </field>
 
-    <one-to-one field="profile" target-entity="PHPDish\Bundle\UserBundle\Entity\Profile" mapped-by="user" fetch="LAZY">
+    <one-to-one field="profile" target-entity="PHPDish\Bundle\UserBundle\Model\ProfileInterface" mapped-by="user" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>
     </one-to-one>
 
-    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="following" fetch="EXTRA_LAZY">
+    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="following" fetch="EXTRA_LAZY">
       <join-table name="users_followers">
         <join-columns>
           <join-column name="user_id" referenced-column-name="id"/>
@@ -54,17 +54,9 @@
       </join-table>
     </many-to-many>
 
-    <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="followers" fetch="EXTRA_LAZY"/>
+    <many-to-many field="following" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" mapped-by="followers" fetch="EXTRA_LAZY"/>
 
-    <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="followers" fetch="LAZY"/>
-    <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Entity\Thread" mapped-by="followers" fetch="LAZY"/>
-    <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Entity\Topic" mapped-by="voters" fetch="LAZY"/>
-    <many-to-many field="votedReplies" target-entity="PHPDish\Bundle\ForumBundle\Entity\Reply" mapped-by="voters" fetch="LAZY"/>
-    <many-to-many field="votedPosts" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="voters" fetch="LAZY"/>
-    <many-to-many field="votedComments" target-entity="PHPDish\Bundle\PostBundle\Entity\Comment" mapped-by="voters" fetch="LAZY"/>
-
-    <one-to-many field="categories" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" mapped-by="creator" fetch="LAZY"/>
-    <one-to-many field="pointHistories" target-entity="PHPDish\Bundle\UserBundle\Entity\PointHistory" mapped-by="user" fetch="LAZY"/>
+    <one-to-many field="pointHistories" target-entity="PHPDish\Bundle\UserBundle\Model\PointHistoryInterface" mapped-by="user" fetch="LAZY"/>
 
     <attribute-overrides>
       <attribute-override name="email">

@@ -11,16 +11,5 @@
     <field name="followerCount" type="integer" column="follower_count" length="10" precision="0" scale="0" nullable="false"/>
     <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
 
-    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="followingThreads" fetch="EXTRA_LAZY">
-      <join-table name="threads_followers">
-        <join-columns>
-          <join-column name="thread_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="user_id" referenced-column-name="id" nullable="1"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
-
   </mapped-superclass>
 </doctrine-mapping>

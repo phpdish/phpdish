@@ -46,48 +46,29 @@
     <field name="originalBody" type="text" column="original_body" precision="0" scale="0" nullable="true"/>
 
 
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
-      <join-columns>
-        <join-column name="user_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="category" target-entity="PHPDish\Bundle\PostBundle\Entity\Category" inversed-by="posts" fetch="LAZY">
+    <many-to-one field="category" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" inversed-by="posts" fetch="LAZY">
       <join-columns>
         <join-column name="category_id" referenced-column-name="id" nullable="1"/>
       </join-columns>
     </many-to-one>
 
-    <many-to-one field="root" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" fetch="LAZY">
+    <many-to-one field="root" target-entity="PHPDish\Bundle\PostBundle\Model\PostInterface" fetch="LAZY">
       <join-columns>
         <join-column name="root_id" referenced-column-name="id" on-delete="CASCADE" nullable="1"/>
       </join-columns>
       <gedmo:tree-root/>
     </many-to-one>
 
-    <many-to-one field="parent" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" inversed-by="children" fetch="LAZY">
+    <many-to-one field="parent" target-entity="PHPDish\Bundle\PostBundle\Model\PostInterface" inversed-by="children" fetch="LAZY">
       <join-columns>
         <join-column name="parent_id" referenced-column-name="id" nullable="1"/>
       </join-columns>
       <gedmo:tree-parent/>
     </many-to-one>
 
-    <one-to-many field="children" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" mapped-by="parent" fetch="LAZY"/>
+    <one-to-many field="children" target-entity="PHPDish\Bundle\PostBundle\Model\PostInterface" mapped-by="parent" fetch="LAZY"/>
 
     <gedmo:tree type="nested"/>
-
-    <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="votedPosts" fetch="LAZY">
-      <cascade>
-        <cascade-persist/>
-      </cascade>
-      <join-table name="posts_voters">
-        <join-columns>
-          <join-column name="post_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="user_id" referenced-column-name="id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
 
   </mapped-superclass>
 

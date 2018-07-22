@@ -26,12 +26,13 @@
     </field>
     <field name="enabled" type="boolean" column="enabled" precision="0" scale="0" nullable="false"/>
 
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="wallet" target-entity="PHPDish\Bundle\PaymentBundle\Entity\Wallet" inversed-by="histories" fetch="LAZY">
+
+    <many-to-one field="wallet" target-entity="PHPDish\Bundle\PaymentBundle\Model\WalletInterface" inversed-by="histories" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>

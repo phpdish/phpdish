@@ -5,6 +5,6 @@
       <generator strategy="AUTO"/>
     </id>
     <field name="name" type="string" column="name" precision="0" scale="0" nullable="false"/>
-    <many-to-many field="users" target-entity="PHPDish\Bundle\UserBundle\Entity\User" mapped-by="roles" fetch="LAZY"/>
+    <many-to-many field="users" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" mapped-by="roles" fetch="LAZY"/>
   </mapped-superclass>
 </doctrine-mapping>

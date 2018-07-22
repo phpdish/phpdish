@@ -23,6 +23,6 @@
       <gedmo:timestampable on="update"/>
     </field>
 
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="pointHistories" fetch="LAZY"/>
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="pointHistories" fetch="LAZY"/>
   </mapped-superclass>
 </doctrine-mapping>

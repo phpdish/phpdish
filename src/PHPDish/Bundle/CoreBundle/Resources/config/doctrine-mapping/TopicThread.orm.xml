@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="PHPDish\Bundle\CoreBundle\Model\TopicThread" table="threads">
-
+    <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="followingThreads" fetch="EXTRA_LAZY">
+      <join-table name="threads_followers">
+        <join-columns>
+          <join-column name="thread_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="user_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 </doctrine-mapping>

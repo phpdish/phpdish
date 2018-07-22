@@ -7,27 +7,10 @@
 
     <field name="voteCount" type="integer" column="vote_count" precision="0" scale="0" nullable="false"/>
 
-    <many-to-one field="post" target-entity="PHPDish\Bundle\PostBundle\Entity\Post" fetch="LAZY">
+    <many-to-one field="post" target-entity="PHPDish\Bundle\PostBundle\Model\PostInterface" fetch="LAZY">
       <join-columns>
         <join-column name="post_id" referenced-column-name="id" nullable="1"/>
       </join-columns>
     </many-to-one>
-
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
-      <join-columns>
-        <join-column name="user_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-
-    <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Entity\User" inversed-by="votedComments" fetch="EXTRA_LAZY">
-      <join-table name="comments_voters">
-        <join-columns>
-          <join-column name="comment_id" referenced-column-name="id"/>
-        </join-columns>
-        <inverse-join-columns>
-          <join-column name="user_id" referenced-column-name="id"/>
-        </inverse-join-columns>
-      </join-table>
-    </many-to-many>
   </mapped-superclass>
 </doctrine-mapping>

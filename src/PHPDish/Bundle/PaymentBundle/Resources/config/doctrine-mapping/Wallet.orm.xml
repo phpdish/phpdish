@@ -15,12 +15,13 @@
       <gedmo:timestampable on="update"/>
     </field>
 
-    <one-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Entity\User" fetch="LAZY">
+    <one-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>
       </join-columns>
     </one-to-one>
-    <one-to-many field="histories" target-entity="PHPDish\Bundle\PaymentBundle\Entity\Payment" mapped-by="wallet" fetch="LAZY">
+
+    <one-to-many field="histories" target-entity="PHPDish\Bundle\PaymentBundle\Model\PaymentInterface" mapped-by="wallet" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>

@@ -2,7 +2,45 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
   <entity name="PHPDish\Bundle\CoreBundle\Model\Topic" table="topics">
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
 
+    <many-to-one field="lastReplyUser" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
+      <join-columns>
+        <join-column name="last_reply_user_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+
+    <many-to-many field="threads" target-entity="PHPDish\Bundle\ForumBundle\Model\ThreadInterface" fetch="LAZY">
+      <cascade>
+        <cascade-persist/>
+      </cascade>
+      <join-table name="topics_threads">
+        <join-columns>
+          <join-column name="topic_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="thread_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+
+    <many-to-many field="voters" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="votedTopics" fetch="EXTRA_LAZY">
+      <cascade>
+        <cascade-persist/>
+      </cascade>
+      <join-table name="topics_voters">
+        <join-columns>
+          <join-column name="topic_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="user_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 
 </doctrine-mapping>
