@@ -14,7 +14,7 @@ use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
+use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
 use PHPDish\Component\Mention\MentionParserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

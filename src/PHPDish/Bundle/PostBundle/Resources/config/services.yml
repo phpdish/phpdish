@@ -62,7 +62,7 @@ services:
         public: false
 
     phpdish.avatar_generator.category:
-        class: PHPDish\Component\Core\AvatarGenerator\AvatarGenerator
+        class: PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGenerator
         arguments: ['@phpdish.media.file_manager', '@phpdish.media.file_namer']
 
     phpdish.event_listener.category_persist:

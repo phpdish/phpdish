@@ -12,7 +12,7 @@ use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
+use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

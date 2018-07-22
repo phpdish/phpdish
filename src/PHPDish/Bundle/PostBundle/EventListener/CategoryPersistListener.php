@@ -4,7 +4,7 @@ namespace PHPDish\Bundle\PostBundle\EventListener;
 
 use PHPDish\Bundle\PostBundle\Event\CategoryCreateEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
-use PHPDish\Component\Core\AvatarGenerator\AvatarGeneratorInterface;
+use PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGeneratorInterface;
 
 final class CategoryPersistListener
 {

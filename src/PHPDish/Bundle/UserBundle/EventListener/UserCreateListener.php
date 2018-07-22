@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\UserBundle\EventListener;
 use Carbon\Carbon;
 use FOS\UserBundle\Event\FormEvent;
 use PHPDish\Bundle\UserBundle\Model\User;
-use PHPDish\Component\Core\AvatarGenerator\AvatarGeneratorInterface;
+use PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 

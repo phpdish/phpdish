@@ -17,7 +17,7 @@ services:
         arguments: ['@phpdish.mention.adapter']
 
     phpdish.body_processor:
-        class: PHPDish\Component\Core\BodyProcessor\BodyProcessor
+        class: PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessor
         arguments:
             - "@markdown.parser"
             - "@phpdish.mention.parser"

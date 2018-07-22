@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\UserManipulator;
-use PHPDish\Component\Core\AvatarGenerator\AvatarGeneratorInterface;
+use PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGeneratorInterface;
 
 class UserFixtures extends Fixture
 {

@@ -39,7 +39,7 @@ class PointManager
      * @param string $type
      * @return PointHistory
      */
-    public function createPointHistory(UserInterface $user, $amount, $type = PointHistory::TYPE_AWARD)
+    public function createPointHistory(UserInterface $user, $amount, $type = null)
     {
         $history = new PointHistory();
         $history->setUser($user)

@@ -14,7 +14,7 @@ use PHPDish\Bundle\PostBundle\Event\VoteCommentEvent;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use PHPDish\Component\Core\BodyProcessor\BodyProcessorInterface;
+use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CommentManager implements CommentManagerInterface
