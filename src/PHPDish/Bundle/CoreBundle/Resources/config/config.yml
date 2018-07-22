@@ -117,8 +117,8 @@ fos_rest:
 # FOSMessage
 fos_message:
     db_driver: orm
-    thread_class: PHPDish\Bundle\ChatBundle\Entity\Thread
-    message_class: PHPDish\Bundle\ChatBundle\Entity\Message
+    thread_class: PHPDish\Bundle\ChatBundle\Model\Thread
+    message_class: PHPDish\Bundle\ChatBundle\Model\Message
 
 httplug:
     plugins:
@@ -136,11 +136,11 @@ algolia_search:
     prefix: staging
     indices:
         - name: posts
-          class: PHPDish\Bundle\PostBundle\Entity\Post
+          class: PHPDish\Bundle\PostBundle\Model\Post
           enable_serializer_groups: true
 
         - name: topics
-          class: PHPDish\Bundle\ForumBundle\Entity\Topic
+          class: PHPDish\Bundle\ForumBundle\Model\Topic
           enable_serializer_groups: true
 
         - name: users

@@ -14,7 +14,7 @@ use PHPDish\Bundle\PostBundle\Repository\PostRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use PHPDish\Bundle\PostBundle\Entity\Post;
+use PHPDish\Bundle\PostBundle\Model\Post;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class PostManager implements PostManagerInterface

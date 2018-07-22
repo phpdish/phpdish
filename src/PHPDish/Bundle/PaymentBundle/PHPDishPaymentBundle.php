@@ -3,9 +3,9 @@
 namespace PHPDish\Bundle\PaymentBundle;
 
 use PHPDish\Bundle\PaymentBundle\DependencyInjection\PHPDishPaymentExtension;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class PHPDishPaymentBundle extends Bundle
+class PHPDishPaymentBundle extends AbstractBundle
 {
     /**
      * {@inheritdoc}

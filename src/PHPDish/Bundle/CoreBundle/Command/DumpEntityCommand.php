@@ -14,19 +14,19 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DumpEntityCommand extends ContainerAwareCommand
 {
     const MAP = [
-        'post' => 'PHPDish\Bundle\PostBundle\Entity\Post',
-        'category' => 'PHPDish\Bundle\PostBundle\Entity\Category',
-        'comment' => 'PHPDish\Bundle\PostBundle\Entity\Comment',
+        'post' => 'PHPDish\Bundle\PostBundle\Model\Post',
+        'category' => 'PHPDish\Bundle\PostBundle\Model\Category',
+        'comment' => 'PHPDish\Bundle\PostBundle\Model\Comment',
 
-        'thread' => 'PHPDish\Bundle\ForumBundle\Entity\Thread',
-        'topic' => 'PHPDish\Bundle\ForumBundle\Entity\Topic',
-        'reply' => 'PHPDish\Bundle\ForumBundle\Entity\Reply',
+        'thread' => 'PHPDish\Bundle\ForumBundle\Model\Thread',
+        'topic' => 'PHPDish\Bundle\ForumBundle\Model\Topic',
+        'reply' => 'PHPDish\Bundle\ForumBundle\Model\Reply',
 
         'user' => 'PHPDish\Bundle\UserBundle\Model\User',
-        'notification' => 'PHPDish\Bundle\NotificationBundle\Entity\Notification',
+        'notification' => 'PHPDish\Bundle\NotificationBundle\Model\Notification',
 
-        'wallet' => 'PHPDish\Bundle\PaymentBundle\Entity\Wallet',
-        'payment' => 'PHPDish\Bundle\PaymentBundle\Entity\Payment',
+        'wallet' => 'PHPDish\Bundle\PaymentBundle\Model\Wallet',
+        'payment' => 'PHPDish\Bundle\PaymentBundle\Model\Payment',
     ];
 
     /**

@@ -9,8 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-
-namespace PHPDish\Bundle\ChatBundle\Entity;
+namespace PHPDish\Bundle\ChatBundle\Model;
 
 use FOS\MessageBundle\Entity\MessageMetadata as BaseMessageMetadata;
 

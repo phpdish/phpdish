@@ -11,7 +11,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CoreBundle\Controller\RestController;
-use PHPDish\Bundle\PostBundle\Entity\Post;
+use PHPDish\Bundle\PostBundle\Model\Post;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;

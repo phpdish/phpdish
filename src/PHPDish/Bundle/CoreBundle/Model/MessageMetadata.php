@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use PHPDish\Bundle\ChatBundle\Entity\MessageMetadata as BaseMessageMetadata;
+use PHPDish\Bundle\ChatBundle\Model\MessageMetadata as BaseMessageMetadata;
 
 class MessageMetadata extends BaseMessageMetadata
 {

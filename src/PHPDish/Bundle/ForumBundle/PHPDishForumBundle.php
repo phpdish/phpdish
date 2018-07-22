@@ -2,8 +2,8 @@
 
 namespace PHPDish\Bundle\ForumBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class PHPDishForumBundle extends Bundle
+class PHPDishForumBundle extends AbstractBundle
 {
 }

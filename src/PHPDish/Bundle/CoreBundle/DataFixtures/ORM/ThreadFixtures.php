@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\CoreBundle\DataFixtures\ORM;
 use Carbon\Carbon;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use PHPDish\Bundle\ForumBundle\Entity\Thread;
+use PHPDish\Bundle\ForumBundle\Model\Thread;
 
 class ThreadFixtures extends Fixture
 {

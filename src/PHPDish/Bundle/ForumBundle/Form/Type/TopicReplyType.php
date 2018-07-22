@@ -2,7 +2,7 @@
 
 namespace PHPDish\Bundle\ForumBundle\Form\Type;
 
-use PHPDish\Bundle\ForumBundle\Entity\Reply;
+use PHPDish\Bundle\ForumBundle\Model\Reply;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;

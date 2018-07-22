@@ -1,4 +1,4 @@
-PHPDish\Bundle\PostBundle\Entity\Category:
+PHPDish\Bundle\PostBundle\Model\Category:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
              fields: [slug]
@@ -29,7 +29,7 @@ PHPDish\Bundle\PostBundle\Entity\Category:
                  maxMessage: category.description.max_length
 
 
-PHPDish\Bundle\PostBundle\Entity\Post:
+PHPDish\Bundle\PostBundle\Model\Post:
     properties:
         title:
             - NotBlank:

@@ -2,8 +2,8 @@
 
 namespace PHPDish\Bundle\ChatBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class PHPDishChatBundle extends Bundle
+class PHPDishChatBundle extends AbstractBundle
 {
 }

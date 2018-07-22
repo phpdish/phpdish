@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\UserBundle\Model;
 
-use PHPDish\Bundle\CoreBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
 interface ProfileInterface extends IdentifiableInterface
 {

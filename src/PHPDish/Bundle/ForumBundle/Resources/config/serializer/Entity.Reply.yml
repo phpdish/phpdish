@@ -1,4 +1,4 @@
-PHPDish\Bundle\ForumBundle\Entity\Reply:
+PHPDish\Bundle\ForumBundle\Model\Reply:
     exclusion_policy: ALL
     xml_root_name: reply
     properties:
@@ -37,5 +37,5 @@ PHPDish\Bundle\ForumBundle\Entity\Reply:
             groups: [Detailed]
         topic:
             expose: true
-            type: PHPDish\Bundle\ForumBundle\Entity\Topic
+            type: PHPDish\Bundle\ForumBundle\Model\Topic
             groups: [Detailed]

@@ -94,4 +94,4 @@ services:
         public: false
         arguments: ['@phpdish.manager.post', '@phpdish.manager.user']
         tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\PostBundle\Entity\Post, event: postPersist, method: postPersist}
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\PostBundle\Model\Post, event: postPersist, method: postPersist}

@@ -4,7 +4,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <many-to-one field="thread" target-entity="PHPDish\Bundle\ChatBundle\Entity\Thread" inversed-by="metadata" fetch="LAZY">
+    <many-to-one field="thread" target-entity="PHPDish\Bundle\ChatBundle\Model\Thread" inversed-by="metadata" fetch="LAZY">
       <join-columns>
         <join-column name="thread_id" referenced-column-name="id"/>
       </join-columns>

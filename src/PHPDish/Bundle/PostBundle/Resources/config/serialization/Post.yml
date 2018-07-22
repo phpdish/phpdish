@@ -1,4 +1,4 @@
-PHPDish\Bundle\PostBundle\Entity\Post:
+PHPDish\Bundle\PostBundle\Model\Post:
     attributes:
         id:
             groups: [Default, Detailed, searchable]

@@ -46,7 +46,7 @@ easy_admin:
 
 
         Post:
-            class: PHPDish\Bundle\PostBundle\Entity\Post
+            class: PHPDish\Bundle\PostBundle\Model\Post
             label: '文章'
             disabled_actions: ['edit']
             list:
@@ -63,7 +63,7 @@ easy_admin:
                       - { property: 'createdAt', label: '创建时间' }
 
         Category:
-            class: PHPDish\Bundle\PostBundle\Entity\Category
+            class: PHPDish\Bundle\PostBundle\Model\Category
             label: '专栏'
             disabled_actions: ['delete']
             list:
@@ -93,7 +93,7 @@ easy_admin:
 
 
         Topic:
-            class: PHPDish\Bundle\ForumBundle\Entity\Topic
+            class: PHPDish\Bundle\ForumBundle\Model\Topic
             label: '话题'
             disabled_actions: ['edit', 'new']
             list:
@@ -110,7 +110,7 @@ easy_admin:
 
 
         Thread:
-            class: PHPDish\Bundle\ForumBundle\Entity\Thread
+            class: PHPDish\Bundle\ForumBundle\Model\Thread
             label: '话题节点'
             disabled_actions: ['delete']
             list:
@@ -151,7 +151,7 @@ easy_admin:
 
         # 钱包
         Wallet:
-            class: PHPDish\Bundle\PaymentBundle\Entity\Wallet
+            class: PHPDish\Bundle\PaymentBundle\Model\Wallet
             label: '钱包'
             disabled_actions: ['edit', 'delete', 'new']
             list:
@@ -168,7 +168,7 @@ easy_admin:
 
         # 钱包
         Payment:
-            class: PHPDish\Bundle\PaymentBundle\Entity\Payment
+            class: PHPDish\Bundle\PaymentBundle\Model\Payment
             label: '交易历史'
             disabled_actions: ['edit', 'delete', 'new']
             list:

@@ -9,7 +9,7 @@ use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
-use PHPDish\Bundle\PostBundle\Entity\Category;
+use PHPDish\Bundle\PostBundle\Model\Category;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;

@@ -2,8 +2,8 @@
 
 namespace PHPDish\Bundle\NotificationBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 
-class PHPDishNotificationBundle extends Bundle
+class PHPDishNotificationBundle extends AbstractBundle
 {
 }

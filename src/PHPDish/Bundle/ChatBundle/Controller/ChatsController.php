@@ -4,7 +4,7 @@ namespace PHPDish\Bundle\ChatBundle\Controller;
 
 use FOS\MessageBundle\FormModel\NewThreadMessage;
 use FOS\MessageBundle\Provider\ProviderInterface;
-use PHPDish\Bundle\ChatBundle\Entity\Chat;
+use PHPDish\Bundle\ChatBundle\Model\Chat;
 use PHPDish\Bundle\ChatBundle\Form\Type\NewChatType;
 use PHPDish\Bundle\ChatBundle\Message\Provider;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait;

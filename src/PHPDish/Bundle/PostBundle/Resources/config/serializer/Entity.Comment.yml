@@ -1,4 +1,4 @@
-PHPDish\Bundle\PostBundle\Entity\Comment:
+PHPDish\Bundle\PostBundle\Model\Comment:
     exclusion_policy: ALL
     xml_root_name: comment
     properties:
@@ -13,5 +13,5 @@ PHPDish\Bundle\PostBundle\Entity\Comment:
             groups: [Default, Detailed]
         post:
             expose: true
-            type: PHPDish\Bundle\PostBundle\Entity\Post
+            type: PHPDish\Bundle\PostBundle\Model\Post
             groups: [Detailed]

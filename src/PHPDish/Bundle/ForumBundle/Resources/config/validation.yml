@@ -1,4 +1,4 @@
-PHPDish\Bundle\ForumBundle\Entity\Thread:
+PHPDish\Bundle\ForumBundle\Model\Thread:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
              fields: [slug]
@@ -27,7 +27,7 @@ PHPDish\Bundle\ForumBundle\Entity\Thread:
                  maxMessage: thread.description.max_length
 
 
-PHPDish\Bundle\ForumBundle\Entity\Topic:
+PHPDish\Bundle\ForumBundle\Model\Topic:
     properties:
         title:
             - NotBlank:

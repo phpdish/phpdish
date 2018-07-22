@@ -15,6 +15,7 @@ use PHPDish\Bundle\CoreBundle\Application\Plugin\DependencyInjection\Compiler\Re
 use PHPDish\Bundle\CoreBundle\DependencyInjection\Compiler\AlgoliaPass;
 use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PHPDishCoreBundle extends AbstractBundle
 {
@@ -23,15 +24,8 @@ class PHPDishCoreBundle extends AbstractBundle
      */
     public function build(ContainerBuilder $container)
     {
+        parent::build($container);
         $container->addCompilerPass(new AlgoliaPass());
         $container->addCompilerPass(new RegisterPluginPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace()
-    {
-        return 'PHPDish\Bundle\CoreBundle\Model';
     }
 }

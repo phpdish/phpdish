@@ -1,4 +1,4 @@
-PHPDish\Bundle\PostBundle\Entity\Post:
+PHPDish\Bundle\PostBundle\Model\Post:
     exclusion_policy: ALL
     xml_root_name: post
     properties:

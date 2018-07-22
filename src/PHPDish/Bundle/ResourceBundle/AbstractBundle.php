@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\ResourceBundle;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 abstract class AbstractBundle extends Bundle
@@ -28,7 +29,7 @@ abstract class AbstractBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createYamlMappingDriver(
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
             [$this->getConfigFilesPath() => $this->getModelNamespace()],
             [sprintf('%s.object_manager', $this->getBundlePrefix())]
         ));
@@ -43,7 +44,7 @@ abstract class AbstractBundle extends Bundle
         if ($this->modelNamespace) {
             return $this->modelNamespace;
         }
-        return $this->modelNamespace = __NAMESPACE__ . '\Model';
+        return $this->modelNamespace = $this->getNamespace() . '\Model';
     }
 
     /**

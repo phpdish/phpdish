@@ -5,7 +5,7 @@ namespace PHPDish\Bundle\PaymentBundle\Service;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\PaymentBundle\Entity\Payment;
+use PHPDish\Bundle\PaymentBundle\Model\Payment;
 use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;

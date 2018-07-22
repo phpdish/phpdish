@@ -1,4 +1,4 @@
-PHPDish\Bundle\PaymentBundle\Entity\Payment:
+PHPDish\Bundle\PaymentBundle\Model\Payment:
     exclusion_policy: ALL
     xml_root_name: payment
     properties:
@@ -53,5 +53,5 @@ PHPDish\Bundle\PaymentBundle\Entity\Payment:
             groups: [Detailed]
         wallet:
             expose: true
-            type: PHPDish\Bundle\PaymentBundle\Entity\Wallet
+            type: PHPDish\Bundle\PaymentBundle\Model\Wallet
             groups: [Detailed]
