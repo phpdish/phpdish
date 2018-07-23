@@ -9,10 +9,5 @@
         <join-column name="message_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="participant" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
-      <join-columns>
-        <join-column name="participant_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
   </mapped-superclass>
 </doctrine-mapping>

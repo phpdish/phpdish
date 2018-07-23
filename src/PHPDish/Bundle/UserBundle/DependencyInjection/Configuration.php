@@ -2,6 +2,8 @@
 
 namespace PHPDish\Bundle\UserBundle\DependencyInjection;
 
+use PHPDish\Bundle\UserBundle\Model\User;
+use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -18,11 +20,21 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('php_dish_user');
+        $rootNode = $treeBuilder->root('phpdish_user');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('resources')
+                    ->children()
+                        ->arrayNode('user')
+                            ->children()
+                                ->scalarNode('interface')->defaultValue(UserInterface::class)->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue(User::class)->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

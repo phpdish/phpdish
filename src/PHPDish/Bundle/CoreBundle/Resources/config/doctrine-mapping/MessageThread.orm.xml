@@ -4,12 +4,6 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <one-to-many field="metadata" target-entity="PHPDish\Bundle\ChatBundle\Model\ThreadMetadata" mapped-by="thread" fetch="LAZY">
-      <cascade>
-        <cascade-all/>
-      </cascade>
-    </one-to-many>
-    <one-to-many field="messages" target-entity="PHPDish\Bundle\ChatBundle\Model\Message" mapped-by="thread" fetch="LAZY"/>
     <many-to-one field="createdBy" target-entity="PHPDish\Bundle\UserBundle\Model\User" fetch="LAZY">
       <join-columns>
         <join-column name="created_by_id" referenced-column-name="id"/>

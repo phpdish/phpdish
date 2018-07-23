@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\UserBundle;
 
 use PHPDish\Bundle\ResourceBundle\AbstractBundle;
 use PHPDish\Bundle\UserBundle\DependencyInjection\Compiler\FOSCompatiblePass;
+use PHPDish\Bundle\UserBundle\DependencyInjection\PHPDishUserExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class PHPDishUserBundle extends AbstractBundle
@@ -27,11 +28,11 @@ class PHPDishUserBundle extends AbstractBundle
         $container->addCompilerPass(new FOSCompatiblePass());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace()
+    public function getContainerExtension()
     {
-        return 'PHPDish\Bundle\UserBundle\Model';
+        if (null === $this->extension) {
+            $this->extension = new PHPDishUserExtension();
+        }
+        return $this->extension;
     }
 }

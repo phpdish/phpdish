@@ -2,6 +2,11 @@
 
 namespace PHPDish\Bundle\PaymentBundle\DependencyInjection;
 
+use PHPDish\Bundle\PaymentBundle\Model\Payment;
+use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
+use PHPDish\Bundle\PaymentBundle\Model\Wallet;
+use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -28,6 +33,32 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('kdt_id')->cannotBeEmpty()->end()
                 ->end()
             ->end();
+
+        $this->addResourcesSection($rootNode);
+
         return $treeBuilder;
+    }
+
+    protected function addResourcesSection(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode
+            ->children()
+                ->arrayNode('resources')
+                    ->children()
+                        ->arrayNode('payment')
+                            ->children()
+                                ->scalarNode('interface')->defaultValue(PaymentInterface::class)->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue(Payment::class)->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('wallet')
+                            ->children()
+                                ->scalarNode('interface')->defaultValue(WalletInterface::class)->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue(Wallet::class)->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }
