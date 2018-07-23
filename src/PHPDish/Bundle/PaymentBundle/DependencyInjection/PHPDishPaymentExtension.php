@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PaymentBundle\DependencyInjection;
 
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractExtension;
 use Slince\YouzanPay\ApiContext;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,7 +17,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class PHPDishPaymentExtension extends Extension
+class PHPDishPaymentExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -40,6 +41,8 @@ class PHPDishPaymentExtension extends Extension
                 $youzanPayDef->replaceArgument(0, new Reference('phpdish.payment_gateway.youzan.api_context'));
             }
         }
+
+        $this->registerResources($config['resources'], $container);
     }
 
     /**

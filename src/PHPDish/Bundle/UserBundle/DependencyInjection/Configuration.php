@@ -2,6 +2,10 @@
 
 namespace PHPDish\Bundle\UserBundle\DependencyInjection;
 
+use PHPDish\Bundle\UserBundle\Model\PointHistory;
+use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
+use PHPDish\Bundle\UserBundle\Model\Profile;
+use PHPDish\Bundle\UserBundle\Model\ProfileInterface;
 use PHPDish\Bundle\UserBundle\Model\User;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -30,6 +34,18 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('interface')->defaultValue(UserInterface::class)->cannotBeEmpty()->end()
                                 ->scalarNode('model')->defaultValue(User::class)->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('profile')
+                            ->children()
+                                ->scalarNode('interface')->defaultValue(ProfileInterface::class)->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue(Profile::class)->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('point_history')
+                            ->children()
+                                ->scalarNode('interface')->defaultValue(PointHistoryInterface::class)->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue(PointHistory::class)->cannotBeEmpty()->end()
                             ->end()
                         ->end()
                     ->end()

@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\PostBundle\DependencyInjection;
 
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -12,7 +13,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class PHPDishPostExtension extends Extension
+class PHPDishPostExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -24,6 +25,8 @@ class PHPDishPostExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $this->registerResources($config['resources'], $container);
     }
 
     /**
