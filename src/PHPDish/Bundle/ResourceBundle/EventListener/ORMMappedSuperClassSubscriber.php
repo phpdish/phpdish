@@ -73,11 +73,7 @@ final class ORMMappedSuperClassSubscriber implements EventSubscriber
             return;
         }
 
-        try {
-            $resourceMetadata = $this->resourceRegistry->getResourceItemByModel($metadata->getName());
-        } catch (\InvalidArgumentException $exception) {
-            return;
-        }
+        $resourceMetadata = $this->resourceRegistry->getResourceItemByModel($metadata->getName());
 
         if ($metadata->getName() === $resourceMetadata['model']) {
             $metadata->isMappedSuperclass = false;

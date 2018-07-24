@@ -65,11 +65,10 @@ class ResourceRegistry
      */
     public function getResourceItemByModel($model)
     {
-        $item = [];
         foreach ($this->resources as $alias => $resource) {
             foreach ($resource as $resourceItem) {
                 if ($resourceItem['model'] === $model) {
-                    return $resource;
+                    return $resourceItem;
                 }
             }
         }
