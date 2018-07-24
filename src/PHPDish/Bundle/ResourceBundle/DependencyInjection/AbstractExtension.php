@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 abstract class AbstractExtension extends Extension
 {
-
     protected function registerResources(array $resources, ContainerBuilder $container) {
 
         $resolvedResources = $container->hasParameter('phpdish.resources')
