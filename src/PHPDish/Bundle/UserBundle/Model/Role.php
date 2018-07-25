@@ -3,10 +3,10 @@
 namespace PHPDish\Bundle\UserBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use Symfony\Component\Security\Core\Role\Role as BaseRole;
 
-class Role extends BaseRole
+class Role extends BaseRole implements IdentifiableInterface
 {
     /**
      * @var int

@@ -61,6 +61,13 @@ final class ORMMappedSuperClassSubscriber implements EventSubscriber
             $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
         } else {
             $this->unsetAssociationMappings($metadata);
+
+            if (false && $metadata->getName() === 'PHPDish\Bundle\ChatBundle\Model\Message') {
+                dump($this->isResource($metadata));
+                dump($metadata->getName());
+                dump($metadata->associationMappings);
+                exit;
+            }
         }
     }
 
@@ -168,11 +175,11 @@ final class ORMMappedSuperClassSubscriber implements EventSubscriber
      */
     protected function isResource(ClassMetadata $metadata): bool
     {
-        if (!$reflClass = $metadata->getReflectionClass()) {
+        if (!$reflectionClass = $metadata->getReflectionClass()) {
             return false;
         }
 
-        return $reflClass->implementsInterface(IdentifiableInterface::class);
+        return $reflectionClass->implementsInterface(IdentifiableInterface::class);
     }
 
     protected function getReflectionService()

@@ -13,7 +13,8 @@
 namespace PHPDish\Bundle\ChatBundle\Model;
 
 use FOS\MessageBundle\Entity\Message as BaseMessage;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
-class Message extends BaseMessage
+class Message extends BaseMessage implements IdentifiableInterface
 {
 }

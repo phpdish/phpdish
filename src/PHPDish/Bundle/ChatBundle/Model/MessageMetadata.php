@@ -12,7 +12,8 @@
 namespace PHPDish\Bundle\ChatBundle\Model;
 
 use FOS\MessageBundle\Entity\MessageMetadata as BaseMessageMetadata;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
-class MessageMetadata extends BaseMessageMetadata
+class MessageMetadata extends BaseMessageMetadata implements IdentifiableInterface
 {
 }

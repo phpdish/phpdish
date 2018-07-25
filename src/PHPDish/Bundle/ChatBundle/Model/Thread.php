@@ -13,7 +13,8 @@
 namespace PHPDish\Bundle\ChatBundle\Model;
 
 use FOS\MessageBundle\Entity\Thread as BaseThread;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
-class Thread extends BaseThread
+class Thread extends BaseThread implements IdentifiableInterface
 {
 }

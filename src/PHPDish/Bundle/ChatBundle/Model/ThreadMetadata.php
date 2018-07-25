@@ -12,7 +12,8 @@
 namespace PHPDish\Bundle\ChatBundle\Model;
 
 use FOS\MessageBundle\Entity\ThreadMetadata as BaseThreadMetadata;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 
-class ThreadMetadata extends BaseThreadMetadata
+class ThreadMetadata extends BaseThreadMetadata implements IdentifiableInterface
 {
 }
