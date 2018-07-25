@@ -19,9 +19,8 @@ abstract class AbstractConfiguration
     {
         $rootNode
             ->children()
-                ->scalarNode('default_templates_namespace')->defaultNull()->end()
+                ->scalarNode('templates_namespace')->defaultNull()->end()
                 ->arrayNode('templates')
-                    ->addDefaultsIfNotSet()
                     ->scalarPrototype()->end()
                 ->end()
             ->end();

@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\ResourceBundle\Controller;
 
-class Configuration
+class ResourceConfiguration implements ResourceConfigurationInterface
 {
     /**
      * @var array

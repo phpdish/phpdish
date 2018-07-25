@@ -1,6 +1,6 @@
 services:
     phpdish.resource.configuration:
-        class: PHPDish\Bundle\ResourceBundle\Controller\Configuration
+        class: PHPDish\Bundle\ResourceBundle\Controller\ResourceConfiguration
 
     phpdish.resource.event_subscriber.orm_mapped_super_class:
          class: PHPDish\Bundle\ResourceBundle\EventListener\ORMMappedSuperClassSubscriber

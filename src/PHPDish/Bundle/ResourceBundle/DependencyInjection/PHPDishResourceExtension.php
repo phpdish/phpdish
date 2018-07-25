@@ -11,6 +11,7 @@
 
 namespace PHPDish\Bundle\ResourceBundle\DependencyInjection;
 
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -26,7 +27,15 @@ class PHPDishResourceExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        if ($config['templates_namespace']) {
+            $container->setParameter('phpdish.templates_namespace', $config['templates_namespace']);
+        }
+        // load default services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        //AutoConfigure
+        $container->registerForAutoconfiguration(ResourceConfigurationInterface::class)
+            ->addTag('phpdish.resource_configuration');
     }
 }

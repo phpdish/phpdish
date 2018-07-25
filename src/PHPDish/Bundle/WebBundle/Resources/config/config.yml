@@ -49,6 +49,9 @@ sylius_theme:
     sources:
         filesystem: ~
 
+phpdish_resource:
+    templates_namespace: PHPDishWebBundle
+
 phpdish_post:
-    templates:
-         book.new: PHPDishWebBundle:Category:create.html.twig
+#    templates:
+#         book.new: PHPDishWebBundle:Category:create.html.twig

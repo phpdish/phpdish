@@ -23,6 +23,12 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('phpdish_resource');
+
+        $rootNode
+            ->children()
+            ->scalarNode('templates_namespace')->defaultNull()->end()
+            ->end();
+
         return $treeBuilder;
     }
 }
