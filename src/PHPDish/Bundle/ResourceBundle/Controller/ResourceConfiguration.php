@@ -29,6 +29,8 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     }
 
     /**
+     * 获取模板
+     *
      * @param string $key
      * @return string
      */
@@ -48,5 +50,15 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     public function setDefaultTemplateNamespace($defaultTemplateNamespace)
     {
         $this->defaultTemplateNamespace = $defaultTemplateNamespace;
+    }
+
+    /**
+     * 设置默认空间
+     *
+     * @param string $defaultTemplateNamespace
+     */
+    public function setDefaultTemplatesNamespaceIfNull($defaultTemplateNamespace)
+    {
+        $this->defaultTemplateNamespace || ($this->defaultTemplateNamespace = $defaultTemplateNamespace);
     }
 }

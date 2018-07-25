@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
+use PHPDish\Bundle\CmsBundle\Utility\StringManipulator;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Form\Type\BookType;
 use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
-use PHPDish\Component\Util\StringManipulator;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +29,11 @@ class BookController extends ResourceController
     use ManagerTrait;
 
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
+
+    /**
+     * @var ResourceConfigurationInterface
+     */
+    protected $configuration;
 
     /**
      * 创建电子书
@@ -54,7 +68,7 @@ class BookController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:create.html.twig'), [
             'form' => $form->createView(),
             'hasManyCategories' => $number >= 5,
             'isBook' => true
@@ -72,7 +86,7 @@ class BookController extends ResourceController
     public function viewAction($slug, Request $request)
     {
         $book = $this->getBookManager()->findBook($slug);
-        return $this->render('PHPDishWebBundle:Book:view.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:view.html.twig'), [
             'book' => $book,
         ]);
     }
@@ -106,7 +120,7 @@ class BookController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:create.html.twig'), [
             'form' => $form->createView(),
             'category' => $book,
             'hasManyCategories' => false,
@@ -127,7 +141,7 @@ class BookController extends ResourceController
         $book = $this->getBookManager()->findBook($slug);
         $chaptersTree = $this->getBookManager()->findBookChaptersTree($book);
 
-        return $this->render('PHPDishWebBundle:Book:summary.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:summary.html.twig'), [
             'book' => $book,
             'chaptersTree' => $chaptersTree
         ]);
@@ -149,7 +163,7 @@ class BookController extends ResourceController
         $book = $this->getBookManager()->findBook($slug);
         $users = $this->getUserManager()->findCategoryFollowers($book, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Book:followers.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:followers.html.twig'), [
             'book' => $book,
             'users' => $users,
         ]);
@@ -185,7 +199,7 @@ class BookController extends ResourceController
             ->addMeta('property', 'og:url',  $this->generateUrl('book_read', ['slug' => $slug, 'chapterId' => $chapter->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $summary);
 
-        return $this->render('PHPDishWebBundle:Book:read.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:read.html.twig'), [
             'book' => $book,
             'chapter' => $chapter,
             'chaptersTree' => $chaptersTree
@@ -206,7 +220,7 @@ class BookController extends ResourceController
     {
         $user = $this->getUserManager()->findUserByName($username);
         $books = $this->getBookManager()->findUserBooks($user);
-        return $this->render('PHPDishWebBundle:Book:user_books.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:user_books.html.twig'), [
             'user' => $user,
             'books' => $books
         ]);
@@ -294,7 +308,7 @@ class BookController extends ResourceController
                 $this->addFlash('error', $translator->trans('book.add_chapter_error'));
             }
         }
-        return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:create_chapter.html.twig'), [
             'form' => $form->createView()
         ]);
     }
@@ -333,7 +347,7 @@ class BookController extends ResourceController
                 $this->addFlash('error', $translator->trans('book.edit_chapter_error'));
             }
         }
-        return $this->render('PHPDishWebBundle:Book:create_chapter.html.twig', [
+        return $this->render($this->configuration->getTemplate('Book:create_chapter.html.twig'), [
             'form' => $form->createView(),
             'chapter' => $chapter
         ]);

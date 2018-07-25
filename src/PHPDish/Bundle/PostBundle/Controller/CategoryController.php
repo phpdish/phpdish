@@ -62,7 +62,7 @@ class CategoryController extends ResourceController
             }
         }
 
-        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:create.html.twig'), [
             'form' => $form->createView(),
             'hasManyCategories' => $number >= 2,
             'isBook' => false
@@ -95,7 +95,7 @@ class CategoryController extends ResourceController
         }
         $posts = $this->getPostManager()->findPostsPager($criteria, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Category:view.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:view.html.twig'), [
             'category' => $category,
             'posts' => $posts,
         ]);
@@ -130,7 +130,7 @@ class CategoryController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Category:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:create.html.twig'), [
             'form' => $form->createView(),
             'category' => $category,
             'hasManyCategories' => false,
@@ -154,7 +154,7 @@ class CategoryController extends ResourceController
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
         $users = $this->getUserManager()->findCategoryFollowers($category, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Category:followers.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:followers.html.twig'), [
             'category' => $category,
             'users' => $users,
         ]);
@@ -225,7 +225,7 @@ class CategoryController extends ResourceController
     {
         $categories = $this->getCategoryManager()->findUserCategories($user);
 
-        return $this->render('PHPDishWebBundle:Category:user_categories.html.twig', [
+        return $this->render($this->configuration->getTemplate('Category:user_categories.html.twig'), [
             'categories' => $categories,
             'user' => $user,
         ]);

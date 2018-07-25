@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taosikai
- * Date: 2017/7/1
- * Time: 13:08.
- */
 
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
+use PHPDish\Bundle\CmsBundle\Utility\StringManipulator;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Model\Post;
 use PHPDish\Bundle\PostBundle\Event\Events;
@@ -21,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
-use PHPDish\Component\Util\StringManipulator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -41,7 +35,7 @@ class PostController extends ResourceController
     {
         $posts = $this->getPostManager()->findLatestEnabledPosts($request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Post:index.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:index.html.twig'), [
             'posts' => $posts,
         ]);
     }
@@ -86,7 +80,7 @@ class PostController extends ResourceController
             }
         }
 
-        return $this->render('PHPDishWebBundle:Post:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:create.html.twig'), [
             'form' => $form->createView(),
         ]);
     }
@@ -132,7 +126,7 @@ class PostController extends ResourceController
             ->addMeta('property', 'og:url',  $this->generateUrl('post_view', ['id' => $post->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $summary);
 
-        return $this->render('PHPDishWebBundle:Post:view.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:view.html.twig'), [
             'post' => $post,
             'comments' => $comments,
             'form' => $form->createView(),
@@ -168,7 +162,7 @@ class PostController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Post:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:create.html.twig'), [
             'form' => $form->createView(),
             'post' => $post,
         ]);
@@ -214,7 +208,7 @@ class PostController extends ResourceController
         $user = $this->getUserManager()->findUserByName($username);
         $posts = $this->getPostManager()->findUserEnabledPosts($user, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Post:user_posts.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:user_posts.html.twig'), [
             'user' => $user,
             'posts' => $posts,
         ]);
@@ -234,7 +228,7 @@ class PostController extends ResourceController
             ->setMaxResults($limit);
         $posts = $this->getPostManager()->findPosts($criteria);
 
-        return $this->render('PHPDishWebBundle:Post:recommend_posts.html.twig', [
+        return $this->render($this->configuration->getTemplate('Post:recommend_posts.html.twig'), [
             'posts' => $posts,
         ]);
     }

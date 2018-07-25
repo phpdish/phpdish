@@ -14,5 +14,11 @@ namespace PHPDish\Bundle\ResourceBundle\Controller;
 
 interface ResourceConfigurationInterface
 {
-
+    /**
+     * 获取模板
+     *
+     * @param string $key
+     * @return string
+     */
+    public function getTemplate($key);
 }
