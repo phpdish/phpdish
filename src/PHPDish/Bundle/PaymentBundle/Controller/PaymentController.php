@@ -4,7 +4,7 @@ namespace PHPDish\Bundle\PaymentBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
 use JMS\Serializer\SerializationContext;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PaymentBundle\Form\Type\PaymentType;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaymentController extends RestController
+class PaymentController extends ResourceController
 {
     use ManagerTrait;
 

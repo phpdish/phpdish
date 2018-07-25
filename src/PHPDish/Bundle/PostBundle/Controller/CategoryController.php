@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Event\CategoryCreateEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Form\Type\CategoryType;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class CategoryController extends RestController
+class CategoryController extends ResourceController
 {
     use ManagerTrait;
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;

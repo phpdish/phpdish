@@ -3,14 +3,14 @@
 namespace PHPDish\Bundle\UserBundle\Controller;
 
 use Carbon\Carbon;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends RestController
+class UserController extends ResourceController
 {
     use ManagerTrait;
 

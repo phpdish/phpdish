@@ -10,7 +10,7 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Model\Post;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostEvent;
@@ -25,7 +25,7 @@ use PHPDish\Component\Util\StringManipulator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class PostController extends RestController
+class PostController extends ResourceController
 {
     use ManagerTrait;
     use UserManagerTrait;

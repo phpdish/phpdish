@@ -4,7 +4,7 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\TopicEvent;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class TopicController extends RestController
+class TopicController extends ResourceController
 {
     use ManagerTrait;
 

@@ -3,12 +3,12 @@
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TopicReplyController extends RestController
+class TopicReplyController extends ResourceController
 {
     use ManagerTrait;
 

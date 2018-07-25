@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Form\Type\BookType;
 use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
 use PHPDish\Component\Util\StringManipulator;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class BookController extends RestController
+class BookController extends ResourceController
 {
     use ManagerTrait;
 

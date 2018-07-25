@@ -2,11 +2,8 @@
 
 namespace PHPDish\Bundle\CoreBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 
-class RestController extends FOSRestController
+class RestController extends ResourceController
 {
-    const HTTP_BAD_REQUEST = 400;
-    const HTTP_OK = 200;
-    const HTTP_CREATED = 201;
 }

@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\PostBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
-use PHPDish\Bundle\CoreBundle\Controller\RestController;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostCommentedEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CommentController extends RestController
+class CommentController extends ResourceController
 {
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
     use ManagerTrait;
