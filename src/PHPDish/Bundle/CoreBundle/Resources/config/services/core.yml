@@ -31,11 +31,6 @@ services:
     phpdish.pinyin_translator:
         class: Overtrue\Pinyin\Pinyin
 
-    ## 安全裁切html
-    phpdish.html_chunker:
-        class: PHPDish\Component\Util\HtmlChunker
-        arguments: ['@exercise_html_purifier.default']
-
     ## 搜索服务，如果需要其它服务可以自行替换
     phpdish.searcher:
         class: PHPDish\Bundle\CoreBundle\Search\Algolia\AlgoliaSearch

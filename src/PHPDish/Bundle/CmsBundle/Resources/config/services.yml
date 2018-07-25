@@ -1,0 +1,15 @@
+services:
+    _defaults:
+       autowire: true
+       autoconfigure: true
+       public: false
+
+    ## 安全裁切html
+    phpdish.html_chunker:
+        class: PHPDish\Component\Util\HtmlChunker
+        arguments: ['@exercise_html_purifier.default']
+
+    # 核心twig扩展
+    phpdish.twig_extension.core:
+         class: PHPDish\Bundle\CmsBundle\Twig\CmsExtension
+         tags: ['twig.extension']

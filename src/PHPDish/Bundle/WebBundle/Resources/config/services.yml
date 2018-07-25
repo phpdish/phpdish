@@ -1,17 +1,4 @@
 services:
-    phpdish.manager.friend_link:
-        class: PHPDish\Bundle\WebBundle\Service\FriendLinkManager
-        arguments: ['@doctrine.orm.entity_manager']
-        public: true
-
-    phpdish.twig_extension.friend_link:
-         class: PHPDish\Bundle\WebBundle\Twig\FriendLinkExtension
-         arguments: ['@phpdish.manager.friend_link']
-         public: false
-         tags:
-            - { name: twig.extension}
-
-
    # Main Menu
     phpdish.menu_builder.main_menu:
         class: PHPDish\Bundle\WebBundle\Menu\MainMenuBuilder

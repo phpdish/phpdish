@@ -1,10 +1,18 @@
 <?php
 
+/*
+ * This file is part of the PHPDish package.
+ *
+ * (c) Tao <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\WebBundle\Service;
+namespace PHPDish\Bundle\CoreBundle\Service;
 
-use PHPDish\Bundle\WebBundle\Entity\FriendLink;
+use PHPDish\Bundle\CoreBundle\Model\FriendLink;
 
 interface FriendLinkManagerInterface
 {

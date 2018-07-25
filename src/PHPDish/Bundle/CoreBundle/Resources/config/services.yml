@@ -26,14 +26,6 @@ services:
          tags:
             - { name: twig.extension}
 
-    # 核心twig扩展
-    phpdish.twig_extension.core:
-         class: PHPDish\Bundle\CoreBundle\Twig\CoreExtension
-         arguments: ['@phpdish.html_chunker']
-         public: false
-         tags:
-            - { name: twig.extension}
-
     # Pjax服务设置
     phpdish.pjax.helper:
          class: PHPDish\Component\Pjax\Helper\PjaxHelper
@@ -59,3 +51,16 @@ services:
          public: false
          tags:
             - { name: kernel.event_listener, event: 'kernel.exception', method: 'onKernelException', priority: 1}
+
+    phpdish.manager.friend_link:
+        class: PHPDish\Bundle\CoreBundle\Service\FriendLinkManager
+        arguments: ['@doctrine.orm.entity_manager']
+        public: true
+
+    phpdish.twig_extension.friend_link:
+         class: PHPDish\Bundle\CoreBundle\Twig\FriendLinkExtension
+         arguments: ['@phpdish.manager.friend_link']
+         public: false
+         tags:
+            - { name: twig.extension}
+

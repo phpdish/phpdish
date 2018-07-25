@@ -4,12 +4,12 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <one-to-many field="metadata" target-entity="FOS\MessageBundle\Entity\MessageMetadata" mapped-by="message" fetch="LAZY">
+    <one-to-many field="metadata" target-entity="FOS\MessageBundle\Model\MessageMetadata" mapped-by="message" fetch="LAZY">
       <cascade>
         <cascade-all/>
       </cascade>
     </one-to-many>
-    <many-to-one field="thread" target-entity="FOS\MessageBundle\Model\Thread" inversed-by="messages" fetch="LAZY">
+    <many-to-one field="thread" target-entity="FOS\MessageBundle\Model\ThreadInterface" inversed-by="messages" fetch="LAZY">
       <join-columns>
         <join-column name="thread_id" referenced-column-name="id"/>
       </join-columns>

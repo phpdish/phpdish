@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\WebBundle\Twig;
+namespace PHPDish\Bundle\CoreBundle\Twig;
 
-use PHPDish\Bundle\WebBundle\Service\FriendLinkManagerInterface;
+use PHPDish\Bundle\CoreBundle\Service\FriendLinkManagerInterface;
 
 class FriendLinkExtension extends \Twig_Extension
 {

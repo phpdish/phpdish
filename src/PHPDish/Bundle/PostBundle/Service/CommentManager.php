@@ -48,7 +48,7 @@ class CommentManager implements CommentManagerInterface
     ) {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
+//        $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
         $this->bodyProcessor = $bodyProcessor;
     }
 

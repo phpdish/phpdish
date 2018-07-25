@@ -1,12 +1,20 @@
 <?php
 
+/*
+ * This file is part of the PHPDish package.
+ *
+ * (c) Tao <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\WebBundle\Service;
+namespace PHPDish\Bundle\CoreBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\WebBundle\Entity\FriendLink;
+use PHPDish\Bundle\CoreBundle\Model\FriendLink;
 
 class FriendLinkManager implements FriendLinkManagerInterface
 {
@@ -23,8 +31,8 @@ class FriendLinkManager implements FriendLinkManagerInterface
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->friendLinkRepository = $this->entityManager
-            ->getRepository('PHPDishWebBundle:FriendLink');
+//        $this->friendLinkRepository = $this->entityManager
+//            ->getRepository('PHPDishWebBundle:FriendLink');
     }
 
     /**

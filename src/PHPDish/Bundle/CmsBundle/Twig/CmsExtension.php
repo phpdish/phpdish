@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Bundle\CoreBundle\Twig;
+namespace PHPDish\Bundle\CmsBundle\Twig;
 
 use Doctrine\Common\Collections\Criteria;
 use Emojione\Emojione;
-use PHPDish\Component\Util\HtmlChunker;
+use PHPDish\Bundle\CmsBundle\Utility\HtmlChunker;
 
-class CoreExtension extends \Twig_Extension
+class CmsExtension extends \Twig_Extension
 {
     /**
      * @var HtmlChunker

@@ -3,7 +3,7 @@
 namespace PHPDish\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\WebBundle\Entity\FriendLink;
+use PHPDish\Bundle\CoreBundle\Model\FriendLink;
 
 class FriendLinkRepository extends EntityRepository
 {
