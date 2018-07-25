@@ -48,3 +48,7 @@ sylius_theme:
     context: phpdish.theme.context.generic
     sources:
         filesystem: ~
+
+phpdish_post:
+    templates:
+         book.new: PHPDishWebBundle:Category:create.html.twig

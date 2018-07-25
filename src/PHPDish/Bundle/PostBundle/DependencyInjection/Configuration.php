@@ -8,6 +8,8 @@ use PHPDish\Bundle\PostBundle\Model\Comment;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\Post;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractConfiguration;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -16,7 +18,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -26,6 +28,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('phpdish_post');
 
+        $this->addResourcesSection($rootNode);
+        $this->addTemplatesSection($rootNode);
+
+        return $treeBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addResourcesSection(ArrayNodeDefinition $rootNode)
+    {
         $rootNode
             ->children()
                 ->arrayNode('resources')
@@ -51,6 +64,5 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
-        return $treeBuilder;
     }
 }

@@ -26,7 +26,9 @@ class PHPDishPostExtension extends AbstractExtension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        dump($config);exit;
         $this->registerResources($config['resources'], $container);
+        $this->registerResourcesConfiguration($config['resources'], $config['templates'], $config['default_templates_namespace'], $container);
     }
 
     /**

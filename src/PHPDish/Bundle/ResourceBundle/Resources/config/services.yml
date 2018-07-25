@@ -1,4 +1,7 @@
 services:
+    phpdish.resource.configuration:
+        class: PHPDish\Bundle\ResourceBundle\Controller\Configuration
+
     phpdish.resource.event_subscriber.orm_mapped_super_class:
          class: PHPDish\Bundle\ResourceBundle\EventListener\ORMMappedSuperClassSubscriber
          arguments: ['@phpdish.resource_registry']
