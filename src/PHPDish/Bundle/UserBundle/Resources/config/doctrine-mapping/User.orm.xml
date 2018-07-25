@@ -58,15 +58,6 @@
 
     <one-to-many field="pointHistories" target-entity="PHPDish\Bundle\UserBundle\Model\PointHistoryInterface" mapped-by="user" fetch="LAZY"/>
 
-    <attribute-overrides>
-      <attribute-override name="email">
-        <field nullable="true" unique="false"/>
-      </attribute-override>
-      <attribute-override name="emailCanonical">
-        <field nullable="true" unique="false"/>
-      </attribute-override>
-    </attribute-overrides>
-
   </mapped-superclass>
 
 </doctrine-mapping>

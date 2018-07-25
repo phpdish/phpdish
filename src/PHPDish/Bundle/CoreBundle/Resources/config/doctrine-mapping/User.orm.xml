@@ -2,6 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
   <entity name="PHPDish\Bundle\CoreBundle\Model\User" table="users">
+
     <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Model\ThreadInterface" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Model\TopicInterface" mapped-by="voters" fetch="LAZY"/>
@@ -10,6 +11,15 @@
     <many-to-many field="votedComments" target-entity="PHPDish\Bundle\PostBundle\Model\CommentInterface" mapped-by="voters" fetch="LAZY"/>
 
     <one-to-many field="categories" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" mapped-by="creator" fetch="LAZY"/>
+
+    <attribute-overrides>
+      <attribute-override name="email">
+        <field nullable="true" unique="false"/>
+      </attribute-override>
+      <attribute-override name="emailCanonical">
+        <field nullable="true" unique="false"/>
+      </attribute-override>
+    </attribute-overrides>
   </entity>
 
 </doctrine-mapping>

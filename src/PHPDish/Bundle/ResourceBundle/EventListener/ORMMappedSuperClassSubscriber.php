@@ -61,14 +61,10 @@ final class ORMMappedSuperClassSubscriber implements EventSubscriber
             $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
         } else {
             $this->unsetAssociationMappings($metadata);
-
-            if (false && $metadata->getName() === 'PHPDish\Bundle\ChatBundle\Model\Message') {
-                dump($this->isResource($metadata));
-                dump($metadata->getName());
-                dump($metadata->associationMappings);
-                exit;
-            }
         }
+        if ($metadata->getName() === 'PHPDish\Bundle\UserBundle\Model\User') {
+        }
+
     }
 
     /**
@@ -85,9 +81,6 @@ final class ORMMappedSuperClassSubscriber implements EventSubscriber
         if ($resourceMetadata === null) {
             return;
         }
-
-//        dump($metadata->getName());
-//        dump($resourceMetadata);exit;
 
         if ($metadata->getName() === $resourceMetadata['model']) {
             $metadata->isMappedSuperclass = false;
