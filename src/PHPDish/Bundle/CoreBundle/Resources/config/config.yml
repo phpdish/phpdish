@@ -1,8 +1,6 @@
 imports:
    - {resource: 'phpdish.yml'}
 
-
-
 doctrine:
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -85,7 +83,7 @@ liip_imagine:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: PHPDish\Bundle\UserBundle\Model\User
+    user_class: PHPDish\Bundle\CoreBundle\Model\User
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:

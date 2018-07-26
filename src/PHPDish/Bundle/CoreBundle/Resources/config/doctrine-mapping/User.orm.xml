@@ -3,6 +3,10 @@
 
   <entity name="PHPDish\Bundle\CoreBundle\Model\User" table="users">
 
+    <field name="postCount" type="integer" column="post_count" precision="0" scale="0" nullable="false"/>
+    <field name="topicCount" type="integer" column="topic_count" precision="0" scale="0" nullable="false"/>
+    <field name="locale" type="string" column="locale" precision="0" scale="0" nullable="true"/>
+    
     <many-to-many field="followingCategories" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="followingThreads" target-entity="PHPDish\Bundle\ForumBundle\Model\ThreadInterface" mapped-by="followers" fetch="LAZY"/>
     <many-to-many field="votedTopics" target-entity="PHPDish\Bundle\ForumBundle\Model\TopicInterface" mapped-by="voters" fetch="LAZY"/>
