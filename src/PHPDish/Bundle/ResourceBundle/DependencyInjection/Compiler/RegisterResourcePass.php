@@ -11,11 +11,12 @@
 
 namespace PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 
+/**
+ * 注册所有的资源到服务对象
+ */
 class RegisterResourcePass implements CompilerPassInterface
 {
     /**
@@ -23,12 +24,13 @@ class RegisterResourcePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('phpdish.resources')) {
+        if (
+            !$container->hasParameter('phpdish.resources')
+            || !$container->hasDefinition('phpdish.resource_registry')
+        ) {
             return;
         }
-        $resourceRegistry = new Definition(ResourceRegistry::class);
-        $resourceRegistry->setArgument(0, $container->getParameter('phpdish.resources'));
-
-        $container->setDefinition('phpdish.resource_registry', $resourceRegistry);
+        $resourceRegistry = $container->findDefinition('phpdish.resource_registry');
+        $resourceRegistry->replaceArgument(0, $container->getParameter('phpdish.resources'));
     }
 }
