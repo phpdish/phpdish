@@ -75,7 +75,7 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
         if ($new = !$reply->getId()) {
             $reply->getTopic()->addCommentCount(1)
                 ->setLastCommentAt(Carbon::now())
-                ->setCommentUser($reply->getUser());
+                ->setLastCommentUser($reply->getUser());
         }
 
         $this->entityManager->persist($reply);
@@ -155,7 +155,7 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
     {
         $reply->disable();
         $topic = $reply->getTopic();
-        $topic->setReplyCount($topic->getReplyCount() > 1 ? $topic->getReplyCount() - 1 : 0);
+        $topic->addCommentCount(-1);
         $this->entityManager->persist($reply);
         $this->entityManager->flush();
 
