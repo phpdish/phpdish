@@ -1,11 +1,21 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\ChatBundle\DependencyInjection;
 
 use PHPDish\Bundle\ChatBundle\Model\Message;
 use PHPDish\Bundle\ChatBundle\Model\MessageMetadata;
 use PHPDish\Bundle\ChatBundle\Model\Thread;
 use PHPDish\Bundle\ChatBundle\Model\ThreadMetadata;
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractConfiguration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -14,7 +24,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -59,6 +69,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
+        $this->addTemplatesSection($rootNode);
         return $treeBuilder;
     }
 }

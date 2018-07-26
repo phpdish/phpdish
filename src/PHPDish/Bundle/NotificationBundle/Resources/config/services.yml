@@ -3,6 +3,7 @@ services:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
         public: true
         arguments:
+            - ''
             - '@doctrine.orm.entity_manager'
             - '@translator'
 

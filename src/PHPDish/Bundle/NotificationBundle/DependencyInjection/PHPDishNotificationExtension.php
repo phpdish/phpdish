@@ -1,10 +1,19 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\DependencyInjection;
 
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -12,7 +21,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class PHPDishNotificationExtension extends Extension
+class PHPDishNotificationExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -24,5 +33,9 @@ class PHPDishNotificationExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        //注册到资源管理
+        $this->registerResources($config['resources'], $container);
+        $this->registerResourcesConfiguration($config['resources'], $config['templates'], $config['templates_namespace'], $container);
     }
 }

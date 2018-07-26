@@ -1,23 +1,31 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
-use PHPDish\Bundle\NotificationBundle\Entity\Notification;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class NotificationManager implements NotificationManagerInterface
+class NotificationManager implements NotificationManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -27,19 +35,18 @@ class NotificationManager implements NotificationManagerInterface
     protected $entityManager;
 
     /**
-     * @var EntityRepository
-     */
-    protected $notificationRepository;
-
-    /**
      * @var TranslatorInterface
      */
     protected $translator;
 
+    protected $notificationEntity;
+
     public function __construct(
+        $notificationEntity,
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator
     ) {
+        $this->notificationEntity = $notificationEntity;
         $this->entityManager = $entityManager;
         $this->translator = $translator;
 //        $this->notificationRepository = $entityManager->getRepository('PHPDishNotificationBundle:Notification');
@@ -250,7 +257,7 @@ class NotificationManager implements NotificationManagerInterface
      */
     public function getUserUnSeenNotificationCount(UserInterface $user)
     {
-        $qb = $this->notificationRepository->createQueryBuilder('n');
+        $qb = $this->getRepository()->createQueryBuilder('n');
 
         return $qb->select($qb->expr()->count('n'))
             ->where('n.user = :userId')->setParameter('userId', $user)
@@ -264,7 +271,7 @@ class NotificationManager implements NotificationManagerInterface
      */
     public function findUserNotifications(UserInterface $user, $page, $limit = null)
     {
-        $query = $this->notificationRepository->createQueryBuilder('n')
+        $query = $this->getRepository()->createQueryBuilder('n')
             ->where('n.user = :userId')->setParameter('userId', $user)
             ->orderBy('n.createdAt', 'desc')
             ->getQuery();
@@ -290,5 +297,23 @@ class NotificationManager implements NotificationManagerInterface
             ->where($qb->expr()->in('n.id', $notificationIds))
             ->getQuery()
             ->execute();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepository()
+    {
+        return $this->entityManager->getRepository($this->notificationEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return  [
+            'notificationEntity' => NotificationInterface::class
+        ];
     }
 }
