@@ -6,16 +6,14 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\CmsBundle\Utility\StringManipulator;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
-use PHPDish\Bundle\PostBundle\Model\Post;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostEvent;
 use PHPDish\Bundle\PostBundle\Form\Type\CommentType;
 use PHPDish\Bundle\PostBundle\Form\Type\PostType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait as UserManagerTrait;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -88,16 +86,16 @@ class PostController extends ResourceController
     /**
      * 查看文章.
      *
-     * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"})
-     * @Method("GET")
+     * @Route("/posts/{id}", name="post_view", requirements={"id": "\d+"}, methods={"GET"})
      *
-     * @param Post    $post
+     * @param int    $id
      * @param Request $request
      *
      * @return Response
      */
-    public function viewAction(Post $post, Request $request)
+    public function viewAction($id, Request $request)
     {
+        $post = $this->getPostManager()->findPostById($id);
         if (!$post->isEnabled()) {
             throw $this->createNotFoundException();
         }
@@ -171,8 +169,7 @@ class PostController extends ResourceController
     /**
      * 删除文章.
      *
-     * @Route("/posts/{id}", name="post_delete", requirements={"id": "\d+"})
-     * @Method("DELETE")
+     * @Route("/posts/{id}", name="post_delete", requirements={"id": "\d+"}, methods={"DELETE"})
      *
      * @param int $id
      *
