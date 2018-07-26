@@ -5,14 +5,14 @@ namespace PHPDish\Bundle\ForumBundle\Service;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Overtrue\Pinyin\Pinyin;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\ForumBundle\Model\Thread;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-class ThreadManager implements ThreadManagerInterface
+class ThreadManager implements ThreadManagerInterface, ServiceManagerInterface
 {
 
     use PaginatorTrait;
@@ -27,8 +27,11 @@ class ThreadManager implements ThreadManagerInterface
      */
     protected $pinyin;
 
-    public function __construct(EntityManagerInterface $entityManager, Pinyin $pinyin)
+    protected $threadEntity;
+
+    public function __construct($threadEntity, EntityManagerInterface $entityManager, Pinyin $pinyin)
     {
+        $this->threadEntity = $threadEntity;
         $this->entityManager = $entityManager;
         $this->pinyin = $pinyin;
     }
@@ -179,6 +182,16 @@ class ThreadManager implements ThreadManagerInterface
      */
     public function getThreadRepository()
     {
-        return $this->entityManager->getRepository('PHPDishForumBundle:Thread');
+        return $this->entityManager->getRepository($this->threadEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'threadEntity' => ThreadInterface::class
+        ];
     }
 }

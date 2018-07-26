@@ -11,15 +11,8 @@
 
 namespace PHPDish\Bundle\ResourceBundle\Service;
 
-interface ServiceManagerInterface
-{
-    /**
-     * @return string
-     */
-    public function getEntityClass();
+use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 
-    /**
-     * @param string $class
-     */
-    public function setEntityClass($class);
+interface ServiceManagerInterface extends EntitySubscriberInterface
+{
 }

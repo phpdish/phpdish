@@ -12,6 +12,8 @@
 namespace PHPDish\Bundle\ResourceBundle\DependencyInjection;
 
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
+use PHPDish\Bundle\ResourceBundle\Service\EntitySubscriberInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -37,6 +39,12 @@ class PHPDishResourceExtension extends Extension
         //AutoConfigure
         $container->registerForAutoconfiguration(ResourceConfigurationInterface::class)
             ->addTag('phpdish.resource_configuration');
+
+        $container->registerForAutoconfiguration(EntitySubscriberInterface::class)
+            ->addTag('phpdish.entity_subscriber');
+
+        $container->registerForAutoconfiguration(ServiceManagerInterface::class)
+            ->addTag('phpdish.service_manager');
     }
 
     /**

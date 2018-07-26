@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\ForumBundle\Service;
 
 use Carbon\Carbon;
@@ -11,12 +20,12 @@ use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
-class TopicManager implements TopicManagerInterface
+class TopicManager implements TopicManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -35,11 +44,18 @@ class TopicManager implements TopicManagerInterface
      */
     protected $eventDispatcher;
 
+    /**
+     * @var string
+     */
+    protected $topicEntity;
+
     public function __construct(
+        $topicEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         BodyProcessorInterface $bodyProcessor
     ) {
+        $this->topicEntity = $topicEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->bodyProcessor = $bodyProcessor;
@@ -53,9 +69,9 @@ class TopicManager implements TopicManagerInterface
         $topic = new Topic();
         $now = Carbon::now();
         $topic->setUser($user)
-            ->setRepliedAt($now)
+            ->setLastCommentAt($now)
             ->setCreatedAt($now)
-            ->setLastReplyUser($user);
+            ->setLastCommentUser($user);
 
         return $topic;
     }
@@ -72,7 +88,7 @@ class TopicManager implements TopicManagerInterface
         //给节点增加话题数
         if (!$topic->getId()) {
             foreach ($topic->getThreads() as $thread) {
-                $thread->setTopicCount($thread->getTopicCount() + 1);
+                $thread->addPostCount(1);
             }
         }
         $this->entityManager->persist($topic);
@@ -234,7 +250,7 @@ class TopicManager implements TopicManagerInterface
      */
     public function getTopicRepository()
     {
-        return $this->entityManager->getRepository('PHPDishForumBundle:Topic');
+        return $this->entityManager->getRepository($this->topicEntity);
     }
 
     /**
@@ -243,5 +259,15 @@ class TopicManager implements TopicManagerInterface
     public function getMaxPerPage()
     {
         return 20;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'topicEntity' => TopicInterface::class
+        ];
     }
 }

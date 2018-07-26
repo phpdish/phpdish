@@ -11,17 +11,12 @@
 
 namespace PHPDish\Bundle\ResourceBundle\Service;
 
-class ServiceManager
+interface EntitySubscriberInterface
 {
-    protected $entityClass;
-
-    public function setEntityClass($class)
-    {
-        $this->entityClass = $class;
-    }
-
-    public function getEntityClass()
-    {
-        return $this->entityClass;
-    }
+    /**
+     * 需要订阅的实体
+     *
+     * @return array
+     */
+    public static function getSubscribedEntities();
 }

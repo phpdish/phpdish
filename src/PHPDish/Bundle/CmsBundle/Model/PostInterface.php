@@ -123,11 +123,27 @@ interface PostInterface extends
     public function getLastCommentAt();
 
     /**
+     * 设置回复时间
+     *
+     * @param \DateTimeInterface $lastCommentAt
+     * @return self
+     */
+    public function setLastCommentAt(\DateTimeInterface $lastCommentAt);
+
+    /**
      * 获取上次评论的用户
      *
      * @return UserInterface
      */
     public function getLastCommentUser();
+
+    /**
+     * 设置回复人
+     *
+     * @param UserInterface $lastCommentUser
+     * @return self
+     */
+    public function setLastCommentUser(UserInterface $lastCommentUser);
 
     /**
      * 获取评论

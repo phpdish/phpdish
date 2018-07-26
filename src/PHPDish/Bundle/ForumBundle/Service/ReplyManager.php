@@ -13,12 +13,12 @@ use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
-use PHPDish\Component\Mention\MentionParserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ReplyManager implements ReplyManagerInterface
+class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
     /**
@@ -36,11 +36,15 @@ class ReplyManager implements ReplyManagerInterface
      */
     protected $eventDispatcher;
 
+    protected $replyEntity;
+
     public function __construct(
+        $replyEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         BodyProcessorInterface $bodyProcessor
     ) {
+        $this->replyEntity = $replyEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->bodyProcessor = $bodyProcessor;
@@ -69,9 +73,9 @@ class ReplyManager implements ReplyManagerInterface
             ->setBody($parsedBody);
 
         if ($new = !$reply->getId()) {
-            $reply->getTopic()->setReplyCount($reply->getTopic()->getReplyCount() + 1);
-            $reply->getTopic()->setRepliedAt(Carbon::now());
-            $reply->getTopic()->setLastReplyUser($reply->getUser());
+            $reply->getTopic()->addCommentCount(1)
+                ->setLastCommentAt(Carbon::now())
+                ->setCommentUser($reply->getUser());
         }
 
         $this->entityManager->persist($reply);
@@ -200,6 +204,16 @@ class ReplyManager implements ReplyManagerInterface
      */
     public function getReplyRepository(): EntityRepository
     {
-        return $this->entityManager->getRepository('PHPDishForumBundle:Reply');;
+        return $this->entityManager->getRepository($this->replyEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'replyEntity' => ReplyInterface::class
+        ];
     }
 }

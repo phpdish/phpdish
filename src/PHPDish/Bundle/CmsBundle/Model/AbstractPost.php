@@ -134,6 +134,8 @@ class AbstractPost implements PostInterface
     public function addCommentCount($count = 1)
     {
         $this->commentCount += $count;
+
+        return $this;
     }
 
     /**
@@ -192,6 +194,26 @@ class AbstractPost implements PostInterface
     public function getLastCommentUser()
     {
         return $this->lastCommentUser;
+    }
+
+    /**
+     * @param \DateTimeInterface $lastCommentAt
+     * @return self
+     */
+    public function setLastCommentAt(\DateTimeInterface $lastCommentAt)
+    {
+        $this->lastCommentAt = $lastCommentAt;
+        return $this;
+    }
+
+    /**
+     * @param UserInterface $lastCommentUser
+     * @return self
+     */
+    public function setLastCommentUser(UserInterface $lastCommentUser)
+    {
+        $this->lastCommentUser = $lastCommentUser;
+        return $this;
     }
 
     /**
