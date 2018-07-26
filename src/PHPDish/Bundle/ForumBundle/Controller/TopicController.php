@@ -4,13 +4,13 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
+use PHPDish\Bundle\CmsBundle\Utility\StringManipulator;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\TopicEvent;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicReplyType;
 use PHPDish\Bundle\ForumBundle\Form\Type\TopicType;
-use PHPDish\Component\Util\StringManipulator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

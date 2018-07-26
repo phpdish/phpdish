@@ -8,6 +8,7 @@ use PHPDish\Bundle\ForumBundle\Model\Thread;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ForumBundle\Model\Topic;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractConfiguration;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -16,7 +17,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -51,6 +52,8 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+
+        $this->addTemplatesSection($rootNode);
         return $treeBuilder;
     }
 }

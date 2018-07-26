@@ -5,15 +5,14 @@ namespace PHPDish\Bundle\ForumBundle\Controller;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
-use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ThreadController extends Controller
+class ThreadController extends ResourceController
 {
     use ManagerTrait;
 

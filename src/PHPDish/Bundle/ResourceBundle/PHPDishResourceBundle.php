@@ -2,8 +2,9 @@
 
 namespace PHPDish\Bundle\ResourceBundle;
 
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler\DoctrineTargetEntitiesResolverPass;
-use PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler\InjectTemplatePass;
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler\InjectResourceConfigurationPass;
 use PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcePass;
 use PHPDish\Bundle\ResourceBundle\DependencyInjection\PHPDishResourceExtension;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -21,7 +22,7 @@ class PHPDishResourceBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new DoctrineTargetEntitiesResolverPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
         $container->addCompilerPass(new RegisterResourcePass());
-        $container->addCompilerPass(new InjectTemplatePass());
+        $container->addCompilerPass(new InjectResourceConfigurationPass());
     }
 
     /**

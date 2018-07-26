@@ -15,12 +15,17 @@ namespace PHPDish\Bundle\ResourceBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class InjectTemplatePass implements CompilerPassInterface
+class InjectResourceConfigurationPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
+    {
+        $this->injectTemplateNamespace($container);
+    }
+
+    protected function injectTemplateNamespace(ContainerBuilder $container)
     {
         if (!$container->hasParameter('phpdish.templates_namespace')) {
             return;
