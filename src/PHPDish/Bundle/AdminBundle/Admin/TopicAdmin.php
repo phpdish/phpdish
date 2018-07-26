@@ -29,7 +29,7 @@ class TopicAdmin extends AbstractAdmin
             ->add('threads', null, ['label'=>'topic.threads'])
             ->add('user', null, ['label'=>'topic.user'])
             ->add('recommended', null, ['label' => 'topic.recommended', 'editable'=>true])
-            ->add('replyCount', null, ['label'=>'topic.reply_count'])
+            ->add('commentCount', null, ['label'=>'topic.reply_count'])
             ->add('viewCount', null, ['label'=>'topic.view_count'])
             ->add('createdAt', null, ['label'=>'topic.created_at'])
             ->add('enabled', null, ['label' => 'topic.enabled', 'editable'=>true]);

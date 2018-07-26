@@ -27,7 +27,7 @@ class InjectServiceManager implements CompilerPassInterface
         $interfaceMapping= $this->getInterfacesMapping($container->getParameter('phpdish.resources'));
         $entitySubscriberIds = $container->findTaggedServiceIds('phpdish.entity_subscriber');
 
-        foreach ($entitySubscriberIds as $id) {
+        foreach ($entitySubscriberIds as $id => $tags) {
             $entitySubscriber = $container->findDefinition($id);
             $class = $entitySubscriber->getClass();
             $entityMapping = call_user_func([$class, 'getSubscribedEntities']);

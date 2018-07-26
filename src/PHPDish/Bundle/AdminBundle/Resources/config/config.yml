@@ -104,9 +104,9 @@ easy_admin:
 #                      - { property: 'threads', label: '所属节点' }
                       - { property: 'recommended', label: '是否推荐', type: 'toggle' }
                       - { property: 'enabled', label: '状态',  type: 'toggle'}
-                      - { property: 'replyCount', label: '回复数量' }
+                      - { property: 'commentCount', label: '回复数量' }
                       - { property: 'createdAt', label: '创建回复' }
-                      - { property: 'repliedAt', label: '最后回复' }
+                      - { property: 'lastCommentAt', label: '最后回复' }
 
 
         Thread:

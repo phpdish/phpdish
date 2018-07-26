@@ -31,6 +31,6 @@ class RegisterResourcePass implements CompilerPassInterface
             return;
         }
         $resourceRegistry = $container->findDefinition('phpdish.resource_registry');
-        $resourceRegistry->replaceArgument(0, $container->getParameter('phpdish.resources'));
+        $resourceRegistry->setArgument(0, $container->getParameter('phpdish.resources'));
     }
 }

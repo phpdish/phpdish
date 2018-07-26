@@ -17,7 +17,7 @@
             </div>
             <ul class="list-unstyled list-inline meta">
                 <li>{{ topic.user.username }} {{ 'topic.create_at'|trans }} {{ topic.createdAt|time_diff }}</li>
-                <li>{{ 'topic.last_reply'|trans }}：{{ topic.repliedAt|time_diff }}</li>
+                <li>{{ 'topic.last_reply'|trans }}：{{ topic.lastCommentAt|time_diff }}</li>
                 <li>
                     {% include 'PHPDishWebBundle:Thread:_thread_tagify.html.twig' with {'threads': topic.threads} %}
                 </li>

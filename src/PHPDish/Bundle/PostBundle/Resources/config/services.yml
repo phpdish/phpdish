@@ -1,8 +1,13 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
     phpdish.manager.post:
         class: PHPDish\Bundle\PostBundle\Service\PostManager
         public: true
         arguments:
+            - ''
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '@markdown.parser'
@@ -11,6 +16,7 @@ services:
         class: PHPDish\Bundle\PostBundle\Service\CategoryManager
         public: true
         arguments:
+            - ''
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '@phpdish.manager.payment'
@@ -29,6 +35,7 @@ services:
         class: PHPDish\Bundle\PostBundle\Service\CommentManager
         public: true
         arguments:
+            - ''
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - "@phpdish.body_processor"
@@ -95,3 +102,9 @@ services:
         arguments: ['@phpdish.manager.post', '@phpdish.manager.user']
         tags:
             - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\PostBundle\Model\Post, event: postPersist, method: postPersist}
+
+    PHPDish\Bundle\PostBundle\Controller\:
+         resource: "../../Controller"
+         arguments:
+              $configuration: '@phpdish.resource.configuration.phpdish_post'
+         tags: ['controller.service_arguments']

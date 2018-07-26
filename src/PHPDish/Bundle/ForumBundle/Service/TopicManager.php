@@ -171,7 +171,7 @@ class TopicManager implements TopicManagerInterface, ServiceManagerInterface
     {
         $criteria = Criteria::create()->where(Criteria::expr()->gt('createdAt', $date))
             ->andWhere(Criteria::expr()->eq('enabled', true))
-            ->orderBy(['replyCount' => 'desc', 'createdAt' => 'desc'])
+            ->orderBy(['commentCount' => 'desc', 'createdAt' => 'desc'])
             ->setMaxResults($limit);
 
         return $this->findTopics($criteria);

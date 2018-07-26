@@ -7,23 +7,17 @@ services:
     phpdish.manager.thread:
        class: PHPDish\Bundle\ForumBundle\Service\ThreadManager
        public: true
-       arguments: ["@doctrine.orm.entity_manager", "@phpdish.pinyin_translator"]
+       arguments: ['', "@doctrine.orm.entity_manager", "@phpdish.pinyin_translator"]
 
     phpdish.manager.topic:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager
+        arguments: ['', '@doctrine.orm.entity_manager', '@event_dispatcher', '@phpdish.body_processor']
         public: true
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@event_dispatcher"
-            - "@phpdish.body_processor"
 
     phpdish.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
         public: true
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@event_dispatcher'
-            - "@phpdish.body_processor"
+        arguments: ['', "@doctrine.orm.entity_manager", '@event_dispatcher', "@phpdish.body_processor"]
 
     phpdish.form.data_transformer.string_to_threads:
         class: PHPDish\Bundle\ForumBundle\Form\DataTransformer\StringToThreadsTransformer

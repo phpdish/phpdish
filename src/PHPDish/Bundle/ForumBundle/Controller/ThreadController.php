@@ -106,7 +106,7 @@ class ThreadController extends ResourceController
         }
 
         $criteria = Criteria::create();
-        $criteria->orderBy(['repliedAt' => 'desc'])
+        $criteria->orderBy(['lastCommentAt' => 'desc'])
             ->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');

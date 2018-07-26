@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
@@ -14,14 +22,13 @@ use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\PostBundle\Repository\PostRepository;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Slince\YouzanPay\Api\QRCode;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class CategoryManager implements CategoryManagerInterface
+class CategoryManager implements CategoryManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -50,7 +57,10 @@ class CategoryManager implements CategoryManagerInterface
      */
     protected $translator;
 
+    protected $categoryEntity;
+
     public function __construct(
+        $categoryEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         PaymentManagerInterface $paymentManager,
@@ -58,6 +68,7 @@ class CategoryManager implements CategoryManagerInterface
         TranslatorInterface $translator
     )
     {
+        $this->categoryEntity = $categoryEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->paymentManager = $paymentManager;
@@ -259,6 +270,16 @@ class CategoryManager implements CategoryManagerInterface
      */
     public function getCategoryRepository()
     {
-        return $this->entityManager->getRepository('PHPDishPostBundle:Category');
+        return $this->entityManager->getRepository($this->categoryEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'categoryEntity' => CategoryInterface::class
+        ];
     }
 }

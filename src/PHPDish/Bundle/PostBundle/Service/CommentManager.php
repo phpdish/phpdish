@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Carbon\Carbon;
@@ -13,11 +22,12 @@ use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\VoteCommentEvent;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CommentManager implements CommentManagerInterface
+class CommentManager implements CommentManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -41,14 +51,18 @@ class CommentManager implements CommentManagerInterface
      */
     protected $bodyProcessor;
 
+    protected $commentEntity;
+
     public function __construct(
+        $commentEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         BodyProcessorInterface $bodyProcessor
     ) {
+        $this->commentEntity = $commentEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
-//        $this->commentRepository = $entityManager->getRepository('PHPDishPostBundle:Comment');
+        $this->commentRepository = $entityManager->getRepository($commentEntity);
         $this->bodyProcessor = $bodyProcessor;
     }
 
@@ -92,7 +106,7 @@ class CommentManager implements CommentManagerInterface
         $comment = new Comment();
         $comment->setPost($post)->setUser($user)
             ->setCreatedAt(Carbon::now());
-        $post->increaseCommentCount();
+        $post->addCommentCount();
 
         return $comment;
     }
@@ -164,5 +178,15 @@ class CommentManager implements CommentManagerInterface
     public function getCommentRepository()
     {
         return $this->commentRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'commentEntity' => CommentInterface::class
+        ];
     }
 }

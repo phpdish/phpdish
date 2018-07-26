@@ -36,7 +36,7 @@ class TopicController extends ResourceController
     {
         $manager = $this->getTopicManager();
         $criteria = Criteria::create();
-        $criteria->orderBy(['isTop' => 'desc',  'repliedAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
+        $criteria->orderBy(['isTop' => 'desc',  'lastCommentAt' => 'desc'])->where(Criteria::expr()->eq('enabled', true));
 
         $tab = $request->query->get('tab');
         if ($tab === 'following') {

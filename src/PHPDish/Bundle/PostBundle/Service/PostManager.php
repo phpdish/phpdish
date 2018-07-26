@@ -2,7 +2,6 @@
 
 namespace PHPDish\Bundle\PostBundle\Service;
 
-use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
@@ -10,14 +9,14 @@ use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostPersistEvent;
 use PHPDish\Bundle\PostBundle\Event\VotePostEvent;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\PostBundle\Repository\PostRepository;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\PostBundle\Model\Post;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
-class PostManager implements PostManagerInterface
+class PostManager implements PostManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -36,11 +35,15 @@ class PostManager implements PostManagerInterface
      */
     protected $markdownParser;
 
+    protected $postEntity;
+
     public function __construct(
+        $postEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         MarkdownParserInterface $markdownParser
     ) {
+        $this->postEntity = $postEntity;
         $this->eventDispatcher = $eventDispatcher;
         $this->entityManager = $entityManager;
         $this->markdownParser = $markdownParser;
@@ -216,6 +219,16 @@ class PostManager implements PostManagerInterface
      */
     public function getPostRepository()
     {
-        return $this->entityManager->getRepository('PHPDishPostBundle:Post');
+        return $this->entityManager->getRepository($this->postEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'postEntity' => PostInterface::class
+        ];
     }
 }
