@@ -39,7 +39,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
         if (isset($this->templates[$key])) {
             return $this->templates[$key];
         }
-        return $this->defaultTemplateNamespace . '/' . $key;
+        return $this->defaultTemplateNamespace . ':' . $key;
     }
 
     /**

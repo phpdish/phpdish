@@ -1,11 +1,15 @@
 services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
     # 全局资源注册处
     phpdish.resource_registry:
         class: PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry
 
     # 各bundle资源配置基础对象
     phpdish.resource.configuration:
-        abstract: true
         class: PHPDish\Bundle\ResourceBundle\Controller\ResourceConfiguration
 
     phpdish.resource.event_subscriber.orm_mapped_super_class:

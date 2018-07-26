@@ -33,10 +33,9 @@ class InjectResourceConfigurationPass implements CompilerPassInterface
         $resourceConfigurationIds = $container->findTaggedServiceIds('phpdish.resource_configuration');
 
         $defaultTemplatesNamespace = $container->getParameter('phpdish.templates_namespace');
-
-        foreach ($resourceConfigurationIds as $resourceConfigurationId) {
+        foreach ($resourceConfigurationIds as $resourceConfigurationId => $tags) {
             $container->findDefinition($resourceConfigurationId)
-                ->addMethodCall('setDefaultTemplatesNamespaceIfNull', $defaultTemplatesNamespace);
+                ->addMethodCall('setDefaultTemplatesNamespaceIfNull', [$defaultTemplatesNamespace]);
         }
     }
 }

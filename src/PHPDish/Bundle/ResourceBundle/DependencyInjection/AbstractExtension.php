@@ -30,10 +30,12 @@ abstract class AbstractExtension extends Extension
     {
         $definition = new ChildDefinition('phpdish.resource.configuration');
         $definition->setArguments([
-            [$this->getAlias() => $resources],
-            $templates,
-            $defaultTemplateNamespace
-        ]);
+                [$this->getAlias() => $resources],
+                $templates,
+                $defaultTemplateNamespace
+            ])
+            ->addTag('phpdish.resource_configuration');
+
         $container->setDefinition('phpdish.resource.configuration.' . $this->getAlias(), $definition);
     }
 }
