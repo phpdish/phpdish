@@ -13,7 +13,6 @@ namespace PHPDish\Bundle\PostBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
 use PHPDish\Bundle\CmsBundle\Utility\StringManipulator;
-use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PostBundle\Form\Type\BookType;
 use PHPDish\Bundle\PostBundle\Form\Type\ChapterType;
@@ -29,11 +28,6 @@ class BookController extends ResourceController
     use ManagerTrait;
 
     use \PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
-
-    /**
-     * @var ResourceConfigurationInterface
-     */
-    protected $configuration;
 
     /**
      * 创建电子书

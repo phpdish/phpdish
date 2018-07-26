@@ -38,4 +38,12 @@ class PHPDishResourceExtension extends Extension
         $container->registerForAutoconfiguration(ResourceConfigurationInterface::class)
             ->addTag('phpdish.resource_configuration');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'phpdish_resource';
+    }
 }
