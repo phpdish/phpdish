@@ -1,14 +1,23 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\Controller;
 
 use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NotificationController extends Controller
+class NotificationController extends ResourceController
 {
     /**
      * 当前用户的通知数量.
@@ -45,7 +54,7 @@ class NotificationController extends Controller
         );
         $manager->readNotifications($notifications->getCurrentPageResults());
 
-        return $this->render('PHPDishWebBundle:Notification:index.html.twig', [
+        return $this->render($this->configuration->getTemplate('Notification:index.html.twig'), [
             'notifications' => $notifications,
         ]);
     }

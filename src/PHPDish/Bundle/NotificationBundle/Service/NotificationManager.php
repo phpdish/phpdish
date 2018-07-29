@@ -291,7 +291,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
             return;
         }
         $qb = $this->entityManager->createQueryBuilder();
-        $qb->update('PHPDishNotificationBundle:Notification', 'n')
+        $qb->update($this->notificationEntity, 'n')
             ->set('n.seen', true)
             ->where($qb->expr()->in('n.id', $notificationIds))
             ->getQuery()

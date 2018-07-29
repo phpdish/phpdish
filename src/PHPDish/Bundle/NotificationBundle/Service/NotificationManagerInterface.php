@@ -2,6 +2,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
+use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
@@ -160,4 +161,11 @@ interface NotificationManagerInterface
      * @param array $notifications
      */
     public function readNotifications($notifications);
+
+    /**
+     * 获取repository
+     *
+     * @return EntityRepository
+     */
+    public function getRepository();
 }

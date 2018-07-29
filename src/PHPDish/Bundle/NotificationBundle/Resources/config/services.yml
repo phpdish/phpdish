@@ -73,3 +73,9 @@ services:
        tags:
            - {name: twig.extension}
        public: false
+
+    PHPDish\Bundle\NotificationBundle\Controller\:
+         resource: "../../Controller"
+         arguments:
+              $configuration: '@phpdish.resource.configuration.phpdish_notification'
+         tags: ['controller.service_arguments']
