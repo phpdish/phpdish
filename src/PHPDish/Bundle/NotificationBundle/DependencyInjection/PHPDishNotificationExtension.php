@@ -38,4 +38,12 @@ class PHPDishNotificationExtension extends AbstractExtension
         $this->registerResources($config['resources'], $container);
         $this->registerResourcesConfiguration($config['resources'], $config['templates'], $config['templates_namespace'], $container);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'phpdish_notification';
+    }
 }

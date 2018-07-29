@@ -43,3 +43,9 @@ phpdish_payment:
             model: PHPDish\Bundle\CoreBundle\Model\Payment
         wallet:
             model: PHPDish\Bundle\CoreBundle\Model\Wallet
+
+
+phpdish_notification:
+    resources:
+        notification:
+            model: PHPDish\Bundle\CoreBundle\Model\Notification
