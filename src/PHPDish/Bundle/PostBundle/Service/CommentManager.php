@@ -62,7 +62,6 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
         $this->commentEntity = $commentEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->commentRepository = $entityManager->getRepository($commentEntity);
         $this->bodyProcessor = $bodyProcessor;
     }
 
@@ -71,7 +70,7 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
      */
     public function findCommentById($id)
     {
-        return $this->commentRepository->find($id);
+        return $this->getCommentRepository()->find($id);
     }
 
     /**
@@ -79,7 +78,7 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
      */
     public function findCommentsPager(Criteria $criteria, $page = 1, $limit = null)
     {
-        $query = $this->commentRepository->createQueryBuilder('c')
+        $query = $this->getCommentRepository()->createQueryBuilder('c')
             ->addCriteria($criteria)
             ->getQuery();
 
@@ -91,7 +90,7 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
      */
     public function findComments(Criteria $criteria)
     {
-        return $this->commentRepository->createQueryBuilder('c')
+        return $this->getCommentRepository()->createQueryBuilder('c')
             ->addCriteria($criteria)
             ->getQuery()
             ->getResult();
@@ -104,10 +103,8 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
     public function createComment(PostInterface $post, UserInterface $user)
     {
         $comment = new Comment();
-        $comment->setPost($post)->setUser($user)
-            ->setCreatedAt(Carbon::now());
+        $comment->setPost($post)->setUser($user);
         $post->addCommentCount();
-
         return $comment;
     }
 
@@ -177,7 +174,10 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
      */
     public function getCommentRepository()
     {
-        return $this->commentRepository;
+        if ($this->commentRepository) {
+            return $this->commentRepository;
+        }
+        return $this->entityManager->getRepository($this->commentEntity);
     }
 
     /**

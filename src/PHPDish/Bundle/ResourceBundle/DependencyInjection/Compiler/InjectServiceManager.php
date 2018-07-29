@@ -21,6 +21,11 @@ class InjectServiceManager implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        $this->injectEntitySubscriber($container);
+    }
+
+    protected function injectEntitySubscriber(ContainerBuilder $container)
+    {
         if (!$container->hasParameter('phpdish.resources')) {
             return;
         }

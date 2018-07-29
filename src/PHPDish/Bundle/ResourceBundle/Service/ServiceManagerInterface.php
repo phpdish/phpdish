@@ -11,8 +11,6 @@
 
 namespace PHPDish\Bundle\ResourceBundle\Service;
 
-use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
-
 interface ServiceManagerInterface extends EntitySubscriberInterface
 {
 }
