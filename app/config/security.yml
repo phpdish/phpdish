@@ -15,12 +15,7 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        phpdish:
-            entity:
-                class: PHPDishUserBundle:User
-                property: username
-                manager_name: ~
-        fos_userbundle:
+        phpdish_user:
             id: fos_user.user_provider.username_email
 
     firewalls:
@@ -32,11 +27,9 @@ security:
             anonymous:  ~
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: phpdish_user
                 csrf_token_generator: security.csrf.token_manager
-
             logout: true
-
             remember_me:
                 secret:   '%secret%'
                 lifetime: 604800 # 1 week in seconds

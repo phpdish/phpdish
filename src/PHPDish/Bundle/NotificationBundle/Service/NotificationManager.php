@@ -49,7 +49,6 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
         $this->notificationEntity = $notificationEntity;
         $this->entityManager = $entityManager;
         $this->translator = $translator;
-//        $this->notificationRepository = $entityManager->getRepository('PHPDishNotificationBundle:Notification');
     }
 
     /**

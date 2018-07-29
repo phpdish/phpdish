@@ -3,19 +3,17 @@
 namespace PHPDish\Bundle\ChatBundle\Controller;
 
 use FOS\MessageBundle\FormModel\NewThreadMessage;
-use FOS\MessageBundle\Provider\ProviderInterface;
-use PHPDish\Bundle\ChatBundle\Model\Chat;
 use PHPDish\Bundle\ChatBundle\Form\Type\NewChatType;
 use PHPDish\Bundle\ChatBundle\Message\Provider;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\UserBundle\Controller\ManagerTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ChatsController extends Controller
+class ChatsController extends ResourceController
 {
     use ManagerTrait;
 
@@ -30,13 +28,14 @@ class ChatsController extends Controller
         $threads = $this->getProvider()->getInboxThreadsPaginator(
             $request->query->get('page', 1)
         );
-        return $this->render('PHPDishWebBundle:Chat:inbox.html.twig', [
+        return $this->render($this->configuration->getTemplate('Chat:inbox.html.twig'), [
             'threads' => $threads
         ]);
     }
 
     /**
      * 发送箱
+     *
      * @Route("/chats/sent", name="chat_sent")
      * @param Request $request
      * @return Response
@@ -46,13 +45,14 @@ class ChatsController extends Controller
         $threads = $this->getProvider()->getSentThreadsPaginator(
             $request->query->get('page', 1)
         );
-        return $this->render('PHPDishWebBundle:Chat:sent.html.twig', [
+        return $this->render($this->configuration->getTemplate('Chat:sent.html.twig'), [
             'threads' => $threads
         ]);
     }
 
     /**
      * 添加新的聊天
+     *
      * @Route("/chats/new", name="chat_add")
      * @param Request $request
      * @return Response
@@ -71,12 +71,12 @@ class ChatsController extends Controller
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+            return new RedirectResponse($this->get('router')->generate('fos_message_thread_view', array(
                 'threadId' => $message->getThread()->getId(),
             )));
         }
 
-        return $this->container->get('templating')->renderResponse('PHPDishWebBundle:Chat:new_chat.html.twig', array(
+        return $this->render($this->configuration->getTemplate('Chat:new_chat.html.twig'), array(
             'form' => $form->createView(),
             'recipient' => $user,
             'data' => $form->getData(),

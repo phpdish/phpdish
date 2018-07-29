@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     phpdish.manager.notification:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
         public: true

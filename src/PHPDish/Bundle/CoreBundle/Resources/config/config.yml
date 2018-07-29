@@ -120,8 +120,8 @@ fos_rest:
 # FOSMessage
 fos_message:
     db_driver: orm
-    thread_class: PHPDish\Bundle\ChatBundle\Model\Thread
-    message_class: PHPDish\Bundle\ChatBundle\Model\Message
+    thread_class: PHPDish\Bundle\CoreBundle\Model\MessageThread
+    message_class: PHPDish\Bundle\CoreBundle\Model\Message
 
 httplug:
     plugins:
