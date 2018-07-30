@@ -12,17 +12,13 @@
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
 use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
-use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
-use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
-use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-class Notification implements NotificationInterface, ActionInterface
+class Notification implements NotificationInterface
 {
-    use IdentifiableTrait;
+    use IdentifiableTrait, DateTimeTrait;
 
     /**
      * @var string
@@ -35,11 +31,6 @@ class Notification implements NotificationInterface, ActionInterface
     protected $message;
 
     /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
      * @var bool
      */
     protected $seen = false;
@@ -48,49 +39,6 @@ class Notification implements NotificationInterface, ActionInterface
      * @var UserInterface
      */
     protected $user;
-
-    /**
-     * @var UserInterface
-     */
-    protected $fromUser;
-
-    /**
-     * @var TopicInterface
-     */
-    protected $topic;
-
-    /**
-     * @var ReplyInterface
-     */
-    protected $reply;
-
-    /**
-     * @var PostInterface
-     */
-    protected $post;
-
-    /**
-     * @var CommentInterface
-     */
-    protected $comment;
-
-    /**
-     * @var CategoryInterface
-     */
-    protected $category;
-
-    /**
-     * @var PaymentInterface
-     */
-    protected $payment;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSystem()
-    {
-        return in_array($this->subject, [static::SUBJECT_HANDLE_WITHDRAW]);
-    }
 
     /**
      * @return UserInterface

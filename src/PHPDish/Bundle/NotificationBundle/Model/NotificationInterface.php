@@ -1,36 +1,28 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
-use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
-use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
-use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface NotificationInterface extends IdentifiableInterface
+interface NotificationInterface extends IdentifiableInterface, DateTimeInterface
 {
-    /**
-     * 是否是系统通知（没有发送人）
-     * @return boolean
-     */
-    public function isSystem();
-
     /**
      * 获取通知的接收人.
      *
      * @return UserInterface
      */
     public function getUser();
-
-    /**
-     * 获取创建人.
-     *
-     * @return UserInterface
-     */
-    public function getFromUser();
 
     /**
      * 获取主题.
@@ -40,36 +32,16 @@ interface NotificationInterface extends IdentifiableInterface
     public function getSubject();
 
     /**
-     * 获取话题.
+     * 获取消息内容
      *
-     * @return TopicInterface
+     * @return string
      */
-    public function getTopic();
+    public function getMessage();
 
     /**
-     * 获取回复.
+     * 是否已经查看
      *
-     * @return ReplyInterface
+     * @return bool
      */
-    public function getReply();
-
-    /**
-     * 获取文章.
-     *
-     * @return PostInterface
-     */
-    public function getPost();
-
-    /**
-     * 获取评论.
-     *
-     * @return CommentInterface
-     */
-    public function getComment();
-
-    /**
-     * 获取交易历史
-     * @return PaymentInterface
-     */
-    public function getPayment();
+    public function isSeen();
 }
