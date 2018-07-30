@@ -11,6 +11,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -18,18 +19,19 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 interface NotificationInterface extends IdentifiableInterface, DateTimeInterface
 {
     /**
-     * 获取通知的接收人.
-     *
-     * @return UserInterface
-     */
-    public function getUser();
-
-    /**
      * 获取主题.
      *
      * @return string
      */
     public function getSubject();
+
+    /**
+     * 设置主题
+     *
+     * @param string $subject
+     * @return self
+     */
+    public function setSubject($subject);
 
     /**
      * 获取消息内容
@@ -39,9 +41,41 @@ interface NotificationInterface extends IdentifiableInterface, DateTimeInterface
     public function getMessage();
 
     /**
-     * 是否已经查看
+     * 设置message
      *
-     * @return bool
+     * @param string $message
+     * @return self
      */
-    public function isSeen();
+    public function setMessage($message);
+
+    /**
+     * 获取链接
+     *
+     * @return string
+     */
+    public function getLink();
+
+
+    /**
+     * 设置链接
+     *
+     * @param string $link
+     * @return self
+     */
+    public function setLink($link);
+
+    /**
+     * 获取metadata信息
+     *
+     * @return NotificationMetadataInterface[]|Collection
+     */
+    public function getMetadata();
+
+    /**
+     * 添加新的metadata
+     *
+     * @param NotificationMetadataInterface $metadata
+     * @return self
+     */
+    public function addMetadata(NotificationMetadataInterface $metadata);
 }

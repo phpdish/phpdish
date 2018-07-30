@@ -7,22 +7,18 @@
     </id>
 
     <field name="subject" type="string" column="subject" precision="0" scale="0" nullable="false"/>
+
     <field name="message" type="text" column="message" precision="0" scale="0" nullable="true"/>
+
     <field name="createdAt" type="datetime" column="created_at" precision="0" scale="0" nullable="false">
       <gedmo:timestampable on="create"/>
     </field>
-    <field name="seen" type="boolean" column="seen" precision="0" scale="0" nullable="false"/>
+    <field name="updatedAt" type="datetime" column="updated_at" precision="0" scale="0" nullable="false">
+      <gedmo:timestampable on="update"/>
+    </field>
 
-    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
-      <join-columns>
-        <join-column name="user_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="fromUser" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" fetch="LAZY">
-      <join-columns>
-        <join-column name="from_user_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
+    <one-to-many field="metadata" mapped-by="notification" orphan-removal="true" target-entity="PHPDish\Bundle\NotificationBundle\Model\NotificationMetadataInterface" fetch="LAZY"/>
+
   </mapped-superclass>
 
 </doctrine-mapping>

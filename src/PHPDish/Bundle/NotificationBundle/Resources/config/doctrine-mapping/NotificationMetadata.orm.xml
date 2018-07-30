@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+  <mapped-superclass name="PHPDish\Bundle\NotificationBundle\Model\NotificationMetadata" table="notification_metadata">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+
+    <field name="seen" type="boolean" column="seen" precision="0" scale="0" nullable="false"/>
+
+    <many-to-one field="notification" target-entity="PHPDish\Bundle\NotificationBundle\Model\NotificationInterface" inversed-by="metadata" fetch="LAZY">
+      <join-columns>
+        <join-column name="notification_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    
+  </mapped-superclass>
+
+</doctrine-mapping>

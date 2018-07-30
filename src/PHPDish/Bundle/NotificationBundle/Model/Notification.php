@@ -11,10 +11,10 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
-use PHPDish\Bundle\CmsBundle\Model\CommentInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class Notification implements NotificationInterface
 {
@@ -31,37 +31,22 @@ class Notification implements NotificationInterface
     protected $message;
 
     /**
-     * @var bool
+     * @var string
      */
-    protected $seen = false;
+    protected $link;
 
     /**
-     * @var UserInterface
+     * @var NotificationMetadataInterface[]|Collection
      */
-    protected $user;
+    protected $metadata;
 
-    /**
-     * @return UserInterface
-     */
-    public function getUser()
+    public function __construct()
     {
-        return $this->user;
+        $this->metadata = new ArrayCollection();
     }
 
     /**
-     * @param UserInterface $user
-     *
-     * @return Notification
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getSubject()
     {
@@ -69,9 +54,7 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @param string $subject
-     *
-     * @return Notification
+     * {@inheritdoc}
      */
     public function setSubject($subject)
     {
@@ -81,7 +64,7 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getMessage()
     {
@@ -89,9 +72,7 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @param string $message
-     *
-     * @return Notification
+     * {@inheritdoc}
      */
     public function setMessage($message)
     {
@@ -101,181 +82,35 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
-    public function getCreatedAt()
+    public function getLink(): string
     {
-        return $this->createdAt;
+        return $this->link;
     }
 
     /**
-     * @param \DateTime $createdAt
-     *
-     * @return Notification
+     * {@inheritdoc}
      */
-    public function setCreatedAt($createdAt)
+    public function setLink($link): Notification
     {
-        $this->createdAt = $createdAt;
-
+        $this->link = $link;
         return $this;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
-    public function isSeen()
+    public function getMetadata()
     {
-        return $this->seen;
+        return $this->metadata;
     }
 
     /**
-     * @param bool $seen
-     *
-     * @return Notification
+     * {@inheritdoc}
      */
-    public function setSeen($seen)
+    public function addMetadata(NotificationMetadataInterface $metadata)
     {
-        $this->seen = $seen;
-
-        return $this;
-    }
-
-    /**
-     * @return UserInterface
-     */
-    public function getFromUser()
-    {
-        return $this->fromUser;
-    }
-
-    /**
-     * @param UserInterface $fromUser
-     *
-     * @return Notification
-     */
-    public function setFromUser($fromUser)
-    {
-        $this->fromUser = $fromUser;
-
-        return $this;
-    }
-
-    /**
-     * @return TopicInterface
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-
-    /**
-     * @param TopicInterface $topic
-     *
-     * @return Notification
-     */
-    public function setTopic($topic)
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * @return ReplyInterface
-     */
-    public function getReply()
-    {
-        return $this->reply;
-    }
-
-    /**
-     * @param ReplyInterface $reply
-     *
-     * @return Notification
-     */
-    public function setReply($reply)
-    {
-        $this->reply = $reply;
-
-        return $this;
-    }
-
-    /**
-     * @return PostInterface
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
-     * @param PostInterface $post
-     *
-     * @return Notification
-     */
-    public function setPost($post)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * @return CommentInterface
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * @param CommentInterface $comment
-     *
-     * @return Notification
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * @return CategoryInterface
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param CategoryInterface $category
-     *
-     * @return Notification
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return PaymentInterface
-     */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * @param PaymentInterface $payment
-     * @return Notification
-     */
-    public function setPayment($payment)
-    {
-        $this->payment = $payment;
-
-        return $this;
+        $this->metadata[] = $metadata;
     }
 }
