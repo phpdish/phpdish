@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Controller;
 
-use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface;
+use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface2;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,7 +60,7 @@ class NotificationController extends ResourceController
     }
 
     /**
-     * @return NotificationManagerInterface
+     * @return NotificationManagerInterface2
      */
     protected function getNotificationManager()
     {

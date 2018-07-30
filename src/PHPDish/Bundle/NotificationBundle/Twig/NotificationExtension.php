@@ -2,7 +2,7 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Twig;
 
-use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface;
+use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface2;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -14,11 +14,11 @@ class NotificationExtension extends \Twig_Extension
     protected $tokenStorage;
 
     /**
-     * @var NotificationManagerInterface
+     * @var NotificationManagerInterface2
      */
     protected $notificationManager;
 
-    public function __construct(NotificationManagerInterface $notificationManager, TokenStorageInterface $tokenStorage)
+    public function __construct(NotificationManagerInterface2 $notificationManager, TokenStorageInterface $tokenStorage)
     {
         $this->notificationManager = $notificationManager;
         $this->tokenStorage = $tokenStorage;

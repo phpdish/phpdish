@@ -9,310 +9,88 @@
  * with this source code in the file LICENSE.
  */
 
+
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
-use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
-use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\ForumBundle\Model\ReplyInterface;
-use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
-use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
-use PHPDish\Bundle\PostBundle\Model\CommentInterface;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class NotificationManager implements NotificationManagerInterface, ServiceManagerInterface
+class NotificationManager implements NotificationManagerInterface
 {
-    use PaginatorTrait;
-
     /**
      * @var EntityManagerInterface
      */
     protected $entityManager;
 
     /**
-     * @var TranslatorInterface
+     * @var EventDispatcherInterface
      */
-    protected $translator;
+    protected $eventDispatcher;
 
+    /**
+     * @var string
+     */
     protected $notificationEntity;
+
+    /**
+     * @var string
+     */
+    protected $metadataEntity;
 
     public function __construct(
         $notificationEntity,
+        $metadataEntity,
         EntityManagerInterface $entityManager,
-        TranslatorInterface $translator
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->notificationEntity = $notificationEntity;
+        $this->metadataEntity = $metadataEntity;
         $this->entityManager = $entityManager;
-        $this->translator = $translator;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createFollowUserNotification(UserInterface $user, UserInterface $follower)
+    public function createNotification($subject, $message = null)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($user)->setFromUser($follower)->setSubject(Notification::SUBJECT_FOLLOW_USER);
-        $this->saveNotification($notification);
-
+        $notification = new $this->notificationEntity();
+        $notification->setSubject($subject);
+        $message && $notification->setMessage($message);
         return $notification;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createReplyTopicNotification(TopicInterface $topic, ReplyInterface $reply)
+    public function sendNotification($participants, NotificationInterface $notification, $send = false)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($topic->getUser())
-            ->setTopic($topic)
-            ->setReply($reply)
-            ->setMessage($reply->getBody())
-            ->setFromUser($reply->getUser())
-            ->setSubject(Notification::SUBJECT_REPLY_TOPIC);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createCommentPostNotification(PostInterface $post, CommentInterface $comment)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($post->getUser())
-            ->setPost($post)
-            ->setComment($comment)
-            ->setMessage($comment->getBody())
-            ->setFromUser($comment->getUser())
-            ->setSubject(Notification::SUBJECT_COMMENT_POST);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createMentionUserInPostNotification(UserInterface $user, CommentInterface $comment)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($user)
-            ->setPost($comment->getPost())
-            ->setComment($comment)
-            ->setMessage($comment->getBody())
-            ->setFromUser($comment->getUser())
-            ->setSubject(Notification::SUBJECT_MENTION_USER_IN_POST);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createAtUserInTopicNotification(UserInterface $user, ReplyInterface $reply)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($user)
-            ->setTopic($reply->getTopic())
-            ->setReply($reply)
-            ->setMessage($reply->getBody())
-            ->setFromUser($reply->getUser())
-            ->setSubject(Notification::SUBJECT_MENTION_USER_IN_TOPIC);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createFollowCategoryNotification(CategoryInterface $category, UserInterface $user)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($category->getCreator())
-            ->setCategory($category)
-            ->setFromUser($user)
-            ->setSubject(Notification::SUBJECT_FOLLOW_CATEGORY);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createWithdrawNotification(PaymentInterface $payment)
-    {
-        $message = $payment->getStatus() === PaymentInterface::STATUS_OK
-            ? $this->translator->trans('withdraw.your_withdraw_was_approved', ['%payment%' => $payment->getDescription()])
-            : $this->translator->trans('withdraw.your_withdraw_was_declined', ['%payment%' => $payment->getDescription()]);
-
-        $notification = $this->createNotification();
-        $notification->setUser($payment->getUser())
-            ->setPayment($payment)
-            ->setMessage($message)
-            ->setSubject(Notification::SUBJECT_HANDLE_WITHDRAW);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createVoteTopicNotification(TopicInterface $topic, UserInterface $user)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($topic->getUser())
-            ->setTopic($topic)
-            ->setFromUser($user)
-            ->setMessage($topic->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_TOPIC);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createVoteReplyNotification(TopicInterface $topic, ReplyInterface $reply, UserInterface $user)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($reply->getUser())
-            ->setTopic($topic)
-            ->setReply($reply)
-            ->setFromUser($user)
-            ->setMessage($reply->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_REPLY);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createVotePostNotification(PostInterface $post, UserInterface $user)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($post->getUser())
-            ->setPost($post)
-            ->setFromUser($user)
-            ->setMessage($post->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_POST);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createVoteCommentNotification(PostInterface $post, CommentInterface $comment, UserInterface $user)
-    {
-        $notification = $this->createNotification();
-        $notification->setUser($comment->getUser())
-            ->setPost($post)
-            ->setComment($comment)
-            ->setFromUser($user)
-            ->setMessage($comment->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_COMMENT);
-        $this->saveNotification($notification);
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNotification()
-    {
-        $notification = new Notification();
-        $notification->setCreatedAt(Carbon::now());
-
-        return $notification;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function saveNotification(NotificationInterface $notification)
-    {
+        foreach ($participants as $participant) {
+            $metadata = new $this->metadataEntity();
+            $metadata->setParticipant($participant);
+            $notification->addMetadata($metadata);
+        }
         $this->entityManager->persist($notification);
+        $send && $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendAll()
+    {
         $this->entityManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getUserUnSeenNotificationCount(UserInterface $user)
+    public function markAllAsSeen(UserInterface $participant)
     {
-        $qb = $this->getRepository()->createQueryBuilder('n');
-
-        return $qb->select($qb->expr()->count('n'))
-            ->where('n.user = :userId')->setParameter('userId', $user)
-            ->andWhere('n.seen = :seen')->setParameter('seen', false)
-            ->getQuery()
-            ->getSingleScalarResult();
+        // TODO: Implement markAllAsSeen() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function findUserNotifications(UserInterface $user, $page, $limit = null)
+    public function markAsSeen(UserInterface $participant, NotificationInterface $notification)
     {
-        $query = $this->getRepository()->createQueryBuilder('n')
-            ->where('n.user = :userId')->setParameter('userId', $user)
-            ->orderBy('n.createdAt', 'desc')
-            ->getQuery();
-
-        return $this->createPaginator($query, $page, $limit);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function readNotifications($notifications)
-    {
-        $notificationIds = [];
-        foreach ($notifications as $notification) {
-            $notificationIds[] = $notification->getId();
-        }
-        if (!$notificationIds) {
-            return;
-        }
-        $qb = $this->entityManager->createQueryBuilder();
-        $qb->update($this->notificationEntity, 'n')
-            ->set('n.seen', true)
-            ->where($qb->expr()->in('n.id', $notificationIds))
-            ->getQuery()
-            ->execute();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRepository()
-    {
-        return $this->entityManager->getRepository($this->notificationEntity);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEntities()
-    {
-        return  [
-            'notificationEntity' => NotificationInterface::class
-        ];
+        
     }
 }

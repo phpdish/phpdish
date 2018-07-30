@@ -14,7 +14,6 @@ namespace PHPDish\Bundle\NotificationBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface NotificationInterface extends IdentifiableInterface, DateTimeInterface
 {
