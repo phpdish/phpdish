@@ -84,7 +84,7 @@ class Notification implements NotificationInterface
     /**
      * {@inheritdoc}
      */
-    public function getLink(): string
+    public function getLink()
     {
         return $this->link;
     }
@@ -92,7 +92,7 @@ class Notification implements NotificationInterface
     /**
      * {@inheritdoc}
      */
-    public function setLink($link): Notification
+    public function setLink($link)
     {
         $this->link = $link;
         return $this;

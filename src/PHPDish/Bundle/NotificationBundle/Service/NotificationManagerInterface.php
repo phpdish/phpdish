@@ -11,7 +11,9 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
+use Pagerfanta\Pagerfanta;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
+use PHPDish\Bundle\NotificationBundle\Model\NotificationMetadataInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 interface NotificationManagerInterface
@@ -39,6 +41,46 @@ interface NotificationManagerInterface
      * 发送所有的通知
      */
     public function sendAll();
+
+    /**
+     * 获取用户的通知
+     *
+     * @param UserInterface $participant
+     * @param boolean|null $seen
+     * @return NotificationInterface[]
+     */
+    public function findNotifications(UserInterface $participant, $seen = null);
+
+    /**
+     * 获取用户的通知
+     *
+     * @param UserInterface $participant
+     * @param boolean|null $seen
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findNotificationsPager(UserInterface $participant, $seen, $page, $limit = null);
+
+    /**
+     * 获取notification metadata
+     *
+     * @param UserInterface $participant
+     * @param boolean|null $seen
+     * @return NotificationMetadataInterface[]
+     */
+    public function findNotificationMetadata(UserInterface $participant, $seen = null);
+
+    /**
+     * 获取notification metadata
+     *
+     * @param UserInterface $participant
+     * @param boolean|null $seen
+     * @param int $page
+     * @param int|null $limit
+     * @return Pagerfanta
+     */
+    public function findNotificationMetadataPager(UserInterface $participant, $seen, $page, $limit = null);
 
     /**
      * 设置为已读
