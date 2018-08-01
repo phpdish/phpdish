@@ -43,7 +43,7 @@ final class NotificationHelper
     /**
      * {@inheritdoc}
      */
-    public function createFollowUserNotification(UserInterface $user, UserInterface $follower)
+    public function createFollowUserNotification(UserInterface $follower)
     {
         $notification = $this->notificationManager->createNotification(
             $this->translator->trans('notification.follow_user.subject'),
@@ -51,8 +51,8 @@ final class NotificationHelper
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_FOLLOW_USER,
-            'follower_id' => $user->getId(),
-            'follower_username' => $user->getUsername(),
+            'follower_id' => $follower->getId(),
+            'follower_username' => $follower->getUsername(),
         ]);
         return $notification;
     }
@@ -249,11 +249,12 @@ final class NotificationHelper
 
     /**
      * 发送消息
-     * @param UserInterface[] $participant
+     * @param UserInterface[]|UserInterface $participant
      * @param $notification
      */
     public function sendNotification($participant, $notification)
     {
-        $this->notificationManager->sendNotification($participant, $notification);
+        $participants = is_array($participant) ? $participant : [$participant];
+        $this->notificationManager->sendNotification($participants, $notification);
     }
 }

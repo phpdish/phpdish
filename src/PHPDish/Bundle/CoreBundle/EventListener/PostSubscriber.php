@@ -50,16 +50,16 @@ class PostSubscriber implements EventSubscriberInterface
      * 文章被评论时触发.
      *
      * @param PostCommentedEvent $event
-     *
-     * @return bool
      */
     public function onPostCommented(PostCommentedEvent $event)
     {
         if ($event->getPost()->getUser() === $event->getComment()->getUser()) {
-            return false;
+            return;
         }
 
-        return $this->notificationHelper->createCommentPostNotification($event->getPost(), $event->getComment()) !== false;
+        $notification = $this->notificationHelper->createCommentPostNotification($event->getPost(), $event->getComment());
+
+        $this->notificationHelper->sendNotification($event->getPost()->getUser(), $notification);
     }
 
     /**

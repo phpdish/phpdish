@@ -54,7 +54,9 @@ final class TopicSubscriber implements EventSubscriberInterface
         if ($event->getTopic()->getUser() === $event->getReply()->getUser()) {
             return;
         }
-        $this->notificationHelper->createReplyTopicNotification($event->getTopic(), $event->getReply());
+        $notification = $this->notificationHelper->createReplyTopicNotification($event->getTopic(), $event->getReply());
+
+        $this->notificationHelper->sendNotification($event->getTopic()->getUser(), $notification);
     }
 
     /**
@@ -68,7 +70,9 @@ final class TopicSubscriber implements EventSubscriberInterface
         if ($event->getTopic()->getUser() === $event->getVoter()) {
             return;
         }
-        $this->notificationHelper->createVoteTopicNotification($event->getTopic(), $event->getVoter());
+        $notification = $this->notificationHelper->createVoteTopicNotification($event->getTopic(), $event->getVoter());
+
+        $this->notificationHelper->sendNotification($event->getTopic()->getUser(), $notification);
     }
 
     /**
@@ -82,11 +86,13 @@ final class TopicSubscriber implements EventSubscriberInterface
         if ($event->getReply()->getUser() === $event->getVoter()) {
             return;
         }
-        $this->notificationHelper->createVoteReplyNotification(
+        $notification = $this->notificationHelper->createVoteReplyNotification(
             $event->getTopic(),
             $event->getReply(),
             $event->getVoter()
         );
+
+        $this->notificationHelper->sendNotification($event->getReply()->getUser(), $notification);
     }
 
     /**
@@ -96,14 +102,16 @@ final class TopicSubscriber implements EventSubscriberInterface
      */
     public function onUserMentioned(ReplyMentionUserEvent $event)
     {
-        foreach ($event->getMentionedUsers() as $user) {
-            if (
-                $event->getReply()->getUser() === $user //不能艾特自己
-                || $event->getReply()->getTopic()->getUser() === $user //不能艾特楼主，楼主本身就会收到消息
-            ) {
-                continue;
-            }
-            $this->notificationHelper->createMentionUserInTopicNotification($event->getReply());
-        }
+        //不能艾特自己, 不能艾特楼主，楼主本身就会收到消息
+        $author = $event->getReply()->getUser();
+        $maintainer = $event->getReply()->getTopic()->getUser();
+
+        $participants = array_filter($event->getMentionedUsers(), function($user) use ($author, $maintainer){
+            return $user !== $author && $user !== $maintainer;
+        });
+        $notification = $this->notificationHelper->createMentionUserInTopicNotification($event->getReply());
+
+        $this->notificationHelper->sendNotification($participants, $notification);
     }
+
 }

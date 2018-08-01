@@ -31,11 +31,11 @@ interface NotificationManagerInterface
     /**
      * 发送通知
      *
-     * @param UserInterface[] $participant
+     * @param UserInterface[] $participants
      * @param NotificationInterface $notification
      * @param boolean $send 是否发送
      */
-    public function sendNotification($participant, NotificationInterface $notification, $send = false);
+    public function sendNotification($participants, NotificationInterface $notification, $send = false);
 
     /**
      * 发送所有的通知

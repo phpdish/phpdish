@@ -49,6 +49,7 @@ final class UserSubscriber implements EventSubscriberInterface
         if ($event->getUser() === $event->getFollower()) {
             return;
         }
-        $this->notificationHelper->createFollowUserNotification($event->getUser(), $event->getFollower());
+        $notification = $this->notificationHelper->createFollowUserNotification($event->getFollower());
+        $this->notificationHelper->sendNotification($event->getUser(), $notification);
     }
 }
