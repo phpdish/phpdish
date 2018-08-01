@@ -13,6 +13,7 @@ namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use PHPDish\Bundle\CoreBundle\Util\NotificationHelper;
 use PHPDish\Bundle\ForumBundle\Event\Events;
+use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
@@ -39,6 +40,7 @@ final class TopicSubscriber implements EventSubscriberInterface
             Events::TOPIC_REPLIED => 'onTopicReplied',
             Events::TOPIC_VOTED => 'onTopicVoted',
             Events::REPLY_VOTED => 'onReplyVoted',
+            Events::USER_MENTIONED_REPLY => 'onUserMentioned'
         ];
     }
 
@@ -85,5 +87,23 @@ final class TopicSubscriber implements EventSubscriberInterface
             $event->getReply(),
             $event->getVoter()
         );
+    }
+
+    /**
+     * 当用户在话题回复中被提及.
+     *
+     * @param ReplyMentionUserEvent $event
+     */
+    public function onUserMentioned(ReplyMentionUserEvent $event)
+    {
+        foreach ($event->getMentionedUsers() as $user) {
+            if (
+                $event->getReply()->getUser() === $user //不能艾特自己
+                || $event->getReply()->getTopic()->getUser() === $user //不能艾特楼主，楼主本身就会收到消息
+            ) {
+                continue;
+            }
+            $this->notificationHelper->createMentionUserInTopicNotification($event->getReply());
+        }
     }
 }

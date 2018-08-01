@@ -238,7 +238,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $this->objectManager->flush();
 
         //触发事件
-        $this->eventDispatcher->dispatch(Events::USER_FOLLOWEd, new UserFollowedEvent($user, $follower));
+        $this->eventDispatcher->dispatch(Events::USER_FOLLOWED, new UserFollowedEvent($user, $follower));
 
         return true;
     }

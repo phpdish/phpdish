@@ -16,7 +16,7 @@ final class Events
      *
      * @var string
      */
-    const USER_FOLLOWEd = 'user.followed';
+    const USER_FOLLOWED = 'user.followed';
 
     /**
      * 设置菜单

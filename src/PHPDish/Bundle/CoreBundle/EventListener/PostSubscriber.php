@@ -12,6 +12,8 @@
 namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use PHPDish\Bundle\CoreBundle\Util\NotificationHelper;
+use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
+use PHPDish\Bundle\PostBundle\Event\CommentMentionUserEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostCommentedEvent;
 use PHPDish\Bundle\PostBundle\Event\VoteCommentEvent;
@@ -39,6 +41,8 @@ class PostSubscriber implements EventSubscriberInterface
             Events::POST_COMMENTED => 'onPostCommented',
             Events::POST_VOTED => 'onPostVoted',
             Events::COMMENT_VOTED => 'onCommentVoted',
+            Events::USER_MENTIONED_COMMENT => 'onUserMentioned',
+            Events::CATEGORY_FOLLOWED => 'onCategoryFollowed'
         ];
     }
 
@@ -90,5 +94,36 @@ class PostSubscriber implements EventSubscriberInterface
             $event->getComment(),
             $event->getVoter()
         );
+    }
+
+    /**
+     * 当用户在文章评论中被提及.
+     *
+     * @param CommentMentionUserEvent $event
+     */
+    public function onUserMentioned(CommentMentionUserEvent $event)
+    {
+        foreach ($event->getMentionedUsers() as $user) {
+            if (
+                $event->getComment()->getUser() === $user
+                || $event->getComment()->getPost()->getUser() === $user
+            ) {
+                continue;
+            }
+            $this->notificationHelper->createMentionUserInPostNotification($event->getComment());
+        }
+    }
+
+    /**
+     * 专栏被关注时给专栏创建者发消息.
+     *
+     * @param CategoryFollowedEvent $event
+     */
+    public function onCategoryFollowed(CategoryFollowedEvent $event)
+    {
+        if ($event->getCategory()->getCreator() === $event->getFollower()) {
+            return;
+        }
+        $this->notificationHelper->createFollowCategoryNotification($event->getCategory(), $event->getFollower());
     }
 }
