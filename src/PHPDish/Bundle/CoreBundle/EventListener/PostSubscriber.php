@@ -11,14 +11,25 @@
 
 namespace PHPDish\Bundle\CoreBundle\EventListener;
 
+use PHPDish\Bundle\CoreBundle\Util\NotificationHelper;
 use PHPDish\Bundle\PostBundle\Event\Events;
 use PHPDish\Bundle\PostBundle\Event\PostCommentedEvent;
 use PHPDish\Bundle\PostBundle\Event\VoteCommentEvent;
 use PHPDish\Bundle\PostBundle\Event\VotePostEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PostListener extends EventListener implements EventSubscriberInterface
+class PostSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var NotificationHelper
+     */
+    protected $notificationHelper;
+
+    public function __construct(NotificationHelper $notificationHelper)
+    {
+        $this->notificationHelper = $notificationHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -44,7 +55,7 @@ class PostListener extends EventListener implements EventSubscriberInterface
             return false;
         }
 
-        return $this->notificationManager->createCommentPostNotification($event->getPost(), $event->getComment()) !== false;
+        return $this->notificationHelper->createCommentPostNotification($event->getPost(), $event->getComment()) !== false;
     }
 
     /**
@@ -59,7 +70,7 @@ class PostListener extends EventListener implements EventSubscriberInterface
             return;
         }
 
-        $this->notificationManager
+        $this->notificationHelper
             ->createVotePostNotification($event->getPost(), $event->getVoter());
     }
 
@@ -74,7 +85,7 @@ class PostListener extends EventListener implements EventSubscriberInterface
         if ($event->getComment()->getUser() === $event->getVoter()) {
             return;
         }
-        $this->notificationManager->createVoteCommentNotification(
+        $this->notificationHelper->createVoteCommentNotification(
             $event->getPost(),
             $event->getComment(),
             $event->getVoter()

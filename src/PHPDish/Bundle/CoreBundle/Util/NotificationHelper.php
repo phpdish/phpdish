@@ -25,14 +25,20 @@ use Symfony\Component\Translation\TranslatorInterface;
 final class NotificationHelper
 {
     /**
+     * @var NotificationManagerInterface
+     */
+    protected $notificationManager;
+
+    /**
      * @var TranslatorInterface
      */
     protected $translator;
 
-    /**
-     * @var NotificationManagerInterface
-     */
-    protected $notificationManager;
+    public function __construct(NotificationManagerInterface $notificationManager, TranslatorInterface $translator)
+    {
+        $this->notificationManager = $notificationManager;
+        $this->translator = $translator;
+    }
 
     /**
      * {@inheritdoc}
@@ -163,7 +169,7 @@ final class NotificationHelper
             'payment_id' => $payment->getId(),
             'payment_serial_no' => $payment->getSerialNo(),
         ]);
-        
+
         return $notification;
     }
 
@@ -172,14 +178,16 @@ final class NotificationHelper
      */
     public function createVoteTopicNotification(TopicInterface $topic, UserInterface $user)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($topic->getUser())
-            ->setTopic($topic)
-            ->setFromUser($user)
-            ->setMessage($topic->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_TOPIC);
-        $this->saveNotification($notification);
-
+        $notification = $this->notificationManager->createNotification(
+            $this->translator->trans('notification.vote_topic.subject'),
+            $this->translator->trans('notification.vote_topic.message')
+        );
+        $notification->addParameters([
+            'subject' => Notification::SUBJECT_VOTE_TOPIC,
+            'topic_id' => $topic->getId(),
+            'voter_id' => $user->getId(),
+            'voter_username' => $user->getUsername(),
+        ]);
         return $notification;
     }
 
@@ -188,15 +196,17 @@ final class NotificationHelper
      */
     public function createVoteReplyNotification(TopicInterface $topic, ReplyInterface $reply, UserInterface $user)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($reply->getUser())
-            ->setTopic($topic)
-            ->setReply($reply)
-            ->setFromUser($user)
-            ->setMessage($reply->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_REPLY);
-        $this->saveNotification($notification);
-
+        $notification = $this->notificationManager->createNotification(
+            $this->translator->trans('notification.vote_reply.subject'),
+            $this->translator->trans('notification.vote_reply.message')
+        );
+        $notification->addParameters([
+            'subject' => Notification::SUBJECT_VOTE_REPLY,
+            'topic_id' => $topic->getId(),
+            'reply_id' => $reply->getId(),
+            'voter_id' => $user->getId(),
+            'voter_username' => $user->getUsername(),
+        ]);
         return $notification;
     }
 
@@ -205,31 +215,45 @@ final class NotificationHelper
      */
     public function createVotePostNotification(PostInterface $post, UserInterface $user)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($post->getUser())
-            ->setPost($post)
-            ->setFromUser($user)
-            ->setMessage($post->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_POST);
-        $this->saveNotification($notification);
+        $notification = $this->notificationManager->createNotification(
+            $this->translator->trans('notification.vote_reply.subject'),
+            $this->translator->trans('notification.vote_reply.message')
+        );
+        $notification->addParameters([
+                'subject' => Notification::SUBJECT_VOTE_POST,
+                'post_id' => $post->getId(),
+                'voter_id' => $user->getId(),
+                'voter_username' => $user->getUsername(),
+        ]);
 
         return $notification;
     }
-
     /**
      * {@inheritdoc}
      */
     public function createVoteCommentNotification(PostInterface $post, CommentInterface $comment, UserInterface $user)
     {
-        $notification = $this->createNotification();
-        $notification->setUser($comment->getUser())
-            ->setPost($post)
-            ->setComment($comment)
-            ->setFromUser($user)
-            ->setMessage($comment->getBody())
-            ->setSubject(Notification::SUBJECT_VOTE_COMMENT);
-        $this->saveNotification($notification);
-
+        $notification = $this->notificationManager->createNotification(
+            $this->translator->trans('notification.vote_comment.subject'),
+            $this->translator->trans('notification.vote_comment.message')
+        );
+        $notification->addParameters([
+            'subject' => Notification::SUBJECT_VOTE_COMMENT,
+            'post_id' => $post->getId(),
+            'comment_id' => $comment->getId(),
+            'voter_id' => $user->getId(),
+            'voter_username' => $user->getUsername(),
+        ]);
         return $notification;
+    }
+
+    /**
+     * 发送消息
+     * @param UserInterface[] $participant
+     * @param $notification
+     */
+    public function sendNotification($participant, $notification)
+    {
+        $this->notificationManager->sendNotification($participant, $notification);
     }
 }

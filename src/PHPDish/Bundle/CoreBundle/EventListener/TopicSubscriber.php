@@ -11,14 +11,25 @@
 
 namespace PHPDish\Bundle\CoreBundle\EventListener;
 
+use PHPDish\Bundle\CoreBundle\Util\NotificationHelper;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class TopicSubscriber extends NotificationManagerAwareEventListener implements EventSubscriberInterface
+final class TopicSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var NotificationHelper
+     */
+    protected $notificationHelper;
+
+    public function __construct(NotificationHelper $notificationHelper)
+    {
+        $this->notificationHelper = $notificationHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,16 +46,13 @@ final class TopicSubscriber extends NotificationManagerAwareEventListener implem
      * 话题被回复时触发.
      *
      * @param ReplyTopicEvent $event
-     *
-     * @return bool
      */
     public function onTopicReplied(ReplyTopicEvent $event)
     {
         if ($event->getTopic()->getUser() === $event->getReply()->getUser()) {
-            return false;
+            return;
         }
-
-        return $this->notificationManager->createReplyTopicNotification($event->getTopic(), $event->getReply()) !== false;
+        $this->notificationHelper->createReplyTopicNotification($event->getTopic(), $event->getReply());
     }
 
     /**
@@ -58,7 +66,7 @@ final class TopicSubscriber extends NotificationManagerAwareEventListener implem
         if ($event->getTopic()->getUser() === $event->getVoter()) {
             return;
         }
-        $this->notificationManager->createVoteTopicNotification($event->getTopic(), $event->getVoter());
+        $this->notificationHelper->createVoteTopicNotification($event->getTopic(), $event->getVoter());
     }
 
     /**
@@ -72,7 +80,7 @@ final class TopicSubscriber extends NotificationManagerAwareEventListener implem
         if ($event->getReply()->getUser() === $event->getVoter()) {
             return;
         }
-        $this->notificationManager->createVoteReplyNotification(
+        $this->notificationHelper->createVoteReplyNotification(
             $event->getTopic(),
             $event->getReply(),
             $event->getVoter()
