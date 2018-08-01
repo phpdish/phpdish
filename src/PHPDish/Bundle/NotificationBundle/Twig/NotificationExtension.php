@@ -1,27 +1,29 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\NotificationBundle\Twig;
 
-use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface2;
+use PHPDish\Bundle\NotificationBundle\Service\NotificationManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class NotificationExtension extends \Twig_Extension
 {
     /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
-     * @var NotificationManagerInterface2
+     * @var NotificationManagerInterface
      */
     protected $notificationManager;
 
-    public function __construct(NotificationManagerInterface2 $notificationManager, TokenStorageInterface $tokenStorage)
+    public function __construct(NotificationManagerInterface $notificationManager)
     {
         $this->notificationManager = $notificationManager;
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -30,42 +32,26 @@ class NotificationExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('notification_unseen_number', [$this, 'getUnSeenNotificationNumber']),
+            new \Twig_SimpleFunction('notification_unseen_count', [$this, 'getUnseenNotificationCount']),
+            new \Twig_SimpleFunction('notification_count', [$this, 'getNotificationCount']),
         );
     }
 
     /**
-     * 获取当前用户未读的消息数量.
-     *
      * @param UserInterface $user
-     *
      * @return int
      */
-    public function getUnSeenNotificationNumber(UserInterface $user = null)
+    public function getUnseenNotificationCount(UserInterface $user)
     {
-        return $this->notificationManager->getUserUnSeenNotificationCount($user ?: $this->getUser());
+        return $this->notificationManager->getNotificationCount($user, false);
     }
 
     /**
-     * {@inheritdoc}
+     * @param UserInterface $user
+     * @return int
      */
-    public function getName()
+    public function getNotificationCount(UserInterface $user)
     {
-        return 'phpdish_notification';
-    }
-
-    /**
-     * 获取当前登录用户.
-     *
-     * @return UserInterface
-     */
-    protected function getUser()
-    {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : false;
-        if (!$user instanceof UserInterface) {
-            throw new \RuntimeException('There is no authenticated user');
-        }
-
-        return $user;
+        return $this->notificationManager->getNotificationCount($user,  null);
     }
 }

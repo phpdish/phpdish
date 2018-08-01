@@ -1,6 +1,15 @@
 <?php
 
-namespace PHPDish\Bundle\ForumBundle\EventListener;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;

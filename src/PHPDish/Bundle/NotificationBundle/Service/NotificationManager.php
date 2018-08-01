@@ -12,16 +12,16 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Service;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationInterface;
 use PHPDish\Bundle\NotificationBundle\Model\NotificationMetadataInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class NotificationManager implements NotificationManagerInterface
+class NotificationManager implements NotificationManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -179,6 +179,15 @@ class NotificationManager implements NotificationManagerInterface
         $this->entityManager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getNotificationCount(UserInterface $participant, $seen = null)
+    {
+        $qb = $this->getParticipantMetadataQb($participant, $seen);
+        $qb->select($qb->expr()->count('n'));
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 
     /**
      * @return EntityRepository
@@ -194,5 +203,13 @@ class NotificationManager implements NotificationManagerInterface
     protected function getMetadataRepository()
     {
         return $this->entityManager->getRepository($this->metadataEntity);
+    }
+
+    public static function getSubscribedEntities()
+    {
+        return [
+            'notificationEntity' => NotificationInterface::class,
+            'metadataEntity' => NotificationMetadataInterface::class,
+        ];
     }
 }

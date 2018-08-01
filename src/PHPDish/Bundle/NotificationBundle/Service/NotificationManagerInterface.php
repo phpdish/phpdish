@@ -96,4 +96,13 @@ interface NotificationManagerInterface
      * @param UserInterface $participant
      */
     public function markAllAsSeen(UserInterface $participant);
+
+    /**
+     * 获取消息数量
+     *
+     * @param UserInterface $participant
+     * @param null|bool $seen
+     * @return int
+     */
+    public function getNotificationCount(UserInterface $participant, $seen = null);
 }

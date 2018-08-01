@@ -12,12 +12,6 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@translator'
 
-    phpdish.manager.timeline:
-        class: PHPDish\Bundle\NotificationBundle\Service\TimelineManager
-        public: true
-        arguments:
-            - "@doctrine.orm.entity_manager"
-
     ## Listeners
     phpdish.event_listener.notification.follow_user:
         class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
@@ -66,13 +60,11 @@ services:
             - {name: kernel.event_listener, event: withdraw.declined, method: onWithdrawHandled}
         public: false
 
-# Twig Extension
+    # Twig Extension
     phpdish.twig_extension.notification:
        class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension
-       arguments: ['@phpdish.manager.notification', '@security.token_storage']
        tags:
            - {name: twig.extension}
-       public: false
 
     PHPDish\Bundle\NotificationBundle\Controller\:
          resource: "../../Controller"
