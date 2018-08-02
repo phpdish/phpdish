@@ -4,6 +4,11 @@ imports:
     - {resource: 'services/plugin.yml'}
 
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     twig_extension.date:
          class: Twig\Extensions\DateExtension
          public: false
@@ -64,3 +69,5 @@ services:
          tags:
             - { name: twig.extension}
 
+  PHPDish\Bundle\CoreBundle\EventListener:
+      resource: '../../EventListener/*'

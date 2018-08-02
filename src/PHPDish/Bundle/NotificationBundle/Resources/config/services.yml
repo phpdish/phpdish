@@ -7,64 +7,12 @@ services:
     phpdish.manager.notification:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
         public: true
-        arguments:
-            - ''
-            - '@doctrine.orm.entity_manager'
-            - '@translator'
-
-    ## Listeners
-    phpdish.event_listener.notification.follow_user:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowUserListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_listener, event: user.followed, method: onUserFollowed}
-        public: false
-
-
-    # 话题相关监听
-    phpdish.event_listener.notification.topic:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\TopicListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_subscriber}
-        public: false
-
-
-    phpdish.event_listener.notification.follow_category:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\FollowCategoryListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_listener, event: category.followed, method: onCategoryFollowed}
-        public: false
-
-    phpdish.event_listener.notification.post:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\PostListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_subscriber}
-        public: false
-
-    phpdish.event_listener.notification.mention_user:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\MentionUserListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_listener, event: user.mentioned.comment, method: onUserMentionedInComment}
-            - {name: kernel.event_listener, event: user.mentioned.reply, method: onUserMentionedInReply}
-        public: false
-
-    phpdish.event_listener.notification.payment:
-        class:  PHPDish\Bundle\NotificationBundle\EventListener\PaymentListener
-        arguments: ['@phpdish.manager.notification']
-        tags:
-            - {name: kernel.event_listener, event: withdraw.approved, method: onWithdrawHandled}
-            - {name: kernel.event_listener, event: withdraw.declined, method: onWithdrawHandled}
-        public: false
+        arguments: ['',  '@doctrine.orm.entity_manager', '@translator']
 
     # Twig Extension
     phpdish.twig_extension.notification:
        class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension
-       tags:
-           - {name: twig.extension}
+       tags: ['twig.extension']
 
     PHPDish\Bundle\NotificationBundle\Controller\:
          resource: "../../Controller"

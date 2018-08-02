@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\CoreBundle\EventListener;
+namespace PHPDish\Bundle\CoreBundle\EventListener\Notification;
 
 use PHPDish\Bundle\CoreBundle\Util\NotificationHelper;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
