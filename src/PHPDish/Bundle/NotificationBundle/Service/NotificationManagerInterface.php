@@ -40,7 +40,7 @@ interface NotificationManagerInterface
     /**
      * 发送所有的通知
      */
-    public function sendAll();
+    public function flush();
 
     /**
      * 获取用户的通知

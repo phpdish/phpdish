@@ -257,4 +257,9 @@ final class NotificationHelper
         $participants = is_array($participant) ? $participant : [$participant];
         $this->notificationManager->sendNotification($participants, $notification);
     }
+
+    public function __destruct()
+    {
+        $this->notificationManager->flush();
+    }
 }

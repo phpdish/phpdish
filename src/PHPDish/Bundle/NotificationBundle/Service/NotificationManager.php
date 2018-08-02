@@ -85,7 +85,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     /**
      * {@inheritdoc}
      */
-    public function sendAll()
+    public function flush()
     {
         $this->entityManager->flush();
     }
