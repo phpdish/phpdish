@@ -69,5 +69,5 @@ services:
          tags:
             - { name: twig.extension}
 
-  PHPDish\Bundle\CoreBundle\EventListener:
-      resource: '../../EventListener/*'
+    PHPDish\Bundle\CoreBundle\EventListener\:
+         resource: '../../EventListener/*'

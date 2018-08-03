@@ -49,3 +49,5 @@ phpdish_notification:
     resources:
         notification:
             model: PHPDish\Bundle\CoreBundle\Model\Notification
+        notification_metadata:
+            model: PHPDish\Bundle\CoreBundle\Model\NotificationMetadata

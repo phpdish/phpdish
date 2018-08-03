@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\CoreBundle\EventListener;
+namespace PHPDish\Bundle\ForumBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
