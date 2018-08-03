@@ -25,8 +25,9 @@
                     <li class="list-group-item {% if is_route_matched('notifications') %}active{% endif %}">
                         <a href="{{ path('notifications') }}">
                             <i class="if i-bell-o"></i> {{ 'notification.notification'|trans }}
-                            {% if notification_unseen_number() > 0 %}
-                                <span class="badge badge-warning">{{ notification_unseen_number() }}</span>
+                            {% set count = notification_unseen_count(app.user) %}
+                            {% if count > 0 %}
+                                <span class="badge badge-warning">{{ count }}</span>
                             {% endif %}
                         </a>
                     </li>

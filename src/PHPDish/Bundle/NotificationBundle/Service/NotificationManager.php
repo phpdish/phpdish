@@ -115,7 +115,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
             ->where('nm.participant = :participant')
             ->setParameter('participant', $participant);
         if ($seen !== null) {
-            $qb->where('nm.seen =:seen')->setParameter('seen', (boolean)$seen);
+            $qb->andWhere('nm.seen =:seen')->setParameter('seen', (boolean)$seen);
         }
         return $qb;
     }
@@ -150,7 +150,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
             ->where('m.participant = :participant')
             ->setParameter('participant', $participant);
         if ($seen !== null) {
-            $qb->where('m.seen =:seen')->setParameter('seen', (boolean)$seen);
+            $qb->andWhere('m.seen =:seen')->setParameter('seen', (boolean)$seen);
         }
         return $qb;
     }
