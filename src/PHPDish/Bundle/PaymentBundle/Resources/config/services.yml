@@ -1,10 +1,13 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        
     phpdish.payment_gateway.youzan:
         class: Slince\YouzanPay\YouzanPay
         public: true
-        arguments:
-            -
-            - {httpClient: "@phpdish.http_client"}
+        arguments: ['', {httpClient: "@phpdish.http_client"}]
 
     phpdish.manager.payment:
         class: PHPDish\Bundle\PaymentBundle\Service\PaymentManager
@@ -22,13 +25,15 @@ services:
     phpdish.twig.extension.money:
         class: PHPDish\Bundle\PaymentBundle\Twig\MoneyExtension
         arguments: ["@phpdish.money_formatter"]
-        public: false
-        tags:
-            - { name: twig.extension}
+        tags: ['twig.extension']
 
     phpdish.twig.extension.wallet:
         class: PHPDish\Bundle\PaymentBundle\Twig\WalletExtension
         arguments: ["@translator"]
-        public: false
-        tags:
-            - { name: twig.extension}
+        tags: ['twig.extension']
+
+    PHPDish\Bundle\PaymentBundle\Controller\:
+         resource: "../../Controller"
+         arguments:
+              $configuration: '@phpdish.resource.configuration.phpdish_payment'
+         tags: ['controller.service_arguments']

@@ -1,9 +1,19 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PaymentBundle\Controller;
 
 use FOS\RestBundle\Context\Context;
 use JMS\Serializer\SerializationContext;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\PaymentBundle\Form\Type\PaymentType;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
@@ -15,6 +25,17 @@ use Symfony\Component\HttpFoundation\Response;
 class PaymentController extends ResourceController
 {
     use ManagerTrait;
+
+    /**
+     * @var PaymentManagerInterface
+     */
+    protected $paymentManager;
+
+    public function __construct(ResourceConfigurationInterface $configuration, PaymentManagerInterface $paymentManager)
+    {
+        parent::__construct($configuration);
+        $this->paymentManager = $paymentManager;
+    }
 
     /**
      * 创建交易
@@ -131,7 +152,7 @@ class PaymentController extends ResourceController
         $histories = $this->getWalletManager()->findUserWalletHistories($wallet,
             $request->query->getInt('page', 1)
         );
-        return $this->render('PHPDishWebBundle:Wallet:index.html.twig', [
+        return $this->render($this->configuration->getTemplate('Wallet:index.html.twig'), [
             'wallet' => $wallet,
             'histories' => $histories
         ]);
@@ -148,14 +169,5 @@ class PaymentController extends ResourceController
         return $this->json([
             'result' => 'success'
         ]);
-    }
-
-    /**
-     * 获取交易管理
-     * @return PaymentManagerInterface
-     */
-    protected function getPaymentManager()
-    {
-        return $this->get('phpdish.manager.payment');
     }
 }
