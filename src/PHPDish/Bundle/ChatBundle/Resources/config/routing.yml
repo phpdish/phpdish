@@ -1,3 +1,0 @@
-php_dish_chat_homepage:
-    path:     /
-    defaults: { _controller: PHPDishChatBundle:Default:index }

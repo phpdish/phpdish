@@ -5,10 +5,12 @@ namespace PHPDish\Bundle\ChatBundle\EventListener;
 use FOS\MessageBundle\Composer\ComposerInterface;
 use FOS\MessageBundle\Sender\SenderInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-final class UserRegisterListener
+final class UserSubscriber implements EventSubscriberInterface
 {
     /**
      * 用户管理服务
@@ -57,6 +59,16 @@ final class UserRegisterListener
         $this->translator = $translator;
         $this->userName = $userName;
         $this->messageTemplate = $messageTemplate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            Events::USER_CREATED => 'onRegistrationCompleted'
+        ];
     }
 
     public function onRegistrationCompleted(UserEvent $event)

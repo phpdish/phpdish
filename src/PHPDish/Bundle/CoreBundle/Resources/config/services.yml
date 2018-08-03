@@ -69,5 +69,17 @@ services:
          tags:
             - { name: twig.extension}
 
+    phpdish.event_subscriber.user:
+        class: PHPDish\Bundle\CoreBundle\EventListener\UserSubscriber
+        arguments:
+            - '@fos_user.user_manager'
+            - '@fos_message.composer'
+            - '@fos_message.sender'
+            - '@translator'
+            - '%chat.sender%'
+            - '%chat.register_message%'
+        tags:
+          - { name: kernel.event_subscriber}
+
     PHPDish\Bundle\CoreBundle\EventListener\:
          resource: '../../EventListener/*'

@@ -25,6 +25,10 @@ notification:
     community_notifications: 社区消息
     you_have_unread_notifications: 你有 %count% 条未读提醒
     reply_content_cannot_be_empty: 回复内容不得为空
+    menu:
+        notification: 提醒
+        inbox: 收件箱
+        sent: 已发送
 
 category:
     this_is_a_paid_category_you_sure_cancel_follow: 这是个付费专栏/电子书，取消之后再次订阅需要再次付费，确认继续吗？

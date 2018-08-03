@@ -1,7 +1,8 @@
 {
-    "name": "phpdish/cms",
+    "name": "phpdish/cms-bundle",
     "type": "library",
     "description": "Basic content interfaces for PHP applications.",
+    "keywords": ["cms", "markdown", "emoji", "mention"],
     "homepage": "https://www.phpdish.com",
     "license": "MIT",
     "autoload": {

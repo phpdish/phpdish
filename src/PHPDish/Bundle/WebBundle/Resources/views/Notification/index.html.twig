@@ -10,18 +10,15 @@
             {% for notification in notifications %}
                 <li class="list-group-item">
                     <div class="media notification">
-                        <div class="media-left">
-                            {% if notification.isSystem %}
-                            <a href="javascript:void(0);">
-                                <img class="media-object avatar" src="{{ asset('img/logo64.png') }}">
-                            </a>
-                            {% else %}
-                                <a href="{{ path('user_view', {username: notification.fromUser.username}) }}">
-                                    <img class="media-object avatar" src="{{ asset(notification.fromUser.avatar)|imagine_filter('middle_square') }}">
-                                </a>
+                        <div class="media-body">
+                            <div class="heading">
+                                {{ notification.subject }}
+                                <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+                            </div>
+                            {% if notification.message %}
+                            <div class="body markdown-body">{{ notification.message|raw }}</div>
                             {% endif %}
                         </div>
-                        {{ renderer.render_notification(notification) }}
                     </div>
                 </li>
             {% else %}
@@ -32,7 +29,8 @@
         </ul>
         {% if notifications.haveToPaginate %}
             <footer class="panel-footer">
-                {{ pagerfanta(notifications, 'twitter_bootstrap3') }}
+                {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
+                {{ paginator(notifications) }}
             </footer>
         {% endif %}
     </div>

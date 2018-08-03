@@ -1,23 +1,15 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     phpdish.chat.message_provider:
         class: PHPDish\Bundle\ChatBundle\Message\Provider
         parent: fos_message.provider
-        public: true
 
-    phpdish.menu_builder.notification_menu:
-        class: PHPDish\Bundle\ChatBundle\Menu\NotificationMenuBuilder
-        arguments: ['@knp_menu.factory', '@translator']
-        tags:
-           - { name: knp_menu.menu_builder, method: createMenu, alias: notification_menu}
-
-    phpdish.event_listener.chat.user_register:
-        class: PHPDish\Bundle\ChatBundle\EventListener\UserRegisterListener
-        arguments:
-            - '@fos_user.user_manager'
-            - '@fos_message.composer'
-            - '@fos_message.sender'
-            - '@translator'
-            - '%chat.sender%'
-            - '%chat.register_message%'
-        tags:
-          - { name: kernel.event_listener, event: user.created, method: onRegistrationCompleted}
+    PHPDish\Bundle\ChatBundle\Controller\:
+         resource: "../../Controller"
+         arguments:
+              $configuration: '@phpdish.resource.configuration.phpdish_chat'
+         tags: ['controller.service_arguments']

@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the PHPDish package.
+ * This file is part of the phpdish/phpdish
  *
- * (c) Tao <taosikai@yeah.net>
+ * (c) Slince <taosikai@yeah.net>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\UserBundle\Mention;
+namespace PHPDish\Bundle\CoreBundle\Mention;
 
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
 use PHPDish\Component\Mention\AdapterInterface;

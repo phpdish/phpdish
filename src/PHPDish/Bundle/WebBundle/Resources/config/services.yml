@@ -5,3 +5,9 @@ services:
         arguments: ['@knp_menu.factory', '@event_dispatcher']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: main_menu}
+
+    phpdish.menu_builder.notification_menu:
+        class: PHPDish\Bundle\WebBundle\Menu\NotificationMenuBuilder
+        arguments: ['@knp_menu.factory', '@translator']
+        tags:
+           - { name: knp_menu.menu_builder, method: createMenu, alias: notification_menu}
