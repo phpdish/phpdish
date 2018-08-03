@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\ForumBundle\DependencyInjection;
 
 use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractExtension;
@@ -7,11 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
- */
 class PHPDishForumExtension extends AbstractExtension
 {
     /**

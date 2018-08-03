@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
-use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ForumBundle\Form\Type\ThreadType;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
@@ -37,20 +45,15 @@ class ThreadController extends ResourceController
      */
     public function hotThreadsAction()
     {
-        $cachePool = $this->get('cache.app');
-        $cacheItem = $cachePool->getItem('hot_threads');
-        if (!$cacheItem->isHit()) {
-            $cacheItem->set($this->getThreadManager()->findEnabledThreads(15))
-                ->expiresAt(Carbon::parse('1 day'));
-            $cachePool->save($cacheItem);
-        }
-        return $this->render('PHPDishWebBundle:Thread:_hot_threads.html.twig', [
-            'threads' => $cacheItem->get()
+        $threads = $this->getThreadManager()->findEnabledThreads(15);
+        return $this->render($this->configuration->getTemplate('Thread:_hot_threads.html.twig'), [
+            'threads' => $threads
         ]);
     }
 
     /**
      * threads 探索
+     *
      * @Route("/threads", name="threads")
      * @param Request $request
      * @return Response
@@ -85,7 +88,7 @@ class ThreadController extends ResourceController
             ->addMeta('property', 'og:url',  $this->generateUrl('threads', [],UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $translator->trans('thread.explore'));
 
-        return $this->render('PHPDishWebBundle:Thread:index.html.twig', [
+        return $this->render($this->configuration->getTemplate('Thread:index.html.twig'), [
             'threads' => $threads
         ]);
     }
@@ -127,7 +130,7 @@ class ThreadController extends ResourceController
             ->addMeta('property', 'og:url',  $this->generateUrl('thread_view', ['slug' => $thread->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $thread->getDescription());
 
-        return $this->render('PHPDishWebBundle:Thread:view.html.twig', [
+        return $this->render($this->configuration->getTemplate('Thread:view.html.twig'), [
             'thread' => $thread,
             'topics' => $topics,
         ]);
@@ -160,7 +163,7 @@ class ThreadController extends ResourceController
                 'slug' => $thread->getSlug(),
             ]);
         }
-        return $this->render('PHPDishWebBundle:Thread:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Thread:create.html.twig'), [
             'thread' => $thread,
             'form' => $form->createView()
         ]);

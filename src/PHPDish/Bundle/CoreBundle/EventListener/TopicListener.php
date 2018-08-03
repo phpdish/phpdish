@@ -14,10 +14,8 @@ namespace PHPDish\Bundle\ForumBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPDish\Bundle\ForumBundle\Model\TopicInterface;
 use PHPDish\Bundle\ForumBundle\Service\TopicManagerInterface;
-use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\UserManagerInterface;
-use Doctrine\ORM\Mapping\PostUpdate;
 
 final class TopicListener
 {

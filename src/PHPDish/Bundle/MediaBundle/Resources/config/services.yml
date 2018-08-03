@@ -1,5 +1,4 @@
 services:
-
     # Uploads 目录操作
     phpdish.media.file_manager:
        class: PHPDish\Component\Media\Manager\FileManager

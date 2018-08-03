@@ -81,5 +81,12 @@ services:
         tags:
           - { name: kernel.event_subscriber}
 
+    phpdish.doctrine.orm.entity_listener.topic:
+        class: PHPDish\Bundle\CoreBundle\EventListener\TopicListener
+        public: false
+        arguments: ['@phpdish.manager.topic', '@phpdish.manager.user']
+        tags:
+            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\CoreBundle\Model\Topic, event: postPersist, method: postPersist}
+
     PHPDish\Bundle\CoreBundle\EventListener\:
          resource: '../../EventListener/*'

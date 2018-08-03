@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
 use Carbon\Carbon;
@@ -48,7 +57,7 @@ class TopicController extends ResourceController
             }
             $topics = $manager->findTopicsPager($criteria, $request->query->getInt('page', 1));
         }
-        return $this->render('PHPDishWebBundle:Topic:index.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:index.html.twig'), [
             'topics' => $topics,
         ]);
     }
@@ -80,7 +89,7 @@ class TopicController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:create.html.twig'), [
             'form' => $form->createView(),
             'threads' => $this->getThreadManager()->findEnabledThreads(10)
         ]);
@@ -124,7 +133,7 @@ class TopicController extends ResourceController
             ->addMeta('property', 'og:url',  $this->generateUrl('topic_view', ['id' => $topic->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description', $summary);
 
-        return $this->render('PHPDishWebBundle:Topic:view.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:view.html.twig'), [
             'topic' => $topic,
             'replies' => $replies,
             'form' => $form->createView(),
@@ -159,7 +168,7 @@ class TopicController extends ResourceController
             ]);
         }
 
-        return $this->render('PHPDishWebBundle:Topic:create.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:create.html.twig'), [
             'form' => $form->createView(),
             'topic' => $topic,
             'threads' => $this->getThreadManager()->findEnabledThreads(10)
@@ -335,7 +344,7 @@ class TopicController extends ResourceController
         $date = Carbon::today()->modify('-100 days');
         $topics = $this->getTopicManager()->findHotTopics($date, $limit ?: 10);
 
-        return $this->render('PHPDishWebBundle:Topic:_today_hot.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:_today_hot.html.twig'), [
             'topics' => $topics,
         ]);
     }

@@ -1,11 +1,20 @@
 <?php
 
-namespace PHPDish\Bundle\CoreBundle\Security;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+namespace PHPDish\Bundle\ResourceBundle\Security;
+
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class EntityVoter extends Voter
 {
@@ -13,11 +22,25 @@ abstract class EntityVoter extends Voter
 
     const ACTION_EDIT = 'edit';
 
+    /**
+     * @var AccessDecisionManagerInterface
+     */
     protected $accessDecisionManager;
 
-    public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
+    /**
+     * @var array
+     */
+    protected $actions;
+
+    /**
+     * @var false
+     */
+    protected $hasAuthenticatedUser;
+
+    public function __construct(AccessDecisionManagerInterface $accessDecisionManager, $actions = [])
     {
         $this->accessDecisionManager = $accessDecisionManager;
+        $this->actions = array_merge($actions, [static::ACTION_EDIT, static::ACTION_VIEW]);
     }
 
     /**
@@ -33,8 +56,7 @@ abstract class EntityVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $entityClass = $this->getResourceClass();
-
-        return in_array($attribute, [static::ACTION_VIEW, static::ACTION_EDIT])
+        return in_array($attribute, $this->actions)
             && $subject instanceof $entityClass;
     }
 
@@ -44,14 +66,14 @@ abstract class EntityVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
-        if (!$user instanceof UserInterface) {
+        $this->hasAuthenticatedUser = $user instanceof UserInterface;
+        //没有登录的用户不允许
+        if (!$this->hasAuthenticatedUser) {
             return false;
         }
-
         if ($this->accessDecisionManager->decide($token, ['ROLE_ADMIN'])) {
             return true;
         }
-
         $result = false;
         switch ($attribute) {
             case static::ACTION_VIEW:
@@ -61,7 +83,6 @@ abstract class EntityVoter extends Voter
                 $result = $this->canEdit($subject, $user);
                 break;
         }
-
         return $result;
     }
 
@@ -79,7 +100,7 @@ abstract class EntityVoter extends Voter
     }
 
     /**
-     * @param mixed         $entity
+     * @param mixed  $entity
      * @param UserInterface $user
      *
      * @return bool
