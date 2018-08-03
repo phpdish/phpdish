@@ -11,9 +11,10 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-interface NotificationMetadataInterface
+interface NotificationMetadataInterface extends IdentifiableInterface
 {
     /**
      * 获取参与者

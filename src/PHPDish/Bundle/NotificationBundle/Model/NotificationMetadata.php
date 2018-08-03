@@ -11,10 +11,13 @@
 
 namespace PHPDish\Bundle\NotificationBundle\Model;
 
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
 class NotificationMetadata implements NotificationMetadataInterface
 {
+    use IdentifiableTrait;
+
     /**
      * @var UserInterface
      */

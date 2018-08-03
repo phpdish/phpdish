@@ -185,7 +185,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     public function getNotificationCount(UserInterface $participant, $seen = null)
     {
         $qb = $this->getParticipantMetadataQb($participant, $seen);
-        $qb->select($qb->expr()->count('n'));
+        $qb->select($qb->expr()->count('m'));
         return $qb->getQuery()->getSingleScalarResult();
     }
 
