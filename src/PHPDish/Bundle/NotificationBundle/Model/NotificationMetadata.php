@@ -31,7 +31,7 @@ class NotificationMetadata implements NotificationMetadataInterface
     /**
      * @var boolean
      */
-    protected $seen;
+    protected $seen = false;
 
     /**
      * @return UserInterface

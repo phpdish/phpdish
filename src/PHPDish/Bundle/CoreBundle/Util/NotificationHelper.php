@@ -20,6 +20,7 @@ use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\PostBundle\Model\CommentInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 final class NotificationHelper
@@ -34,6 +35,11 @@ final class NotificationHelper
      */
     protected $translator;
 
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
+
     public function __construct(NotificationManagerInterface $notificationManager, TranslatorInterface $translator)
     {
         $this->notificationManager = $notificationManager;
@@ -46,8 +52,10 @@ final class NotificationHelper
     public function createFollowUserNotification(UserInterface $follower)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.follow_user.subject'),
-            $this->translator->trans('notification.follow_user.message')
+            $this->translator->trans('notification.follow_user.subject', [
+                '%username%' => $follower->getUsername(),
+                '%url%' => $this->router->generate('user_view', ['username' => $follower->getUsername()])
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_FOLLOW_USER,
@@ -63,8 +71,13 @@ final class NotificationHelper
     public function createReplyTopicNotification(TopicInterface $topic, ReplyInterface $reply)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.reply_topic.subject'),
-            $this->translator->trans('notification.reply_topic.message')
+            $this->translator->trans('notification.reply_topic.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $reply->getUser()->getUsername()]),
+                '%username%' =>$reply->getUser()->getUsername(),
+                '%topicUrl%' => $this->router->generate('topic_view', ['id' => $topic->getId()]),
+                '%topicTitle%' => $topic->getTitle()
+            ]),
+            $reply->getBody()
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_REPLY_TOPIC,
@@ -82,8 +95,13 @@ final class NotificationHelper
     public function createCommentPostNotification(PostInterface $post, CommentInterface $comment)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.comment_post.subject'),
-            $this->translator->trans('notification.comment_post.message')
+            $this->translator->trans('notification.comment_post.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $comment->getUser()->getUsername()]),
+                '%username%' =>$comment->getUser()->getUsername(),
+                '%postUrl%' => $this->router->generate('post_view', ['id' => $post->getId()]),
+                '%postTitle%' => $post->getTitle()
+            ]),
+            $comment->getBody()
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_COMMENT_POST,
@@ -101,8 +119,12 @@ final class NotificationHelper
     public function createMentionUserInPostNotification(CommentInterface $comment)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.mention_user_post.subject'),
-            $this->translator->trans('notification.mention_user_post.message')
+            $this->translator->trans('notification.mention_user_post.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $comment->getUser()->getUsername()]),
+                '%username%' => $comment->getUser()->getUsername(),
+                '%postUrl%' => $this->router->generate('post_view', ['id' => $comment->getPost()->getId()]),
+                '%postTitle%' => $comment->getPost()->getTitle()
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_MENTION_USER_IN_POST,
@@ -120,8 +142,12 @@ final class NotificationHelper
     public function createMentionUserInTopicNotification(ReplyInterface $reply)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.mention_user_topic.subject'),
-            $this->translator->trans('notification.mention_user_topic.message')
+            $this->translator->trans('notification.mention_user_topic.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $reply->getUser()->getUsername()]),
+                '%username%' => $reply->getUser()->getUsername(),
+                '%topicUrl%' => $this->router->generate('post_view', ['id' => $reply->getTopic()->getId()]),
+                '%topicTitle%' => $reply->getTopic()->getTitle()
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_MENTION_USER_IN_TOPIC,
@@ -138,10 +164,25 @@ final class NotificationHelper
      */
     public function createFollowCategoryNotification(CategoryInterface $category, UserInterface $follower)
     {
-        $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.follow_category.subject'),
-            $this->translator->trans('notification.follow_category.message')
-        );
+        if ($category->isBook()) {
+            $notification = $this->notificationManager->createNotification(
+                $this->translator->trans('notification.follow_book.subject', [
+                    '%userUrl%' => $this->router->generate('user_view', ['username' => $follower->getUsername()]),
+                    '%username%' => $follower->getUsername(),
+                    '%bookUrl%' => $this->router->generate('book_view', ['slug' => $category->getSlug()]),
+                    '%bookTitle%' => $category->getName()
+                ])
+            );
+        } else {
+            $notification = $this->notificationManager->createNotification(
+                $this->translator->trans('notification.follow_category.subject', [
+                    '%userUrl%' => $this->router->generate('user_view', ['username' => $follower->getUsername()]),
+                    '%username%' => $follower->getUsername(),
+                    '%categoryUrl%' => $this->router->generate('category_view', ['slug' => $category->getSlug()]),
+                    '%categoryTitle%' => $category->getName()
+                ])
+            );
+        }
         $notification->addParameters([
             'subject' => Notification::SUBJECT_FOLLOW_CATEGORY,
             'category_id' => $category->getId(),
@@ -157,8 +198,8 @@ final class NotificationHelper
     public function createWithdrawNotification(PaymentInterface $payment)
     {
         $message = $payment->getStatus() === PaymentInterface::STATUS_OK
-            ? $this->translator->trans('notification.withdraw.message.your_withdraw_was_approved', ['%payment%' => $payment->getDescription()])
-            : $this->translator->trans('notification.withdraw.message.your_withdraw_was_declined', ['%payment%' => $payment->getDescription()]);
+            ? $this->translator->trans('notification.withdraw.subject.your_withdraw_was_approved', ['%payment%' => $payment->getDescription()])
+            : $this->translator->trans('notification.withdraw.subject.your_withdraw_was_declined', ['%payment%' => $payment->getDescription()]);
 
         $notification = $this->notificationManager->createNotification(
             $this->translator->trans('notification.withdraw.subject'),
@@ -179,8 +220,12 @@ final class NotificationHelper
     public function createVoteTopicNotification(TopicInterface $topic, UserInterface $user)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.vote_topic.subject'),
-            $this->translator->trans('notification.vote_topic.message')
+            $this->translator->trans('notification.vote_topic.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $user->getUsername()]),
+                '%username%' => $user->getUsername(),
+                '%topicUrl%' => $this->router->generate('topic_view', ['id'=>$topic->getId()]),
+                '%topicTitle%' => $topic->getTitle()
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_VOTE_TOPIC,
@@ -197,8 +242,12 @@ final class NotificationHelper
     public function createVoteReplyNotification(TopicInterface $topic, ReplyInterface $reply, UserInterface $user)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.vote_reply.subject'),
-            $this->translator->trans('notification.vote_reply.message')
+            $this->translator->trans('notification.vote_reply.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $user->getUsername()]),
+                '%username%' => $user->getUsername(),
+                '%topicUrl%' => $this->router->generate('topic_view', ['id'=>$topic->getId()]),
+                '%topicTitle%' => $topic->getTitle()
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_VOTE_REPLY,
@@ -216,14 +265,18 @@ final class NotificationHelper
     public function createVotePostNotification(PostInterface $post, UserInterface $user)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.vote_reply.subject'),
-            $this->translator->trans('notification.vote_reply.message')
+            $this->translator->trans('notification.vote_post.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $user->getUsername()]),
+                '%username%' => $user->getUsername(),
+                '%postUrl%' => $this->router->generate('post_view', ['id'=>$post->getId()]),
+                '%postTitle%' => $post->getTitle()
+            ])
         );
         $notification->addParameters([
-                'subject' => Notification::SUBJECT_VOTE_POST,
-                'post_id' => $post->getId(),
-                'voter_id' => $user->getId(),
-                'voter_username' => $user->getUsername(),
+            'subject' => Notification::SUBJECT_VOTE_POST,
+            'post_id' => $post->getId(),
+            'voter_id' => $user->getId(),
+            'voter_username' => $user->getUsername(),
         ]);
 
         return $notification;
@@ -234,8 +287,12 @@ final class NotificationHelper
     public function createVoteCommentNotification(PostInterface $post, CommentInterface $comment, UserInterface $user)
     {
         $notification = $this->notificationManager->createNotification(
-            $this->translator->trans('notification.vote_comment.subject'),
-            $this->translator->trans('notification.vote_comment.message')
+            $this->translator->trans('notification.vote_comment.subject', [
+                '%userUrl%' => $this->router->generate('user_view', ['username' => $user->getUsername()]),
+                '%username%' => $user->getUsername(),
+                '%postUrl%' => $this->router->generate('post_view', ['id'=>$post->getId()]),
+                '%postTitle%' => $post->getTitle()
+            ])
         );
         $notification->addParameters([
             'subject' => Notification::SUBJECT_VOTE_COMMENT,
@@ -249,13 +306,14 @@ final class NotificationHelper
 
     /**
      * 发送消息
+     *
      * @param UserInterface[]|UserInterface $participant
      * @param $notification
      */
     public function sendNotification($participant, $notification)
     {
         $participants = is_array($participant) ? $participant : [$participant];
-        $this->notificationManager->sendNotification($participants, $notification);
+        $this->notificationManager->sendNotification($participants, $notification, true);
     }
 
     public function __destruct()

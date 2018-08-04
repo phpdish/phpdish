@@ -162,26 +162,6 @@ post:
 
 friend_link: 友情链接
 
-notification:
-    notification: 通知
-    my_notification: 我的提醒
-    empty: 没有提醒
-    user_follow_you: <a class="username" href="%url%">%username%</a>  关注了你
-    user_reply_your_topic: <a class="username" href="%userUrl%">%username%</a>  回复了你的话题 <a href="%topicUrl%">%topicTitle%</a>
-    user_vote_your_topic: <a class="username" href="%userUrl%">%username%</a>  赞了你的话题 <a href="%topicUrl%">%topicTitle%</a>
-    user_vote_your_reply: <a class="username" href="%userUrl%">%username%</a>  赞了你在话题 <a href="%topicUrl%">%topicTitle%</a> 里的回复
-    user_at_your_in_topic: <a class="username" href="%userUrl%">%username%</a>  在话题 <a href="%topicUrl%">%topicTitle%</a> 提到了你
-
-    user_comment_your_post: <a class="username" href="%userUrl%">%username%</a>  评论了你的文章 <a href="%postUrl%">%postTitle%</a>
-    user_vote_your_post: <a class="username" href="%userUrl%">%username%</a>  赞了你的文章 <a href="%postUrl%">%postTitle%</a>
-    user_vote_your_comment: <a class="username" href="%userUrl%">%username%</a>  赞了你在文章 <a href="%postUrl%">%postTitle%</a> 里的评论
-    user_at_your_in_post: <a class="username" href="%userUrl%">%username%</a>  在文章 <a href="%topicUrl%">%postTitle%</a> 提到了你
-
-    user_buy_your_book: <a class="username" href="%userUrl%">%username%</a> 购买了你的 <a href="%bookUrl%">%bookTitle%</a> 电子书
-    user_follow_your_category: <a class="username" href="%userUrl%">%username%</a> 订阅了你的 <a href="%categoryUrl%">%categoryTitle%</a> 专栏
-    withdraw_notification: 提现通知
-
-
 error:
     unknow_error: 未知的错误
     the_page_you_are_looking_for_does_not_exist: OOPS! 您请求的资源不存在

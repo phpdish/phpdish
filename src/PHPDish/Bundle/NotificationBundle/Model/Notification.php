@@ -111,6 +111,7 @@ class Notification implements NotificationInterface
      */
     public function addMetadata(NotificationMetadataInterface $metadata)
     {
+        $metadata->setNotification($this);
         $this->metadata[] = $metadata;
     }
 }

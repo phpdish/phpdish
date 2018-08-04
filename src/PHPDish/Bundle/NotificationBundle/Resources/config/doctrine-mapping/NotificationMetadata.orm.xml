@@ -6,7 +6,11 @@
       <generator strategy="AUTO"/>
     </id>
 
-    <field name="seen" type="boolean" column="seen" precision="0" scale="0" nullable="false"/>
+    <field name="seen" type="boolean" column="seen" precision="0" scale="0" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
 
     <many-to-one field="notification" target-entity="PHPDish\Bundle\NotificationBundle\Model\NotificationInterface" inversed-by="metadata" fetch="LAZY">
       <join-columns>

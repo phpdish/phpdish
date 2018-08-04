@@ -1,2 +1,34 @@
 register:
     welcome_subject: 欢迎注册本社区！
+
+notification:
+    notification: 通知
+    my_notification: 我的提醒
+    empty: 没有提醒
+    withdraw_notification: 提现通知
+    follow_user:
+         subject: <a class="username" href="%url%">%username%</a> 关注了你
+    follow_category:
+        subject: <a class="username" href="%userUrl%">%username%</a> 订阅了你的 <a href="%categoryUrl%">%categoryTitle%</a> 专栏
+    follow_book:
+        subject: <a class="username" href="%userUrl%">%username%</a> 购买了你的 <a href="%bookUrl%">%bookTitle%</a> 电子书
+    reply_topic:
+        subject: <a class="username" href="%userUrl%">%username%</a> 回复了你的话题 <a href="%topicUrl%">%topicTitle%</a>
+    comment_post:
+        subject: <a class="username" href="%userUrl%">%username%</a> 评论了你的文章 <a href="%postUrl%">%postTitle%</a>
+    mention_user_post:
+        subject: <a class="username" href="%userUrl%">%username%</a> 在文章 <a href="%postUrl%">%postTitle%</a> 提到了你
+    mention_user_topic:
+         subject: <a class="username" href="%userUrl%">%username%</a> 在话题 <a href="%topicUrl%">%topicTitle%</a> 提到了你
+    withdraw:
+        subject:
+             your_withdraw_was_approved: 您的提现已通过; %payment%
+             your_withdraw_was_declined: 您的提现已经被拒绝; %payment%
+    vote_topic:
+        subject: <a class="username" href="%userUrl%">%username%</a> 赞了你的话题 <a href="%topicUrl%">%topicTitle%</a>
+    vote_reply:
+        subject:  <a class="username" href="%userUrl%">%username%</a> 赞了你在话题 <a href="%topicUrl%">%topicTitle%</a> 里的回复
+    vote_post:
+        subject: <a class="username" href="%userUrl%">%username%</a> 赞了你的文章 <a href="%postUrl%">%postTitle%</a>
+    vote_comment:
+        subject: <a class="username" href="%userUrl%">%username%</a>  赞了你在文章 <a href="%postUrl%">%postTitle%</a> 里的评论

@@ -1,5 +1,10 @@
 # PHPDish Mention Adapter
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     phpdish.security.password_encoder.generic:
         class: PHPDish\Bundle\CoreBundle\Security\Core\Encoder\GenericPasswordEncoder
         arguments: ['%security.password_encoder_strength%']
@@ -80,3 +85,6 @@ services:
          class: PHPDish\Bundle\CoreBundle\Twig\FriendLinkExtension
          arguments: ['@phpdish.manager.friend_link']
          tags: ['twig.extension']
+
+    phpdish.util.notification_helper:
+        class: PHPDish\Bundle\CoreBundle\Util\NotificationHelper

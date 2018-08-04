@@ -30,7 +30,7 @@ class Notification extends BaseNotification
     /**
      * @var array
      */
-    protected $parameters;
+    protected $parameters = [];
 
     /**
      * @return array
