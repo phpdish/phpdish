@@ -15,6 +15,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 abstract class AbstractConfiguration
 {
+    /**
+     * 添加模板模块配置
+     *
+     * @param ArrayNodeDefinition $rootNode
+     */
     protected function addTemplatesSection(ArrayNodeDefinition $rootNode)
     {
         $rootNode

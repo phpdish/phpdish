@@ -1,15 +1,12 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
     phpdish.chat.message_provider:
         class: PHPDish\Bundle\ChatBundle\Message\Provider
+        autowire: true
         parent: fos_message.provider
 
     PHPDish\Bundle\ChatBundle\Controller\:
          resource: "../../Controller"
+         autowire: true
          arguments:
               $configuration: '@phpdish.resource.configuration.phpdish_chat'
          tags: ['controller.service_arguments']

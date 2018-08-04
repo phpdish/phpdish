@@ -15,11 +15,12 @@ use PHPDish\Bundle\PaymentBundle\Model\Payment;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Model\Wallet;
 use PHPDish\Bundle\PaymentBundle\Model\WalletInterface;
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -27,7 +28,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('php_dish_payment');
+        $rootNode = $treeBuilder->root('phpdish_payment');
 
         $rootNode->children()
             ->arrayNode('youzan')
@@ -39,7 +40,7 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $this->addResourcesSection($rootNode);
-
+        $this->addTemplatesSection($rootNode);
         return $treeBuilder;
     }
 

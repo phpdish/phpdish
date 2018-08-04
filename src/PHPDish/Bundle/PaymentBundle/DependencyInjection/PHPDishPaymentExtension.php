@@ -46,7 +46,9 @@ class PHPDishPaymentExtension extends AbstractExtension
             }
         }
 
+        //注册到资源管理
         $this->registerResources($config['resources'], $container);
+        $this->registerResourcesConfiguration($config['resources'], $config['templates'], $config['templates_namespace'], $container);
     }
 
     /**
