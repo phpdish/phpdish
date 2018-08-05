@@ -1,5 +1,9 @@
 services:
-    phpdish.manager.user:
+    phpdish_user.security.password_encoder.generic:
+        class: PHPDish\Bundle\UserBundle\Security\Core\Encoder\GenericPasswordEncoder
+        arguments: ['%security.password_encoder_strength%']
+
+    phpdish_user.manager.user:
         class: PHPDish\Bundle\UserBundle\Service\UserManager
         parent: fos_user.user_manager
         calls:
@@ -7,87 +11,54 @@ services:
              - [setTranslator, [ '@translator']]
         public: true
 
-    phpdish.avatar_generator.user:
+    phpdish_user.avatar_generator.user:
         class: PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGenerator
-        arguments: ['@phpdish.media.file_manager.avatar', '@phpdish.media.file_namer.avatar']
+        arguments: ['@phpdish_media.file_manager.avatar', '@phpdish_media.file_namer.avatar']
 
-    phpdish.event_listener.user_listener:
-        class: PHPDish\Bundle\UserBundle\EventListener\UserListener
-        arguments: ['@event_dispatcher']
+    phpdish_user.event_subscriber.user_subscriber:
+        class: PHPDish\Bundle\UserBundle\EventListener\UserSubscriber
+        arguments: ['@event_dispatcher', '@router', '@phpdish_user.avatar_generator.user']
         tags:
             - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Model\User, event: postPersist,  method: postPersist}
+            - {name: 'kernel.event_subscriber'}
 
-    phpdish.event_listener.user_create:
-        class: PHPDish\Bundle\UserBundle\EventListener\UserCreateListener
-        arguments: ['@router', '@phpdish.avatar_generator.user']
-        tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Model\User, event: prePersist,  method: prePersist}
-            - {name: kernel.event_listener, event: fos_user.registration.success,  method: onRegisterSuccess}
-
-    phpdish.event_listener.resetting:
-        class: PHPDish\Bundle\UserBundle\EventListener\ResettingListener
-        arguments: ['@router']
-        tags:
-            - {name: kernel.event_subscriber}
-
-    phpdish.event_listener.change_password:
-        class: PHPDish\Bundle\UserBundle\EventListener\ChangePasswordListener
-        arguments: ['@router']
-        tags:
-            - {name: kernel.event_listener, event: fos_user.change_password.edit.success,  method: onChangePassword}
-
-    phpdish.event_listener.user_locale:
-        class: PHPDish\Bundle\UserBundle\EventListener\UserLocaleSubscriber
-        arguments: ['@session']
-        tags:
-            - {name: kernel.event_subscriber}
-
-    phpdish.oauth_aware.user_provider:
-#        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
+    phpdish_user.oauth_aware.user_provider:
         class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
         arguments:
           - '@fos_user.user_manager'
           - '@security.token_storage'
-          - '@phpdish.media.file_downloader.avatar'
+          - '@phpdish_media.file_downloader.avatar'
           - {weibo: weiboId, github: githubId, qq: qqId}
 
     # Form Type
-    phpdish.form_type.user_profile:
+    phpdish_user.form_type.user_profile:
         class: PHPDish\Bundle\UserBundle\Form\Type\ChangeUserProfileType
-        arguments: ['@phpdish.locale_manager']
+        arguments: ['@phpdish_core.locale_manager']
         autowire: true
         tags: [form.type]
 
     # Setting Menu
-    phpdish.menu_builder.setting_menu:
+    phpdish_user.menu_builder.setting_menu:
         class: PHPDish\Bundle\UserBundle\Menu\SettingMenuBuilder
         arguments: ['@knp_menu.factory', '@event_dispatcher']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: setting_menu}
 
     # 核心twig扩展
-    phpdish.twig_extension.user:
+    phpdish_user.twig_extension.user:
          class: PHPDish\Bundle\UserBundle\Twig\UserExtension
-         arguments: ['@phpdish.manager.user']
+         arguments: ['@phpdish_user.manager.user']
          public: false
          tags:
             - { name: twig.extension}
 
    # 积分管理服务
-    phpdish.manager.point:
+    phpdish_user.manager.point:
         class: PHPDish\Bundle\UserBundle\Service\PointManager
         autowire: true
-        public: true
 
    # 积分变动
-    phpdish.event_subscriber.point_history:
+    phpdish_user.event_subscriber.point_history:
         class: PHPDish\Bundle\UserBundle\EventListener\PointHistorySubscriber
         autowire: true
-        tags:
-            - {name: doctrine.event_subscriber}
-
-    phpdish.event_subscriber.point:
-        class: PHPDish\Bundle\UserBundle\EventListener\PointSubscriber
-        autowire: true
-        tags:
-            - {name: kernel.event_subscriber}
+        tags: ['doctrine.event_subscriber']

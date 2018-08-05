@@ -4,30 +4,30 @@ services:
         autoconfigure: true
         public: false
         
-    phpdish.payment_gateway.youzan:
+    phpdish_payment.payment_gateway.youzan:
         class: Slince\YouzanPay\YouzanPay
         public: true
-        arguments: ['', {httpClient: "@phpdish.http_client"}]
+        arguments: ['', {httpClient: "@phpdish_core.http_client"}]
 
-    phpdish.manager.payment:
+    phpdish_payment.manager.payment:
         class: PHPDish\Bundle\PaymentBundle\Service\PaymentManager
         public: true
-        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish.manager.wallet", "@phpdish.payment_gateway.youzan"]
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@phpdish_payment.manager.wallet", "@phpdish_payment.payment_gateway.youzan"]
 
-    phpdish.manager.wallet:
+    phpdish_payment.manager.wallet:
         class: PHPDish\Bundle\PaymentBundle\Service\WalletManager
         public: true
-        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@router", "@phpdish.manager.user", "@translator"]
+        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@router", "@phpdish_user.manager.user", "@translator"]
 
-    phpdish.money_formatter:
+    phpdish_payment.money_formatter:
         class: PHPDish\Bundle\PaymentBundle\Money\MoneyFormatter
 
-    phpdish.twig.extension.money:
+    phpdish_payment.twig.extension.money:
         class: PHPDish\Bundle\PaymentBundle\Twig\MoneyExtension
-        arguments: ["@phpdish.money_formatter"]
+        arguments: ["@phpdish_payment.money_formatter"]
         tags: ['twig.extension']
 
-    phpdish.twig.extension.wallet:
+    phpdish_payment.twig.extension.wallet:
         class: PHPDish\Bundle\PaymentBundle\Twig\WalletExtension
         arguments: ["@translator"]
         tags: ['twig.extension']
@@ -35,5 +35,5 @@ services:
     PHPDish\Bundle\PaymentBundle\Controller\:
          resource: "../../Controller"
          arguments:
-              $configuration: '@phpdish.resource.configuration.phpdish_payment'
+              $configuration: '@phpdish_resource.configuration.phpdish_payment'
          tags: ['controller.service_arguments']

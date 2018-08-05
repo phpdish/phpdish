@@ -12,7 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->get('phpdish.manager.user')->findUserByName('slince');
+        $user = $this->get('phpdish_user.manager.user')->findUserByName('slince');
         return $this->render('PHPDishWebBundle:Resume:index.html.twig', [
             'user' => $user
         ]);

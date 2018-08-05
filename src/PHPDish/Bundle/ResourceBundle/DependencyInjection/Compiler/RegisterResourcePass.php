@@ -26,11 +26,11 @@ class RegisterResourcePass implements CompilerPassInterface
     {
         if (
             !$container->hasParameter('phpdish.resources')
-            || !$container->hasDefinition('phpdish.resource_registry')
+            || !$container->hasDefinition('phpdish_resource.resource_registry')
         ) {
             return;
         }
-        $resourceRegistry = $container->findDefinition('phpdish.resource_registry');
+        $resourceRegistry = $container->findDefinition('phpdish_resource.resource_registry');
         $resourceRegistry->setArgument(0, $container->getParameter('phpdish.resources'));
     }
 }

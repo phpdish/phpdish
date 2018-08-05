@@ -1,15 +1,22 @@
 <?php
 
-namespace PHPDish\Bundle\UserBundle\EventListener;
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use PHPDish\Bundle\ForumBundle\Event\ReplyTopicEvent;
 use PHPDish\Bundle\ForumBundle\Event\TopicEvent;
-use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\PostBundle\Event\PostEvent;
 use PHPDish\Bundle\CoreBundle\Model\PointHistory;
 use PHPDish\Bundle\UserBundle\Event\Events;
 use PHPDish\Bundle\UserBundle\Event\UserEvent;
-use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\UserBundle\Service\PointManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -70,8 +77,6 @@ class PointSubscriber implements EventSubscriberInterface
             // 题主送积分
             $this->sendPoints($event->getTopic()->getUser(), PointHistory::TYPE_TOPIC_REPLY);
         }
-        // 答主送积分
-//        $this->sendPoints($event->getReply()->getUser(), PointHistory::TYPE_POST_TOPIC_REPLY);
     }
 
     /**

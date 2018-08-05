@@ -5,20 +5,20 @@ services:
        public: false
 
     ## 安全裁切html
-    phpdish.html_chunker:
+    phpdish_cms.html_chunker:
         class: PHPDish\CmsBundle\Utility\HtmlChunker
         arguments: ['@exercise_html_purifier.default']
 
     # 核心twig扩展
-    phpdish.twig_extension.core:
+    phpdish_cms.twig_extension.core:
          class: PHPDish\Bundle\CmsBundle\Twig\CmsExtension
          tags: ['twig.extension']
 
     # 艾特处理解析器
-    phpdish.mention.parser:
+    phpdish_cms.mention.parser:
         class: PHPDish\Component\Mention\MentionParser
 
     # body处理器
-    phpdish.body_processor:
+    phpdish_cms.body_processor:
         class: PHPDish\Bundle\CmsBundle\BodyProcessor\BodyProcessor
-        arguments: ["@markdown.parser", "@phpdish.mention.parser", "@exercise_html_purifier.default"]
+        arguments: ["@markdown.parser", "@phpdish_cms.mention.parser", "@exercise_html_purifier.default"]

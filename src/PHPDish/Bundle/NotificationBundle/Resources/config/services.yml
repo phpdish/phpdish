@@ -4,17 +4,17 @@ services:
         autoconfigure: true
         public: false
 
-    phpdish.manager.notification:
+    phpdish_notification.manager.notification:
         class: PHPDish\Bundle\NotificationBundle\Service\NotificationManager
         public: true
 
     # Twig Extension
-    phpdish.twig_extension.notification:
+    phpdish_notification.twig_extension.notification:
        class: PHPDish\Bundle\NotificationBundle\Twig\NotificationExtension
        tags: ['twig.extension']
 
     PHPDish\Bundle\NotificationBundle\Controller\:
          resource: "../../Controller"
          arguments:
-              $configuration: '@phpdish.resource.configuration.phpdish_notification'
+              $configuration: '@phpdish_resource.configuration.phpdish_notification'
          tags: ['controller.service_arguments']

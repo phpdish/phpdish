@@ -14,7 +14,7 @@ trait ManagerTrait
      */
     protected function getUserManager()
     {
-        return $this->get('phpdish.manager.user');
+        return $this->get('phpdish_user.manager.user');
     }
 
     /**

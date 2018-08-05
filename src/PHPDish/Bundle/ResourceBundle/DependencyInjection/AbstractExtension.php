@@ -28,7 +28,7 @@ abstract class AbstractExtension extends Extension
 
     protected function registerResourcesConfiguration(array $resources, array $templates, $defaultTemplateNamespace, ContainerBuilder $container)
     {
-        $definition = new ChildDefinition('phpdish.resource.configuration');
+        $definition = new ChildDefinition('phpdish_resource.configuration');
         $definition->setArguments([
                 [$this->getAlias() => $resources],
                 $templates,
@@ -36,6 +36,6 @@ abstract class AbstractExtension extends Extension
             ])
             ->addTag('phpdish.resource_configuration');
 
-        $container->setDefinition('phpdish.resource.configuration.' . $this->getAlias(), $definition);
+        $container->setDefinition('phpdish_resource.configuration.' . $this->getAlias(), $definition);
     }
 }

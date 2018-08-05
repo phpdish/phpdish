@@ -45,7 +45,7 @@ sonata_seo:
 
 ## 多主题
 sylius_theme:
-    context: phpdish.theme.context.generic
+    context: phpdish_core.theme.context.generic
     sources:
         filesystem: ~
 

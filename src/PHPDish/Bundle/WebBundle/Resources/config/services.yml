@@ -1,12 +1,12 @@
 services:
    # Main Menu
-    phpdish.menu_builder.main_menu:
+    phpdish_web.menu_builder.main_menu:
         class: PHPDish\Bundle\WebBundle\Menu\MainMenuBuilder
         arguments: ['@knp_menu.factory', '@event_dispatcher']
         tags:
            - { name: knp_menu.menu_builder, method: createMenu, alias: main_menu}
 
-    phpdish.menu_builder.notification_menu:
+    phpdish_web.menu_builder.notification_menu:
         class: PHPDish\Bundle\WebBundle\Menu\NotificationMenuBuilder
         arguments: ['@knp_menu.factory', '@translator']
         tags:

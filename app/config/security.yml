@@ -3,7 +3,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface:
-            id: phpdish.security.password_encoder.generic
+            id: phpdish_user.security.password_encoder.generic
 #            algorithm: md5
 #            encode_as_base64: false
 #            iterations: 0
@@ -44,7 +44,7 @@ security:
                     github: "/login/check-github"
                     qq: "/login/check-qq"
                 oauth_user_provider:
-                    service:  phpdish.oauth_aware.user_provider
+                    service:  phpdish_user.oauth_aware.user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

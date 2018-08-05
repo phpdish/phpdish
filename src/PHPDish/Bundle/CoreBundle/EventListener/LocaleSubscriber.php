@@ -12,22 +12,55 @@
 namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use PHPDish\Bundle\CoreBundle\Locale\LocaleManager;
-use PHPDish\Bundle\UserBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
-class LocaleListener
+final class LocaleSubscriber implements EventSubscriberInterface
 {
     /**
      * @var LocaleManager
      */
     protected $localeManager;
 
+    /**
+     * @var Session
+     */
+    private $session;
 
-    public function __construct(LocaleManager $localeManager)
+    public function __construct(LocaleManager $localeManager, Session $session)
     {
         $this->localeManager = $localeManager;
+        $this->session = $session;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest',
+            SecurityEvents::INTERACTIVE_LOGIN => array(array('onInteractiveLogin', 15)),
+        ];
+    }
+
+    /**
+     * 用户登录之后触发，记录用户的语言
+     *
+     * @param InteractiveLoginEvent $event
+     */
+    public function onInteractiveLogin(InteractiveLoginEvent $event)
+    {
+        $user = $event->getAuthenticationToken()->getUser();
+
+        if (null !== $user->getLocale()) {
+            $this->session->set('_locale', $user->getLocale());
+        }
     }
 
     /**
@@ -50,6 +83,12 @@ class LocaleListener
         }
     }
 
+    /**
+     * 获取最匹配客户端的语言
+     *
+     * @param Request $request
+     * @return null|string
+     */
     protected function getClientPreferredLocale(Request $request)
     {
         return $request->getPreferredLanguage($this->localeManager->all());

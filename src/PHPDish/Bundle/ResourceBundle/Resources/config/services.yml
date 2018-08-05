@@ -5,14 +5,14 @@ services:
         autoconfigure: true
 
     # 全局资源注册处
-    phpdish.resource_registry:
+    phpdish_resource.resource_registry:
         class: PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry
 
     # 各bundle资源配置基础对象
-    phpdish.resource.configuration:
+    phpdish_resource.configuration:
         class: PHPDish\Bundle\ResourceBundle\Controller\ResourceConfiguration
 
-    phpdish.resource.event_subscriber.orm_mapped_super_class:
+    phpdish_resource.event_subscriber.orm_mapped_super_class:
          class: PHPDish\Bundle\ResourceBundle\EventListener\ORMMappedSuperClassSubscriber
-         arguments: ['@phpdish.resource_registry']
+         arguments: ['@phpdish_resource.resource_registry']
          tags: ['doctrine.event_subscriber']

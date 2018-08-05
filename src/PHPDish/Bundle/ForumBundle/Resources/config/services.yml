@@ -4,32 +4,32 @@ services:
         autoconfigure: true
         public: false
 
-    phpdish.manager.thread:
+    phpdish_forum.manager.thread:
        class: PHPDish\Bundle\ForumBundle\Service\ThreadManager
        public: true
-       arguments: ['', "@doctrine.orm.entity_manager", "@phpdish.pinyin_translator"]
+       arguments: ['', "@doctrine.orm.entity_manager", "@phpdish_core.pinyin_translator"]
 
-    phpdish.manager.topic:
+    phpdish_forum.manager.topic:
         class: PHPDish\Bundle\ForumBundle\Service\TopicManager
-        arguments: ['', '@doctrine.orm.entity_manager', '@event_dispatcher', '@phpdish.body_processor']
+        arguments: ['', '@doctrine.orm.entity_manager', '@event_dispatcher', '@phpdish_cms.body_processor']
         public: true
 
-    phpdish.manager.reply:
+    phpdish_forum.manager.reply:
         class: PHPDish\Bundle\ForumBundle\Service\ReplyManager
         public: true
-        arguments: ['', "@doctrine.orm.entity_manager", '@event_dispatcher', "@phpdish.body_processor"]
+        arguments: ['', "@doctrine.orm.entity_manager", '@event_dispatcher', "@phpdish_cms.body_processor"]
 
-    phpdish.form.data_transformer.string_to_threads:
+    phpdish_forum.form.data_transformer.string_to_threads:
         class: PHPDish\Bundle\ForumBundle\Form\DataTransformer\StringToThreadsTransformer
-        arguments: ["@phpdish.manager.thread"]
+        arguments: ["@phpdish_forum.manager.thread"]
 
-    phpdish.form.topic_type:
+    phpdish_forum.form.topic_type:
         class: PHPDish\Bundle\ForumBundle\Form\Type\TopicType
-        arguments: ["@phpdish.form.data_transformer.string_to_threads"]
+        arguments: ["@phpdish_forum.form.data_transformer.string_to_threads"]
         tags:
            - {name: "form.type"}
 
-    phpdish.security.topic_voter:
+    phpdish_forum.security.topic_voter:
         class: PHPDish\Bundle\ForumBundle\Security\TopicVoter
         arguments:
             - "@security.access.decision_manager"
@@ -37,7 +37,7 @@ services:
             - {name: "security.voter"}
         public: false
 
-    phpdish.security.topic_reply_voter:
+    phpdish_forum.security.topic_reply_voter:
         class: PHPDish\Bundle\ForumBundle\Security\TopicReplyVoter
         arguments:
             - "@security.access.decision_manager"
@@ -45,7 +45,7 @@ services:
             - {name: "security.voter"}
         public: false
 
-    phpdish.security.thread_voter:
+    phpdish_forum.security.thread_voter:
         class: PHPDish\Bundle\ForumBundle\Security\ThreadVoter
         arguments:
             - "@security.access.decision_manager"
@@ -53,18 +53,18 @@ services:
             - {name: "security.voter"}
         public: false
 
-    phpdish.twig_extension.topic:
+    phpdish_forum.twig_extension.topic:
         class: PHPDish\Bundle\ForumBundle\Twig\TopicExtension
         public: false
         arguments:
-            - "@phpdish.manager.thread"
-            - "@phpdish.manager.topic"
-            - "@phpdish.manager.reply"
+            - "@phpdish_forum.manager.thread"
+            - "@phpdish_forum.manager.topic"
+            - "@phpdish_forum.manager.reply"
         tags:
             - {name: twig.extension}
 
     PHPDish\Bundle\ForumBundle\Controller\:
          resource: "../../Controller"
          arguments:
-              $configuration: '@phpdish.resource.configuration.phpdish_forum'
+              $configuration: '@phpdish_resource.configuration.phpdish_forum'
          tags: ['controller.service_arguments']

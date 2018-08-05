@@ -1,37 +1,37 @@
 services:
     # Uploads 目录操作
-    phpdish.media.file_manager:
+    phpdish_media.file_manager:
        class: PHPDish\Component\Media\Manager\FileManager
-       arguments: ['@phpdish.filesystem.uploads']
+       arguments: ['@phpdish_media.filesystem.uploads']
 
-    phpdish.media.file_namer:
+    phpdish_media.file_namer:
        class: PHPDish\Component\Media\Namer\DatePathNamer
-       arguments: ['@phpdish.filesystem.uploads']
+       arguments: ['@phpdish_media.filesystem.uploads']
 
-    phpdish.media.url_builder:
+    phpdish_media.url_builder:
        class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
        arguments: ['@liip_imagine.cache.manager', '%app.path.uploads%']
 
-    phpdish.media.file_factory:
+    phpdish_media.file_factory:
         class: PHPDish\Component\Media\Manager\FileFactory
-        arguments: ['@phpdish.media.file_namer']
+        arguments: ['@phpdish_media.file_namer']
 
-    phpdish.media.file_uploader:
+    phpdish_media.file_uploader:
        class: PHPDish\Component\Media\Uploader\FileUploader
-       arguments: ['@phpdish.media.file_factory',  '@phpdish.media.file_manager']
+       arguments: ['@phpdish_media.file_factory',  '@phpdish_media.file_manager']
 
-    phpdish.media.file_downloader:
+    phpdish_media.file_downloader:
        class: PHPDish\Component\Media\Downloader\FileDownloader
-       arguments: ['@phpdish.http_client', '@phpdish.media.file_manager',  '@phpdish.media.file_namer']
+       arguments: ['@phpdish_core.http_client', '@phpdish_media.file_manager',  '@phpdish_media.file_namer']
 
-    phpdish.media.twig_extension:
+    phpdish_media.twig_extension:
         class: PHPDish\Bundle\MediaBundle\Twig\MediaExtension
         arguments: ['@service_container', '%cdn.host%']
         tags:
             - { name: twig.extension}
 
     ## CDN 处理
-    phpdish.media.imagine.resolver:
+    phpdish_media.imagine.resolver:
         class: PHPDish\Bundle\MediaBundle\Imagine\CDNResolver
         parent: liip_imagine.cache.resolver.prototype.web_path
         arguments:
@@ -39,10 +39,10 @@ services:
             $cachePrefix: media/cache
             $baseUrl: '%cdn.host%'
         tags:
-            - { name: "liip_imagine.cache.resolver", resolver: phpdish.media.imagine_resolver }
+            - { name: "liip_imagine.cache.resolver", resolver: phpdish_media.imagine_resolver }
 
     ## 给oneup uploader使用
-    phpdish.media.oneup_file_namer:
+    phpdish_media.oneup_file_namer:
        class: PHPDish\Bundle\MediaBundle\Oneup\Naming\GenericNamer
-       parent: 'phpdish.media.file_namer'
+       parent: 'phpdish_media.file_namer'
        public: true

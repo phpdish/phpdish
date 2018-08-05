@@ -39,10 +39,10 @@ knp_gaufrette:
     filesystems:
         local:
           adapter: uploads
-          alias: phpdish.filesystem.uploads
+          alias: phpdish_media.filesystem.uploads
         avatar:
           adapter: avatar
-          alias: phpdish.filesystem.avatar
+          alias: phpdish_media.filesystem.avatar
 # KNP Menu
 knp_menu:
     twig:
@@ -173,7 +173,7 @@ bazinga_js_translation:
 phpdish_media:
     maps:
         avatar:
-            filesystem_service: phpdish.filesystem.avatar
+            filesystem_service: phpdish_media.filesystem.avatar
             path: '%app.path.avatar%'
 
 # 支付
@@ -188,10 +188,10 @@ oneup_uploader:
     mappings:
         uploads:
             root_folder: true
-            namer: phpdish.media.oneup_file_namer
+            namer: phpdish_media.oneup_file_namer
             storage:
                 type: gaufrette
-                filesystem: phpdish.filesystem.uploads
+                filesystem: phpdish_media.filesystem.uploads
                 sync_buffer_size: 1M
             frontend: plupload
             use_orphanage: false

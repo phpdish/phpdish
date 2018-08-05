@@ -42,31 +42,31 @@ class PHPDishMediaExtension extends Extension
             foreach ($config['maps'] as $alias => $config) {
                 $id = $config['filesystem_service'];
 
-                $fileManagerDefinition = new ChildDefinition('phpdish.media.file_manager');
+                $fileManagerDefinition = new ChildDefinition('phpdish_media.file_manager');
                 $fileManagerDefinition->replaceArgument(0, new Reference($id));
-                $container->setDefinition('phpdish.media.file_manager.' .  $alias, $fileManagerDefinition);
+                $container->setDefinition('phpdish_media.file_manager.' .  $alias, $fileManagerDefinition);
 
-                $fileNamerDefinition = new ChildDefinition('phpdish.media.file_namer');
+                $fileNamerDefinition = new ChildDefinition('phpdish_media.file_namer');
                 $fileNamerDefinition->replaceArgument(0, new Reference($id));
-                $container->setDefinition('phpdish.media.file_namer.' .  $alias, $fileNamerDefinition);
+                $container->setDefinition('phpdish_media.file_namer.' .  $alias, $fileNamerDefinition);
 
-                $urlBuilderDefinition = new ChildDefinition('phpdish.media.url_builder');
+                $urlBuilderDefinition = new ChildDefinition('phpdish_media.url_builder');
                 $urlBuilderDefinition->replaceArgument(1, $config['path']);
-                $container->setDefinition('phpdish.media.url_builder.' .  $alias, $urlBuilderDefinition);
+                $container->setDefinition('phpdish_media.url_builder.' .  $alias, $urlBuilderDefinition);
 
-                $fileFactoryDefinition = new ChildDefinition('phpdish.media.file_factory');
-                $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish.media.file_namer.' .  $alias));
-                $container->setDefinition('phpdish.media.file_factory.' .  $alias, $fileFactoryDefinition);
+                $fileFactoryDefinition = new ChildDefinition('phpdish_media.file_factory');
+                $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish_media.file_namer.' .  $alias));
+                $container->setDefinition('phpdish_media.file_factory.' .  $alias, $fileFactoryDefinition);
 
-                $fileUploaderDefinition = new ChildDefinition('phpdish.media.file_uploader');
-                $fileUploaderDefinition->replaceArgument(0, new Reference('phpdish.media.file_factory.' .  $alias));
-                $fileUploaderDefinition->replaceArgument(1, new Reference('phpdish.media.file_manager.' .  $alias));
-                $container->setDefinition('phpdish.media.file_uploader.' .  $alias, $fileUploaderDefinition);
+                $fileUploaderDefinition = new ChildDefinition('phpdish_media.file_uploader');
+                $fileUploaderDefinition->replaceArgument(0, new Reference('phpdish_media.file_factory.' .  $alias));
+                $fileUploaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.' .  $alias));
+                $container->setDefinition('phpdish_media.file_uploader.' .  $alias, $fileUploaderDefinition);
 
-                $fileDownloaderDefinition = new ChildDefinition('phpdish.media.file_downloader');
-                $fileDownloaderDefinition->replaceArgument(1, new Reference('phpdish.media.file_manager.' .  $alias));
-                $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish.media.file_namer.' .  $alias));
-                $container->setDefinition('phpdish.media.file_downloader.' .  $alias, $fileDownloaderDefinition);
+                $fileDownloaderDefinition = new ChildDefinition('phpdish_media.file_downloader');
+                $fileDownloaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.' .  $alias));
+                $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish_media.file_namer.' .  $alias));
+                $container->setDefinition('phpdish_media.file_downloader.' .  $alias, $fileDownloaderDefinition);
             }
         }
     }

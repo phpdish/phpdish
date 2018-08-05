@@ -5,25 +5,21 @@ services:
         autoconfigure: true
         public: false
 
-    phpdish.security.password_encoder.generic:
-        class: PHPDish\Bundle\CoreBundle\Security\Core\Encoder\GenericPasswordEncoder
-        arguments: ['%security.password_encoder_strength%']
-
-    phpdish.theme.context.generic:
+    phpdish_core.theme.context.generic:
         class: PHPDish\Bundle\CoreBundle\Theme\Context\GenericThemeContext
         arguments: ['@sylius.repository.theme', '%theme.current_theme%']
 
     ## http client
-    phpdish.http_client:
+    phpdish_core.http_client:
         class: GuzzleHttp\Client
         arguments: [{verify: false}]
 
     ## 拼音服务
-    phpdish.pinyin_translator:
+    phpdish_core.pinyin_translator:
         class: Overtrue\Pinyin\Pinyin
 
     ## 搜索服务，如果需要其它服务可以自行替换
-    phpdish.searcher:
+    phpdish_core.searcher:
         class: PHPDish\Bundle\CoreBundle\Search\Algolia\AlgoliaSearch
         public: true
         arguments:
@@ -31,27 +27,27 @@ services:
             - "@doctrine.orm.entity_manager"
 
     # mention 适配器
-    phpdish.mention.adapter:
+    phpdish_core.mention.adapter:
         class: PHPDish\Bundle\CoreBundle\Mention\Adapter
-        arguments: ['@phpdish.manager.user', '@router']
+        arguments: ['@phpdish_user.manager.user', '@router']
 
     ## 默认null engine
     search.engine.null:
         class: Algolia\SearchBundle\Engine\NullEngine
 
     ## locale manager
-    phpdish.locale_manager:
+    phpdish_core.locale_manager:
         class: PHPDish\Bundle\CoreBundle\Locale\LocaleManager
         arguments: ['%locales%']
 
-    twig_extension.date:
+    phpdish_core.twig_extension.date:
          class: Twig\Extensions\DateExtension
          public: false
          arguments: ['@translator']
          tags:
             - { name: twig.extension}
 
-    phpdish.twig_extension.url_pattern:
+    phpdish_core.twig_extension.url_pattern:
          class: PHPDish\Bundle\CoreBundle\Twig\UrlPatternExtension
          arguments: ['@request_stack']
          public: false
@@ -59,7 +55,7 @@ services:
             - { name: twig.extension}
 
     # 配置参数读取扩展
-    phpdish.twig_extension.container:
+    phpdish_core.twig_extension.container:
          class: PHPDish\Bundle\CoreBundle\Twig\ContainerExtension
          arguments: ['@service_container']
          public: false
@@ -67,24 +63,24 @@ services:
             - { name: twig.extension}
 
     # Pjax服务设置
-    phpdish.pjax.helper:
+    phpdish_core.pjax.helper:
          class: PHPDish\Component\Pjax\Helper\PjaxHelper
 
-    phpdish.twig_extension.pjax:
+    phpdish_core.twig_extension.pjax:
          class: PHPDish\Component\Pjax\Twig\PjaxExtension
-         arguments: ['@phpdish.pjax.helper']
+         arguments: ['@phpdish_core.pjax.helper']
          public: false
          tags:
             - { name: twig.extension}
 
-    phpdish.manager.friend_link:
+    phpdish_core.manager.friend_link:
         class: PHPDish\Bundle\CoreBundle\Service\FriendLinkManager
         arguments: ['@doctrine.orm.entity_manager']
 
-    phpdish.twig_extension.friend_link:
+    phpdish_core.twig_extension.friend_link:
          class: PHPDish\Bundle\CoreBundle\Twig\FriendLinkExtension
-         arguments: ['@phpdish.manager.friend_link']
+         arguments: ['@phpdish_core.manager.friend_link']
          tags: ['twig.extension']
 
-    phpdish.util.notification_helper:
+    phpdish_core.util.notification_helper:
         class: PHPDish\Bundle\CoreBundle\Util\NotificationHelper
