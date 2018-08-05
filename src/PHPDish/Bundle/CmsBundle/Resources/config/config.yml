@@ -1,0 +1,7 @@
+## Html 清理
+exercise_html_purifier:
+    default:
+        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
+        HTML.Allowed: 'p[style],div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,br,span[style],img[width|height|alt|src],*[style|class],pre,hr,code,h1,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td'
+        AutoFormat.AutoParagraph: true
+        AutoFormat.RemoveEmpty: true

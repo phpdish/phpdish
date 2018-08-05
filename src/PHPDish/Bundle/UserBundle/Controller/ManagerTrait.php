@@ -24,6 +24,6 @@ trait ManagerTrait
      */
     protected function getPointManager()
     {
-        return $this->get('phpdish.manager.point');
+        return $this->get('phpdish_user.manager.point');
     }
 }

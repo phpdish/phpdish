@@ -23,7 +23,7 @@ trait ManagerTrait
      */
     protected function getPaymentManager()
     {
-        return $this->get('phpdish.manager.payment');
+        return $this->get('phpdish_payment.manager.payment');
     }
 
     /**
@@ -33,6 +33,6 @@ trait ManagerTrait
      */
     protected function getWalletManager()
     {
-        return $this->get('phpdish.manager.wallet');
+        return $this->get('phpdish_payment.manager.wallet');
     }
 }

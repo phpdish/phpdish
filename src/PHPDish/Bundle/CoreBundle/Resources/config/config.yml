@@ -1,4 +1,6 @@
 imports:
+   - {resource: '@PHPDishCmsBundle/Resources/config/config.yml'}
+   - {resource: '@PHPDishMediaBundle/Resources/config/config.yml'}
    - {resource: 'phpdish.yml'}
 
 doctrine:
@@ -24,25 +26,6 @@ stof_doctrine_extensions:
             tree: true
             timestampable: true
 
-# KNP Gaufrette:
-knp_gaufrette:
-    adapters:
-        uploads:
-            local:
-                directory: '%app.dir.uploads%'
-                create: true
-        avatar:
-            local:
-                directory: '%app.dir.avatar%'
-                create: true
-
-    filesystems:
-        local:
-          adapter: uploads
-          alias: phpdish_media.filesystem.uploads
-        avatar:
-          adapter: avatar
-          alias: phpdish_media.filesystem.avatar
 # KNP Menu
 knp_menu:
     twig:
@@ -53,7 +36,7 @@ knp_menu:
 
 # Liip Imagine
 liip_imagine:
-    cache: phpdish.media.imagine_resolver
+    cache: phpdish_media.imagine_resolver
     loaders:
         default:
             filesystem:
@@ -150,14 +133,6 @@ algolia_search:
           class: PHPDish\Bundle\UserBundle\Model\User
           enable_serializer_groups: true
 
-## Html 清理
-exercise_html_purifier:
-    default:
-        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
-        HTML.Allowed: 'p[style],div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,br,span[style],img[width|height|alt|src],*[style|class],pre,hr,code,h1,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td'
-        AutoFormat.AutoParagraph: true
-        AutoFormat.RemoveEmpty: true
-
 ## 验证码
 gregwar_captcha:
    as_url: true
@@ -170,18 +145,30 @@ bazinga_js_translation:
     default_domain: assets
 
 # Media
+knp_gaufrette:
+    adapters:
+        uploads:
+            local:
+                directory: '%app.dir.uploads%'
+                create: true
+        avatar:
+            local:
+                directory: '%app.dir.avatar%'
+                create: true
+
+    filesystems:
+        local:
+          adapter: uploads
+          alias: phpdish_media.filesystem.uploads
+        avatar:
+          adapter: avatar
+          alias: phpdish_media.filesystem.avatar
+
 phpdish_media:
     maps:
         avatar:
             filesystem_service: phpdish_media.filesystem.avatar
             path: '%app.path.avatar%'
-
-# 支付
-phpdish_payment:
-    youzan:
-      client_id: '%youzan.client_id%'
-      client_secret: '%youzan.client_secret%'
-      kdt_id: '%youzan.kdt_id%'
 
 # 文件上传
 oneup_uploader:
@@ -195,3 +182,10 @@ oneup_uploader:
                 sync_buffer_size: 1M
             frontend: plupload
             use_orphanage: false
+            
+# 支付
+phpdish_payment:
+    youzan:
+      client_id: '%youzan.client_id%'
+      client_secret: '%youzan.client_secret%'
+      kdt_id: '%youzan.kdt_id%'

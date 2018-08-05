@@ -22,7 +22,7 @@ trait ManagerTrait
      */
     protected function getThreadManager()
     {
-        return $this->get('phpdish.manager.thread');
+        return $this->get('phpdish_forum.manager.thread');
     }
 
     /**
@@ -30,7 +30,7 @@ trait ManagerTrait
      */
     protected function getTopicManager()
     {
-        return $this->get('phpdish.manager.topic');
+        return $this->get('phpdish_forum.manager.topic');
     }
 
     /**
@@ -38,6 +38,6 @@ trait ManagerTrait
      */
     protected function getReplyManager()
     {
-        return $this->get('phpdish.manager.reply');
+        return $this->get('phpdish_forum.manager.reply');
     }
 }

@@ -16,7 +16,7 @@ trait ManagerTrait
      */
     protected function getPostManager()
     {
-        return $this->get('phpdish.manager.post');
+        return $this->get('phpdish_post.manager.post');
     }
 
     /**
@@ -26,7 +26,7 @@ trait ManagerTrait
      */
     protected function getCategoryManager()
     {
-        return $this->get('phpdish.manager.category');
+        return $this->get('phpdish_post.manager.category');
     }
 
     /**
