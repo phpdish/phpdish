@@ -85,10 +85,9 @@ interface NotificationManagerInterface
     /**
      * 设置为已读
      *
-     * @param UserInterface $participant
-     * @param NotificationInterface $notification
+     * @param NotificationMetadataInterface[] $notificationMeta
      */
-    public function markAsSeen(UserInterface $participant, NotificationInterface $notification);
+    public function markAsSeen($notificationMeta);
 
     /**
      * 全部设置为已读

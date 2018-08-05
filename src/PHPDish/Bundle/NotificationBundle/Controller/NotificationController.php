@@ -43,11 +43,13 @@ class NotificationController extends ResourceController
     public function index(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-        $notifications = $this->notificationManager->findNotificationMetadataPager($this->getUser(),null,
+        $meta = $this->notificationManager->findNotificationMetadataPager($this->getUser(),null,
             $request->query->getInt('page', 1)
         );
+        //将当前页置为已读
+        $this->notificationManager->markAsSeen($meta->getCurrentPageResults());
         return $this->render($this->configuration->getTemplate('Notification:index.html.twig'), [
-            'notifications' => $notifications,
+            'notificationMeta' => $meta,
         ]);
     }
 }

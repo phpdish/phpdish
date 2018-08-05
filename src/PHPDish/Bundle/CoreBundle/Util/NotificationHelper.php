@@ -40,10 +40,14 @@ final class NotificationHelper
      */
     protected $router;
 
-    public function __construct(NotificationManagerInterface $notificationManager, TranslatorInterface $translator)
-    {
+    public function __construct(
+        NotificationManagerInterface $notificationManager,
+        TranslatorInterface $translator,
+        RouterInterface $router
+    ) {
         $this->notificationManager = $notificationManager;
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     /**

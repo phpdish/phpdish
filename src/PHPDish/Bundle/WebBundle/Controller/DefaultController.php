@@ -52,7 +52,7 @@ class DefaultController extends Controller
     public function countNotificationAction()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-        $count = $this->get('phpdish.manager.notification')->getNotificationCount($this->getUser(), false);
+        $count = $this->get('phpdish_notification.manager.notification')->getNotificationCount($this->getUser(), false);
         $nbMessageCount = $this->get('fos_message.provider')->getNbUnreadMessages();
         return $this->json([
             'count' => $count + $nbMessageCount,

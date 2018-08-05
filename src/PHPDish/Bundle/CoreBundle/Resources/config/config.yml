@@ -182,7 +182,7 @@ oneup_uploader:
                 sync_buffer_size: 1M
             frontend: plupload
             use_orphanage: false
-            
+
 # 支付
 phpdish_payment:
     youzan:

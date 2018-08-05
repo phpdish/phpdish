@@ -7,16 +7,16 @@
         <div class="panel-heading">{{ 'notification.my_notification'|trans }}</div>
         <ul class="list-group notification-list">
             {% import 'PHPDishWebBundle:Macros:notifications.html.twig' as renderer %}
-            {% for notification in notifications %}
+            {% for meta in notificationMeta %}
                 <li class="list-group-item">
                     <div class="media notification">
                         <div class="media-body">
                             <div class="heading">
-                                {{ notification.subject }}
-                                <div class="time meta">{{ notification.createdAt|time_diff }}</div>
+                                {{ meta.notification.subject|raw }}
+                                <div class="time meta">{{ meta.notification.createdAt|time_diff }}</div>
                             </div>
-                            {% if notification.message %}
-                            <div class="body markdown-body">{{ notification.message|raw }}</div>
+                            {% if meta.notification.message %}
+                            <div class="body markdown-body">{{ meta.notification.message|raw }}</div>
                             {% endif %}
                         </div>
                     </div>
@@ -27,10 +27,10 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if notifications.haveToPaginate %}
+        {% if notificationMeta.haveToPaginate %}
             <footer class="panel-footer">
                 {% from 'PHPDishWebBundle:Macros:paginator.html.twig' import paginator %}
-                {{ paginator(notifications) }}
+                {{ paginator(notificationMeta) }}
             </footer>
         {% endif %}
     </div>

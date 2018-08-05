@@ -132,7 +132,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
      */
     public function findNotificationMetadataPager(UserInterface $participant, $seen, $page, $limit = null)
     {
-        $qb = $this->getNotificationQb($participant, $seen)->getQuery();
+        $qb = $this->getParticipantMetadataQb($participant, $seen)->getQuery();
         return $this->createPaginator($qb, $page, $limit);
     }
 
@@ -169,11 +169,10 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     /**
      * {@inheritdoc}
      */
-    public function markAsSeen(UserInterface $participant, NotificationInterface $notification)
+    public function markAsSeen($notificationMeta)
     {
-        $notifications = $this->findNotificationMetadata($participant, true);
-        foreach ($notifications as $notification) {
-            $notification->setSeen(true);
+        foreach ($notificationMeta as $notificationMetadata) {
+            $notificationMetadata->setSeen(true);
         }
         $this->entityManager->flush();
     }
