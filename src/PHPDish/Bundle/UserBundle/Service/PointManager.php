@@ -14,11 +14,11 @@ namespace PHPDish\Bundle\UserBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\UserBundle\Model\PointHistory;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 
-class PointManager
+class PointManager implements PointManagerInterface, ServiceManagerInterface
 {
     use PaginatorTrait;
 
@@ -27,8 +27,11 @@ class PointManager
      */
     protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    protected $pointHistoryEntity;
+
+    public function __construct($pointHistoryEntity, EntityManagerInterface $entityManager)
     {
+        $this->pointHistoryEntity = $pointHistoryEntity;
         $this->entityManager = $entityManager;
     }
 
@@ -37,20 +40,15 @@ class PointManager
      */
     public function getPointHistoryRepository()
     {
-        return $this->entityManager->getRepository('PHPDishUserBundle:PointHistory');
+        return $this->entityManager->getRepository($this->pointHistoryEntity);
     }
 
     /**
-     * 创建积分收益
-     *
-     * @param UserInterface $user
-     * @param int $amount
-     * @param string $type
-     * @return PointHistory
+     * {@inheritdoc}
      */
     public function createPointHistory(UserInterface $user, $amount, $type = null)
     {
-        $history = new PointHistory();
+        $history = new $this->pointHistoryEntity;
         $history->setUser($user)
             ->setAmount($amount)
             ->setType($type);
@@ -58,9 +56,7 @@ class PointManager
     }
 
     /**
-     * 保存历史
-     *
-     * @param PointHistoryInterface $history
+     * {@inheritdoc}
      */
     public function savePointHistory(PointHistoryInterface $history)
     {
@@ -78,5 +74,15 @@ class PointManager
             ->getQuery();
 
         return $this->createPaginator($query, $page, $limit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'pointHistoryEntity' => PointHistoryInterface::class
+        ];
     }
 }

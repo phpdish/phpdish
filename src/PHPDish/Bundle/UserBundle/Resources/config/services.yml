@@ -1,15 +1,15 @@
+imports:
+    - {resource: './services/inherit.yml'}
+
 services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
     phpdish_user.security.password_encoder.generic:
         class: PHPDish\Bundle\UserBundle\Security\Core\Encoder\GenericPasswordEncoder
         arguments: ['%security.password_encoder_strength%']
-
-    phpdish_user.manager.user:
-        class: PHPDish\Bundle\UserBundle\Service\UserManager
-        parent: fos_user.user_manager
-        calls:
-             - [setEventDispatcher, [ '@event_dispatcher']]
-             - [setTranslator, [ '@translator']]
-        public: true
 
     phpdish_user.avatar_generator.user:
         class: PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGenerator
@@ -48,14 +48,11 @@ services:
     phpdish_user.twig_extension.user:
          class: PHPDish\Bundle\UserBundle\Twig\UserExtension
          arguments: ['@phpdish_user.manager.user']
-         public: false
-         tags:
-            - { name: twig.extension}
+         tags: ['twig.extension']
 
    # 积分管理服务
     phpdish_user.manager.point:
         class: PHPDish\Bundle\UserBundle\Service\PointManager
-        autowire: true
 
    # 积分变动
     phpdish_user.event_subscriber.point_history:

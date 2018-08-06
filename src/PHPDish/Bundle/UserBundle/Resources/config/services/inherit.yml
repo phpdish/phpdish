@@ -1,0 +1,8 @@
+services:
+    phpdish_user.manager.user:
+        class: PHPDish\Bundle\UserBundle\Service\UserManager
+        parent: fos_user.user_manager
+        calls:
+             - [setEventDispatcher, [ '@event_dispatcher']]
+             - [setTranslator, [ '@translator']]
+        public: true
