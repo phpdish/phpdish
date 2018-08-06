@@ -1,9 +1,4 @@
 services:
-    _defaults:
-       autowire: true
-       autoconfigure: true
-       public: false
-
     # Uploads 目录操作
     phpdish_media.file_manager.private:
        class: PHPDish\Component\Media\Manager\FileManager

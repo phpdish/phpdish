@@ -15,6 +15,7 @@ namespace PHPDish\Component\Media\Manager;
 
 use function GuzzleHttp\Psr7\stream_for;
 use PHPDish\Component\Media\Model\File;
+use PHPDish\Component\Media\Model\Image;
 use PHPDish\Component\Media\Namer\NamerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -35,7 +36,7 @@ class FileFactory implements FileFactoryInterface
      */
     public function createFileFromUploadedFile(UploadedFile $uploadedFile)
     {
-        $file = new File();
+        $file = $this->isImage($uploadedFile) ? new Image() : new File();
         $file->setExtension($uploadedFile->guessExtension())
             ->setSize($uploadedFile->getSize())
             ->setContentType($uploadedFile->getMimeType())

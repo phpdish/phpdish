@@ -81,7 +81,7 @@ class PHPDishMediaExtension extends Extension
 
             $fileDownloaderDefinition = new ChildDefinition('phpdish_media.file_downloader.private');
             $fileDownloaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.'.$alias));
-            $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish_media.file_namer.'.$alias));
+            $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish_media.file_factory.'.$alias));
             $container->setDefinition('phpdish_media.file_downloader.'.$alias, $fileDownloaderDefinition);
         }
         //为添加别名
