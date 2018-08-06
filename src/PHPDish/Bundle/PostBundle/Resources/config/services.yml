@@ -21,7 +21,7 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '@router'
-            - '@translator'，
+            - '@translator'
             - '@phpdish_payment.manager.payment'
             - '@phpdish_payment.manager.wallet'
 

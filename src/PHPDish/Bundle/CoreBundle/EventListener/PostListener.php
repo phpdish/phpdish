@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\PostBundle\EventListener;
+namespace PHPDish\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
