@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PaymentBundle\Service;
 
 use Pagerfanta\Pagerfanta;
@@ -29,15 +38,6 @@ interface WalletManagerInterface
      * @param WalletHistoryInterface $history
      */
     public function addHistory(WalletInterface $wallet, WalletHistoryInterface $history);
-
-    /**
-     * 给用户添加订阅收入,语法糖
-     * @param UserInterface $user
-     * @param CategoryInterface $category
-     * @param UserInterface $follower
-     * @param int|null $amount
-     */
-    public function addCategoryIncome(UserInterface $user, CategoryInterface $category, UserInterface $follower, $amount = null);
 
     /**
      * 创建一条历史记录

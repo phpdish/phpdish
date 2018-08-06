@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PaymentBundle\Service;
 
 use Carbon\Carbon;
@@ -8,11 +17,12 @@ use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\PaymentBundle\Model\Payment;
 use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
+use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Slince\YouzanPay\YouzanPay;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class PaymentManager implements PaymentManagerInterface
+class PaymentManager implements PaymentManagerInterface, ServiceManagerInterface
 {
     /**
      * @var EventDispatcherInterface
@@ -34,13 +44,17 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected $walletManager;
 
+    protected $paymentEntity;
+
     public function __construct(
+        $paymentEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
         WalletManagerInterface $walletManager,
         YouzanPay $youzanPay
     )
     {
+        $this->paymentEntity = $paymentEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->walletManager = $walletManager;
@@ -127,6 +141,16 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function getRepository()
     {
-        return $this->entityManager->getRepository('PHPDishPaymentBundle:Payment');
+        return $this->entityManager->getRepository($this->paymentEntity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEntities()
+    {
+        return [
+            'paymentEntity' => PaymentInterface::class,
+        ];
     }
 }

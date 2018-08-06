@@ -13,7 +13,6 @@ namespace PHPDish\Bundle\PostBundle\EventListener;
 
 use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
-use PHPDish\Bundle\PaymentBundle\Service\WalletManagerInterface;
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
 
 final class PaymentListener
@@ -23,18 +22,11 @@ final class PaymentListener
      */
     protected $categoryManager;
 
-    /**
-     * @var WalletManagerInterface
-     */
-    protected $walletManager;
-
     public function __construct(
-        CategoryManagerInterface $categoryManager,
-        WalletManagerInterface $walletManager
+        CategoryManagerInterface $categoryManager
     )
     {
         $this->categoryManager = $categoryManager;
-        $this->walletManager = $walletManager;
     }
 
     /**
@@ -55,7 +47,7 @@ final class PaymentListener
             if ($category) { //用户支付成功，增加订阅
                 $this->categoryManager->followCategory($category, $payment->getUser());
 
-                $this->walletManager->addCategoryIncome($category->getCreator(), $category, $payment->getUser(), $payment->getAmount()); //增加收入
+                $this->categoryManager->addCategoryIncome($category->getCreator(), $category, $payment->getUser(), $payment->getAmount()); //增加收入
             }
         }
     }

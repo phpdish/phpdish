@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PaymentBundle\Service;
 
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
@@ -9,6 +18,7 @@ interface PaymentManagerInterface
 {
     /**
      * 创建payment
+     *
      * @param UserInterface|null $user
      * @return PaymentInterface
      */

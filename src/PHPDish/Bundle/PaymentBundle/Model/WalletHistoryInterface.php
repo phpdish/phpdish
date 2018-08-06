@@ -17,6 +17,13 @@ use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;
 interface WalletHistoryInterface extends DateTimeInterface
 {
     /**
+     * 设置金额
+     * @param int $amount
+     * @return self
+     */
+    public function setAmount($amount);
+
+    /**
      * 获取金额
      * @return int
      */
@@ -37,7 +44,7 @@ interface WalletHistoryInterface extends DateTimeInterface
     /**
      * 设置wallet
      * @param WalletInterface $wallet
-     * @return WalletHistoryInterface
+     * @return self
      */
     public function setWallet(WalletInterface $wallet);
 
@@ -50,14 +57,14 @@ interface WalletHistoryInterface extends DateTimeInterface
     /**
      * 设置类型
      * @param string $type
-     * @return WalletHistoryInterface
+     * @return self
      */
     public function setType($type);
 
     /**
      * 设置描述
      * @param string $description
-     * @return WalletHistoryInterface
+     * @return self
      */
     public function setDescription($description);
 
@@ -70,7 +77,7 @@ interface WalletHistoryInterface extends DateTimeInterface
     /**
      * 设置参数
      * @param array $parameters
-     * @return WalletHistoryInterface
+     * @return self
      */
     public function setParameters($parameters);
 

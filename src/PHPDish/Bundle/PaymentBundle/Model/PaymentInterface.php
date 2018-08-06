@@ -11,7 +11,6 @@
 
 namespace PHPDish\Bundle\PaymentBundle\Model;
 
-
 use PHPDish\Bundle\ResourceBundle\Model\EnabledInterface;
 use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
 use PHPDish\Bundle\UserBundle\Model\UserAwareInterface;

@@ -129,7 +129,18 @@ interface CategoryManagerInterface
     public function createGetUserCategoriesQueryBuilder(UserInterface $user);
 
     /**
+     * 给用户添加订阅收入,语法糖
+     *
+     * @param UserInterface $user
+     * @param CategoryInterface $category
+     * @param UserInterface $follower
+     * @param int|null $amount
+     */
+    public function addCategoryIncome(UserInterface $user, CategoryInterface $category, UserInterface $follower, $amount = null);
+
+    /**
      * 为专栏/电子书付费
+     *
      * @param CategoryInterface $category
      * @param UserInterface $user
      * @return QRCode

@@ -20,9 +20,10 @@ services:
             - ''
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
-            - '@phpdish_payment.manager.payment'
             - '@router'
-            - '@translator'
+            - '@translator'，
+            - '@phpdish_payment.manager.payment'
+            - '@phpdish_payment.manager.wallet'
 
     phpdish_post.manager.book:
         class: PHPDish\Bundle\PostBundle\Service\BookManager
@@ -82,7 +83,7 @@ services:
 
     phpdish_post.event_listener.payment:
         class: PHPDish\Bundle\PostBundle\EventListener\PaymentListener
-        arguments: ['@phpdish_post.manager.category', '@phpdish_payment.manager.wallet']
+        arguments: ['@phpdish_post.manager.category']
         tags:
              - { name: kernel.event_listener, event: payment.paid, method: onPaymentPaid}
         public: false

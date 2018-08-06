@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
+use PHPDish\Bundle\PaymentBundle\Service\WalletManagerInterface;
 use PHPDish\Bundle\PostBundle\Model\Category;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
@@ -43,11 +44,6 @@ class CategoryManager implements CategoryManagerInterface, ServiceManagerInterfa
     protected $eventDispatcher;
 
     /**
-     * @var PaymentManagerInterface
-     */
-    protected $paymentManager;
-
-    /**
      * @var Router
      */
     protected $router;
@@ -57,23 +53,35 @@ class CategoryManager implements CategoryManagerInterface, ServiceManagerInterfa
      */
     protected $translator;
 
+    /**
+     * @var PaymentManagerInterface
+     */
+    protected $paymentManager;
+
+    /**
+     * @var WalletManagerInterface
+     */
+    protected $walletManager;
+
     protected $categoryEntity;
 
     public function __construct(
         $categoryEntity,
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher,
-        PaymentManagerInterface $paymentManager,
         Router $router,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        PaymentManagerInterface $paymentManager,
+        WalletManagerInterface $walletManager
     )
     {
         $this->categoryEntity = $categoryEntity;
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->paymentManager = $paymentManager;
         $this->router = $router;
         $this->translator = $translator;
+        $this->paymentManager = $paymentManager;
+        $this->walletManager = $walletManager;
     }
 
     /**
@@ -171,6 +179,49 @@ class CategoryManager implements CategoryManagerInterface, ServiceManagerInterfa
         $category->addManager($user);
 
         return $this->saveCategory($category);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCategoryIncome(UserInterface $user, CategoryInterface $category, UserInterface $follower, $amount = null)
+    {
+        $wallet = $this->walletManager->getUserWallet($user);
+        $history = $this->walletManager->createHistory();
+
+        if ($category->isBook()) {
+            $description = $this->translator->trans('payment.buy_your_book', [
+                '%username%' => sprintf('<a href="%s">%s</a>',
+                    $this->router->generate('user_view', ['username' => $follower->getUsername()]),
+                    $follower->getUsername()
+                ),
+                '%book%' => sprintf('<a href="%s">《%s》</a>',
+                    $this->router->generate('book_view', ['slug' => $category->getSlug()]),
+                    $category->getName()
+                ),
+            ]);
+
+        } else {
+            $description = $this->translator->trans('payment.subscribe_your_category', [
+                '%username%' => sprintf('<a href="%s">%s</a>',
+                    $this->router->generate('user_view', ['username' => $follower->getUsername()]),
+                    $follower->getUsername()
+                ),
+                '%category%' => sprintf('<a href="%s">《%s》</a>',
+                    $this->router->generate('category_view', ['slug' => $category->getSlug()]),
+                    $category->getName()
+                ),
+            ]);
+        }
+
+        //设置历史
+        $history->setAmount($amount ?: $category->getCharge())
+            ->setType($category->isBook() ? PaymentInterface::TYPE_BOOK_INCOME : PaymentInterface::TYPE_CATEGORY_INCOME)
+            ->setDescription($description)
+            ->setStatus(PaymentInterface::STATUS_OK)
+            ->setUser($wallet->getUser());
+
+        $this->walletManager->addHistory($wallet, $history);
     }
 
     /**
