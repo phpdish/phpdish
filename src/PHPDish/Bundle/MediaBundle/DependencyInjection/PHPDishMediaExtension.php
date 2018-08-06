@@ -33,9 +33,9 @@ class PHPDishMediaExtension extends Extension
 
         //process imagine resolver
         $imagineResolver = $container->findDefinition('phpdish_media.imagine.resolver');
-        $imagineResolver->replaceArgument('$webRootDir', $configs['url_builder']['web_root']);
-        $imagineResolver->replaceArgument('$cachePrefix', $configs['url_builder']['cache_prefix']);
-        $imagineResolver->replaceArgument('$baseUrl', $configs['url_builder']['cdn_host']);
+        $imagineResolver->replaceArgument('$webRootDir', $config['url_builder']['web_root']);
+        $imagineResolver->replaceArgument('$cachePrefix', $config['url_builder']['cache_prefix']);
+        $imagineResolver->replaceArgument('$baseUrl', $config['url_builder']['cdn_host']);
 
         // process media mapping
         if (!empty($config['maps'])) {

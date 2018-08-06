@@ -163,7 +163,7 @@ liip_imagine:
             filters:
                 thumbnail: { size: [220, 300], mode: outbound }
                 background: { size: [220, 300], position: center, color: '#ffffff' }
-                
+
 phpdish_media:
     url_builder:
          cdn_host: '%cdn.host%'
