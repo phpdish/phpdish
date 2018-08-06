@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\ForumBundle\Model\Topic;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\VoteTopicEvent;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
@@ -66,7 +65,7 @@ class TopicManager implements TopicManagerInterface, ServiceManagerInterface
      */
     public function createTopic(UserInterface $user)
     {
-        $topic = new Topic();
+        $topic = new $this->topicEntity;
         $now = Carbon::now();
         $topic->setUser($user)
             ->setLastCommentAt($now)

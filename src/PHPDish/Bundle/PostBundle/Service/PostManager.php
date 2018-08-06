@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\PostBundle\Service;
 
 use Doctrine\Common\Collections\Criteria;
@@ -13,7 +22,6 @@ use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use PHPDish\Bundle\PostBundle\Model\PostInterface;
-use PHPDish\Bundle\PostBundle\Model\Post;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class PostManager implements PostManagerInterface, ServiceManagerInterface
@@ -54,7 +62,7 @@ class PostManager implements PostManagerInterface, ServiceManagerInterface
      */
     public function createPost(UserInterface $user)
     {
-        $post = new Post();
+        $post = new $this->postEntity;
         $post->setUser($user);
 
         return $post;

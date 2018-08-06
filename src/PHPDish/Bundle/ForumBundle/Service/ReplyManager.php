@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\ForumBundle\Model\Reply;
 use PHPDish\Bundle\ForumBundle\Event\Events;
 use PHPDish\Bundle\ForumBundle\Event\ReplyMentionUserEvent;
 use PHPDish\Bundle\ForumBundle\Event\VoteReplyEvent;
@@ -64,7 +63,7 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
      */
     public function createReply(TopicInterface $topic, UserInterface $user = null)
     {
-        $reply = new Reply();
+        $reply = new $this->replyEntity;
         $reply->setTopic($topic)
             ->setCreatedAt(Carbon::now());
         $user && $reply->setUser($user);

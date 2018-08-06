@@ -14,7 +14,6 @@ namespace PHPDish\Bundle\PaymentBundle\Service;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use PHPDish\Bundle\PaymentBundle\Model\Payment;
 use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
@@ -66,7 +65,7 @@ class PaymentManager implements PaymentManagerInterface, ServiceManagerInterface
      */
     public function createPayment(UserInterface $user = null)
     {
-        $payment = new Payment();
+        $payment = new $this->paymentEntity;
         $now = Carbon::now();
         $payment->setUser($user)
             ->setStatus(PaymentInterface::STATUS_WAITING)

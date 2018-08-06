@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Overtrue\Pinyin\Pinyin;
 use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
-use PHPDish\Bundle\ForumBundle\Model\Thread;
 use PHPDish\Bundle\ForumBundle\Model\ThreadInterface;
 use PHPDish\Bundle\ResourceBundle\Service\ServiceManagerInterface;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
@@ -122,7 +121,7 @@ class ThreadManager implements ThreadManagerInterface, ServiceManagerInterface
      */
     public function createThread()
     {
-        $thread = new Thread();
+        $thread = new $this->threadEntity;
         $thread->setCreatedAt(Carbon::now());
         return $thread;
     }

@@ -18,7 +18,6 @@ use PHPDish\Bundle\CoreBundle\Service\PaginatorTrait;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PaymentBundle\Service\PaymentManagerInterface;
 use PHPDish\Bundle\PaymentBundle\Service\WalletManagerInterface;
-use PHPDish\Bundle\PostBundle\Model\Category;
 use PHPDish\Bundle\PostBundle\Event\CategoryFollowedEvent;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
 use PHPDish\Bundle\PostBundle\Event\Events;
@@ -291,7 +290,7 @@ class CategoryManager implements CategoryManagerInterface, ServiceManagerInterfa
      */
     public function createCategory(UserInterface $user)
     {
-        $category = new Category();
+        $category = new $this->categoryEntity;
         $category->setCreator($user)
             ->setCreatedAt(Carbon::now());
 

@@ -17,7 +17,7 @@ services:
     phpdish_payment.manager.wallet:
         class: PHPDish\Bundle\PaymentBundle\Service\WalletManager
         public: true
-        arguments: ["@doctrine.orm.entity_manager", "@event_dispatcher", "@router", "@phpdish_user.manager.user", "@translator"]
+        arguments: ['', '', "@doctrine.orm.entity_manager", "@event_dispatcher", "@router", "@phpdish_user.manager.user", "@translator"]
 
     phpdish_payment.money_formatter:
         class: PHPDish\Bundle\PaymentBundle\Money\MoneyFormatter
