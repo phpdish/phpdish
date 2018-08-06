@@ -79,7 +79,6 @@ class TopicController extends ResourceController
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-dump($topic);exit;
             $manager->saveTopic($topic);
             //触发事件
             $this->get('event_dispatcher')->dispatch(Events::TOPIC_CREATED, new TopicEvent($topic));
