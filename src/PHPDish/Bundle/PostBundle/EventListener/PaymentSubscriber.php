@@ -14,8 +14,9 @@ namespace PHPDish\Bundle\PostBundle\EventListener;
 use PHPDish\Bundle\PaymentBundle\Event\PaymentEvent;
 use PHPDish\Bundle\PaymentBundle\Model\PaymentInterface;
 use PHPDish\Bundle\PostBundle\Service\CategoryManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class PaymentListener
+final class PaymentSubscriber implements EventSubscriberInterface
 {
     /**
      * @var CategoryManagerInterface
@@ -27,6 +28,13 @@ final class PaymentListener
     )
     {
         $this->categoryManager = $categoryManager;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            PaymentEvent::PAYMENT_PAID => 'onPaymentPaid'
+        ];
     }
 
     /**

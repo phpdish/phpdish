@@ -11,18 +11,21 @@
 
 namespace PHPDish\Bundle\PostBundle\EventListener;
 
+use PHPDish\Bundle\PostBundle\Event\Events;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use PHPDish\Bundle\PostBundle\Event\CategoryPersistEvent;
 use PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGeneratorInterface;
 
-final class CategoryPersistListener
+final class CategorySubscriber implements EventSubscriberInterface
 {
     /**
      * @var AvatarGeneratorInterface
      */
     protected $avatarGenerator;
 
-    public function __construct(AvatarGeneratorInterface $avatarGenerator)
-    {
+    public function __construct(
+        AvatarGeneratorInterface $avatarGenerator
+    ) {
         $this->avatarGenerator = $avatarGenerator;
     }
 
@@ -38,5 +41,14 @@ final class CategoryPersistListener
             $avatar = $this->avatarGenerator->generate($category->getName());
             $category->setCover($avatar->getKey());
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            Events::CATEGORY_PRE_PERSIST => 'onCategoryPersist'
+        ];
     }
 }

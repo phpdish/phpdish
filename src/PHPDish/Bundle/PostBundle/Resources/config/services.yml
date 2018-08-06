@@ -74,19 +74,15 @@ services:
         class: PHPDish\Bundle\ResourceBundle\AvatarGenerator\AvatarGenerator
         arguments: ['@phpdish_media.file_manager', '@phpdish_media.file_namer']
 
-    phpdish_post.event_listener.category_persist:
-        class: PHPDish\Bundle\PostBundle\EventListener\CategoryPersistListener
+    phpdish_post.event_subscriber.category:
+        class: PHPDish\Bundle\PostBundle\EventListener\CategorySubscriber
         arguments: ['@phpdish_post.avatar_generator.category']
-        tags:
-             - { name: kernel.event_listener, event: category.pre_persist, method: onCategoryPersist}
-        public: false
+        tags: ['kernel.event_subscriber']
 
-    phpdish_post.event_listener.payment:
-        class: PHPDish\Bundle\PostBundle\EventListener\PaymentListener
+    phpdish_post.event_subscriber.payment:
+        class: PHPDish\Bundle\PostBundle\EventListener\PaymentSubscriber
         arguments: ['@phpdish_post.manager.category']
-        tags:
-             - { name: kernel.event_listener, event: payment.paid, method: onPaymentPaid}
-        public: false
+        tags: ['kernel.event_subscriber']
 
     phpdish_post.twig_extension.post:
         class: PHPDish\Bundle\PostBundle\Twig\PostExtension
@@ -97,13 +93,6 @@ services:
             - "@phpdish_post.manager.post.comment"
         tags:
             - {name: twig.extension}
-
-    phpdish_post.doctrine.orm.entity_listener.post:
-        class: PHPDish\Bundle\PostBundle\EventListener\PostListener
-        public: false
-        arguments: ['@phpdish_post.manager.post', '@phpdish_user.manager.user']
-        tags:
-            - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\PostBundle\Model\Post, event: postPersist, method: postPersist}
 
     PHPDish\Bundle\PostBundle\Controller\:
          resource: "../../Controller"
