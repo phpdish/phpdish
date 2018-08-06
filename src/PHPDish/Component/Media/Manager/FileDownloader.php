@@ -11,32 +11,24 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Component\Media\Downloader;
+namespace PHPDish\Component\Media\Manager;
 
 use GuzzleHttp\Client as HttpClient;
-use Http\Message\MessageFactory;
-use PHPDish\Component\Media\Manager\FileManagerInterface;
-use PHPDish\Component\Media\Model\File;
-use PHPDish\Component\Media\Namer\NamerInterface;
-use PHPDish\Component\Util\ExtensionFinder;
+use PHPDish\Component\Media\ExtensionFinder;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 
 class FileDownloader implements FileDownloaderInterface
 {
     /**
+     * @var FileFactoryInterface
+     */
+    protected $fileFactory;
+
+    /**
      * @var FileManagerInterface
      */
     protected $fileManager;
-
-    /**
-     * @var NamerInterface
-     */
-    protected $namer;
-
-    /**
-     * @var MessageFactory
-     */
-    protected $messageFactory;
 
     /**
      * @var HttpClient
@@ -46,11 +38,11 @@ class FileDownloader implements FileDownloaderInterface
     public function __construct(
         HttpClient $httpClient,
         FileManagerInterface $fileManager,
-        NamerInterface $namer
+        FileFactoryInterface $fileFactory
     ) {
         $this->httpClient = $httpClient;
         $this->fileManager = $fileManager;
-        $this->namer = $namer;
+        $this->fileFactory = $fileFactory;
     }
 
     /**
@@ -63,19 +55,23 @@ class FileDownloader implements FileDownloaderInterface
         } catch(\Exception $exception) {
             throw new \RuntimeException(sprintf('Fail to donwload the resource "%s"', $mediaUrl));
         }
-        $content = (string)$response->getBody();
+        //查找扩展名
+        $extension = $this->resolveExtension($mediaUrl, $response);
 
+        $file = $this->fileFactory->createFileWithExtension($extension);
+        $file->setContent($response->getBody());
+        $this->fileManager->upload($file);
+
+        return $file;
+    }
+
+    protected function resolveExtension($mediaUrl, ResponseInterface $response)
+    {
         $extension = ExtensionFinder::find($mediaUrl);
         if ($extension === false) {
             $contentType = $response->getHeaderLine('content-type');
             $extension = $contentType ? ExtensionGuesser::getInstance()->guess($contentType) : 'jpg';
         }
-
-        $file = new File();
-        $file->setContent($content)
-            ->setKey($this->namer->transformWithExtension($extension));
-        $this->fileManager->upload($file);
-
-        return $file;
+        return $extension;
     }
 }

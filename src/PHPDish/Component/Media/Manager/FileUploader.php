@@ -11,10 +11,8 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Component\Media\Uploader;
+namespace PHPDish\Component\Media\Manager;
 
-use PHPDish\Component\Media\Manager\FileFactoryInterface;
-use PHPDish\Component\Media\Manager\FileManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader implements FileUploaderInterface

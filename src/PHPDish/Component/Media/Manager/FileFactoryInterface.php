@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace PHPDish\Component\Media\Manager;
 
-use PHPDish\Component\Media\Model\File;
+use PHPDish\Component\Media\Model\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface FileFactoryInterface
@@ -23,7 +23,7 @@ interface FileFactoryInterface
      *
      * @param UploadedFile $uploadedFile
      *
-     * @return File
+     * @return FileInterface
      */
     public function createFileFromUploadedFile(UploadedFile $uploadedFile);
 
@@ -32,7 +32,15 @@ interface FileFactoryInterface
      *
      * @param string $key
      *
-     * @return File
+     * @return FileInterface
      */
     public function createFileByKey($key);
+
+    /**
+     * 生成带有指定扩展名的文件
+     *
+     * @param string $extension
+     * @return FileInterface
+     */
+    public function createFileWithExtension($extension);
 }

@@ -16,6 +16,7 @@ namespace PHPDish\Component\Media\Manager;
 use Gaufrette\Adapter\StreamFactory;
 use Gaufrette\Filesystem;
 use PHPDish\Component\Media\Model\FileInterface;
+use Psr\Http\Message\StreamInterface;
 
 class FileManager implements FileManagerInterface
 {
@@ -35,12 +36,11 @@ class FileManager implements FileManagerInterface
     public function upload(FileInterface $file, $overwrite = true)
     {
         $body = $file->getContent();
-        if (is_resource($body)) { //流式写入
+        if ($body instanceof StreamInterface) { //流式写入
             $this->assertStreamingSupport(); //不支持流式读写抛出异常
-
             $stream = $this->filesystem->createStream($file->getKey());
-            while (!feof($body)) {
-                $stream->write(fread($body, 1024));
+            while (!$body->eof()) {
+                $stream->write($body->read(1024));
             }
             $stream->close(); //close the stream
         } else {

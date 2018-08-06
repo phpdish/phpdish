@@ -17,18 +17,17 @@ services:
         arguments: ['@phpdish_media.file_namer']
 
     phpdish_media.file_uploader:
-       class: PHPDish\Component\Media\Uploader\FileUploader
+       class: PHPDish\Component\Media\Manager\FileUploader
        arguments: ['@phpdish_media.file_factory',  '@phpdish_media.file_manager']
 
     phpdish_media.file_downloader:
-       class: PHPDish\Component\Media\Downloader\FileDownloader
-       arguments: ['@phpdish_core.http_client', '@phpdish_media.file_manager',  '@phpdish_media.file_namer']
+       class: PHPDish\Component\Media\Manager\FileDownloader
+       arguments: ['@phpdish_core.http_client', '@phpdish_media.file_manager',  '@phpdish_media.file_factory']
 
     phpdish_media.twig_extension:
         class: PHPDish\Bundle\MediaBundle\Twig\MediaExtension
         arguments: ['@service_container', '%cdn.host%']
-        tags:
-            - { name: twig.extension}
+        tags: ['twig.extension']
 
     ## CDN 处理
     phpdish_media.imagine.resolver:

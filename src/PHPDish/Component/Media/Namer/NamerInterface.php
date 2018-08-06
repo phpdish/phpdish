@@ -34,7 +34,7 @@ interface NamerInterface
     public function transformFromUrl($url);
 
     /**
-     * 根据扩展名生成.
+     * 生成带有指定扩展名的随机存储键.
      *
      * @param string $extension
      *

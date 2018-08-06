@@ -15,7 +15,7 @@ namespace PHPDish\Component\Media\Namer;
 
 use Carbon\Carbon;
 use Gaufrette\Filesystem;
-use PHPDish\Component\Util\ExtensionFinder;
+use PHPDish\Component\Media\ExtensionFinder;
 
 class DatePathNamer implements NamerInterface
 {

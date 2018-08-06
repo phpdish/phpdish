@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Component\Media\Uploader;
+namespace PHPDish\Component\Media\Manager;
 
 use PHPDish\Component\Media\Model\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace PHPDish\Component\Media\Manager;
 
+use function GuzzleHttp\Psr7\stream_for;
 use PHPDish\Component\Media\Model\File;
-use PHPDish\Component\Media\Model\Image;
 use PHPDish\Component\Media\Namer\NamerInterface;
-use PHPDish\Component\Media\UrlBuilder\UrlBuilderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileFactory implements FileFactoryInterface
@@ -40,7 +39,7 @@ class FileFactory implements FileFactoryInterface
         $file->setExtension($uploadedFile->guessExtension())
             ->setSize($uploadedFile->getSize())
             ->setContentType($uploadedFile->getMimeType())
-            ->setContent(fopen($uploadedFile->getRealPath(), 'r'))
+            ->setContent(stream_for(fopen($uploadedFile->getRealPath(), 'r')))
             ->setKey($this->namer->transform($uploadedFile));
 
         return $file;
@@ -67,5 +66,14 @@ class FileFactory implements FileFactoryInterface
     {
         $file = new File($key);
         return $file;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFileWithExtension($extension)
+    {
+        $key = $this->namer->transformWithExtension($extension);
+        return $this->createFileByKey($key);
     }
 }

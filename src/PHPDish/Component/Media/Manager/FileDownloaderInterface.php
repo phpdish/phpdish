@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace PHPDish\Component\Media\Downloader;
+namespace PHPDish\Component\Media\Manager;
 
 use PHPDish\Component\Media\Model\MediaInterface;
 
@@ -20,7 +20,7 @@ interface FileDownloaderInterface
     /**
      * 下载远程资源.
      *
-     * @param $mediaUrl
+     * @param string $mediaUrl
      *
      * @return MediaInterface
      *

@@ -57,9 +57,9 @@ class MediaController extends Controller
      */
     protected function getUploaderAndBuilder(Request $request)
     {
-        if ($request->headers->has('upload_avatar')) {
-            $uploader = $this->get('phpdish.media.file_uploader.avatar');
-            $urlBuilder = $this->get('phpdish.media.url_builder.avatar');
+        if ($configKey = $request->headers->has('_media_key')) {
+            $uploader = $this->get('phpdish_media.file_uploader.' . $configKey);
+            $urlBuilder = $this->get('phpdish_media.url_builder.' . $configKey);
         } else {
             $uploader = $this->get('phpdish.media.file_uploader');
             $urlBuilder = $this->get('phpdish.media.url_builder');
