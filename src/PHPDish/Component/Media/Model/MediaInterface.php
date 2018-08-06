@@ -31,18 +31,25 @@ interface MediaInterface
     public function getKey();
 
     /**
-     * Set path.
+     * 获取媒体资源文件名
      *
-     * @param string $path Path to file
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * Set the content.
+     *
+     * @param string|resource $content Content
      *
      * @return $this Self object
      */
-    public function setPath($path);
+    public function setContent($content);
 
     /**
-     * Get path.
+     * Get the content.
      *
-     * @return string Path
+     * @return string|resource Content
      */
-    public function getPath();
+    public function getContent();
 }

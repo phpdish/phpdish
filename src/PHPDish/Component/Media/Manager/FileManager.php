@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace PHPDish\Component\Media\Manager;
 
+use Gaufrette\Adapter\StreamFactory;
 use Gaufrette\Filesystem;
 use PHPDish\Component\Media\Model\FileInterface;
 
@@ -33,16 +34,32 @@ class FileManager implements FileManagerInterface
      */
     public function upload(FileInterface $file, $overwrite = true)
     {
-        $this->filesystem->write($file->getKey(), $file->getContent(), $overwrite);
+        $body = $file->getContent();
+        if (is_resource($body)) { //流式写入
+            $this->assertStreamingSupport(); //不支持流式读写抛出异常
+
+            $stream = $this->filesystem->createStream($file->getKey());
+            while (!feof($body)) {
+                $stream->write(fread($body, 1024));
+            }
+            $stream->close(); //close the stream
+        } else {
+            $this->filesystem->write($file->getKey(), $body, $overwrite);
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function download(FileInterface $file)
+    public function download(FileInterface $file, $streaming = true)
     {
-        $content = $this->filesystem->read($file->getKey());
-        $file->setContent($content);
+        if ($streaming) {
+            $this->assertStreamingSupport(); //不支持流式读写抛出异常
+            $body = $this->filesystem->createStream($file->getKey());
+        } else {
+            $body = $this->filesystem->read($file->getKey());
+        }
+        $file->setContent($body);
     }
 
     /**
@@ -53,5 +70,12 @@ class FileManager implements FileManagerInterface
         $key = $file instanceof FileInterface ? $file->getKey() : $file;
 
         return $this->filesystem->has($key);
+    }
+
+    protected function assertStreamingSupport()
+    {
+        if (!$this->filesystem->getAdapter() instanceof StreamFactory) {
+            throw new \InvalidArgumentException('The streaming io is not support for the adapter');
+        }
     }
 }

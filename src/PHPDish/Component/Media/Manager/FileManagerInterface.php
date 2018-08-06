@@ -29,8 +29,9 @@ interface FileManagerInterface
      * 下载文件内容.
      *
      * @param FileInterface $file
+     * @param bool $streaming 读入流
      */
-    public function download(FileInterface $file);
+    public function download(FileInterface $file, $streaming = true);
 
     /**
      * 是否存在文件.

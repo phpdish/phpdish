@@ -38,10 +38,8 @@ class File extends Media implements FileInterface
 
     /**
      * @var string
-     *
-     * Content
      */
-    protected $content;
+    protected $path;
 
     public function __construct($key = null, $content = null)
     {
@@ -123,26 +121,21 @@ class File extends Media implements FileInterface
     }
 
     /**
-     * Set the content.
-     *
-     * @param string $content Content
-     *
-     * @return $this Self object
+     * @return string
      */
-    public function setContent($content)
+    public function getPath()
     {
-        $this->content = $content;
-
-        return $this;
+        return $this->path;
     }
 
     /**
-     * Get the content.
-     *
-     * @return string Content
+     * @param string $path
+     * @return File
      */
-    public function getContent()
+    public function setPath($path)
     {
-        return $this->content;
+        $this->path = $path;
+
+        return $this;
     }
 }

@@ -16,6 +16,21 @@ namespace PHPDish\Component\Media\Model;
 interface FileInterface extends MediaInterface
 {
     /**
+     * Set path.
+     *
+     * @param string $path Path to file
+     *
+     * @return $this Self object
+     */
+    public function setPath($path);
+    /**
+     * Get path.
+     *
+     * @return string Path
+     */
+    public function getPath();
+
+    /**
      * Set the mime type of this media element.
      *
      * @param string $contentType Content type
@@ -62,20 +77,4 @@ interface FileInterface extends MediaInterface
      * @return int Size
      */
     public function getSize();
-
-    /**
-     * Set the content.
-     *
-     * @param string $content Content
-     *
-     * @return $this Self object
-     */
-    public function setContent($content);
-
-    /**
-     * Get the content.
-     *
-     * @return string Content
-     */
-    public function getContent();
 }

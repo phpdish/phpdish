@@ -23,9 +23,14 @@ class Media implements MediaInterface
     /**
      * @var string
      *
-     * Path
+     * name
      */
-    protected $path;
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $content;
 
     /**
      * {@inheritdoc}
@@ -48,9 +53,9 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function setPath($path)
+    public function setName($name)
     {
-        $this->path = $path;
+        $this->name = $name;
 
         return $this;
     }
@@ -58,8 +63,26 @@ class Media implements MediaInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath()
+    public function getName()
     {
-        return $this->path;
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
     }
 }

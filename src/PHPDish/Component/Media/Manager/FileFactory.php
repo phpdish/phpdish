@@ -36,12 +36,11 @@ class FileFactory implements FileFactoryInterface
      */
     public function createFileFromUploadedFile(UploadedFile $uploadedFile)
     {
-        $isImage = $this->isImage($uploadedFile);
-        $file = $isImage ? new Image() : new File();
+        $file = new File();
         $file->setExtension($uploadedFile->guessExtension())
             ->setSize($uploadedFile->getSize())
             ->setContentType($uploadedFile->getMimeType())
-            ->setContent(file_get_contents($uploadedFile->getRealPath()))
+            ->setContent(fopen($uploadedFile->getRealPath(), 'r'))
             ->setKey($this->namer->transform($uploadedFile));
 
         return $file;
