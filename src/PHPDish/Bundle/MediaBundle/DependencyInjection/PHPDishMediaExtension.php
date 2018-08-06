@@ -14,16 +14,10 @@ namespace PHPDish\Bundle\MediaBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
- */
 class PHPDishMediaExtension extends Extension
 {
     /**
@@ -34,40 +28,51 @@ class PHPDishMediaExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        //process imagine resolver
+        $imagineResolver = $container->findDefinition('phpdish_media.imagine.resolver');
+        $imagineResolver->replaceArgument('$webRootDir', $configs['url_builder']['web_root']);
+        $imagineResolver->replaceArgument('$cachePrefix', $configs['url_builder']['cache_prefix']);
+        $imagineResolver->replaceArgument('$baseUrl', $configs['url_builder']['cdn_host']);
+
+        // process media mapping
         if (!empty($config['maps'])) {
-            foreach ($config['maps'] as $alias => $config) {
-                $id = $config['filesystem_service'];
+            $this->processMediaMapping($config, $container);
+        }
+    }
 
-                $fileManagerDefinition = new ChildDefinition('phpdish_media.file_manager');
-                $fileManagerDefinition->replaceArgument(0, new Reference($id));
-                $container->setDefinition('phpdish_media.file_manager.' .  $alias, $fileManagerDefinition);
+    protected function processMediaMapping($config, ContainerBuilder $container)
+    {
+        foreach ($config['maps'] as $alias => $config) {
+            $id = $config['filesystem_service'];
 
-                $fileNamerDefinition = new ChildDefinition('phpdish_media.file_namer');
-                $fileNamerDefinition->replaceArgument(0, new Reference($id));
-                $container->setDefinition('phpdish_media.file_namer.' .  $alias, $fileNamerDefinition);
+            $fileManagerDefinition = new ChildDefinition('phpdish_media.file_manager');
+            $fileManagerDefinition->replaceArgument(0, new Reference($id));
+            $container->setDefinition('phpdish_media.file_manager.'.$alias, $fileManagerDefinition);
 
-                $urlBuilderDefinition = new ChildDefinition('phpdish_media.url_builder');
-                $urlBuilderDefinition->replaceArgument(1, $config['path']);
-                $container->setDefinition('phpdish_media.url_builder.' .  $alias, $urlBuilderDefinition);
+            $fileNamerDefinition = new ChildDefinition('phpdish_media.file_namer');
+            $fileNamerDefinition->replaceArgument(0, new Reference($id));
+            $container->setDefinition('phpdish_media.file_namer.'.$alias, $fileNamerDefinition);
 
-                $fileFactoryDefinition = new ChildDefinition('phpdish_media.file_factory');
-                $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish_media.file_namer.' .  $alias));
-                $container->setDefinition('phpdish_media.file_factory.' .  $alias, $fileFactoryDefinition);
+            $urlBuilderDefinition = new ChildDefinition('phpdish_media.url_builder');
+            $urlBuilderDefinition->replaceArgument(1, $config['path']);
+            $container->setDefinition('phpdish_media.url_builder.'.$alias, $urlBuilderDefinition);
 
-                $fileUploaderDefinition = new ChildDefinition('phpdish_media.file_uploader');
-                $fileUploaderDefinition->replaceArgument(0, new Reference('phpdish_media.file_factory.' .  $alias));
-                $fileUploaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.' .  $alias));
-                $container->setDefinition('phpdish_media.file_uploader.' .  $alias, $fileUploaderDefinition);
+            $fileFactoryDefinition = new ChildDefinition('phpdish_media.file_factory');
+            $fileFactoryDefinition->replaceArgument(0, new Reference('phpdish_media.file_namer.'.$alias));
+            $container->setDefinition('phpdish_media.file_factory.'.$alias, $fileFactoryDefinition);
 
-                $fileDownloaderDefinition = new ChildDefinition('phpdish_media.file_downloader');
-                $fileDownloaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.' .  $alias));
-                $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish_media.file_namer.' .  $alias));
-                $container->setDefinition('phpdish_media.file_downloader.' .  $alias, $fileDownloaderDefinition);
-            }
+            $fileUploaderDefinition = new ChildDefinition('phpdish_media.file_uploader');
+            $fileUploaderDefinition->replaceArgument(0, new Reference('phpdish_media.file_factory.'.$alias));
+            $fileUploaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.'.$alias));
+            $container->setDefinition('phpdish_media.file_uploader.'.$alias, $fileUploaderDefinition);
+
+            $fileDownloaderDefinition = new ChildDefinition('phpdish_media.file_downloader');
+            $fileDownloaderDefinition->replaceArgument(1, new Reference('phpdish_media.file_manager.'.$alias));
+            $fileDownloaderDefinition->replaceArgument(2, new Reference('phpdish_media.file_namer.'.$alias));
+            $container->setDefinition('phpdish_media.file_downloader.'.$alias, $fileDownloaderDefinition);
         }
     }
 

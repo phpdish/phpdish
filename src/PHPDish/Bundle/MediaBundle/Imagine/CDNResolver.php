@@ -25,9 +25,9 @@ class CDNResolver extends WebPathResolver
     public function __construct(
         Filesystem $filesystem,
         RequestContext $requestContext,
-        string $webRootDir,
-        string $cachePrefix = 'media/cache',
-        ?string $baseUrl = null
+        $webRootDir,
+        $cachePrefix = 'media/cache',
+        $baseUrl = null
     ) {
         parent::__construct($filesystem, $requestContext, $webRootDir, $cachePrefix);
         $this->baseUrl = $baseUrl;

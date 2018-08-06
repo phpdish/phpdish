@@ -33,10 +33,6 @@ services:
     phpdish_media.imagine.resolver:
         class: PHPDish\Bundle\MediaBundle\Imagine\CDNResolver
         parent: liip_imagine.cache.resolver.prototype.web_path
-        arguments:
-            $webRootDir: '%kernel.root_dir%/../web'
-            $cachePrefix: media/cache
-            $baseUrl: '%cdn.host%'
         tags:
             - { name: "liip_imagine.cache.resolver", resolver: phpdish_media.imagine_resolver }
 

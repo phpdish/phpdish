@@ -33,35 +33,6 @@ knp_menu:
     templating: false
     default_renderer: twig
 
-
-# Liip Imagine
-liip_imagine:
-    cache: phpdish_media.imagine_resolver
-    loaders:
-        default:
-            filesystem:
-                data_root:
-                  - '%app.dir.uploads%'
-                  - '%app.dir.avatar%'
-#    resolvers:
-#        default:
-#            web_path: ~
-
-    filter_sets:
-        cache: ~
-        # the name of the "filter set"
-        middle_square:
-            quality: 75
-            filters:
-                thumbnail: { size: [120, 120], mode: outbound }
-                background: { size: [120, 120], position: center, color: '#ffffff' }
-
-        middle_rectangle:
-            quality: 75
-            filters:
-                thumbnail: { size: [220, 300], mode: outbound }
-                background: { size: [220, 300], position: center, color: '#ffffff' }
-
 ## FOSUser
 fos_user:
     db_driver: orm
@@ -164,7 +135,38 @@ knp_gaufrette:
           adapter: avatar
           alias: phpdish_media.filesystem.avatar
 
+
+# Liip Imagine
+liip_imagine:
+    cache: phpdish_media.imagine_resolver
+    loaders:
+        default:
+            filesystem:
+                data_root:
+                  - '%app.dir.uploads%'
+                  - '%app.dir.avatar%'
+#    resolvers:
+#        default:
+#            web_path: ~
+
+    filter_sets:
+        cache: ~
+        # the name of the "filter set"
+        middle_square:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+                background: { size: [120, 120], position: center, color: '#ffffff' }
+
+        middle_rectangle:
+            quality: 75
+            filters:
+                thumbnail: { size: [220, 300], mode: outbound }
+                background: { size: [220, 300], position: center, color: '#ffffff' }
+                
 phpdish_media:
+    url_builder:
+         cdn_host: '%cdn.host%'
     maps:
         avatar:
             filesystem_service: phpdish_media.filesystem.avatar

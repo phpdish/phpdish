@@ -22,12 +22,20 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('php_dish_media');
-
+        $rootNode = $treeBuilder->root('phpdish_media');
 
         $rootNode
             ->fixXmlConfig('map')
             ->children()
+
+                ->arrayNode('url_builder')
+                    ->children()
+                        ->scalarNode('cdn_host')->defaultNull()->end()
+                        ->scalarNode('web_root')->defaultValue('%kernel.root_dir%/../web')->cannotBeEmpty()->end()
+                        ->scalarNode('cache_prefix')->defaultValue('media/cache')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('maps')
                     ->useAttributeAsKey('alias')
                     ->prototype('array')
