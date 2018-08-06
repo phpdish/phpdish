@@ -165,19 +165,23 @@ liip_imagine:
                 background: { size: [220, 300], position: center, color: '#ffffff' }
 
 phpdish_media:
-    url_builder:
+    imagine_resolver:
          cdn_host: '%cdn.host%'
-    maps:
+    mappings:
         avatar:
             filesystem_service: phpdish_media.filesystem.avatar
-            path: '%app.path.avatar%'
+            base_url: '%app.path.avatar%'
+        uploads:
+            filesystem_service: phpdish_media.filesystem.uploads
+            base_url: '%app.path.uploads%'
+    default_mapping: uploads
 
 # 文件上传
 oneup_uploader:
     mappings:
         uploads:
             root_folder: true
-            namer: phpdish_media.oneup_file_namer
+            namer: phpdish_media.oneup_file_namer.uploads
             storage:
                 type: gaufrette
                 filesystem: phpdish_media.filesystem.uploads

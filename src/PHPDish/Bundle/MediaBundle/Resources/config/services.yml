@@ -1,28 +1,33 @@
 services:
+    _defaults:
+       autowire: true
+       autoconfigure: true
+       public: false
+
     # Uploads 目录操作
-    phpdish_media.file_manager.base:
+    phpdish_media.file_manager.private:
        class: PHPDish\Component\Media\Manager\FileManager
-       arguments: ['@phpdish_media.filesystem.uploads']
+       arguments: ['']
 
-    phpdish_media.file_namer.base:
+    phpdish_media.file_namer.private:
        class: PHPDish\Component\Media\Namer\DatePathNamer
-       arguments: ['@phpdish_media.filesystem.uploads']
+       arguments: ['']
 
-    phpdish_media.url_builder.base:
+    phpdish_media.url_builder.private:
        class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
-       arguments: ['@liip_imagine.cache.manager', '%app.path.uploads%']
+       arguments: ['@liip_imagine.cache.manager', '']
 
-    phpdish_media.file_factory.base:
+    phpdish_media.file_factory.private:
         class: PHPDish\Component\Media\Manager\FileFactory
-        arguments: ['@phpdish_media.file_namer']
+        arguments: ['']
 
-    phpdish_media.file_uploader.base:
+    phpdish_media.file_uploader.private:
        class: PHPDish\Component\Media\Manager\FileUploader
-       arguments: ['@phpdish_media.file_factory',  '@phpdish_media.file_manager']
+       arguments: ['', '']
 
-    phpdish_media.file_downloader.base:
+    phpdish_media.file_downloader.private:
        class: PHPDish\Component\Media\Manager\FileDownloader
-       arguments: ['@phpdish_core.http_client', '@phpdish_media.file_manager',  '@phpdish_media.file_factory']
+       arguments: ['@phpdish_core.http_client', '', '']
 
     phpdish_media.twig_extension:
         class: PHPDish\Bundle\MediaBundle\Twig\MediaExtension
@@ -37,7 +42,6 @@ services:
             - { name: "liip_imagine.cache.resolver", resolver: phpdish_media.imagine_resolver }
 
     ## 给oneup uploader使用
-    phpdish_media.oneup_file_namer:
+    phpdish_media.oneup_file_namer.private:
        class: PHPDish\Bundle\MediaBundle\Oneup\Naming\GenericNamer
-       parent: 'phpdish_media.file_namer'
-       public: true
+       arguments: ['']

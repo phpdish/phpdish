@@ -13,8 +13,9 @@ namespace PHPDish\Bundle\MediaBundle\Oneup\Naming;
 
 use Oneup\UploaderBundle\Uploader\File\FileInterface;
 use Oneup\UploaderBundle\Uploader\Naming\NamerInterface;
+use PHPDish\Component\Media\Namer\DatePathNamer;
 
-class GenericNamer extends \PHPDish\Component\Media\Namer\DatePathNamer implements NamerInterface
+class GenericNamer extends DatePathNamer implements NamerInterface
 {
     /**
      * {@inheritdoc}

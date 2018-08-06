@@ -33,8 +33,8 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('cache_prefix')->defaultValue('media/cache')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
-
-                ->arrayNode('mapping')
+                ->scalarNode('default_mapping')->defaultNull()->end()
+                ->arrayNode('mappings')
                     ->useAttributeAsKey('alias')
                     ->isRequired()
                     ->requiresAtLeastOneElement()
@@ -42,6 +42,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('filesystem_service')->cannotBeEmpty()->end()  //对应filesystem service id
                         ->scalarNode('base_url')->cannotBeEmpty()->end() //访问的基础域名
+                        ->scalarNode('namer')->end() //访问的基础域名
                     ->end()
                 ->end()
             ->end();
