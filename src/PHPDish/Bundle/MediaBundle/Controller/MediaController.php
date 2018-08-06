@@ -47,6 +47,7 @@ class MediaController extends Controller
         if ($file instanceof Image) {
             $response['thumb'] = $urlBuilder->buildImageResizeUrl($file, 'middle_square');
         }
+        $file->getContent()->close();
         return $this->json($response);
     }
 
