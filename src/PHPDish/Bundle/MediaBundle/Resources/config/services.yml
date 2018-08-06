@@ -1,26 +1,26 @@
 services:
     # Uploads 目录操作
-    phpdish_media.file_manager:
+    phpdish_media.file_manager.base:
        class: PHPDish\Component\Media\Manager\FileManager
        arguments: ['@phpdish_media.filesystem.uploads']
 
-    phpdish_media.file_namer:
+    phpdish_media.file_namer.base:
        class: PHPDish\Component\Media\Namer\DatePathNamer
        arguments: ['@phpdish_media.filesystem.uploads']
 
-    phpdish_media.url_builder:
+    phpdish_media.url_builder.base:
        class: PHPDish\Component\Media\UrlBuilder\GeneralBuilder
        arguments: ['@liip_imagine.cache.manager', '%app.path.uploads%']
 
-    phpdish_media.file_factory:
+    phpdish_media.file_factory.base:
         class: PHPDish\Component\Media\Manager\FileFactory
         arguments: ['@phpdish_media.file_namer']
 
-    phpdish_media.file_uploader:
+    phpdish_media.file_uploader.base:
        class: PHPDish\Component\Media\Manager\FileUploader
        arguments: ['@phpdish_media.file_factory',  '@phpdish_media.file_manager']
 
-    phpdish_media.file_downloader:
+    phpdish_media.file_downloader.base:
        class: PHPDish\Component\Media\Manager\FileDownloader
        arguments: ['@phpdish_core.http_client', '@phpdish_media.file_manager',  '@phpdish_media.file_factory']
 

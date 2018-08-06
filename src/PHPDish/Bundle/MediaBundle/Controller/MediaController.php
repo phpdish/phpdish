@@ -62,8 +62,8 @@ class MediaController extends Controller
             $uploader = $this->get('phpdish_media.file_uploader.' . $configKey);
             $urlBuilder = $this->get('phpdish_media.url_builder.' . $configKey);
         } else {
-            $uploader = $this->get('phpdish.media.file_uploader');
-            $urlBuilder = $this->get('phpdish.media.url_builder');
+            $uploader = $this->get('phpdish_media.file_uploader');
+            $urlBuilder = $this->get('phpdish_media.url_builder');
         }
         return [$uploader, $urlBuilder];
     }

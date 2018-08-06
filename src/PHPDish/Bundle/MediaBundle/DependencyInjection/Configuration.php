@@ -25,10 +25,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('phpdish_media');
 
         $rootNode
-            ->fixXmlConfig('map')
             ->children()
-
-                ->arrayNode('url_builder')
+                ->arrayNode('imagine_resolver')
                     ->children()
                         ->scalarNode('cdn_host')->defaultNull()->end()
                         ->scalarNode('web_root')->defaultValue('%kernel.root_dir%/../web')->cannotBeEmpty()->end()
@@ -36,12 +34,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('maps')
+                ->arrayNode('mapping')
                     ->useAttributeAsKey('alias')
+                    ->isRequired()
+                    ->requiresAtLeastOneElement()
                     ->prototype('array')
                     ->children()
-                        ->scalarNode('filesystem_service')->cannotBeEmpty()->end()
-                        ->scalarNode('path')->cannotBeEmpty()->end()
+                        ->scalarNode('filesystem_service')->cannotBeEmpty()->end()  //对应filesystem service id
+                        ->scalarNode('base_url')->cannotBeEmpty()->end() //访问的基础域名
                     ->end()
                 ->end()
             ->end();
