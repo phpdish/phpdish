@@ -117,6 +117,14 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
 
         $comment->setUpdatedAt(Carbon::now())
             ->setBody($parsedBody);
+
+        //新增评论，维护post的数据
+        if ($new) {
+            $comment->getPost()->addCommentCount(1)
+                ->setLastCommentAt(Carbon::now())
+                ->setLastCommentUser($comment->getUser());
+        }
+
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
