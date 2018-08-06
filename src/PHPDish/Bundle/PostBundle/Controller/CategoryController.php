@@ -82,7 +82,8 @@ class CategoryController extends ResourceController
     public function viewAction($slug, Request $request)
     {
         $category = $this->getCategoryManager()->findCategoryBySlug($slug);
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()))
+            ->andWhere(Criteria::expr()->eq('enabled', true));
         if ($request->query->get('orderby') === 'hot') {
             $criteria->orderBy([
                 'viewCount' => 'desc',

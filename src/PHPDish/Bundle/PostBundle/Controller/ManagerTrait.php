@@ -36,7 +36,7 @@ trait ManagerTrait
      */
     public function getPostCommentManager()
     {
-        return $this->get('phpdish.manager.post.comment');
+        return $this->get('phpdish_post.manager.post.comment');
     }
 
     /**
@@ -45,6 +45,6 @@ trait ManagerTrait
      */
     public function getBookManager()
     {
-        return $this->get('phpdish.manager.book');
+        return $this->get('phpdish_post.manager.book');
     }
 }
