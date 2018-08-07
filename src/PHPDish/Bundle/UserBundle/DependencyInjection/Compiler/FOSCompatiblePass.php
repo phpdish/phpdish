@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\UserBundle\DependencyInjection\Compiler;
 use PHPDish\Bundle\UserBundle\Controller\ResettingController;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class FOSCompatiblePass implements CompilerPassInterface
 {
@@ -23,7 +24,10 @@ class FOSCompatiblePass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if ($changePassword = $container->findDefinition('fos_user.resetting.controller')) {
-            $changePassword->setClass(ResettingController::class);
+            $changePassword->setClass(ResettingController::class)
+                ->addMethodCall('setResourceConfiguration', [
+                    new Reference('phpdish_resource.configuration.phpdish_user')
+                ]);
         }
     }
 }

@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\UserBundle\Controller;
 
-use Carbon\Carbon;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -54,7 +62,7 @@ class UserController extends ResourceController
     {
         $following = $this->getUserManager()->findUserFollowing($user, 1);
 
-        return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
+        return $this->render($this->configuration->getTemplate('User:user_grid.html.twig'), [
             'users' => $following,
         ]);
     }
@@ -70,7 +78,7 @@ class UserController extends ResourceController
     {
         $following = $this->getUserManager()->findUserFollowers($user, 1);
 
-        return $this->render('PHPDishWebBundle:User:user_grid.html.twig', [
+        return $this->render($this->configuration->getTemplate('User:user_grid.html.twig'), [
             'users' => $following,
         ]);
     }
@@ -91,7 +99,7 @@ class UserController extends ResourceController
         $user = $manager->findUserByName($username);
         $following = $manager->findUserFollowing($user, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:User:user_following.html.twig', [
+        return $this->render($this->configuration->getTemplate('User:user_following.html.twig'), [
             'user' => $user,
             'users' => $following,
         ]);
@@ -115,7 +123,7 @@ class UserController extends ResourceController
         $view = $this->view([
                 'user' => $user,
                 'followers' => $followers,
-            ])->setTemplate('PHPDishWebBundle:User:user_followers.html.twig');
+            ])->setTemplate($this->configuration->getTemplate('User:user_followers.html.twig'));
 
         return $this->handleView($view);
     }
@@ -186,7 +194,7 @@ class UserController extends ResourceController
         $manager = $this->getUserManager();
         $user = $manager->findUserByName($username);
         $histories = $this->getPointManager()->findPointHistories($user, $request->get('page', 1));
-        return $this->render('PHPDishWebBundle:User:point_history.html.twig', [
+        return $this->render($this->configuration->getTemplate('User:point_history.html.twig'), [
             'histories' => $histories,
             'user' => $user,
         ]);

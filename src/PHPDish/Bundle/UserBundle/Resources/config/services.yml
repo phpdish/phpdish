@@ -59,3 +59,10 @@ services:
         class: PHPDish\Bundle\UserBundle\EventListener\PointHistorySubscriber
         autowire: true
         tags: ['doctrine.event_subscriber']
+
+    PHPDish\Bundle\UserBundle\Controller\:
+         resource: "../../Controller"
+         exclude: "../../Controller/ResettingController.php"
+         arguments:
+              $configuration: '@phpdish_resource.configuration.phpdish_user'
+         tags: ['controller.service_arguments']

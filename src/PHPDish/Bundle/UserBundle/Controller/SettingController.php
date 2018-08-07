@@ -1,15 +1,24 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\UserBundle\Controller;
 
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use PHPDish\Bundle\UserBundle\Form\Type\ChangeUserProfileType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class SettingController extends Controller
+class SettingController extends ResourceController
 {
     use ManagerTrait;
 
@@ -37,7 +46,7 @@ class SettingController extends Controller
             return $this->redirectToRoute('setting_profile');
         }
 
-        return $this->render('PHPDishWebBundle:Setting:profile.html.twig', [
+        return $this->render($this->configuration->getTemplate('Setting:profile.html.twig'), [
             'form' => $form->createView(),
         ]);
     }
@@ -55,7 +64,6 @@ class SettingController extends Controller
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        return $this->render('PHPDishWebBundle:Setting:bind_social.html.twig', [
-        ]);
+        return $this->render($this->configuration->getTemplate('Setting:bind_social.html.twig'));
     }
 }

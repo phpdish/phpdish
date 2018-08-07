@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\UserBundle\Controller;
 
 use FOS\UserBundle\Controller\ResettingController as FOSResettingController;
 use FOS\UserBundle\Event\GetResponseNullableUserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use PHPDish\Bundle\ResourceBundle\Controller\ResourceConfigurationInterface;
 use PHPDish\Bundle\UserBundle\Form\Type\ResettingRequestType;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +22,19 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ResettingController extends FOSResettingController
 {
+    /**
+     * @var ResourceConfigurationInterface
+     */
+    protected $configuration;
+
+    /**
+     * @param ResourceConfigurationInterface $configuration
+     */
+    public function setResourceConfiguration(ResourceConfigurationInterface $configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
     /**
      * 上一个用户名
      * @var string
@@ -27,7 +50,7 @@ class ResettingController extends FOSResettingController
         $form = $this->createForm(ResettingRequestType::class, null, [
             'action' => $this->generateUrl('fos_user_resetting_send_email')
         ]);
-        return $this->render('PHPDishWebBundle:Resetting:request.html.twig', [
+        return $this->render($this->configuration->getTemplate('Resetting:request.html.twig'), [
             'form' => $form->createView(),
             'lastUsername' => $this->get('session')->get(static::LAST_USERNAME_SESSION_KEY) ?: ''
         ]);

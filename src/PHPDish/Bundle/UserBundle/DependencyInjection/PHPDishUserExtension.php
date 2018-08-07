@@ -38,6 +38,7 @@ class PHPDishUserExtension extends AbstractExtension
         $loader->load('services.yml');
 
         $this->registerResources($config['resources'], $container);
+        $this->registerResourcesConfiguration($config['resources'], $config['templates'], $config['templates_namespace'], $container);
 
         //process oauth provider
         $oauthUserProvider = $container->findDefinition('phpdish_user.oauth.user_provider');

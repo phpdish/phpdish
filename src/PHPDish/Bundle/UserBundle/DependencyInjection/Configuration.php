@@ -11,6 +11,7 @@
 
 namespace PHPDish\Bundle\UserBundle\DependencyInjection;
 
+use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractConfiguration;
 use PHPDish\Bundle\UserBundle\Model\PointHistory;
 use PHPDish\Bundle\UserBundle\Model\PointHistoryInterface;
 use PHPDish\Bundle\UserBundle\Model\Profile;
@@ -20,12 +21,7 @@ use PHPDish\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * This is the class that validates and merges configuration from your app/config files.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
- */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -62,6 +58,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
+        $this->addTemplatesSection($rootNode);
         return $treeBuilder;
     }
 }
