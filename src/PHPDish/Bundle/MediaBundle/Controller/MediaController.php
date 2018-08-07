@@ -58,7 +58,7 @@ class MediaController extends Controller
      */
     protected function getUploaderAndBuilder(Request $request)
     {
-        if ($configKey = $request->headers->has('media_map')) {
+        if ($configKey = $request->headers->get('media_mapping')) {
             $uploader = $this->get('phpdish_media.file_uploader.' . $configKey);
             $urlBuilder = $this->get('phpdish_media.url_builder.' . $configKey);
         } else {

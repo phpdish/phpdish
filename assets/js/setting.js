@@ -27,7 +27,7 @@ import Util from '../modules/util.js';
                     }
                 },
                 headers: {
-                    'Upload_Avatar': true
+                    'media_mapping': 'avatar'
                 }
             });
         }
