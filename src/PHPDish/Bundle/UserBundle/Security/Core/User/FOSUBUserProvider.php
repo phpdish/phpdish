@@ -15,7 +15,7 @@ use Carbon\Carbon;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
-use PHPDish\Component\Media\Downloader\FileDownloaderInterface;
+use PHPDish\Component\Media\Manager\FileDownloaderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

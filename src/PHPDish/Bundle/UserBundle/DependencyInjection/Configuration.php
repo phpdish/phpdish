@@ -37,6 +37,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('avatar_downloader')->isRequired()->cannotBeEmpty()->end()
                 ->arrayNode('resources')
                     ->children()
                         ->arrayNode('user')

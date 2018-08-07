@@ -15,6 +15,7 @@ namespace PHPDish\Bundle\UserBundle\DependencyInjection;
 use PHPDish\Bundle\ResourceBundle\DependencyInjection\AbstractExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -37,6 +38,10 @@ class PHPDishUserExtension extends AbstractExtension
         $loader->load('services.yml');
 
         $this->registerResources($config['resources'], $container);
+
+        //process oauth provider
+        $oauthUserProvider = $container->findDefinition('phpdish_user.oauth.user_provider');
+        $oauthUserProvider->replaceArgument(2, new Reference($config['avatar_downloader']));
     }
 
     /**

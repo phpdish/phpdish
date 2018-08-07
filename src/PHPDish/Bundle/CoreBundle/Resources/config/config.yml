@@ -189,9 +189,65 @@ oneup_uploader:
             frontend: plupload
             use_orphanage: false
 
+## 用户
+phpdish_user:
+    avatar_downloader: 'phpdish_media.file_downloader.avatar'
+
 # 支付
 phpdish_payment:
     youzan:
       client_id: '%youzan.client_id%'
       client_secret: '%youzan.client_secret%'
       kdt_id: '%youzan.kdt_id%'
+
+# 社交网站登录
+hwi_oauth:
+    http:
+        client: httplug.client.default
+    firewall_names:
+        - 'main'
+    resource_owners:
+        weibo:
+            type: sina_weibo
+            client_id: '%oauth.weibo.client_id%'
+            client_secret: '%oauth.weibo.client_secret%'
+            scope: 'all'
+
+        github:
+            type: github
+            client_id: '%oauth.github.client_id%'
+            client_secret: '%oauth.github.client_secret%'
+            scope: 'user:email,public_repo'
+        qq:
+            type: qq
+            client_id: '%oauth.qq.client_id%'
+            client_secret: '%oauth.qq.client_secret%'
+            scope: 'get_user_info'
+
+# SEO
+sonata_seo:
+    page:
+        title: '%phpdish.site.title%'
+        metas:
+            name:
+                keywords: '%phpdish.site.keywords%'
+                description: '%phpdish.site.description%'
+                apple-mobile-web-app-title: '%phpdish.site.title%'
+
+            property:
+                'og:site_name':  '%phpdish.site.title%'
+                'og:description':  '%phpdish.site.description%'
+
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+                #'X-Ua-Compatible':      IE=EmulateIE7
+
+## 多主题
+sylius_theme:
+    context: phpdish_core.theme.context.generic
+    sources:
+        filesystem: ~
+
+## 资源处理，见 phpdish.yml
+phpdish_resource:
+    templates_namespace: PHPDishWebBundle

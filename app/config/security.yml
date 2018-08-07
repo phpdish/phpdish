@@ -44,7 +44,7 @@ security:
                     github: "/login/check-github"
                     qq: "/login/check-qq"
                 oauth_user_provider:
-                    service:  phpdish_user.oauth_aware.user_provider
+                    service:  phpdish_user.oauth.user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

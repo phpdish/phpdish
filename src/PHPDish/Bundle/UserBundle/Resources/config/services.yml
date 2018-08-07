@@ -22,12 +22,12 @@ services:
             - {name: doctrine.orm.entity_listener, entity: PHPDish\Bundle\UserBundle\Model\User, event: postPersist,  method: postPersist}
             - {name: 'kernel.event_subscriber'}
 
-    phpdish_user.oauth_aware.user_provider:
+    phpdish_user.oauth.user_provider:
         class: PHPDish\Bundle\UserBundle\Security\Core\User\FOSUBUserProvider
         arguments:
           - '@fos_user.user_manager'
           - '@security.token_storage'
-          - '@phpdish_media.file_downloader.avatar'
+          - ''
           - {weibo: weiboId, github: githubId, qq: qqId}
 
     # Form Type
