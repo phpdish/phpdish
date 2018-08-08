@@ -125,16 +125,27 @@ class PostManager implements PostManagerInterface, ServiceManagerInterface
     }
 
     /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getPostsQb()
+    {
+        return $this->getPostRepository()->createQueryBuilder('p')
+            ->addSelect('pu')
+            ->join('p.user', 'pu');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findUserEnabledPosts(UserInterface $user, $page = 1, $limit = null)
     {
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('user', $user))
-            ->andWhere(Criteria::expr()->eq('enabled', true))
-            ->orderBy(['createdAt' => 'desc']);
+        $qb = $this->getPostRepository()->createQueryBuilder('p')
+            ->join('p.category', 'pc')->addSelect('pc')
+            ->where('p.user = :user')->setParameter('user', $user)
+            ->andWhere('p.enabled = :enabled')->setParameter('enabled', true)
+            ->orderBy('p.createdAt', 'desc');
 
-        return $this->findPostsPager($criteria, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**
@@ -142,9 +153,13 @@ class PostManager implements PostManagerInterface, ServiceManagerInterface
      */
     public function findCategoryPosts(CategoryInterface $category, $page = 1, $limit = null)
     {
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('category', $category->getId()));
+        $qb = $this->getPostRepository()->createQueryBuilder('p')
+            ->join('p.user', 'pu')->addSelect('pu')
+            ->where('p.category = :category')->setParameter('category', $category)
+            ->andWhere('p.enabled = :enabled')->setParameter('enabled', true)
+            ->orderBy('p.createdAt', 'desc');
 
-        return $this->findPostsPager($criteria, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**
@@ -152,12 +167,14 @@ class PostManager implements PostManagerInterface, ServiceManagerInterface
      */
     public function findLatestEnabledPosts($page, $limit = null)
     {
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('enabled', true))
-            ->andWhere(Criteria::expr()->neq('body', ''))
-            ->orderBy(['createdAt' => 'desc']);
+        $qb = $this->getPostRepository()->createQueryBuilder('p')
+            ->join('p.user', 'pu')->addSelect('pu')
+            ->join('p.category', 'pc')->addSelect('pc')
+            ->where('p.enabled = :enabled')->setParameter('enabled', true)
+            ->andWhere('p.body != :body')->setParameter('body', '')
+            ->orderBy('p.createdAt', 'desc');
 
-        return $this->findPostsPager($criteria, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**

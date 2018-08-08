@@ -78,6 +78,7 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
     public function findCommentsPager(Criteria $criteria, $page = 1, $limit = null)
     {
         $query = $this->getCommentRepository()->createQueryBuilder('c')
+            ->join('c.user', 'cu')->addSelect('cu')
             ->addCriteria($criteria)
             ->getQuery();
 
@@ -90,6 +91,7 @@ class CommentManager implements CommentManagerInterface, ServiceManagerInterface
     public function findComments(Criteria $criteria)
     {
         return $this->getCommentRepository()->createQueryBuilder('c')
+            ->join('c.user', 'cu')->addSelect('cu')
             ->addCriteria($criteria)
             ->getQuery()
             ->getResult();

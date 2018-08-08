@@ -69,7 +69,7 @@ class PointHistorySubscriber implements EventSubscriber
             $addedPoints = - $addedPoints;
         }
         $user = $history->getUser();
-        $user->increasePoint($addedPoints);
+        $user->addPoint($addedPoints);
         $this->userManager->saveUser($user);
     }
 
@@ -86,7 +86,7 @@ class PointHistorySubscriber implements EventSubscriber
         } else {
             $point = $history->getAmount();
         }
-        $user->increasePoint($point);
+        $user->addPoint($point);
         $this->userManager->saveUser($user);
     }
 }

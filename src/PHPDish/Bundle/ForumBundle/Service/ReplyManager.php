@@ -151,7 +151,11 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
     public function findUserReplies(UserInterface $user, $page, $limit = null, Criteria $criteria = null)
     {
         $qb = $this->getReplyRepository()->createQueryBuilder('r')
-            ->where('r.user = :userId')->setParameter('userId', $user->getId());
+            ->addSelect('rt')
+            ->join('r.topic', 'rt')
+            ->where('r.user = :user')->setParameter('user', $user)
+            ->andWhere('r.enabled = :enabled')->setParameter('enabled', true)
+            ->orderBy('r.createdAt', 'desc');
 
         if ($criteria) {
             $qb->addCriteria($criteria);

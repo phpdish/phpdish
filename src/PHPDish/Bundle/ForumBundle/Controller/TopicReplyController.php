@@ -11,7 +11,6 @@
 
 namespace PHPDish\Bundle\ForumBundle\Controller;
 
-use Doctrine\Common\Collections\Criteria;
 use PHPDish\Bundle\ResourceBundle\Controller\ResourceController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,13 +59,10 @@ class TopicReplyController extends ResourceController
     public function getUserRepliesAction($username, Request $request)
     {
         $user = $this->getUserManager()->findUserByName($username);
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('enabled', true))
-            ->orderBy(['createdAt' => 'desc']);
-
         $replies = $this->getReplyManager()
-            ->findUserReplies($user, $request->query->getInt('page', 1), null, $criteria);
+            ->findUserReplies($user, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Topic:user_replies.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:user_replies.html.twig'), [
             'user' => $user,
             'replies' => $replies,
         ]);
@@ -76,6 +72,8 @@ class TopicReplyController extends ResourceController
      * 切换点赞状态
      *
      * @Route("/replies/{id}/voters", name="topic_reply_toggle_voter", methods={"POST"})
+     *
+     * @param int $id
      */
     public function toggleVoterAction($id)
     {

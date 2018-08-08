@@ -324,7 +324,7 @@ class TopicController extends ResourceController
         $user = $this->getUserManager()->findUserByName($username);
         $topics = $this->getTopicManager()->findUserTopics($user, $request->query->getInt('page', 1));
 
-        return $this->render('PHPDishWebBundle:Topic:user_topics.html.twig', [
+        return $this->render($this->configuration->getTemplate('Topic:user_topics.html.twig'), [
             'user' => $user,
             'topics' => $topics,
         ]);
