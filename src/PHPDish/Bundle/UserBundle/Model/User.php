@@ -50,7 +50,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     /**
      * 个人资料.
      *
-     * @var ProfileInterface
+     * @var ProfileInterface[]|Collection
      */
     protected $profile;
 
@@ -115,8 +115,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
         $this->followers = new ArrayCollection();
         //我关注的
         $this->following = new ArrayCollection();
-        //我的专栏
-        $this->categories = new ArrayCollection();
         //创建时间
         $this->setCreatedAt(Carbon::now());
         //更新时间
@@ -316,7 +314,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     public function getProfile()
     {
-        return $this->profile;
+        return $this->profile->first();
     }
 
     /**
@@ -324,8 +322,9 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      */
     public function setProfile(ProfileInterface $profile)
     {
+        $this->profile->clear();
         $profile->setUser($this);
-        $this->profile = $profile;
+        $this->profile[] = $profile;
 
         return $this;
     }

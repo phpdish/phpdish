@@ -8,11 +8,11 @@
     <field name="company" type="string" column="company" precision="0" scale="0" nullable="true"/>
     <field name="location" type="string" column="location" precision="0" scale="0" nullable="true"/>
 
-    <one-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="profile" fetch="LAZY">
+    <many-to-one field="user" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="profile" fetch="LAZY">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>
       </join-columns>
-    </one-to-one>
+    </many-to-one>
 
   </mapped-superclass>
 </doctrine-mapping>

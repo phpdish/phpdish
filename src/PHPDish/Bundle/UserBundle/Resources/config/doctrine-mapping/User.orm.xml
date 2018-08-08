@@ -34,11 +34,11 @@
       <gedmo:timestampable on="update"/>
     </field>
 
-    <one-to-one field="profile" target-entity="PHPDish\Bundle\UserBundle\Model\ProfileInterface" mapped-by="user" fetch="LAZY">
+    <one-to-many field="profile" target-entity="PHPDish\Bundle\UserBundle\Model\ProfileInterface" mapped-by="user" fetch="LAZY">
       <cascade>
         <cascade-persist/>
       </cascade>
-    </one-to-one>
+    </one-to-many>
 
     <many-to-many field="followers" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" inversed-by="following" fetch="EXTRA_LAZY">
       <join-table name="users_followers">

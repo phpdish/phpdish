@@ -11,6 +11,7 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\User as BaseUser;
@@ -66,6 +67,13 @@ class User extends BaseUser
      * @var string
      */
     protected $locale;
+
+    public function __construct()
+    {
+        parent::__construct();
+        //我的专栏
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * {@inheritdoc}
