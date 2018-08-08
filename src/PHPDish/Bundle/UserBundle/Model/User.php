@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use PHPDish\Bundle\ResourceBundle\Model\DateTimeTrait;
-use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 
 class User extends BaseUser implements UserInterface, ParticipantInterface
@@ -221,14 +220,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
      * Set description.
      *
      * @param string $description
@@ -284,42 +275,6 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     public function getFollowing()
     {
         return $this->following;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPostCount()
-    {
-        return $this->postCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPostCount($postCount)
-    {
-        $this->postCount = $postCount;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTopicCount()
-    {
-        return $this->topicCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTopicCount($topicCount)
-    {
-        $this->topicCount = $topicCount;
-
-        return $this;
     }
 
     /**
@@ -484,26 +439,9 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    /**
      * @return int
      */
-    public function getPoint(): int
+    public function getPoint()
     {
         return $this->point;
     }
@@ -512,7 +450,7 @@ class User extends BaseUser implements UserInterface, ParticipantInterface
      * @param int $point
      * @return User
      */
-    public function increasePoint(int $point)
+    public function addPoint(int $point)
     {
         $this->point += $point;
         $this->point = max($this->point, 0);

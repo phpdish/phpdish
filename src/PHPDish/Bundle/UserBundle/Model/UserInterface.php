@@ -137,13 +137,6 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
     public function getFollowing();
 
     /**
-     * 获取用户的语言
-     *
-     * @return string
-     */
-    public function getLocale();
-
-    /**
      * 获取积分
      *
      * @return int
@@ -155,5 +148,5 @@ interface UserInterface extends BaseUserInterface, IdentifiableInterface, DateTi
      *
      * @param int $point
      */
-    public function increasePoint(int $point);
+    public function addPoint(int $point);
 }

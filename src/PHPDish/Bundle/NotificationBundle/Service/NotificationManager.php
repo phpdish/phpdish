@@ -92,15 +92,6 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     /**
      * {@inheritdoc}
      */
-    public function findNotifications(UserInterface $participant, $seen = null)
-    {
-        $qb = $this->getNotificationQb($participant, $seen);
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findNotificationsPager(UserInterface $participant, $seen = null, $page, $limit = null)
     {
         $qb = $this->getNotificationQb($participant, $seen);
@@ -110,6 +101,7 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     protected function getNotificationQb(UserInterface $participant, $seen = null)
     {
         $qb = $this->getRepository()->createQueryBuilder('n')
+            ->addSelect('nm')
             ->innerJoin('n.metadata', 'nm')
             ->where('nm.participant = :participant')
             ->setParameter('participant', $participant);
@@ -122,18 +114,22 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
     /**
      * {@inheritdoc}
      */
-    public function findNotificationMetadata(UserInterface $participant, $seen = null)
+    public function findNotificationMetadataPager(UserInterface $participant, $seen, $page, $limit = null)
     {
-        return $this->getNotificationQb($participant, $seen)->getQuery()->getResult();
+        $qb = $this->getParticipantMetadataQb($participant, $seen);
+        $qb->innerJoin('m.notification', 'mn')
+            ->addSelect(['mn']);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findNotificationMetadataPager(UserInterface $participant, $seen, $page, $limit = null)
+    public function getNotificationCount(UserInterface $participant, $seen = null)
     {
-        $qb = $this->getParticipantMetadataQb($participant, $seen)->getQuery();
-        return $this->createPaginator($qb, $page, $limit);
+        $qb = $this->getParticipantMetadataQb($participant, $seen);
+        $qb->select($qb->expr()->count('m'));
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -177,15 +173,6 @@ class NotificationManager implements NotificationManagerInterface, ServiceManage
         $this->entityManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNotificationCount(UserInterface $participant, $seen = null)
-    {
-        $qb = $this->getParticipantMetadataQb($participant, $seen);
-        $qb->select($qb->expr()->count('m'));
-        return $qb->getQuery()->getSingleScalarResult();
-    }
 
     /**
      * @return EntityRepository

@@ -17,7 +17,6 @@ use PHPDish\Bundle\UserBundle\Model\User as BaseUser;
 
 class User extends BaseUser
 {
-
     /**
      * @var Collection|CategoryInterface[]
      */
@@ -67,4 +66,65 @@ class User extends BaseUser
      * @var string
      */
     protected $locale;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostCount()
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostCount($postCount)
+    {
+        $this->postCount = $postCount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTopicCount()
+    {
+        return $this->topicCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTopicCount($topicCount)
+    {
+        $this->topicCount = $topicCount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }

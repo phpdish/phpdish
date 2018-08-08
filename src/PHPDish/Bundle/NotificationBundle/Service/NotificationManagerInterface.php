@@ -47,15 +47,6 @@ interface NotificationManagerInterface
      *
      * @param UserInterface $participant
      * @param boolean|null $seen
-     * @return NotificationInterface[]
-     */
-    public function findNotifications(UserInterface $participant, $seen = null);
-
-    /**
-     * 获取用户的通知
-     *
-     * @param UserInterface $participant
-     * @param boolean|null $seen
      * @param int $page
      * @param int|null $limit
      * @return Pagerfanta
@@ -67,20 +58,20 @@ interface NotificationManagerInterface
      *
      * @param UserInterface $participant
      * @param boolean|null $seen
-     * @return NotificationMetadataInterface[]
-     */
-    public function findNotificationMetadata(UserInterface $participant, $seen = null);
-
-    /**
-     * 获取notification metadata
-     *
-     * @param UserInterface $participant
-     * @param boolean|null $seen
      * @param int $page
      * @param int|null $limit
      * @return Pagerfanta
      */
     public function findNotificationMetadataPager(UserInterface $participant, $seen, $page, $limit = null);
+
+    /**
+     * 获取消息数量
+     *
+     * @param UserInterface $participant
+     * @param null|bool $seen
+     * @return int
+     */
+    public function getNotificationCount(UserInterface $participant, $seen = null);
 
     /**
      * 设置为已读
@@ -95,13 +86,4 @@ interface NotificationManagerInterface
      * @param UserInterface $participant
      */
     public function markAllAsSeen(UserInterface $participant);
-
-    /**
-     * 获取消息数量
-     *
-     * @param UserInterface $participant
-     * @param null|bool $seen
-     * @return int
-     */
-    public function getNotificationCount(UserInterface $participant, $seen = null);
 }

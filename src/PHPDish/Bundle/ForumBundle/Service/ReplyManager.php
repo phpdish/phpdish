@@ -100,11 +100,21 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
     }
 
     /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getRepliesQb()
+    {
+        return $this->getReplyRepository()->createQueryBuilder('r')
+            ->addSelect('ru')
+            ->join('r.user', 'ru');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findReplies(Criteria $criteria)
     {
-        return $this->getReplyRepository()->createQueryBuilder('r')
+        return $this->getRepliesQb()
             ->addCriteria($criteria)
             ->getQuery()
             ->getResult();
@@ -115,7 +125,7 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
      */
     public function findRepliesPager(Criteria $criteria, $page, $limit = null)
     {
-        $qb = $this->getReplyRepository()->createQueryBuilder('r')
+        $qb = $this->getRepliesQb()
             ->addCriteria($criteria);
         return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
@@ -125,13 +135,14 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
      */
     public function findTopicReplies(TopicInterface $topic, $page, $limit = null, Criteria $criteria = null)
     {
-        $qb = $this->getReplyRepository()->createQueryBuilder('r')
-            ->where('r.topic = :topicId')->setParameter('topicId', $topic->getId());
+        $qb = $this->getRepliesQb()
+            ->where('r.topic = :topic')->setParameter('topic', $topic)
+            ->andWhere('r.enabled = :enabled')->setParameter('enabled', true);
+
         if ($criteria) {
             $qb->addCriteria($criteria);
         }
-        $query = $qb->getQuery();
-        return $this->createPaginator($query, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**
@@ -141,11 +152,11 @@ class ReplyManager implements ReplyManagerInterface, ServiceManagerInterface
     {
         $qb = $this->getReplyRepository()->createQueryBuilder('r')
             ->where('r.user = :userId')->setParameter('userId', $user->getId());
+
         if ($criteria) {
             $qb->addCriteria($criteria);
         }
-        $query = $qb->getQuery();
-        return $this->createPaginator($query, $page, $limit);
+        return $this->createPaginator($qb->getQuery(), $page, $limit);
     }
 
     /**
