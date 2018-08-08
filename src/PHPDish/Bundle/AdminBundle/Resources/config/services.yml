@@ -1,14 +1,14 @@
 services:
   phpdish.admin.user:
         class: PHPDish\Bundle\AdminBundle\Admin\UserAdmin
-        arguments: [~, PHPDish\Bundle\UserBundle\Model\User, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\User, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.user, group: 'phpdish.admin.group.user' }
         public: true
 
   phpdish.admin.wallet:
         class: PHPDish\Bundle\AdminBundle\Admin\WalletAdmin
-        arguments: [~, PHPDish\Bundle\PaymentBundle\Model\Wallet, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Wallet, ~]
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.payment']}
         tags:
@@ -17,7 +17,7 @@ services:
 
   phpdish.admin.payment:
         class: PHPDish\Bundle\AdminBundle\Admin\PaymentAdmin
-        arguments: [~, PHPDish\Bundle\PaymentBundle\Model\Payment, PHPDishAdminBundle:Payment]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Payment, PHPDishAdminBundle:Payment]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.transaction, group: 'phpdish.admin.group.wallet' }
         public: true
@@ -27,7 +27,7 @@ services:
 
   phpdish.admin.category:
         class: PHPDish\Bundle\AdminBundle\Admin\CategoryAdmin
-        arguments: [~, PHPDish\Bundle\PostBundle\Model\Category, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Category, ~]
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.post']}
         tags:
@@ -36,14 +36,14 @@ services:
 
   phpdish.admin.post:
         class: PHPDish\Bundle\AdminBundle\Admin\PostAdmin
-        arguments: [~, PHPDish\Bundle\PostBundle\Model\Post, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Post, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.post, group: 'phpdish.admin.group.post' }
         public: true
 
   phpdish.admin.thread:
         class: PHPDish\Bundle\AdminBundle\Admin\ThreadAdmin
-        arguments: [~, PHPDish\Bundle\ForumBundle\Model\Thread, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Thread, ~]
         calls:
             - {method: addChild, arguments: ['@phpdish.admin.topic']}
         tags:
@@ -52,14 +52,14 @@ services:
 
   phpdish.admin.topic:
         class: PHPDish\Bundle\AdminBundle\Admin\TopicAdmin
-        arguments: [~, PHPDish\Bundle\ForumBundle\Model\Topic, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Model\Topic, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.topic, group: 'phpdish.admin.group.forum' }
         public: true
 
   phpdish.admin.friend_link:
         class: PHPDish\Bundle\AdminBundle\Admin\FriendLinkAdmin
-        arguments: [~, PHPDish\Bundle\WebBundle\Entity\FriendLink, ~]
+        arguments: [~, PHPDish\Bundle\CoreBundle\Entity\FriendLink, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.friend_link, group: 'phpdish.admin.group.site' }
         public: true

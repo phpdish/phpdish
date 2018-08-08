@@ -39,9 +39,7 @@
                     </div>
                 </header>
                 <div class="panel-body">
-                    {% set isCanView = not post.category.isCharging
-                            or (is_granted('IS_AUTHENTICATED_REMEMBERED') and (is_granted('edit', post) or post.category.isFollowedBy(app.user)))
-                    %}
+                    {% set isCanView = is_granted('view', post)%}
                     <article class="markdown-body body">
                         {{ isCanView ? post.body|image_process|raw : post.body|image_process|html_safe_chunk(0.5)|raw}}
                     </article>
