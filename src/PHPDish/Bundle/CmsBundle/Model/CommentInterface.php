@@ -9,7 +9,6 @@
  * with this source code in the file LICENSE.
  */
 
-
 namespace  PHPDish\Bundle\CmsBundle\Model;
 
 use PHPDish\Bundle\ResourceBundle\Model\DateTimeInterface;

@@ -46,7 +46,7 @@ class UserController extends ResourceController
     public function latestUsersAction($limit)
     {
         $users = $this->getUserManager()->findLatestUsers($limit, true);
-        return $this->render('PHPDishWebBundle:User:latest.html.twig', [
+        return $this->render($this->configuration->getTemplate('User:latest.html.twig'), [
             'users' => $users,
         ]);
     }
