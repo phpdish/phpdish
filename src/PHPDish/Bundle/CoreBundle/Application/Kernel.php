@@ -57,7 +57,7 @@ abstract class Kernel extends HttpKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Algolia\SearchBundle\AlgoliaSearchBundle(),
             new \Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
-            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+//            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
             new \Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new \Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new \Oneup\UploaderBundle\OneupUploaderBundle(), //多文件上传

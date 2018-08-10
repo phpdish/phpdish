@@ -243,10 +243,10 @@ sonata_seo:
                 #'X-Ua-Compatible':      IE=EmulateIE7
 
 ## 多主题
-sylius_theme:
-    context: phpdish_core.theme.context.generic
-    sources:
-        filesystem: ~
+#sylius_theme:
+#    context: phpdish_core.theme.context.generic
+#    sources:
+#        filesystem: ~
 
 ## 资源处理，见 phpdish.yml
 phpdish_resource:
