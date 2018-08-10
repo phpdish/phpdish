@@ -68,12 +68,12 @@ interface ThemeInterface
     /**
      * @param ThemeInterface $theme
      */
-    public function addParent(self $theme): void;
+    public function addParent(ThemeInterface $theme): void;
 
     /**
      * @param ThemeInterface $theme
      */
-    public function removeParent(self $theme): void;
+    public function removeParent(ThemeInterface $theme): void;
 
     /**
      * @return array|ThemeScreenshot[]
