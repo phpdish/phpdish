@@ -127,6 +127,14 @@ class Theme implements ThemeInterface
     }
 
     /**
+     * @param array|ThemeAuthor[] $authors
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function addAuthor(ThemeAuthor $author): void
@@ -194,6 +202,14 @@ class Theme implements ThemeInterface
         $this->screenshots = array_filter($this->screenshots, function ($currentScreenshot) use ($screenshot) {
             return $currentScreenshot !== $screenshot;
         });
+    }
+
+    /**
+     * @param array|ThemeScreenshot[] $screenshots
+     */
+    public function setScreenshots($screenshots)
+    {
+        $this->screenshots = $screenshots;
     }
 
     /**
