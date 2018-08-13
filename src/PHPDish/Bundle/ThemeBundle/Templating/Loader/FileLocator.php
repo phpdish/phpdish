@@ -12,10 +12,9 @@
 namespace PHPDish\Bundle\ThemeBundle\Templating\Loader;
 
 use PHPDish\Bundle\ThemeBundle\Theming\ThemeManagerInterface;
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
+use Symfony\Component\HttpKernel\Config\FileLocator as BaseFileLocator;
 
-class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterface
+class FileLocator extends BaseFileLocator
 {
     /**
      * @var ThemeManagerInterface
@@ -30,12 +29,11 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
     /**
      * {@inheritdoc}
      */
-    protected function getCacheKey($template)
+    public function locate($file, $currentPath = null, $first = true)
     {
-        $name = $template->getLogicalName();
         if ($currentTheme = $this->themeManager->getCurrentTheme()) {
-            return $name . '|' . $currentTheme->getName();
+            $this->paths[] = $currentTheme->getPath();
         }
-        return $name;
+        parent::locate($file, $currentPath);
     }
 }
