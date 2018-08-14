@@ -18,8 +18,7 @@ interface ThemeFinderInterface
     /**
      * 查找该目录下所有的主题
      *
-     * @param string $directory
      * @return ThemeInterface[]
      */
-    public function find($directory);
+    public function find();
 }

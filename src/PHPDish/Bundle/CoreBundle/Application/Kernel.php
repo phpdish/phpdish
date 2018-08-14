@@ -67,7 +67,9 @@ abstract class Kernel extends HttpKernel
             new \Sonata\CoreBundle\SonataCoreBundle(),
             new \Sonata\BlockBundle\SonataBlockBundle(),
 
+            //PHPDish bundles
             new \PHPDish\Bundle\ResourceBundle\PHPDishResourceBundle(),
+            new \PHPDish\Bundle\ThemeBundle\PHPDishThemeBundle(),
             new \PHPDish\Bundle\CmsBundle\PHPDishCmsBundle(),
             new \PHPDish\Bundle\UserBundle\PHPDishUserBundle(),
             new \PHPDish\Bundle\PostBundle\PHPDishPostBundle(),

@@ -27,9 +27,23 @@ class ThemeManager implements ThemeManagerInterface
      */
     protected $theme;
 
-    public function __construct(ThemeContextInterface $themeContext)
+    /**
+     * @var array
+     */
+    protected $namespaces;
+
+    public function __construct(ThemeContextInterface $themeContext, $namespaces)
     {
         $this->themeContext = $themeContext;
+        $this->namespaces = $namespaces;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
     }
 
     /**

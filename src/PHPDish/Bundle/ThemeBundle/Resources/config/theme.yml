@@ -4,14 +4,14 @@ services:
         public: false
         autowire: true
 
-    phpdish_theme.theme_context:
-        class: PHPDish\Bundle\ThemeBundle\Theming\GenericThemeContext
-        arguments: ['']
-
     phpdish_theme.theme_finder:
         class: PHPDish\Bundle\ThemeBundle\Theming\ThemeFinder
-        arguments: ['composer.json', 'phpdish-theme']
+        arguments: ['composer.json', 'phpdish-theme', '']
+
+    phpdish_theme.theme_context:
+        class: PHPDish\Bundle\ThemeBundle\Theming\GenericThemeContext
+        arguments: ['', '@phpdish_theme.theme_finder']
 
     phpdish_theme.theme_manager:
         class: PHPDish\Bundle\ThemeBundle\Theming\ThemeManager
-        arguments: ['@phpdish_theme.theme_context']
+        arguments: ['@phpdish_theme.theme_context', '']

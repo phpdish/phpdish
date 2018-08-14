@@ -28,15 +28,21 @@ class PHPDishThemeExtension extends Extension
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('theme.yml');
-        $loader->load('templaing.yml');
+        $loader->load('templating.yml');
 
         //替换当前主题为
         if ($config['current_theme']) {
             $container->findDefinition('phpdish_theme.theme_context')->replaceArgument(0, $config['current_theme']);
         }
+
+        //Theme finder
+        $container->findDefinition('phpdish_theme.theme_finder')
+            ->replaceArgument(1, $config['configuration_filename'])
+            ->replaceArgument(2, $config['configuration_type']);
+
+        //Theme manager
         $container->findDefinition('phpdish_theme.theme_manager')
-            ->replaceArgument(0, $config['configuration_filename'])
-            ->replaceArgument(1, $config['configuration_type']);
+            ->replaceArgument(1, $config['namespaces']);
     }
 
     /**

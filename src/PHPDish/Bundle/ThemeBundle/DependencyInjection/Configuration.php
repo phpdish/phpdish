@@ -26,9 +26,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('current_theme')->end()
+                ->scalarNode('current_theme')->defaultNull()->end()
                 ->scalarNode('configuration_filename')->defaultValue('composer.json')->end()
                 ->scalarNode('configuration_type')->defaultValue('phpdish_theme')->end()
+                ->arrayNode('namespaces')
+                    ->scalarPrototype()
+                    ->end()
+                ->end()
             ->end();
+
+        return $treeBuilder;
     }
 }

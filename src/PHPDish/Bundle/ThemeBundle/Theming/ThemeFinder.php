@@ -21,29 +21,37 @@ use Symfony\Component\Finder\SplFileInfo;
 class ThemeFinder implements ThemeFinderInterface
 {
     /**
-     * 主题声明文件，默认是 composer.json
+     * composer.json
+     *
      * @var string
      */
     protected $filename;
 
-    protected $repoType;
+    /**
+     * phpdish-theme
+     *
+     * @var string
+     */
+    protected $type;
 
-    public function __construct($filename, $repoType)
+    protected $directory;
+
+    public function __construct($filename, $type, $directory)
     {
         $this->filename = $filename;
-        $this->repoType = $repoType;
+        $this->type = $type;
+        $this->directory = $directory;
     }
 
     /**
      * 查找指定目录下的所有主题
      *
-     * @param string|array $directory
      * @return ThemeInterface[]
      */
-    public function find($directory)
+    public function find()
     {
         $finder = new Finder();
-        $finder->in($directory)->name($this->filename)->ignoreUnreadableDirs();
+        $finder->in($this->directory)->name($this->filename)->ignoreUnreadableDirs();
         $themes = [];
         foreach ($finder as $file) {
             $theme = $this->hydrateTheme($file);
@@ -62,7 +70,7 @@ class ThemeFinder implements ThemeFinderInterface
     protected function hydrateTheme(SplFileInfo $file)
     {
         $configuration = json_decode($file->getContents(), true);
-        if (!isset($configuration['type']) || $configuration['type'] !== $this->repoType) {
+        if (!isset($configuration['type']) || $configuration['type'] !== $this->type) {
             return false;
         }
         $theme = new Theme($configuration['name'] ?? 'Unknown', $file->getRealPath());
