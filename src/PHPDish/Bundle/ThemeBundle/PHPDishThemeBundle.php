@@ -11,11 +11,22 @@
 
 namespace PHPDish\Bundle\ThemeBundle;
 
+use PHPDish\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemePass;
 use PHPDish\Bundle\ThemeBundle\DependencyInjection\PHPDishThemeExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PHPDishThemeBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new ThemePass());
+    }
+
     /**
      * {@inheritdoc}
      */

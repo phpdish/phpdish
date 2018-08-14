@@ -38,4 +38,9 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
         }
         return $name;
     }
+
+    public function locate($name, $currentPath = null, $first = true)
+    {
+        return parent::locate($name, $currentPath, $first);
+    }
 }

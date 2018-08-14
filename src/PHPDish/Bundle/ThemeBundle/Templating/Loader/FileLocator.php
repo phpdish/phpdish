@@ -34,6 +34,6 @@ class FileLocator extends BaseFileLocator
         if ($currentTheme = $this->themeManager->getCurrentTheme()) {
             $this->paths[] = $currentTheme->getPath();
         }
-        parent::locate($file, $currentPath);
+        return parent::locate($file, $currentPath);
     }
 }

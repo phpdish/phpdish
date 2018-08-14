@@ -1,13 +1,13 @@
 services:
 
     phpdish_theme.file_locator:
-        class: PHPDish\Bundle\ThemeBundle\Templating\Loade\FileLocator
+        class: PHPDish\Bundle\ThemeBundle\Templating\Loader\FileLocator
         parent: file_locator
         calls:
            - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
 
-    phpdish_theme.template_locator:
-        class: PHPDish\Bundle\ThemeBundle\Templating\Loade\TemplateLocator
-        parent: templating.locator
+    phpdish_theme.templating_locator:
+        class: PHPDish\Bundle\ThemeBundle\Templating\Loader\TemplateLocator
+        arguments: ['@phpdish_theme.file_locator', '%kernel.cache_dir%']
         calls:
            - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
