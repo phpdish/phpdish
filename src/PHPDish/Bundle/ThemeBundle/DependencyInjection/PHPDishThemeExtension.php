@@ -37,8 +37,9 @@ class PHPDishThemeExtension extends Extension
 
         //Theme finder
         $container->findDefinition('phpdish_theme.theme_finder')
-            ->replaceArgument(1, $config['configuration_filename'])
-            ->replaceArgument(2, $config['configuration_type']);
+            ->replaceArgument(0, $config['configuration_filename'])
+            ->replaceArgument(1, $config['configuration_type'])
+            ->replaceArgument(2, $config['theme_directory']);
 
         //Theme manager
         $container->findDefinition('phpdish_theme.theme_manager')
