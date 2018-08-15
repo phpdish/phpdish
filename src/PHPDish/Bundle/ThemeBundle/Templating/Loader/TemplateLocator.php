@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\ThemeBundle\Templating\Loader;
 use PHPDish\Bundle\ThemeBundle\Theming\ThemeManagerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
+use Symfony\Component\Templating\TemplateReferenceInterface;
 
 class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterface
 {
@@ -39,8 +40,18 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
         return $name;
     }
 
-    public function locate($name, $currentPath = null, $first = true)
+    public function locate($template, $currentPath = null, $first = true)
     {
-        return parent::locate($name, $currentPath, $first);
+        if (!$template instanceof TemplateReferenceInterface) {
+            throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
+        }
+        if ($this->themeManager->getCurrentTheme()) {
+
+        }
+
+        if ($template->get('bundle') ) {
+
+        }
+        return parent::locate($template, $currentPath, $first);
     }
 }
