@@ -60,8 +60,6 @@ class ThemeFinder implements ThemeFinderInterface
             }
             $themes[] = $theme;
         }
-        var_dump($this->directory, $this->filename);
-        var_dump($themes);exit;
         return $themes;
     }
 
@@ -72,10 +70,12 @@ class ThemeFinder implements ThemeFinderInterface
     protected function hydrateTheme(SplFileInfo $file)
     {
         $configuration = json_decode($file->getContents(), true);
+
+//        var_dump(!isset($configuration['type']) || $configuration['type'] !== $this->type);
         if (!isset($configuration['type']) || $configuration['type'] !== $this->type) {
             return false;
         }
-        $theme = new Theme($configuration['name'] ?? 'Unknown', $file->getRealPath());
+        $theme = new Theme($configuration['name'] ?? 'Unknown', $file->getPath());
         $theme->setDescription($configuration['description'] ?? null);
         $theme->setAuthors($this->convertAuthorsArraysToAuthorsObjects($configuration['authors'] ?? []));
         $theme->setScreenshots($this->convertScreenshotsArraysToScreenshotsObjects($configuration['screenshots'] ?? []));

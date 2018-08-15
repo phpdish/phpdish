@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('current_theme')->defaultNull()->end()
                 ->scalarNode('configuration_filename')->defaultValue('composer.json')->end()
-                ->scalarNode('configuration_type')->defaultValue('phpdish_theme')->end()
+                ->scalarNode('configuration_type')->defaultValue('phpdish-theme')->end()
                 ->scalarNode('theme_directory')->defaultValue('%kernel.root_dir%/themes')->end()
                 ->arrayNode('namespaces')
                     ->scalarPrototype()

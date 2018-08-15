@@ -52,7 +52,6 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
         ) {
             $template->set('bundle', false);
         }
-        var_dump($template->getPath());
         return parent::locate($template, $currentPath, $first);
     }
 }
