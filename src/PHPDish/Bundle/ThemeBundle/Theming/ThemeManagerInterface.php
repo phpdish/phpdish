@@ -21,4 +21,11 @@ interface ThemeManagerInterface
      * @return ThemeInterface|null
      */
     public function getCurrentTheme();
+
+    /**
+     * 获取覆盖的bundle命名空间，在此空间内的模板会被重定向到主题内
+     *
+     * @return array
+     */
+    public function getNamespaces();
 }

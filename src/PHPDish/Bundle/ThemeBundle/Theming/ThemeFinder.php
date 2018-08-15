@@ -60,6 +60,8 @@ class ThemeFinder implements ThemeFinderInterface
             }
             $themes[] = $theme;
         }
+        var_dump($this->directory, $this->filename);
+        var_dump($themes);exit;
         return $themes;
     }
 

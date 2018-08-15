@@ -24,6 +24,10 @@ class FileLocator extends BaseFileLocator
     public function setThemeManager(ThemeManagerInterface $themeManager)
     {
         $this->themeManager = $themeManager;
+        //将当前主题的路径添加入paths
+        if ($currentTheme = $this->themeManager->getCurrentTheme()) {
+            $this->paths[] = $currentTheme->getPath();
+        }
     }
 
     /**
@@ -31,9 +35,6 @@ class FileLocator extends BaseFileLocator
      */
     public function locate($file, $currentPath = null, $first = true)
     {
-        if ($currentTheme = $this->themeManager->getCurrentTheme()) {
-            $this->paths[] = $currentTheme->getPath();
-        }
         return parent::locate($file, $currentPath);
     }
 }

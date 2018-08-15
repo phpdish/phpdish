@@ -200,6 +200,12 @@ phpdish_payment:
       client_secret: '%youzan.client_secret%'
       kdt_id: '%youzan.kdt_id%'
 
+# 多主题
+phpdish_theme:
+   current_theme: '%theme.current_theme%'
+   theme_directory: '%kernel.project_dir%/themes'
+   namespaces: ['PHPDishWebBundle']
+
 # 社交网站登录
 hwi_oauth:
     http:
