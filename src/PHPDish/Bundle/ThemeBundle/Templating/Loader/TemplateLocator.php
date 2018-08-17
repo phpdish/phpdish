@@ -45,13 +45,13 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
         if (!$template instanceof TemplateReferenceInterface) {
             throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
         }
-        if (
-            $this->themeManager->getCurrentTheme()
-            && ($bundle = $template->get('bundle'))
-            && in_array($bundle, $this->themeManager->getNamespaces())
-        ) {
-            $template->set('bundle', false);
-        }
+//        if (
+//            $this->themeManager->getCurrentTheme()
+//            && ($bundle = $template->get('bundle'))
+//            && in_array($bundle, $this->themeManager->getNamespaces())
+//        ) {
+//            $template->set('bundle', false);
+//        }
         return parent::locate($template, $currentPath, $first);
     }
 }
