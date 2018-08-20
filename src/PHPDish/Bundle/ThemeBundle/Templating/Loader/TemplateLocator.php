@@ -31,7 +31,7 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
     /**
      * {@inheritdoc}
      */
-    protected function getCacheKey($template)
+    protected function getCacheKey2($template)
     {
         $name = $template->getLogicalName();
         if ($currentTheme = $this->themeManager->getCurrentTheme()) {
@@ -40,7 +40,7 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
         return $name;
     }
 
-    public function locate($template, $currentPath = null, $first = true)
+    public function locate2($template, $currentPath = null, $first = true)
     {
         if (!$template instanceof TemplateReferenceInterface) {
             throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
