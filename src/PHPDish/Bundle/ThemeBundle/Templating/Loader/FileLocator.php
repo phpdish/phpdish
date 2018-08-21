@@ -31,7 +31,7 @@ class FileLocator extends BaseFileLocator
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    protected $_kernel;
 
     public function setThemeManager(ThemeManagerInterface $themeManager)
     {
@@ -48,7 +48,7 @@ class FileLocator extends BaseFileLocator
      */
     public function setKernel($kernel)
     {
-        $this->kernel = $kernel;
+        $this->_kernel = $kernel;
     }
 
     /**
@@ -56,15 +56,19 @@ class FileLocator extends BaseFileLocator
      */
     public function locate($file, $currentPath = null, $first = true)
     {
-        if ($this->currentTheme) {
+        if ($this->currentTheme && $file[0] === '@') {
             $bundleName = substr($file, 1);
             if (false !== strpos($bundleName, '/')) {
-                list($bundleName) = explode('/', $bundleName, 2);
+                list($bundleName, $path) = explode('/', $bundleName, 2);
             }
             if (in_array($bundleName, $this->themeManager->getNamespaces())) {
-                $file = $this->kernel->locateResource($file, $this->currentTheme->getPath(), $first);
-
-                return $file;
+                try {
+                    $filePath = $this->_kernel->locateResource($file,
+                        $this->currentTheme->getPath(), $first);
+                    return $filePath;
+                } catch (\Exception $exception) {
+                    //Ignore if not found in theme.
+                }
             }
         }
         return parent::locate($file, $currentPath);
