@@ -12,3 +12,16 @@ services:
         arguments: ['@phpdish_theme.file_locator', '%kernel.cache_dir%']
         calls:
            - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
+
+    phpdish_theme.templating_finder:
+        class: PHPDish\Bundle\ThemeBundle\CacheWarmer\TemplateFinder
+        arguments:
+          - '@phpdish_theme.theme_manager'
+          - '@kernel'
+          - '@templating.filename_parser']
+          - '%kernel.root_dir%/Resources'
+          - '%phpdish_theme.theme_dir%'
+
+    phpdish_theme.templating.cache_warmer.template_paths:
+        class: PHPDish\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer
+        arguments: ['@phpdish_theme.theme_manager', '@phpdish_theme.templating_finder', '@phpdish_theme.templating_locator']

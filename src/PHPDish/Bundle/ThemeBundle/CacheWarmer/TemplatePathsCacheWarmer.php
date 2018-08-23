@@ -12,20 +12,45 @@
 namespace PHPDish\Bundle\ThemeBundle\CacheWarmer;
 
 
-use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer;
+use PHPDish\Bundle\ThemeBundle\Theming\ThemeManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
+use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer as BaseTemplatePathsCacheWarmer;
+use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
+use Symfony\Component\Templating\TemplateReferenceInterface;
 
-class TemplatePathsCacheWarmer extends CacheWarmer
+class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
 {
+
+    protected $themeManager;
+
+    public function __construct(
+        ThemeManagerInterface $themeManager,
+        TemplateFinderInterface $finder,
+        TemplateLocator $locator
+    ) {
+        parent::__construct($finder, $locator);
+        $this->themeManager = $themeManager;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function warmUp($cacheDir)
     {
+
+        /** @var TemplateReferenceInterface[] $allTemplates */
+        $templates = $this->finder->findAllTemplates();
+
         $filesystem = new Filesystem();
         $templates = array();
 
-        foreach ($this->finder->findAllTemplates() as $template) {
-            $templates[$template->getLogicalName()] = rtrim($filesystem->makePathRelative($this->locator->locate($template), $cacheDir), '/');
+        foreach ($templates as $template) {
+            foreach ($this->themeManager->getThemes() as $theme) {
+                $key = $template->getLogicalName() . '|' . $theme->getName();
+                $templates[$key]
+                    = rtrim($filesystem->makePathRelative($this->locator->locate($template), $cacheDir), '/');
+            }
         }
 
         $templates = str_replace("' => '", "' => __DIR__.'/", var_export($templates, true));
