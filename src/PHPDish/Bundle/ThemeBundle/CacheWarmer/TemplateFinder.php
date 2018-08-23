@@ -15,6 +15,7 @@ use PHPDish\Bundle\ThemeBundle\Model\ThemeInterface;
 use PHPDish\Bundle\ThemeBundle\Theming\ThemeManagerInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder as BaseTemplateFinder;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;

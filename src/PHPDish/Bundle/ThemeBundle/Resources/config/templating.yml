@@ -18,10 +18,11 @@ services:
         arguments:
           - '@phpdish_theme.theme_manager'
           - '@kernel'
-          - '@templating.filename_parser']
+          - '@templating.filename_parser'
           - '%kernel.root_dir%/Resources'
           - '%phpdish_theme.theme_dir%'
 
     phpdish_theme.templating.cache_warmer.template_paths:
         class: PHPDish\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer
         arguments: ['@phpdish_theme.theme_manager', '@phpdish_theme.templating_finder', '@phpdish_theme.templating_locator']
+        tags: [{name: kernel.cache_warmer, priority: 20}]

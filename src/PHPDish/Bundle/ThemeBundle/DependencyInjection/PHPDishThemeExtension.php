@@ -46,7 +46,7 @@ class PHPDishThemeExtension extends Extension
 
         //Theme manager
         $container->findDefinition('phpdish_theme.theme_manager')
-            ->replaceArgument(1, $config['namespaces']);
+            ->replaceArgument(2, $config['namespaces']);
     }
 
     /**
