@@ -23,6 +23,13 @@ interface ThemeManagerInterface
     public function getCurrentTheme();
 
     /**
+     * 设置当前主题
+     *
+     * @param ThemeInterface $theme
+     */
+    public function setCurrentTheme($theme);
+
+    /**
      * 获取覆盖的bundle命名空间，在此空间内的模板会被重定向到主题内
      *
      * @return array

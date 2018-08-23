@@ -74,6 +74,14 @@ class ThemeManager implements ThemeManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function setCurrentTheme($theme)
+    {
+        $this->theme = $theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getThemes()
     {
         if ($this->themes === null) {
