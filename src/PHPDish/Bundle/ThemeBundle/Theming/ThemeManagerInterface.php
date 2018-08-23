@@ -28,4 +28,12 @@ interface ThemeManagerInterface
      * @return array
      */
     public function getNamespaces();
+
+
+    /**
+     * 获取所有的主题
+     *
+     * @return ThemeFinderInterface[]
+     */
+    public function getThemes();
 }

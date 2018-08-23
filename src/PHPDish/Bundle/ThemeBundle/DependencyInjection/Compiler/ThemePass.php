@@ -21,6 +21,9 @@ class ThemePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        //覆盖
         $container->setAlias('templating.locator', 'phpdish_theme.templating_locator');
+
+        $container->setAlias('templating.cache_warmer.template_paths', 'phpdish_theme.templating.cache_warmer.template_paths');
     }
 }

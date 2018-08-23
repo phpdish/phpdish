@@ -21,6 +21,11 @@ class ThemeManager implements ThemeManagerInterface
     protected $themeContext;
 
     /**
+     * @var ThemeFinderInterface
+     */
+    protected $themeFinder;
+
+    /**
      * 当前主题
      *
      * @var ThemeInterface|null
@@ -28,13 +33,22 @@ class ThemeManager implements ThemeManagerInterface
     protected $theme;
 
     /**
+     * @var ThemeInterface[]
+     */
+    protected $themes;
+
+    /**
      * @var array
      */
     protected $namespaces;
 
-    public function __construct(ThemeContextInterface $themeContext, $namespaces)
-    {
+    public function __construct(
+        ThemeContextInterface $themeContext,
+        ThemeFinderInterface $themeFinder,
+        $namespaces
+    ) {
         $this->themeContext = $themeContext;
+        $this->themeFinder = $themeFinder;
         $this->namespaces = $namespaces;
     }
 
@@ -55,5 +69,16 @@ class ThemeManager implements ThemeManagerInterface
             $this->theme = $this->themeContext->getTheme();
         }
         return $this->theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemes()
+    {
+        if ($this->themes === null) {
+            $this->themes = $this->themeFinder->find();
+        }
+        return $this->themes;
     }
 }

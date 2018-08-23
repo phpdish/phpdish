@@ -26,6 +26,9 @@ class PHPDishThemeExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        //polyfill to parameters
+        $container->setParameter('phpdish_theme.theme_dir', $config['theme_directory']);
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('theme.yml');
         $loader->load('templating.yml');
@@ -43,7 +46,7 @@ class PHPDishThemeExtension extends Extension
 
         //Theme manager
         $container->findDefinition('phpdish_theme.theme_manager')
-            ->replaceArgument(1, $config['namespaces']);
+            ->replaceArgument(2, $config['namespaces']);
     }
 
     /**
