@@ -11,6 +11,7 @@
 
 namespace PHPDish\Bundle\ResourceBundle\AvatarGenerator;
 
+use GuzzleHttp\Psr7\Stream;
 use Md\MDAvatars;
 use PHPDish\Component\Media\Manager\FileManagerInterface;
 use PHPDish\Component\Media\Model\File;
@@ -42,7 +43,8 @@ class AvatarGenerator implements AvatarGeneratorInterface
         $avatar = new MDAvatars($idString, $width);
         $tmpFile = sys_get_temp_dir() . '/' . md5(uniqid('avatar'));
         $avatar->Save($tmpFile, $width);
-        $file = new File($this->namer->transformWithExtension('png'), file_get_contents($tmpFile));
+        $content = new Stream(fopen($tmpFile, 'r+'));
+        $file = new File($this->namer->transformWithExtension('png'), $content);
         $this->fileManager->upload($file);
         @unlink($tmpFile);
         return $file;
