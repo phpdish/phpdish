@@ -11,3 +11,8 @@ sonata_admin:
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin
+
+phpdish_admin:
+    resource: "@PHPDishAdminBundle/Controller"
+    prefix:   /
+    type: annotation
