@@ -66,6 +66,6 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
      */
     public function isOptional()
     {
-        return false;
+        return true;
     }
 }

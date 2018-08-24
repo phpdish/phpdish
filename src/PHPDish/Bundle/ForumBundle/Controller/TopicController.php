@@ -57,9 +57,9 @@ class TopicController extends ResourceController
             }
             $topics = $manager->findTopicsPager($criteria, $request->query->getInt('page', 1));
         }
-        return $this->render('@PHPDishWeb/Topic/index.html.twig', [
-            'topics' => $topics,
-        ]);
+//        return $this->render('@PHPDishWeb/Topic/index.html.twig', [
+//            'topics' => $topics,
+//        ]);
         return $this->render($this->configuration->getTemplate('Topic:index.html.twig'), [
             'topics' => $topics,
         ]);
