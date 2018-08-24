@@ -21,11 +21,11 @@ class ThemePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        //覆盖
+        //覆盖目标版定位器
         $container->setAlias('templating.locator', 'phpdish_theme.templating_locator');
-
+        //覆盖文件路径缓存预热器
         $container->setAlias('templating.cache_warmer.template_paths', 'phpdish_theme.templating.cache_warmer.template_paths');
-
+        //覆盖twig的loader
         $container->setAlias('twig.loader.filesystem', 'phpdish_theme.twig.loader.filesystem');
     }
 }
