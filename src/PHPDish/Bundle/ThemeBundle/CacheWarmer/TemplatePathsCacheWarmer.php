@@ -44,12 +44,14 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
         $filesystem = new Filesystem();
         $templates = array();
 
-        foreach ($allTemplates as $template) {
-            foreach ($this->themeManager->getThemes() as $theme) {
-
+        // 不用主题
+        $themes = $this->themeManager->getThemes();
+        array_unshift($themes, null);
+        foreach ($themes as $theme) {
+            $keySuffix = $theme ? '|' . $theme->getName() : '';
+            foreach ($allTemplates as $template) {
                 $this->themeManager->setCurrentTheme($theme); //覆盖当前主题
-
-                $key = $template->getLogicalName() . '|' . $theme->getName();
+                $key = $template->getLogicalName() . $keySuffix;
                 $templates[$key]
                     = rtrim($filesystem->makePathRelative($this->locator->locate($template), $cacheDir), '/');
             }

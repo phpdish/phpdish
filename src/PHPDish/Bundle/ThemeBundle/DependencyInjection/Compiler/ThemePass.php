@@ -25,5 +25,7 @@ class ThemePass implements CompilerPassInterface
         $container->setAlias('templating.locator', 'phpdish_theme.templating_locator');
 
         $container->setAlias('templating.cache_warmer.template_paths', 'phpdish_theme.templating.cache_warmer.template_paths');
+
+        $container->setAlias('twig.loader.filesystem', 'phpdish_theme.twig.loader.filesystem');
     }
 }

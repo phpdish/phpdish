@@ -1,5 +1,10 @@
 services:
 
+    # 支持解析twig的快捷路径格式解析
+    phpdish_theme.templating.name_parser:
+        class: PHPDish\Bundle\ThemeBundle\Templating\TemplateNameParser
+        parent: templating.name_parser
+
     phpdish_theme.file_locator:
         class: PHPDish\Bundle\ThemeBundle\Templating\Loader\FileLocator
         parent: file_locator
@@ -26,3 +31,11 @@ services:
         class: PHPDish\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer
         arguments: ['@phpdish_theme.theme_manager', '@phpdish_theme.templating_finder', '@phpdish_theme.templating_locator']
         tags: [{name: kernel.cache_warmer, priority: 20}]
+
+    # 替换twig bundle默认的
+    phpdish_theme.twig.loader.filesystem:
+        class: PHPDish\Bundle\ThemeBundle\Twig\FilesystemLoader
+        arguments: ['@phpdish_theme.templating_locator', '@phpdish_theme.templating.name_parser']
+        calls:
+           - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
+        tags: ['twig.loader']

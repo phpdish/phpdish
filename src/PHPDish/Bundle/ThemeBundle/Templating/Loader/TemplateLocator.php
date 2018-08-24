@@ -22,9 +22,19 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
      */
     protected $themeManager;
 
+    /**
+     * 模板名称后缀
+     * @var string
+     */
+    protected $templateLogicNameSuffix = '';
+
     public function setThemeManager(ThemeManagerInterface $themeManager)
     {
         $this->themeManager = $themeManager;
+        //当前主题后缀
+        if ($activeTheme = $themeManager->getCurrentTheme()) {
+            $this->templateLogicNameSuffix = '|' . $activeTheme->getName();
+        }
     }
 
     /**
@@ -32,10 +42,6 @@ class TemplateLocator extends BaseTemplateLocator implements FileLocatorInterfac
      */
     protected function getCacheKey($template)
     {
-        $name = $template->getLogicalName();
-        if ($currentTheme = $this->themeManager->getCurrentTheme()) {
-            return $name . '|' . $currentTheme->getName();
-        }
-        return $name;
+        return $template->getLogicalName() . $this->templateLogicNameSuffix;
     }
 }
