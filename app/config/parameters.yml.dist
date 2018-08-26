@@ -50,6 +50,7 @@ parameters:
     youzan.kdt_id: phpdish
 
     # CDN
-    cdn.host: null
+    cdn.host.admin: /build_admin/
+    cdn.host.web: /build/
 
 
