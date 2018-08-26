@@ -9,13 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle\Model;
+namespace PHPDish\Bundle\CoreBundle\Model;
 
-interface PermissionInterface
+use PHPDish\Bundle\PermissionBundle\Model\Permission as BasePermission;
+
+class Permission extends BasePermission
 {
-    public function getId();
-
-    public function getName();
-
-    public function getRoute();
 }

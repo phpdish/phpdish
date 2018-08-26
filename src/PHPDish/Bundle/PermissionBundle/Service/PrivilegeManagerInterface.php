@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle\Service;
+namespace PHPDish\Bundle\PermissionBundle\Service;
 
-use PHPDish\Bundle\AdminBundle\Model\PermissionInterface;
-use PHPDish\Bundle\AdminBundle\Model\Privileger;
-use PHPDish\Bundle\AdminBundle\Model\RoleInterface;
+use PHPDish\Bundle\PermissionBundle\Model\PermissionInterface;
+use PHPDish\Bundle\PermissionBundle\Model\Privileger;
+use PHPDish\Bundle\PermissionBundle\Model\RoleInterface;
 
 interface PrivilegeManagerInterface
 {
@@ -59,4 +59,12 @@ interface PrivilegeManagerInterface
      * @return boolean
      */
     public function hasAnyPermissions(Privileger $privileger, $permissions);
+
+    /**
+     * 获取权限树形结构
+     *
+     * @param Privileger $privileger
+     * @return PermissionInterface[]
+     */
+    public function findPermissionsTree(Privileger $privileger);
 }

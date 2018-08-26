@@ -11,9 +11,11 @@
 
 namespace PHPDish\Bundle\CoreBundle\Model;
 
-use PHPDish\Bundle\UserBundle\Model\Role as BaseRole;
+use PHPDish\Bundle\PermissionBundle\Model\Role as BaseRole;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 
-class Role extends BaseRole
+class Role extends BaseRole implements IdentifiableInterface
 {
-
+    use IdentifiableTrait;
 }

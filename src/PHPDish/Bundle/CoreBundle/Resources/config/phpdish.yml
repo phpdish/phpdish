@@ -15,7 +15,7 @@ phpdish_media:
 ## 用户
 phpdish_user:
     avatar_downloader: 'phpdish_media.file_downloader.avatar'
-    
+
 # 支付
 phpdish_payment:
     youzan:

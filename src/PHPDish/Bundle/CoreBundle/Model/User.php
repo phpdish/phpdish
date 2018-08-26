@@ -13,10 +13,11 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPDish\Bundle\PermissionBundle\Model\PrivilegerInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\User as BaseUser;
 
-class User extends BaseUser
+class User extends BaseUser implements PrivilegerInterface
 {
     /**
      * @var Collection|CategoryInterface[]

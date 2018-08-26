@@ -9,16 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle\Model;
+namespace PHPDish\Bundle\PermissionBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableTrait;
 
 class Role implements RoleInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    use IdentifiableTrait;
 
     /**
      * @var string
@@ -26,32 +24,26 @@ class Role implements RoleInterface
     protected $name;
 
     /**
+     * 英文标记
+     *
+     * @var slug
+     */
+    protected $slug;
+
+    /**
      * @var PermissionInterface[]|Collection
      */
     protected $permissions;
+
+    /**
+     * @var PrivilegerInterface[]
+     */
+    protected $users;
 
     public function __construct($name, $permissions = [])
     {
         $this->name = $name;
         $this->permissions = $permissions;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return Role
-     */
-    public function setId(int $id): Role
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

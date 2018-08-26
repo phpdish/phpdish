@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle\Model;
+namespace PHPDish\Bundle\PermissionBundle\Model;
 
-interface Privileger
+interface PrivilegerInterface
 {
     /**
      * 获取角色

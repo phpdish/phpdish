@@ -53,3 +53,12 @@ phpdish_notification:
             model: PHPDish\Bundle\CoreBundle\Model\Notification
         notification_metadata:
             model: PHPDish\Bundle\CoreBundle\Model\NotificationMetadata
+
+phpdish_permission:
+    resources:
+        privileger:
+            model: PHPDish\Bundle\CoreBundle\Model\User
+        role:
+            model: PHPDish\Bundle\CoreBundle\Model\Profile
+        permission:
+            model: PHPDish\Bundle\CoreBundle\Model\Permission

@@ -9,9 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle\Model;
+namespace PHPDish\Bundle\PermissionBundle\Model;
 
-interface RoleInterface
+use PHPDish\Bundle\ResourceBundle\Model\IdentifiableInterface;
+
+interface RoleInterface extends IdentifiableInterface
 {
     /**
      * @return int

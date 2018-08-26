@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <mapped-superclass name="PHPDish\Bundle\UserBundle\Model\Role">
+  <mapped-superclass name="PHPDish\Bundle\PermissionBundle\Model\Permission">
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
     <field name="name" type="string" column="name" precision="0" scale="0" nullable="false"/>
-    <many-to-many field="users" target-entity="PHPDish\Bundle\UserBundle\Model\UserInterface" mapped-by="roles" fetch="LAZY"/>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" nullable="false" unique="true"/>
+    <field name="route"  type="string"  column="route" nullable="true"/>
+    <many-to-many field="roles" target-entity="PHPDish\Bundle\PermissionBundle\Model\PrivilegerInterface" mapped-by="roles" fetch="EXTRA_LAZY"/>
   </mapped-superclass>
 </doctrine-mapping>
