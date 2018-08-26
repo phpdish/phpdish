@@ -20,6 +20,6 @@ class PageController extends AdminController
      */
     public function index()
     {
-        return $this->render('PHPDishAdminBundle:Page:homepage.html.twig');
+        return $this->render('PHPDishAdminBundle:Page:index.html.twig');
     }
 }

@@ -9,6 +9,8 @@
     "prod": "encore production",
     "dev": "encore dev",
     "watch": "encore dev-server --port 8089 --disable-host-check --hot",
+    "admin": "encore production --config webpack.config.admin.js",
+    "watch-admin": "encore dev-server --config webpack.config.admin.js --port 8090 --disable-host-check --hot",
     "cs-fixer": "php-cs-fixer fix ./src  --rules=@Symfony,@PSR2"
   },
   "repository": {

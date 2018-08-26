@@ -1,0 +1,7 @@
+{
+  "build_admin/css/style.css": "http://127.0.0.1:8090/css/style.css",
+  "build_admin/js/app.js": "http://127.0.0.1:8090/js/app.js",
+  "build_admin/manifest.js": "http://127.0.0.1:8090/manifest.js",
+  "build_admin/vendor.css": "http://127.0.0.1:8090/vendor.css",
+  "build_admin/vendor.js": "http://127.0.0.1:8090/vendor.js"
+}

@@ -14,5 +14,5 @@
 
 phpdish_admin:
     resource: "@PHPDishAdminBundle/Controller"
-    prefix:   /
+    prefix:   /admin
     type: annotation
