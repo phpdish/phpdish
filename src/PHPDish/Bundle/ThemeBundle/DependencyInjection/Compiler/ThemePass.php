@@ -11,8 +11,10 @@
 
 namespace PHPDish\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
+use PHPDish\Bundle\ThemeBundle\Twig\FilesystemLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ThemePass implements CompilerPassInterface
 {
@@ -26,6 +28,10 @@ class ThemePass implements CompilerPassInterface
         //覆盖文件路径缓存预热器
         $container->setAlias('templating.cache_warmer.template_paths', 'phpdish_theme.templating.cache_warmer.template_paths');
         //覆盖twig的loader
-        $container->setAlias('twig.loader.filesystem', 'phpdish_theme.twig.loader.filesystem');
+        $container->findDefinition('twig.loader.filesystem')
+            ->setClass(FilesystemLoader::class)
+            ->replaceArgument(0, new Reference('phpdish_theme.templating_locator'))
+            ->replaceArgument(1, new Reference('phpdish_theme.templating.name_parser'))
+            ->addMethodCall('setThemeManager', [new Reference('phpdish_theme.theme_manager')]);
     }
 }

@@ -33,9 +33,9 @@ services:
         tags: [{name: kernel.cache_warmer, priority: 20}]
 
     # 替换twig bundle默认的
-    phpdish_theme.twig.loader.filesystem:
-        class: PHPDish\Bundle\ThemeBundle\Twig\FilesystemLoader
-        arguments: ['@phpdish_theme.templating_locator', '@phpdish_theme.templating.name_parser']
-        calls:
-           - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
-        tags: ['twig.loader']
+#    phpdish_theme.twig.loader.filesystem:
+#        class: PHPDish\Bundle\ThemeBundle\Twig\FilesystemLoader
+#        arguments: ['@phpdish_theme.templating_locator', '@phpdish_theme.templating.name_parser']
+#        calls:
+#           - {method: setThemeManager, arguments: ['@phpdish_theme.theme_manager']}
+#        tags: ['twig.loader']

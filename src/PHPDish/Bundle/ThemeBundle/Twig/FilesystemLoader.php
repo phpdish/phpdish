@@ -56,11 +56,10 @@ class FilesystemLoader extends BaseFilesystemLoader
         $previous = null;
 
         try {
-            $template = $this->parser->parse($template);
-            $file = $this->locator->locate($template);
+            $templateReference  = $this->parser->parse($template);
+            $file = $this->locator->locate($templateReference);
         } catch (\Exception $e) {
             $previous = $e;
-
             // for BC
             try {
                 $file = parent::findTemplate((string) $template);
