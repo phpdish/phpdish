@@ -1,11 +1,11 @@
 # 核心路由
-phpdish_core:
+phpdish_kernel:
     resource: '@PHPDishCoreBundle/Resources/config/routing.yml'
 
 # 前台路由
-phpdish_main:
+phpdish_frontend:
     resource: '@PHPDishWebBundle/Resources/config/routing.yml'
 
 # 后台路由
-phpdish_admin:
+phpdish_secured:
     resource: '@PHPDishAdminBundle/Resources/config/routing.yml'

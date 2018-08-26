@@ -26,7 +26,7 @@ services:
 
     phpdish_media.twig_extension:
         class: PHPDish\Bundle\MediaBundle\Twig\MediaExtension
-        arguments: ['@service_container', '%cdn.host%']
+        arguments: ['@service_container', '']
         tags: ['twig.extension']
 
     ## CDN 处理

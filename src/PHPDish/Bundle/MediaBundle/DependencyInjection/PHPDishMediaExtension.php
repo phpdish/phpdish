@@ -39,6 +39,8 @@ class PHPDishMediaExtension extends Extension
         $imagineResolver->replaceArgument('$cachePrefix', $config['imagine_resolver']['cache_prefix']);
         $imagineResolver->replaceArgument('$baseUrl', $config['imagine_resolver']['cdn_host']);
 
+        //process twig extension
+        $container->findDefinition('phpdish_media.twig_extension')->replaceArgument(1, $config['imagine_resolver']['cdn_host']);
         // process media mapping
         $this->processMediaMapping($config, $container);
 

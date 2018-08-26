@@ -45,11 +45,11 @@ framework:
     http_method_override: true
     assets:
         packages:
-            default:
-                base_urls: '%cdn.host%'
+            web:
+                base_urls: '%cdn.host.web%'
                 json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
             admin:
-                base_urls: '%cdn.host%'
+                base_urls: '%cdn.host.admin%'
                 json_manifest_path: '%kernel.project_dir%/web/build_admin/manifest.json'
     php_errors:
         log: true

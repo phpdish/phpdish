@@ -2,8 +2,6 @@
 
 namespace PHPDish\Bundle\CoreBundle\DependencyInjection;
 
-use PHPDish\Bundle\CoreBundle\Plugin\Finder\PluginFinder;
-use PHPDish\Bundle\CoreBundle\Plugin\PluginManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,7 +22,25 @@ class PHPDishCoreExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        //polyfill
+        if (!$container->hasParameter('cdn.host')) {
+            $container->setParameter('cdn.host', $config['assets']['web']['cdn_host']);
+        }
+        if (!$container->hasParameter('cdn.host.web')) {
+            $container->setParameter('cdn.host', $config['assets']['web']['cdn_host']);
+        }
+        if (!$container->hasParameter('cdn.host.admin')) {
+            $container->setParameter('cdn.host', $config['assets']['admin']['cdn_host']);
+        }
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'phpdish_core';
     }
 }

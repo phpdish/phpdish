@@ -1,6 +1,7 @@
 imports:
    - {resource: '@PHPDishCmsBundle/Resources/config/config.yml'}
    - {resource: '@PHPDishMediaBundle/Resources/config/config.yml'}
+   - {resource: 'resources.yml'}
    - {resource: 'phpdish.yml'}
 
 doctrine:
@@ -164,17 +165,6 @@ liip_imagine:
                 thumbnail: { size: [220, 300], mode: outbound }
                 background: { size: [220, 300], position: center, color: '#ffffff' }
 
-phpdish_media:
-    imagine_resolver:
-         cdn_host: '%cdn.host%'
-    mappings:
-        avatar:
-            filesystem_service: phpdish_media.filesystem.avatar
-            base_url: '%app.path.avatar%'
-        uploads:
-            filesystem_service: phpdish_media.filesystem.uploads
-            base_url: '%app.path.uploads%'
-    default_mapping: uploads
 
 # 文件上传
 oneup_uploader:
@@ -189,22 +179,7 @@ oneup_uploader:
             frontend: plupload
             use_orphanage: false
 
-## 用户
-phpdish_user:
-    avatar_downloader: 'phpdish_media.file_downloader.avatar'
 
-# 支付
-phpdish_payment:
-    youzan:
-      client_id: '%youzan.client_id%'
-      client_secret: '%youzan.client_secret%'
-      kdt_id: '%youzan.kdt_id%'
-
-# 多主题
-phpdish_theme:
-   current_theme: '%theme.current_theme%'
-   theme_directory: '%kernel.project_dir%/themes'
-   namespaces: ['PHPDishWebBundle']
 
 # 社交网站登录
 hwi_oauth:
@@ -253,7 +228,3 @@ sonata_seo:
 #    context: phpdish_core.theme.context.generic
 #    sources:
 #        filesystem: ~
-
-## 资源处理，见 phpdish.yml
-phpdish_resource:
-    templates_namespace: PHPDishWebBundle

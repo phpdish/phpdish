@@ -1,53 +1,42 @@
+## 媒体处理bundle
+
+phpdish_media:
+    imagine_resolver:
+         cdn_host: '%cdn.host.web%'
+    mappings:
+        avatar:
+            filesystem_service: phpdish_media.filesystem.avatar
+            base_url: '%app.path.avatar%'
+        uploads:
+            filesystem_service: phpdish_media.filesystem.uploads
+            base_url: '%app.path.uploads%'
+    default_mapping: uploads
+    
+## 用户
 phpdish_user:
-    resources:
-        user:
-            model: PHPDish\Bundle\CoreBundle\Model\User
-        profile:
-            model: PHPDish\Bundle\CoreBundle\Model\Profile
-        point_history:
-            model: PHPDish\Bundle\CoreBundle\Model\PointHistory
-
-
-phpdish_chat:
-    resources:
-        message:
-            model: PHPDish\Bundle\CoreBundle\Model\Message
-        message_metadata:
-            model: PHPDish\Bundle\CoreBundle\Model\MessageMetadata
-        message_thread:
-            model: PHPDish\Bundle\CoreBundle\Model\MessageThread
-        message_thread_metadata:
-            model: PHPDish\Bundle\CoreBundle\Model\MessageThreadMetadata
-
-phpdish_post:
-    resources:
-        post:
-            model: PHPDish\Bundle\CoreBundle\Model\Post
-        category:
-            model: PHPDish\Bundle\CoreBundle\Model\Category
-        comment:
-            model: PHPDish\Bundle\CoreBundle\Model\Comment
-
-phpdish_forum:
-    resources:
-        topic:
-            model: PHPDish\Bundle\CoreBundle\Model\Topic
-        thread:
-            model: PHPDish\Bundle\CoreBundle\Model\TopicThread
-        reply:
-            model: PHPDish\Bundle\CoreBundle\Model\TopicReply
-
+    avatar_downloader: 'phpdish_media.file_downloader.avatar'
+    
+# 支付
 phpdish_payment:
-    resources:
-        payment:
-            model: PHPDish\Bundle\CoreBundle\Model\Payment
-        wallet:
-            model: PHPDish\Bundle\CoreBundle\Model\Wallet
+    youzan:
+      client_id: '%youzan.client_id%'
+      client_secret: '%youzan.client_secret%'
+      kdt_id: '%youzan.kdt_id%'
 
+# 多主题
+phpdish_theme:
+   current_theme: '%theme.current_theme%'
+   theme_directory: '%kernel.project_dir%/themes'
+   namespaces: ['PHPDishWebBundle']
+   
+## 资源处理，见 phpdish.yml
+phpdish_resource:
+    templates_namespace: PHPDishWebBundle
 
-phpdish_notification:
-    resources:
-        notification:
-            model: PHPDish\Bundle\CoreBundle\Model\Notification
-        notification_metadata:
-            model: PHPDish\Bundle\CoreBundle\Model\NotificationMetadata
+## 运营核心
+phpdish_core:
+    assets:
+        web:
+            cdn_host: '%cdn.host.web%'
+        admin:
+            cdn_host: '%cdn.host.admin%'
