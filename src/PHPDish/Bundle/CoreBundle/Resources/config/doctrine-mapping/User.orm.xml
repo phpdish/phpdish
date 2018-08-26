@@ -16,7 +16,7 @@
 
     <one-to-many field="categories" target-entity="PHPDish\Bundle\PostBundle\Model\CategoryInterface" mapped-by="creator" fetch="LAZY"/>
 
-    <many-to-many field="roles" target-entity="PHPDish\Bundle\Permission\Model\UserInterface" inversed-by="users" fetch="EXTRA_LAZY">
+    <many-to-many field="userRoles" target-entity="PHPDish\Bundle\PermissionBundle\Model\RoleInterface" inversed-by="users" fetch="EXTRA_LAZY">
       <join-table name="users_roles">
         <join-columns>
           <join-column name="user_id" referenced-column-name="id"/>

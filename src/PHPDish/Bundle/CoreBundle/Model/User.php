@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\CoreBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PHPDish\Bundle\PermissionBundle\Model\PrivilegerInterface;
+use PHPDish\Bundle\PermissionBundle\Model\RoleInterface;
 use PHPDish\Bundle\PostBundle\Model\CategoryInterface;
 use PHPDish\Bundle\UserBundle\Model\User as BaseUser;
 
@@ -68,6 +69,11 @@ class User extends BaseUser implements PrivilegerInterface
      * @var string
      */
     protected $locale;
+
+    /**
+     * @var RoleInterface[]|string
+     */
+    protected $userRoles;
 
     public function __construct()
     {
