@@ -1,4 +1,9 @@
 services:
+  _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
   phpdish.admin.user:
         class: PHPDish\Bundle\AdminBundle\Admin\UserAdmin
         arguments: [~, PHPDish\Bundle\CoreBundle\Model\User, ~]
@@ -63,3 +68,9 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: menu.friend_link, group: 'phpdish.admin.group.site' }
         public: true
+
+  phpdish_admin.grid_source_factory:
+      class: PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactory
+
+  PHPDish\Bundle\AdminBundle\DataGrid\:
+        resource: '../../DataGrid'

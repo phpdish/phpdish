@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * This file is part of the phpdish/phpdish
+ *
+ * (c) Slince <taosikai@yeah.net>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace PHPDish\Bundle\AdminBundle\DependencyInjection;
 
+use PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,5 +34,9 @@ class PHPDishAdminExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        //注册
+        $container->registerForAutoconfiguration(GridSourceFactoryInterface::class)
+            ->addTag('admin.grid_source_factory');
     }
 }
