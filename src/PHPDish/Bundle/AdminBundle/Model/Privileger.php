@@ -9,10 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle;
+namespace PHPDish\Bundle\AdminBundle\Model;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class PHPDishAdminBundle extends Bundle
+interface Privileger
 {
+    /**
+     * 获取角色
+     *
+     * @return RoleInterface[]
+     */
+    public function getRoles();
 }

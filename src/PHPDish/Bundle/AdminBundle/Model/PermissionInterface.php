@@ -9,10 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace PHPDish\Bundle\AdminBundle;
+namespace PHPDish\Bundle\AdminBundle\Model;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class PHPDishAdminBundle extends Bundle
+interface PermissionInterface
 {
+    public function getId();
+
+    public function getName();
+
+    public function getRoute();
 }
