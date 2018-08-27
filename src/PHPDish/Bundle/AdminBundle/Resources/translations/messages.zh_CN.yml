@@ -107,11 +107,15 @@ user:
     email: 邮箱
     username: 用户名
     avatar: 头像
+    gender: 性别
+    created_at: 注册时间
     last_login: 上次登录
-    enabled: 是否启用
+    enabled: 是否合法用户
     roles: 角色
     select_roles: 请选择角色
     _action: 操作
+    action:
+        show: 查看
 
 wallet:
     user: 用户名

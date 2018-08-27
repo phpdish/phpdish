@@ -11,6 +11,8 @@
 
 namespace PHPDish\Bundle\AdminBundle\DataGrid;
 
+use APY\DataGridBundle\Grid\Action\RowAction;
+use APY\DataGridBundle\Grid\GridBuilder;
 use APY\DataGridBundle\Grid\Source\Entity;
 use PHPDish\Bundle\CoreBundle\Model\User;
 
@@ -29,21 +31,40 @@ class UserFactory extends AbstractGridFactory
             'sortable'     => false,
             'max_per_page' => 20,
         ]);
-        $grid = $gridBuilder
+        $this->addColumns($gridBuilder);
+        $this->addFilters($gridBuilder);
+        return $gridBuilder->getGrid();
+    }
+
+    protected function addFilters(GridBuilder $gridBuilder)
+    {
+    }
+
+    protected function addColumns(GridBuilder $gridBuilder)
+    {
+        $rowAction = new RowAction('user.action.show', 'admin_user_show');
+        $gridBuilder
             ->add('id','number', [
                 'primary' => 'true',
             ])
             ->add('username', 'text', [
-                'title' => '用户名'
+                'title' => 'user.username'
             ])
             ->add('gender', 'boolean', [
-                'title' => '性别'
+                'title' => 'user.gender',
+                'size' => -1
             ])
-            ->add('avatar', '', [
-                'title' => '头像'
+            ->add('createdAt', 'datetime', [
+                'title' => 'user.created_at'
             ])
-            ->getGrid();
-        return $grid;
+            ->add('lastLogin', 'datetime', [
+                'title' => 'user.last_login'
+            ])
+            ->add('enabled', 'boolean', [
+                'title' => 'user.enabled',
+                'size' => -1
+            ])
+            ->addAction($rowAction);
     }
 
     /**
