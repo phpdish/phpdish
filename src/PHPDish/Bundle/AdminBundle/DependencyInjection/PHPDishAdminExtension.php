@@ -37,6 +37,6 @@ class PHPDishAdminExtension extends Extension
 
         //注册
         $container->registerForAutoconfiguration(GridFactoryInterface::class)
-            ->addTag('admin.grid_source_factory');
+            ->addTag('admin.grid_factory');
     }
 }

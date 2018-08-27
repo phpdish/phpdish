@@ -34,7 +34,7 @@ class GridFactory
      * ]
      * @var GridFactoryInterface[]
      */
-    protected $factory;
+    protected $factory = [];
 
     /**
      * @var Grid

@@ -11,8 +11,14 @@
 
 namespace PHPDish\Bundle\AdminBundle;
 
+use PHPDish\Bundle\AdminBundle\DependencyInjection\Compiler\RegisterGridSourcePass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PHPDishAdminBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new RegisterGridSourcePass());
+    }
 }

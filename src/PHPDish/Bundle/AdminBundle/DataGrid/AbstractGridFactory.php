@@ -12,6 +12,7 @@
 namespace PHPDish\Bundle\AdminBundle\DataGrid;
 
 use APY\DataGridBundle\Grid\Grid;
+use APY\DataGridBundle\Grid\GridFactoryInterface as APYGridFactoryInterface;
 
 abstract class AbstractGridFactory implements GridFactoryInterface
 {
@@ -20,8 +21,14 @@ abstract class AbstractGridFactory implements GridFactoryInterface
      */
     protected $grid;
 
-    public function __construct(Grid $grid)
+    /**
+     * @var APYGridFactoryInterface
+     */
+    protected $gridFactory;
+
+    public function __construct(Grid $grid, APYGridFactoryInterface $gridFactory)
     {
         $this->grid = $grid;
+        $this->gridFactory = $gridFactory;
     }
 }

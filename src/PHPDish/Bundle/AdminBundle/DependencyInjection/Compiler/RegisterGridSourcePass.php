@@ -22,9 +22,9 @@ class RegisterGridSourcePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $serviceIds = $container->findTaggedServiceIds('admin.grid_source_factory');
+        $serviceIds = $container->findTaggedServiceIds('admin.grid_factory');
 
-        $gridSourceFactory = $container->findDefinition('phpdish_admin.grid_source_factory');
+        $gridSourceFactory = $container->findDefinition('phpdish_admin.grid_factory');
         foreach ($serviceIds as $id => $tags) {
             $class = $container->findDefinition($id)
                 ->getClass();
