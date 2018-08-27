@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\AdminBundle\DependencyInjection;
 
-use PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactoryInterface;
+use PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -36,7 +36,7 @@ class PHPDishAdminExtension extends Extension
         $loader->load('services.yml');
 
         //注册
-        $container->registerForAutoconfiguration(GridSourceFactoryInterface::class)
+        $container->registerForAutoconfiguration(GridFactoryInterface::class)
             ->addTag('admin.grid_source_factory');
     }
 }

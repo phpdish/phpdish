@@ -11,14 +11,15 @@
 
 namespace PHPDish\Bundle\AdminBundle\DataGrid;
 
+use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Source\Entity;
 
-interface GridSourceFactoryInterface
+interface GridFactoryInterface
 {
     /**
      * 创建grid源工厂
      *
-     * @return Entity
+     * @return Grid
      */
     public function factory();
 

@@ -16,7 +16,7 @@ use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry;
 
-class GridSourceFactory
+class GridFactory
 {
     /**
      * @var ResourceRegistry
@@ -32,7 +32,7 @@ class GridSourceFactory
      * [
      *     'PHPDish\Bundle\UserBundle\UserInterface' => 'phpdish_admin.source_factory.user'
      * ]
-     * @var GridSourceFactoryInterface[]
+     * @var GridFactoryInterface[]
      */
     protected $factory;
 
@@ -55,35 +55,24 @@ class GridSourceFactory
      * 获取grid source
      *
      * @param string $sourceClass
-     * @return Entity
+     * @return Grid
      * @throws \ReflectionException
      */
     public function get($sourceClass)
     {
         if (isset($this->factory[$sourceClass])) {
             $factory = $this->factory[$sourceClass];
-            $source = $factory->factory();
+            $grid = $factory->factory();
         } else {
             $reflection = new \ReflectionClass($sourceClass);
             if (!$reflection->isInstantiable()) {
                 throw new \InvalidArgumentException(sprintf('The "%s" cannot be instantiated'));
             }
             $source = new Entity($sourceClass);
+            $this->grid->setSource($source);
+            $grid = $this->grid;
         }
-        return $source;
-    }
-
-    /**
-     * 获取 grid
-     * @param string $sourceClass
-     * @return Grid
-     * @throws \ReflectionException
-     */
-    public function grid($sourceClass)
-    {
-        $source = $this->get($sourceClass);
-        $this->grid->setSource($source);
-        return $this->grid;
+        return $grid;
     }
 
     public function addFactory($sourceClass, $factory)

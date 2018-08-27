@@ -11,15 +11,18 @@
 
 namespace PHPDish\Bundle\AdminBundle\Controller;
 
-use PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactory;
+use PHPDish\Bundle\AdminBundle\DataGrid\GridFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AdminController extends Controller
 {
-    protected $sourceFactory;
+    /**
+     * @var GridFactory
+     */
+    protected $gridFactory;
 
-    public function __construct(GridSourceFactory $sourceFactory)
+    public function __construct(GridFactory $gridFactory)
     {
-        $this->sourceFactory = $sourceFactory;
+        $this->gridFactory = $gridFactory;
     }
 }

@@ -14,14 +14,21 @@ namespace PHPDish\Bundle\AdminBundle\DataGrid;
 use APY\DataGridBundle\Grid\Source\Entity;
 use PHPDish\Bundle\CoreBundle\Model\User;
 
-class UserSourceFactory implements GridSourceFactoryInterface
+class UserFactory extends AbstractGridFactory
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function factory()
     {
-        return new Entity(self::getSourceClass());
+        $source = new Entity(self::getSourceClass());
+        $this->grid->setSource($source);
+
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSourceClass()
     {
         return User::class;
