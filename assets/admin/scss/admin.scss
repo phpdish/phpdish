@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Grid
+------------------------------------*/
+
+.grid{
+  @extend .box;
+  .grid_header{
+    @extend .box-header
+  }
+  .grid_body{
+    @extend .box-body;
+  }
+  .grid_footer{
+    @extend .box-footer
+  }
+}

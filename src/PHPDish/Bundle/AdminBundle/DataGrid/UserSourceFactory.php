@@ -16,6 +16,7 @@ use PHPDish\Bundle\CoreBundle\Model\User;
 
 class UserSourceFactory implements GridSourceFactoryInterface
 {
+
     public function factory()
     {
         return new Entity(self::getSourceClass());

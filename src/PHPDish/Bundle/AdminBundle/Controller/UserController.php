@@ -11,21 +11,18 @@
 
 namespace PHPDish\Bundle\AdminBundle\Controller;
 
-use PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactory;
 use PHPDish\Bundle\CoreBundle\Model\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AdminController
 {
     /**
+     * 用户管理列表
      * @Route("/users", name="admin_user_index")
      */
-    public function index()
+    public function indexAction()
     {
         $grid = $this->sourceFactory->grid(User::class);
-        return $this->render('PHPDishAdminBundle:User:index.html.twig', [
-            'grid' => $grid
-        ]);
+        return $grid->getGridResponse('PHPDishAdminBundle:User:index.html.twig');
     }
 }

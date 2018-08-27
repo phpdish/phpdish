@@ -13,7 +13,7 @@ namespace PHPDish\Bundle\AdminBundle\DataGrid;
 
 use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry;
 
 class GridSourceFactory
@@ -43,7 +43,7 @@ class GridSourceFactory
 
     public function __construct(
         ResourceRegistry $resourceRegistry,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         Grid $grid
     ) {
         $this->resourceRegistry = $resourceRegistry;

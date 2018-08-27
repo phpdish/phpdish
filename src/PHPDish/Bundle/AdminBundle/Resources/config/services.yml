@@ -71,6 +71,13 @@ services:
 
   phpdish_admin.grid_source_factory:
       class: PHPDish\Bundle\AdminBundle\DataGrid\GridSourceFactory
+      arguments:
+         $grid: '@grid'
 
   PHPDish\Bundle\AdminBundle\DataGrid\:
         resource: '../../DataGrid'
+        exclude: '../../DataGrid/{GridSourceFactory}.php'
+
+  PHPDish\Bundle\AdminBundle\Controller\:
+        resource: '../../Controller'
+
