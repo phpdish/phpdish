@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\AdminBundle\DependencyInjection;
 use PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -22,8 +23,20 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class PHPDishAdminExtension extends Extension
+class PHPDishAdminExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $container->prependExtensionConfig('twig', [
+            'globals' => [
+                'admin_breadcrumb' => '@phpdish_admin.twig_breadcrumb'
+            ]
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */

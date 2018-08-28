@@ -81,3 +81,11 @@ services:
   PHPDish\Bundle\AdminBundle\Controller\:
         resource: '../../Controller'
 
+  # 管理员扩展
+  phpdish_admin.twig_breadcrumb:
+        class: PHPDish\Bundle\AdminBundle\Twig\Breadcrumb
+
+  phpdish_admin.twig_extension.admin:
+       class: PHPDish\Bundle\AdminBundle\Twig\AdminExtension
+       tags: ['twig.extension']
+

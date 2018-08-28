@@ -1,3 +1,11 @@
+admin:
+    page:
+        title: PHPDish管理后台
+    homepage: 首页
+    user:
+        management: 用户管理
+        index: 用户列表
+
 menu:
     user: 用户
     wallet: 钱包

@@ -23,6 +23,7 @@ class UserController extends AdminController
      */
     public function indexAction()
     {
+        $this->breadcrumb->push('admin.user.index');
         $grid = $this->gridFactory->get(User::class);
         return $grid->getGridResponse('PHPDishAdminBundle:User:index.html.twig');
     }

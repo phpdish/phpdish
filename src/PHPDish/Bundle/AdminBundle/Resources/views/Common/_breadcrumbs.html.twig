@@ -1,0 +1,15 @@
+{% if breadcrumb.count %}
+    <ol class="breadcrumb">
+        {% for bread in breadcrumb.all %}
+            {% if loop.last %}
+                <li class="active">{{ bread.title|trans }}</li>
+            {% else %}
+                {% if bread.route %}
+                    <li><a href="{{ path(bread.route, bread.routeParameters) }}">{{ bread.title|trans }}</a></li>
+                {% else %}
+                    <li>{{ bread.title|trans }}</li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endif %}
