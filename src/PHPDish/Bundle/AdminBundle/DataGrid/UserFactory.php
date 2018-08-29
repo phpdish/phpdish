@@ -27,8 +27,8 @@ class UserFactory extends AbstractGridFactory
         $gridBuilder = $this->gridFactory->createBuilder('grid', $source, [
             'persistence'  => true,
             'route'=> 'admin_user_index',
-            'filterable'   => true,
-            'sortable'     => true,
+            'filterable'=> true,
+            'sortable' => true,
             'max_per_page' => 20,
         ]);
         $this->addColumns($gridBuilder);

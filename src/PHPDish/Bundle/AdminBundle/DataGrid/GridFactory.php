@@ -15,6 +15,7 @@ use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class GridFactory
 {
@@ -27,6 +28,11 @@ class GridFactory
      * @var EntityManager
      */
     protected $entityManager;
+
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
 
     /**
      * [
@@ -44,10 +50,12 @@ class GridFactory
     public function __construct(
         ResourceRegistry $resourceRegistry,
         EntityManagerInterface $entityManager,
+        RequestStack $requestStack,
         Grid $grid
     ) {
         $this->resourceRegistry = $resourceRegistry;
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
         $this->grid = $grid;
     }
 
@@ -72,6 +80,9 @@ class GridFactory
             $this->grid->setSource($source);
             $grid = $this->grid;
         }
+        //handle request
+        $grid->handleRequest($this->requestStack->getCurrentRequest());
+        dump($grid->getColumns());
         return $grid;
     }
 

@@ -8,5 +8,8 @@
 {% endblock %}
 
 {% block content %}
-    {{ grid(grid) }}
+    {{ grid_search(grid) }}
+    {{ grid(grid, _self) }}
 {% endblock %}
+
+{% block grid_filters %}{% endblock %}
