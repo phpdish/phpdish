@@ -82,7 +82,7 @@ class GridFactory
         }
         //handle request
         $grid->handleRequest($this->requestStack->getCurrentRequest());
-        dump($grid->getColumns());
+//        dump($grid->getColumns());
         return $grid;
     }
 

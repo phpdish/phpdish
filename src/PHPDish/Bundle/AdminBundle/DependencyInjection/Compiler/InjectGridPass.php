@@ -15,12 +15,20 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RegisterGridSourcePass implements CompilerPassInterface
+class InjectGridPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
+    {
+        //注册grid factory
+        $this->registerGridFactory($container);
+        //替换grid extension
+//        $container->findDefinition('');
+    }
+
+    protected function registerGridFactory(ContainerBuilder $container)
     {
         $serviceIds = $container->findTaggedServiceIds('admin.grid_factory');
 

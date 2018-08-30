@@ -1,3 +1,7 @@
+parameters:
+    # 替换原有的extension class
+    grid.twig_extension.class: PHPDish\Bundle\AdminBundle\Twig\DataGridExtension
+
 services:
   _defaults:
         autoconfigure: true
