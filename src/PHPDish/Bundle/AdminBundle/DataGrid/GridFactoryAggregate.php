@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\ResourceBundle\Metadata\ResourceRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class GridFactory
+class GridFactoryAggregate
 {
     /**
      * @var ResourceRegistry
@@ -81,7 +81,7 @@ class GridFactory
             $grid = $this->grid;
         }
         //handle request
-        $grid->handleRequest($this->requestStack->getCurrentRequest());
+//        $grid->handleRequest($this->requestStack->getCurrentRequest());
 //        dump($grid->getColumns());
         return $grid;
     }

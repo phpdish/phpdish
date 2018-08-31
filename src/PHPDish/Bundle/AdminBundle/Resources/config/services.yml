@@ -74,13 +74,13 @@ services:
         public: true
 
   phpdish_admin.grid_factory:
-      class: PHPDish\Bundle\AdminBundle\DataGrid\GridFactory
+      class: PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryAggregate
       arguments:
          $grid: '@grid'
 
   PHPDish\Bundle\AdminBundle\DataGrid\:
         resource: '../../DataGrid'
-        exclude: '../../DataGrid/{GridFactory, AbstractGridFactory}.php'
+        exclude: '../../DataGrid/{GridFactoryAggregate, AbstractGridFactory}.php'
 
   PHPDish\Bundle\AdminBundle\Controller\:
         resource: '../../Controller'

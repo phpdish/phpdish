@@ -1,27 +1,29 @@
 {# ------------------------------------------------------ grid ------------------------------------------------------ #}
 {% block grid %}
-    <div class="grid">
+    <div class="box box-info">
         {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is same as (false) %}
             <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
-                <div class="grid_header">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
                     {% if grid.massActions|length > 0 %}
                         {{ grid_actions(grid) }}
                     {% endif %}
                 </div>
-                <div class="grid_body">
+                <div class="box-body">
+                    {% if grid.isFilterSectionVisible %}
+                        {{ grid_search(grid) }}
+                    {% endif %}
                     <div class="table-responsive data-table-wrapper">
                         <table class="table table-hover">
                             {% if grid.isTitleSectionVisible %}
                                 {{ grid_titles(grid) }}
                             {% endif %}
-                            {% if grid.isFilterSectionVisible %}
-                                {{ grid_filters(grid) }}
-                            {% endif %}
+                            {{ dump(grid.getRows()) }}
                             {{ grid_rows(grid) }}
                         </table>
                     </div>
                 </div>
-                <div class="grid_footer">
+                <div class="box-footer">
                     {% if grid.isPagerSectionVisible %}
                         {{ grid_pager(grid) }}
                     {% endif %}
@@ -110,19 +112,19 @@
 {% block grid_search %}
     {% if grid.isFilterSectionVisible %}
         <div class="grid-search">
-            <form id="{{ grid.hash }}_search" action="{{ grid.routeUrl }}" method="post">
-                {% for column in grid.columns %}
-                    {% if column.isFilterable and column.type not in ['actions', 'massaction'] %}
-                        {% if column.usePrefixTitle == true %}
-                            {% set columnTitle = grid.prefixTitle ~ column.title %}
-                        {% else %}
-                            {% set columnTitle = column.title %}
-                        {% endif %}
-                        <div class="{{ cycle(['odd', 'even'], loop.index) }}"><label>{{ columnTitle|trans }}</label>{{ grid_filter(column, grid, false)|raw }}</div>
+            {#<form id="{{ grid.hash }}_search" action="{{ grid.routeUrl }}" method="post">#}
+            {% for column in grid.columns %}
+                {% if column.isFilterable and column.type not in ['actions', 'massaction'] %}
+                    {% if column.usePrefixTitle == true %}
+                        {% set columnTitle = grid.prefixTitle ~ column.title %}
+                    {% else %}
+                        {% set columnTitle = column.title %}
                     {% endif %}
-                {% endfor %}
-                <div class="grid-search-action"><input type="submit" class="grid-search-submit" value="{{ 'Search'|trans }}"/><input type="button" class="grid-search-reset" value="{{ 'Reset'|trans }}" onclick="return {{ grid.hash }}_reset();"/></div>
-            </form>
+                    <div class="{{ cycle(['odd', 'even'], loop.index) }}"><label>{{ columnTitle|trans }}</label>{{ grid_filter(column, grid, false)|raw }}</div>
+                {% endif %}
+            {% endfor %}
+            <div class="grid-search-action"><input type="submit" class="grid-search-submit" value="{{ 'Search'|trans }}"/><input type="button" class="grid-search-reset" value="{{ 'Reset'|trans }}" onclick="return {{ grid.hash }}_reset();"/></div>
+            {#</form>#}
         </div>
     {% endif %}
 {% endblock grid_search %}
