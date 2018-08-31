@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 interface GridInterface
 {
     /**
+     * 最大结果集
+     * @var int
+     */
+    const MAX_RESULTS_NUM = 20;
+
+    /**
      * apply request
      * @param Request $request
      * @return self

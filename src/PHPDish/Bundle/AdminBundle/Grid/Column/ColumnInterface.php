@@ -11,8 +11,17 @@
 
 namespace PHPDish\Bundle\AdminBundle\Grid\Column;
 
+use PHPDish\Bundle\AdminBundle\Grid\Filter\FilterInterface;
+
 interface ColumnInterface
 {
+    /**
+     * 获取列名
+     *
+     * @return string
+     */
+    public function getName();
+
     /**
      * @return bool
      */
@@ -24,9 +33,16 @@ interface ColumnInterface
     public function isFilterable();
 
     /**
-     * 获取过滤操作符
+     * 获取筛选项
      *
-     * @return string
+     * @return FilterInterface[]
      */
-    public function getFilterOperator();
+    public function getFilters();
+
+    /**
+     * 添加筛选项
+     *
+     * @param FilterInterface $filter
+     */
+    public function addFilter(FilterInterface $filter);
 }

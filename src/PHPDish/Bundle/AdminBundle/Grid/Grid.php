@@ -12,6 +12,7 @@
 namespace PHPDish\Bundle\AdminBundle\Grid;
 
 use PHPDish\Bundle\AdminBundle\Grid\Column\ColumnInterface;
+use PHPDish\Bundle\AdminBundle\Grid\Source\SourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class Grid implements GridInterface
@@ -35,6 +36,11 @@ class Grid implements GridInterface
      * @var Factory
      */
     protected $factory;
+
+    /**
+     * @var SourceInterface
+     */
+    protected $source;
 
     public function __construct(Factory $factory)
     {
@@ -72,6 +78,6 @@ class Grid implements GridInterface
     }
     protected function applySource()
     {
-
+        $this->source->fetchSource($this->columns);
     }
 }
