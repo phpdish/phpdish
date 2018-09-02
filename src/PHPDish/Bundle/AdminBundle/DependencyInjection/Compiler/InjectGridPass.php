@@ -23,7 +23,7 @@ class InjectGridPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         //注册grid factory
-        $this->registerGridFactory($container);
+//        $this->registerGridFactory($container);
         //替换grid extension
 //        $container->findDefinition('');
     }

@@ -68,7 +68,7 @@ abstract class Kernel extends HttpKernel
             new \Sonata\BlockBundle\SonataBlockBundle(),
 
             //Data grid
-            new \APY\DataGridBundle\APYDataGridBundle(),
+//            new \APY\DataGridBundle\APYDataGridBundle(),
 
             //PHPDish bundles
             new \PHPDish\Bundle\ResourceBundle\PHPDishResourceBundle(),

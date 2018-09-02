@@ -12,13 +12,28 @@
 namespace PHPDish\Bundle\AdminBundle;
 
 use PHPDish\Bundle\AdminBundle\DependencyInjection\Compiler\InjectGridPass;
+use PHPDish\Bundle\AdminBundle\DependencyInjection\PHPDishAdminExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PHPDishAdminBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new InjectGridPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainerExtension()
+    {
+        if (null === $this->extension) {
+            $this->extension = new PHPDishAdminExtension();
+        }
+        return $this->extension;
     }
 }

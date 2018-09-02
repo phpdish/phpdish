@@ -30,16 +30,25 @@ interface GridInterface
     public function handleRequest(Request $request);
 
     /**
-     * 渲染当前grid
-     * @param string|null $template
-     * @return string
-     */
-    public function render($template = null);
-
-    /**
      * 获取列
      *
      * @return ColumnInterface[]
      */
     public function getColumns();
+
+    /**
+     * 判断是否有列
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function hasColumn($name);
+
+    /**
+     * 获取指定列
+     *
+     * @param string $name
+     * @return ColumnInterface
+     */
+    public function getColumn($name);
 }

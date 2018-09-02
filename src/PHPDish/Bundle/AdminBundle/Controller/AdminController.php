@@ -27,9 +27,10 @@ class AdminController extends Controller
      */
     protected $breadcrumb;
 
-    public function __construct(GridFactoryAggregate $gridFactory, Breadcrumb $breadcrumb)
+    public function __construct(Breadcrumb $breadcrumb)
     {
-        $this->gridFactory = $gridFactory;
-        $this->breadcrumb = $breadcrumb;
+        //GridFactoryAggregate $gridFactory,
+//        $this->gridFactory = $gridFactory;
+//        $this->breadcrumb = $breadcrumb;
     }
 }

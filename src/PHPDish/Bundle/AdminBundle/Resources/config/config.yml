@@ -219,5 +219,5 @@ sonata_admin:
 
 
 # 覆盖默认的grid table
-apy_data_grid:
-    theme: 'PHPDishAdminBundle::blocks.html.twig'
+#apy_data_grid:
+#    theme: 'PHPDishAdminBundle::blocks.html.twig'

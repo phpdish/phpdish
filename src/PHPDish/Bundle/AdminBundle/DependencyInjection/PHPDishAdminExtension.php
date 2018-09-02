@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\AdminBundle\DependencyInjection;
 
-use PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryInterface;
+use PHPDish\Bundle\AdminBundle\GridFactory\GridFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -45,8 +45,11 @@ class PHPDishAdminExtension extends Extension implements PrependExtensionInterfa
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('grid.base_template', $config['grid_template']);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('grids.yml');
 
         //注册
         $container->registerForAutoconfiguration(GridFactoryInterface::class)

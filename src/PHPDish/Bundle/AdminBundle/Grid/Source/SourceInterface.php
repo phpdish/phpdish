@@ -19,6 +19,8 @@ interface SourceInterface
      * 获取数据
      *
      * @param ColumnInterface[] $columns
+     * @param int $offset
+     * @param int $limit
      * @return object
      */
     public function loadSource(array $columns, $offset, $limit);

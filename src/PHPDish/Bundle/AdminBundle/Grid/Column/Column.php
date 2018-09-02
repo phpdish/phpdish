@@ -11,38 +11,97 @@
 
 namespace PHPDish\Bundle\AdminBundle\Grid\Column;
 
+use PHPDish\Bundle\AdminBundle\Grid\Filter\FilterInterface;
+
 class Column implements ColumnInterface
 {
+    protected $name;
+
+    protected $type;
+
     protected $sortable = true;
 
     protected $filterable = true;
-
-    protected $type;
 
     /**
      * @var string
      */
     protected $operator;
 
-    public function __construct($sortable, $filterable, $operator = null)
+    /**
+     * @var FilterInterface[]
+     */
+    protected $filters;
+
+    public function __construct($name, $type, $sortable = true)
     {
+        $this->name = $name;
+        $this->type = $type;
         $this->sortable = $sortable;
-        $this->filterable = $filterable;
-        $this->operator = $operator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isFilterable()
     {
         return $this->filterable;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isSortable()
     {
         return $this->sortable;
     }
 
-    public function getFilterOperator()
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
     {
-        return $this->operator;
+        return $this->filters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->filters[] = $filter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilterByOperator($operator)
+    {
+        //如果只有一个filter，则operator可以忽略
+        if ($operator === null && count($this->filters) === 1) {
+            return $this->filters[0];
+        }
+        foreach ($this->filters as $filter) {
+            if ($filter->getOperator() === $operator) {
+                return $filter;
+            }
+        }
+        return null;
     }
 }

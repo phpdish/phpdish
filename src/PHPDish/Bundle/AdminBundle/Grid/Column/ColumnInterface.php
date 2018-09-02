@@ -23,6 +23,13 @@ interface ColumnInterface
     public function getName();
 
     /**
+     * 获取类型
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
      * @return bool
      */
     public function isSortable();
@@ -38,6 +45,14 @@ interface ColumnInterface
      * @return FilterInterface[]
      */
     public function getFilters();
+
+    /**
+     * 根据operator获取filter
+     *
+     * @param string $operator
+     * @return FilterInterface|null
+     */
+    public function getFilterByOperator($operator);
 
     /**
      * 添加筛选项

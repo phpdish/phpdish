@@ -21,14 +21,37 @@ class InputFilter extends AbstractFilter
      */
     protected $value;
 
+    public function __construct($operator)
+    {
+        $this->operator = $operator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getComparison()
     {
         $this->assertComparable();
         return new Comparison($this->column->getName(), $this->operator, $this->value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initialize($data)
+    {
+        $this->value = $data['value'];
+        // input filter 允许自己调整operator
+        if (isset($data['operator'])) {
+            $this->operator = $data['operator'];
+        }
     }
 }

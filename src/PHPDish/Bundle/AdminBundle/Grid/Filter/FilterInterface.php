@@ -37,4 +37,10 @@ interface FilterInterface
      * @return Expr\Comparison
      */
     public function getComparison();
+
+    /**
+     * 初始化filter
+     * @param array $data
+     */
+    public function initialize($data);
 }
