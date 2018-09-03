@@ -87,7 +87,7 @@ class ORM implements SourceInterface
         $this->initialize();
         $qb = $this->createQueryBuilder();
         //应用过滤条件
-        $this->applyFilters($qb, $columns);
+//        $this->applyFilters($qb, $columns);
         //应用排序
         $this->applyOrders($qb, $columns);
 
