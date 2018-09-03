@@ -34,7 +34,7 @@ class ORM implements SourceInterface
     /**
      * @var string
      */
-    protected $alias;
+    protected $alias = 'a';
 
     /**
      * @var QueryBuilder
@@ -53,10 +53,10 @@ class ORM implements SourceInterface
      */
     protected $class;
 
-    public function __construct($entity, $alias = '_a')
+    public function __construct($entity, $alias = null)
     {
         $this->entity = $entity;
-        $this->alias = $alias;
+        $alias && $this->alias = $alias;
     }
 
     public function setEntityManager(EntityManager $entityManager)
@@ -76,6 +76,7 @@ class ORM implements SourceInterface
     protected function createQueryBuilder()
     {
         return $this->entityManager->createQueryBuilder()
+            ->select($this->alias)
             ->from($this->class, $this->alias);
     }
 
@@ -91,7 +92,9 @@ class ORM implements SourceInterface
         //应用排序
         $this->applyOrders($qb, $columns);
 
-        echo $qb->getQuery()->getSQL();exit;
+
+//        dump($qb->getDQL());
+        dump($qb->getQuery()->getSQL());exit;
         $adapter = new DoctrineORMAdapter($qb->getQuery());
         $pagerfanta = new Pagerfanta($adapter);
         $pagerfanta->setCurrentPage($page)->setMaxPerPage($limit);
