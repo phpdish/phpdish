@@ -32,6 +32,13 @@ interface FilterInterface
     public function getOperator();
 
     /**
+     * 是否跳过查询
+     *
+     * @return bool
+     */
+    public function shouldSkip();
+
+    /**
      * 获取comparison
      *
      * @return Expr\Comparison

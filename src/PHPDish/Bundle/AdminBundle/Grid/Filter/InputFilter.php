@@ -46,6 +46,14 @@ class InputFilter extends AbstractFilter
     /**
      * {@inheritdoc}
      */
+    public function shouldSkip()
+    {
+        return !$this->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function initialize($data)
     {
         $this->value = $data['value'];

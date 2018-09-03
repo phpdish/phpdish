@@ -40,6 +40,14 @@ class RangeFilter extends AbstractFilter
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function shouldSkip()
+    {
+        return $this->from === null && $this->to === null;
+    }
+
+    /**
      * @return mixed
      */
     public function getFrom()

@@ -90,6 +90,8 @@ class ORM implements SourceInterface
         $this->applyFilters($qb, $columns);
         //应用排序
         $this->applyOrders($qb, $columns);
+
+        echo $qb->getQuery()->getSQL();exit;
         $adapter = new DoctrineORMAdapter($qb->getQuery());
         $pagerfanta = new Pagerfanta($adapter);
         $pagerfanta->setCurrentPage($page)->setMaxPerPage($limit);
@@ -124,6 +126,9 @@ class ORM implements SourceInterface
             //应用该字段所有的filter
             $exprJunction = $qb->expr()->andX();
             foreach ($column->getFilters() as $filter) {
+                if ($filter->shouldSkip()) { //没有设置初值的跳过
+                    continue;
+                }
                 $exprJunction->add($filter->getComparison());
             }
             $expr->add($exprJunction);
