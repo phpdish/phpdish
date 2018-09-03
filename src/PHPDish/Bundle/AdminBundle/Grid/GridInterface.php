@@ -30,6 +30,13 @@ interface GridInterface
     public function handleRequest(Request $request);
 
     /**
+     * 初始化栅格，从数据源获取数据
+     *
+     * @return void
+     */
+    public function initialize();
+
+    /**
      * 获取列
      *
      * @return ColumnInterface[]
@@ -51,4 +58,14 @@ interface GridInterface
      * @return ColumnInterface
      */
     public function getColumn($name);
+
+    /**
+     * 添加一列
+     *
+     * @param string $column
+     * @param string $type
+     * @param array $options
+     * @return ColumnInterface
+     */
+    public function addColumn($column, $type, $options = []);
 }

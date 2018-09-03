@@ -1,6 +1,11 @@
 services:
+    # factory
+
+    phpdish_admin.grid.factory:
+        class: PHPDish\Bundle\AdminBundle\Grid\Factory
+
     # 注册grid twig extension
     phpdish_admin.grid.twig_extension:
         class: PHPDish\Bundle\AdminBundle\Grid\Twig\GridExtension
-        arguments: ['@twig', '%grid.base_template%']
+        arguments: ['@twig', '%grid.template%']
         tags: ['twig.extension']

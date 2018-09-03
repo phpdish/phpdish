@@ -14,6 +14,7 @@ namespace PHPDish\Bundle\AdminBundle\Grid;
 use PHPDish\Bundle\AdminBundle\Grid\Column\Column;
 use PHPDish\Bundle\AdminBundle\Grid\Column\ColumnInterface;
 use PHPDish\Bundle\AdminBundle\Grid\Filter\InputFilter;
+use PHPDish\Bundle\AdminBundle\Grid\Source\SourceInterface;
 
 class Factory
 {
@@ -27,9 +28,23 @@ class Factory
      */
     public function createColumn($name, $type, $options = [])
     {
-        $column =  new Column($name, $type, $options['sortable'] ?? true);
+        $column = new Column($name, $type, $options['sortable'] ?? true);
         if ($options['filterable']) { //如果默认开启filter，则帮其生成一个默认的input filter
             $column->addFilter(new InputFilter(Operator::LIKE));
         }
+        return $column;
+    }
+
+    /**
+     * 创建 grid
+     *
+     * @param SourceInterface $source
+     * @return GridInterface
+     */
+    public function createGrid(SourceInterface $source)
+    {
+        $grid = new Grid($source);
+        $grid->setFactory($grid);
+        return $grid;
     }
 }

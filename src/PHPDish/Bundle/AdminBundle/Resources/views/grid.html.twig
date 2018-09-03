@@ -1,0 +1,31 @@
+
+{% block grid %}
+    <div class="box">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    {% for column in grid.columns %}
+                        <th>{{ column.title|trans }}</th>
+                    {% endfor %}
+                    </thead>
+                    <tbody>
+                        {% for row in grid.rows %}
+                        <tr>
+                            {% for column in grid.columns %}
+                                <th>{{ attribute(row, column.name) }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+
+        </div>
+    </div>
+{% endblock %}

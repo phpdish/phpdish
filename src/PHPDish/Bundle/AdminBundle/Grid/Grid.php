@@ -29,9 +29,14 @@ class Grid implements GridInterface
     protected $columns;
 
     /**
-     * @var bool
+     * @var array
      */
-    protected $dataLoaded = false;
+    protected $rows;
+
+    /**
+     * @var array
+     */
+    protected $entities;
 
     /**
      * @var Factory
@@ -43,7 +48,7 @@ class Grid implements GridInterface
      */
     protected $source;
 
-    public function __construct(Factory $factory)
+    public function setFactory(Factory $factory)
     {
         $this->factory = $factory;
     }
@@ -63,6 +68,14 @@ class Grid implements GridInterface
     public function getColumns()
     {
         return $this->columns;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRows()
+    {
+        return $this->rows;
     }
 
     /**
@@ -95,14 +108,33 @@ class Grid implements GridInterface
     /**
      * {@inheritdoc}
      */
-    public function load()
+    public function initialize()
+    {
+        $this->loadEntities();  //加载数据
+        $this->prepareRows(); //初始化rows
+    }
+
+    protected function prepareRows()
+    {
+        foreach ($this->entities as $entity) {
+            $row = [];
+            foreach ($this->columns as $column) {
+                $row[$column->getName()] = $entity->getUsername();
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function loadEntities()
     {
         if ($this->request) {
             if ($filters = $this->request->get('filters')) {
                 $this->applyFilters($filters);
             }
         }
-        return $this->source->loadSource($this->columns);
+        $this->data = $this->source->loadSource($this->columns);
     }
 
     /**

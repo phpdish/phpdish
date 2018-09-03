@@ -45,7 +45,7 @@ class PHPDishAdminExtension extends Extension implements PrependExtensionInterfa
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('grid.base_template', $config['grid_template']);
+        $container->setParameter('grid.template', $config['grid_template']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

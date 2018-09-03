@@ -11,21 +11,17 @@
 
 namespace PHPDish\Bundle\AdminBundle\GridFactory;
 
-use PHPDish\Bundle\AdminBundle\Grid\GridInterface;
+use PHPDish\Bundle\AdminBundle\Grid\Factory;
 
-interface GridFactoryInterface
+abstract class AbstractGridFactory implements GridFactoryInterface
 {
     /**
-     * 获取grid
-     *
-     * @return GridInterface
+     * @var Factory
      */
-    public function getGrid();
+    protected $factory;
 
-    /**
-     * 获取实体类名称
-     *
-     * @return string
-     */
-    public function getEntityClass();
+    public function __construct(Factory $factory)
+    {
+        $this->factory = $factory;
+    }
 }

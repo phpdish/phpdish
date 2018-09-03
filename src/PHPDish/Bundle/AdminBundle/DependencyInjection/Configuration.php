@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('grid_template')->defaultValue('PHPDishAdminBundle::grid_base.html.twig')->end()
+                ->scalarNode('grid_template')->defaultValue('PHPDishAdminBundle::grid.html.twig')->end()
             ->end();
         return $treeBuilder;
     }
