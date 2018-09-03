@@ -46,9 +46,20 @@ class GridExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * 渲染一个grid
+     *
+     * @param GridInterface $grid
+     * @param null $theme
+     * @return string
+     */
     public function grid(GridInterface $grid, $theme =  null)
     {
         $this->initializeTemplate($theme);
+        $grid->initialize();
+        return $this->renderBlock('grid', [
+            'grid' => $grid
+        ]);
     }
 
     /**
@@ -65,6 +76,17 @@ class GridExtension extends AbstractExtension
             }
         }
         return false;
+    }
+
+    protected function renderBlock($name, $context = [])
+    {
+        foreach ($this->templates as $template) {
+            if (!$template->hasBlock($name)) {
+                continue;
+            }
+            return $template->renderBlock($name, $context);
+        }
+        throw new \InvalidArgumentException(sprintf('The block "%s" is not found', $name));
     }
 
     protected function initializeTemplate($theme)

@@ -73,14 +73,16 @@ services:
             - { name: sonata.admin, manager_type: orm, label: menu.friend_link, group: 'phpdish.admin.group.site' }
         public: true
 
-#  phpdish_admin.grid_factory:
-#      class: PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryAggregate
-#      arguments:
-#         $grid: '@grid'
+  phpdish_admin.grid_factory:
+      class: PHPDish\Bundle\AdminBundle\GridFactory\GridFactoryAggregate
 
 #  PHPDish\Bundle\AdminBundle\DataGrid\:
 #        resource: '../../DataGrid'
 #        exclude: '../../DataGrid/{GridFactoryAggregate, AbstractGridFactory}.php'
+
+  PHPDish\Bundle\AdminBundle\GridFactory\:
+        resource: '../../GridFactory'
+        exclude: '../../GridFactory/{GridFactoryAggregate, AbstractGridFactory}.php'
 
   PHPDish\Bundle\AdminBundle\Controller\:
         resource: '../../Controller'

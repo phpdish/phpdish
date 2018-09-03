@@ -11,7 +11,7 @@
 
 namespace PHPDish\Bundle\AdminBundle\Controller;
 
-use PHPDish\Bundle\AdminBundle\DataGrid\GridFactoryAggregate;
+use PHPDish\Bundle\AdminBundle\GridFactory\GridFactoryAggregate;
 use PHPDish\Bundle\AdminBundle\Twig\Breadcrumb;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -27,10 +27,10 @@ class AdminController extends Controller
      */
     protected $breadcrumb;
 
-    public function __construct(Breadcrumb $breadcrumb)
+    public function __construct(GridFactoryAggregate $gridFactory, Breadcrumb $breadcrumb)
     {
         //GridFactoryAggregate $gridFactory,
-//        $this->gridFactory = $gridFactory;
-//        $this->breadcrumb = $breadcrumb;
+        $this->gridFactory = $gridFactory;
+        $this->breadcrumb = $breadcrumb;
     }
 }

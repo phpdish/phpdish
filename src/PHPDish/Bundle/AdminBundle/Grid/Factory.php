@@ -11,13 +11,25 @@
 
 namespace PHPDish\Bundle\AdminBundle\Grid;
 
+use Doctrine\ORM\EntityManagerInterface;
 use PHPDish\Bundle\AdminBundle\Grid\Column\Column;
 use PHPDish\Bundle\AdminBundle\Grid\Column\ColumnInterface;
 use PHPDish\Bundle\AdminBundle\Grid\Filter\InputFilter;
+use PHPDish\Bundle\AdminBundle\Grid\Source\ORM;
 use PHPDish\Bundle\AdminBundle\Grid\Source\SourceInterface;
 
 class Factory
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * 创建column
      *
@@ -38,13 +50,22 @@ class Factory
     /**
      * 创建 grid
      *
-     * @param SourceInterface $source
+     * @param SourceInterface|string $source
+     * @param string|null $alias
      * @return GridInterface
      */
-    public function createGrid(SourceInterface $source)
+    public function createGrid($source, $alias = null)
     {
+        $source = $this->createSource($source, $alias);
         $grid = new Grid($source);
-        $grid->setFactory($grid);
+        $grid->setFactory($this);
         return $grid;
+    }
+
+    public function createSource($entity, $alias = null)
+    {
+        $source = new ORM($entity, $alias);
+        $source->setEntityManager($this->entityManager);
+        return $source;
     }
 }

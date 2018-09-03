@@ -1,6 +1,10 @@
 services:
-    # factory
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: fase
 
+    # factory
     phpdish_admin.grid.factory:
         class: PHPDish\Bundle\AdminBundle\Grid\Factory
 

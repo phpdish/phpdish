@@ -23,5 +23,5 @@ interface SourceInterface
      * @param int $limit
      * @return object
      */
-    public function loadSource(array $columns, $offset, $limit);
+    public function loadSource($columns, $offset, $limit);
 }

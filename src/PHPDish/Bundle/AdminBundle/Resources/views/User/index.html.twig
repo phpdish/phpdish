@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ grid(grid, _self) }}
+    {{ grid(grid, _self)|raw }}
 {% endblock %}
 
 {% block grid_filters %}{% endblock %}

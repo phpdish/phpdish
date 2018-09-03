@@ -11,15 +11,13 @@
 
 namespace PHPDish\Bundle\AdminBundle\GridFactory;
 
-use PHPDish\Bundle\AdminBundle\Grid\Source\ORM;
 use PHPDish\Bundle\CoreBundle\Model\User;
 
 class UserFactory extends AbstractGridFactory
 {
     public function getGrid()
     {
-        $source = new ORM($this->getEntityClass());
-        $grid = $this->factory->createGrid($source);
+        $grid = $this->factory->createGrid($this->getEntityClass());
         $grid->addColumn('username', 'text', [
             'sortable' => true
         ]);

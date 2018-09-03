@@ -26,7 +26,7 @@ class Grid implements GridInterface
     /**
      * @var ColumnInterface[]|ArrayCollection
      */
-    protected $columns;
+    protected $columns = [];
 
     /**
      * @var array
@@ -48,6 +48,15 @@ class Grid implements GridInterface
      */
     protected $source;
 
+    public function __construct(SourceInterface $source)
+    {
+        $this->source = $source;
+        $this->columns = new ArrayCollection();
+    }
+
+    /**
+     * @param Factory $factory
+     */
     public function setFactory(Factory $factory)
     {
         $this->factory = $factory;
@@ -134,7 +143,7 @@ class Grid implements GridInterface
                 $this->applyFilters($filters);
             }
         }
-        $this->data = $this->source->loadSource($this->columns);
+        $this->entities = $this->source->loadSource($this->columns);
     }
 
     /**

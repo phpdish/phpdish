@@ -82,7 +82,7 @@ class ORM implements SourceInterface
     /**
      * {@inheritdoc}
      */
-    public function loadSource(array $columns, $page = 1, $limit = GridInterface::MAX_RESULTS_NUM)
+    public function loadSource($columns, $page = 1, $limit = GridInterface::MAX_RESULTS_NUM)
     {
         $this->initialize();
         $qb = $this->createQueryBuilder();
