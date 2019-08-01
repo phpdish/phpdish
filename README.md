@@ -6,7 +6,6 @@
 
 PHPDish 是一个基于Symfony框架开发的内容社区系统；得益于大量的前端以及后端的第三方类库的使用使得PHPDish有着高质量的代码，敏捷实现；
 你可以使用composer或者直接下载本仓库进行程序的安装，注意切换到tag。
-QQ群号：138307655，欢迎进群讨论。
 
 [PHPDish 开发手册以及详细安装文档](https://www.phpdish.com/books/docs)
 
